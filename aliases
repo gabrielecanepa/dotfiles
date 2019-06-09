@@ -1,0 +1,32 @@
+# Get external or local IPs
+alias ip="curl ipinfo.io/ip"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
+
+# Serve the current directory as HTTP
+alias serve="ruby -run -e httpd . -p 8000"
+
+# git
+alias gsts="git status -s"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gp="git push"
+
+# Directories
+alias code="~/code"
+alias cdg="~/code/github"
+alias cdlw="~/code/lewagon"
+alias tmp="~/code/tmp"
+
+# Atom
+alias atom="open -a Atom"
+alias at="atom $1"
+alias att="atom ."
+
+# Shortcuts
+alias aliases="at ~/.aliases"
+alias ll:size="du -sh * | sort -hr"
+
+# Updates and cleanups
+alias brew:update="brew update && brew upgrade && brew cleanup; brew doctor"
+alias node:clean="find . -name "node_modules" -exec rm -rf '{}' +"
