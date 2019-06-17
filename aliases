@@ -10,6 +10,7 @@ alias serve="ruby -run -e httpd . -p 8000"
 alias gsts="git status -s"
 alias ga="git add"
 alias gcm="git commit -m"
+alias gco="git checkout"
 alias gp="git push"
 
 # Directories
