@@ -15,7 +15,7 @@ alias gp="git push"
 
 # Directories
 alias code="~/code"
-alias cdg="~/code/github"
+alias cdp="~/code/gabrielecanepa"
 alias cdlw="~/code/lewagon"
 alias tmp="~/code/tmp"
 
@@ -26,8 +26,9 @@ alias att="atom ."
 
 # Shortcuts
 alias aliases="at ~/.aliases"
-alias ll:size="du -sh * | sort -hr"
+alias ll:a="ll -a"
+alias ll:s="du -sh * | sort -hr"
 
 # Updates and cleanups
-alias brew:update="brew update && brew upgrade && brew cleanup; brew doctor"
-alias node:clean="find . -name "node_modules" -exec rm -rf '{}' +"
+alias brew:up="brew update && brew upgrade && brew cleanup; brew doctor"
+alias node:cl="find . -name "node_modules" -exec rm -rf '{}' +"
