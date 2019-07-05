@@ -11,7 +11,7 @@ alias gsts="git status -s"
 alias ga="git add"
 alias gcm="git commit -m"
 alias gco="git checkout"
-alias gp="git push"
+alias gpom="git push origin master"
 
 # Directories
 alias code="~/code"
