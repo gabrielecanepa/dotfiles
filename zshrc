@@ -1,15 +1,29 @@
 ZSH=$HOME/.oh-my-zsh
 
-# Change theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
+# Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="robbyrussell"
 
-# Useful plugins
-plugins=(gitfast last-working-dir common-aliases sublime zsh-syntax-highlighting history-substring-search)
+# Plugins - https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
+plugins=(
+  brew
+  common-aliases
+  gatsby
+  gem
+  git-extras
+  git-prompt
+  gitfast
+  github
+  heroku
+  history-substring-search
+  last-working-dir
+  sublime
+  zsh-syntax-highlighting
+)
 
 # Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
 
-# Load Oh-My-Zsh
+# Load Oh My Zsh
 source "${ZSH}/oh-my-zsh.sh"
 unalias rm
 
