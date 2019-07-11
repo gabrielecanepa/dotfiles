@@ -5,12 +5,10 @@ ZSH_THEME="robbyrussell"
 
 # Plugins - https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
 plugins=(
-  brew
   common-aliases
   gatsby
   gem
   git-extras
-  git-prompt
   gitfast
   github
   heroku
