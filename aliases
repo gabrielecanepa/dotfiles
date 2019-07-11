@@ -26,7 +26,6 @@ alias att="atom ."
 
 # Shortcuts
 alias aliases="at ~/.aliases"
-alias ll:a="ll -a"
 alias ll:s="du -sh * | sort -hr"
 
 # Updates and cleanups
