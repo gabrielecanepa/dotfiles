@@ -1,4 +1,4 @@
-ZSH=$HOME/.oh-my-zsh
+ZSH="$HOME/.oh-my-zsh"
 
 # Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="robbyrussell"
@@ -32,7 +32,12 @@ type -a rbenv > /dev/null && eval "$(rbenv init -)"
 # Use local `bin` folder to store binstubs
 export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
 
-# Store aliases in ~/.aliases file and load them here
+# Default text editor and working directory
+export TEXT_EDITOR="Atom"
+export WORKING_DIR="$HOME/code"
+
+# Store and load scripts and aliases
+for filename in $WORKING_DIR/scripts/*; do [[ -f $filename ]] && source $filename; done
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 # Encoding for the terminal
