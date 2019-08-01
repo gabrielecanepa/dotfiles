@@ -15,26 +15,21 @@
 	excludesfile = /Users/gabrielecanepa/.gitignore_global
 
 [alias]
-  co = checkout
-  st = status -sb
+  a = add
   br = branch
   ci = commit
-  fo = fetch origin
+  cm = git commit -m
+  co = !sh -c 'git checkout $1 && git branch --set-upstream-to=$1 $1 && git fetch' -
   d = !git --no-pager diff
   dt  = difftool
-  stat = !git --no-pager diff --stat
-
-  # Clean merged branches
-  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
-
-  # Pimp git log
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
-  # Serve local
-  # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
+  fo = fetch origin
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  # pf = push -f --set-upstream origin test
+  pom = push origin master
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
-
-  # Removes a file from the index
+  st = status -sb
+  stat = !git --no-pager diff --stat
+  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
   unstage = reset HEAD --
 
 [help]
@@ -46,7 +41,7 @@
 [branch "master"]
   mergeoptions = --no-edit
 [user]
-	email = gabriele@canepa.io
+	email = ggc.canepa@gmail.com
 	name = Gabriele Canepa
 [filter "lfs"]
 	clean = git-lfs clean -- %f
