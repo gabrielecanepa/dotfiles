@@ -41,7 +41,7 @@
 [branch "master"]
   mergeoptions = --no-edit
 [user]
-	email = ggc.canepa@gmail.com
+	email = gabriele.canepa93@gmail.com
 	name = Gabriele Canepa
 [filter "lfs"]
 	clean = git-lfs clean -- %f
