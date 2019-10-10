@@ -19,7 +19,7 @@ alias gpf="git push -f --set-upstream $1 $2"
 # Directories
 alias code="cd $WORKING_DIR"
 alias cdp="cd $WORKING_DIR/gabrielecanepa"
-alias cdfk="cd $WORKING_DIR/frekkls/core"
+alias cdtr="cd $WORKING_DIR/trendiamo/core"
 alias cdlw="cd $WORKING_DIR/lewagon"
 alias tmp="cd $WORKING_DIR/tmp"
 
@@ -38,5 +38,5 @@ alias scripts="open -a $TEXT_EDITOR $WORKING_DIR/scripts"
 alias ll:s="du -sh * | sort -hr"
 
 # Updates and cleanups
-alias brew-update="brew update && brew cleanup; brew doctor"
-alias node-clear="find . -name "node_modules" -exec rm -rf '{}' +"
+alias brew:update="brew update && brew cleanup; brew doctor"
+alias node:clear="find . -name "node_modules" -exec rm -rf '{}' +"
