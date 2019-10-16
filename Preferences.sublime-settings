@@ -1,9 +1,15 @@
 {
-	"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
-	"font_size": 18,
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme",
+	"font_size": 23,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
+	"material_theme_accent_graphite": true,
+	"material_theme_accent_scrollbars": true,
+	"material_theme_accent_titlebar": true,
+	"material_theme_big_fileicons": true,
+	"material_theme_disable_tree_indicator": true,
+	"material_theme_small_tab": true,
 	"theme": "Adaptive.sublime-theme"
 }
