@@ -74,9 +74,17 @@
 	"ignore_vcs_packages":
 	[
 	],
+	"in_process_packages":
+	[
+	],
 	"install_missing": true,
 	"install_prereleases":
 	[
+	],
+	"installed_packages":
+	[
+		"Package Control",
+		"Theme - Brogrammer"
 	],
 	"package_destination": "",
 	"package_name_map":

@@ -18,7 +18,7 @@
 *.tar
 *.zip
 
-# Logs and databases
+# Logs and database
 ######################
 *.log
 *.sql
@@ -31,7 +31,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment files
+# Env files
+######################
 .env
 .env.local
 .env.development.local
