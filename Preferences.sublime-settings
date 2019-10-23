@@ -1,6 +1,27 @@
 {
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme",
-	"font_size": 23,
+	"detect_indentation": false,
+	"draw_white_space": true,
+	"ensure_newline_at_eof_on_save": true,
+	"folder_exclude_patterns":
+	[
+		"log",
+		".bundle",
+		".git",
+		".sass-cache",
+		".asset-cache",
+		"build",
+		"node_modules",
+		"dist",
+		"public/packs",
+		"coverage",
+		".ipynb_checkpoints",
+		".pytest_cache",
+		"__pycache__"
+	],
+	"font_size": 30,
+	"highlight_modified_tabs": true,
+	"hot_exit": false,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -11,5 +32,16 @@
 	"material_theme_big_fileicons": true,
 	"material_theme_disable_tree_indicator": true,
 	"material_theme_small_tab": true,
-	"theme": "Adaptive.sublime-theme"
+	"remember_open_files": false,
+	"rulers":
+	[
+		80
+	],
+	"tab_size": 2,
+	"theme": "Adaptive.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_automatic_white_space": true,
+	"trim_trailing_white_space_on_save": true,
+	"use_tab_stops": true,
+	"word_wrap": false
 }
