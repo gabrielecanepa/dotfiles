@@ -23,10 +23,9 @@ alias at="atom $1"
 alias att="atom ."
 
 # Directories and files
-alias cddesk="cd $HOME/Desktop"
-alias cdcode="cd $WORKING_DIR"
-alias cdp="cd $WORKING_DIR/$USER"
-alias cdtmp="cd $WORKING_DIR/tmp"
+alias desk="cd $HOME/Desktop"
+alias cdp="cd $WORKING_DIR"
+alias tmp="cd $WORKING_DIR/tmp"
 alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/$USER/dotfiles"
 
 # Custom commands
