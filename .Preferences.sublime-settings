@@ -19,7 +19,7 @@
 		".pytest_cache",
 		"__pycache__"
 	],
-	"font_size": 30,
+	"font_size": 28,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
 	"ignored_packages":
