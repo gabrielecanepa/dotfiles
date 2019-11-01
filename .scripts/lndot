@@ -1,0 +1,6 @@
+#!/bin/sh
+
+lndot() {
+  for file in $@
+    ln -sf $WORKING_DIR/dotfiles/$file $file
+}
