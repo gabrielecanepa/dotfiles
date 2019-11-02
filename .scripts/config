@@ -1,0 +1,61 @@
+#!/bin/zsh
+
+config() {
+  BB="\e[1m"
+  BLU="\e[34m"
+  GRN="\e[32m"
+  NC="\033[0m"
+
+  echo "${BB}First and last name (no accent or special characters - e.g. 'ç'):$NC"
+  printf "> "
+  read NAME
+
+  echo "${BB}Email address (the one used for git):$NC"
+  printf "> "
+  read EMAIL
+
+  echo "${BB}Text editor (Atom, VSCode, Sublime Text, etc.):$NC"
+  printf "> "
+  read TEXT_EDITOR
+  TEXT_EDITOR="'/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR'"
+
+  echo ${BB}"Working directory (relative to $HOME):$NC"
+  printf "> "
+  read WORKING_DIR
+  WORKING_DIR="$HOME/$WORKING_DIR"
+
+  printf "\n${BLU}Storing profile...$NC"
+  echo "# Personal profile" > ~/.profile
+  for key in NAME EMAIL TEXT_EDITOR WORKING_DIR
+  do
+    value=${(P)key}
+    echo "export $key=\"$value\"" >> ~/.profile
+  done
+  echo "\r${GRN}Storing profile ✅$NC"
+
+  printf "${BLU}Linking dotfiles...$NC"
+  for file in $WORKING_DIR/dotfiles/.*; do
+    filename=$(basename $file)
+    if [ ! -e "$WORKING_DIR/$filename" ]; then
+      [[ ! "$filename" =~ "\.git*" ]] && ln -sf "$file" "$HOME/$filename"
+    fi
+  done
+  echo "\r${GRN}Linking dotfiles ✅$NC"
+
+  printf "${BLU}Reloading zsh and storing backup...$NC"
+  . ~/.zshrc
+  ln -sf "$WORKING_DIR/dotfiles/.zshrc" "$HOME/.zshrc.pre-oh-my-zsh"
+  echo "\r${GRN}Reloading zsh and storing backup ✅$NC"
+
+  printf "${BLU}Configuring git...$NC"
+  git config --global user.name $NAME
+  git config --global user.email $EMAIL
+  git config --global core.editor "$TEXT_EDITOR -n -w"
+  ln -sf "$WORKING_DIR/dotfiles/.gitconfig" "$HOME/.gitconfig_global"
+  git config --global include.path "$HOME/.gitconfig_global"
+  ln -sf "$WORKING_DIR/dotfiles/.gitignore" "$HOME/.gitignore_global"
+  git config --global core.excludesfile "$HOME/.gitignore*"
+  echo "\r${GRN}Configuring git ✅$NC"
+
+  echo "\n${GRN}👌 Awesome, all set.$NC"
+}
