@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 lndot() {
   for file in $@
