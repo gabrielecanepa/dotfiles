@@ -32,7 +32,6 @@
 
 [core]
   pager = less -FRSX
-	editor = Atom -n -w
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

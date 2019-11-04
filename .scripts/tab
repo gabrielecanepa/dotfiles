@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 tab() {
   osascript -i >/dev/null 2>&1 <<EOF
