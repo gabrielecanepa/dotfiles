@@ -30,23 +30,14 @@ PATH="$PATH:$HOME/.rbenv/bin"
 type -a rbenv > /dev/null && eval "$(rbenv init -)"
 
 # Use local bin folder to store binstubs
-PATH="$PATH:./bin:./node_modules/.bin:/usr/local/sbin"
-
-# Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-
-# Load Anaconda
-export PATH="$PATH:/anaconda3/bin:$HOME/anaconda3/bin"
+PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
 
 # Load local profile
 . "$HOME/.profile"
 . "$HOME/.aliases"
 [ -d "$HOME/.scripts" ] && . <(cat $HOME/.scripts/*)
 
-# Use default editor for bundler
-export BUNDLER_EDITOR=$TEXT_EDITOR
-
 # Encoding
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export BUNDLER_EDITOR=$TEXT_EDITOR
