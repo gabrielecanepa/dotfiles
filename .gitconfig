@@ -2,7 +2,7 @@
   a = add
   br = branch
   ci = commit
-  cm = git commit -m
+  cm = commit -m
   co = !sh -c 'git checkout $1 && git branch --set-upstream-to=$1 $1 && git fetch' -
   d = !git --no-pager diff
   dt  = difftool
@@ -10,6 +10,7 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   pf = push -f --set-upstream $1 $2
   pom = push origin master
+  rebase-master = !sh -c 'git checkout master && git pull && git checkout - && git rebase master' -
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   stat = !git --no-pager diff --stat
@@ -41,3 +42,6 @@
 
 [help]
   autocorrect = 1
+
+[pull]
+  rebase = true
