@@ -11,6 +11,7 @@
   pf = push -f --set-upstream $1 $2
   pom = push origin master
   rebase-master = !sh -c 'git checkout master && git pull && git checkout - && git rebase master' -
+  redate = git filter-branch --env-filter "if [ $GIT_COMMIT = $1 ]; then export GIT_AUTHOR_DATE='$2'; then export GIT_COMMITTER_DATE='$2'; fi"
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   stat = !git --no-pager diff --stat
