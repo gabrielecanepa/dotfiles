@@ -1,6 +1,6 @@
 #!/bin/sh
 
-config() {
+config () {
   BB="\e[1m"
   BLU="\e[34m"
   GRN="\e[32m"
@@ -17,7 +17,7 @@ config() {
   echo "${BB}Text editor (Atom, VSCode, Sublime Text, etc.):$NC"
   printf "> "
   read TEXT_EDITOR
-  TEXT_EDITOR="'/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR'"
+  TEXT_EDITOR="/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR"
 
   echo ${BB}"Working directory (relative to $HOME):$NC"
   printf "> "
@@ -25,9 +25,8 @@ config() {
   WORKING_DIR="$HOME/$WORKING_DIR"
 
   printf "\n${BLU}Storing profile...$NC"
-  echo "# Personal profile" > ~/.profile
-  for key in NAME EMAIL TEXT_EDITOR WORKING_DIR
-  do
+  echo "# Personal profile - use the \`config\` script to edit it" > ~/.profile
+  for key in NAME EMAIL TEXT_EDITOR WORKING_DIR; do
     value=${(P)key}
     echo "export $key=\"$value\"" >> ~/.profile
   done
