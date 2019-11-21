@@ -1,0 +1,15 @@
+#!/bin/sh
+
+ln () {
+  case $1 in
+    (--dotfiles)
+      for file in ${@:2}; do
+        command ln -sf $WORKING_DIR/dotfiles/$file $file
+      done
+      ;;
+      
+    (*)
+      command ln $@
+      ;;
+  esac
+}
