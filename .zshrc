@@ -22,7 +22,7 @@ plugins=(
 HOMEBREW_NO_ANALYTICS=1
 
 # Load Oh My Zsh
-. "${ZSH}/oh-my-zsh.sh"
+. "$ZSH/oh-my-zsh.sh"
 unalias rm
 
 # Load rbenv

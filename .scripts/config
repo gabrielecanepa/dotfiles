@@ -10,7 +10,7 @@ config () {
   printf "> "
   read NAME
 
-  echo "${BB}Email address (the one used for git):$NC"
+  echo "${BB}Email address (for git):$NC"
   printf "> "
   read EMAIL
 
@@ -33,6 +33,7 @@ config () {
   echo "\r${GRN}Storing profile ✅$NC"
 
   printf "${BLU}Linking dotfiles...$NC"
+  [ $1 = install ] && rm "$WORKING_DIR/dotfiles/install.sh"
   for file in $WORKING_DIR/dotfiles/.*; do
     filename=$(basename $file)
     if [ ! -e "$WORKING_DIR/$filename" ]; then
@@ -50,6 +51,7 @@ config () {
   git config --global user.name $NAME
   git config --global user.email $EMAIL
   git config --global core.editor "$TEXT_EDITOR -n -w"
+  # Use global gitconfig and gitignore:
   ln -sf "$WORKING_DIR/dotfiles/.gitconfig" "$HOME/.gitconfig_global"
   git config --global include.path "$HOME/.gitconfig_global"
   ln -sf "$WORKING_DIR/dotfiles/.gitignore" "$HOME/.gitignore_global"

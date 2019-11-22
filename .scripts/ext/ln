@@ -7,7 +7,7 @@ ln () {
         command ln -sf $WORKING_DIR/dotfiles/$file $file
       done
       ;;
-      
+
     (*)
       command ln $@
       ;;
