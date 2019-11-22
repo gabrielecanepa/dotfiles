@@ -1,9 +1,0 @@
-#!/bin/sh
-
-tab () {
-  osascript -i >/dev/null 2>&1 <<EOF
-    tell application "System Events"
-      keystroke "t" using command down
-    end tell
-EOF
-}
