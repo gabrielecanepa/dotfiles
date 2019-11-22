@@ -3,21 +3,24 @@
 echo () {
   case $1 in
     (-t)
-      builtin echo -e "\r\033[1A\033[0K${@:2}"
+      echo "\r\033[1A\033[0K${@:2}"
+      ;;
+
+    (-E)
+      builtin echo -E $@
       ;;
 
     (-h)
-      builtin echo "Usage: echo <string> [options]\n"
-      builtin echo "Options:"
-      builtin echo -e "  -n\t	Suppress trailing newline"
-      builtin echo -e "  -e\t	Enable interpretation of backslash-escaped characters"
-      builtin echo -e "  -E\t	Disable interpretation of backslash-escaped characters"
-      builtin echo -e "  -t\t	Trim the last printed line"
-      builtin echo -e "  -h\t	Print this help message"
+      echo "Usage: echo <string> [options]\n"
+      echo "Options:"
+      echo "  -n\t	Suppress trailing newline"
+      echo "  -t\t	Trim the last printed line"
+      echo "  -E\t	Disable interpretation of backslash-escaped characters"
+      echo "  -h\t	Print this help message"
       ;;
 
     (*)
-      builtin echo $@
+      builtin echo -e $@ # enables default interpretation of backslash-escaped characters
       ;;
   esac
 }

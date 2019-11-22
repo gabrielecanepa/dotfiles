@@ -7,20 +7,16 @@ config () {
   NC="\033[0m"
 
   echo "${BB}First and last name (no accent or special characters - e.g. 'ç'):$NC"
-  printf "> "
   read NAME
 
-  echo "${BB}Email address (for git):$NC"
-  printf "> "
+  echo "${BB}Email address (used for git):$NC"
   read EMAIL
 
   echo "${BB}Text editor (Atom, VSCode, Sublime Text, etc.):$NC"
-  printf "> "
   read TEXT_EDITOR
   TEXT_EDITOR="/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR"
 
   echo ${BB}"Working directory (relative to $HOME):$NC"
-  printf "> "
   read WORKING_DIR
   WORKING_DIR="$HOME/$WORKING_DIR"
 
@@ -33,7 +29,7 @@ config () {
   echo "\r${GRN}Storing profile ✅$NC"
 
   printf "${BLU}Linking dotfiles...$NC"
-  [ $1 = install ] && rm "$WORKING_DIR/dotfiles/install.sh"
+  [[ $1 = --install ]] && rm "$WORKING_DIR/dotfiles/install.sh"
   for file in $WORKING_DIR/dotfiles/.*; do
     filename=$(basename $file)
     if [ ! -e "$WORKING_DIR/$filename" ]; then
@@ -45,6 +41,7 @@ config () {
   printf "${BLU}Reloading zsh and storing backup...$NC"
   . ~/.zshrc
   ln -sf "$WORKING_DIR/dotfiles/.zshrc" "$HOME/.zshrc.pre-oh-my-zsh"
+  ln -sf "$WORKING_DIR/dotfiles/.zshrc" "$HOME/.zshrc.backup"
   echo "\r${GRN}Reloading zsh and storing backup ✅$NC"
 
   printf "${BLU}Configuring git...$NC"
@@ -58,5 +55,5 @@ config () {
   git config --global core.excludesfile "$HOME/.gitignore*"
   echo "\r${GRN}Configuring git ✅$NC"
 
-  echo "\n${GRN}👌 Awesome, all set.$NC"
+  echo "\n👌 Awesome, all set! Use the $BB${GRN}profile$NC command to check your current profile, or $BB${GRN}config$NC to modify it"
 }

@@ -1,2 +1,2 @@
 . .scripts/config
-config install
+config --install
