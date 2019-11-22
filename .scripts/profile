@@ -1,0 +1,8 @@
+#!/bin/sh
+
+profile () {
+  echo 👤 $NAME
+  echo 📧 $EMAIL
+  echo 💻 ${TEXT_EDITOR##*/}
+  echo 📁 $WORKING_DIR
+}
