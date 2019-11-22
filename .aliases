@@ -27,6 +27,7 @@ alias desk="cd $HOME/Desktop"
 alias cdp="cd $WORKING_DIR"
 alias tmp="cd $WORKING_DIR/tmp"
 alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
+alias sshrc="open -a $TEXT_EDITOR $HOME/.ssh"
 
 # Custom commands
 alias ls="/usr/local/bin/gls --color -h --group-directories-first"
