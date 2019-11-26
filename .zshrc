@@ -32,9 +32,9 @@ type -a rbenv > /dev/null && eval "$(rbenv init -)"
 # Use local bin folder to store binstubs
 PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
 
-# Load local profile and custom scripts
+# Load profile and custom scripts
 . "$HOME/.profile"
-. "$HOME/.aliases"
+[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -d "$HOME/.scripts" ] && for script in ~/.scripts/**/*; do . $script; done
 
 # Encoding
