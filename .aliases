@@ -13,22 +13,20 @@ alias ga="git add"
 alias gbr="git branch"
 alias gcm="git commit -m"
 alias gco="git checkout"
-alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glg="git log --abbrev-commit --color --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 alias gsts="git status -sb"
 alias gpom="git push origin master"
 alias gpf="git push -f --set-upstream $1 $2"
 
-# Atom
-alias at="atom $1"
-alias att="atom ."
-
 # Directories and files
-alias desk="cd $HOME/Desktop"
 alias cdp="cd $WORKING_DIR"
+alias desk="cd $HOME/Desktop"
 alias tmp="cd $WORKING_DIR/tmp"
 alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
+alias .atom="open -a $TEXT_EDITOR $HOME/.atom"
 alias .ssh="open -a $TEXT_EDITOR $HOME/.ssh"
 
-# Custom commands
-alias ls="/usr/local/bin/gls --color -h --group-directories-first"
-alias lls="du -sh * | sort -hr"
+# Generic commands
+alias ls="/usr/local/bin/gls -ah --color --group-directories-first"
+alias ll="ls -al"
+alias lss="du -sh * | sort -hr"

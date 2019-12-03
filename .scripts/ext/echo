@@ -20,7 +20,7 @@ echo () {
       ;;
 
     (*)
-      builtin echo -e $@ # enables default interpretation of backslash-escaped characters
+      builtin echo -e $@
       ;;
   esac
 }

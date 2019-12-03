@@ -48,7 +48,7 @@ config () {
   git config --global user.name $NAME
   git config --global user.email $EMAIL
   git config --global core.editor "$TEXT_EDITOR -n -w"
-  # Use global gitconfig and gitignore:
+  # Use global gitconfig and gitignore
   ln -sf "$WORKING_DIR/dotfiles/.gitconfig" "$HOME/.gitconfig_global"
   git config --global include.path "$HOME/.gitconfig_global"
   ln -sf "$WORKING_DIR/dotfiles/.gitignore" "$HOME/.gitignore_global"

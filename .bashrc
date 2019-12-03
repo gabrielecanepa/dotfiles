@@ -1,3 +1,5 @@
-# Load RVM
-export PATH="$PATH:$HOME/.rvm/bin"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# Backup Ruby to RVM
+if ! (type -a rbenv > /dev/null) && [ -s "$HOME/.rvm/scripts/rvm" ]; then
+  export PATH="$PATH:$HOME/.rvm/bin"
+  . "$HOME/.rvm/scripts/rvm"
+fi

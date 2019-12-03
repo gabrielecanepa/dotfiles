@@ -26,13 +26,15 @@ HOMEBREW_NO_ANALYTICS=1
 unalias rm
 
 # Load rbenv
-PATH="$PATH:$HOME/.rbenv/bin"
-type -a rbenv > /dev/null && eval "$(rbenv init -)"
+if (type -a rbenv > /dev/null); then
+  PATH="$PATH:$HOME/.rbenv/bin"
+  eval "$(rbenv init -)"
+fi
 
 # Use local bin folder to store binstubs
-PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
+export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
 
-# Load profile and custom scripts
+# Load profile, aliases, and custom scripts
 . "$HOME/.profile"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -d "$HOME/.scripts" ] && for script in ~/.scripts/**/*; do . $script; done
@@ -40,4 +42,9 @@ PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
 # Encoding
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+# git
+export FILTER_BRANCH_SQUELCH_WARNING=1
+
+# Bundler
 export BUNDLER_EDITOR=$TEXT_EDITOR

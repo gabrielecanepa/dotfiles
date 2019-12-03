@@ -1,7 +1,7 @@
 [alias]
   a = add
   br = branch
-  ci = commit
+  c = commit
   cm = commit -m
   co = !sh -c 'git checkout $1 && git branch --set-upstream-to=$1 $1 && git fetch' -
   d = !git --no-pager diff

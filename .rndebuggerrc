@@ -5,7 +5,7 @@
   defaultReactDevToolsTheme: 'RNDebugger', // see https://github.com/facebook/react-devtools/blob/master/frontend/Themes/Themes.js
   defaultRNPackagerPorts: [19001],
   editor: 'Atom',
-  // fontFamily: 'monaco, Consolas, Lucida Console, monospace',
+  // fontFamily: 'Monaco, Consolas, Lucida Console, monospace',
   timesJSLoadToRefreshDevTools: -1,
   windowBounds: {
     frame: true,
