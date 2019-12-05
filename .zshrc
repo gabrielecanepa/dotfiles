@@ -31,6 +31,12 @@ if (type -a rbenv > /dev/null); then
   eval "$(rbenv init -)"
 fi
 
+# Load nvm
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh"
+fi
+
 # Use local bin folder to store binstubs
 export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
 
