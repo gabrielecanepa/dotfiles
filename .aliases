@@ -2,8 +2,7 @@
 alias ip="curl ipinfo.io/ip"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
-
-# Serve the current directory as HTTP
+# Serve current directory as HTTP
 alias serve="ruby -run -e httpd . -p 8000"
 # Expose local server with Serveo
 alias serveo="ssh -R 80:$1 serveo.net"
@@ -18,15 +17,18 @@ alias gsts="git status -sb"
 alias gpom="git push origin master"
 alias gpf="git push -f --set-upstream $1 $2"
 
-# Directories and files
-alias cdp="cd $WORKING_DIR"
+# Change directory
+alias cdw="cd $WORKING_DIR"
+alias cdp="cd $WORKING_DIR/$USER"
 alias desk="cd $HOME/Desktop"
 alias tmp="cd $WORKING_DIR/tmp"
-alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
-alias .atom="open -a $TEXT_EDITOR $HOME/.atom"
-alias .ssh="open -a $TEXT_EDITOR $HOME/.ssh"
 
 # Generic commands
 alias ls="/usr/local/bin/gls -ah --color --group-directories-first"
 alias ll="ls -al"
 alias lss="du -sh * | sort -hr"
+
+# Open in text editor
+alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
+alias .atom="open -a $TEXT_EDITOR $HOME/.atom"
+alias .ssh="open -a $TEXT_EDITOR $HOME/.ssh"
