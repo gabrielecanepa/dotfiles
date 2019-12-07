@@ -1,0 +1,51 @@
+#!/bin/zsh
+
+gatekeeper () (
+  GRN="\e[32m"
+  RED="\e[31m"
+  NC="\033[0m"
+
+  case $1 in
+    (disable)
+      if [ $2 = --global ] && [ "${*:3}" = "" ]; then
+        sudo spctl --master-disable
+      else
+        for app in "${@:2}"; do
+          sudo xattr -r -d com.apple.quarantine $app 2> /dev/null
+          if [ $? -eq 0 ]; then
+            app_name=$(printf "%s\n" "${app##*/}")
+            echo "${GRN}🔓 GateKeeper disabled for $app_name$NC"
+          else
+            echo "${RED}❌ Can't disable GateKeeper for $app$NC"
+          fi
+        done
+      fi
+      ;;
+
+    (global)
+      sudo spctl --master-disable >/dev/null 2>&1
+      if [ $? -eq 0 ]; then
+        echo "${GRN}🔓 GateKeeper disabled globally$NC"
+      else
+        echo "${RED}There was a problem disabling GateKeeper, please try again$NC"
+      fi
+      ;;
+
+    (enable)
+      sudo spctl --master-enable >/dev/null 2>&1
+      if [ $? -eq 0 ]; then
+        echo "${GRN}🔒 GateKeeper enabled globally$NC"
+      else
+        echo "${RED}There was a problem enabling GateKeeper, please try again$NC"
+      fi
+      ;;
+
+    (*)
+      echo "Usage: gatekeeper <command>\n"
+      echo "Commands:"
+      echo "  disable\t  Disable checks for one or multiple applications"
+      echo "  global\t  Disable checks globally"
+      echo "  enable\t  Enable checks globally"
+      ;;
+  esac
+)
