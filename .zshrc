@@ -1,3 +1,6 @@
+#!/bin/zsh
+# shellcheck disable=SC2034
+
 ZSH="$HOME/.oh-my-zsh"
 
 # Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes

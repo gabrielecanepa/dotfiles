@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 config () {
   BB="\e[1m"
@@ -29,11 +29,11 @@ config () {
   echo "\r${GRN}Storing profile ✅$NC"
 
   printf "${BLU}Linking dotfiles...$NC"
-  [[ $1 = --install ]] && rm "$WORKING_DIR/dotfiles/install.sh"
+  [ $1 = --install ] && rm "$WORKING_DIR/dotfiles/install.sh"
   for file in $WORKING_DIR/dotfiles/.*; do
     filename=$(basename $file)
     if [ ! -e "$WORKING_DIR/$filename" ]; then
-      [[ ! "$filename" =~ "\.git*" ]] && ln -sf "$file" "$HOME/$filename"
+      [[ ! "$filename" =~ \.git* ]] && ln -sf "$file" "$HOME/$filename"
     fi
   done
   echo "\r${GRN}Linking dotfiles ✅$NC"

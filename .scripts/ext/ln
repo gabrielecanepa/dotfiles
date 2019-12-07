@@ -1,15 +1,15 @@
-#!/bin/sh
+#!/bin/zsh
 
 ln () {
   case $1 in
     (--dotfiles)
-      for file in ${@:2}; do
+      for file in "${@:2}"; do
         command ln -sf $WORKING_DIR/dotfiles/$file $file
       done
       ;;
 
     (*)
-      command ln $@
+      command ln "$@"
       ;;
   esac
 }

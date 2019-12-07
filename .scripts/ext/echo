@@ -1,13 +1,14 @@
-#!/bin/sh
+#!/bin/zsh
 
 echo () {
   case $1 in
     (-t)
-      echo "\r\033[1A\033[0K${@:2}"
+      rest=${*:2}
+      echo "\r\033[1A\033[0K$rest"
       ;;
 
     (-E)
-      builtin echo -E $@
+      builtin echo -E "$@"
       ;;
 
     (-h)
@@ -20,7 +21,7 @@ echo () {
       ;;
 
     (*)
-      builtin echo -e $@
+      builtin echo -e "$@"
       ;;
   esac
 }

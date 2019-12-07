@@ -1,0 +1,5 @@
+shell=bash
+# See https://github.com/koalaman/shellcheck/wiki/<code>
+disable=SC1090
+disable=SC2038
+disable=SC2139
