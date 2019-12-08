@@ -1,0 +1,67 @@
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+    - '**/Gemfile'
+    - '**/*.gemspec'
+    - '**/*.rake'
+    - '**/*.rb'
+  Exclude:
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - script/**/*
+    - public/**/*
+    - vendor/**/*
+  TargetRubyVersion: 2.6
+
+Metrics/BlockLength:
+  Max: 100
+Metrics/LineLength:
+  Max: 120
+
+Layout/ClassStructure:
+  Enabled: true
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  IgnoredMethods:
+    [
+      'authorize',
+      'desc',
+      'gem',
+      'has_many',
+      'head',
+      'puts',
+      'raise',
+      'redirect_to',
+      'render',
+      'require',
+      'require_relative',
+      'ruby',
+      'run',
+      'separator',
+      'source',
+      'yield',
+    ]
+Style/MultilineMethodSignature:
+  Enabled: true
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Rails:
+  Enabled: true
+Rails/SaveBang:
+  Enabled: true
