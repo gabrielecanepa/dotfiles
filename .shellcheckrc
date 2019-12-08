@@ -1,5 +1,7 @@
+# ShellCheck - https://github.com/koalaman/shellcheck/wiki
 shell=bash
-# See https://github.com/koalaman/shellcheck/wiki/<code>
 disable=SC1090
 disable=SC2038
+disable=SC2124
 disable=SC2139
+disable=SC2145

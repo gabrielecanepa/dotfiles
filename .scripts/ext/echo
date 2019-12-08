@@ -1,26 +1,80 @@
 #!/bin/zsh
 
+BB="\e[1m"
+RED="\e[31m"
+GRN="\e[32m"
+BLU="\e[34m"
+YLW="\e[33m"
+NC="\e[0m"
+
 echo () {
   case $1 in
-    (-t)
-      rest=${*:2}
-      echo "\r\033[1A\033[0K$rest"
+    (-r)
+      echo "${RED}${@:2}$NC"
+      ;;
+
+    (-g)
+      echo "${GRN}${@:2}$NC"
+      ;;
+
+    (-b)
+      echo "${BLU}${@:2}$NC"
+      ;;
+
+    (-y)
+      echo "${YLW}${@:2}$NC"
+      ;;
+
+    (-*B*)
+      bold="${BB}${@:2}$NC"
+      if [ "$1" = "-B" ]; then
+        echo $bold
+        return
+      fi
+      case $1 in
+        (-rB | -Br)
+          echo -r $bold
+          ;;
+        (-gB | -Bg)
+          echo -g $bold
+          ;;
+        (-bB | -Bb)
+          echo -b $bold
+          ;;
+        (-yB | -By)
+          echo -y $bold
+          ;;
+      esac
+      ;;
+
+    (-T)
+      if [[ $2 =~ ^-[rgby]?B?[rgby]?$ ]]; then
+        echo $2 "\r\033[1A\033[0K${@:3}"
+        return
+      else
+        echo "\r\033[1A\033[0K${@:2}"
+      fi
       ;;
 
     (-E)
-      builtin echo -E "$@"
+      builtin echo -E "${@:2}"
       ;;
 
     (-h)
-      echo "Usage: echo <string> [options]\n"
+      echo "Usage: echo [option] <text>\n"
       echo "Options:"
-      echo "  -n\t	Suppress trailing newline"
-      echo "  -t\t	Trim the last printed line"
+      echo "  -r\t	Print text in red"
+      echo "  -g\t	Print text in green"
+      echo "  -b\t	Print text in blue"
+      echo "  -y\t	Print text in yellow"
+      echo "  -B\t	Print text in bold characters"
+      echo "  -T\t	Trim last printed line"
       echo "  -E\t	Disable interpretation of backslash-escaped characters"
       echo "  -h\t	Print this help message"
       ;;
 
     (*)
+      # Interpret backslash-escaped characters by default
       builtin echo -e "$@"
       ;;
   esac

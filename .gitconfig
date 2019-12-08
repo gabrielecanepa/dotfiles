@@ -4,13 +4,14 @@
   c = commit
   cm = commit -m
   co = !sh -c 'git checkout $1 && git branch --set-upstream-to=$1 $1 && git fetch' -
-  d = !git --no-pager diff
+  d = !git diff --no-pager
   dt  = difftool
   fo = fetch origin
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   pf = push -f --set-upstream $1 $2
   pom = push origin master
   rebase-master = !sh -c 'git checkout master && git pull && git checkout - && git rebase master' -
+  remote = remote -v
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   stat = !git --no-pager diff --stat
@@ -25,7 +26,7 @@
   diff = auto
   interactive = auto
   status = auto
-	ui = true
+  ui = true
 
 [color "branch"]
   current = green
@@ -35,10 +36,10 @@
   pager = less -FRSX
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  process = git-lfs filter-process
+  required = true
+  smudge = git-lfs smudge -- %f
 
 [help]
   autocorrect = 1

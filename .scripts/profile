@@ -1,8 +1,81 @@
 #!/bin/zsh
 
 profile () {
-  echo 👤 $NAME
-  echo 📧 $EMAIL
-  echo 💻 ${TEXT_EDITOR##*/}
-  echo 📁 $WORKING_DIR
+  cmd=`echo -gB profile`
+  config_cmd="$cmd `echo -B config`"
+
+  case $1 in
+    (config)
+      echo -B "First and last name (no accent or special characters):"
+      printf  "> "
+      read NAME
+
+      echo -B "Email address (used for git):"
+      printf  "> "
+      read EMAIL
+
+      echo -B "Text editor (name of the app, e.g. Atom, VSCode, Sublime Text):"
+      printf  "> "
+      read TEXT_EDITOR
+      TEXT_EDITOR="/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR"
+
+      echo -B "Working directory (relative to $HOME):"
+      printf  "> "
+      read WORKING_DIR
+      WORKING_DIR="$HOME/$WORKING_DIR"
+
+      echo ""
+
+      echo -c "Storing profile..."
+      echo "# Personal profile - use the \`profile\` script to edit it" > ~/.profile
+      for key in NAME EMAIL TEXT_EDITOR WORKING_DIR; do
+        value=${(P)key}
+        echo "export $key=\"$value\"" >> ~/.profile
+      done
+      echo -T -g "Storing profile ✅"
+
+      # *TODO*: fix scripts folder loop
+      echo -b "Linking dotfiles..."
+      [ "$2" = "--install" ] && [ -f $WORKING_DIR/dotfiles/install.zsh ] && rm $WORKING_DIR/dotfiles/install.zsh
+      for file in $WORKING_DIR/dotfiles/.*; do
+        filename=$(basename $file)
+        if [ ! -e $WORKING_DIR/$filename ]; then
+          [[ ! $filename =~ \.git* ]] && ln -sf $file $HOME/$filename
+        fi
+      done
+      echo -T -g "Linking dotfiles ✅"
+
+      echo -b "Reloading zsh and storing backup..."
+      . ~/.zshrc
+      for file in .zshrc.pre-oh-my-zsh .zshrc.backup; do
+        ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$file
+      done
+      echo -T -g "Reloading zsh and storing backup ✅"
+
+      echo -b "Configuring git..."
+      git config --global user.name "$NAME"
+      git config --global user.email "$EMAIL"
+      git config --global core.editor "$TEXT_EDITOR"
+      # Use global gitconfig and gitignore
+      for file in .gitconfig .gitignore; do
+        ln -sf $WORKING_DIR/dotfiles/$file $HOME/.${file}_global
+      done
+      git config --global include.path "$HOME/.gitconfig_global"
+      git config --global core.excludesfile "$HOME/.gitignore*"
+      echo -T -g "Configuring git ✅"
+
+      echo ""
+      echo "👌 Awesome, all set! `[ \"$2\" = \"--install\" ] && echo Type $cmd to check your current profile, or $config_cmd to modify it`"
+      ;;
+
+    (*)
+      echo -B "🖥  $USER"
+      echo " ⌙ 👤 $NAME"
+      echo " ⌙ 📧 $EMAIL"
+      echo " ⌙ 📝 ${TEXT_EDITOR##*/}"
+      echo " ⌙ 📁 $WORKING_DIR"
+      echo
+      echo "Type $config_cmd to edit"
+      ;;
+  esac
 }

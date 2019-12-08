@@ -28,7 +28,7 @@ alias ls="/usr/local/bin/gls -ah --color --group-directories-first"
 alias ll="ls -al"
 alias lss="du -sh * | sort -hr"
 
-# Open in text editor
+# Open with text editor
 alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
 alias .atom="open -a $TEXT_EDITOR $HOME/.atom"
 alias .ssh="open -a $TEXT_EDITOR $HOME/.ssh"

@@ -1,48 +1,42 @@
 {
   "parser": "babel-eslint",
   "parserOptions": {
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "env": {
     "es6": true,
     "browser": true
   },
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "prettier",
-  ],
+  "plugins": ["prettier"],
+  "extends": ["eslint:recommended", "prettier"],
   "settings": {
     "import/resolver": {
       "node": {
         "moduleDirectory": ["node_modules", "src/"]
       }
-    },
+    }
   },
   "globals": {
-    "Promise": true,
+    "module": true,
     "process": true,
-    "module": true
+    "Promise": true
   },
   "rules": {
-    "import/namespace": ["error", { "allowComputed": true }],
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 120,
-        "singleQuote": true,
-        "semi": false,
-        "trailingComma": "es5",
-        "bracketSpacing": true,
-      }
-    ],
-    "no-console": 0,
-    "quotes": ["error", "single", { "avoidEscape": true }],
-    "object-shorthand": ["error", "always"],
-    "max-lines": 2,
+    "max-lines": 1,
+    "no-console": 1,
+    "object-shorthand": [1, "always"],
+    "quotes": [1, "single", { "avoidEscape": true }],
     "sort-keys": 0,
-    "sort-vars": ["error", { "ignoreCase": false }]
+    "sort-vars": [1, { "ignoreCase": false }],
+    "prettier/prettier": [
+      1,
+      {
+        "bracketSpacing": true,
+        "printWidth": 120,
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "es5"
+      }
+    ]
   }
 }

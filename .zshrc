@@ -1,59 +1,60 @@
 #!/bin/zsh
-# shellcheck disable=SC2034
 
+# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh
 ZSH="$HOME/.oh-my-zsh"
 
 # Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
-ZSH_THEME="robbyrussell"
+export ZSH_THEME="robbyrussell"
 
 # Plugins - https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
-plugins=(
+export plugins=(
+  brew
+  bundler
   common-aliases
   gatsby
   gem
+  git
   git-extras
   gitfast
   github
   heroku
-  history-substring-search
-  last-working-dir
-  sublime
+  history
+  npm
+  osx
+  redis-cli
+  web-search
+  yarn
   zsh-syntax-highlighting
 )
+export HOMEBREW_NO_ANALYTICS=1 # prevents Homebrew from reporting
 
-# Prevent Homebrew from reporting
-HOMEBREW_NO_ANALYTICS=1
-
-# Load Oh My Zsh
 . "$ZSH/oh-my-zsh.sh"
 unalias rm
 
-# Load rbenv
-if (type -a rbenv > /dev/null); then
-  PATH="$PATH:$HOME/.rbenv/bin"
-  eval "$(rbenv init -)"
-fi
-
-# Load nvm
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  . "$NVM_DIR/nvm.sh"
-fi
-
-# Use local bin folder to store binstubs
-export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
-
-# Load profile, aliases, and custom scripts
+# Profile
 . "$HOME/.profile"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 [ -d "$HOME/.scripts" ] && for script in ~/.scripts/**/*; do . $script; done
 
 # Encoding
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 # git
 export FILTER_BRANCH_SQUELCH_WARNING=1
 
-# Bundler
-export BUNDLER_EDITOR=$TEXT_EDITOR
+# Ruby: load rbenv and set Bundler editor
+if (type -a rbenv > /dev/null); then
+  PATH="$PATH:$HOME/.rbenv/bin"
+  eval "$(rbenv init -)"
+fi
+export BUNDLER_EDITOR="$TEXT_EDITOR"
+
+# Node: load nvm
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh"
+fi
+
+# Rails: use local bin folder for binstubs
+export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
