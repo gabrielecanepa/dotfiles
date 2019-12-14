@@ -2,10 +2,10 @@ AllCops:
   Include:
     - Rakefile
     - config.ru
-    - '**/Gemfile'
-    - '**/*.gemspec'
-    - '**/*.rake'
-    - '**/*.rb'
+    - "**/Gemfile"
+    - "**/*.gemspec"
+    - "**/*.rake"
+    - "**/*.rb"
   Exclude:
     - bin/**/*
     - config/**/*
@@ -27,6 +27,8 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
   Enabled: false
+Style/EachWithObject:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Lambda:
@@ -35,22 +37,22 @@ Style/MethodCallWithArgsParentheses:
   Enabled: true
   IgnoredMethods:
     [
-      'authorize',
-      'desc',
-      'gem',
-      'has_many',
-      'head',
-      'puts',
-      'raise',
-      'redirect_to',
-      'render',
-      'require',
-      'require_relative',
-      'ruby',
-      'run',
-      'separator',
-      'source',
-      'yield',
+      "authorize",
+      "desc",
+      "gem",
+      "has_many",
+      "head",
+      "puts",
+      "raise",
+      "redirect_to",
+      "render",
+      "require",
+      "require_relative",
+      "ruby",
+      "run",
+      "separator",
+      "source",
+      "yield",
     ]
 Style/MultilineMethodSignature:
   Enabled: true
