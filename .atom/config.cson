@@ -1,0 +1,71 @@
+"*":
+  "atom-beautify":
+    executables:
+      rubocop:
+        path: "rubocop"
+  "atom-elixir-formatter":
+    showErrorNotifications: false
+  "autocomplete-paths":
+    relative: false
+  core:
+    automaticallyUpdate: true
+    closeDeletedFileTabs: true
+    disabledPackages: [
+      "exception-reporting"
+    ]
+    ignoredNames: [
+      "._*"
+      ".DS_Store"
+      ".hg"
+      ".sass-cache"
+      ".svn"
+      "desktop.ini"
+      "Thumbs.db"
+    ]
+    packagesWithKeymapsDisabled: []
+    projectHome: "/Users/gabrielecanepa/code"
+    telemetryConsent: "no"
+    themes: [
+      "one-dark-ui"
+      "atom-material-syntax-dark"
+    ]
+    titleBar: "hidden"
+    useTreeSitterParsers: true
+  editor:
+    fontSize: 22
+    showIndentGuide: true
+  "file-types":
+    ".aliases": "source.shell"
+    ".prettierrc*": "source.js"
+  "fuzzy-finder":
+    scoringSystem: "fast"
+    useRipGrep: true
+  "linter-markdown":
+    presetStyleGuideWithoutConfig: true
+  "linter-rubocop":
+    disableWhenNoConfigFile: true
+  "linter-ui-default":
+    alwaysTakeMinimumSpace: true
+    panelHeight: 64
+    showPanel: true
+  lorem:
+    defaults:
+      unitSize: "Short"
+  "one-dark-ui":
+    stickyHeaders: true
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
+      showInStatusBar: true
+    useEslint: true
+  "pretty-json":
+    prettifyOnSaveJSON: true
+  "theme-switcher":
+    syntaxThemeOne: "atom-material-syntax-dark"
+    syntaxThemeTwo: "atom-material-syntax-light"
+    uiThemeOne: "one-dark-ui"
+    uiThemeTwo: "one-light-ui"
+  "tree-view":
+    hideIgnoredNames: true
+  welcome:
+    showOnStartup: false

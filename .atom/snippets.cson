@@ -1,0 +1,33 @@
+'.text.html.erb':
+  'erb-inject':
+    'prefix': 'er'
+    'body': '<% $1 %>$2'
+    'description': 'Inject Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
+  'erb-print':
+    'prefix': 'pe'
+    'body': '<%= $1 %>$2'
+    'description': 'Print Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
+'.text.html.ruby':
+  'erb-inject':
+    'prefix': 'er'
+    'body': '<% $1 %>$2'
+    'description': 'Inject Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
+  'erb-print':
+    'prefix': 'pe'
+    'body': '<%= $1 %>$2'
+    'description': 'Print Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
+'.source.js.rails':
+  'erb-inject':
+    'prefix': 'er'
+    'body': '<% $1 %>$2'
+    'description': 'Inject Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
+  'erb-print':
+    'prefix': 'pe'
+    'body': '<%= $1 %>$2'
+    'description': 'Print Ruby in ERB files'
+    'rightLabelHTML': '<span style="color: #CC332D">ERB</span>'
