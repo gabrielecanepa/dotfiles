@@ -1,81 +1,157 @@
 #!/bin/zsh
 
+# TODO:
+# - fix profile config
+# - bundle scripts
+# - autocomplete commands
+# - manage ctrl-c exit
+
+profile_cmd=`echo -gB profile`
+profile_config_cmd="$profile_cmd `echo -B config`"
+profile_install_cmd="$profile_cmd `echo -B install`"
+
+check_profile_installation () {
+  if [[ ! $NAME =~ $name_regex ]] || [[ ! $EMAIL =~ $email_regex ]] || [ ! -f $EDITOR ] || [ ! -d $WORKING_DIR/dotfiles ]; then
+    echo -r "⚠️  Profile installed incorrectly"
+    echo "Type $profile_install_cmd to install a profile for `echo -c $USER`"
+    return 1
+  fi
+}
+
 profile () {
-  cmd=`echo -gB profile`
-  config_cmd="$cmd `echo -B config`"
+  # Install, config, or display the current profile
+  # Usage: profile [install|config]
 
   case $1 in
     (config)
-      echo -B "First and last name (no accent or special characters):"
-      printf  "> "
-      read NAME
+      changed_keys=0
+      is_installation=`[[ $2 =~ ^install$ ]]; echo $?`
+      name_msg="🔏 First and last name$NC (`(( $is_installation == 0 )) && echo 'no accent or special characters' || echo $NAME`)"
+      email_msg="📧 Email address$NC (`(( $is_installation == 0 )) && echo 'to sign your commits' || echo $EMAIL`)"
+      working_dir_msg="📁 Working directory$NC (`(( $is_installation == 0 )) && echo \"relative to $HOME, e.g. code\" || echo ${WORKING_DIR##*/}`)"
+      editor_msg="⌨️  Text editor$NC (`(( $is_installation == 0 )) && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo ${EDITOR##*/}`)"
 
-      echo -B "Email address (used for git):"
-      printf  "> "
-      read EMAIL
+      if (( $is_installation == 1 )); then
+        check_profile_installation
+        [ $? = 1 ] && return
+      fi
 
-      echo -B "Text editor (name of the app, e.g. Atom, VSCode, Sublime Text):"
-      printf  "> "
-      read TEXT_EDITOR
-      TEXT_EDITOR="/Applications/$TEXT_EDITOR.app/Contents/MacOS/$TEXT_EDITOR"
+      echo -cB "👤 $USER"
+      (( $is_installation == 1 )) && echo "(hit ⏎ if unchanged)"
+      echo ""
 
-      echo -B "Working directory (relative to $HOME):"
-      printf  "> "
-      read WORKING_DIR
-      WORKING_DIR="$HOME/$WORKING_DIR"
+      for key in NAME EMAIL WORKING_DIR EDITOR; do
+        tmp_key="${(L)key}"
+        eval echo -B $"${tmp_key}_msg"
+        eval get_input $tmp_key "`(( $is_installation == 0 )) && echo -v || echo -vb`"
+        if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
+          export "`echo $key=\"${(P)tmp_key}\"`"
+          changed_keys+=1
+        fi
+      done
 
       echo ""
 
-      echo -c "Storing profile..."
-      echo "# Personal profile - use the \`profile\` script to edit it" > ~/.profile
-      for key in NAME EMAIL TEXT_EDITOR WORKING_DIR; do
-        value=${(P)key}
-        echo "export $key=\"$value\"" >> ~/.profile
-      done
-      echo -T -g "Storing profile ✅"
+      if (( $changed_keys > 0 )); then
+        echo -b "Storing profile..."
+        echo "# 👤 $USER" > ~/.zprofile
+        for key in NAME EMAIL WORKING_DIR EDITOR; do
+          echo "export $key=\"${(P)key}\"" >> ~/.zprofile
+        done
+        echo "export LANG=\"en_US.UTF-8\"" >> ~/.zprofile
+        echo "export LC_ALL=\"en_US.UTF-8\"" >> ~/.zprofile
+        echo -T -g "Storing profile ✅"
+      else
+        echo "Nothing changed"
+        return
+      fi
 
-      # *TODO*: fix scripts folder loop
-      echo -b "Linking dotfiles..."
-      [ "$2" = "--install" ] && [ -f $WORKING_DIR/dotfiles/install.zsh ] && rm $WORKING_DIR/dotfiles/install.zsh
+      echo -b "Linking dotfiles`(( $is_installation == 0 )) && echo ' and removing installation script'`..."
+      if (( $is_installation == 0 )) && [ -f "`pwd`/install.zsh" ]; then
+         rm -rf "`pwd`/install.zsh"
+      fi
       for file in $WORKING_DIR/dotfiles/.*; do
-        filename=$(basename $file)
-        if [ ! -e $WORKING_DIR/$filename ]; then
-          [[ ! $filename =~ \.git* ]] && ln -sf $file $HOME/$filename
+        filename=`basename $file`
+        target=`readlink $HOME/$filename`
+        if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
+          case $filename in
+            .atom)
+              if [ -d $HOME/.atom ]; then
+                for config in $WORKING_DIR/dotfiles/.atom/*; do
+                  config_name=`basename $config`
+                  rm -f $HOME/.atom/$config_name
+                  ln -sf $WORKING_DIR/dotfiles/.atom/$config_name $HOME/.atom/$config_name
+                done
+              fi
+              ;;
+            .git|.github) # skip
+              ;;
+            .gitconfig) # use global
+              rm -f $HOME/$filename
+              ln -sf $file $HOME/${filename}_global
+              ;;
+            .scripts) # TODO: bundle in one file
+              ;;
+            *)
+              rm -rf $HOME/$filename
+              ln -sf $file $HOME/$filename
+              ;;
+          esac
         fi
       done
       echo -T -g "Linking dotfiles ✅"
 
       echo -b "Reloading zsh and storing backup..."
-      . ~/.zshrc
-      for file in .zshrc.pre-oh-my-zsh .zshrc.backup; do
-        ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$file
+      for zfile in .zprofile .zshrc .zlogin; do
+        if [ -f $HOME/$zfile ]; then
+          . $HOME/$zfile
+        else
+          echo -T -r "ERROR: can't find $zfile in $HOME"
+          return
+        fi
+      done
+      for backup in .zshrc.backup .zshrc.pre-oh-my-zsh; do
+        [ -f $backup ] && rm -f $HOME/$backup
+        ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$backup
       done
       echo -T -g "Reloading zsh and storing backup ✅"
 
       echo -b "Configuring git..."
       git config --global user.name "$NAME"
       git config --global user.email "$EMAIL"
-      git config --global core.editor "$TEXT_EDITOR"
-      # Use global gitconfig and gitignore
-      for file in .gitconfig .gitignore; do
-        ln -sf $WORKING_DIR/dotfiles/$file $HOME/.${file}_global
-      done
+      git config --global core.editor "'$EDITOR'"
       git config --global include.path "$HOME/.gitconfig_global"
       git config --global core.excludesfile "$HOME/.gitignore*"
       echo -T -g "Configuring git ✅"
 
       echo ""
-      echo "👌 Awesome, all set! `[ \"$2\" = \"--install\" ] && echo Type $cmd to check your current profile, or $config_cmd to modify it`"
+      echo "👌 Awesome, all set! Type $profile_cmd to check your current profile`(( $is_installation == 0 )) && echo , or $profile_config_cmd to modify it`"
+      ;;
+
+    (install)
+      if (check_profile_installation >/dev/null); then
+        echo -y "WARNING: You already have a profile installed for $USER"
+        printf "Do you want to override the current configuration? (y/n [n]) "
+        read choice
+        if [[ $choice =~ [yY] ]]; then
+          profile config install
+        fi
+      else
+        profile config install
+      fi
       ;;
 
     (*)
-      echo -B "🖥  $USER"
-      echo " ⌙ 👤 $NAME"
+      check_profile_installation
+      [ $? = 1 ] && return
+
+      echo -cB "👤 $USER"
+      echo " ⌙ 🔏 $NAME"
       echo " ⌙ 📧 $EMAIL"
-      echo " ⌙ 📝 ${TEXT_EDITOR##*/}"
-      echo " ⌙ 📁 $WORKING_DIR"
+      echo " ⌙ 📁 ${WORKING_DIR##*/}"
+      echo " ⌙ ⌨️  ${EDITOR##*/}"
       echo
-      echo "Type $config_cmd to edit"
+      echo "Type $profile_config_cmd to edit this profile"
       ;;
   esac
 }

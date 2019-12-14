@@ -1,7 +1,9 @@
-#!/bin/zsh
+# TODO: speed up nvm or use fnm
 
-# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh
 ZSH="$HOME/.oh-my-zsh"
+
+# Options - http://zsh.sourceforge.net/Doc/Release/Options.html#Description-of-Options
+setopt RC_EXPAND_PARAM
 
 # Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 export ZSH_THEME="robbyrussell"
@@ -10,51 +12,40 @@ export ZSH_THEME="robbyrussell"
 export plugins=(
   brew
   bundler
+  colored-man-pages
   common-aliases
   gatsby
   gem
   git
   git-extras
-  gitfast
   github
   heroku
-  history
   npm
   osx
   redis-cli
   web-search
   yarn
+  zsh-autosuggestions
+  zsh-navigation-tools
   zsh-syntax-highlighting
 )
-export HOMEBREW_NO_ANALYTICS=1 # prevents Homebrew from reporting
+export HOMEBREW_NO_ANALYTICS=1 # prevent Homebrew from reporting
 
+# Load Oh My Zsh
 . "$ZSH/oh-my-zsh.sh"
-unalias rm
-
-# Profile
-. "$HOME/.profile"
-[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-[ -d "$HOME/.scripts" ] && for script in ~/.scripts/**/*; do . $script; done
-
-# Encoding
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
-# git
-export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Ruby: load rbenv and set Bundler editor
-if (type -a rbenv > /dev/null); then
+if (type -a rbenv >/dev/null); then
   PATH="$PATH:$HOME/.rbenv/bin"
-  eval "$(rbenv init -)"
+  eval "`rbenv init -`"
 fi
-export BUNDLER_EDITOR="$TEXT_EDITOR"
+[ $EDITOR ] && export BUNDLER_EDITOR="$EDITOR"
 
 # Node: load nvm
+NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  . "$NVM_DIR/nvm.sh"
+  . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Rails: use local bin folder for binstubs
+# Use local bin folder for binstubs
 export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"

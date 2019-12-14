@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+ln () {
+  # Usage with dotfiles: ln dotfiles <file>[ <file2>]
+  case $1 in
+    (dotfiles)
+      for file in "${@:2}"; do
+        ln -sf $WORKING_DIR/dotfiles/$file $file
+      done
+      ;;
+    (*)
+      builtin command ln "$@"
+      ;;
+  esac
+}

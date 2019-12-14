@@ -4,6 +4,7 @@ BB="\e[1m"
 RED="\e[31m"
 GRN="\e[32m"
 BLU="\e[34m"
+CYN="\e[36m"
 YLW="\e[33m"
 NC="\e[0m"
 
@@ -21,6 +22,10 @@ echo () {
       echo "${BLU}${@:2}$NC"
       ;;
 
+    (-c)
+      echo "${CYN}${@:2}$NC"
+      ;;
+
     (-y)
       echo "${YLW}${@:2}$NC"
       ;;
@@ -29,28 +34,30 @@ echo () {
       bold="${BB}${@:2}$NC"
       if [ "$1" = "-B" ]; then
         echo $bold
-        return
+      else
+        case $1 in
+          (-rB | -Br)
+            echo -r $bold
+            ;;
+          (-gB | -Bg)
+            echo -g $bold
+            ;;
+          (-bB | -Bb)
+            echo -b $bold
+            ;;
+          (-cB | -Bc)
+            echo -c $bold
+            ;;
+          (-yB | -By)
+            echo -y $bold
+            ;;
+        esac
       fi
-      case $1 in
-        (-rB | -Br)
-          echo -r $bold
-          ;;
-        (-gB | -Bg)
-          echo -g $bold
-          ;;
-        (-bB | -Bb)
-          echo -b $bold
-          ;;
-        (-yB | -By)
-          echo -y $bold
-          ;;
-      esac
       ;;
 
     (-T)
-      if [[ $2 =~ ^-[rgby]?B?[rgby]?$ ]]; then
+      if [[ $2 =~ ^-[rgbcy]?B?[rgbcy]?$ ]]; then
         echo $2 "\r\033[1A\033[0K${@:3}"
-        return
       else
         echo "\r\033[1A\033[0K${@:2}"
       fi

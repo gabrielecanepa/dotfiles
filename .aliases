@@ -1,34 +1,35 @@
-# Get external or local IPs
+# TODO: loop through git aliases
+
+unalias rm
+unalias rubocop
+
+# Network
 alias ip="curl ipinfo.io/ip"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
-# Serve current directory as HTTP
 alias serve="ruby -run -e httpd . -p 8000"
-# Expose local server with Serveo
 alias serveo="ssh -R 80:$1 serveo.net"
 
-# git
-alias ga="git add"
-alias gbr="git branch"
-alias gcm="git commit -m"
-alias gco="git checkout"
-alias glg="git log --abbrev-commit --color --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-alias gsts="git status -sb"
-alias gpom="git push origin master"
-alias gpf="git push -f --set-upstream $1 $2"
-
-# Change directory
+# Directories
 alias cdw="cd $WORKING_DIR"
-alias cdp="cd $WORKING_DIR/$USER"
-alias desk="cd $HOME/Desktop"
+alias cdd="cd $HOME/Desktop"
 alias tmp="cd $WORKING_DIR/tmp"
 
-# Generic commands
-alias ls="/usr/local/bin/gls -ah --color --group-directories-first"
-alias ll="ls -al"
-alias lss="du -sh * | sort -hr"
+# Open in editor
+alias dotfiles="open -a $EDITOR $WORKING_DIR/dotfiles"
+alias .ssh="open -a $EDITOR $HOME/.ssh"
 
-# Open with text editor
-alias dotfiles="open -a $TEXT_EDITOR $WORKING_DIR/dotfiles"
-alias .atom="open -a $TEXT_EDITOR $HOME/.atom"
-alias .ssh="open -a $TEXT_EDITOR $HOME/.ssh"
+# git
+alias ga="git a"
+alias gbr="git br"
+alias gcm="git cm"
+alias gco="git co $1"
+alias glg="git lg"
+alias gsts="git st"
+alias gpom="git pom"
+alias gpf="git pf $1 $2"
+
+# Common commands
+alias ls="/usr/local/bin/gls -ah --color --group-directories-first"
+alias ll="ls -l"
+alias lss="du -sh * 2>/dev/null | sort -hr"

@@ -4,28 +4,29 @@ gatekeeper () (
   case $1 in
     (disable)
       if [ -z $2 ]; then
-        sudo spctl --master-disable >/dev/null 2>&1
-        if [ $? -eq 0 ]; then
-          echo "🔓 GateKeeper disabled globally"
-        else
-          echo -r "An error occured, please try again"
+        echo -y "WARNING: this will disable GateKeeper globally"
+        printf "Are you sure you want to continue? (y/n [n]) "
+        read choice
+        if [[ $choice =~ [yY] ]]; then
+          if (sudo spctl --master-disable >/dev/null 2>&1); then
+            echo "🔓 GateKeeper disabled globally"
+          else
+            echo -r "An error occured, please try again"
+          fi
         fi
       else
         for app in "${@:2}"; do
-          app_name=$(printf "%s\n" "${app##*/}")
-          sudo xattr -r -d com.apple.quarantine $app 2> /dev/null
-          if [ $? -eq 0 ]; then
-            echo "🔓 GateKeeper disabled for $app_name"
+          if (sudo xattr -r -d com.apple.quarantine $app 2>/dev/null); then
+            echo "🔓 GateKeeper disabled for ${app##*/}"
           else
-            echo -r "Can't disable GateKeeper for $app_name"
+            echo -r "Can't disable GateKeeper for ${app##*/}"
           fi
         done
       fi
       ;;
 
     (enable)
-      sudo spctl --master-enable >/dev/null 2>&1
-      if [ $? -eq 0 ]; then
+      if (sudo spctl --master-enable >/dev/null 2>&1); then
         echo "🔒 GateKeeper enabled globally"
       else
         echo -r "There was a problem enabling GateKeeper, please try again"
