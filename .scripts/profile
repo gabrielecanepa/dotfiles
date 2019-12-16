@@ -1,11 +1,5 @@
 #!/bin/zsh
 
-# TODO:
-# - fix profile config
-# - bundle scripts
-# - autocomplete commands
-# - manage ctrl-c exit
-
 profile_cmd=`echo -gB profile`
 profile_config_cmd="$profile_cmd `echo -B config`"
 profile_install_cmd="$profile_cmd `echo -B install`"
@@ -18,14 +12,49 @@ check_profile_installation () {
   fi
 }
 
-profile () {
-  # Install, config, or display the current profile
-  # Usage: profile [install|config]
+link_dotfiles () {
+  check_profile_installation
+  [ $? = 1 ] && return
 
+  for file in $WORKING_DIR/dotfiles/.*; do
+    filename=`basename $file`
+    target=`readlink $HOME/$filename`
+    if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
+      case $filename in
+        .git|.github|.iterm2) # skip
+          ;;
+        .atom) # Atom
+          if (type atom >/dev/null) && [ -d $HOME/.atom ]; then
+            for atom_file in $WORKING_DIR/dotfiles/.atom/*; do
+              atom_filename=`basename $atom_file`
+              rm -f $HOME/.atom/$atom_filename
+              ln -sf $file/$atom_filename $HOME/.atom/$atom_filename
+            done
+          fi
+          ;;
+        .gitconfig) # use global
+          [ -f $HOME/.gitconfig ] && rm -f $HOME/.gitconfig
+          ln -sf $file $HOME/${filename}_global
+          ;;
+        .scripts) # minify
+          ;;
+        *)
+          [ -f $HOME/$filename ] && rm -f $HOME/$filename
+          ln -sf $file $HOME/$filename
+          ;;
+      esac
+    fi
+  done
+}
+
+# Usage: profile [install|config|reload]
+# Install, config, reload, or print the current profile
+profile () {
   case $1 in
     (config)
       changed_keys=0
       is_installation=`[[ $2 =~ ^install$ ]]; echo $?`
+      is_reload=`[[ $2 =~ ^reload$ ]]; echo $?`
       name_msg="🔏 First and last name$NC (`(( $is_installation == 0 )) && echo 'no accent or special characters' || echo $NAME`)"
       email_msg="📧 Email address$NC (`(( $is_installation == 0 )) && echo 'to sign your commits' || echo $EMAIL`)"
       working_dir_msg="📁 Working directory$NC (`(( $is_installation == 0 )) && echo \"relative to $HOME, e.g. code\" || echo ${WORKING_DIR##*/}`)"
@@ -36,23 +65,25 @@ profile () {
         [ $? = 1 ] && return
       fi
 
-      echo -cB "👤 $USER"
-      (( $is_installation == 1 )) && echo "(hit ⏎ if unchanged)"
-      echo ""
+      if (( $is_reload == 1 )); then
+        echo -cB "👤 $USER"
+        (( $is_installation == 1 )) && echo "(hit ⏎ if unchanged)"
+        echo ""
 
-      for key in NAME EMAIL WORKING_DIR EDITOR; do
-        tmp_key="${(L)key}"
-        eval echo -B $"${tmp_key}_msg"
-        eval get_input $tmp_key "`(( $is_installation == 0 )) && echo -v || echo -vb`"
-        if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
-          export "`echo $key=\"${(P)tmp_key}\"`"
-          changed_keys+=1
-        fi
-      done
+        for key in NAME EMAIL WORKING_DIR EDITOR; do
+          tmp_key="${(L)key}"
+          eval echo -B $"${tmp_key}_msg"
+          eval get_input $tmp_key "`(( $is_installation == 0 )) && echo -v || echo -vb`"
+          if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
+            export "`echo $key=\"${(P)tmp_key}\"`"
+            changed_keys+=1
+          fi
+        done
 
-      echo ""
+        echo ""
+      fi
 
-      if (( $changed_keys > 0 )); then
+      if (( $changed_keys > 0 )) || (( $is_reload == 0 )); then
         echo -b "Storing profile..."
         echo "# 👤 $USER" > ~/.zprofile
         for key in NAME EMAIL WORKING_DIR EDITOR; do
@@ -66,42 +97,13 @@ profile () {
         return
       fi
 
-      echo -b "Linking dotfiles`(( $is_installation == 0 )) && echo ' and removing installation script'`..."
       if (( $is_installation == 0 )) && [ -f "`pwd`/install.zsh" ]; then
-         rm -rf "`pwd`/install.zsh"
+        echo -b "Removing installation script..."
+        rm -rf "`pwd`/install.zsh"
+        echo -T -g "Removing installation script ✅"
       fi
-      for file in $WORKING_DIR/dotfiles/.*; do
-        filename=`basename $file`
-        target=`readlink $HOME/$filename`
-        if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
-          case $filename in
-            .git|.github|.iterm) # skip
-              ;;
-            .atom) # Atom config
-              if [ -d $HOME/.atom ]; then
-                for config in $WORKING_DIR/dotfiles/.atom/*; do
-                  config_name=`basename $config`
-                  rm -f $HOME/.atom/$config_name
-                  ln -sf $WORKING_DIR/dotfiles/.atom/$config_name $HOME/.atom/$config_name
-                done
-              fi
-              ;;
-            .gitconfig) # use global
-              rm -f $HOME/$filename
-              ln -sf $file $HOME/${filename}_global
-              ;;
-            .scripts) # TODO: bundle in one file
-              ;;
-            *)
-              rm -rf $HOME/$filename
-              ln -sf $file $HOME/$filename
-              ;;
-          esac
-        fi
-      done
-      echo -T -g "Linking dotfiles ✅"
 
-      echo -b "Reloading zsh and storing backup..."
+      echo -b "Reloading zsh and linking dotfiles..."
       for zfile in .zprofile .zshrc .zlogin; do
         if [ -f $HOME/$zfile ]; then
           . $HOME/$zfile
@@ -114,18 +116,18 @@ profile () {
         [ -f $backup ] && rm -f $HOME/$backup
         ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$backup
       done
-      echo -T -g "Reloading zsh and storing backup ✅"
+      echo -T -g "Reloading zsh and linking dotfiles ✅"
 
       echo -b "Configuring git..."
       git config --global user.name "$NAME"
       git config --global user.email "$EMAIL"
       git config --global core.editor "'$EDITOR'"
       git config --global include.path "$HOME/.gitconfig_global"
-      git config --global core.excludesfile "$HOME/.gitignore*"
+      git config --global core.excludesfile "$HOME/.gitignore"
       echo -T -g "Configuring git ✅"
 
       echo ""
-      echo "👌 Awesome, all set! Type $profile_cmd to check your current profile`(( $is_installation == 0 )) && echo , or $profile_config_cmd to modify it`"
+      echo "👌 Awesome, all set! `(( $is_reload == 1 )) && echo Type $profile_cmd to check your current profile``(( $is_installation == 0 )) && echo , or $profile_config_cmd to modify it`"
       ;;
 
     (install)
@@ -133,25 +135,26 @@ profile () {
         echo -y "WARNING: You already have a profile installed for $USER"
         printf "Do you want to override the current configuration? (y/n [n]) "
         read choice
-        if [[ $choice =~ [yY] ]]; then
-          profile config install
-        fi
+        [[ $choice =~ [yY] ]] && profile config install
       else
         profile config install
       fi
       ;;
 
-    (*)
-      check_profile_installation
-      [ $? = 1 ] && return
+    (reload)
+      profile config reload
+      ;;
 
-      echo -cB "👤 $USER"
-      echo " ⌙ 🔏 $NAME"
-      echo " ⌙ 📧 $EMAIL"
-      echo " ⌙ 📁 ${WORKING_DIR##*/}"
-      echo " ⌙ ⌨️  ${EDITOR##*/}"
-      echo
-      echo "Type $profile_config_cmd to edit this profile"
+    (*)
+      if (check_profile_installation); then
+        echo -cB "👤 $USER"
+        echo " ⌙ 🔏 $NAME"
+        echo " ⌙ 📧 $EMAIL"
+        echo " ⌙ 📁 ${WORKING_DIR##*/}"
+        echo " ⌙ ⌨️  ${EDITOR##*/}"
+        echo
+        echo "Type $profile_config_cmd to edit this profile"
+      fi
       ;;
   esac
 }

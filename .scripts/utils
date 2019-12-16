@@ -1,31 +1,25 @@
 #!/bin/zsh
 
-# TODO:
-# - autocomplete
-#   * name and email from history
-#   * editor from installed apps
-#   * working_dir from ~
-
 name_regex="[A-Za-z\s,\.]{2,}"
 email_regex="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 
 get_input () {
-  help=`[ ! $1 ] || [[ $1 =~ --?h(elp)? ]]; echo $?`
   validate=`[[ $2 =~ ^-vb?$ ]]; echo $?`
   allow_blank=`[[ $2 =~ ^-vb$ ]]; echo $?`
+  help=`[ ! $1 ] || [[ $1 =~ --?h(elp)? ]]; echo $?`
 
   if (( $help == 0 )); then
     echo "Usage: get_input <input_name>"
     echo
     echo "Options:"
-    echo "  -v\t\t\tValidate the input if validation is available"
+    echo "  -v\t\t\tValidate the input, if validation is available"
     echo "  -vb\t\t\tValidate the input and allow blank values"
     echo "  -h, --help\t	Print this help message"
     return
   fi
 
   if (( $validate == 0 )); then
-    log_input_error () { # private function
+    log_input_error () {
       tput civis # hide cursor
       echo -T -r "$1\c"
       sleep 1
@@ -35,7 +29,7 @@ get_input () {
     }
 
     if [[ ! $1 =~ (name|email|editor|working_dir) ]]; then
-      echo -y "Validation not available for $1"
+      echo -y "WARNING: validation not available for $1"
     fi
 
     echo -n "> "
@@ -43,13 +37,13 @@ get_input () {
 
     case $1 in
       name)
-        while (( $allow_blank == 1 )) && ! [[ $name =~ $name_regex ]]; do
+        while (( $allow_blank == 1 )) || [ $name ] && ! [[ $name =~ $name_regex ]]; do
           log_input_error "You must specify a valid name"
           read name
         done
         ;;
       email)
-        while (( $allow_blank == 1 )) && [[ ! $email =~ $email_regex ]]; do
+        while (( $allow_blank == 1 )) || [ $email ] && [[ ! $email =~ $email_regex ]]; do
           if [ $email ]; then
             log_input_error "$email is not a valid email"
           else
@@ -59,7 +53,7 @@ get_input () {
         done
         ;;
       editor)
-        while (( $allow_blank == 1 )) && [ ! -f /Applications/$editor.app/Contents/MacOS/$editor ]; do
+        while (( $allow_blank == 1 )) || [ $editor ] && [ ! -f /Applications/$editor.app/Contents/MacOS/$editor ]; do
           if [ $editor ]; then
             log_input_error "${editor##*/} is not a valid application"
           else
@@ -70,7 +64,7 @@ get_input () {
         [ $editor ] && editor="/Applications/$editor.app/Contents/MacOS/$editor"
         ;;
       working_dir)
-        while (( $allow_blank == 1 )) && [ ! -d $HOME/$working_dir/dotfiles ]; do
+        while (( $allow_blank == 1 )) || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
           if [ -d $HOME/$working_dir ]; then
             log_input_error "$HOME/$working_dir doesn't contain the required dotfiles"
           else
@@ -82,6 +76,7 @@ get_input () {
         ;;
       *);;
     esac
+
     unset -f log_input_error
   else
     echo -n "> "
