@@ -1,8 +1,4 @@
 "*":
-  "atom-beautify":
-    executables:
-      rubocop:
-        path: "rubocop"
   "atom-elixir-formatter":
     showErrorNotifications: false
   "autocomplete-paths":
@@ -22,7 +18,6 @@
       "desktop.ini"
       "Thumbs.db"
     ]
-    packagesWithKeymapsDisabled: []
     projectHome: "/Users/gabrielecanepa/code"
     telemetryConsent: "no"
     themes: [
@@ -36,14 +31,13 @@
     showIndentGuide: true
   "file-types":
     ".aliases": "source.shell"
-    ".prettierrc*": "source.js"
+    ".prettier*": "source.js"
+    ".remark*": "source.js"
   "fuzzy-finder":
     scoringSystem: "fast"
     useRipGrep: true
   "linter-markdown":
     presetStyleGuideWithoutConfig: true
-  "linter-rubocop":
-    disableWhenNoConfigFile: true
   "linter-ui-default":
     alwaysTakeMinimumSpace: true
     panelHeight: 64

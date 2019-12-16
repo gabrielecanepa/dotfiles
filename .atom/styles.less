@@ -1,19 +1,27 @@
-.tree-view,
-.tab-bar {
+// File names
+.tab-bar,
+.tree-view {
   font-size: 1.1rem;
 }
 
+// File icons
+.icon {
+  &.vue-icon:before {
+    color: #41b883;
+  }
+  &[data-name*="iterm"]:before {
+    font-family: file-icons;
+    font-size: 1.15rem;
+    content: "\f0c8";
+  }
+  &[data-name*="scripts"]:before {
+    font-family: Mfizz;
+    content: "\f156";
+  }
+}
+
+// Hide encoding selector
 encoding-selector-status,
 .line-ending-tile {
   display: none !important;
-}
-
-.vue-icon:before {
-  color: #41b883;
-}
-
-.icon[data-name*=".iterm"]:before {
-  font-family: file-icons;
-  font-size: 1.15rem;
-  content: "\f0c8";
 }

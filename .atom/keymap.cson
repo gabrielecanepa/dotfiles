@@ -2,8 +2,6 @@
   'ctrl-shift-left': 'pane:move-item-left'
   'ctrl-shift-right': 'pane:move-item-right'
 'body':
-  'cmd-alt-,': 'application:open-your-config'
-  'cmd-alt-k': 'application:open-your-keymap'
   'cmd-alt-p': 'project-manager:edit-projects'
   'cmd-alt-t': 'theme-switcher:switch'
   'cmd-alt-g': 'github:toggle-git-tab'
@@ -13,5 +11,4 @@
 'atom-text-editor':
   'cmd-alt-p': 'project-manager:edit-projects'
   'cmd-alt-t': 'theme-switcher:switch'
-  'cmd-ctrl-e': 'project-manager:edit-projects'
   'cmd-ctrl-s': 'project-manager:save-project'
