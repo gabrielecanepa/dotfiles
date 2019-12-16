@@ -20,8 +20,14 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Max: 120
 
+Naming/MethodParameterName:
+  MinNameLength: 1
+
 Layout/ClassStructure:
   Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
