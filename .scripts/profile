@@ -24,11 +24,12 @@ link_dotfiles () {
         .git|.github|.iterm2) # skip
           ;;
         .atom) # Atom
-          if (type atom >/dev/null) && [ -d $HOME/.atom ]; then
-            for atom_file in $WORKING_DIR/dotfiles/.atom/*; do
+          atom_config_path="$HOME/.atom"
+          if (type atom >/dev/null) && [ -d $atom_config_path ]; then
+            for atom_file in $file/*; do
               atom_filename=`basename $atom_file`
-              rm -f $HOME/.atom/$atom_filename
-              ln -sf $file/$atom_filename $HOME/.atom/$atom_filename
+              [ -f $atom_config_path/$atom_filename ] && rm -f $atom_config_path/$atom_filename
+              ln -sf $atom_file $atom_config_path/$atom_filename
             done
           fi
           ;;
