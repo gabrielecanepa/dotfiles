@@ -47,6 +47,9 @@
       unitSize: "Short"
   "one-dark-ui":
     stickyHeaders: true
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
