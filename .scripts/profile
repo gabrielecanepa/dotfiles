@@ -75,7 +75,9 @@ profile () {
         target=`readlink $HOME/$filename`
         if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
           case $filename in
-            .atom)
+            .git|.github|.iterm) # skip
+              ;;
+            .atom) # Atom config
               if [ -d $HOME/.atom ]; then
                 for config in $WORKING_DIR/dotfiles/.atom/*; do
                   config_name=`basename $config`
@@ -83,8 +85,6 @@ profile () {
                   ln -sf $WORKING_DIR/dotfiles/.atom/$config_name $HOME/.atom/$config_name
                 done
               fi
-              ;;
-            .git|.github) # skip
               ;;
             .gitconfig) # use global
               rm -f $HOME/$filename
