@@ -14,21 +14,16 @@ AllCops:
     - public/**/*
     - vendor/**/*
   TargetRubyVersion: 2.6
-
 Metrics/BlockLength:
   Max: 100
 Metrics/LineLength:
   Max: 120
-
 Naming/MethodParameterName:
   MinNameLength: 1
-
 Layout/ClassStructure:
   Enabled: true
-
 Lint/AmbiguousBlockAssociation:
   Enabled: false
-
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
@@ -68,7 +63,6 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-
 Rails:
   Enabled: true
 Rails/SaveBang:

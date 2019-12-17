@@ -6,6 +6,7 @@
   core:
     automaticallyUpdate: true
     closeDeletedFileTabs: true
+    destroyEmptyPanes: false
     disabledPackages: [
       "exception-reporting"
     ]
@@ -18,7 +19,8 @@
       "desktop.ini"
       "Thumbs.db"
     ]
-    projectHome: "/Users/gabrielecanepa/code"
+    openEmptyEditorOnStart: false
+    projectHome: "~/code"
     telemetryConsent: "no"
     themes: [
       "one-dark-ui"
@@ -26,9 +28,12 @@
     ]
     titleBar: "hidden"
     useTreeSitterParsers: true
+    warnOnLargeFileLimit: 20
   editor:
     fontSize: 22
     showIndentGuide: true
+  emmet:
+    extensionsPath: "~/.emmet"
   "file-types":
     ".aliases": "source.shell"
     ".prettier*": "source.js"

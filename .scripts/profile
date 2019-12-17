@@ -23,7 +23,7 @@ link_dotfiles () {
       case $filename in
         .git|.github|.iterm2) # skip
           ;;
-        .atom) # Atom
+        .atom) # link Atom files
           atom_config_path="$HOME/.atom"
           if (type atom >/dev/null) && [ -d $atom_config_path ]; then
             for atom_file in $file/*; do
@@ -33,11 +33,10 @@ link_dotfiles () {
             done
           fi
           ;;
-        .gitconfig) # use global
-          [ -f $HOME/.gitconfig ] && rm -f $HOME/.gitconfig
-          ln -sf $file $HOME/${filename}_global
+        .gitconfig) # store as global (keep .gitconfig private)
+          ln -sf $file $HOME/.gitconfig_global
           ;;
-        .scripts) # minify
+        .scripts) # minify custom scripts
           ;;
         *)
           [ -f $HOME/$filename ] && rm -f $HOME/$filename
@@ -54,27 +53,27 @@ profile () {
   case $1 in
     (config)
       changed_keys=0
-      is_installation=`[[ $2 =~ ^install$ ]]; echo $?`
-      is_reload=`[[ $2 =~ ^reload$ ]]; echo $?`
-      name_msg="🔏 First and last name$NC (`(( $is_installation == 0 )) && echo 'no accent or special characters' || echo $NAME`)"
-      email_msg="📧 Email address$NC (`(( $is_installation == 0 )) && echo 'to sign your commits' || echo $EMAIL`)"
-      working_dir_msg="📁 Working directory$NC (`(( $is_installation == 0 )) && echo \"relative to $HOME, e.g. code\" || echo ${WORKING_DIR##*/}`)"
-      editor_msg="⌨️  Text editor$NC (`(( $is_installation == 0 )) && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo ${EDITOR##*/}`)"
+      installation=`[[ $2 =~ ^install$ ]]; echo $?`
+      reload=`[[ $2 =~ ^reload$ ]]; echo $?`
+      name_msg="🔏 First and last name$NC (`(( $installation == 0 )) && echo 'no accent or special characters' || echo $NAME`)"
+      email_msg="📧 Email address$NC (`(( $installation == 0 )) && echo 'to sign your commits' || echo $EMAIL`)"
+      working_dir_msg="📁 Working directory$NC (`(( $installation == 0 )) && echo \"relative to $HOME, e.g. code\" || echo ${WORKING_DIR##*/}`)"
+      editor_msg="⌨️  Text editor$NC (`(( $installation == 0 )) && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo ${EDITOR##*/}`)"
 
-      if (( $is_installation == 1 )); then
+      if (( $installation == 1 )); then
         check_profile_installation
         [ $? = 1 ] && return
       fi
 
-      if (( $is_reload == 1 )); then
+      if (( $reload == 1 )); then
         echo -cB "👤 $USER"
-        (( $is_installation == 1 )) && echo "(hit ⏎ if unchanged)"
+        (( $installation == 1 )) && echo "(hit ⏎ if unchanged)"
         echo ""
 
         for key in NAME EMAIL WORKING_DIR EDITOR; do
           tmp_key="${(L)key}"
           eval echo -B $"${tmp_key}_msg"
-          eval get_input $tmp_key "`(( $is_installation == 0 )) && echo -v || echo -vb`"
+          eval get_input $tmp_key "`(( $installation == 0 )) && echo -v || echo -vb`"
           if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
             export "`echo $key=\"${(P)tmp_key}\"`"
             changed_keys+=1
@@ -84,7 +83,7 @@ profile () {
         echo ""
       fi
 
-      if (( $changed_keys > 0 )) || (( $is_reload == 0 )); then
+      if (( $changed_keys > 0 )) || (( $reload == 0 )); then
         echo -b "Storing profile..."
         echo "# 👤 $USER" > ~/.zprofile
         for key in NAME EMAIL WORKING_DIR EDITOR; do
@@ -98,7 +97,7 @@ profile () {
         return
       fi
 
-      if (( $is_installation == 0 )) && [ -f "`pwd`/install.zsh" ]; then
+      if (( $installation == 0 )) && [ -f "`pwd`/install.zsh" ]; then
         echo -b "Removing installation script..."
         rm -rf "`pwd`/install.zsh"
         echo -T -g "Removing installation script ✅"
@@ -128,7 +127,7 @@ profile () {
       echo -T -g "Configuring git ✅"
 
       echo ""
-      echo "👌 Awesome, all set! `(( $is_reload == 1 )) && echo Type $profile_cmd to check your current profile``(( $is_installation == 0 )) && echo , or $profile_config_cmd to modify it`"
+      echo "👌 Awesome, all set! `(( $reload == 1 )) && echo Type $profile_cmd to check your current profile``(( $installation == 0 )) && echo , or $profile_config_cmd to modify it`"
       ;;
 
     (install)

@@ -1,5 +1,4 @@
-# TODO: loop through git aliases
-
+# Unalias
 unalias rm
 unalias rubocop
 
@@ -17,16 +16,13 @@ alias tmp="cd $WORKING_DIR/tmp"
 
 # Open in editor
 alias dotfiles="open -a $EDITOR $WORKING_DIR/dotfiles"
-alias .ssh="open -a $EDITOR $HOME/.ssh"
+alias sshrc="open -a $EDITOR $HOME/.ssh"
 
 # git
-alias ga="git a"
-alias gbr="git br"
-alias gcm="git cm"
+for git_alias in a br cm lg st pom; do
+  alias g${git_alias}="git $git_alias"
+done
 alias gco="git co $1"
-alias glg="git lg"
-alias gsts="git st"
-alias gpom="git pom"
 alias gpf="git pf $1 $2"
 
 # Common commands

@@ -1,7 +1,7 @@
 // File names
 .tab-bar,
 .tree-view {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 // File icons
@@ -13,6 +13,10 @@
     font-family: file-icons;
     font-size: 1.15rem;
     content: "\f0c8";
+  }
+  &[data-name*="README"]&[data-name$=".md"]:before {
+    font-family: "Octicons Regular";
+    content: "\f0c9";
   }
   &[data-name*="scripts"]:before {
     font-family: Mfizz;
