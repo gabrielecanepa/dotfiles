@@ -6,21 +6,28 @@
 
 // File icons
 .icon {
+  &.atom-icon:before {
+    color: #5eaf7d;
+  }
   &.vue-icon:before {
     color: #41b883;
   }
-  &[data-name*="iterm"]:before {
+  &[data-name$="iterm2"]:before {
     font-family: file-icons;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     content: "\f0c8";
+  }
+  &[data-name$="oh-my-zsh"]:before {
+    font-family: Mfizz;
+    content: "\f158";
+  }
+  &[data-name$="scripts"]:before {
+    font-family: Mfizz;
+    content: "\f156";
   }
   &[data-name*="README"]&[data-name$=".md"]:before {
     font-family: "Octicons Regular";
     content: "\f0c9";
-  }
-  &[data-name*="scripts"]:before {
-    font-family: Mfizz;
-    content: "\f156";
   }
 }
 
