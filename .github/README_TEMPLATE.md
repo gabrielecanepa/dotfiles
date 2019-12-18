@@ -2,9 +2,16 @@
 
 <!-- Required - Short description. -->
 
+## Table of contents
+
+- [Setup](#setup)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Setup
 
-<!-- Optional - Does the app need any particular setup to be run? -->
+<!-- Optional - Does the app need any particular dependency/setup to be run? -->
 
 ## Usage
 
@@ -12,7 +19,7 @@
 
 ## Contributing
 
-Please fork the repository and create a new pull request/issue.
+Please [fork the repository](./fork) and create a new pull request/issue.
 
 ### License
 
