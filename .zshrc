@@ -1,38 +1,29 @@
-# TODO: speed up nvm or use fnm
-
+# Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-# Options - http://zsh.sourceforge.net/Doc/Release/Options.html#Description-of-Options
-setopt RC_EXPAND_PARAM
+ZSH_THEME="robbierussell"
 
-# Theme - https://github.com/robbyrussell/oh-my-zsh/wiki/themes
-export ZSH_THEME="robbyrussell"
-
-# Plugins - https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
-export plugins=(
+plugins=(
   brew
-  bundler
   colored-man-pages
-  common-aliases
-  gatsby
+  colorize
+  cp
   gem
-  git
-  git-extras
   github
-  heroku
-  npm
+  nvm
   osx
-  redis-cli
-  web-search
-  yarn
+  rbenv
+  sublime
+  themes
   zsh-autosuggestions
   zsh-navigation-tools
   zsh-syntax-highlighting
 )
-export HOMEBREW_NO_ANALYTICS=1 # prevent Homebrew from reporting
 
-# Load Oh My Zsh
 . "$ZSH/oh-my-zsh.sh"
+
+# Zsh: http://zsh.sourceforge.net/Docs
+setopt RC_EXPAND_PARAM
 
 # Ruby: load rbenv and set Bundler editor
 if (type -a rbenv >/dev/null); then
@@ -42,10 +33,10 @@ fi
 [ $EDITOR ] && export BUNDLER_EDITOR="$EDITOR"
 
 # Node: load nvm
-NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
+if [ -s "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
   . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Use local bin folder for binstubs
+# Use local folder for binstubs
 export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
