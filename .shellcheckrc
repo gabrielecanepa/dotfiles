@@ -10,3 +10,4 @@ disable=SC2139
 disable=SC2145
 disable=SC2153
 disable=SC2154
+disable=SC2207
