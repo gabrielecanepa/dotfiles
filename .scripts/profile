@@ -23,20 +23,44 @@ link_dotfiles () {
       case $filename in
         .git|.github|.iterm2) # skip
           ;;
+
         .atom) # Atom
-          atom_config_path="$HOME/.atom"
-          if (type atom >/dev/null) && [ -d $atom_config_path ]; then
+          atom_path="$HOME/.atom"
+          if (type atom >/dev/null) && [ -d $atom_path ]; then
             for atom_file in $file/*; do
               atom_filename=`basename $atom_file`
-              [ -f $atom_config_path/$atom_filename ] && rm -f $atom_config_path/$atom_filename
-              ln -sf $atom_file $atom_config_path/$atom_filename
+              atom_target=`readlink $atom_path/$atom_filename`
+              if [ "$atom_target" != "$atom_file" ]; then
+                rm -f $atom_path/$atom_filename
+                ln -sf $atom_file $atom_path/$atom_filename
+              fi
             done
           fi
           ;;
-        .gitconfig) # store as global
+        .gitconfig) # use global
           ln -sf $file $HOME/.gitconfig_global
           ;;
+        .oh-my-zsh) # link themes
+          themes_path="$HOME/.oh-my-zsh/custom/themes"
+          for theme in $file/*; do
+            theme_name=`basename $theme`
+            theme_target=`readlink $themes_path/$theme_name`
+            if [ "$theme_target" != "$theme" ]; then
+              rm -f $themes_path/$theme_name
+              ln -sf $theme $themes_path/$theme_name
+            fi
+          done
+          ;;
         .scripts) # TODO: minify custom scripts
+          ;;
+        .zshrc) # create backup
+          for zshconfig in .zshrc .zshrc.backup; do
+            target=`readlink $HOME/$zshconfig`
+            if [ "$target" != "$WORKING_DIR/dotfiles/.zshrc" ]; then
+              rm -f $HOME/$zshconfig
+              ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$zshconfig
+            fi
+          done
           ;;
         *)
           [ -f $HOME/$filename ] && rm -f $HOME/$filename
@@ -85,12 +109,12 @@ profile () {
 
       if (( $changed_keys > 0 )) || (( $reload == 0 )); then
         echo -b "Storing profile..."
-        echo "# 👤 $USER" > ~/.zprofile
+        echo "# 👤 $USER" > $HOME/.zprofile
         for key in NAME EMAIL WORKING_DIR EDITOR; do
-          echo "export $key=\"${(P)key}\"" >> ~/.zprofile
+          echo "export $key=\"${(P)key}\"" >> $HOME/.zprofile
         done
-        echo "export LANG=\"en_US.UTF-8\"" >> ~/.zprofile
-        echo "export LC_ALL=\"en_US.UTF-8\"" >> ~/.zprofile
+        echo "export LANG=\"en_US.UTF-8\"" >> $HOME/.zprofile
+        echo "export LC_ALL=\"en_US.UTF-8\"" >> $HOME/.zprofile
         echo -T -g "Storing profile ✅"
       else
         echo "Nothing changed"
@@ -112,10 +136,8 @@ profile () {
           return
         fi
       done
-      for backup in .zshrc.backup .zshrc.pre-oh-my-zsh; do
-        [ -f $backup ] && rm -f $HOME/$backup
-        ln -sf $WORKING_DIR/dotfiles/.zshrc $HOME/$backup
-      done
+      link_dotfiles
+
       echo -T -g "Reloading zsh and linking dotfiles ✅"
 
       echo -b "Configuring git..."
@@ -150,7 +172,7 @@ profile () {
         echo -cB "👤 $USER"
         echo " ⌙ 🔏 $NAME"
         echo " ⌙ 📧 $EMAIL"
-        echo " ⌙ 📁 ${WORKING_DIR##*/}"
+        echo " ⌙ 📁 ~/${WORKING_DIR##*/}"
         echo " ⌙ ⌨️  ${EDITOR##*/}"
         echo
         echo "Type $profile_config_cmd to edit this profile"
