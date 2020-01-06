@@ -17,4 +17,4 @@ about: Suggest an idea for this project
 
 ## Screenshots/Screencasts
 
-<!-- Optional - Provide supporting image/video/design. -->
+<!-- Optional - Provide supporting image/video/designs. -->

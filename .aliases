@@ -14,7 +14,7 @@ alias tmp="cd $WORKING_DIR/tmp"
 alias dotfiles="open -a $EDITOR $WORKING_DIR/dotfiles"
 alias sshrc="open -a $EDITOR $HOME/.ssh"
 
-# git - create shortcuts for short aliases (e.g. gpom = git pom)
+# git shortcuts for short aliases (e.g. gpom = git pom = git push origin master)
 for git_alias in `git aliases | sed "s/\ .*//"`; do
   (( ${#git_alias} < 4 )) && alias g${git_alias}="git $git_alias"
 done

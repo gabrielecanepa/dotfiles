@@ -23,7 +23,7 @@ link_dotfiles () {
       case $filename in
         .git|.github|.iterm2) # skip
           ;;
-        .atom) # link Atom files
+        .atom) # Atom
           atom_config_path="$HOME/.atom"
           if (type atom >/dev/null) && [ -d $atom_config_path ]; then
             for atom_file in $file/*; do
@@ -33,10 +33,10 @@ link_dotfiles () {
             done
           fi
           ;;
-        .gitconfig) # store as global (keep .gitconfig private)
+        .gitconfig) # store as global
           ln -sf $file $HOME/.gitconfig_global
           ;;
-        .scripts) # minify custom scripts
+        .scripts) # TODO: minify custom scripts
           ;;
         *)
           [ -f $HOME/$filename ] && rm -f $HOME/$filename
@@ -47,8 +47,8 @@ link_dotfiles () {
   done
 }
 
+# Print, install, configure, or reload the current profile
 # Usage: profile [install|config|reload]
-# Install, config, reload, or print the current profile
 profile () {
   case $1 in
     (config)

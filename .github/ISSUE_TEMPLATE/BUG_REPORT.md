@@ -1,5 +1,5 @@
 name: Bug Report
-about: Create a report to help the project improve
+about: Create a report to help improve the project
 
 ---
 
