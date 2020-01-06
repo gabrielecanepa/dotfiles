@@ -1,4 +1,4 @@
-# robbierussell.min - works with https://www.nerdfonts.com
+# robbierussell.min theme - works with https://www.nerdfonts.com
 
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )" # pre prompt
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%}$(git_prompt_info) ' # path + git

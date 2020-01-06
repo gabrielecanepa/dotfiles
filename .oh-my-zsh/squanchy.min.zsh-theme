@@ -1,4 +1,4 @@
-# squanchy - works with https://www.nerdfonts.com
+# squanchy theme - works with https://www.nerdfonts.com
 
 PROMPT="%{$fg_bold[cyan]%}$(echo \\uf751) %~%{$reset_color%} " # path
 PROMPT+='$(git_prompt_info)' # git
