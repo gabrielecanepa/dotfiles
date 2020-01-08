@@ -1,10 +1,14 @@
-// File names
 .tab-bar,
 .tree-view {
   font-size: 1.15rem;
 }
 
-// File icons
+encoding-selector-status,
+.line-ending-tile {
+  display: none !important;
+}
+
+// https://atom.io/packages/file-icons
 .icon {
   &.atom-icon:before {
     color: #5eaf7d;
@@ -12,27 +16,18 @@
   &.vue-icon:before {
     color: #41b883;
   }
-  &[data-name$="iterm2"]:before {
-    font-family: file-icons;
-    font-size: 1.2rem;
-    content: "\f0c8";
-  }
-  &[data-name$="oh-my-zsh"]:before {
-    font-family: Mfizz;
-    content: "\f158";
-  }
-  &[data-name$="scripts"]:before {
+  &[data-path$="bin"]:before {
     font-family: Mfizz;
     content: "\f156";
   }
-  &[data-name*="README"]&[data-name$=".md"]:before {
-    font-family: "Octicons Regular";
-    content: "\f0c9";
+  &[data-path$="private"]:before {
+    font-family: file-icons;
+    content: "\e976";
+    color: #d28445;
   }
-}
-
-// Hide encoding selector
-encoding-selector-status,
-.line-ending-tile {
-  display: none !important;
+  &[data-path$="subl"]:before {
+    font-family: file-icons;
+    content: "\e986";
+    color: #d28445;
+  }
 }
