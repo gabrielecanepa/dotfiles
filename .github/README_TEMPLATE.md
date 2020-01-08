@@ -1,6 +1,6 @@
-# {app-name}
+# <app-name>
 
-<!-- Required - Short description. -->
+<!-- Required - Short description -->
 
 ## Table of contents
 
@@ -15,12 +15,12 @@
 
 ## Usage
 
-<!-- Required - Describe how to run/test/deploy the app, with optional images/videos. -->
+<!-- Required - Describe how to run/test/deploy the app, with optional images/videos -->
 
 ## Contributing
 
-Please [fork the repository](./fork) and create a new pull request/issue.
+Please [fork the repository](https://github.com/<user>/<repo>/fork) and create a new pull request/issue.
 
 ### License
 
-[MIT](https://${user}.mit-license.org)
+[MIT](https://<user>.mit-license.org)

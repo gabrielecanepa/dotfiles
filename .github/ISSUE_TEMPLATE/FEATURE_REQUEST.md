@@ -9,12 +9,12 @@ about: Suggest an idea for this project
 
 ## Details
 
-<!-- Optional - List the key features of the feature as bullet points. -->
+<!-- Optional - List the key features of the feature as bullet points -->
 
 ## Notes
 
-<!-- Optional - List additional notes/references as bullet points. -->
+<!-- Optional - List additional notes/references as bullet points -->
 
 ## Screenshots/Screencasts
 
-<!-- Optional - Provide supporting image/video/designs. -->
+<!-- Optional - Provide supporting image/video/designs -->
