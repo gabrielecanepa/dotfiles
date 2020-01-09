@@ -2,6 +2,7 @@ packages: [
   "atom-beautify"
   "atom-material-syntax-dark"
   "atom-material-syntax-light"
+  "atom-ternjs"
   "autoclose-html"
   "autocomplete"
   "autocomplete-bash-builtins"

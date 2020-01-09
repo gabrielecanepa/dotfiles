@@ -1,6 +1,7 @@
 "*":
-  "atom-elixir-formatter":
-    showErrorNotifications: false
+  "atom-ternjs":
+    useSnippets: true
+    useSnippetsAndFunction: true
   "autocomplete-paths":
     relative: false
   core:
