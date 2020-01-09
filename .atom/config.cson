@@ -21,7 +21,6 @@
       "Thumbs.db"
     ]
     openEmptyEditorOnStart: false
-    projectHome: "~/code"
     telemetryConsent: "no"
     themes: [
       "one-dark-ui"
@@ -35,19 +34,23 @@
     showIndentGuide: true
   emmet:
     extensionsPath: "~/.emmet"
+  "file-icons": {}
   "file-types":
-    ".aliases": "source.shell"
-    ".prettier*": "source.js"
-    ".remark*": "source.js"
+    "*.sublime-settings": "source.json"
+    ".alias*": "source.shell"
+    ".remark*": "source.json"
   "fuzzy-finder":
     scoringSystem: "fast"
     useRipGrep: true
+  "linter-eslint":
+    autofix: {}
+    disabling:
+      disableWhenNoEslintConfig: false
   "linter-markdown":
     presetStyleGuideWithoutConfig: true
   "linter-ui-default":
     alwaysTakeMinimumSpace: true
     panelHeight: 64
-    showPanel: true
   lorem:
     defaults:
       unitSize: "Short"
@@ -60,6 +63,7 @@
     formatOnSaveOptions:
       enabled: true
       showInStatusBar: true
+    useEditorConfig: false
     useEslint: true
   "pretty-json":
     prettifyOnSaveJSON: true
