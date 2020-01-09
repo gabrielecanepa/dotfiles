@@ -1,0 +1,144 @@
+#!/bin/zsh
+
+# profile [install|check|config|reload]
+# Print, install, configure, or reload the current profile
+
+BB="\e[1m"
+RED="\e[31m"
+GRN="\e[32m"
+BLU="\e[34m"
+CYN="\e[36m"
+YLW="\e[33m"
+NC="\e[0m"
+CUT="\r\033[1A\033[0K"
+
+NAME_REGEX="[A-Za-z\s,\.]{2,}"
+EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
+EDITOR_NAME=`echo ${EDITOR##*/} | sed 's/.$//'`
+HOSTNAME=`hostname | cut -f1 -d "." | tr - " "`
+PROFILE_CMD=`echo ${GRN}profile$NC`
+PROFILE_CONFIG_CMD="$PROFILE_CMD `echo ${BB}config$NC`"
+PROFILE_INSTALL_CMD="$PROFILE_CMD `echo ${BB}install$NC`"
+
+if (! type -a get-input >/dev/null) || (! type -a ln-dotfiles >/dev/null); then
+  echo "${RED}⚠️  Some dependencies are missing$NC"
+  echo "This function depends on the ${BB}get-input$NC and ${BB}ln-dotfiles$NC functions"
+  return 1
+fi
+
+case $1 in
+  (check)
+    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || [ ! $EDITOR ] || [ ! -d $WORKING_DIR/dotfiles ]; then
+      echo "${RED}⚠️  Profile installed incorrectly$NC"
+      echo "Type $PROFILE_INSTALL_CMD to install a new profile for `echo -c $USER`"
+      return 1
+    fi
+    ;;
+
+  (config)
+    changed_keys=0
+    installation=`[[ $2 =~ ^install$ ]]; echo $?`
+    reload=`[[ $2 =~ ^reload$ ]]; echo $?`
+    name_msg="${BB}🔏 First and last name$NC (`[ $installation = 0 ] && echo 'no accent or special characters' || echo $NAME`)"
+    email_msg="${BB}📧 Email address$NC (`[ $installation = 0 ] && echo 'to sign your commits' || echo $EMAIL`)"
+    working_dir_msg="${BB}📁 Working directory$NC (`[ $installation = 0 ] && echo \"relative to $HOME, e.g. code\" || echo \~/${WORKING_DIR##*/}`)"
+    editor_msg="${BB}⌨️  Text editor$NC (`[ $installation = 0 ] && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo $EDITOR_NAME`)"
+
+    if [ $installation = 1 ]; then
+      profile check
+      [ $? = 1 ] && return
+    fi
+
+    if [ $reload = 1 ]; then
+      if [ $installation = 0 ]; then
+        echo "$CYN${BB}👤 $USER$NC on 🖥  `echo $BB$HOSTNAME$NC`"
+      else
+        echo "$CYN${BB}👤 $USER$NC"
+        echo "(hit ⏎ if unchanged)"
+      fi
+
+      echo ""
+
+      for key in NAME EMAIL WORKING_DIR EDITOR; do
+        tmp_key="${(L)key}"
+        eval echo $"${tmp_key}_msg"
+        eval get-input $tmp_key "`[ $installation = 0 ] && echo -v || echo -vb`"
+        if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
+          export "`echo $key=\"${(P)tmp_key}\"`"
+          changed_keys+=1
+        fi
+      done
+
+      echo ""
+    fi
+
+    if [ $changed_keys -gt 0 ] || [ $reload = 0 ]; then
+      echo "${BLU}Storing profile...$NC"
+      echo "# 👤 $USER" > $HOME/.zprofile
+      for key in NAME EMAIL WORKING_DIR EDITOR; do
+        echo "export $key=\"${(P)key}\"" >> $HOME/.zprofile
+      done
+      echo "export LANG=\"en_US.UTF-8\"" >> $HOME/.zprofile
+      echo "export LC_ALL=\"en_US.UTF-8\"" >> $HOME/.zprofile
+      echo "$CUT${GRN}Storing profile ✅$NC"
+    else
+      echo "Nothing changed"
+      return
+    fi
+
+    if [ $installation = 0 ] && [ -f "`pwd`/install.zsh" ]; then
+      echo "${BLU}Removing installation script...$NC"
+      rm -f "`pwd`/install.zsh"
+      echo "$CUT${GRN}Removing installation script ✅$NC"
+    fi
+
+    echo "${BLU}Reloading zsh and linking dotfiles...$NC"
+    for zfile in .zprofile .zshrc; do
+      if [ ! -f $HOME/$zfile ]; then
+        echo "${RED}ERROR: can't find $zfile in $HOME$NC"
+        return 1
+      fi
+      . $HOME/$zfile
+    done
+    ln-dotfiles
+    echo "$CUT${GRN}Reloading zsh and linking dotfiles ✅$NC"
+
+    echo "${BLU}Configuring git...$NC"
+    git config --global user.name "$NAME"
+    git config --global user.email "$EMAIL"
+    git config --global core.editor "$EDITOR" # TODO: handle git editor
+    git config --global include.path "$HOME/.gitconfig_global"
+    git config --global core.excludesfile "$HOME/.gitignore"
+    echo "$CUT${GRN}Configuring git ✅$NC"
+
+    echo ""
+    echo "👌 Awesome, all set! `[ $reload = 1 ] && echo Type $PROFILE_CMD to check your current profile``[ $installation = 0 ] && echo , or $PROFILE_CONFIG_CMD to modify it`"
+    ;;
+
+  (install)
+    if (profile check >/dev/null); then
+      echo "${YLW}WARNING: You already have a profile installed for $USER$NC"
+      printf "Do you want to override the current configuration? (y/n [n]) "
+      read choice
+      [[ $choice =~ [yY] ]] && profile config install
+    else
+      profile config install
+    fi
+    ;;
+
+  (reload)
+    profile config reload
+    ;;
+
+  (*)
+    if (profile check); then
+      echo "$BB${CYN}👤 $USER$NC"
+      echo " ⌙ 🔏 $NAME"
+      echo " ⌙ 📧 $EMAIL"
+      echo " ⌙ 📁 ~/${WORKING_DIR##*/}"
+      echo " ⌙ ⌨️  ${EDITOR_NAME##*/}"
+      echo
+      echo "Type $PROFILE_CONFIG_CMD to edit this profile"
+    fi
+    ;;
+esac

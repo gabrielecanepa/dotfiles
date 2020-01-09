@@ -1,42 +1,36 @@
 # Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbierussell"
+ZSH_THEME="robbierussell" # https://github.com/gabrielecanepa/robbierussell
 
 plugins=(
   brew
   colored-man-pages
   colorize
-  cp
   gem
   github
   nvm
-  osx
   rbenv
   sublime
   themes
   zsh-autosuggestions
-  zsh-navigation-tools
   zsh-syntax-highlighting
 )
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Zsh: http://zsh.sourceforge.net/Docs
-setopt RC_EXPAND_PARAM
-
-# Ruby: load rbenv and set Bundler editor
+# Ruby: load rbenv
 if (type -a rbenv >/dev/null); then
   PATH="$PATH:$HOME/.rbenv/bin"
   eval "`rbenv init -`"
 fi
-[ $EDITOR ] && export BUNDLER_EDITOR="$EDITOR"
 
 # Node: load nvm
-if [ -s "$HOME/.nvm" ]; then
+if (type -a nvm >/dev/null); then
   export NVM_DIR="$HOME/.nvm"
   . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Use local folder for binstubs
-export PATH="$PATH:./bin:/usr/local/sbin:./node_modules/.bin"
+# Other binstubs and aliases
+export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
+[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"

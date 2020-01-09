@@ -1,0 +1,54 @@
+#!/bin/zsh
+
+type -a profile >/dev/null && profile check
+[ $? = 1 ] && return
+
+ln-dotfiles-dir () {
+  for file in $1/*; do
+    filename=`basename $file`
+    target=`readlink $2/$filename`
+    if [ "$target" != "$file" ]; then
+      rm -f $2/$filename
+      ln -sf $file $2/$filename
+    fi
+  done
+}
+
+for file in $WORKING_DIR/dotfiles/.*; do
+  filename=`basename $file`
+  target=`readlink $HOME/$filename`
+
+  if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
+    case $filename in
+      .DS_Store|.git|.github) # skip
+        ;;
+      .atom) # Atom
+        atom_path="$HOME/.atom"
+        if (type atom >/dev/null) && [ -d $atom_path ]; then
+          ln-dotfiles-dir $file $atom_path
+        fi
+        ;;
+      .bin) # make executables
+        for bin_file in $file/*; do
+          chmod +x $bin
+        done
+        ln -sf $file $HOME/$filename
+        ;;
+      .gitconfig) # use global
+        ln -sf $file $HOME/.gitconfig_global
+        ;;
+      .subl) # Sublime Text
+        subl_path="/Users/$USER/Library/Application Support/Sublime Text 3/Packages/User"
+        if (type subl >/dev/null) && [ -d $subl_path ]; then
+          ln-dotfiles-dir $file $subl_path
+        fi
+        ;;
+      *)
+        [ -f $HOME/$filename ] && rm -f $HOME/$filename
+        ln -sf $file $HOME/$filename
+        ;;
+    esac
+  fi
+done
+
+unset -f ln-dotfiles-dir
