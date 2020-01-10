@@ -6,6 +6,14 @@ RED="\e[31m"
 NC="\e[0m"
 
 case $1 in
+  (-h|--help)
+    echo "Usage: gatekeeper <command>"
+    echo
+    echo "Commands:"
+    echo "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
+    echo "  enable \t\t Enable checks globally"
+    ;;
+
   (disable)
     if [ -z $2 ]; then
       echo "${YLW}WARNING: this will disable GateKeeper globally$NC"
@@ -38,10 +46,6 @@ case $1 in
     ;;
 
   (*)
-    echo "Usage: gatekeeper <command>"
-    echo
-    echo "Commands:"
-    echo -e "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
-    echo -e "  enable \t\t Enable checks globally"
+    gatekeeper --help
     ;;
 esac

@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-# profile [install|check|config|reload]
-# Print, install, configure, or reload the current profile
-
 BB="\e[1m"
 RED="\e[31m"
 GRN="\e[32m"
@@ -11,34 +8,148 @@ CYN="\e[36m"
 YLW="\e[33m"
 NC="\e[0m"
 CUT="\r\033[1A\033[0K"
-
 NAME_REGEX="[A-Za-z\s,\.]{2,}"
 EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
-EDITOR_NAME=`echo ${EDITOR##*/} | sed 's/.$//'`
-HOSTNAME=`hostname | cut -f1 -d "." | tr - " "`
-PROFILE_CMD=`echo ${GRN}profile$NC`
-PROFILE_CONFIG_CMD="$PROFILE_CMD `echo ${BB}config$NC`"
-PROFILE_INSTALL_CMD="$PROFILE_CMD `echo ${BB}install$NC`"
+EDITOR_NAME=$(echo ${EDITOR##*/} | sed "s/.$//")
+HOSTNAME=$(hostname | cut -f1 -d "." | tr - " ")
+PROFILE_CMD=$(echo ${GRN}profile$NC)
+PROFILE_CONFIG_CMD="$PROFILE_CMD $(echo ${BB}config$NC)"
+PROFILE_INSTALL_CMD="$PROFILE_CMD $(echo ${BB}install$NC)"
 
-if (! type -a get-input >/dev/null) || (! type -a ln-dotfiles >/dev/null); then
-  echo "${RED}⚠️  Some dependencies are missing$NC"
-  echo "This function depends on the ${BB}get-input$NC and ${BB}ln-dotfiles$NC functions"
-  return 1
-fi
+# read-input [--allow-blank]
+# Read, validate, and store an input
+read-input () {
+  allow_blank=`[ "$2" = --allow-blank ]; echo $?`
 
+  log-input-error () {
+    tput civis
+    echo "$CUT$RED$1\c$NC"
+    sleep 1
+    echo
+    echo -n "$CUT$NC> "
+    tput cnorm
+  }
+
+  echo -n "> "
+  read $1
+
+  case $1 in
+    name)
+      while [ $allow_blank = 1 ] || [ $name ] && ! [[ $name =~ $NAME_REGEX ]]; do
+        log-input-error "You must specify a valid name"
+        read name
+      done
+      ;;
+    email)
+      while [ $allow_blank = 1 ] || [ $email ] && [[ ! $email =~ $EMAIL_REGEX ]]; do
+        if [ $email ]; then
+          log-input-error "$email is not a valid email"
+        else
+          log-input-error "You must specify an email"
+        fi
+        read email
+      done
+      ;;
+    editor)
+      while [ $allow_blank = 1 ] || [ $editor ] && [ ! -f /Applications/$editor.app/Contents/MacOS/$editor ]; do
+        if [ $editor ]; then
+          log-input-error "${editor##*/} is not a valid application"
+        else
+          log-input-error "You must specify a valid editor"
+        fi
+        read editor
+      done
+      [ $editor ] && editor="'/Applications/$editor.app/Contents/MacOS/$editor'"
+      ;;
+    working_dir)
+      while [ $allow_blank = 1 ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
+        if [ -d $HOME/$working_dir ]; then
+          log-input-error "$HOME/$working_dir doesn't contain the required dotfiles"
+        else
+          log-input-error "$HOME/$working_dir is not a valid directory"
+        fi
+        read working_dir
+      done
+      [ $working_dir ] && working_dir="$HOME/$working_dir"
+      ;;
+  esac
+}
+
+# ln-dotfiles
+# Create symlink for files in $WORKING_DIR/dotfiles
+ln-dotfiles () {
+  ln-dotfiles-dir () {
+    dir_path=$1
+    target_path=$2
+    for file in $dir_path/*; do
+      filename=$(basename $file)
+      target=$(readlink $target_path/$filename)
+      if [ ! $target ] || [ $target != $file ]; then
+        if [ -f $target_path/$filename ]; then
+          cp -H $target_path/$filename $target_path/${filename}.backup
+        fi
+        ln -sf $file $target_path/$filename
+      fi
+    done
+  }
+
+  for file in $WORKING_DIR/dotfiles/.*; do
+    filename=$(basename $file)
+    target=$(readlink $HOME/$filename)
+
+    if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
+      case $filename in
+        .DS_Store|.git|.github) # skip
+          ;;
+        .gitconfig) # use global
+          ln -sf $file $HOME/.gitconfig_global
+          ;;
+        .atom) # Atom
+          atom_path="$HOME/.atom"
+          if (type atom >/dev/null) && [ -d $atom_path ]; then
+            ln-dotfiles-dir $file $atom_path
+          fi
+          ;;
+        .subl) # Sublime Text
+          subl_path="/Users/$USER/Library/Application Support/Sublime Text 3/Packages/User"
+          if (type subl >/dev/null) && [ -d $subl_path ]; then
+            ln-dotfiles-dir $file $subl_path
+          fi
+          ;;
+        *)
+          [ -f $HOME/$filename ] && cp -H $HOME/$filename $HOME/${filename}.backup
+          ln -sf $file $HOME/$filename
+          ;;
+      esac
+    fi
+  done
+}
+
+# profile [check|config|install|reload|-h|--help]
+# Print the current profile or execute one of the commands
 case $1 in
+  (-h|--help)
+    echo "Usage: profile [command]"
+    echo
+    echo "Commands:"
+    echo "  check\t\t Check if the current profile is installed correctly"
+    echo "  config\t Edit the current profile"
+    echo "  install\t Install a new profile for the current user"
+    echo "  reload\t Reload the current profile"
+    ;;
+
   (check)
     if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || [ ! $EDITOR ] || [ ! -d $WORKING_DIR/dotfiles ]; then
       echo "${RED}⚠️  Profile installed incorrectly$NC"
-      echo "Type $PROFILE_INSTALL_CMD to install a new profile for `echo -c $USER`"
+      echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
       return 1
     fi
     ;;
 
   (config)
     changed_keys=0
-    installation=`[[ $2 =~ ^install$ ]]; echo $?`
-    reload=`[[ $2 =~ ^reload$ ]]; echo $?`
+    installation=$([[ $2 =~ ^install$ ]]; echo $?)
+    reload=$([[ $2 =~ ^reload$ ]]; echo $?)
     name_msg="${BB}🔏 First and last name$NC (`[ $installation = 0 ] && echo 'no accent or special characters' || echo $NAME`)"
     email_msg="${BB}📧 Email address$NC (`[ $installation = 0 ] && echo 'to sign your commits' || echo $EMAIL`)"
     working_dir_msg="${BB}📁 Working directory$NC (`[ $installation = 0 ] && echo \"relative to $HOME, e.g. code\" || echo \~/${WORKING_DIR##*/}`)"
@@ -50,9 +161,7 @@ case $1 in
     fi
 
     if [ $reload = 1 ]; then
-      if [ $installation = 0 ]; then
-        echo "$CYN${BB}👤 $USER$NC on 🖥  `echo $BB$HOSTNAME$NC`"
-      else
+      if [ $installation = 1 ]; then
         echo "$CYN${BB}👤 $USER$NC"
         echo "(hit ⏎ if unchanged)"
       fi
@@ -62,7 +171,7 @@ case $1 in
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         tmp_key="${(L)key}"
         eval echo $"${tmp_key}_msg"
-        eval get-input $tmp_key "`[ $installation = 0 ] && echo -v || echo -vb`"
+        eval read-input $tmp_key "`[ $installation = 1 ] && echo --allow-blank`"
         if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
           export "`echo $key=\"${(P)tmp_key}\"`"
           changed_keys+=1
@@ -112,13 +221,13 @@ case $1 in
     echo "$CUT${GRN}Configuring git ✅$NC"
 
     echo ""
-    echo "👌 Awesome, all set! `[ $reload = 1 ] && echo Type $PROFILE_CMD to check your current profile``[ $installation = 0 ] && echo , or $PROFILE_CONFIG_CMD to modify it`"
+    echo "👌 Awesome, all set! `[ $reload = 1 ] && echo Type $PROFILE_CMD to print your current profile``[ $installation = 0 ] && echo , or $PROFILE_CONFIG_CMD to modify it`"
     ;;
 
   (install)
     if (profile check >/dev/null); then
       echo "${YLW}WARNING: You already have a profile installed for $USER$NC"
-      printf "Do you want to override the current configuration? (y/n [n]) "
+      echo -n "Do you want to override the current configuration? (y/n [n]) "
       read choice
       [[ $choice =~ [yY] ]] && profile config install
     else
@@ -131,14 +240,17 @@ case $1 in
     ;;
 
   (*)
-    if (profile check); then
-      echo "$BB${CYN}👤 $USER$NC"
-      echo " ⌙ 🔏 $NAME"
-      echo " ⌙ 📧 $EMAIL"
-      echo " ⌙ 📁 ~/${WORKING_DIR##*/}"
-      echo " ⌙ ⌨️  ${EDITOR_NAME##*/}"
-      echo
-      echo "Type $PROFILE_CONFIG_CMD to edit this profile"
+    if [ $1 ]; then
+      echo "${RED}Unknown option: $1$NC"
+      echo "Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
+    else
+      if (profile check); then
+        echo "$CYN${BB}👤 $USER$NC"
+        echo " ⌙ 🔏 $NAME"
+        echo " ⌙ 📧 $EMAIL"
+        echo " ⌙ 📁 ~/${WORKING_DIR##*/}"
+        echo " ⌙ ⌨️  ${EDITOR_NAME##*/}"
+      fi
     fi
     ;;
 esac
