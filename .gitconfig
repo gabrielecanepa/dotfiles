@@ -9,7 +9,6 @@
   ds = diff --stat -r
   fo = fetch origin
   get = !git pull --rebase && git submodule update --init --recursive
-  template = !sh -c '[ -d $WORKING_DIR/dotfiles/.github ] && git init && cp -R $WORKING_DIR/dotfiles/.github . && mv .github/README_TEMPLATE.md README.md && mv .github/LICENSE . && git add . && git commit -m \"Initialize new repository\"  >/dev/null 2>&1' -
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   log = log --color
   pf = push -f --set-upstream
