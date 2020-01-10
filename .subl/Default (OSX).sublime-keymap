@@ -1,0 +1,39 @@
+[
+  {
+    "keys": ["super+k", "super+b"],
+    "command": "toggle_side_bar"
+  },
+  {
+    "keys": ["ctrl+shift+left"],
+    "command": "move_tab",
+    "args": {
+      "position": "-1"
+    }
+  },
+  {
+    "keys": ["ctrl+shift+right"],
+    "command": "move_tab",
+    "args": {
+      "position": "+1"
+    }
+  },
+  {
+    "keys": ["super+v"],
+    "command": "paste_and_indent"
+  },
+  {
+    "keys": ["super+shift+v"],
+    "command": "paste"
+  },
+  {
+    "keys": ["super+shift+2"],
+    "command": "change_quotes"
+  },
+  {
+    "keys": ["alt+shift+w"],
+    "command": "toggle_setting",
+    "args": {
+      "setting": "word_wrap"
+    }
+  }
+]
