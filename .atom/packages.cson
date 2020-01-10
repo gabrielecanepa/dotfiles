@@ -18,7 +18,6 @@ packages: [
   "file-icons"
   "file-types"
   "highlight-selected"
-  "hyperclick"
   "intentions"
   "language-applescript"
   "language-babel"
