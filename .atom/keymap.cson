@@ -4,8 +4,6 @@
   'cmd-alt-t': 'theme-switcher:switch'
   'cmd-alt-g': 'github:toggle-git-tab'
   'cmd-alt-k': 'application:open-your-keymap'
-  'cmd-alt-p': 'project-manager:edit-projects'
-  'cmd-ctrl-s': 'project-manager:save-project'
 '.tree-view':
   'r': 'tree-view:rename'
   's': 'tree-view:show-in-file-manager'
