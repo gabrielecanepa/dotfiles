@@ -9,6 +9,7 @@ plugins=(
   colorize
   gem
   github
+  last-working-dir
   nvm
   rbenv
   sublime
