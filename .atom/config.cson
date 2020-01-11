@@ -36,7 +36,7 @@
     extensionsPath: "~/.emmet"
   "file-icons": {}
   "file-types":
-    "*.sublime-settings": "source.json"
+    "*.sublime-*": "source.json"
     ".alias*": "source.shell"
     ".remark*": "source.json"
   "fuzzy-finder":

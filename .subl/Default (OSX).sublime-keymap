@@ -1,7 +1,15 @@
 [
   {
-    "keys": ["super+k", "super+b"],
+    "keys": ["super+<"],
     "command": "toggle_side_bar"
+  },
+  {
+    "keys": ["ctrl+shift+c"],
+    "command": "show_panel",
+    "args": {
+      "panel": "console",
+      "toggle": true
+    }
   },
   {
     "keys": ["ctrl+shift+left"],
@@ -30,7 +38,7 @@
     "command": "change_quotes"
   },
   {
-    "keys": ["alt+shift+w"],
+    "keys": ["ctrl+shift+w"],
     "command": "toggle_setting",
     "args": {
       "setting": "word_wrap"
