@@ -34,7 +34,6 @@
     showIndentGuide: true
   emmet:
     extensionsPath: "~/.emmet"
-  "file-icons": {}
   "file-types":
     "*.sublime-*": "source.json"
     ".alias*": "source.shell"
@@ -43,7 +42,6 @@
     scoringSystem: "fast"
     useRipGrep: true
   "linter-eslint":
-    autofix: {}
     disabling:
       disableWhenNoEslintConfig: false
   "linter-markdown":

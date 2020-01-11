@@ -14,6 +14,7 @@
     "node_modules",
 		"public/packs",
 		"coverage",
+		".git",
 		".ipynb_checkpoints",
 		".pytest_cache",
 		"__pycache__"
@@ -31,6 +32,7 @@
 	"material_theme_compact_panel": true,
 	"material_theme_compact_sidebar": true,
 	"material_theme_contrast_mode": true,
+	"material_theme_disable_tree_indicator": true,
 	"material_theme_panel_separator": true,
 	"material_theme_titlebar": true,
 	"material_theme_tree_headings": true,
