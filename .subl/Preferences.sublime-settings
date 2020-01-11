@@ -11,9 +11,9 @@
 		".asset-cache",
 		"build",
 		"dist",
-    "node_modules",
 		"public/packs",
 		"coverage",
+		".git",
 		".ipynb_checkpoints",
 		".pytest_cache",
 		"__pycache__"
