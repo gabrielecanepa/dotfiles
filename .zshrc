@@ -32,6 +32,9 @@ if (type -a nvm >/dev/null); then
   . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Other binstubs and aliases
+# Other binstubs
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
+
+# Load aliases and check profile
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+type -a profile >/dev/null && profile check
