@@ -17,4 +17,4 @@ about: Create a report to help improve the project
 
 ## Specifications
 
-<!-- Required - List your local specifications (version, platform, subsystem, etc.) -->
+<!-- Required - List your local specifications (platform, version, subsystem, etc.) -->

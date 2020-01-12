@@ -7,3 +7,4 @@
 '.tree-view':
   'r': 'tree-view:rename'
   's': 'tree-view:show-in-file-manager'
+  'cmd-backspace': 'tree-view:remove-project-folder'

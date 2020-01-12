@@ -16,22 +16,22 @@ case $1 in
 
   (disable)
     if [ -z $2 ]; then
-      echo "${YLW}WARNING: this will disable GateKeeper globally$NC"
+      echo "${YLW}WARNING: this will disable GateKeeper globally${NC}"
       printf "Are you sure you want to continue? (y/n [n]) "
       read choice
       if [[ $choice =~ [yY] ]]; then
         if (sudo spctl --master-disable >/dev/null 2>&1); then
-          echo "${GRN}🔓 GateKeeper disabled globally"$NC
+          echo "${GRN}🔓 GateKeeper disabled globally"${NC}
         else
-          echo "${RED}An error occured, please try again$NC"
+          echo "${RED}An error occured, please try again${NC}"
         fi
       fi
     else
       for app in "${@:2}"; do
         if (sudo xattr -r -d com.apple.quarantine $app 2>/dev/null); then
-          echo "${GRN}🔓 GateKeeper disabled for ${app##*/}$NC"
+          echo "${GRN}🔓 GateKeeper disabled for ${app##*/}${NC}"
         else
-          echo "${RED}Can't disable GateKeeper for ${app##*/}$NC"
+          echo "${RED}Can't disable GateKeeper for ${app##*/}${NC}"
         fi
       done
     fi
@@ -39,9 +39,9 @@ case $1 in
 
   (enable)
     if (sudo spctl --master-enable >/dev/null 2>&1); then
-      echo "${GRN}🔒 GateKeeper enabled globally$NC"
+      echo "${GRN}🔒 GateKeeper enabled globally${NC}"
     else
-      echo "${RED}There was a problem enabling GateKeeper, please try again$NC"
+      echo "${RED}There was a problem enabling GateKeeper, please try again${NC}"
     fi
     ;;
 

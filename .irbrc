@@ -1,7 +1,7 @@
 begin
   require "rubygems"
   require "pry"
-rescue LoadError
+rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 if defined?(Pry)

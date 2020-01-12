@@ -37,7 +37,10 @@
   "file-types":
     "*.sublime-*": "source.json"
     ".alias*": "source.shell"
+    ".eslint*": "source.json"
+    ".prettier*": "source.json"
     ".remark*": "source.json"
+    ".shellcheck*": "source.shell"
   "fuzzy-finder":
     scoringSystem: "fast"
     useRipGrep: true

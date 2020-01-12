@@ -13,9 +13,8 @@
   log = log --color
   pf = push -f --set-upstream
   pom = push origin master
-  rebase-master = !git checkout master && git pull && git checkout - && git rebase -i master
   remote = remote -v
-  r = remote -v
+  r = remote
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin

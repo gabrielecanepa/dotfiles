@@ -1,14 +1,9 @@
 {
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
-  },
   "env": {
     "es6": true,
     "browser": true
   },
-  "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -25,17 +20,18 @@
     "max-lines": 1,
     "no-console": 1,
     "object-shorthand": [1, "always"],
-    "quotes": [1, "single", { "avoidEscape": true }],
+    "quotes": [
+      1,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
     "sort-keys": 0,
-    "sort-vars": [1, { "ignoreCase": false }],
-    "prettier/prettier": [
+    "sort-vars": [
       1,
       {
-        "bracketSpacing": true,
-        "printWidth": 120,
-        "semi": false,
-        "singleQuote": true,
-        "trailingComma": "es5"
+        "ignoreCase": false
       }
     ]
   }

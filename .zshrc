@@ -17,13 +17,15 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
+zle_highlight+=(paste:none) # disable text highlighting on paste
 
 . "$ZSH/oh-my-zsh.sh"
 
 # Ruby: load rbenv
+PATH="$PATH:$HOME/.rbenv/bin"
 if (type -a rbenv >/dev/null); then
-  PATH="$PATH:$HOME/.rbenv/bin"
-  eval "`rbenv init -`"
+  eval "$(rbenv init -)"
 fi
 
 # Node: load nvm
@@ -32,9 +34,11 @@ if (type -a nvm >/dev/null); then
   . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Other binstubs
+# Other binstubs and aliases
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
-
-# Load aliases and check profile
-[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-type -a profile >/dev/null && profile check
+if (type -a profile >/dev/null); then
+  profile check
+  if [ $? = 0 ] && [ -f "$HOME/.aliases" ]; then
+    . "$HOME/.aliases"
+  fi
+fi
