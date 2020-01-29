@@ -67,8 +67,3 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-
-Rails:
-  Enabled: true
-Rails/SaveBang:
-  Enabled: true
