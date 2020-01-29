@@ -18,7 +18,7 @@ plugins=(
   zsh-syntax-highlighting
 )
 zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zle_highlight+=(paste:none) # disable text highlighting on paste
+zle_highlight+=(paste:none) # disable text highlighting
 
 . "$ZSH/oh-my-zsh.sh"
 
@@ -31,14 +31,11 @@ fi
 # Node: load nvm
 if (type -a nvm >/dev/null); then
   export NVM_DIR="$HOME/.nvm"
-  . "$NVM_DIR/nvm.sh" --no-use
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
 
 # Other binstubs and aliases
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
-if (type -a profile >/dev/null); then
-  profile check
-  if [ $? = 0 ] && [ -f "$HOME/.aliases" ]; then
-    . "$HOME/.aliases"
-  fi
+if (type -a profile >/dev/null && profile check && [ -f "$HOME/.aliases" ]); then
+  . "$HOME/.aliases"
 fi
