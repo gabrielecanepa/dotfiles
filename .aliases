@@ -15,9 +15,7 @@ alias cdw="cd $WORKING_DIR"
 alias cdd="cd $HOME/Desktop"
 alias tmp="cd $WORKING_DIR/tmp"
 
-# Editors
-alias atom="atom -a"
-alias subl="subl -a"
+# Open with editor
 alias dotfiles="open -a $EDITOR $WORKING_DIR/dotfiles"
 alias sshrc="open -a $EDITOR $HOME/.ssh"
 

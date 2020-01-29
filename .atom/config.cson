@@ -1,5 +1,8 @@
 "*":
   "atom-ternjs":
+    debug: false
+    inlineFnCompletionDocumentation: true
+    snippetsFirst: true
     useSnippets: true
     useSnippetsAndFunction: true
   "autocomplete-paths":
@@ -49,14 +52,16 @@
       disableWhenNoEslintConfig: false
   "linter-markdown":
     presetStyleGuideWithoutConfig: true
+  "linter-rubocop":
+    fixOnSave: true
+  "linter-shellcheck":
+    enableNotice: true
   "linter-ui-default":
     alwaysTakeMinimumSpace: true
     panelHeight: 64
   lorem:
     defaults:
       unitSize: "Short"
-  "one-dark-ui":
-    stickyHeaders: true
   "package-sync":
     createOnChange: true
     forceOverwrite: true
