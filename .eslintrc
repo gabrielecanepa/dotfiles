@@ -20,13 +20,6 @@
     "max-lines": 1,
     "no-console": 1,
     "object-shorthand": [1, "always"],
-    "quotes": [
-      1,
-      "single",
-      {
-        "avoidEscape": true
-      }
-    ],
     "sort-keys": 0,
     "sort-vars": [
       1,
