@@ -2,8 +2,9 @@
 shell=bash
 disable=SC1090 # follow non-constant sources
 disable=SC2034 # allow unused vars
-disable=SC2038 # avoid -print0/-0 restriction
-disable=SC2115 # avoid "${var:?}" restriction
+disable=SC2038 # disable -print0/-0 restriction
+disable=SC2086 # double quotes word splitting
+disable=SC2115 # disable "${var:?}" restriction
 disable=SC2128 # array expansion
 disable=SC2139 # allow expansion in definition
 disable=SC2145 # allow $@
