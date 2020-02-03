@@ -6,8 +6,9 @@ alias serve="ruby -run -e httpd . -p 8000"
 alias serveo="ssh -R 80:$1 serveo.net"
 
 # Common aliases
-alias ls="/usr/local/bin/gls -ah --color --group-directories-first && rm -f .DS_Store"
+alias ls="/usr/local/bin/gls -h --color --group-directories-first"
 alias ll="ls -l"
+alias lla="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr"
 
 # Directories
