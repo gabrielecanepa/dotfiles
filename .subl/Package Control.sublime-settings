@@ -95,7 +95,7 @@
 		"ERB Snippets",
 		"GitGutter",
 		"HTML5",
-		"JavaScript Completions",
+		"JavaScript Enhancements",
 		"Material Theme",
 		"MoveTab",
 		"Package Control",
@@ -106,6 +106,7 @@
 		"SublimeLinter",
 		"SublimeLinter-eslint",
 		"SublimeLinter-rubocop",
+		"TerminalView",
 		"Theme - Brogrammer"
 	],
 	"package_destination": "",
