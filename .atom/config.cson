@@ -44,9 +44,14 @@
     ".prettier*": "source.json"
     ".remark*": "source.json"
     ".shellcheck*": "source.shell"
+  "find-and-replace":
+    autocompleteSearches: true
+    useRipgrep: true
   "fuzzy-finder":
     scoringSystem: "fast"
     useRipGrep: true
+  "git-diff":
+    showIconsInEditorGutter: true
   "linter-eslint":
     disabling:
       disableWhenNoEslintConfig: false
