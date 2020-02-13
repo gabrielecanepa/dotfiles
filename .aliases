@@ -22,5 +22,5 @@ alias sshrc="open -a $EDITOR $HOME/.ssh"
 
 # git short aliases (e.g. gpom = git pom = git push origin master)
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  (( ${#git_alias} < 4 )) && alias g${git_alias}="git $git_alias"
+  (( ${#git_alias} < 3 )) && alias g${git_alias}="git $git_alias"
 done
