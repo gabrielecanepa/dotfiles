@@ -17,8 +17,8 @@ alias cdd="cd $HOME/Desktop"
 alias tmp="cd $WORKING_DIR/tmp"
 
 # Open with editor
-alias dotfiles="open -a $EDITOR $WORKING_DIR/dotfiles"
-alias sshrc="open -a $EDITOR $HOME/.ssh"
+alias dotfiles="$EDITOR $WORKING_DIR/dotfiles"
+alias sshrc="$EDITOR $HOME/.ssh"
 
 # git short aliases (e.g. gpom = git pom = git push origin master)
 for git_alias in $(git aliases | sed 's/\ .*//'); do
