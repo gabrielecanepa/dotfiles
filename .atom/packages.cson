@@ -1,7 +1,6 @@
 packages: [
   "atom-material-syntax-dark"
   "atom-material-syntax-light"
-  "atom-ternjs"
   "autoclose-html"
   "autocomplete"
   "autocomplete-bash-builtins"
@@ -24,9 +23,9 @@ packages: [
   "language-vue"
   "linter"
   "linter-eslint"
-  "linter-markdown"
   "linter-rubocop"
   "linter-shellcheck"
+  "linter-stylelint"
   "linter-ui-default"
   "lorem"
   "package-sync"
