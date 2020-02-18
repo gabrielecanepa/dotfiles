@@ -52,6 +52,8 @@
     useRipGrep: true
   "git-diff":
     showIconsInEditorGutter: true
+  github:
+    remoteFetchProtocol: "ssh"
   "linter-eslint":
     disabling:
       disableWhenNoEslintConfig: false
@@ -76,6 +78,7 @@
       showInStatusBar: true
     useEditorConfig: false
     useEslint: true
+    useStylelint: true
   "pretty-json":
     prettifyOnSaveJSON: true
   "theme-switcher":

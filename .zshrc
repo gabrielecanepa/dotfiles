@@ -34,7 +34,7 @@ if (type -a nvm >/dev/null); then
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
 
-# Other binstubs and aliases
+# Other binstubs + aliases
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
 if (type -a profile >/dev/null && profile check && [ -f "$HOME/.aliases" ]); then
   . "$HOME/.aliases"
