@@ -12,7 +12,6 @@ packages: [
   "busy-signal"
   "click-link"
   "emmet"
-  "eslint-snippets"
   "file-icons"
   "file-types"
   "highlight-selected"
