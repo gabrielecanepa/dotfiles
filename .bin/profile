@@ -8,9 +8,9 @@ CYN="\e[36m"
 YLW="\e[33m"
 NC="\e[0m"
 CUT="\r\033[1A\033[0K"
-PROFILE_CMD=$(echo ${GRN}profile${NC})
-PROFILE_CONFIG_CMD="$PROFILE_CMD $(echo ${BB}config${NC})"
-PROFILE_INSTALL_CMD="$PROFILE_CMD $(echo ${BB}install${NC})"
+PROFILE_CMD="${GRN}profile${NC}"
+PROFILE_CONFIG_CMD="$PROFILE_CMD ${BB}config${NC}"
+PROFILE_INSTALL_CMD="$PROFILE_CMD ${BB}install${NC}"
 NAME_REGEX="[A-Za-z\s,\.]{2,}"
 EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 WORKING_DIR_NAME=${WORKING_DIR##*/}
@@ -31,13 +31,13 @@ read-input () {
   }
 
   echo -n "> "
-  read $1
+  read -r $1
 
   case $1 in
     name)
       while [ $allow_blank = 1 ] || [ $name ] && ! [[ $name =~ $NAME_REGEX ]]; do
         log-input-error "You must specify a valid name"
-        read name
+        read -r name
       done
       ;;
     email)
@@ -47,7 +47,7 @@ read-input () {
         else
           log-input-error "You must specify an email"
         fi
-        read email
+        read -r email
       done
       ;;
     editor)
@@ -57,7 +57,7 @@ read-input () {
         else
           log-input-error "You must specify a valid editor"
         fi
-        read editor
+        read -r editor
       done
       [ $editor ] && editor="'/Applications/$editor.app/Contents/MacOS/$editor'"
       ;;
@@ -68,7 +68,7 @@ read-input () {
         else
           log-input-error "$HOME/$working_dir is not a valid directory"
         fi
-        read working_dir
+        read -r working_dir
       done
       [ $working_dir ] && working_dir="$HOME/$working_dir"
       ;;
@@ -81,7 +81,7 @@ ln-dotfiles () {
   ln-dotfiles-dir () {
     dir_path=$1
     target_path=$2
-    for file in $dir_path/*; do
+    for file in "$dir_path"/*; do
       filename=$(basename $file)
       target=$(readlink $target_path/$filename)
       if [ ! $target ] || [ $target != $file ]; then
@@ -93,7 +93,7 @@ ln-dotfiles () {
     done
   }
 
-  for file in $WORKING_DIR/dotfiles/.*; do
+  for file in "$WORKING_DIR"/dotfiles/.*; do
     filename=$(basename $file)
     target=$(readlink $HOME/$filename)
 
@@ -132,10 +132,10 @@ case $1 in
     echo "Usage: profile [command]"
     echo
     echo "Commands:"
-    echo "  check\t\t Check if the current profile is installed correctly"
-    echo "  config\t Edit the current profile"
-    echo "  install\t Install a new profile for the current user"
-    echo "  reload\t Reload the current profile"
+    echo -e "  check\t\t Check if the current profile is installed correctly"
+    echo -e "  config\t Edit the current profile"
+    echo -e "  install\t Install a new profile for the current user"
+    echo -e "  reload\t Reload the current profile"
     ;;
 
   (check)
@@ -200,8 +200,7 @@ case $1 in
     fi
 
     echo "${BLU}Linking dotfiles...${NC}"
-    ln-dotfiles
-    if [ $? != 0 ]; then
+    if ln-dotfiles; then
       echo "${RED}ERROR: can't link dotfiles${NC}"
       return 1
     fi
@@ -226,8 +225,8 @@ case $1 in
   (install)
     if (profile check >/dev/null); then
       echo "${YLW}WARNING: You already have a profile installed for $USER${NC}"
-      echo -n "Do you want to override the current configuration? (y/n [n]) "
-      read choice
+      echo -n "Do you want to override the current configuration? (y/N) "
+      read -r choice
       [[ $choice =~ [yY] ]] && profile config install
     else
       profile config install
