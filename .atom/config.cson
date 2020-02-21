@@ -1,10 +1,4 @@
 "*":
-  "atom-ternjs":
-    debug: false
-    inlineFnCompletionDocumentation: true
-    snippetsFirst: true
-    useSnippets: true
-    useSnippetsAndFunction: true
   "autocomplete-paths":
     relative: false
   core:
@@ -57,12 +51,12 @@
   "linter-eslint":
     disabling:
       disableWhenNoEslintConfig: false
-  "linter-markdown":
-    presetStyleGuideWithoutConfig: true
-  "linter-rubocop":
-    fixOnSave: true
+    lintHtmlFiles: true
   "linter-shellcheck":
     enableNotice: true
+  "linter-stylelint":
+    disableWhenNoConfig: false
+    useStandard: true
   "linter-ui-default":
     alwaysTakeMinimumSpace: true
     panelHeight: 64
