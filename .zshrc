@@ -24,18 +24,19 @@ zle_highlight+=(paste:none) # disable text highlighting
 
 # Ruby - load rbenv
 PATH="$PATH:$HOME/.rbenv/bin"
-if (type -a rbenv >/dev/null); then
+if type -a rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
 
 # Node - load nvm
-if (type -a nvm >/dev/null); then
+if type -a nvm >/dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
 
 # Other binstubs + aliases
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
-if (type -a profile >/dev/null && profile check && [ -f "$HOME/.aliases" ]); then
-  . "$HOME/.aliases"
-fi
+[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+
+# Check profile installation
+type -a profile >/dev/null && profile check
