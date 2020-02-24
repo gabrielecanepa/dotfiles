@@ -9,8 +9,8 @@
   ds = diff --stat -r
   fo = fetch origin
   get = !git pull --rebase && git submodule update --init --recursive
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-  log = log --color
+  lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  log = log --color --graph
   pf = push -f --set-upstream
   pom = push origin master
   remote = remote -v
