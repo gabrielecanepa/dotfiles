@@ -52,6 +52,8 @@
     disabling:
       disableWhenNoEslintConfig: false
     lintHtmlFiles: true
+  "linter-rubocop":
+    fixOnSave: true
   "linter-shellcheck":
     enableNotice: true
   "linter-stylelint":
@@ -69,6 +71,9 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
+      excludedGlobs: [
+        "*.rb"
+      ]
       showInStatusBar: true
     useEditorConfig: false
     useEslint: true
