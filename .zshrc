@@ -1,4 +1,4 @@
-# Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
+# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbierussell" # https://github.com/gabrielecanepa/robbierussell
@@ -22,13 +22,13 @@ zle_highlight+=(paste:none) # disable text highlighting
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Ruby: load rbenv
+# Ruby - load rbenv
 PATH="$PATH:$HOME/.rbenv/bin"
 if (type -a rbenv >/dev/null); then
   eval "$(rbenv init -)"
 fi
 
-# Node: load nvm
+# Node - load nvm
 if (type -a nvm >/dev/null); then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use

@@ -21,7 +21,7 @@
   undo = reset --hard
   unstage = reset HEAD --
   untrack = rm --cache --
-  zip = !"git archive HEAD -o ../${PWD##*/}.zip"
+  zip = !git archive HEAD -o ../${PWD"##"*/}.zip
 
 [branch "master"]
   mergeoptions = --no-edit
