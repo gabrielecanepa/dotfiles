@@ -14,7 +14,7 @@ PROFILE_INSTALL_CMD="$PROFILE_CMD ${BB}install${NC}"
 NAME_REGEX="[A-Za-z\s,\.]{2,}"
 EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 WORKING_DIR_NAME=${WORKING_DIR##*/}
-EDITOR_NAME="${${EDITOR##*/}%\'*}"
+EDITOR_NAME="${EDITOR}" # TODO: compute editor name
 
 # read-input [--allow-blank]
 # Read, validate, and store an input
@@ -51,7 +51,7 @@ read-input () {
       done
       ;;
     editor)
-      while [ $allow_blank = 1 ] || [ $editor ] && [ ! -f "/Applications/$editor.app/Contents/MacOS/$editor" ]; do
+      while [ $allow_blank = 1 ] || [ $editor ] && ! type -a $editor >/dev/null; do
         if [ $editor ]; then
           log-input-error "$editor is not a valid application"
         else
@@ -59,12 +59,11 @@ read-input () {
         fi
         read -r editor
       done
-      [ $editor ] && editor="'/Applications/$editor.app/Contents/MacOS/$editor'"
       ;;
     working_dir)
       while [ $allow_blank = 1 ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
         if [ -d $HOME/$working_dir ]; then
-          log-input-error "$HOME$([ $working_dir ] && echo /$working_dir) doesn't contain the required dotfiles"
+          log-input-error "$HOME$([ $working_dir ] && echo /$working_dir) doesn't contain any dotfiles"
         else
           log-input-error "$HOME/$working_dir is not a valid directory"
         fi
@@ -106,13 +105,13 @@ ln-dotfiles () {
           ;;
         .atom) # Atom
           atom_path="$HOME/.atom"
-          if (type atom >/dev/null) && [ -d $atom_path ]; then
+          if type atom >/dev/null && [ -d $atom_path ]; then
             ln-dotfiles-dir $file $atom_path
           fi
           ;;
         .subl) # Sublime Text
           subl_path="/Users/$USER/Library/Application Support/Sublime Text 3/Packages/User"
-          if (type subl >/dev/null) && [ -d $subl_path ]; then
+          if type subl >/dev/null && [ -d $subl_path ]; then
             ln-dotfiles-dir $file $subl_path
           fi
           ;;
@@ -139,7 +138,7 @@ case $1 in
     ;;
 
   (check)
-    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || [ ! $EDITOR ] || [ ! -d $WORKING_DIR/dotfiles ]; then
+    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ! type -a $EDITOR >/dev/null || [ ! -d $WORKING_DIR/dotfiles ]; then
       echo "${RED}⚠️  Profile installed incorrectly${NC}"
       echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
       return 1
@@ -152,7 +151,7 @@ case $1 in
     reload=$([[ $2 =~ ^reload$ ]]; echo $?)
     name_msg="${BB}🔏 First and last name${NC} ($([ $installation = 0 ] && echo 'no accent or special characters' || echo $NAME))"
     email_msg="${BB}📧 Email address${NC} ($([ $installation = 0 ] && echo 'to sign your commits' || echo $EMAIL))"
-    working_dir_msg="${BB}📁 Working directory${NC} ($([ $installation = 0 ] && echo relative to $HOME, e.g. code || echo \~/${WORKING_DIR##*/}))"
+    working_dir_msg="${BB}📁 Working directory${NC} ($([ $installation = 0 ] && echo relative to $HOME, e.g. code || echo \~/$WORKING_DIR_NAME))"
     editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = 0 ] && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo $EDITOR_NAME))"
 
     if [ $installation = 1 ]; then
@@ -200,7 +199,7 @@ case $1 in
     fi
 
     echo "${BLU}Linking dotfiles...${NC}"
-    if ln-dotfiles; then
+    if ! ln-dotfiles; then
       echo "${RED}ERROR: can't link dotfiles${NC}"
       return 1
     fi
@@ -209,21 +208,21 @@ case $1 in
     echo "${BLU}Configuring git...${NC}"
     git config --global user.name "$NAME"
     git config --global user.email "$EMAIL"
-    git config --global core.editor "$EDITOR" # TODO: handle git editor
+    git config --global core.editor "$EDITOR --wait" # TODO: handle git editor
     git config --global include.path "$HOME/.gitconfig_global"
     git config --global core.excludesfile "$HOME/.gitignore"
     echo "${CUT}${GRN}Configuring git ✅${NC}"
 
-    echo "${BLU}Reloading zsh...${NC}"
-    eval zsh # TODO: handle zsh reload
-    echo "${CUT}${GRN}Reloading zsh ✅${NC}"
+    if [ $installation = 0 ]; then
+      echo ""
+      echo "👌 Awesome, all set! Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
+    fi
 
-    echo ""
-    echo "👌 Awesome, all set!$([ $reload = 1 ] && echo \ Type $PROFILE_CMD to print your current profile)$([ $installation = 0 ] && echo , or $PROFILE_CONFIG_CMD to modify it)"
+    zsh
     ;;
 
   (install)
-    if (profile check >/dev/null); then
+    if profile check >/dev/null; then
       echo "${YLW}WARNING: You already have a profile installed for $USER${NC}"
       echo -n "Do you want to override the current configuration? (y/N) "
       read -r choice
@@ -242,7 +241,7 @@ case $1 in
       echo "${RED}Unknown option: $1${NC}"
       echo "Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
     else
-      if (profile check); then
+      if profile check; then
         echo "${BB}${CYN}👤 $USER${NC}"
         echo " ⌙ 🔏 $NAME"
         echo " ⌙ 📧 $EMAIL"
