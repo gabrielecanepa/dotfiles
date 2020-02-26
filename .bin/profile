@@ -8,17 +8,44 @@ CYN="\e[36m"
 YLW="\e[33m"
 NC="\e[0m"
 CUT="\r\033[1A\033[0K"
+
 PROFILE_CMD="${GRN}profile${NC}"
 PROFILE_CONFIG_CMD="$PROFILE_CMD ${BB}config${NC}"
 PROFILE_INSTALL_CMD="$PROFILE_CMD ${BB}install${NC}"
+
 NAME_REGEX="[A-Za-z\s,\.]{2,}"
 EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
-WORKING_DIR_NAME=${WORKING_DIR##*/}
-EDITOR_NAME="${EDITOR}" # TODO: compute editor name
 
-# read-input [--allow-blank]
+WORKING_DIR_NAME=${WORKING_DIR##*/}
+
+EDITORS=(
+  "atom"      # Atom
+  "brackets"  # Brackets
+  "emacs"     # Emacs
+  "coda"      # Coda
+  "code"      # Visual Studio Code
+  "mate"      # TextMate
+  "subl"      # Sublime Text
+  "vim"       # Vim
+)
+case $EDITOR in
+  code)
+    EDITOR_NAME="Visual Studio Code"
+    ;;
+  mate)
+    EDITOR_NAME="Text Mate"
+    ;;
+  subl)
+    EDITOR_NAME="Sublime Text"
+    ;;
+  *)
+    EDITOR_NAME="${(C)EDITOR}"
+    ;;
+esac
+
+# get-profile-input [--allow-blank]
 # Read, validate, and store an input
-read-input () {
+get-profile-input () {
   allow_blank=$([ "$2" = --allow-blank ]; echo $?)
 
   log-input-error () {
@@ -50,16 +77,6 @@ read-input () {
         read -r email
       done
       ;;
-    editor)
-      while [ $allow_blank = 1 ] || [ $editor ] && ! type -a $editor >/dev/null; do
-        if [ $editor ]; then
-          log-input-error "$editor is not a valid application"
-        else
-          log-input-error "You must specify a valid editor"
-        fi
-        read -r editor
-      done
-      ;;
     working_dir)
       while [ $allow_blank = 1 ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
         if [ -d $HOME/$working_dir ]; then
@@ -71,6 +88,16 @@ read-input () {
       done
       [ $working_dir ] && working_dir="$HOME/$working_dir"
       ;;
+    editor)
+      while [ $allow_blank = 1 ] || [ $editor ] && [[ -z "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null; do
+        if [ $editor ]; then
+          log-input-error "$editor is not a valid command"
+        else
+          log-input-error "You must specify a valid command"
+        fi
+        read -r editor
+      done
+      ;;
   esac
 }
 
@@ -80,13 +107,13 @@ ln-dotfiles () {
   ln-dotfiles-dir () {
     dir_path=$1
     target_path=$2
+
     for file in "$dir_path"/*; do
       filename=$(basename $file)
       target=$(readlink $target_path/$filename)
+
       if [ ! $target ] || [ $target != $file ]; then
-        if [ -f $target_path/$filename ]; then
-          cp -H $target_path/$filename $target_path/${filename}.backup
-        fi
+        [ -f $target_path/$filename ] && cp -H $target_path/$filename $target_path/${filename}.backup
         ln -sf $file $target_path/$filename
       fi
     done
@@ -127,7 +154,7 @@ ln-dotfiles () {
 # profile [check|config|install|reload|-h|--help]
 # Print the current profile or execute one of the commands
 case $1 in
-  (-h|--help)
+  -h|--help)
     echo "Usage: profile [command]"
     echo
     echo "Commands:"
@@ -137,22 +164,22 @@ case $1 in
     echo -e "  reload\t Reload the current profile"
     ;;
 
-  (check)
-    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ! type -a $EDITOR >/dev/null || [ ! -d $WORKING_DIR/dotfiles ]; then
+  check)
+    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ([[ -n "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null) || [ ! -d $WORKING_DIR/dotfiles ]; then
       echo "${RED}⚠️  Profile installed incorrectly${NC}"
       echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
       return 1
     fi
     ;;
 
-  (config)
+  config)
     changed_keys=0
     installation=$([[ $2 =~ ^install$ ]]; echo $?)
     reload=$([[ $2 =~ ^reload$ ]]; echo $?)
     name_msg="${BB}🔏 First and last name${NC} ($([ $installation = 0 ] && echo 'no accent or special characters' || echo $NAME))"
     email_msg="${BB}📧 Email address${NC} ($([ $installation = 0 ] && echo 'to sign your commits' || echo $EMAIL))"
     working_dir_msg="${BB}📁 Working directory${NC} ($([ $installation = 0 ] && echo relative to $HOME, e.g. code || echo \~/$WORKING_DIR_NAME))"
-    editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = 0 ] && echo 'name of the app you use, e.g. Atom, Visual Studio Code, Sublime Text' || echo $EDITOR_NAME))"
+    editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = 0 ] && echo 'cli command of the app you use, e.g. atom, subl, code, vim, etc.' || echo $EDITOR_NAME))"
 
     if [ $installation = 1 ]; then
       profile check
@@ -168,7 +195,7 @@ case $1 in
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         tmp_key="${(L)key}"
         eval echo $"${tmp_key}_msg"
-        eval read-input $tmp_key "$([ $installation = 1 ] && echo --allow-blank)"
+        eval get-profile-input $tmp_key "$([ $installation = 1 ] && echo --allow-blank)"
         if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
           export $key=${(P)tmp_key}
           changed_keys+=1
@@ -208,7 +235,18 @@ case $1 in
     echo "${BLU}Configuring git...${NC}"
     git config --global user.name "$NAME"
     git config --global user.email "$EMAIL"
-    git config --global core.editor "$EDITOR --wait" # TODO: handle git editor
+    case $EDITOR in
+      [Aa]tom|[Cc]ode|[Mm]ate)
+        GIT_EDITOR="$EDITOR -w"
+        ;;
+      [Ee]macs|[Ss]ubl)
+        GIT_EDITOR="$EDITOR -nw"
+        ;;
+      *)
+        GIT_EDITOR="$EDITOR"
+        ;;
+    esac
+    git config --global core.editor "$GIT_EDITOR"
     git config --global include.path "$HOME/.gitconfig_global"
     git config --global core.excludesfile "$HOME/.gitignore"
     echo "${CUT}${GRN}Configuring git ✅${NC}"
@@ -221,7 +259,7 @@ case $1 in
     zsh
     ;;
 
-  (install)
+  install)
     if profile check >/dev/null; then
       echo "${YLW}WARNING: You already have a profile installed for $USER${NC}"
       echo -n "Do you want to override the current configuration? (y/N) "
@@ -236,7 +274,7 @@ case $1 in
     profile config reload
     ;;
 
-  (*)
+  *)
     if [ $1 ]; then
       echo "${RED}Unknown option: $1${NC}"
       echo "Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
