@@ -3,7 +3,6 @@ alias ip="curl ipinfo.io/ip"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias speedtest="wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip"
 alias serve="ruby -run -e httpd . -p 8000"
-alias serveo="ssh -R 80:$1 serveo.net"
 
 # Commands
 alias ls="/usr/local/bin/gls -h --color --group-directories-first"
@@ -13,13 +12,16 @@ alias lss="du -sh * 2>/dev/null | sort -hr"
 # Directories
 alias cdw="cd $WORKING_DIR"
 alias cdd="cd $HOME/Desktop"
-alias tmp="cd $WORKING_DIR/tmp"
 
-# Editor
+# Temporary files
+tmp="$WORKING_DIR/tmp"
+alias tmp="cd $tmp"
+
+# Open with editor
 alias dotfiles="$EDITOR $WORKING_DIR/dotfiles"
 alias sshrc="$EDITOR $HOME/.ssh"
 
-# git shortcuts
+# Git shortcuts
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   (( ${#git_alias} < 3 )) && alias g${git_alias}="git $git_alias"
 done
