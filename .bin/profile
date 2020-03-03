@@ -18,15 +18,16 @@ EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 
 WORKING_DIR_NAME=${WORKING_DIR##*/}
 
+# Available editors:
 EDITORS=(
-  "atom"      # Atom
-  "brackets"  # Brackets
-  "emacs"     # Emacs
-  "coda"      # Coda
-  "code"      # Visual Studio Code
-  "mate"      # TextMate
-  "subl"      # Sublime Text
-  "vim"       # Vim
+  "atom"     # Atom
+  "brackets" # Brackets
+  "emacs"    # Emacs
+  "coda"     # Coda
+  "code"     # Visual Studio Code
+  "mate"     # TextMate
+  "subl"     # Sublime Text
+  "vim"      # Vim
 )
 case $EDITOR in
   code)
@@ -43,7 +44,9 @@ case $EDITOR in
     ;;
 esac
 
-# get-profile-input [--allow-blank]
+# TODO: check for updates
+
+# get-profile-input <input> [--allow-blank]
 # Read, validate, and store an input
 get-profile-input () {
   allow_blank=$([ "$2" = --allow-blank ]; echo $?)
@@ -104,7 +107,7 @@ get-profile-input () {
 # ln-dotfiles
 # Create symlink for files in $WORKING_DIR/dotfiles
 ln-dotfiles () {
-  ln-dotfiles-dir () {
+  ln-dotfiles-dir () { # ln all files in a dir
     dir_path=$1
     target_path=$2
 
@@ -125,20 +128,20 @@ ln-dotfiles () {
 
     if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
       case $filename in
-        .DS_Store|.git|.github) # skip
+        .DS_Store|.git) # skip
           ;;
         .gitconfig) # use global
           ln -sf $file $HOME/.gitconfig_global
           ;;
         .atom) # Atom
           atom_path="$HOME/.atom"
-          if type atom >/dev/null && [ -d $atom_path ]; then
+          if [ -d $atom_path ]; then
             ln-dotfiles-dir $file $atom_path
           fi
           ;;
         .subl) # Sublime Text
           subl_path="/Users/$USER/Library/Application Support/Sublime Text 3/Packages/User"
-          if type subl >/dev/null && [ -d $subl_path ]; then
+          if [ -d $subl_path ]; then
             ln-dotfiles-dir $file $subl_path
           fi
           ;;
@@ -151,17 +154,18 @@ ln-dotfiles () {
   done
 }
 
-# profile [check|config|install|reload|-h|--help]
+# profile [check|config|install|reload|h]
 # Print the current profile or execute one of the commands
 case $1 in
-  -h|--help)
+  help|-h|--help)
     echo "Usage: profile [command]"
     echo
     echo "Commands:"
-    echo -e "  check\t\t Check if the current profile is installed correctly"
     echo -e "  config\t Edit the current profile"
-    echo -e "  install\t Install a new profile for the current user"
+    echo -e "  install\t Install a new profile"
     echo -e "  reload\t Reload the current profile"
+    echo -e "  check\t\t Check if the current profile is installed correctly"
+    echo -e "  help\t\t Print this help message"
     ;;
 
   check)
@@ -206,28 +210,24 @@ case $1 in
     fi
 
     if [ $changed_keys -gt 0 ] || [ $reload = 0 ]; then
-      echo "${BLU}Storing profile...${NC}"
+      _action=$([ $reload = 0 ] && echo 'Reloading' || echo 'Storing')
+      echo "${BLU}$_action profile...${NC}"
       echo "# 👤 $USER" > $HOME/.zprofile
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         echo "export $key=\"${(P)key}\"" >> $HOME/.zprofile
       done
       echo "export LANG=\"en_US.UTF-8\"" >> $HOME/.zprofile
       echo "export LC_ALL=\"en_US.UTF-8\"" >> $HOME/.zprofile
-      echo "${CUT}${GRN}Storing profile ✅${NC}"
+      echo "${CUT}${GRN}$_action profile ✅${NC}"
     else
       echo "Nothing changed"
       return
     fi
 
-    if [ $installation = 0 ] && [ -f "$(pwd)/install.zsh" ]; then
-      echo "${BLU}Removing installation script...${NC}"
-      rm -f "$(pwd)/install.zsh"
-      echo "${CUT}${GRN}Removing installation script ✅${NC}"
-    fi
-
     echo "${BLU}Linking dotfiles...${NC}"
     if ! ln-dotfiles; then
       echo "${RED}ERROR: can't link dotfiles${NC}"
+      echo "Please try again or open an issue here https://github.com/gabrielecanepa/dotfiles/issues/new"
       return 1
     fi
     echo "${CUT}${GRN}Linking dotfiles ✅${NC}"
@@ -251,17 +251,12 @@ case $1 in
     git config --global core.excludesfile "$HOME/.gitignore"
     echo "${CUT}${GRN}Configuring git ✅${NC}"
 
-    if [ $installation = 0 ]; then
-      echo ""
-      echo "👌 Awesome, all set! Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
-    fi
-
     zsh
     ;;
 
   install)
     if profile check >/dev/null; then
-      echo "${YLW}WARNING: You already have a profile installed for $USER${NC}"
+      echo "${YLW}WARNING: you already have a profile installed for $USER${NC}"
       echo -n "Do you want to override the current configuration? (y/N) "
       read -r choice
       [[ $choice =~ [yY] ]] && profile config install
