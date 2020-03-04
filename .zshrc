@@ -1,7 +1,8 @@
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbierussell" # https://github.com/gabrielecanepa/robbierussell
+# Squanchy Zsh Theme - https://github.com/gabrielecanepa/squanchy
+ZSH_THEME="squanchy"
 
 plugins=(
   brew
@@ -17,10 +18,11 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zle_highlight+=(paste:none) # disable text highlighting
 
 . "$ZSH/oh-my-zsh.sh"
+
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
+zle_highlight+=(paste:none) # disable text highlighting
 
 # Ruby - load rbenv
 PATH="$PATH:$HOME/.rbenv/bin"
