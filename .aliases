@@ -10,16 +10,14 @@ alias ll="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr"
 
 # Directories
-alias cdw="cd $WORKING_DIR"
-alias cdd="cd $HOME/Desktop"
-
-# Temporary files
-tmp="$WORKING_DIR/tmp"
+wd="$WORKING_DIR"
+tmp="$wd/tmp"
+alias cdw="cd $wd"
 alias tmp="cd $tmp"
 
-# Open with editor
-alias dotfiles="$EDITOR $WORKING_DIR/dotfiles"
-alias sshrc="$EDITOR $HOME/.ssh"
+# Editor
+alias dotfiles="$EDITOR $@ $wd/dotfiles"
+alias sshrc="$EDITOR $@ $HOME/.ssh"
 
 # Git shortcuts
 for git_alias in $(git aliases | sed 's/\ .*//'); do
