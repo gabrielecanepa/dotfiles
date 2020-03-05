@@ -6,15 +6,7 @@ RED="\e[31m"
 NC="\e[0m"
 
 case $1 in
-  (-h|--help)
-    echo "Usage: gatekeeper <command>"
-    echo
-    echo "Commands:"
-    echo -e "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
-    echo -e "  enable \t\t Enable checks globally"
-    ;;
-
-  (disable)
+  disable)
     if [ -z $2 ]; then
       echo "${YLW}WARNING: this will disable GateKeeper globally${NC}"
       printf "Are you sure you want to continue? (y/N) "
@@ -37,7 +29,7 @@ case $1 in
     fi
     ;;
 
-  (enable)
+  enable)
     if (sudo spctl --master-enable >/dev/null 2>&1); then
       echo "${GRN}🔒 GateKeeper enabled globally${NC}"
     else
@@ -45,7 +37,11 @@ case $1 in
     fi
     ;;
 
-  (*)
-    gatekeeper --help
+  *)
+    echo "Usage: gatekeeper <command>"
+    echo
+    echo "Commands:"
+    echo -e "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
+    echo -e "  enable \t\t Enable checks globally"
     ;;
 esac

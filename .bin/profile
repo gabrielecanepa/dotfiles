@@ -29,7 +29,7 @@ EDITORS=(
   "subl"     # Sublime Text
   "vim"      # Vim
 )
-case $EDITOR in
+case $EDITOR in # convert editors name
   code)
     EDITOR_NAME="Visual Studio Code"
     ;;
@@ -49,15 +49,15 @@ esac
 # get-profile-input <input> [--allow-blank]
 # Read, validate, and store an input
 get-profile-input () {
-  allow_blank=$([ "$2" = --allow-blank ]; echo $?)
+  allow_blank=$([ "$2" = --allow-blank ] && echo true || echo false)
 
   log-input-error () {
-    tput civis
+    tput civis # hide cursor
     echo "${CUT}${RED}$1\c${NC}"
     sleep 1
     echo
     echo -n "${CUT}${NC}> "
-    tput cnorm
+    tput cnorm # show cursor
   }
 
   echo -n "> "
@@ -65,13 +65,13 @@ get-profile-input () {
 
   case $1 in
     name)
-      while [ $allow_blank = 1 ] || [ $name ] && ! [[ $name =~ $NAME_REGEX ]]; do
+      while [ $allow_blank = false ] || [ $name ] && ! [[ $name =~ $NAME_REGEX ]]; do
         log-input-error "You must specify a valid name"
         read -r name
       done
       ;;
     email)
-      while [ $allow_blank = 1 ] || [ $email ] && [[ ! $email =~ $EMAIL_REGEX ]]; do
+      while [ $allow_blank = false ] || [ $email ] && [[ ! $email =~ $EMAIL_REGEX ]]; do
         if [ $email ]; then
           log-input-error "$email is not a valid email"
         else
@@ -81,7 +81,7 @@ get-profile-input () {
       done
       ;;
     working_dir)
-      while [ $allow_blank = 1 ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
+      while [ $allow_blank = false ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
         if [ -d $HOME/$working_dir ]; then
           log-input-error "$HOME$([ $working_dir ] && echo /$working_dir) doesn't contain any dotfiles"
         else
@@ -92,7 +92,7 @@ get-profile-input () {
       [ $working_dir ] && working_dir="$HOME/$working_dir"
       ;;
     editor)
-      while [ $allow_blank = 1 ] || [ $editor ] && [[ -z "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null; do
+      while [ $allow_blank = false ] || [ $editor ] && [[ -z "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null; do
         if [ $editor ]; then
           log-input-error "$editor is not a valid command"
         else
@@ -154,52 +154,32 @@ ln-dotfiles () {
   done
 }
 
-# profile [check|config|install|reload|h]
+# profile [check|config|install|reload|help]
 # Print the current profile or execute one of the commands
 case $1 in
-  help|-h|--help)
-    echo "Usage: profile [command]"
-    echo
-    echo "Commands:"
-    echo -e "  config\t Edit the current profile"
-    echo -e "  install\t Install a new profile"
-    echo -e "  reload\t Reload the current profile"
-    echo -e "  check\t\t Check if the current profile is installed correctly"
-    echo -e "  help\t\t Print this help message"
-    ;;
-
-  check)
-    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ([[ -n "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null) || [ ! -d $WORKING_DIR/dotfiles ]; then
-      echo "${RED}⚠️  Profile installed incorrectly${NC}"
-      echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
-      return 1
-    fi
-    ;;
-
   config)
     changed_keys=0
-    installation=$([[ $2 =~ ^install$ ]]; echo $?)
-    reload=$([[ $2 =~ ^reload$ ]]; echo $?)
-    name_msg="${BB}🔏 First and last name${NC} ($([ $installation = 0 ] && echo 'no accent or special characters' || echo $NAME))"
-    email_msg="${BB}📧 Email address${NC} ($([ $installation = 0 ] && echo 'to sign your commits' || echo $EMAIL))"
-    working_dir_msg="${BB}📁 Working directory${NC} ($([ $installation = 0 ] && echo relative to $HOME, e.g. code || echo \~/$WORKING_DIR_NAME))"
-    editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = 0 ] && echo 'cli command of the app you use, e.g. atom, subl, code, vim, etc.' || echo $EDITOR_NAME))"
+    installation=$([ "$2" = install ] && echo true || echo false)
+    reload=$([ "$2" = reload ] && echo true || echo false)
+    name_msg="${BB}🔏 First and last name${NC} ($([ $installation = true ] && echo 'no accent or special characters' || echo $NAME))"
+    email_msg="${BB}📧 Email address${NC} ($([ $installation = true ] && echo 'to sign your commits' || echo $EMAIL))"
+    working_dir_msg="${BB}📁 Working directory${NC} ($([ $installation = true ] && echo relative to $HOME, e.g. code || echo \~/$WORKING_DIR_NAME))"
+    editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = true ] && echo 'cli command of the app you use, e.g. atom, subl, code, vim, etc.' || echo $EDITOR_NAME))"
 
-    if [ $installation = 1 ]; then
-      profile check
-      [ $? = 1 ] && return
+    if [ $installation = false ] && ! profile check; then
+      return
     fi
 
-    if [ $reload = 1 ]; then
+    if [ $reload = false ]; then
       echo "${CYN}${BB}👤 $USER${NC}"
-      [ $installation = 1 ] && echo "(hit ⏎ if unchanged)"
+      [ $installation = false ] && echo "(hit ⏎ if unchanged)"
 
       echo ""
 
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         tmp_key="${(L)key}"
         eval echo $"${tmp_key}_msg"
-        eval get-profile-input $tmp_key "$([ $installation = 1 ] && echo --allow-blank)"
+        eval get-profile-input $tmp_key "$([ $installation = false ] && echo --allow-blank)"
         if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
           export $key=${(P)tmp_key}
           changed_keys+=1
@@ -209,8 +189,8 @@ case $1 in
       echo ""
     fi
 
-    if [ $changed_keys -gt 0 ] || [ $reload = 0 ]; then
-      _action=$([ $reload = 0 ] && echo 'Reloading' || echo 'Storing')
+    if [ $changed_keys -gt 0 ] || [ $reload = true ]; then
+      _action=$([ $reload = true ] && echo 'Reloading' || echo 'Storing')
       echo "${BLU}$_action profile...${NC}"
       echo "# 👤 $USER" > $HOME/.zprofile
       for key in NAME EMAIL WORKING_DIR EDITOR; do
@@ -265,14 +245,33 @@ case $1 in
     fi
     ;;
 
-  (reload)
+  reload)
     profile config reload
+    ;;
+
+  check)
+    if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ([[ -n "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null) || [ ! -d $WORKING_DIR/dotfiles ]; then
+      echo "${RED}⚠️  Profile installed incorrectly${NC}"
+      echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
+      return 1
+    fi
+    ;;
+
+  help)
+    echo "Usage: profile [command]"
+    echo
+    echo "Commands:"
+    echo -e "  config\t Edit the current profile"
+    echo -e "  install\t Install a new profile"
+    echo -e "  reload\t Reload the current profile"
+    echo -e "  check\t\t Check if the current profile is installed correctly"
+    echo -e "  help\t\t Print this help message"
     ;;
 
   *)
     if [ $1 ]; then
-      echo "${RED}Unknown option: $1${NC}"
-      echo "Type $PROFILE_CMD to print your current profile, or $PROFILE_CONFIG_CMD to modify it"
+      echo "${RED}Unknown command: $1${NC}"
+      profile help
     else
       if profile check; then
         echo "${BB}${CYN}👤 $USER${NC}"
