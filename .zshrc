@@ -42,3 +42,6 @@ export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
 
 # Check profile installation
 type -a profile >/dev/null && profile check
+
+# Avoid duplicates in $PATH
+typeset -aU path
