@@ -257,7 +257,7 @@ case $1 in
     fi
     ;;
 
-  help)
+  help|-h|--help)
     echo "Usage: profile [command]"
     echo
     echo "Commands:"

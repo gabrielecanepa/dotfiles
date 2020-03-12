@@ -37,11 +37,18 @@ case $1 in
     fi
     ;;
 
-  *)
+  -h|--help)
     echo "Usage: gatekeeper <command>"
     echo
     echo "Commands:"
     echo -e "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
     echo -e "  enable \t\t Enable checks globally"
+    ;;
+
+  *)
+    if [ $1 ]; then
+      echo "${RED}Unknown command: $1${NC}"
+    fi
+    gatekeeper --help
     ;;
 esac
