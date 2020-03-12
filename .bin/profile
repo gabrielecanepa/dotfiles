@@ -46,12 +46,12 @@ esac
 
 # TODO: check for updates
 
-# get-profile-input <input> [--allow-blank]
+# get_profile_input <input> [--allow-blank]
 # Read, validate, and store an input
-get-profile-input () {
+get_profile_input () {
   allow_blank=$([ "$2" = --allow-blank ] && echo true || echo false)
 
-  log-input-error () {
+  log_profile_input_error () {
     tput civis # hide cursor
     echo "${CUT}${RED}$1\c${NC}"
     sleep 1
@@ -66,16 +66,16 @@ get-profile-input () {
   case $1 in
     name)
       while [ $allow_blank = false ] || [ $name ] && ! [[ $name =~ $NAME_REGEX ]]; do
-        log-input-error "You must specify a valid name"
+        log_profile_input_error "You must specify a valid name"
         read -r name
       done
       ;;
     email)
       while [ $allow_blank = false ] || [ $email ] && [[ ! $email =~ $EMAIL_REGEX ]]; do
         if [ $email ]; then
-          log-input-error "$email is not a valid email"
+          log_profile_input_error "$email is not a valid email"
         else
-          log-input-error "You must specify an email"
+          log_profile_input_error "You must specify an email"
         fi
         read -r email
       done
@@ -83,9 +83,9 @@ get-profile-input () {
     working_dir)
       while [ $allow_blank = false ] || [ $working_dir ] && [ ! -d $HOME/$working_dir/dotfiles ]; do
         if [ -d $HOME/$working_dir ]; then
-          log-input-error "$HOME$([ $working_dir ] && echo /$working_dir) doesn't contain any dotfiles"
+          log_profile_input_error "$HOME$([ $working_dir ] && echo /$working_dir) doesn't contain any dotfiles"
         else
-          log-input-error "$HOME/$working_dir is not a valid directory"
+          log_profile_input_error "$HOME/$working_dir is not a valid directory"
         fi
         read -r working_dir
       done
@@ -94,9 +94,9 @@ get-profile-input () {
     editor)
       while [ $allow_blank = false ] || [ $editor ] && [[ -z "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null; do
         if [ $editor ]; then
-          log-input-error "$editor is not a valid command"
+          log_profile_input_error "$editor is not a valid command"
         else
-          log-input-error "You must specify a valid command"
+          log_profile_input_error "You must specify a valid command"
         fi
         read -r editor
       done
@@ -104,10 +104,10 @@ get-profile-input () {
   esac
 }
 
-# ln-dotfiles
+# ln_dotfiles
 # Create symlink for files in $WORKING_DIR/dotfiles
-ln-dotfiles () {
-  ln-dotfiles-dir () { # ln all files in a dir
+ln_dotfiles () {
+  ln_dotfiles_dir () { # ln all files in a dir
     dir_path=$1
     target_path=$2
 
@@ -136,13 +136,13 @@ ln-dotfiles () {
         .atom) # Atom
           atom_path="$HOME/.atom"
           if [ -d $atom_path ]; then
-            ln-dotfiles-dir $file $atom_path
+            ln_dotfiles_dir $file $atom_path
           fi
           ;;
         .subl) # Sublime Text
           subl_path="/Users/$USER/Library/Application Support/Sublime Text 3/Packages/User"
           if [ -d $subl_path ]; then
-            ln-dotfiles-dir $file $subl_path
+            ln_dotfiles_dir $file $subl_path
           fi
           ;;
         *)
@@ -179,7 +179,7 @@ case $1 in
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         tmp_key="${(L)key}"
         eval echo $"${tmp_key}_msg"
-        eval get-profile-input $tmp_key "$([ $installation = false ] && echo --allow-blank)"
+        eval get_profile_input $tmp_key "$([ $installation = false ] && echo --allow-blank)"
         if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
           export $key=${(P)tmp_key}
           changed_keys+=1
@@ -205,7 +205,7 @@ case $1 in
     fi
 
     echo "${BLU}Linking dotfiles...${NC}"
-    if ! ln-dotfiles; then
+    if ! ln_dotfiles; then
       echo "${RED}ERROR: can't link dotfiles${NC}"
       echo "Please try again or open an issue here https://github.com/gabrielecanepa/dotfiles/issues/new"
       return 1
@@ -231,7 +231,7 @@ case $1 in
     git config --global core.excludesfile "$HOME/.gitignore"
     echo "${CUT}${GRN}Configuring git ✅${NC}"
 
-    zsh
+    exec zsh -l
     ;;
 
   install)
