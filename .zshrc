@@ -1,8 +1,7 @@
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-# Squanchy Zsh Theme - https://github.com/gabrielecanepa/squanchy
-ZSH_THEME="squanchy"
+ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/squanchy
 
 plugins=(
   brew
@@ -22,15 +21,15 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zle_highlight+=(paste:none) # disable text highlighting
+zle_highlight+=(paste:none) # disable text highlighting on paste
 
-# Ruby - load rbenv
+# Load rbenv
 PATH="$PATH:$HOME/.rbenv/bin"
 if type -a rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
 
-# Node - load nvm
+# Load nvm
 if type -a nvm >/dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
