@@ -192,12 +192,10 @@ case $1 in
     if [ $changed_keys -gt 0 ] || [ $reload = true ]; then
       _action=$([ $reload = true ] && echo 'Reloading' || echo 'Storing')
       echo "${BLU}$_action profile...${NC}"
-      echo "# 👤 $USER" > $HOME/.zprofile
+      echo -n "" > $HOME/.zprofile
       for key in NAME EMAIL WORKING_DIR EDITOR; do
         echo "export $key=\"${(P)key}\"" >> $HOME/.zprofile
       done
-      echo "export LANG=\"en_US.UTF-8\"" >> $HOME/.zprofile
-      echo "export LC_ALL=\"en_US.UTF-8\"" >> $HOME/.zprofile
       echo "${CUT}${GRN}$_action profile ✅${NC}"
     else
       echo "Nothing changed"
