@@ -167,7 +167,7 @@ case $1 in
     editor_msg="${BB}⌨️  Text editor${NC} ($([ $installation = true ] && echo 'cli command of the app you use, e.g. atom, subl, code, vim, etc.' || echo $EDITOR_NAME))"
 
     if [ $installation = false ] && ! profile check; then
-      return
+      exit 1
     fi
 
     if [ $reload = false ]; then
@@ -201,14 +201,14 @@ case $1 in
       echo "${CUT}${GRN}$_action profile ✅${NC}"
     else
       echo "Nothing changed"
-      return
+      exit 0
     fi
 
     echo "${BLU}Linking dotfiles...${NC}"
     if ! ln_dotfiles; then
       echo "${RED}ERROR: can't link dotfiles${NC}"
       echo "Please try again or open an issue here https://github.com/gabrielecanepa/dotfiles/issues/new"
-      return 1
+      exit 1
     fi
     echo "${CUT}${GRN}Linking dotfiles ✅${NC}"
 
@@ -253,7 +253,7 @@ case $1 in
     if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ([[ -n "${EDITORS[(r)$editor]}" ]] && ! type -a $editor >/dev/null) || [ ! -d $WORKING_DIR/dotfiles ]; then
       echo "${RED}⚠️  Profile installed incorrectly${NC}"
       echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
-      return 1
+      exit 1
     fi
     ;;
 
