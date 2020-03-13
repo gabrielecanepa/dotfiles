@@ -1,6 +1,4 @@
-'*':
-  'ctrl-shift-left': 'pane:move-item-left'
-  'ctrl-shift-right': 'pane:move-item-right'
+'atom-workspace':
   'cmd-alt-t': 'theme-switcher:switch'
   'cmd-alt-g': 'github:toggle-git-tab'
   'cmd-alt-k': 'application:open-your-keymap'
@@ -9,5 +7,7 @@
   's': 'tree-view:show-in-file-manager'
   'cmd-backspace': 'tree-view:remove-project-folder'
 'atom-text-editor':
+  'ctrl-shift-left': 'pane:move-item-left'
+  'ctrl-shift-right': 'pane:move-item-right'
   'ctrl-shift-w': 'editor:toggle-soft-wrap'
   'cmd-alt-shift-g': 'open-on-github:repository'
