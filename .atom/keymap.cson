@@ -9,4 +9,5 @@
   's': 'tree-view:show-in-file-manager'
   'cmd-backspace': 'tree-view:remove-project-folder'
 'atom-text-editor':
+  'ctrl-shift-w': 'editor:toggle-soft-wrap'
   'cmd-alt-shift-g': 'open-on-github:repository'
