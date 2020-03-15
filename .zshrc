@@ -36,7 +36,7 @@ if type -a nvm >/dev/null; then
 fi
 
 # Other binstubs + aliases
-export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.bin"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 # Check profile installation
