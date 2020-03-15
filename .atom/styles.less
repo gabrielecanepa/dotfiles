@@ -20,7 +20,7 @@ encoding-selector-status,
     font-family: file-icons;
     content: "\f0c8";
   }
-  &[data-path$="private"]:before {
+  &[data-path="private"]:before {
     font-family: FontAwesome;
     content: "\f023";
   }
@@ -32,5 +32,8 @@ encoding-selector-status,
   &[data-name*="shellcheck"]:before {
     font-family: MFizz;
     content: "\f157";
+  }
+  &[data-name$=".zsh"]:before {
+    color: #6a9fb5;
   }
 }
