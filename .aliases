@@ -21,5 +21,8 @@ alias sshrc="$EDITOR $@ $HOME/.ssh"
 
 # Git shortcuts
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  (( ${#git_alias} < 3 )) && alias g${git_alias}="git $git_alias"
+  if (( ${#git_alias} < 4 )) && ! type -a g$git_alias >/dev/null; then
+    alias g${git_alias}="git $git_alias"
+  fi
 done
+unset git_alias
