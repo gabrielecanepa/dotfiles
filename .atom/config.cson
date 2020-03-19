@@ -32,12 +32,12 @@
   emmet:
     extensionsPath: "~/.emmet"
   "file-types":
-    "*.sublime-*": "source.json"
-    ".alias*": "source.shell"
-    ".eslint*": "source.json"
-    ".prettier*": "source.json"
-    ".remark*": "source.json"
-    ".shellcheck*": "source.shell"
+    ".alias??": "source.shell"
+    ".eslintrc": "source.json"
+    ".prettierrc": "source.json"
+    ".remarkrc": "source.json"
+    ".shellcheckrc": "source.shell"
+    ".sublime-*": "source.json"
   "find-and-replace":
     autocompleteSearches: true
     useRipgrep: true
@@ -53,7 +53,7 @@
       disableWhenNoEslintConfig: false
     lintHtmlFiles: true
   "linter-rubocop":
-    fixOnSave: true
+    command: "/Users/gabrielecanepa/.rbenv/shims/rubocop"
   "linter-shellcheck":
     enableNotice: true
   "linter-stylelint":
@@ -71,11 +71,8 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
-      excludedGlobs: [
-        "*.rb"
-      ]
       showInStatusBar: true
-    useEditorConfig: false
+    useEditorConfig: true
     useEslint: true
     useStylelint: true
   "pretty-json":
