@@ -30,6 +30,7 @@ packages: [
   "package-sync"
   "pigments"
   "prettier-atom"
+  "pretty-json"
   "project-view"
   "sort-lines"
   "teletype"
