@@ -52,8 +52,6 @@
     disabling:
       disableWhenNoEslintConfig: false
     lintHtmlFiles: true
-  "linter-rubocop":
-    command: "/Users/gabrielecanepa/.rbenv/shims/rubocop"
   "linter-shellcheck":
     enableNotice: true
   "linter-stylelint":
