@@ -11,6 +11,7 @@ plugins=(
   github
   last-working-dir
   nvm
+  rails
   rbenv
   sublime
   themes
