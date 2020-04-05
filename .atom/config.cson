@@ -1,5 +1,12 @@
 "*":
   "autocomplete-paths":
+    enableHtmlSupport: true
+    ignoreBuiltinScopes: true
+    ignoreSubmodules: true
+    ignoredPatterns: [
+      "node_modules"
+    ]
+    maxFileCount: 10000
     relative: false
   core:
     automaticallyUpdate: true
