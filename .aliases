@@ -18,6 +18,9 @@ alias tmp="cd $tmp"
 # Editor
 alias dotfiles="$EDITOR $@ $wd/dotfiles"
 alias sshrc="$EDITOR $@ $HOME/.ssh"
+# Atom
+alias at="atom $@"
+alias att="atom ."
 
 # Git shortcuts
 for git_alias in $(git aliases | sed 's/\ .*//'); do
