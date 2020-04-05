@@ -73,6 +73,9 @@
   lorem:
     defaults:
       unitSize: "Short"
+  "markdown-preview":
+    allowUnsafeProtocols: true
+    useGitHubStyle: true
   "package-sync":
     createOnChange: true
     forceOverwrite: true
