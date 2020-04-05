@@ -1,9 +1,6 @@
 {
 	"auto_upgrade": true,
 	"auto_upgrade_frequency": 1,
-	"auto_upgrade_ignore":
-	[
-	],
 	"bootstrapped": true,
 	"cache_length": 300,
 	"channels":
@@ -47,20 +44,11 @@
 		"*.sublime-workspace",
 		"*.tmTheme.cache"
 	],
-	"files_to_include":
-	[
-	],
-	"git_binary":
-	[
-	],
 	"git_update_command":
 	[
 		"pull",
 		"--ff",
 		"--commit"
-	],
-	"hg_binary":
-	[
 	],
 	"hg_update_command":
 	[
@@ -69,18 +57,10 @@
 	],
 	"http_cache": true,
 	"http_cache_length": 604800,
-	"http_proxy": "",
-	"https_proxy": "",
-	"ignore_vcs_packages":
-	[
-	],
 	"in_process_packages":
 	[
 	],
 	"install_missing": true,
-	"install_prereleases":
-	[
-	],
 	"installed_packages":
 	[
 		"A File Icon",
@@ -107,12 +87,9 @@
 		"SublimeLinter-eslint",
 		"SublimeLinter-rubocop",
 		"TerminalView",
-		"Theme - Brogrammer"
+		"Theme - Brogrammer",
+		"Todo"
 	],
-	"package_destination": "",
-	"package_name_map":
-	{
-	},
 	"package_profiles":
 	{
 		"Binaries Only":

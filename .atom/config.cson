@@ -27,7 +27,7 @@
     useTreeSitterParsers: true
     warnOnLargeFileLimit: 20
   editor:
-    fontSize: 22
+    fontSize: 25
     showIndentGuide: true
   emmet:
     extensionsPath: "~/.emmet"
