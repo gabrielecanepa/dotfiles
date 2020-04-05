@@ -13,8 +13,9 @@
   log = log --color --graph
   pf = push -f --set-upstream
   pom = push origin master
-  remote = remote -v
   r = remote
+  remote = remote -v
+  reset-origin = !git remote remove origin && git remote add origin git@github.com:$1
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
