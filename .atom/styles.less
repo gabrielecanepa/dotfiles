@@ -3,12 +3,21 @@
   font-size: 1.2rem;
 }
 
+// Hide encoding selector
 encoding-selector-status,
 .line-ending-tile {
   display: none !important;
 }
 
-// https://atom.io/packages/file-icons
+// Open files
+.open-files-title.list-item {
+  height: auto !important;
+  padding: 10px 0 0 !important;
+  margin: 5px 0 !important;
+  line-height: 2em !important;
+}
+
+// File icons https://atom.io/packages/file-icons
 .icon {
   &.atom-icon:before {
     color: #5eaf7d;

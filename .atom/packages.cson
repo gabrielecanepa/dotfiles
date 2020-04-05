@@ -27,6 +27,8 @@ packages: [
   "linter-stylelint"
   "linter-ui-default"
   "lorem"
+  "open-file"
+  "open-files"
   "package-sync"
   "pigments"
   "prettier-atom"

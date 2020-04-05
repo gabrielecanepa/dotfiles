@@ -1,4 +1,4 @@
-# ERB
+# erb
 '.text.html.erb, .text.html.ruby, .source.js.rails':
   'erb-inject':
     'prefix': 'er'

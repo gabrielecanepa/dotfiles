@@ -18,6 +18,9 @@
       "Thumbs.db"
     ]
     openEmptyEditorOnStart: false
+    packagesWithKeymapsDisabled: [
+      "open-file-in"
+    ]
     telemetryConsent: "no"
     themes: [
       "one-dark-ui"
