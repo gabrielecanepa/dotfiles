@@ -12,6 +12,7 @@
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   log = log --color --graph
   pf = push -f --set-upstream
+  phm = push heroku master
   pom = push origin master
   r = remote
   remote = remote -v
