@@ -1,7 +1,8 @@
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/squanchy
+ZSH_THEME="robbyrussell"
+# ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/squanchy
 
 plugins=(
   brew
@@ -15,14 +16,14 @@ plugins=(
   rbenv
   sublime
   themes
-  zsh-autosuggestions
+  # zsh-autosuggestions # disable when sharing screen
   zsh-syntax-highlighting
 )
 
 . "$ZSH/oh-my-zsh.sh"
 
 zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zle_highlight+=(paste:none) # disable text highlighting on paste
+zle_highlight+=(paste:none) # disable text highlight on paste
 
 # Load rbenv
 PATH="$PATH:$HOME/.rbenv/bin"
