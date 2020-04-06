@@ -19,7 +19,7 @@ alias tmp="cd $tmp"
 alias dotfiles="$EDITOR $@ $wd/dotfiles"
 alias sshrc="$EDITOR $@ $HOME/.ssh"
 # Atom
-alias at="atom $@"
+alias at="atom [ $1 ] && $1 || ."
 alias att="atom ."
 
 # Git shortcuts
