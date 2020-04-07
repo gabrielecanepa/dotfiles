@@ -37,6 +37,7 @@ packages: [
   "project-view"
   "sort-lines"
   "teletype"
+  "terminal-tab"
   "theme-switcher"
   "toggle-quotes"
   "tree-view-git-status"
