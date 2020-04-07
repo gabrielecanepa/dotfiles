@@ -22,8 +22,7 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
   fi
 done
 
-# Editor
-alias dotfiles="$EDITOR $@ $wd/dotfiles"
+# SSH
 alias sshrc="$EDITOR $@ $HOME/.ssh"
 # Atom
 alias at="atom $@"
