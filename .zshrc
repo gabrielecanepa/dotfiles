@@ -37,7 +37,7 @@ if type -a nvm >/dev/null; then
 fi
 
 # Other binstubs + aliases
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.bin" # TODO: remove `$HOME/.bin` when 1#card-35746167 is done
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.zsh" # TODO: remove `$HOME/.zsh` after closing [#2](./issues/2)
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 # Check profile installation

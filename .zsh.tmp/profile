@@ -145,6 +145,8 @@ ln_dotfiles () {
             ln_dotfiles_dir $file $subl_path
           fi
           ;;
+        .zsh.tmp) # TODO: #2
+          ;;
         *)
           [ -f $HOME/$filename ] && cp -H $HOME/$filename $HOME/${filename}.backup
           ln -sf $file $HOME/$filename
