@@ -14,6 +14,7 @@
     disabledPackages: [
       "exception-reporting"
       "open-files"
+      "prettier-atom"
     ]
     ignoredNames: [
       "._*"
@@ -41,6 +42,8 @@
     showIndentGuide: true
   emmet:
     extensionsPath: "~/.emmet"
+  "file-icons":
+    onChanges: true
   "file-types":
     ".alias??": "source.shell"
     ".eslintrc": "source.json"
@@ -78,15 +81,20 @@
   "package-sync":
     createOnChange: true
     forceOverwrite: true
+  pigments:
+    dismissableReloadNotifications: false
   "prettier-atom":
     formatOnSaveOptions:
-      enabled: true
       showInStatusBar: true
     useEditorConfig: true
     useEslint: true
     useStylelint: true
   "pretty-json":
     prettifyOnSaveJSON: true
+  "project-manager":
+    includeGitRepositories: true
+    showPath: false
+    sortBy: "title"
   "theme-switcher":
     syntaxThemeOne: "atom-material-syntax-dark"
     syntaxThemeTwo: "atom-material-syntax-light"

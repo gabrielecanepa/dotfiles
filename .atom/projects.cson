@@ -1,0 +1,77 @@
+[
+  {
+    title: "dotfiles"
+    paths: [
+      "/Users/gabrielecanepa/code/dotfiles"
+    ]
+    color: "#0366d6"
+  }
+  {
+    title: "gabrielecanepa/middleman-webpack"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/middleman-webpack"
+    ]
+    color: "#0366d6"
+  }
+  {
+    title: "gabrielecanepa/igscraper"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/igscraper"
+    ]
+    color: "#0366d6"
+  }
+  {
+    title: "gabrielecanepa/squanchy"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/squanchy"
+    ]
+    color: "#0366d6"
+  }
+  {
+    title: "gabrielecanepa/gatsby-portfolio"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/gatsby-portfolio"
+    ]
+    color: "#0366d6"
+  }
+  {
+    title: "lewagon/programming4everybody"
+    paths: [
+      "/Users/gabrielecanepa/code/lewagon/programming4everybody"
+    ]
+    icon: "rocket"
+    color: "#fd1015"
+  }
+  {
+    title: "lewagon/esselunga"
+    paths: [
+      "/Users/gabrielecanepa/code/lewagon/livecodes/esselunga"
+    ]
+    icon: "rocket"
+    color: "#fd1015"
+  }
+  {
+    title: "squonk/assets"
+    paths: [
+      "/Users/gabrielecanepa/code/squonk/assets"
+    ]
+    icon: "octocat"
+    color: "#24292e"
+  }
+  {
+    title: "squonk/squonk.tech"
+    paths: [
+      "/Users/gabrielecanepa/code/squonk/squonk.tech"
+    ]
+    icon: "octocat"
+    color: "#24292e"
+  }
+  {
+    title: "tiflis/manitoba"
+    paths: [
+      "/Users/gabrielecanepa/code/tiflis/manitoba"
+    ]
+    icon: "browser"
+    color: "#912934"
+  }
+]

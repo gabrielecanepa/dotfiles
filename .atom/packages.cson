@@ -33,6 +33,7 @@ packages: [
   "pigments"
   "prettier-atom"
   "pretty-json"
+  "project-manager"
   "project-view"
   "sort-lines"
   "teletype"

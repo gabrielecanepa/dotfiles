@@ -1,17 +1,19 @@
 'atom-workspace':
-  'cmd-alt-g': 'github:toggle-git-tab'
-  'cmd-alt-t': 'theme-switcher:switch'
-  'cmd-alt-k': 'application:open-your-keymap'
+  'alt-cmd-g': 'github:toggle-git-tab'
+  'ctrl-cmd-t': 'theme-switcher:switch'
+  'ctrl-cmd-k': 'application:open-your-keymap'
+  'ctrl-cmd-shift-p': 'project-manager:edit-projects'
 'atom-text-editor':
-  'cmd-alt-shift-g': 'open-on-github:repository'
+  'cmd-alt-shift-g': 'open-on-github:file'
   'ctrl-shift-left': 'pane:move-item-left'
   'ctrl-shift-right': 'pane:move-item-right'
   'ctrl-shift-w': 'editor:toggle-soft-wrap'
-  'cmd-alt-m': 'markdown-preview:toggle'
+  'ctrl-cmd-m': 'markdown-preview:toggle'
+  'ctrl-cmd-s': 'project-manager:save-project'
 '.tree-view':
   'r': 'tree-view:rename'
   'enter': 'tree-view:rename'
   's': 'tree-view:show-in-file-manager'
   'o': 'open-file:open' # open with default system app
   'm': 'markdown-preview:toggle' # TODO: fix
-  'cmd-shift-backspace': 'tree-view:remove-project-folder' # TODO: fix project open/close
+  'cmd-shift-backspace': 'tree-view:remove-project-folder' # TODO: fix project folder toggle
