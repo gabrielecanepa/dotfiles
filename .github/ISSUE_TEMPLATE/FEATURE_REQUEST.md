@@ -1,20 +1,23 @@
 ---
 name: Feature Request
 about: Suggest an idea for this project
+title: [Feature] Description of the feature
 ---
 
 ## Overview
 
-<!-- Required - Why do you think this feature could improve the quality of this project? -->
+<!-- *Required*: how do you think this feature could improve the quality of this project? -->
 
+<!-- Optional:
 ## Details
 
-<!-- Optional - List the key features of the feature as bullet points -->
+List the key features of your idea as bullet points
 
 ## Notes
 
-<!-- Optional - List additional notes/references as bullet points -->
+List additional notes/references as bullet points
 
 ## Screenshots/Screencasts
 
-<!-- Optional - Provide supporting image/video/designs -->
+Provide supporting images/videos/design
+-->

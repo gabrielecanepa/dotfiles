@@ -1,20 +1,21 @@
 ---
 name: Bug Report
-about: Create a report to help improve the project
+about: Create a report to help us improve the project
+title: [Bug] Description of the bug
 ---
 
 ## Expected behavior
 
-<!-- Required -->
+<!-- *Required* -->
 
 ## Actual behavior
 
-<!-- Required -->
+<!-- *Required* -->
 
 ## Steps to reproduce the problem
 
-<!-- Required - List in details the steps to reproduce the actual behavior -->
+<!-- *Required*: list in details the steps to reproduce the behavior -->
 
 ## Specifications
 
-<!-- Required - List your local specifications (platform, version, subsystem, etc.) -->
+<!-- *Required*: list your local specifications (platform, version, subsystem, etc.) -->
