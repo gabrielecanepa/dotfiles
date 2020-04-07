@@ -60,7 +60,6 @@
   "linter-eslint":
     disabling:
       disableWhenNoEslintConfig: false
-    lintHtmlFiles: true
   "linter-shellcheck":
     enableNotice: true
   "linter-stylelint":
