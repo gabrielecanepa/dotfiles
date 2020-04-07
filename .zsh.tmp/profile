@@ -128,7 +128,7 @@ ln_dotfiles () {
 
     if [ ! $target ] || [ $target != $WORKING_DIR/dotfiles/$filename ]; then
       case $filename in
-        .DS_Store|.git|.github) # skip
+        .DS_Store|.git|.github|.iterm2) # skip
           ;;
         .gitconfig) # use global
           ln -sf $file $HOME/.gitconfig_global
