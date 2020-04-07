@@ -7,7 +7,7 @@ alias serve="ruby -run -e httpd . -p 8000"
 # Commands
 alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store"
 alias ll="ls -la"
-alias lss="du -sh * 2>/dev/null | sort -hr"
+alias lss="du -sh * 2>/dev/null | sort -hr" # by size
 
 # Directories
 wd="$WORKING_DIR"
@@ -19,13 +19,12 @@ alias tmp="cd $tmp"
 alias dotfiles="$EDITOR $@ $wd/dotfiles"
 alias sshrc="$EDITOR $@ $HOME/.ssh"
 # Atom
-alias at="atom [ $1 ] && $1 || ."
+alias at="atom"
 alias att="atom ."
 
 # Git shortcuts
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  if (( ${#git_alias} < 4 )) && ! type -a g$git_alias >/dev/null; then
+  if ! type -a "g$git_alias" >/dev/null; then # only if the command doesn't already exist!
     alias g${git_alias}="git $git_alias"
   fi
 done
-unset git_alias
