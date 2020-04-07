@@ -13,6 +13,7 @@
     destroyEmptyPanes: false
     disabledPackages: [
       "exception-reporting"
+      "open-files"
     ]
     ignoredNames: [
       "._*"
