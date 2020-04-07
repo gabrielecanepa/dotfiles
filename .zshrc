@@ -1,8 +1,7 @@
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
-# ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/squanchy
+ZSH_THEME="robbyrussell" # or squanchy -> https://github.com/gabrielecanepa/squanchy
 
 plugins=(
   brew
@@ -16,7 +15,7 @@ plugins=(
   rbenv
   sublime
   themes
-  # zsh-autosuggestions # disable when sharing screen
+  # zsh-autosuggestions # disable when sharing screen, or weird things could appear 😁
   zsh-syntax-highlighting
 )
 
@@ -38,7 +37,7 @@ if type -a nvm >/dev/null; then
 fi
 
 # Other binstubs + aliases
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.bin"
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.bin" # TODO: remove `$HOME/.bin` when 1#card-35746167 is done
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 # Check profile installation

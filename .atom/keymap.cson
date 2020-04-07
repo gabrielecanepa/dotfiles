@@ -14,4 +14,4 @@
   's': 'tree-view:show-in-file-manager'
   'o': 'open-file:open' # open with default system app
   'm': 'markdown-preview:toggle' # TODO: fix
-  'cmd-shift-backspace': 'tree-view:remove-project-folder' # TODO: fix open/close
+  'cmd-shift-backspace': 'tree-view:remove-project-folder' # TODO: fix project open/close

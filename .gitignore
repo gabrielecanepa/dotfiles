@@ -1,4 +1,4 @@
-# Compiled source
+# Compiled sources
 ##################
 *.com
 *.class
@@ -18,7 +18,7 @@
 *.tar
 *.zip
 
-# Logs and database
+# Logs and databases
 ####################
 *.log
 *.sql
@@ -49,6 +49,6 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
-# Private files
-################
+# Misc
+#######
 private/

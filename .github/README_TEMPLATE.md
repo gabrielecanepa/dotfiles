@@ -24,7 +24,7 @@
 
 ## Contributing
 
-Please [fork the repository](https://github.com/<user>/<repo>/fork) and create a new pull request/issue.
+Please [create a new issue](https://github.com/<user>/<repo>/issues/new) or [fork the repository](https://github.com/<user>/<repo>/fork) and open a new pull request.
 
 ### License
 

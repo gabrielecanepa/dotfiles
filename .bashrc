@@ -15,6 +15,3 @@ fi
 # Other binstubs + aliases
 export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-
-# Check profile installation
-type -a profile >/dev/null && profile check

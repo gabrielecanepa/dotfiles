@@ -3,11 +3,16 @@
     "es6": true,
     "browser": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": [
+    "eslint:recommended"
+  ],
   "settings": {
     "import/resolver": {
       "node": {
-        "moduleDirectory": ["node_modules", "src/"]
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
       }
     }
   },
@@ -20,7 +25,10 @@
     "max-lines": 2,
     "no-console": 1,
     "no-var": 2,
-    "object-shorthand": [2, "always"],
+    "object-shorthand": [
+      2,
+      "always"
+    ],
     "prefer-const": [
       2,
       {
@@ -39,8 +47,15 @@
         "jsxBracketSameLine": false
       }
     ],
-    "quotes": [2, "single", "avoid-escape"],
-    "semi": [2, "never"],
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
     "sort-keys": 0,
     "sort-vars": [
       1,
