@@ -1,11 +1,12 @@
 # https://github.com/koalaman/shellcheck/wiki
 shell=bash
-disable=SC1090 # allow non-constant sources
-disable=SC2034 # allow unused vars
-disable=SC2038 # disable -print0/-0 restriction
+disable=SC1090 # non-constant sources
+disable=SC2015 # inline condition warning
+disable=SC2034 # unused vars
+disable=SC2038 # disable -print0/-0 warn
 disable=SC2086 # double quotes word splitting
-disable=SC2115 # disable "${var:?}" restriction
-disable=SC2128 # array expansion
+disable=SC2115 # disable "${var:?}" warn
+disable=SC2128 # allow array expansion
 disable=SC2139 # allow expansion in definition
 disable=SC2145 # allow $@
-disable=SC2153 # allow possible mispelling
+disable=SC2153 # allow possible mispellings
