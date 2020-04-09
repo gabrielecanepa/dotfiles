@@ -37,7 +37,7 @@ if type -a nvm >/dev/null; then
 fi
 
 # Other binstubs + aliases
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.zsh" # TODO: remove `$HOME/.zsh` after closing [#2](./issues/2)
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$WORKING_DIR/dotfiles/.zsh.tmp" # TODO: remove `.zsh.tmp` after closing issue #2
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 # Check profile installation
