@@ -92,9 +92,10 @@
   "pretty-json":
     prettifyOnSaveJSON: true
   "project-manager":
+    alwaysOpenInSameWindow: true
     includeGitRepositories: true
+    savePathsRelativeToHome: true
     showPath: false
-    sortBy: "title"
   "theme-switcher":
     syntaxThemeOne: "atom-material-syntax-dark"
     syntaxThemeTwo: "atom-material-syntax-light"

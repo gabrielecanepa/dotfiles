@@ -1,77 +1,105 @@
 [
+  # Templates
+  {
+    title: "config"
+    color: "#abb5c1"
+    icon: "icon-person"
+  }
+  {
+    title: "github"
+    icon: "icon-mark-github"
+  }
+  {
+    title: "lewagon"
+    color: "#d23333"
+    icon: "icon-rocket"
+  }
+  {
+    title: "squonk"
+    color: "#24292e"
+    icon: "icon-octoface"
+  }
+  {
+    title: "tiflis"
+    color: "#912934"
+    icon: "icon-home"
+  }
+  # Projects
   {
     title: "dotfiles"
     paths: [
       "/Users/gabrielecanepa/code/dotfiles"
     ]
-    color: "#0366d6"
+    template: "config"
   }
   {
-    title: "gabrielecanepa/middleman-webpack"
+    title: "assets"
     paths: [
-      "/Users/gabrielecanepa/code/gabrielecanepa/middleman-webpack"
+      "/Users/gabrielecanepa/code/assets"
     ]
-    color: "#0366d6"
-  }
-  {
-    title: "gabrielecanepa/igscraper"
-    paths: [
-      "/Users/gabrielecanepa/code/gabrielecanepa/igscraper"
-    ]
-    color: "#0366d6"
-  }
-  {
-    title: "gabrielecanepa/squanchy"
-    paths: [
-      "/Users/gabrielecanepa/code/gabrielecanepa/squanchy"
-    ]
-    color: "#0366d6"
-  }
-  {
-    title: "gabrielecanepa/gatsby-portfolio"
-    paths: [
-      "/Users/gabrielecanepa/code/gabrielecanepa/gatsby-portfolio"
-    ]
-    color: "#0366d6"
-  }
-  {
-    title: "lewagonlisbon/programming4everybody"
-    paths: [
-      "/Users/gabrielecanepa/code/lewagon/workshops/programming4everybody"
-    ]
-    icon: "rocket"
-    color: "#fd1015"
+    template: "config"
   }
   {
     title: "jones-sam/local-help"
     paths: [
       "/Users/gabrielecanepa/code/lewagon/projects/local-help"
     ]
-    icon: "rocket"
-    color: "#fd1015"
+    template: "lewagon"
   }
   {
-    title: "squonk/assets"
+    title: "gabrielecanepa/esselunga"
     paths: [
-      "/Users/gabrielecanepa/code/squonk/assets"
+      "/Users/gabrielecanepa/code/lewagon/projects/esselunga"
     ]
-    icon: "octocat"
-    color: "#24292e"
+    template: "lewagon"
   }
   {
-    title: "squonk/squonk.tech"
+    title: "lewagonlisbon/programming4everybody"
     paths: [
-      "/Users/gabrielecanepa/code/squonk/squonk.tech"
+      "/Users/gabrielecanepa/code/lewagon/workshops/programming4everybody"
     ]
-    icon: "octocat"
-    color: "#24292e"
+    template: "lewagon"
   }
   {
     title: "tiflis/manitoba"
     paths: [
       "/Users/gabrielecanepa/code/tiflis/manitoba"
     ]
-    icon: "browser"
-    color: "#912934"
+  }
+  {
+    title: "gabrielecanepa/middleman-webpack"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/middleman-webpack"
+    ]
+    template: "github"
+  }
+  {
+    title: "gabrielecanepa/igscraper"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/igscraper"
+    ]
+    template: "github"
+  }
+  {
+    title: "gabrielecanepa/squanchy"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/squanchy"
+    ]
+    template: "github"
+  }
+  {
+    title: "gabrielecanepa/gatsby-portfolio"
+    paths: [
+      "/Users/gabrielecanepa/code/gabrielecanepa/gatsby-portfolio"
+    ]
+    template: "github"
+  }
+  {
+    title: "squonk/squonk.tech"
+    paths: [
+      "/Users/gabrielecanepa/code/squonk/assets"
+      "/Users/gabrielecanepa/code/squonk/squonk.tech"
+    ]
+    template: "squonk"
   }
 ]
