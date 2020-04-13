@@ -1,5 +1,5 @@
 'atom-workspace':
-  'alt-cmd-g': 'github:toggle-git-tab'
+  'cmd-alt-g': 'github:toggle-git-tab'
   'ctrl-cmd-t': 'theme-switcher:switch'
   'ctrl-cmd-k': 'application:open-your-keymap'
   'ctrl-cmd-shift-p': 'project-manager:edit-projects'
@@ -15,5 +15,4 @@
   'enter': 'tree-view:rename'
   's': 'tree-view:show-in-file-manager'
   'o': 'open-file:open' # open with default system app
-  'm': 'markdown-preview:toggle' # TODO: fix
-  'cmd-shift-backspace': 'tree-view:remove-project-folder' # TODO: fix repo folder toggle on click
+  'cmd-shift-backspace': 'tree-view:remove-project-folder'

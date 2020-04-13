@@ -13,8 +13,6 @@
     destroyEmptyPanes: false
     disabledPackages: [
       "exception-reporting"
-      "open-files"
-      "prettier-atom"
     ]
     ignoredNames: [
       "._*"
@@ -82,7 +80,10 @@
     createOnChange: true
     forceOverwrite: true
   pigments:
-    dismissableReloadNotifications: false
+    extendAutocompleteToColorValue: true
+    extendAutocompleteToVariables: true
+    mergeColorDuplicates: true
+    notifyReloads: false
   "prettier-atom":
     formatOnSaveOptions:
       showInStatusBar: true
@@ -92,7 +93,6 @@
   "pretty-json":
     prettifyOnSaveJSON: true
   "project-manager":
-    alwaysOpenInSameWindow: true
     includeGitRepositories: true
     savePathsRelativeToHome: true
     showPath: false
