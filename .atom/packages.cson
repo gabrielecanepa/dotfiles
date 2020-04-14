@@ -31,7 +31,6 @@ packages: [
   "package-sync"
   "pigments"
   "prettier-atom"
-  "pretty-json"
   "project-manager"
   "project-view"
   "sort-lines"
