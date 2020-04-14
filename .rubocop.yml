@@ -13,6 +13,7 @@ AllCops:
     - script/**/*
     - public/**/*
     - vendor/**/*
+    - "**/*.erb"
   TargetRubyVersion: 2.6
 
 Metrics/BlockLength:
