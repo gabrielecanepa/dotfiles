@@ -21,7 +21,7 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
+zstyle ":bracketed-paste-magic" active-widgets ".self-*" # fix slow pasting
 zle_highlight+=(paste:none) # disable text highlight on paste
 
 # Load rbenv
@@ -29,6 +29,7 @@ PATH="$PATH:$HOME/.rbenv/bin"
 if type -a rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
+export RUBYOPT="-W:no-deprecated" # suppress deprecation warnings
 
 # Load nvm
 if type -a nvm >/dev/null; then
