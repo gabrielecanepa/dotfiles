@@ -62,6 +62,9 @@
   "linter-eslint":
     disabling:
       disableWhenNoEslintConfig: false
+  "linter-rubocop":
+    fixOnSave: true
+    useBundler: true
   "linter-shellcheck":
     enableNotice: true
   "linter-stylelint":
@@ -96,6 +99,9 @@
     includeGitRepositories: true
     savePathsRelativeToHome: true
     showPath: false
+  "terminal-tab":
+    shellSettings:
+      shellArgs: "--theme=robbyrussell"
   "theme-switcher":
     syntaxThemeOne: "atom-material-syntax-dark"
     syntaxThemeTwo: "atom-material-syntax-light"
