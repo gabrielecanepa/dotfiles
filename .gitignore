@@ -52,3 +52,4 @@ Thumbs.db
 # Misc
 #######
 private/
+.atom/projects.cson
