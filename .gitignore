@@ -52,4 +52,8 @@ Thumbs.db
 # Misc
 #######
 private/
-.atom/projects.cson
+
+# Dotfiles
+###########
+.atom/projects*
+.oh-my-zsh

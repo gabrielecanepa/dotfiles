@@ -3,7 +3,7 @@
   font-size: 1.2rem;
 }
 
-// Hide unused stuff
+// Hide unused things
 encoding-selector-status,
 .line-ending-tile {
   display: none !important;
@@ -29,24 +29,24 @@ encoding-selector-status,
     font-family: Devicons;
     content: "\e6a2";
   }
-  &[data-path$="iterm2"]:before {
+  &[data-name$="iterm2"]:before {
     font-family: file-icons;
     content: "\e9da";
+  }
+  &[data-name*=".oh-my-zsh"]:before {
+    font-family: file-icons;
+    content: "\f0c8";
   }
   &[data-path$="private"]:before {
     font-family: FontAwesome;
     content: "\f023";
   }
-  &[data-path$="subl"]:before {
+  &[data-name$="subl"]:before {
     font-family: file-icons;
     content: "\e986";
   }
   &[data-name*="shellcheck"]:before {
     font-family: MFizz;
     content: "\f157";
-  }
-  &[data-path*=".zsh"]:before {
-    font-family: file-icons;
-    content: "\f0c8";
   }
 }

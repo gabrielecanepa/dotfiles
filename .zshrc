@@ -1,7 +1,7 @@
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/squanchy
+ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/zsh-theme
 
 plugins=(
   brew
@@ -15,8 +15,14 @@ plugins=(
   rbenv
   sublime
   themes
-  zsh-autosuggestions # disable when sharing screen, or weird things could appear 😁
+  # Ext
+  zsh-autosuggestions # disable when sharing screen 😬
+  zsh-completions
   zsh-syntax-highlighting
+  # Custom - https://github.com/gabrielecanepa/zsh-plugins
+  gatekeeper
+  node-modules
+  profile
 )
 
 . "$ZSH/oh-my-zsh.sh"
@@ -38,11 +44,11 @@ if type -a nvm >/dev/null; then
 fi
 
 # Other binstubs + aliases
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$WORKING_DIR/gabrielecanepa/dotfiles/.zsh.tmp" # TODO: remove `.zsh.tmp` after closing issue #2
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin"
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 # Check profile installation
-type -a profile >/dev/null && profile check
+profile >/dev/null && profile check
 
 # Avoid duplicates in $PATH
 typeset -aU path
