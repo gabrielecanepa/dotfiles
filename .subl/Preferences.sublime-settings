@@ -24,6 +24,7 @@
 	"hot_exit": false,
 	"ignored_packages":
 	[
+		"SublimeLinter-rubocop",
 		"Vintage"
 	],
 	"material_theme_arrow_folders": true,
