@@ -9,10 +9,15 @@ You can easily manage your configuration with the Zsh [`profile`](https://github
 ![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-dark.png?raw=true)
 ![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-light.png?raw=true)
 
-## Editor
+## Atom
 
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/editor-dark.png?raw=true)
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/editor-light.png?raw=true)
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/atom-dark.png?raw=true)
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/atom-light.png?raw=true)
+
+## Sublime Text
+
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/sublime-dark.png?raw=true)
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/sublime-light.png?raw=true)
 
 ## License
 

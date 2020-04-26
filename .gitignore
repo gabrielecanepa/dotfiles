@@ -52,8 +52,3 @@ Thumbs.db
 # Misc
 #######
 private/
-
-# Dotfiles
-###########
-.github/
-.oh-my-zsh/
