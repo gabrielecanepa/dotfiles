@@ -4,6 +4,8 @@
     paths: [
       "~/code/lewagon/projects/local-help"
     ]
+    icon: "icon-mortar-board"
+    color: "#d23333"
     template: "lewagon"
   }
   {
@@ -11,6 +13,8 @@
     paths: [
       "~/code/lewagon/workshops/programming4everybody"
     ]
+    icon: "icon-mortar-board"
+    color: "#d23333"
     template: "lewagon"
   }
   {
@@ -22,11 +26,13 @@
     color: "#912934"
   }
   {
-    title: "dotfiles"
+    title: "gabrielecanepa"
     paths: [
       "~/code/dotfiles"
+      "~/code/.github"
       "~/code/assets"
       "~/code/cheatsheets"
+      "~/code/zsh-custom"
     ]
     icon: "icon-gear"
   }
@@ -35,6 +41,7 @@
     paths: [
       "~/code/gabrielecanepa/igscraper"
     ]
+    icon: "icon-mark-github"
     template: "github"
   }
   {
@@ -42,6 +49,7 @@
     paths: [
       "~/code/gabrielecanepa/middleman-webpack"
     ]
+    icon: "icon-mark-github"
     template: "github"
   }
   {
@@ -49,6 +57,7 @@
     paths: [
       "~/code/gabrielecanepa/gabrielecanepa.com"
     ]
+    icon: "icon-mark-github"
     template: "github"
   }
   {
@@ -56,6 +65,7 @@
     paths: [
       "~/code/gabrielecanepa/gatsby-portfolio"
     ]
+    icon: "icon-mark-github"
     template: "github"
   }
   {
@@ -67,7 +77,6 @@
     icon: "icon-octoface"
     color: "#788290"
   }
-  # Templates
   {
     title: "github"
     icon: "icon-mark-github"
