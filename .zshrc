@@ -15,7 +15,7 @@ plugins=(
   rbenv
   sublime
   themes
-  # Ext
+  # From zsh-users
   zsh-autosuggestions # disable when sharing screen 😬
   zsh-completions
   zsh-syntax-highlighting
