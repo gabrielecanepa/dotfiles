@@ -32,8 +32,8 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "one-light-ui"
-      "atom-material-syntax-light"
+      "one-dark-ui"
+      "atom-material-syntax-dark"
     ]
     titleBar: "hidden"
     useTreeSitterParsers: true
