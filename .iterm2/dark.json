@@ -194,8 +194,8 @@
   },
   "AWDS Pane Directory" : "",
   "Blur" : false,
-  "Vertical Spacing" : 1.1000000000000001,
-  "Normal Font" : "MonacoNerdFontCompleteM- 20",
+  "Vertical Spacing" : 1.3,
+  "Normal Font" : "MonacoNerdFontCompleteM- 25",
   "Ansi 7 Color" : {
     "Red Component" : 0.99607843160629272,
     "Color Space" : "sRGB",
