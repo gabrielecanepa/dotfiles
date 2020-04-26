@@ -55,5 +55,8 @@ private/
 
 # Dotfiles
 ###########
-.atom/projects*
-.oh-my-zsh
+.atom/
+.github/
+.iterm2/
+.oh-my-zsh/
+.subl/
