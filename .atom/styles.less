@@ -1,0 +1,53 @@
+// Font sizes
+.tab-bar,
+.tree-view {
+  font-size: 1.25rem;
+
+  .tab {
+    transition: all 0.17s;
+  }
+  .tab.active {
+    font-size: 1.26rem;
+  }
+  .tab:not(.active):hover {
+    font-size: 1.26rem;
+  }
+}
+
+// Hide unused things
+encoding-selector-status,
+.line-ending-tile {
+  display: none !important;
+}
+
+// File icons: https://github.com/file-icons/atom/blob/master/styles/icons.less
+.icon {
+  &[title$="bin"]:before {
+    font-family: Devicons;
+    content: "\e6a2";
+  }
+  &[title$="private"]:before {
+    font-family: FontAwesome;
+    content: "\f023";
+  }
+  &[title$=".iterm2"]:before {
+    font-family: file-icons;
+    content: "\e9da";
+  }
+  &[title$=".oh-my-zsh"]:before {
+    font-family: file-icons;
+    content: "\f0c8";
+  }
+  &[title$=".subl"]:before {
+    font-family: file-icons;
+    content: "\e986";
+  }
+  &[title$=".shellcheckrc"]:before {
+    font-family: MFizz;
+    content: "\f157";
+  }
+  // Show default icon for .github zsh plugin
+  &[data-path="/Users/gabrielecanepa/code/dotfiles/.oh-my-zsh/plugins/.github"]::before {
+    content: "\f016";
+  }
+}

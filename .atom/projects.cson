@@ -1,0 +1,80 @@
+[
+  {
+    title: "local-help"
+    paths: [
+      "~/code/lewagon/projects/local-help"
+    ]
+    template: "lewagon"
+  }
+  {
+    title: "programming4everybody"
+    paths: [
+      "~/code/lewagon/workshops/programming4everybody"
+    ]
+    template: "lewagon"
+  }
+  {
+    title: "tiflis"
+    paths: [
+      "~/code/tiflis/manitoba"
+    ]
+    icon: "icon-flame"
+    color: "#912934"
+  }
+  {
+    title: "dotfiles"
+    paths: [
+      "~/code/dotfiles"
+      "~/code/assets"
+      "~/code/cheatsheets"
+    ]
+    icon: "icon-gear"
+  }
+  {
+    title: "igscraper"
+    paths: [
+      "~/code/gabrielecanepa/igscraper"
+    ]
+    template: "github"
+  }
+  {
+    title: "middleman-webpack"
+    paths: [
+      "~/code/gabrielecanepa/middleman-webpack"
+    ]
+    template: "github"
+  }
+  {
+    title: "gabrielecanepa.com"
+    paths: [
+      "~/code/gabrielecanepa/gabrielecanepa.com"
+    ]
+    template: "github"
+  }
+  {
+    title: "gatsby-portfolio"
+    paths: [
+      "~/code/gabrielecanepa/gatsby-portfolio"
+    ]
+    template: "github"
+  }
+  {
+    title: "squonk"
+    paths: [
+      "~/code/squonk/www"
+      "~/code/squonk/assets"
+    ]
+    icon: "icon-octoface"
+    color: "#788290"
+  }
+  # Templates
+  {
+    title: "github"
+    icon: "icon-mark-github"
+  }
+  {
+    title: "lewagon"
+    icon: "icon-mortar-board"
+    color: "#d23333"
+  }
+]
