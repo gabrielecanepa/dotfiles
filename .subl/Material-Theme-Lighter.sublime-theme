@@ -3,11 +3,11 @@
     "class": "sidebar_label",
     "color": "#424242",
     "font.bold": false,
-    "font.size": 13.8
+    "font.size": 16
   },
   {
     "class": "tab_label",
-    "font.size": 13.8
+    "font.size": 16
   },
   {
     "class": "tab_label",

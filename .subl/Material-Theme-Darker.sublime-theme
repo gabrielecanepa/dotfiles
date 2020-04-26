@@ -3,11 +3,16 @@
     "class": "sidebar_label",
     "color": [168, 168, 168],
     "font.bold": false,
-    "font.size": 13.8
+    "font.size": 16
+  },
+  {
+    "class": "sidebar_tree",
+    "row_padding": [8, 8],
+    "indent": 20
   },
   {
     "class": "tab_label",
-    "font.size": 13.8
+    "font.size": 14
   },
   {
     "class": "tab_label",
