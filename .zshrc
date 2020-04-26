@@ -1,7 +1,8 @@
-# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
+# Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="squanchy" # https://github.com/gabrielecanepa/zsh-theme
+# Custom: https://github.com/gabrielecanepa/zsh-custom
+ZSH_THEME="squanchy"
 
 plugins=(
   brew
@@ -15,14 +16,14 @@ plugins=(
   rbenv
   sublime
   themes
-  # From zsh-users
-  zsh-autosuggestions # disable when sharing screen 😬
-  zsh-completions
-  zsh-syntax-highlighting
-  # Custom - https://github.com/gabrielecanepa/zsh-plugins
+  # Custom
   gatekeeper
   node-modules
   profile
+  # From zsh-users
+  zsh-autosuggestions # disable when sharing screen 😁
+  zsh-completions
+  zsh-syntax-highlighting
 )
 
 . "$ZSH/oh-my-zsh.sh"
