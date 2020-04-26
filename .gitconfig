@@ -41,6 +41,8 @@
 
 [core]
   pager = less -FRSX
+	editor = atom -w
+	excludesfile = /Users/gabrielecanepa/.gitignore
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -53,3 +55,8 @@
 
 [pull]
   rebase = true
+[user]
+	name = Gabriele Canepa
+	email = git@gabrielecanepa.com
+[include]
+	path = /Users/gabrielecanepa/.gitconfig_global

@@ -1,14 +1,19 @@
 # Dotfiles
 
-⚙️ My .files and preferences
+My configuration files and preferences ⚙️
 
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/dotfiles-dark.png?raw=true)
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/dotfiles-light.png?raw=true)
+You can easily manage your configuration with the Zsh [`profile`](https://github.com/gabrielecanepa/zsh-custom/tree/master/plugins#profile-) plugin.
 
-## Usage
+## Shell
 
-You can easily manage your configuration with the [Zsh **profile** plugin](https://github.com/gabrielecanepa/zsh-custom/tree/master/plugins).
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-dark.png?raw=true)
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-light.png?raw=true)
+
+## Editor
+
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/editor-dark.png?raw=true)
+![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/editor-light.png?raw=true)
 
 ## License
 
-[MIT](https://github.com/gabrielecanepa/.github/LICENSE)
+[MIT](https://github.com/gabrielecanepa/.github/blob/master/LICENSE)
