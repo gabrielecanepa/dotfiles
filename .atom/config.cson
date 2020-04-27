@@ -92,7 +92,6 @@
     notifyReloads: false
   "prettier-atom":
     formatOnSaveOptions:
-      enabled: true
       showInStatusBar: true
     useEditorConfig: true
     useEslint: true
@@ -105,7 +104,8 @@
     showPath: false
   "terminal-tab":
     fontFamily: "Monaco Nerd Font Mono"
-    shellSettings: {}
+    shellSettings:
+      shellArgs: "export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=\"fg=0\""
   "theme-switcher":
     syntaxThemeOne: "atom-material-syntax-dark"
     syntaxThemeTwo: "atom-material-syntax-light"
