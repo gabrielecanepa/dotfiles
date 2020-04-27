@@ -39,7 +39,7 @@
     useTreeSitterParsers: true
     warnOnLargeFileLimit: 20
   editor:
-    fontSize: 25
+    fontSize: 24
     showIndentGuide: true
   emmet:
     extensionsPath: "~/.emmet"
@@ -103,6 +103,7 @@
     savePathsRelativeToHome: true
     showPath: false
   "terminal-tab":
+    fontFamily: "Monaco Nerd Font Mono"
     shellSettings: {}
   "theme-switcher":
     syntaxThemeOne: "atom-material-syntax-dark"
