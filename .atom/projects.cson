@@ -2,10 +2,10 @@
   {
     title: "local-help"
     paths: [
-      "~/code/lewagon/projects/local-help"
+      "~/code/local-help/findlocal.help"
     ]
-    icon: "icon-mortar-board"
-    color: "#d23333"
+    icon: "icon-heart"
+    color: "#28b485"
     template: "lewagon"
   }
   {
@@ -26,7 +26,16 @@
     color: "#912934"
   }
   {
-    title: "gabrielecanepa"
+    title: "squonk"
+    paths: [
+      "~/code/squonk/www"
+      "~/code/squonk/assets"
+    ]
+    icon: "icon-octoface"
+    color: "#5d0dfa"
+  }
+  {
+    title: "dotfiles"
     paths: [
       "~/code/dotfiles"
       "~/code/.github"
@@ -34,7 +43,7 @@
       "~/code/cheatsheets"
       "~/code/zsh-custom"
     ]
-    icon: "icon-gear"
+    icon: "icon-person"
   }
   {
     title: "igscraper"
@@ -68,15 +77,9 @@
     icon: "icon-mark-github"
     template: "github"
   }
-  {
-    title: "squonk"
-    paths: [
-      "~/code/squonk/www"
-      "~/code/squonk/assets"
-    ]
-    icon: "icon-octoface"
-    color: "#788290"
-  }
+  #############
+  # Templates #
+  #############
   {
     title: "github"
     icon: "icon-mark-github"
