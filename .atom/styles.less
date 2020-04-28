@@ -1,3 +1,5 @@
+@working-dir: "/Users/gabrielecanepa/code";
+
 // Font sizes
 .tab-bar,
 .tree-view {
@@ -43,9 +45,9 @@ encoding-selector-status,
     font-family: MFizz;
     content: "\f157";
   }
-  // Show default icon for .github zsh plugin
-  &[data-path="/Users/gabrielecanepa/code/dotfiles/.oh-my-zsh/plugins/.github"]::before,
-  &[data-path="/Users/gabrielecanepa/code/dotfiles/.github/.github"]::before {
+
+  // Show default folder icon for .github zsh plugin
+  &[data-path="@{working-dir}/zsh-custom/plugins/.github"]::before {
     content: "\f016";
   }
 }
