@@ -92,6 +92,7 @@
     notifyReloads: false
   "prettier-atom":
     formatOnSaveOptions:
+      enabled: true
       showInStatusBar: true
     useEditorConfig: true
     useEslint: true
