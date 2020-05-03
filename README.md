@@ -1,23 +1,21 @@
 # Dotfiles
 
-My configuration files and preferences ⚙️
-
-You can easily manage your configuration with the Zsh [`profile`](https://github.com/gabrielecanepa/zsh-custom/tree/master/plugins#profile-) plugin.
+You can easily manage your own custom configuration with the [Zsh `profile`plugin](https://github.com/gabrielecanepa/zsh-custom/tree/master/plugins#profile).
 
 ## Shell
 
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-dark.png?raw=true)
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/shell-light.png?raw=true)
+![](images/shell-dark.png)
+![](images/shell-light.png)
 
 ## Atom
 
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/atom-dark.png?raw=true)
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/atom-light.png?raw=true)
+![](images/atom-dark.png)
+![](images/atom-light.png)
 
 ## Sublime Text
 
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/sublime-dark.png?raw=true)
-![](https://github.com/gabrielecanepa/dotfiles/blob/master/images/sublime-light.png?raw=true)
+![](images/sublime-dark.png)
+![](images/sublime-light.png)
 
 ## License
 
