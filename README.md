@@ -1,6 +1,6 @@
 # Dotfiles
 
-You can easily manage your own custom configuration with the [Zsh `profile`plugin](https://github.com/gabrielecanepa/zsh-custom/tree/master/plugins#profile).
+You can easily manage your own custom configuration with the [Zsh `profile` plugin](https://github.com/gabrielecanepa/zsh-custom#profile-).
 
 ## Shell
 
