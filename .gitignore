@@ -7,4 +7,5 @@
 /.zcompdump-*
 
 # Include
+!/.yarn/
 !/.zsh/
