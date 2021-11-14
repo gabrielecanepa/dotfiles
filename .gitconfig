@@ -1,0 +1,70 @@
+# Core
+[user]
+  email = $EMAIL
+  name = $NAME
+[core]
+  editor = $EDITOR --wait
+  excludesfile = ~/.gitignore_global
+  pager = less -FRSX
+[init]
+  defaultBranch = main
+[pull]
+  rebase = true
+[help]
+  autocorrect = 1
+
+# Branches 
+[branch "main"]
+  mergeoptions = --no-edit
+[branch "master"]
+  mergeoptions = --no-edit
+
+# Theme
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = true
+[color "branch"]
+  current = green
+  remote = yellow
+
+# Commands
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  process = git-lfs filter-process
+  required = true
+  smudge = git-lfs smudge -- %f
+
+# Aliases
+[alias]
+  a = add
+  aliases = !git config --get-regexp \"alias.*\" | sed \"s/alias.//\"
+  br = branch
+  ci = commit --interactive
+  clone = !git clone git@github.com/$USER:$1
+  cm = commit -m
+  co = !git checkout $@ && [[ ! $1 =~ ^-.*$ ]] && git show-ref --verify --quiet refs/heads/$1 && git fetch
+  df = diff
+  ds = diff --stat -r
+  f = fetch
+  fo = fetch origin
+  get = !git pull --rebase && git submodule update --init --recursive
+  lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  log = log --color --graph
+  p = push --set-upstream
+  pf = p -f
+  phm = p heroku master
+  pom = p origin master
+  poma = p origin main
+  re = remote
+  remote = remote -v
+  reset-origin = !git remote remove origin && git remote add origin git@github.com:$1
+  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  st = status -sb
+  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
+  undo = reset --hard
+  unstage = reset HEAD --
+  untrack = rm --cache --
+  zip = !git archive HEAD -o ../${PWD'##'*/}.zip

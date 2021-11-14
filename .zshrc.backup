@@ -1,0 +1,36 @@
+# Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
+ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbierussell"
+
+plugins=(
+  brew
+  colored-man-pages
+  colorize
+  gem
+  github
+  nvm
+  rbenv
+  sublime
+  themes
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+. "$ZSH/oh-my-zsh.sh"
+
+# Ruby: load rbenv and set bundler editor
+if (type -a rbenv >/dev/null); then
+  PATH="$PATH:$HOME/.rbenv/bin"
+  eval "`rbenv init -`"
+fi
+[ $VISUAL ] && export BUNDLER_EDITOR="$VISUAL"
+
+# Node: load nvm
+if [ -s "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh" --no-use
+fi
+
+# Use local folder for binstubs
+export PATH="$PATH:./bin:./node_modules/.bin:/usr/local/sbin"

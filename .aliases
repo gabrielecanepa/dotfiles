@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Network
+alias ip="echo $(curl -s ipinfo.io/ip)"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+alias serve="ruby -run -e httpd . -p 8000"
+
+# Core commands
+alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
+alias ll="ls -la"
+alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
+
+# Directories
+tmp="$WORKING_DIR/tmp"
+alias cdw="cd $WORKING_DIR"
+alias tmp="cd $tmp"
+
+# Files
+alias aliases="$EDITOR ~/.aliases"
+alias zshrc="$EDITOR ~/.zshrc"
+
+# Git shortcuts
+for git_alias in $(git aliases | sed 's/\ .*//'); do
+  # only if the command doesn't already exist
+  if ! type -a "g$git_alias" >/dev/null; then
+    alias g"""${git_alias}"="git $git_alias"
+  fi
+done
+
+gpo() {
+  git push --set-upstream origin "$(git branch --show-current)"
+}
+gps()
+{
+  git pull origin "$(git branch --show-current)" && git sweep
+}
+
+# Editors
+alias at="atom $*"
+alias ata="atom -a $*"
+alias att="atom ."
+alias te="open -a TextEdit"

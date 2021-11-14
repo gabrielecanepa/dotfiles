@@ -1,0 +1,54 @@
+# Compiled sources
+##################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+###########
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+####################
+*.log
+*.sql
+*.sqlite
+
+# Modules
+##########
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+############
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS generated files
+#####################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Misc
+#######
+private/
