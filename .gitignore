@@ -1,0 +1,10 @@
+/*/
+/.*_history
+/.gist
+/.git-stats
+/.netrc
+/.viminfo
+/.zcompdump-*
+
+# Include
+# !/.oh-my-zsh/custom/
