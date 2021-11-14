@@ -1,13 +1,23 @@
-# Zsh
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zstyle ':omz:update' mode auto # auto update omz
-zle_highlight+=(paste:none) # disable text highlight on paste
-autoload -U compinit && compinit # reload completions
+export LANG=en_US.UTF-8
 
 # Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 
+ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=1"
+
+# Options
+CASE_SENSITIVE="false"
+COMPLETION_WAITING_DOTS="false"
+DISABLE_AUTO_TITLE="false"
+DISABLE_AUTO_UPDATE="false"
+DISABLE_LS_COLORS="false"
+DISABLE_UNTRACKED_FILES_DIRTY="false"
+ENABLE_CORRECTION="true"
+HIST_STAMPS="mm/dd/yyyy"
+HYPHEN_INSENSITIVE="false"
+UPDATE_ZSH_DAYS=1
 
 plugins=(
   brew
@@ -24,7 +34,7 @@ plugins=(
   gatekeeper
   google
   node_modules
-  # profile FIXME
+  # FIXME: profile
   xcode-select
   # From zsh-users
   zsh-autosuggestions
@@ -34,24 +44,28 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
+# Zsh
+autoload -U compinit && compinit # reload completions
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
+zstyle ':omz:update' mode auto # auto update omz
+zle_highlight+=(paste:none) # disable text highlight on paste
+
 # git
 export FILTER_BRANCH_SQUELCH_WARNING=1
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
 
-# Load nvm
+# nvm
 if type -a nvm > /dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
-
-# Load rbenv
+# rbenv
 if type -a rbenv > /dev/null; then
   PATH="$PATH:$HOME/.rbenv/bin"
   eval "$(rbenv init -)"
 fi
-
-# Load pyenv
+# pyenv
 if type -a pyenv > /dev/null; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
@@ -59,13 +73,11 @@ if type -a pyenv > /dev/null; then
 fi
 
 # Binstubs
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.composer/vendor/bin"
+PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.composer/vendor/bin"
 
-# Load custom aliases
+# Aliases
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
-# Avoid duplicates in $PATH
-typeset -aU path
-
-# Switch to last working directory
-lwd
+# Export $PATH
+export PATH="$HOME/bin:$PATH"
+typeset -aU path # avoid duplicates
