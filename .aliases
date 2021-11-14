@@ -28,7 +28,10 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
 done
 
 gpo() {
-  git push --set-upstream origin "$(git branch --show-current)"
+  git push $1 --set-upstream origin "$(git branch --show-current)"
+}
+gpf() {
+  gpo --force
 }
 gps()
 {
