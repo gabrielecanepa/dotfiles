@@ -376,13 +376,15 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.188.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.189.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.189.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.189.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1715245584204,
+      "installedTimestamp": 1715354846347,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -393,8 +395,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.188.0",
-    "version": "1.188.0"
+    "relativeLocation": "github.copilot-1.189.0",
+    "version": "1.189.0"
   },
   {
     "identifier": {
@@ -403,8 +405,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
       "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
       "scheme": "file"
     },
