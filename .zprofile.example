@@ -1,4 +1,4 @@
 export NAME="Joe Doe"
-export EMAIL="git@joedoe.com"
+export EMAIL="joe@doe.com"
 export WORKING_DIR="/Users/joedoe/Developer"
 export EDITOR="code"
