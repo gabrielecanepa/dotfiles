@@ -1,9 +1,7 @@
 # Core
-[user]
-  email = $EMAIL
-  name = $NAME
+[include]
+  path = ~/.gitprofile
 [core]
-  editor = $EDITOR --wait
   excludesfile = ~/.gitignore_global
   pager = less -FRSX
 [init]

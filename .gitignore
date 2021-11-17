@@ -3,6 +3,7 @@
 /.*.backup
 /.gist
 /.git-stats
+/.gitprofile
 /.netrc
 /.viminfo
 /.zcompdump-*
