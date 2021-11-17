@@ -5,7 +5,6 @@ ZSH="$HOME/.oh-my-zsh"
 
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=1"
 
 # Options
 CASE_SENSITIVE="false"
@@ -34,7 +33,7 @@ plugins=(
   gatekeeper
   google
   node_modules
-  # FIXME: profile
+  # profile FIXME
   xcode-select
   # From zsh-users
   zsh-autosuggestions
@@ -51,7 +50,7 @@ zstyle ':omz:update' mode auto # auto update omz
 zle_highlight+=(paste:none) # disable text highlight on paste
 
 # git
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use .gitprofile file
+[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use .gitprofile file
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"

@@ -22,6 +22,7 @@
     "Promise": true
   },
   "rules": {
+    // Base
     "max-lines": 2,
     "no-console": 1,
     "no-var": 2,
@@ -34,17 +35,6 @@
       {
         "destructuring": "any",
         "ignoreReadBeforeAssign": false
-      }
-    ],
-    "prettier/prettier": [
-      2,
-      {
-        "printWidth": 120,
-        "singleQuote": true,
-        "semi": false,
-        "trailingComma": "es5",
-        "bracketSpacing": true,
-        "jsxBracketSameLine": false
       }
     ],
     "quotes": [
@@ -62,6 +52,18 @@
       {
         "ignoreCase": false
       }
-    ]
+    ],
+    // Prettier
+    "prettier/prettier": [
+      2,
+      {
+        "printWidth": 120,
+        "singleQuote": true,
+        "semi": false,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false
+      }
+    ],
   }
 }
