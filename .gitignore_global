@@ -19,7 +19,7 @@
 *.zip
 
 # Logs and databases
-####################
+#####################
 *.log
 *.sql
 *.sqlite
@@ -31,7 +31,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Env files
+# Environment files
 ############
 .env
 .env.local
