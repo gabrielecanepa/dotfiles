@@ -1,4 +1,4 @@
-# ⚡️ Squanchy - https://github.com/gabrielecanepa/zsh-custom/blob/master/themes
+# ⚡️ Squanchy - https://github.com/gabrielecanepa/squanchy
 
 # Tabs
 ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
@@ -13,13 +13,12 @@ python_icon="\\uf81f"
 
 # Prompt
 PROMPT=' %(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) ' # pre-prompt
-PROMPT+='%{$fg[cyan]%}%c%{$reset_color%}' # path
+PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # path
 PROMPT+='$(git_prompt_info)$(git_prompt_status) ' # git
-
 RPROMPT='$(nvm_prompt_info)  $(ruby_prompt_info)' # languages
 
 # Git
-ZSH_THEME_GIT_PROMPT_PREFIX=" %F{202}$git_icon"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{202}$git_icon"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY=""
