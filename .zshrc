@@ -30,6 +30,7 @@ plugins=(
   rbenv
   themes
   # Custom
+  brewfile
   gatekeeper
   google
   node_modules
