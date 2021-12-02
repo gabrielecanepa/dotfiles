@@ -9,5 +9,6 @@
 /.viminfo
 /.yarnrc
 /.zcompdump-*
+/.zprofile
 !/.yarn/
 !/.zsh/
