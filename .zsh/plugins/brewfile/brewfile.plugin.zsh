@@ -2,6 +2,12 @@
 
 brew() {
   case $1 in
+    actualize)
+      command brew update && command brew upgrade && command brew cleanup && command brew doctor
+      ;;
+    dump)
+      command brew bundle dump ${@:2} --global --describe
+      ;;
     init)
       if [  -f "$HOME/.Brewfile" ]; then
         printf "${fg[yellow]}Brewfile already exists. Do you want to override it? [y/N]$reset_color "
@@ -15,13 +21,11 @@ brew() {
       fi
       command brew bundle install --global --no-lock
       ;;
-    dump)
-      command brew bundle dump ${@:2} --global --describe
-      ;;
-    install|uninstall)
-      command brew $1 ${@:2} && brew dump --force
-      ;;
+    # install|uninstall)
+    #   command brew $@ && brew dump --force
+    #   ;;
     *)
-      command brew $@
+      command brew $@ && brew dump --force
+      ;;
   esac
 }

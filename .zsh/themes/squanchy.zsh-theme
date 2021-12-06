@@ -5,7 +5,7 @@ ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 
 # Icons
-git_icon="\\ue727"
+branch_icon="\\ue727"
 ruby_icon="\\uf43b"
 nvm_icon="\\ue718"
 php_icon="\\ue608"
@@ -18,7 +18,7 @@ PROMPT+='$(git_prompt_info)$(git_prompt_status) ' # git
 RPROMPT='$(nvm_prompt_info)  $(ruby_prompt_info)' # languages
 
 # Git
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{202}$git_icon"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{202}$branch_icon"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY=""
@@ -37,6 +37,16 @@ ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$nvm_icon "
 ZSH_THEME_NVM_PROMPT_SUFFIX="%{$reset_color%}"
 
+# Python
+ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$python_icon "
+ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
+python_version() { 
+  python -V 2>&1 | sed 's/Python //'
+}
+python_prompt_info() { 
+  echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX" 
+}
+
 # PHP
 ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$php_icon "
 ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
@@ -45,14 +55,4 @@ php_version() {
 }
 php_prompt_info() { 
   echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX" 
-}
-
-# Python
-ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$python_icon "
-ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
-python_version() { 
-  python -V | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3 
-}
-python_prompt_info() { 
-  echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX" 
 }
