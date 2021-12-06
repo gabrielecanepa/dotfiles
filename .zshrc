@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 export LANG=en_US.UTF-8
 
 # Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
@@ -16,7 +18,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="false"
 ENABLE_CORRECTION="false"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="false"
-UPDATE_ZSH_DAYS=2
+UPDATE_ZSH_DAYS=1
 
 plugins=(
   brew
@@ -34,7 +36,6 @@ plugins=(
   gatekeeper
   google
   node_modules
-  # profile FIXME
   xcode-select
   # From zsh-users
   zsh-autosuggestions
@@ -51,7 +52,7 @@ zstyle ':omz:update' mode auto # auto update omz
 zle_highlight+=(paste:none) # disable text highlight on paste
 
 # git
-[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use .gitprofile file
+[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use private .gitprofile file
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"

@@ -5,7 +5,7 @@ gatekeeper()
   case $1 in
     status)
       if (sudo spctl --status >/dev/null 2>&1); then
-        echo "🔒 GateKeeper is enabled"
+        echo "🔒 GateKeeper is enabled globally"
       else 
         echo "${fg[yellow]}🔓 GateKeeper is currently disabled$reset_color\n"
         printf "Do you want to enable it? (Y/n) "
@@ -56,7 +56,7 @@ gatekeeper()
       echo
       echo "Commands:"
       echo -e "  status \t\t Print the current status"
-      echo -e "  disable [apps] \t Disable checks for one or multiple app, or globally if no apps are provided"
+      echo -e "  disable [apps] \t Disable checks for one or multiple apps, or globally if no arguments are provided"
       echo -e "  enable \t\t Enable checks globally"
       ;;
 

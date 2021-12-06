@@ -46,8 +46,6 @@ brew "composer"
 brew "coreutils"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq"
-# Distributed search & analytics engine
-brew "elasticsearch"
 # Programming language for highly scalable real-time systems
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
@@ -84,6 +82,8 @@ brew "graphviz"
 brew "httpie"
 # Add GitHub support to git on the command-line
 brew "hub"
+# OpenEXR ILM Base libraries (high dynamic-range image file format)
+brew "ilmbase"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # Interpreted, interactive, object-oriented programming language

@@ -19,7 +19,7 @@ alias tmp="cd $tmp"
 alias aliases="$EDITOR ~/.aliases"
 alias zshrc="$EDITOR ~/.zshrc"
 
-# Git shortcuts
+# Git
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   # only if the command doesn't already exist
   if ! type -a "g$git_alias" >/dev/null; then

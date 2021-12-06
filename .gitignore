@@ -1,3 +1,4 @@
+# Local gitignore for dotfiles repository
 /*/
 /.*_history
 /.*.backup
@@ -8,7 +9,5 @@
 /.viminfo
 /.yarnrc
 /.zcompdump-*
-
-# Include
 !/.yarn/
 !/.zsh/

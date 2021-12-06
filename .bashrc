@@ -1,17 +1,40 @@
 #!/bin/bash
 
-# Ruby - load rbenv
-PATH="$PATH:$HOME/.rbenv/bin"
-if type -a rbenv >/dev/null; then
-  eval "$(rbenv init -)"
-fi
+export LANG=en_US.UTF-8
 
-# Node - load nvm
-if type -a nvm >/dev/null; then
+# git
+[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use .gitprofile file
+git config --file "$HOME/.gitprofile" user.email "$EMAIL"
+git config --file "$HOME/.gitprofile" user.name "$NAME"
+git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"
+export FILTER_BRANCH_SQUELCH_WARNING=1
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+
+# nvm
+if type -a nvm > /dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
+# rbenv
+if type -a rbenv > /dev/null; then
+  PATH="$PATH:$HOME/.rbenv/bin"
+  eval "$(rbenv init -)"
+fi
+# pyenv
+if type -a pyenv > /dev/null; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
 
-# Other binstubs + aliases
-export PATH="$PATH:./bin:./node_modules/.bin:$HOME/.bin"
+# Binstubs
+PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.composer/vendor/bin"
+
+# Aliases
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+
+# Export $PATH
+export PATH="$HOME/bin:$PATH"
+typeset -aU path # avoid duplicates
