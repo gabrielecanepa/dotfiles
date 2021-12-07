@@ -11,7 +11,7 @@ function google () {
       ;;
 
     *)
-      q="$@"
+      local q="$@"
       open https://google.com/search\?q\=${q// /+}
       ;;
   esac
