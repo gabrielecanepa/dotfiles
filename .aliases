@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
@@ -16,8 +16,9 @@ alias cdw="cd $WORKING_DIR"
 alias tmp="cd $tmp"
 
 # Files
-alias aliases="$EDITOR ~/.aliases"
-alias zshrc="$EDITOR ~/.zshrc"
+alias aliases="$EDITOR $HOME/.aliases"
+alias sshrc="$EDITOR $HOME/.ssh"
+alias zshrc="$EDITOR $HOME/.zshrc"
 
 # Git
 for git_alias in $(git aliases | sed 's/\ .*//'); do
@@ -32,10 +33,6 @@ gpo() {
 }
 gpf() {
   gpo --force
-}
-gps()
-{
-  git pull origin "$(git branch --show-current)" && git sweep
 }
 
 # Editors
