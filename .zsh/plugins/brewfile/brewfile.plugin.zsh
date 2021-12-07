@@ -2,9 +2,6 @@
 
 brew() {
   case $1 in
-    actualize)
-      command brew update && command brew upgrade && command brew cleanup && command brew doctor
-      ;;
     dump)
       command brew bundle dump ${@:2} --global --describe
       ;;
@@ -21,9 +18,9 @@ brew() {
       fi
       command brew bundle install --global --no-lock
       ;;
-    # install|uninstall)
-    #   command brew $@ && brew dump --force
-    #   ;;
+    up)
+      command brew update && command brew upgrade && command brew cleanup && command brew doctor
+      ;;
     *)
       command brew $@ && brew dump --force
       ;;
