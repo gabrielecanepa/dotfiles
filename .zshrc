@@ -20,8 +20,12 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="false"
 UPDATE_ZSH_DAYS=1
 
+autoload -U compinit && compinit # reload completions
+zle_highlight+=(paste:none) # disable text highlight on paste
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
+zstyle ':omz:update' mode auto # auto update omz
+
 plugins=(
-  brew
   colored-man-pages
   colorize
   gem
@@ -37,6 +41,7 @@ plugins=(
   google
   node_modules
   xcode-select
+  zprofile
   # From zsh-users
   zsh-autosuggestions
   zsh-completions
@@ -45,17 +50,12 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Zsh
-autoload -U compinit && compinit # reload completions
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zstyle ':omz:update' mode auto # auto update omz
-zle_highlight+=(paste:none) # disable text highlight on paste
-
-# git
+# Git
 [ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use private .gitprofile file
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"
+
 export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Homebrew
@@ -66,11 +66,13 @@ if type -a nvm > /dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
 fi
+
 # rbenv
 if type -a rbenv > /dev/null; then
   PATH="$PATH:$HOME/.rbenv/bin"
   eval "$(rbenv init -)"
 fi
+
 # pyenv
 if type -a pyenv > /dev/null; then
   eval "$(pyenv init -)"
@@ -78,12 +80,14 @@ if type -a pyenv > /dev/null; then
   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
 
-# Binstubs
-PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.composer/vendor/bin"
+# Binaries
+export PATH="$PATH:./bin:$HOME/bin:/usr/local/sbin:./node_modules/.bin:$HOME/.composer/vendor/bin"
+typeset -aU path # avoid duplicates
 
 # Aliases
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
-# Export $PATH
-export PATH="$HOME/bin:$PATH"
-typeset -aU path # avoid duplicates
+lwd # switch to last working directory
+
+# Check profile installation
+[ "$1" != "--skip-profile-check" ] && profile check
