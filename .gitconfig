@@ -41,7 +41,6 @@
   aliases = !git config --get-regexp \"alias.*\" | sed \"s/alias.//\"
   br = branch
   ci = commit --interactive
-  clone = !git clone git@github.com/$USER:$1
   cm = commit -m
   co = !git checkout $@ && [[ ! $1 =~ ^-.*$ ]] && git show-ref --verify --quiet refs/heads/$1 && git fetch
   df = diff
@@ -58,7 +57,7 @@
   ps = !git pull && git sweep
   re = remote
   remote = remote -v
-  reset-origin = !git remote remove origin && git remote add origin git@github.com:$1
+  reset-origin = !git remote remove origin && git remote add origin $1
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
