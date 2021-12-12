@@ -39,13 +39,13 @@ brew "oniguruma"
 # Granddaddy of HTML tools, with support for modern standards
 brew "tidy-html5"
 # General-purpose scripting language
-brew "php"
+brew "php", restart_service: true
 # Dependency Manager for PHP
 brew "composer"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Lightweight DNS forwarder and DHCP server
-brew "dnsmasq"
+brew "dnsmasq", restart_service: true
 # Programming language for highly scalable real-time systems
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
@@ -119,7 +119,7 @@ brew "poppler"
 # Object-relational database system
 brew "postgresql", restart_service: true
 # Object-relational database system
-brew "postgresql@12"
+brew "postgresql@12", restart_service: true
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -155,3 +155,4 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Slack", id: 803453959
+mas "Super Agent", id: 1568262835
