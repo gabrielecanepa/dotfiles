@@ -28,8 +28,9 @@ zstyle ':omz:update' mode auto # auto update omz
 plugins=(
   colored-man-pages
   colorize
-  gem
-  github
+  gh
+  git-auto-fetch
+  gitfast
   last-working-dir
   nvm
   rails
@@ -55,8 +56,6 @@ plugins=(
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"
-
-export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
