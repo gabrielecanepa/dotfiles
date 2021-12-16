@@ -3,6 +3,7 @@
   path = ~/.gitprofile
 [core]
   excludesfile = ~/.gitignore_global
+  ignorecase = false
   pager = less -FRSX
 [init]
   defaultBranch = main
@@ -42,7 +43,7 @@
   br = branch
   ci = commit --interactive
   cm = commit -m
-  co = !git checkout $@ && [[ ! $1 =~ ^-.*$ ]] && git show-ref --verify --quiet refs/heads/$1 && git fetch
+  co = !git checkout $@ && git show-ref --verify --quiet refs/heads/$1 && git fetch
   df = diff
   ds = diff --stat -r
   f = fetch
@@ -50,10 +51,9 @@
   get = !git pull --rebase && git submodule update --init --recursive
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   log = log --color --graph
-  p = push --set-upstream
-  phm = p heroku master
-  pom = p origin master
-  poma = p origin main
+  p = push
+  pf = po --force
+  po = p $1 --set-upstream origin $(git_current_branch)
   ps = !git pull && git sweep
   re = remote
   remote = remote -v
