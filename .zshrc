@@ -6,7 +6,7 @@ export LANG=en_US.UTF-8
 ZSH="$HOME/.oh-my-zsh"
 
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME="squanchy"
+ZSH_THEME="squanchy" # custom theme
 
 # Options
 CASE_SENSITIVE="false"
@@ -18,7 +18,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="false"
 ENABLE_CORRECTION="false"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="false"
-UPDATE_ZSH_DAYS=1
+UPDATE_ZSH_DAYS=7
 
 autoload -U compinit && compinit # reload completions
 zle_highlight+=(paste:none) # disable text highlight on paste
@@ -51,11 +51,14 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
+# Check profile installation
+type -a profile > /dev/null && ! profile check && return 1
+
 # Git
 [ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use private .gitprofile file
-git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
-git config --file "$HOME/.gitprofile" core.editor "$EDITOR --wait"
+git config --file "$HOME/.gitprofile" user.email "$EMAIL"
+git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
@@ -87,6 +90,3 @@ typeset -aU path # avoid duplicates
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 lwd # switch to last working directory
-
-# Check profile installation
-[ "$1" != "--skip-profile-check" ] && profile check

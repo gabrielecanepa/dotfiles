@@ -6,9 +6,9 @@ profile ()
 (
   local CUT="\r\033[1A\033[0K"
 
-  local PROFILE_CMD="${fg_bold[green]}profile$reset_color"
-  local PROFILE_CONFIG_CMD="$PROFILE_CMD ${fg_bold[white]}config$reset_color"
-  local PROFILE_INSTALL_CMD="$PROFILE_CMD ${fg_bold[white]}install$reset_color"
+  local PROFILE_CMD="${fg[green]}profile$reset_color"
+  local PROFILE_CONFIG_CMD="$PROFILE_CMD ${fg[white]}config$reset_color"
+  local PROFILE_INSTALL_CMD="$PROFILE_CMD ${fg[white]}install$reset_color"
 
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
@@ -18,15 +18,16 @@ profile ()
   local EDITORS=(
     "atom"     # Atom
     "brackets" # Brackets
-    "emacs"    # Emacs
     "coda"     # Coda
     "code"     # Visual Studio Code
+    "emacs"    # Emacs
     "mate"     # TextMate
+    "nano"     # Nano
     "subl"     # Sublime Text
     "vim"      # Vim
   )
 
-  # Conver editor cli command to app name
+  # Convert editor cli command to app name
   # get_editor_name <command>
   local get_editor_name () {
     case $1 in
@@ -40,7 +41,26 @@ profile ()
         echo "Sublime Text"
         ;;
       *)
-        echo "${(C)EDITOR}"
+        echo "${(C)1}"
+        ;;
+    esac
+  }
+
+  # Conver editor cli command to git cli command
+  # get_git_editor <command>
+  local get_git_editor () {
+    case $1 in
+      atom|code)
+        echo "$1 --wait"
+        ;;
+      mate)
+        echo "mate -w"
+        ;;
+      subl)
+        echo "subl -n -w"
+        ;;
+      *)
+        echo $1
         ;;
     esac
   }
@@ -89,13 +109,16 @@ profile ()
         [ "$working_dir" ] && working_dir="$HOME/$working_dir"
         ;;
       editor)
-        while ! $allow_blank || [ ! -z "$editor" ] && ([ -z "${EDITORS[(r)$editor]}" ] || ! type -a "$editor" >/dev/null); do
-          if ! type -a "$editor" >/dev/null; then
-            log_error "$(get_editor_name $editor) is not installed"
-          elif [ -z "$editor" ]; then
+        while ! $allow_blank || [ ! -z "$editor" ] && ! type -a "$editor" >/dev/null; do
+          if [ -z "$editor" ]; then
             log_error "You must specify an editor"
           else
-            log_error "$editor is not a valid editor"
+            local editor_name=$(get_editor_name "$editor")
+            if [ -z "$editor_name" ]; then
+              log_error "$editor is not a valid command"
+            else
+              log_error "$editor_name is not installed"
+            fi
           fi
           read -r editor
         done
@@ -112,50 +135,45 @@ profile ()
       local name_msg="🔏 First and last name ($($is_installation && echo 'no accent or special characters' || echo $NAME))"
       local email_msg="📧 Email address ($($is_installation && echo 'to sign your commits' || echo $EMAIL))"
       local working_dir_msg="📁 Working directory (relative to $HOME, $($is_installation && echo 'e.g. Developer' || echo current is $WORKING_DIR_NAME))"
-      local editor_msg="⌨️  Text editor (shell command of the app you use, e.g. code, subl, vim$(! $is_installation && echo \; current is $EDITOR))"
+      local editor_msg="⌨️  Text editor (shell command, e.g. code, subl, vim$(! $is_installation && echo \; current app is $(get_editor_name $EDITOR)))"
 
       if ! $is_installation && ! profile check; then
         return 1
       fi
 
       if ! $is_reload; then
+        echo "${fg_bold[cyan]}👤 $USER$reset_color"
+        
         if ! $is_installation; then
-          echo "${fg_bold[cyan]}👤 $USER$reset_color"
           echo "(hit ⏎  if unchanged)"
         fi
 
         echo ""
 
         for key in NAME EMAIL WORKING_DIR EDITOR; do
-          tmp_key="${(L)key}"
+          local tmp_key="${(L)key}"
           eval echo $"${tmp_key}_msg"
-          eval get_input $tmp_key "$(! $is_installation && echo --allow-blank)"
+          eval get_input $tmp_key $(! $is_installation && echo --allow-blank)
           if [ ${(P)tmp_key} ] && [ "${(P)tmp_key}" != "${(P)key}" ]; then
-            export $key=${(P)tmp_key}
+            export $key="${(P)tmp_key}"
             changed_keys+=1
           fi
         done
-
+        key=
+        
         echo ""
       fi
 
       if [ $changed_keys -gt 0 ] || $is_reload; then
-        _action=$($is_reload && echo "Reloading" || echo "Storing")
-        echo "$_action profile..."
         echo -n "" > "$HOME/.zprofile"
         for key in NAME EMAIL WORKING_DIR EDITOR; do
           echo "export $key=\"${(P)key}\"" >> "$HOME/.zprofile"
         done
-        echo "${CUT}${fg[green]}$_action profile ✅$reset_color"
+        echo "export GIT_EDITOR=\"$(get_git_editor $EDITOR)\"" >> "$HOME/.zprofile"
       else
         echo "Nothing changed"
         return 0
       fi
-
-      echo "Reloading configuration..."
-      . "$HOME/.zshrc" --skip-profile-check
-      echo "${CUT}${CUT}${fg[green]}Reloading configuration ✅$reset_color"
-      echo ""
 
       if $is_reload; then
         echo "${fg_bold[cyan]}$USER${reset_color}'s profile reloaded and ready for use"
@@ -164,20 +182,22 @@ profile ()
       fi
 
       if $is_installation; then
-        echo "Type $PROFILE_CMD to print your current profile or $PROFILE_CONFIG_CMD to modify it"
+        echo "Type $PROFILE_CMD to print your current configuration or $PROFILE_CONFIG_CMD to modify it"
       fi
+
+      exec zsh --login
       ;;
 
     install)
       if profile check >/dev/null; then
-        echo "${fg[yellow]}WARNING: you already have a profile installed for $USER$reset_color"
+        echo "${fg[yellow]}WARNING: you already have a profile installed for the user $USER$reset_color"
         echo -n "Do you want to override the current profile? (y/N) "
         read -r choice
         if [[ "$choice" =~ [yY] ]]; then
           profile config install
         else
           echo ""
-          echo "Command aborted"
+          echo "Installation aborted"
         fi
       else
         profile config install
@@ -189,9 +209,13 @@ profile ()
       ;;
 
     check)
-      if [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ([ -n "${EDITORS[(r)$EDITOR]}" ] && ! type -a $EDITOR >/dev/null) || [[ ! -d $WORKING_DIR ]]; then
-        echo "${fg[red]}⚠️  Profile installed incorrectly$reset_color"
-        echo "Type $PROFILE_INSTALL_CMD to install a new profile for the current user"
+      if [ -z "$HOME/.zprofile" ]; then
+        echo "${fg[red]}Profile not found for user $USER$reset_color"
+        echo "Type $PROFILE_INSTALL_CMD to install a new profile"
+        return 1
+      elif [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ! type -a $EDITOR >/dev/null || [[ ! -d $WORKING_DIR ]]; then
+        echo "${fg[red]}⚠️  Profile installed incorrectly for user $USER$reset_color"
+        echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1
       fi
       ;;

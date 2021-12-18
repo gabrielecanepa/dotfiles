@@ -1,4 +1,0 @@
-export NAME="John Doe"
-export EMAIL="john@doe.com"
-export WORKING_DIR="/Users/johndoe/Developer"
-export EDITOR="code"
