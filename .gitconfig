@@ -43,7 +43,7 @@
   br = branch
   ci = commit --interactive
   cm = commit -m
-  co = !git checkout $@ && git show-ref --verify --quiet refs/heads/$1 && git fetch
+  co = !sh -c 'git checkout $@ && git show-ref --verify --quiet refs/heads/$1 && git fetch'
   df = diff
   ds = diff --stat -r
   f = fetch
@@ -53,15 +53,14 @@
   log = log --color --graph
   p = push
   pf = po --force
-  po = p $1 --set-upstream origin $(git_current_branch)
+  po = !sh -c 'git push $1 --set-upstream origin $(git branch --show-current)'
   ps = !git pull && git sweep
   re = remote
   remote = remote -v
-  reset-origin = !git remote remove origin && git remote add origin $1
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
   sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
   undo = reset --hard
   unstage = reset HEAD --
   untrack = rm --cache --
-  zip = !git archive HEAD -o ../${PWD'##'*/}.zip
+  zip = !sh -c 'git archive HEAD -o $(basename $PWD).zip'
