@@ -15,7 +15,14 @@ python_icon="\\uf81f"
 PROMPT=' %(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) ' # pre-prompt
 PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # path
 PROMPT+='$(git_prompt_info)$(git_prompt_status) ' # git
-RPROMPT='$(nvm_prompt_info)  $(ruby_prompt_info)' # languages
+
+# Post prompt
+local prompts=()
+type -a nvm > /dev/null && prompts+=('$(nvm_prompt_info)') # nvm
+type -a ruby > /dev/null && prompts+=('$(ruby_prompt_info)') # ruby
+type -a python > /dev/null && prompts+=('$(python_prompt_info)') # python
+type -a php > /dev/null && prompts+=('$(php_prompt_info)') # php
+RPROMPT=${(j:  :)prompts}
 
 # Git
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{202}$branch_icon"
@@ -29,13 +36,13 @@ ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 
+# nvm
+ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$nvm_icon "
+ZSH_THEME_NVM_PROMPT_SUFFIX="%{$reset_color%}"
+
 # Ruby
 ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$ruby_icon "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
-
-# NVM
-ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$nvm_icon "
-ZSH_THEME_NVM_PROMPT_SUFFIX="%{$reset_color%}"
 
 # Python
 ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$python_icon "
