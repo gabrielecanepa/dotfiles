@@ -8,7 +8,7 @@
 /.netrc
 /.viminfo
 /.yarnrc
-/.zcompdump-*
+/.zcompdump*
 /.zprofile
 !/.yarn/
 !/.zsh/
