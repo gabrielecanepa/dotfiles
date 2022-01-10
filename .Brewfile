@@ -8,10 +8,14 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "potatolabs/git-redate"
 tap "rcmdnk/file"
+# Library for command-line editing
+brew "readline"
 # Record and share terminal sessions
 brew "asciinema"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Freely available high-quality data compressor
@@ -86,8 +90,6 @@ brew "hub"
 brew "ilmbase"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # GNU utilities for networking
@@ -120,6 +122,8 @@ brew "poppler"
 brew "postgresql", restart_service: true
 # Object-relational database system
 brew "postgresql@12", restart_service: true
+# Python version management
+brew "pyenv"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -146,7 +150,6 @@ brew "zlib"
 brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-cask "java8"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Mach-O disassembler
@@ -154,5 +157,4 @@ cask "otx"
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Slack", id: 803453959
-mas "Super Agent", id: 1568262835
+mas "The Unarchiver", id: 425424353

@@ -67,6 +67,7 @@ export HOMEBREW_NO_ANALYTICS=1
 if type -a nvm > /dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # load completion
 fi
 
 # rbenv
@@ -77,9 +78,10 @@ fi
 
 # pyenv
 if type -a pyenv > /dev/null; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-  export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
 
 # Binaries
