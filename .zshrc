@@ -2,11 +2,12 @@
 
 export LANG=en_US.UTF-8
 
-# Oh My Zsh: https://github.com/robbyrussell/oh-my-zsh/wiki
+# Oh My Zsh (https://github.com/robbyrussell/oh-my-zsh/wiki)
 ZSH="$HOME/.oh-my-zsh"
 
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy" # custom theme
+# ZSH_THEME_PROMPTS=(git nvm ruby python) # prompt plugins
 
 # Options
 CASE_SENSITIVE="false"
@@ -62,6 +63,7 @@ git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
 
 # nvm
 if type -a nvm > /dev/null; then
@@ -71,15 +73,15 @@ if type -a nvm > /dev/null; then
 fi
 
 # rbenv
+PATH="$PATH:$HOME/.rbenv/bin"
 if type -a rbenv > /dev/null; then
-  PATH="$PATH:$HOME/.rbenv/bin"
   eval "$(rbenv init -)"
 fi
 
 # pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+PATH="$PATH:$PYENV_ROOT/bin"
 if type -a pyenv > /dev/null; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
@@ -90,5 +92,3 @@ typeset -aU path # avoid duplicates
 
 # Aliases
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
-
-lwd # switch to last working directory

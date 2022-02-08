@@ -1,37 +1,40 @@
 ## Installation
 
-1. Clone the repository and copy the files to `$HOME`
+1. Clone the repository and move all files to `$HOME`
 
    ```sh
    git clone git@github.com:gabrielecanepa/dotfiles.git
-   cp -af gabrielecanepa/dotfiles/. ~
-   chflags hidden ~/README.md # hide README file
+   mv -vf dotfiles/* ~/
+   rm -rf dotfiles
+   cd ~
    ```
  
-2. Install Homebrew and packages
+2. Install Homebrew and global packages
 
    ```sh
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    brew bundle install --global
    ```
 
-3. Install `nvm`
+3. Install `nvm` and latest Node version
 
    ```sh
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh)"
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh | bash
+   nvm install node
    ```
 
 4. Install Oh My Zsh and essential plugins
 
    ```sh
-   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+   /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
    # Plugins
    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
    ```
    
-5. Install Monaco Nerd font from https://github.com/Karmenzind/monaco-nerd-fonts
+5. To display icons in your terminal, install the Monaco Nerd Mono font from [here](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.otf?raw=true), install it in your system, and make it the default font in all apps using a terminal interface (Terminal, iTerm, VSCode, etc.)
 
 6. Reload Zsh
 
@@ -55,20 +58,14 @@
    yarn global install
    ```
    
-8. Install latest Node version
+8. Install latest Ruby version
 
    ```sh
-   nvm install node
-   ```
-   
-9. Install latest Ruby version
-
-   ```
-   rbenv install --list
-   rbenv install <version>
+   rbenv install $(rbenv install -l | grep -v - | tail -1)
    ```
 
 TODO:
-- [ ] Review steps order
-- [ ] Add installation file
-- [x] Add Yarn global instructions
+- [ ] List all tools and their usage
+- [ ] Add installation file and quickstart guide
+- [ ] Add Python installation instructions
+- [ ] Review steps order and write step-by-step instructions
