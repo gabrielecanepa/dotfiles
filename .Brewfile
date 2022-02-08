@@ -14,8 +14,6 @@ brew "readline"
 brew "asciinema"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Freely available high-quality data compressor
@@ -30,8 +28,6 @@ brew "cocoapods"
 brew "libssh2"
 # Open source suite of directory software
 brew "openldap"
-# Get a file from an HTTP, HTTPS or FTP server
-brew "curl"
 # Libraries to talk to Microsoft SQL Server and Sybase databases
 brew "freetds"
 # Network authentication protocol
@@ -86,8 +82,6 @@ brew "graphviz"
 brew "httpie"
 # Add GitHub support to git on the command-line
 brew "hub"
-# OpenEXR ILM Base libraries (high dynamic-range image file format)
-brew "ilmbase"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # Tools and libraries to manipulate images in many formats
@@ -98,6 +92,8 @@ brew "inetutils"
 brew "jq"
 # Statically typed programming language for the JVM
 brew "kotlin"
+# GNOME XML library
+brew "libxml2"
 # YAML Parser
 brew "libyaml"
 # Mac App Store command-line interface
@@ -110,10 +106,10 @@ brew "neofetch"
 brew "nghttp2"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx", restart_service: true
-# Platform built on V8 to build network applications
-brew "node"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Python dependency management tool
+brew "pipenv"
 # Cross-platform application and UI framework
 brew "qt"
 # PDF rendering library (based on the xpdf-3.0 code base)

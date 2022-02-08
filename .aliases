@@ -8,8 +8,9 @@ alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
 alias omzr="omz reload"
 
 # Directories
-tmp="$WORKING_DIR/tmp"
-alias cdw="cd $WORKING_DIR"
+wd="$WORKING_DIR"
+tmp="$wd/tmp"
+alias cdw="cd $wd"
 alias tmp="cd $tmp"
 
 # Files
@@ -23,7 +24,7 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias serve="ruby -run -e httpd . -p 8000"
 
 # Git
-# Shortcuts for short git aliases, e.g. gcm = git cm = git commit -m
+# Shortcuts for git aliases, e.g. gcm = git cm = git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   # only if the command doesn't already exist
   if ! type -a "g$git_alias" >/dev/null; then
@@ -32,7 +33,4 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
 done
 
 # Apps
-alias at="atom $*"
-alias ata="atom -a $*"
-alias att="atom ."
 alias te="open -a TextEdit"

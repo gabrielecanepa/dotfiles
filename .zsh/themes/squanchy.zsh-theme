@@ -1,28 +1,41 @@
-# ⚡️ Squanchy - https://github.com/gabrielecanepa/squanchy
+# ⚡️ Squanchy - https://github.com/gabrielecanepa/dotfiles
 
 # Tabs
 ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 
-# Icons
-branch_icon="\\ue727"
-ruby_icon="\\uf43b"
+# Icons 
+branch_icon="\\ue727" 
 nvm_icon="\\ue718"
-php_icon="\\ue608"
+
+ruby_icon="\\uf43b"
 python_icon="\\uf81f"
+php_icon="\\ue608"
+
+# Set up prompts
+# if [ ${#ZSH_THEME_PROMPTS[@]} -eq 0 ]; then
+#   ZSH_THEME_PROMPTS=(git nvm ruby python php)
+# fi
 
 # Prompt
 PROMPT=' %(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) ' # pre-prompt
 PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # path
-PROMPT+='$(git_prompt_info)$(git_prompt_status) ' # git
+# if [[ ${ZSH_THEME_PROMPTS[(ie)git]} -le ${#ZSH_THEME_PROMPTS} ]]; then
+  PROMPT+='$(git_prompt)' # git
+# fi
 
 # Post prompt
-local prompts=()
-type -a nvm > /dev/null && prompts+=('$(nvm_prompt_info)') # nvm
-type -a ruby > /dev/null && prompts+=('$(ruby_prompt_info)') # ruby
-type -a python > /dev/null && prompts+=('$(python_prompt_info)') # python
-type -a php > /dev/null && prompts+=('$(php_prompt_info)') # php
-RPROMPT=${(j:  :)prompts}
+rprompts=()
+# for prompt in $ZSH_THEME_PROMPTS; do
+#   prompt_info="${prompt}_prompt_info"
+#   type -a $prompt > /dev/null && rprompts+=('$($prompt_info)')
+# done
+type -a nvm > /dev/null && rprompts+=('$(nvm_prompt_info)') # nvm
+type -a ruby > /dev/null && rprompts+=('$(ruby_prompt_info)') # ruby
+type -a python > /dev/null && rprompts+=('$(python_prompt_info)') # python
+type -a php > /dev/null && rprompts+=('$(php_prompt_info)') # php
+RPROMPT=${(j:  :)rprompts}
+unset rprompts
 
 # Git
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{202}$branch_icon"
@@ -35,6 +48,14 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}*"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
+git_prompt() {
+  # Hide branch if current path is in .gitignore
+  if git check-ignore . &> /dev/null; then
+    echo ""
+  else
+    echo "$(git_prompt_info)$(git_prompt_status) "
+  fi
+}
 
 # nvm
 ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$nvm_icon "

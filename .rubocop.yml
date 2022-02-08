@@ -25,6 +25,8 @@ Lint/AmbiguousBlockAssociation:
   Enabled: false
 Layout/ClassStructure:
   Enabled: true
+Layout/FirstHashElementIndentation:
+  Enabled: false
 Layout/LineLength:
   Max: 120
 

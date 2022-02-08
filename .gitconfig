@@ -43,7 +43,7 @@
   br = branch
   ci = commit --interactive
   cm = commit -m
-  co = !sh -c 'git checkout $@ && git show-ref --verify --quiet refs/heads/$1 && git fetch'
+  co = checkout
   df = diff
   ds = diff --stat -r
   f = fetch
@@ -52,7 +52,7 @@
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   log = log --color --graph
   p = push
-  pf = po --force
+  pf = push --force
   po = !sh -c 'git push $1 --set-upstream origin $(git branch --show-current)'
   ps = !git pull && git sweep
   re = remote

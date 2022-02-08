@@ -1,14 +1,17 @@
 # Local gitignore for dotfiles repository
 /*/
-/.*_history
 /.*.backup
+/.*_history
+/.*hst
 /.gist
 /.git-stats
 /.gitprofile
 /.netrc
 /.viminfo
 /.yarnrc
-/.zcompdump*
+/.zcompdump-*
 /.zprofile
+/Downloads
+!/.github/
 !/.yarn/
 !/.zsh/
