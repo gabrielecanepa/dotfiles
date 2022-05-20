@@ -3,7 +3,10 @@
 brew() {
   case $1 in
     dump)
-      command brew bundle dump ${@:2} --global --formula --describe --cleanup 
+      command brew bundle dump ${@:2} --global --brews --taps --casks --describe --cleanup 
+      ;;
+    fresh)
+      brew update && brew upgrade && brew cleanup && command brew doctor
       ;;
     init)
       if [  -f "$HOME/.Brewfile" ]; then
@@ -17,9 +20,6 @@ brew() {
         brew dump
       fi
       command brew bundle install --global
-      ;;
-    up)
-      command brew update && command brew upgrade && command brew cleanup && command brew doctor
       ;;
     *)
       command brew $@ && brew dump --force
