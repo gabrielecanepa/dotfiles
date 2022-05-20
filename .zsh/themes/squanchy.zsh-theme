@@ -10,7 +10,7 @@ nvm_icon="\\ue718"
 
 ruby_icon="\\uf43b"
 python_icon="\\uf81f"
-php_icon="\\ue608"
+# php_icon="\\ue608"
 
 # Set up prompts
 # if [ ${#ZSH_THEME_PROMPTS[@]} -eq 0 ]; then
@@ -33,7 +33,7 @@ rprompts=()
 type -a nvm > /dev/null && rprompts+=('$(nvm_prompt_info)') # nvm
 type -a ruby > /dev/null && rprompts+=('$(ruby_prompt_info)') # ruby
 type -a python > /dev/null && rprompts+=('$(python_prompt_info)') # python
-type -a php > /dev/null && rprompts+=('$(php_prompt_info)') # php
+# type -a php > /dev/null && rprompts+=('$(php_prompt_info)') # php
 RPROMPT=${(j:  :)rprompts}
 unset rprompts
 
@@ -76,11 +76,11 @@ python_prompt_info() {
 }
 
 # PHP
-ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$php_icon "
-ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
-php_version() { 
-  php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3 
-}
-php_prompt_info() { 
-  echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX" 
-}
+# ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$php_icon "
+# ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
+# php_version() { 
+#   php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3 
+# }
+# php_prompt_info() { 
+#   echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX" 
+# }
