@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Core
-alias cat="ccat"
 alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
 alias ll="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
