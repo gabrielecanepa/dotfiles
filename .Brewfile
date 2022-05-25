@@ -151,6 +151,8 @@ cask "ngrok"
 # Mach-O disassembler
 cask "otx"
 mas "AdGuard for Safari", id: 1440147259
+mas "Craft", id: 1487937127
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "WhatsApp", id: 1147396723
