@@ -42,8 +42,8 @@ plugins=(
   gatekeeper
   google
   node_modules
+  profile
   xcode-select
-  zprofile
   # From zsh-users
   zsh-autosuggestions
   zsh-completions
@@ -87,7 +87,7 @@ if type -a pyenv > /dev/null; then
 fi
 
 # Binaries
-export PATH="$PATH:./bin:$HOME/bin:/usr/local/sbin:./node_modules/.bin:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.bin:/usr/local/sbin:./bin:./node_modules/.bin:$HOME/.composer/vendor/bin"
 typeset -aU path # avoid duplicates
 
 # Aliases
