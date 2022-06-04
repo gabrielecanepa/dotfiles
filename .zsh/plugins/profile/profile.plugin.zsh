@@ -142,7 +142,7 @@ profile ()
       fi
 
       if ! $is_reload; then
-        echo "${fg_bold[cyan]}👤 $USER$reset_color"
+        echo "${fg_bold[blue]}👤 $USER$reset_color"
         
         if ! $is_installation; then
           echo "(hit ⏎  if unchanged)"
@@ -176,9 +176,9 @@ profile ()
       fi
 
       if $is_reload; then
-        echo "${fg_bold[cyan]}$USER${reset_color}'s profile reloaded and ready for use"
+        echo "${fg_bold[blue]}$USER${reset_color}'s profile reloaded and ready for use"
       else
-        echo "${fg_bold[cyan]}$USER${reset_color}'s profile successfully configured"
+        echo "${fg_bold[blue]}$USER${reset_color}'s profile successfully configured"
       fi
 
       if $is_installation; then
@@ -237,7 +237,7 @@ profile ()
         profile help
       else
         if profile check; then
-          echo "${fg_bold[cyan]}👤 $USER$reset_color"
+          echo "${fg_bold[blue]}👤 $USER$reset_color"
           echo " ⌙ 📝 $NAME"
           echo " ⌙ 📧 $EMAIL"
           echo " ⌙ 📁 $WORKING_DIR"
