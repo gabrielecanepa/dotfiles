@@ -49,6 +49,8 @@ Style/MethodCallWithArgsParentheses:
       "gem",
       "has_many",
       "head",
+      "print",
+      "printf",
       "puts",
       "raise",
       "redirect_to",
