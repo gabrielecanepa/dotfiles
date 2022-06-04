@@ -4,6 +4,7 @@
     "@algolia/cli": "^4.0.8",
     "@vue/cli": "^3.4.0",
     "bundle-phobia-cli": "^0.14.6",
+    "create-cra-template": "^1.2.3",
     "create-next-app": "^12.0.10",
     "cross-env": "^7.0.2",
     "eslint": "^8.14.0",
