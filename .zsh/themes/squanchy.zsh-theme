@@ -7,7 +7,6 @@ ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 # Icons 
 branch_icon="\\ue727" 
 nvm_icon="\\ue718"
-
 ruby_icon="\\uf43b"
 python_icon="\\uf81f"
 # php_icon="\\ue608"
@@ -26,14 +25,17 @@ PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # path
 
 # Post prompt
 rprompts=()
+
 # for prompt in $ZSH_THEME_PROMPTS; do
 #   prompt_info="${prompt}_prompt_info"
 #   type -a $prompt > /dev/null && rprompts+=('$($prompt_info)')
 # done
+
 type -a nvm > /dev/null && rprompts+=('$(nvm_prompt_info)') # nvm
 type -a ruby > /dev/null && rprompts+=('$(ruby_prompt_info)') # ruby
 type -a python > /dev/null && rprompts+=('$(python_prompt_info)') # python
 # type -a php > /dev/null && rprompts+=('$(php_prompt_info)') # php
+
 RPROMPT=${(j:  :)rprompts}
 unset rprompts
 
@@ -48,6 +50,7 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}*"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
+
 git_prompt() {
   # Hide branch if current path is in .gitignore
   if git check-ignore . &> /dev/null; then
@@ -68,9 +71,11 @@ ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
 # Python
 ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$python_icon "
 ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
+
 python_version() { 
   python -V 2>&1 | sed 's/Python //'
 }
+
 python_prompt_info() { 
   echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX" 
 }
