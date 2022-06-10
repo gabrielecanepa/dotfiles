@@ -1,5 +1,6 @@
 # Local gitignore for dotfiles repository
-/*/
+
+# files
 /.*.backup
 /.*_history
 /.*hst
@@ -11,7 +12,12 @@
 /.yarnrc
 /.zcompdump-*
 /.zprofile
-/Downloads
+
+# folders
+/*/
 !/.github/
+!/.vscode/
+/.vscode/extensions/
+/.vscode/argv.json
 !/.yarn/
 !/.zsh/
