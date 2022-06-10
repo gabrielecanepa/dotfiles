@@ -34,7 +34,7 @@
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
    ```
    
-5. To display icons in your terminal, install the Monaco Nerd Mono font from [here](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.otf?raw=true), install it in your system, and make it the default font in all apps using a terminal interface (Terminal, iTerm, VSCode, etc.)
+5. To display icons in your terminal, download a font like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.otf?raw=true), then install it in your system and make it the default font in all apps using a terminal interface (Terminal, iTerm, VSCode, etc.)
 
 6. Reload Zsh
 
@@ -58,7 +58,7 @@
    yarn global install
    ```
    
-8. Install latest Ruby version
+8. Install the latest Ruby version
 
    ```sh
    rbenv install $(rbenv install -l | grep -v - | tail -1)
