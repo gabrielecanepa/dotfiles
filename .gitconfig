@@ -2,7 +2,7 @@
 [include]
   path = ~/.gitprofile
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore.global
   ignorecase = false
   pager = less -FRSX
 [init]

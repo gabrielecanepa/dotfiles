@@ -1,0 +1,12 @@
+/* Reduce opacity of active indentation */
+.monaco-editor .indent-active {
+  opacity: 0.20;
+}
+
+/* Icons */
+.file-icon[title*=".gitignore"]::before {
+  color: #ac4142;
+  content: "\e602";
+  font-family: devopicons;
+  background-image: unset;
+}
