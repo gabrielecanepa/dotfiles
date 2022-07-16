@@ -1,12 +1,17 @@
 {
   "env": {
-    "es6": true,
     "browser": true,
-    "commonjs": true
+    "commonjs": true,
+    "es6": true,
+    "node": true
   },
   "parserOptions": {
     "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "experimentalObjectRestSpread": true
   },
   "extends": [
     "eslint:recommended"
@@ -16,7 +21,7 @@
       "node": {
         "moduleDirectory": [
           "node_modules",
-          "src/"
+          "src"
         ]
       }
     }
@@ -62,17 +67,5 @@
         "ignoreCase": false
       }
     ]
-    // Prettier
-    // "prettier/prettier": [
-    //   2,
-    //   {
-    //     "printWidth": 120,
-    //     "singleQuote": true,
-    //     "semi": false,
-    //     "trailingComma": "es5",
-    //     "bracketSpacing": true,
-    //     "jsxBracketSameLine": false
-    //   }
-    // ],
   }
 }
