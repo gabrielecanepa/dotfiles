@@ -33,6 +33,7 @@ plugins=(
   git-auto-fetch
   gitfast
   last-working-dir
+  macos
   nvm
   rails
   rbenv
