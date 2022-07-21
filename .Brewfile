@@ -1,3 +1,4 @@
+tap "algolia/algolia-fig"
 tap "github/gh"
 tap "hashicorp/tap"
 tap "heroku/brew"
@@ -134,14 +135,20 @@ brew "shellcheck"
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Pager/text based browser
+brew "w3m"
 # Watch files and take action when they change
 brew "watchman"
 # Internet file retriever
 brew "wget"
+# Access X11 clipboards from the command-line
+brew "xclip"
 # JavaScript package manager
 brew "yarn"
 # General-purpose lossless data-compression library
 brew "zlib"
+# FIG - Fake Insights Generator
+brew "algolia/algolia-fig/fig"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome

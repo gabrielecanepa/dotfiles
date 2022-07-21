@@ -3,7 +3,7 @@
 brew() {
   case $1 in
     dump)
-      command brew bundle dump ${@:2} --global --brews --taps --casks --describe --cleanup 
+      command brew bundle dump ${@:2} --global --brews --taps --casks --describe --cleanup
       ;;
     fresh)
       echo "${fg[blue]}info${reset_color} Updating existing packages"
