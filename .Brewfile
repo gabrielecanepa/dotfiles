@@ -1,4 +1,3 @@
-tap "algolia/algolia-fig"
 tap "github/gh"
 tap "hashicorp/tap"
 tap "heroku/brew"
@@ -147,8 +146,6 @@ brew "xclip"
 brew "yarn"
 # General-purpose lossless data-compression library
 brew "zlib"
-# FIG - Fake Insights Generator
-brew "algolia/algolia-fig/fig"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome
@@ -162,4 +159,3 @@ mas "Craft", id: 1487937127
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "WhatsApp", id: 1147396723
