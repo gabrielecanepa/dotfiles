@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Paths
+wd="$WORKING_DIR"
+tmp="$wd/tmp"
+icloud="/Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs"
+
 # Core
 alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
 alias ll="ls -la"
@@ -7,10 +12,9 @@ alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
 alias omzr="omz reload"
 
 # Directories
-wd="$WORKING_DIR"
-tmp="$wd/tmp"
 alias cdw="cd $wd"
 alias tmp="cd $tmp"
+alias cdcloud="cd $icloud"
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"
