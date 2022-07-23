@@ -1,4 +1,4 @@
-#files: 939	version: 5.8.1
+#files: 944	version: 5.8.1
 
 _comps=(
 '-' '_precommand'
@@ -1017,6 +1017,7 @@ _comps=(
 'ntalk' '_other_accounts'
 'numfmt' '_numfmt'
 'nvim' '_vim'
+'nvm' '_nvm'
 'nvram' '_nvram'
 'objdump' '_objdump'
 'od' '_od'
@@ -1190,6 +1191,7 @@ _comps=(
 'querybts' '_bug'
 'quilt' '_quilt'
 'r' '_fc'
+'rails' '_rails'
 'rake' '_rake'
 'ranlib' '_ranlib'
 'rar' '_rar'
@@ -1282,6 +1284,7 @@ _comps=(
 'scselect' '_scselect'
 'scutil' '_scutil'
 'seaf-cli' '_seafile'
+'security' '_security'
 'sed' '_sed'
 'senlin' '_openstack'
 'seq' '_seq'
@@ -1793,7 +1796,8 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _aws _brew _brew_services _exercism _gh \
+autoload -Uz _rails _nvm _security _git _gh \
+            _aws _brew _brew_services _exercism _gh \
             _git _heroku _hub _pipenv _SUSEconfig \
             _a2ps _a2utils _aap _abcde _absolute_command_paths \
             _ack _acpi _acpitool _acroread _adb \
@@ -1985,3 +1989,6 @@ autoload -Uz +X _call_program
 
 typeset -gUa _comp_assocs
 _comp_assocs=( '' )
+
+#omz revision: 18e7e5d0339f3491a6c0324e2443415309b56173
+#omz fpath: /Users/gabrielecanepa/.zsh/plugins/zsh-syntax-highlighting /Users/gabrielecanepa/.zsh/plugins/zsh-completions /Users/gabrielecanepa/.zsh/plugins/zsh-autosuggestions /Users/gabrielecanepa/.zsh/plugins/xcode-select /Users/gabrielecanepa/.zsh/plugins/profile /Users/gabrielecanepa/.zsh/plugins/node_modules /Users/gabrielecanepa/.zsh/plugins/google /Users/gabrielecanepa/.zsh/plugins/gatekeeper /Users/gabrielecanepa/.zsh/plugins/brewfile /Users/gabrielecanepa/.oh-my-zsh/plugins/themes /Users/gabrielecanepa/.oh-my-zsh/plugins/rbenv /Users/gabrielecanepa/.oh-my-zsh/plugins/rails /Users/gabrielecanepa/.oh-my-zsh/plugins/nvm /Users/gabrielecanepa/.oh-my-zsh/plugins/macos /Users/gabrielecanepa/.oh-my-zsh/plugins/last-working-dir /Users/gabrielecanepa/.oh-my-zsh/plugins/gitfast /Users/gabrielecanepa/.oh-my-zsh/plugins/git-auto-fetch /Users/gabrielecanepa/.oh-my-zsh/plugins/gh /Users/gabrielecanepa/.oh-my-zsh/plugins/colorize /Users/gabrielecanepa/.oh-my-zsh/plugins/colored-man-pages /Users/gabrielecanepa/.oh-my-zsh/functions /Users/gabrielecanepa/.oh-my-zsh/completions /Users/gabrielecanepa/.oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/5.8.1/functions
