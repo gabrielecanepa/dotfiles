@@ -6,7 +6,8 @@ export LANG=en_US.UTF-8
 ZSH="$HOME/.oh-my-zsh"
 
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME="squanchy" # custom theme
+ZSH_THEME="squanchy"
+ZSH_COMPDUMP="$HOME/.zcompdump"
 # ZSH_THEME_PROMPTS=(git nvm ruby python) # prompt plugins
 
 # Options
