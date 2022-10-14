@@ -1,46 +1,54 @@
-#!/bin/zsh
+#!/bin/sh
 
 brew() {
   case $1 in
     dump)
-      command brew bundle dump ${@:2} --global --brews --taps --casks --describe --cleanup
+      command brew bundle dump --global --brews --casks --taps --force --describe --cleanup --no-lock
       ;;
     fresh)
       echo "${fg[blue]}info${reset_color} Updating existing packages"
-      brew update
-      brew upgrade
-      echo "${fg[blue]}info${reset_color} Cleaning up old packages"
-      brew cleanup
-      echo "${fg[blue]}info${reset_color} Checking for errors"
+      brew update && brew upgrade
+      echo "\n${fg[blue]}info${reset_color} Cleaning up old packages"
+      [[ -z "$(brew cleanup)" ]] && echo "No packages to cleanup."
+      echo "\n${fg[blue]}info${reset_color} Running brew doctor"
       brew doctor
-      echo "${fg[blue]}info${reset_color} Updating Yarn packages"
-      yarn global upgrade
       ;;
     init)
-      if [  -f "$HOME/.Brewfile" ]; then
+      if [[ -f "${HOME}/.Brewfile" ]]; then
         printf "${fg[yellow]}warning${reset_color} A Brewfile already exists. Do you want to override it? [y/N] "
         read -r choice
         case "$choice" in
           y|Y)
-            rm -f "$HOME/.Brewfile" "$HOME/.Brewfile.lock.json"
+            rm -f "$brewfile_path" "${brewfile_path}.lock.json"
             brew dump
             ;;
           n|N|"")
             ;;
           *)
             echo "${fg[red]}error${reset_color} Unknown option: $choice"
-            unset $choice
+            unset choice
             return 1
             ;;
         esac
-        unset $choice
+        unset choice
       else
         brew dump
       fi
       command brew bundle install --global
       ;;
+    install)
+      command brew $@
+      printf "${fg[blue]}==>${reset_color} Updating Brewfile..."
+      brew dump &>/dev/null
+      echo "\r"
+      ;;
+    uninstall)
+      command brew $@
+      echo "Updating Brewfile..."
+      brew dump &>/dev/null
+      ;;
     *)
-      command brew $@ && brew dump --force
+      command brew $@
       ;;
   esac
 }
