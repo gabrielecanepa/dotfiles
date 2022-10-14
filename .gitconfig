@@ -12,7 +12,7 @@
 [help]
   autocorrect = 1
 
-# Branches 
+# Branches
 [branch "main"]
   mergeoptions = --no-edit
 [branch "master"]
@@ -53,13 +53,13 @@
   log = log --color --graph
   p = push
   pf = push --force
-  po = !sh -c 'git push $1 --set-upstream origin $(git branch --show-current)'
+  po = !sh -c 'git push --set-upstream origin $(git branch --show-current)'
   ps = !git pull && git sweep
   re = remote
   remote = remote -v
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   st = status -sb
-  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
+  sweep = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
   undo = reset --hard
   unstage = reset HEAD --
   untrack = rm --cache --
