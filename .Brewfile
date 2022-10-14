@@ -1,3 +1,4 @@
+tap "algolia/algolia-cli"
 tap "github/gh"
 tap "hashicorp/tap"
 tap "heroku/brew"
@@ -82,6 +83,8 @@ brew "graphviz"
 brew "httpie"
 # Add GitHub support to git on the command-line
 brew "hub"
+# Command-line benchmarking tool
+brew "hyperfine"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # Tools and libraries to manipulate images in many formats
@@ -98,6 +101,8 @@ brew "libxml2"
 brew "libyaml"
 # Mac App Store command-line interface
 brew "mas"
+# General-purpose lossless data-compression library
+brew "zlib"
 # Open source relational database management system
 brew "mysql", restart_service: true
 # Fast, highly customisable system info script
@@ -110,14 +115,10 @@ brew "nginx", restart_service: true
 brew "pinentry-mac"
 # Python dependency management tool
 brew "pipenv"
-# Cross-platform application and UI framework
-brew "qt"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Object-relational database system
-brew "postgresql", restart_service: true
-# Object-relational database system
-brew "postgresql@12", restart_service: true
+brew "postgresql@14"
 # Python version management
 brew "pyenv"
 # Install various Ruby versions and implementations
@@ -144,8 +145,8 @@ brew "wget"
 brew "xclip"
 # JavaScript package manager
 brew "yarn"
-# General-purpose lossless data-compression library
-brew "zlib"
+# Algolia CLI utility
+brew "algolia/algolia-cli/algolia"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome
