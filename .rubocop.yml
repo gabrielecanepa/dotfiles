@@ -36,6 +36,8 @@ Style/Documentation:
   Enabled: false
 Style/EachWithObject:
   Enabled: false
+Style/ExplicitBlockArgument:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Lambda:
@@ -71,3 +73,5 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+Style/WordArray:
+  Enabled: false
