@@ -1,3 +1,5 @@
+#!/bin/sh
+
 xcode-select()
 {
   case $1 in

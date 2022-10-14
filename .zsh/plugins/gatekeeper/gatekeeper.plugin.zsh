@@ -1,12 +1,12 @@
-#!/bin/zsh
+#!/bin/sh
 
-gatekeeper() 
+gatekeeper()
 {
   case $1 in
     status)
       if (sudo spctl --status >/dev/null 2>&1); then
         echo "🔒 GateKeeper is enabled globally"
-      else 
+      else
         echo "${fg[yellow]}🔓 GateKeeper is currently disabled$reset_color\n"
         printf "Do you want to enable it? (Y/n) "
         read -r choice

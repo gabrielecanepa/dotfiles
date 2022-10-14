@@ -1,8 +1,8 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Print the current profile or execute one of the commands
 # profile [check|config|install|reload|help]
-profile () 
+profile ()
 (
   local CUT="\r\033[1A\033[0K"
 
@@ -143,7 +143,7 @@ profile ()
 
       if ! $is_reload; then
         echo "${fg_bold[blue]}👤 $USER$reset_color"
-        
+
         if ! $is_installation; then
           echo "(hit ⏎  if unchanged)"
         fi
@@ -160,7 +160,7 @@ profile ()
           fi
         done
         key=
-        
+
         echo ""
       fi
 
@@ -242,7 +242,7 @@ profile ()
           echo " ⌙ 📧 $EMAIL"
           echo " ⌙ 📁 $WORKING_DIR"
           echo " ⌙ 💻 $(get_editor_name $EDITOR)"
-        else 
+        else
           return 1
         fi
       fi
