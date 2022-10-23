@@ -5,6 +5,7 @@ disable=SC1091 # not referenced
 disable=SC2015 # inline condition warning
 disable=SC2034 # unused vars
 disable=SC2038 # disable -print0/-0 warn
+disable=SC2044 # allow loops over find output
 disable=SC2068 # array expansion
 disable=SC2086 # word splitting
 disable=SC2115 # disable "${var:?}" warn

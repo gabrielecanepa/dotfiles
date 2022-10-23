@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Paths
 wd="$WORKING_DIR"
@@ -40,9 +40,8 @@ done
 alias te="open -a TextEdit"
 
 # VS Code workspaces, e.g. code-<project> = code /path/to/<project>.code-workspace
-for workspace in "$wd"/*/*.code-workspace; do
+for workspace in $(find $wd -type f -name "*.code-workspace" -maxdepth 4); do
   workspace_name="$workspace:t:r"
   alias code-"""$workspace_name"="code $workspace"
-
-  unset workspace workspace_name
 done
+unset workspace workspace_name
