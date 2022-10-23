@@ -14,14 +14,22 @@ icon_python="\\uf81f"
 # Prompts
 
 ## Git
-git_branch_color() {
+git_branch_color()
+{
+  # return empty string if not a git repo
+  if ! git branch &>/dev/null; then
+    echo ""
   # use different color for dotfiles repository
-  [[ "$(git branch --show-current)" =~ "dotfiles" ]] && echo "%{$fg[blue]%}" || echo "%F{202}"
+  elif [[ "$(git branch --show-current)" =~ "dotfiles" ]]; then
+    echo "%{$fg[blue]%}"
+  else
+    echo "%F{202}"
+  fi
 }
 git_prompt()
 {
-  # Hide branch if current path is in a parent .gitignore
-  if git check-ignore . &> /dev/null; then
+  # hide branch if current path is in a parent .gitignore
+  if git check-ignore . &>/dev/null; then
     echo ""
   else
     echo "$(git_prompt_info)$(git_prompt_status) "
@@ -81,6 +89,7 @@ PROMPT+=' $(git_branch_color)$(git_prompt)' # git
 # Post prompt display
 rprompts=()
 
+# use all rprompts if none is specified
 if [ ${#ZSH_THEME_RPROMPTS[@]} -eq 0 ]; then
   ZSH_THEME_RPROMPTS=(nvm ruby python php)
 fi
