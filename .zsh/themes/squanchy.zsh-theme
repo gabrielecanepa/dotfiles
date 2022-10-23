@@ -16,7 +16,7 @@ icon_python="\\uf81f"
 ## Git
 git_branch_color() {
   # use different color for dotfiles repository
-  [[ "$(git_prompt)" =~ "dotfiles(\|.+)?" ]] && echo "%{$fg[blue]%}" || echo "%F{202}"
+  [[ "$(git branch --show-current)" =~ "dotfiles" ]] && echo "%{$fg[blue]%}" || echo "%F{202}"
 }
 git_prompt()
 {
