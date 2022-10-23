@@ -34,13 +34,16 @@ brew() {
       else
         brew dump
       fi
-      command brew bundle install --global
+      brew install-global
       ;;
     install)
       command brew $@
       printf "${fg[blue]}==>${reset_color} Updating Brewfile..."
       brew dump &>/dev/null
       echo "\r"
+      ;;
+    install-global)
+      command brew bundle install --global
       ;;
     uninstall)
       command brew $@

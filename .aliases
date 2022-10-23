@@ -1,19 +1,20 @@
 #!/bin/sh
 
-# Paths
-wd="$WORKING_DIR"
-tmp="$wd/tmp"
-icloud="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
-
 # Core
 alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
 alias ll="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
 alias omzr="omz reload"
 
+# Paths
+wd="$WORKING_DIR"
+tmp="$wd/tmp"
+icloud="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
+
 # Directories
 alias cdw="cd $wd"
 alias tmp="cd $tmp"
+alias cdcloud="cd $icloud"
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"
@@ -25,21 +26,19 @@ alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias serve="ruby -run -e httpd . -p 8000"
 
-# Git
-# Shortcuts for git aliases, e.g. gcm = git cm = git commit -m
+# Git short aliases, e.g. gcm = git cm = git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   # only if the command doesn't already exist
   if ! type -a "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
-
-  unset git_alias
 done
+unset git_alias
 
 # Apps
 alias te="open -a TextEdit"
 
-# VS Code workspaces, e.g. code-<project> = code /path/to/<project>.code-workspace
+# VSCode workspaces, e.g. code-<project> = code /path/to/<project>.code-workspace
 for workspace in $(find $wd -type f -name "*.code-workspace" -maxdepth 4); do
   workspace_name="$workspace:t:r"
   alias code-"""$workspace_name"="code $workspace"

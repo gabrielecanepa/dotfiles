@@ -59,10 +59,11 @@ plugins=(
 type -a profile > /dev/null && ! profile check && return 1
 
 # Git
-[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use private .gitprofile file
+[ ! -f "$HOME/.gitprofile" ] && touch "$HOME/.gitprofile" # use private .gitprofile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+export GIT_DISCOVERY_ACROSS_FILESYSTEM=1 # allow git to traverse filesystem
 
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
