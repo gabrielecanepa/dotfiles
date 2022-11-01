@@ -13,3 +13,6 @@ disable=SC2128 # array expansion
 disable=SC2139 # expansion in definition
 disable=SC2145 # allow $@
 disable=SC2153 # mispellings
+disable=SC2154 # undefined vars
+disable=SC2250 # allow variables without braces
+disable=SC2312 # allow masking return values

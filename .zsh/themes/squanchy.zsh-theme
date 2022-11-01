@@ -14,21 +14,19 @@ icon_python="\\uf81f"
 # Prompts
 
 ## Git
-git_branch_color()
-{
-  # return empty string if not a git repo
+git_branch_color() {
+  # return an empty string if not a git repo
   if ! git branch &>/dev/null; then
     echo ""
-  # use different color for dotfiles repository
+  # use a different color for the dotfiles branch
   elif [[ "$(git branch --show-current)" =~ "dotfiles" ]]; then
     echo "%{$fg[blue]%}"
   else
     echo "%F{202}"
   fi
 }
-git_prompt()
-{
-  # hide branch if current path is in a parent .gitignore
+git_prompt() {
+  # hide branch if current path is specified in a parent .gitignore
   if git check-ignore . &>/dev/null; then
     echo ""
   else
@@ -51,20 +49,26 @@ ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$icon_node "
 ZSH_THEME_NVM_PROMPT_SUFFIX="%{$reset_color%}"
 
+nvm_prompt_info() {
+  echo "$ZSH_THEME_NVM_PROMPT_PREFIX$(nvm current | sed 's/v//g')$ZSH_THEME_NVM_PROMPT_SUFFIX"
+}
+
 ## Ruby
 ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$icon_ruby "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
+
+ruby_prompt_info() {
+  echo "$ZSH_THEME_RUBY_PROMPT_PREFIX$(rbenv version-name)$ZSH_THEME_RUBY_PROMPT_SUFFIX"
+}
 
 ## Python
 ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$icon_python "
 ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
 
-python_version()
-{
+python_version() {
   python -V 2>&1 | sed 's/Python //'
 }
-python_prompt_info()
-{
+python_prompt_info() {
   echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
 }
 
@@ -72,12 +76,10 @@ python_prompt_info()
 ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$icon_php "
 ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
 
-php_version()
-{
+php_version() {
   php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3
 }
-php_prompt_info()
-{
+php_prompt_info() {
   echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX"
 }
 
@@ -86,19 +88,13 @@ PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜)' # pre-prompt arrow
 PROMPT+=' %{$fg[cyan]%}%c' # path
 PROMPT+=' $(git_branch_color)$(git_prompt)' # git
 
-# Post prompt display
-rprompts=()
+# Post-prompt display
+RPROMPT='$(
+  rprompts=()
+  for rprompt in $ZSH_THEME_RPROMPTS; do # $ZSH_THEME_RPROMPTS
+    type -a $rprompt >/dev/null && rprompts+="$(${rprompt}_prompt_info)"
+  done
+  echo ${(j:  :)rprompts}
+)'
 
-# use all rprompts if none is specified
-if [ ${#ZSH_THEME_RPROMPTS[@]} -eq 0 ]; then
-  ZSH_THEME_RPROMPTS=(nvm ruby python php)
-fi
-
-for rprompt in $ZSH_THEME_RPROMPTS; do
-  rprompt_info="${rprompt}_prompt_info"
-  type -a $rprompt >/dev/null && rprompts+=("$(eval $rprompt_info)")
-done
-
-RPROMPT=${(j:  :)rprompts}
-
-unset icon_branch icon_node icon_ruby icon_php icon_python rprompts rprompt rprompt_info
+unset icon_branch icon_node icon_ruby icon_php icon_python rprompts rprompt
