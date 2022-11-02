@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 brew() {
   case $1 in
@@ -6,10 +6,10 @@ brew() {
       command brew bundle dump --global --brews --casks --taps --force --describe --cleanup --no-lock
       ;;
     fresh)
-      echo "${fg[blue]}info${reset_color} Updating existing packages"
+      echo "${fg[blue]}info${reset_color} Upgrading brew packages"
       brew update && brew upgrade
       echo "\n${fg[blue]}info${reset_color} Cleaning up old packages"
-      [[ -z "$(brew cleanup)" ]] && echo "No packages to cleanup."
+      [[ -z "$(brew cleanup)" ]] && echo "No packages to cleanup"
       echo "\n${fg[blue]}info${reset_color} Running brew doctor"
       brew doctor
       ;;

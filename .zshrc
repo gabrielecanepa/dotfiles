@@ -2,7 +2,7 @@
 
 export LANG=en_US.UTF-8
 
-# Oh My Zsh (https://github.com/robbyrussell/oh-my-zsh/wiki)
+# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
@@ -13,13 +13,14 @@ ZSH_COMPDUMP="$HOME/.zcompdump"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="false"
 DISABLE_AUTO_TITLE="false"
-DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_UPDATE="true"
 DISABLE_LS_COLORS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="false"
-ENABLE_CORRECTION="false"
+ENABLE_CORRECTION="true"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="false"
-UPDATE_ZSH_DAYS=7
+UPDATE_ZSH_DAYS=1
+UP_TO_DATE=(brew yarn plugins)
 
 autoload -U compinit && compinit # reload completions
 zle_highlight+=(paste:none) # disable text highlight on paste
@@ -49,6 +50,7 @@ plugins=(
   google
   node_modules
   profile
+  up-to-date
   xcode-select
 )
 
@@ -57,9 +59,6 @@ plugins=(
 # Binaries
 export PATH="$PATH:$HOME/.bin:/usr/local/sbin:./bin:./.bin"
 typeset -aU path
-
-# Check profile installation
-type -a profile > /dev/null && ! profile check && return 1
 
 # Git
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # private .gitprofile
@@ -97,5 +96,8 @@ fi
 # PHP
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-# Aliases
+# Check setup with the `profile` plugin
+type -a profile > /dev/null && ! profile check && return 1
+
+# Load aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
