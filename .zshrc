@@ -13,14 +13,14 @@ ZSH_COMPDUMP="$HOME/.zcompdump"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="false"
 DISABLE_AUTO_TITLE="false"
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 DISABLE_LS_COLORS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="false"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE="false"
-UPDATE_ZSH_DAYS=1
-UP_TO_DATE=(brew yarn plugins)
+UPDATE_ZSH_DAYS=3
+UPDATE_ZSH_EXTEND=(brew yarn plugins)
 
 autoload -U compinit && compinit # reload completions
 zle_highlight+=(paste:none) # disable text highlight on paste
