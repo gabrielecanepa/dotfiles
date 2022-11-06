@@ -50,7 +50,7 @@ plugins=(
   google
   node_modules
   profile
-  up-to-date
+  uptodate
   xcode-select
 )
 
