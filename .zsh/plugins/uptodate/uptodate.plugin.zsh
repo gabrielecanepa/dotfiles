@@ -3,6 +3,11 @@
 function uptodate() {
   local plugin_name="uptodate"
   local args="$([[ $1 = "--init" ]] && echo "${@:2}" || echo "$@")"
+  local extensions=($([[ -z "$args" ]] && echo "$UPDATE_ZSH_EXTEND" || echo "$args"))
+
+  if [[ -z "$extensions" ]]; then
+    return $?
+  fi
 
   local log_default="[$plugin_name]"
   local log_info="[$plugin_name] ${fg[blue]}info${reset_color}"
@@ -36,11 +41,11 @@ function uptodate() {
     }
 
     local function upgrade_brew() {
-      echo "$log_info Upgrading Homebrew packages..."
+      echo "$log_info Upgrading Homebrew packages"
       brew update && brew upgrade
-      echo "$log_info Cleaning up old brew packages..."
+      echo "$log_info Cleaning up old brew packages"
       [[ -z "$(brew cleanup)" ]] && echo "No packages to cleanup."
-      echo "$log_info Running brew doctor..."
+      echo "$log_info Running brew doctor"
       [[ -z "$(brew doctor)" ]] && echo "No issues found."
       echo "$log_success Homebrew packages upgraded"
     }
@@ -52,13 +57,6 @@ function uptodate() {
     }
 
     local function upgrade_all() {
-      if [[ -z "$args" ]] && [[ -z "$UPDATE_ZSH_EXTEND" ]]; then
-        echo "$log_error You must provide at least one option"
-        return 1
-      fi
-
-      extensions=($([[ -z "$args" ]] && echo "$UPDATE_ZSH_EXTEND" || echo "$args"))
-
       for extension in $(echo $extensions); do
         if ! type -a upgrade_$extension >/dev/null; then
           echo "$log_error $extension is not a valid option"
@@ -67,11 +65,10 @@ function uptodate() {
           echo "$log_error $extension:t upgrade failed"
         fi
       done
-
-      unset extensions extension
+      unset extension
     }
 
-    . "${ZSH_CACHE_DIR}/.zsh-update" # loads LAST_EPOCH
+    . "${ZSH_CACHE_DIR}/.zsh-update" # load LAST_EPOCH
 
     if [[ $1 = "--init" ]] && [[ $(($(current_epoch) - $LAST_EPOCH)) > $UPDATE_ZSH_DAYS ]]; then
       return
