@@ -106,3 +106,6 @@ type -a profile > /dev/null && ! profile check && return 1
 
 # Load aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
+
+# Set cron jobs
+[[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
