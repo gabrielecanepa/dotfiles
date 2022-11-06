@@ -13,7 +13,7 @@ profile ()
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 
-  local WORKING_DIR_NAME=${WORKING_DIR##*/}
+  local WORKING_DIR_NAME=${WORKING_DIR/\/Users\/$USER\//}
 
   local EDITORS=(
     "atom"     # Atom
@@ -79,7 +79,7 @@ profile ()
   # Read, validate, and store an input
   # get_input <input> [--allow-blank]
   local get_input () {
-    allow_blank=$([ "$2" = --allow-blank ] && echo true || echo false)
+    local allow_blank=$([ "$2" = --allow-blank ] && echo true || echo false)
 
     printf "> "
     read -r $1
@@ -240,7 +240,7 @@ profile ()
           echo "${fg_bold[blue]}👤 $USER$reset_color"
           echo " ⌙ 📝 $NAME"
           echo " ⌙ 📧 $EMAIL"
-          echo " ⌙ 📁 $WORKING_DIR"
+          echo " ⌙ 📁 ~/$WORKING_DIR_NAME"
           echo " ⌙ 💻 $(get_editor_name $EDITOR)"
         else
           return 1

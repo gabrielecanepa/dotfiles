@@ -1,6 +1,11 @@
 #!/bin/sh
 
-export LANG=en_US.UTF-8
+# Profile
+export LANG="en_US.UTF-8"
+export EDITOR="code"
+export VISUAL="$EDITOR"
+export GIT_EDITOR="code --wait"
+# NAME EMAIL WORKING_DIR in ~/.zprofile
 
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
@@ -13,7 +18,7 @@ ZSH_COMPDUMP="$HOME/.zcompdump"
 CASE_SENSITIVE="false"
 COMPLETION_WAITING_DOTS="false"
 DISABLE_AUTO_TITLE="false"
-DISABLE_AUTO_UPDATE="false"
+DISABLE_AUTO_UPDATE="true"
 DISABLE_LS_COLORS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="false"
 ENABLE_CORRECTION="false"
@@ -57,11 +62,11 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Binaries
-export PATH="$PATH:$HOME/.bin:/usr/local/sbin:./bin:./.bin"
+export PATH="$PATH:$HOME/.bin:$HOME/.local/bin:/usr/local/sbin:./bin:./.bin"
 typeset -aU path
 
 # Git
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # private .gitprofile
+[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # private git profile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
