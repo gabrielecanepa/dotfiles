@@ -10,7 +10,7 @@
 /.netrc
 /.viminfo
 /.yarnrc
-/.zcompdump*
+/.zcompdump**
 /.zprofile
 
 # folders
