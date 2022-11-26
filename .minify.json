@@ -1,0 +1,10 @@
+{
+  "html": {},
+  "css": {
+    "compatibility": "*"
+  },
+  "js": {
+    "module": true
+  },
+  "img": {}
+}
