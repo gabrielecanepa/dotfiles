@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-brew() {
+function brew() {
   local log_default="[$plugin_name]"
   local log_info="[$plugin_name] ${fg[blue]}info${reset_color}"
   local log_warning="[$plugin_name] ${fg[yellow]}warning${reset_color}"

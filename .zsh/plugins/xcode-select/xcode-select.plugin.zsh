@@ -1,7 +1,6 @@
 #!/bin/sh
 
-xcode-select()
-{
+function xcode-select() {
   case $1 in
     --reset)
       if [ "$2" ]; then

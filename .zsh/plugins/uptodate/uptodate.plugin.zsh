@@ -84,11 +84,17 @@ function uptodate() {
 
     case "$option" in
       [yY$'\n'])
+        # TODO: update last upgrade date
         echo "$log_warning The process might take a while"
         printf "$log_default Would you like to open a new terminal tab? [Y/n] "
         read -r -k 1 new_tab
         if [[ $new_tab = [yY$'\n'] ]]; then
-          # TODO: open new tab
+          # Visual Studio Code
+          osascript -e '
+            tell application "System Events" to tell process "Code"
+              click menu item "New Terminal" of menu 1 of menu bar item "Terminal" of menu bar 1
+            end tell
+          ' &>/dev/null
         fi
         unset new_tab
 
