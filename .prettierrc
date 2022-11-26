@@ -15,9 +15,9 @@
   "singleAttributePerLine": false,
   "overrides": [
     {
-      "files": "*.html",
+      "files": "*.(css|scss|sass)",
       "options": {
-        "printWidth": 160
+        "singleQuote": false
       }
     }
   ]
