@@ -1,7 +1,6 @@
 #!/bin/sh
 
-gatekeeper()
-{
+function gatekeeper() {
   case $1 in
     status)
       if (sudo spctl --status >/dev/null 2>&1); then

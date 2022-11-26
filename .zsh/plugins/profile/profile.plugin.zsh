@@ -2,8 +2,7 @@
 
 # Print the current profile or execute one of the commands
 # profile [check|config|install|reload|help]
-profile ()
-(
+function profile() (
   local CUT="\r\033[1A\033[0K"
 
   local PROFILE_CMD="${fg[green]}profile$reset_color"

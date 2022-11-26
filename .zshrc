@@ -5,7 +5,6 @@ export LANG="en_US.UTF-8"
 export EDITOR="code"
 export VISUAL="$EDITOR"
 export GIT_EDITOR="code --wait"
-# NAME EMAIL WORKING_DIR in ~/.zprofile
 
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
@@ -27,10 +26,17 @@ HYPHEN_INSENSITIVE="false"
 UPDATE_ZSH_DAYS=3
 UPDATE_ZSH_EXTEND=(brew yarn plugins)
 
-autoload -U compinit && compinit # reload completions
 zle_highlight+=(paste:none) # disable text highlight on paste
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow pasting
-zstyle ':omz:update' mode auto # auto update omz
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # avoid slow pasting
+zstyle ':omz:update' mode auto # autoupdate omz
+
+# Cache
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit
+else
+	compinit -C
+fi;
 
 plugins=(
   colored-man-pages
@@ -101,7 +107,7 @@ fi
 # PHP
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-# Check setup with the `profile` plugin
+# Check setup using the profile plugin
 type -a profile > /dev/null && ! profile check && return 1
 
 # Load aliases
