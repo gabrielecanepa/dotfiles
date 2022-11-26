@@ -1,18 +1,16 @@
-# Wiki: https://github.com/koalaman/shellcheck/wiki
-
-disable=SC1090 # non-constant sources
-disable=SC1091 # not referenced
-disable=SC2015 # inline condition warning
-disable=SC2034 # unused vars
-disable=SC2038 # disable -print0/-0 warn
-disable=SC2044 # allow loops over find output
-disable=SC2068 # array expansion
-disable=SC2086 # word splitting
-disable=SC2115 # disable "${var:?}" warn
-disable=SC2128 # array expansion
-disable=SC2139 # expansion in definition
-disable=SC2145 # allow $@
-disable=SC2153 # mispellings
-disable=SC2154 # undefined vars
-disable=SC2250 # allow variables without braces
-disable=SC2312 # allow masking return values
+disable=SC1090 # https://github.com/koalaman/shellcheck/wiki/SC1090
+disable=SC1091 # https://github.com/koalaman/shellcheck/wiki/SC1091
+disable=SC2015 # https://github.com/koalaman/shellcheck/wiki/SC2015
+disable=SC2034 # https://github.com/koalaman/shellcheck/wiki/SC2034
+disable=SC2038 # https://github.com/koalaman/shellcheck/wiki/SC2038
+disable=SC2044 # https://github.com/koalaman/shellcheck/wiki/SC2044
+disable=SC2068 # https://github.com/koalaman/shellcheck/wiki/SC2068
+disable=SC2086 # https://github.com/koalaman/shellcheck/wiki/SC2086
+disable=SC2115 # https://github.com/koalaman/shellcheck/wiki/SC2115
+disable=SC2128 # https://github.com/koalaman/shellcheck/wiki/SC2128
+disable=SC2139 # https://github.com/koalaman/shellcheck/wiki/SC2139
+disable=SC2145 # https://github.com/koalaman/shellcheck/wiki/SC2145
+disable=SC2153 # https://github.com/koalaman/shellcheck/wiki/SC2153
+disable=SC2154 # https://github.com/koalaman/shellcheck/wiki/SC2154
+disable=SC2250 # https://github.com/koalaman/shellcheck/wiki/SC2250
+disable=SC2312 # https://github.com/koalaman/shellcheck/wiki/SC2312
