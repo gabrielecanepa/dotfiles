@@ -1,40 +1,23 @@
-# ⚡️ Zsh Theme Squanchy ⚡️ - https://github.com/gabrielecanepa/dotfiles
+# Zsh Theme Squanchy ⚡️ - https://github.com/gabrielecanepa/dotfiles
 
 # Tabs
 ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
 
 # Icons
-icon_branch="\\ue727"
-icon_node="\\ue718"
-icon_ruby="\\uf43b"
-icon_php="\\ue608"
-icon_python="\\uf81f"
+local icon="\\u"
+icon_branch="${icon}e727"
+icon_commit="${icon}e729"
+icon_github="${icon}f7a3"
+icon_node="${icon}e718"
+icon_ruby="${icon}f43b"
+icon_php="${icon}e608"
+icon_python="${icon}f81f"
 
 # Prompts
 
 ## Git
-git_branch_color() {
-  # return an empty string if not a git repo
-  if ! git branch &>/dev/null; then
-    echo ""
-  # use a different color for the dotfiles branch
-  elif [[ "$(git branch --show-current)" =~ "dotfiles" ]]; then
-    echo "%{$fg[blue]%}"
-  else
-    echo "%F{202}"
-  fi
-}
-git_prompt() {
-  # hide branch if current path is specified in a parent .gitignore
-  if git check-ignore . &>/dev/null; then
-    echo ""
-  else
-    echo "$(git_prompt_info)$(git_prompt_status) "
-  fi
-}
-
-ZSH_THEME_GIT_PROMPT_PREFIX="$icon_branch"
+ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY=""
@@ -45,11 +28,25 @@ ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 
+function git_prompt() {
+  # Hide branch if current path is specified in a parent .gitignore
+  git check-ignore . &>/dev/null && return 1
+
+  local git_prompt="%F{202}$icon_branch$(git_prompt_info)$(git_prompt_status) "
+
+  if git config --get remote.origin.url &>/dev/null; then
+    echo "%{$reset_color%}$icon_github$icon_commit$git_prompt"
+    return 0
+  fi
+
+  echo $git_prompt
+}
+
 ## nvm
 ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[green]%}$icon_node "
 ZSH_THEME_NVM_PROMPT_SUFFIX="%{$reset_color%}"
 
-nvm_prompt_info() {
+function nvm_prompt_info() {
   echo "$ZSH_THEME_NVM_PROMPT_PREFIX$(nvm current | sed 's/v//g')$ZSH_THEME_NVM_PROMPT_SUFFIX"
 }
 
@@ -57,7 +54,7 @@ nvm_prompt_info() {
 ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$icon_ruby "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
 
-ruby_prompt_info() {
+function ruby_prompt_info() {
   echo "$ZSH_THEME_RUBY_PROMPT_PREFIX$(rbenv version-name)$ZSH_THEME_RUBY_PROMPT_SUFFIX"
 }
 
@@ -65,10 +62,10 @@ ruby_prompt_info() {
 ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$icon_python "
 ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
 
-python_version() {
+function python_version() {
   python -V 2>&1 | sed 's/Python //'
 }
-python_prompt_info() {
+function python_prompt_info() {
   echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
 }
 
@@ -76,25 +73,21 @@ python_prompt_info() {
 ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$icon_php "
 ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
 
-php_version() {
+function php_version() {
   php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3
 }
-php_prompt_info() {
+function php_prompt_info() {
   echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX"
 }
 
-# Prompt display
-PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜)' # pre-prompt arrow
-PROMPT+=' %{$fg[cyan]%}%c' # path
-PROMPT+=' $(git_branch_color)$(git_prompt)' # git
+# Prompt
+PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) %{$fg[cyan]%}%c ' # pre-prompt and path
+PROMPT+='$(git_prompt)' # git
 
-# Post-prompt display
-RPROMPT='$(
-  rprompts=()
-  for rprompt in $ZSH_THEME_RPROMPTS; do # $ZSH_THEME_RPROMPTS
-    type -a $rprompt >/dev/null && rprompts+="$(${rprompt}_prompt_info)"
-  done
-  echo ${(j:  :)rprompts}
-)'
+# Right prompt
+local rprompts=()
+for rprompt in $ZSH_THEME_RPROMPTS; do rprompts+="$(${rprompt}_prompt_info)"; done
+unset rprompt
 
-unset icon_branch icon_node icon_ruby icon_php icon_python rprompts rprompt
+RPROMPT="${(j:  :)rprompts}"
+
