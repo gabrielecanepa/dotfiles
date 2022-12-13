@@ -4,6 +4,7 @@
 /.*.backup
 /.*_history
 /.*hst
+/.*padl
 /.gist
 /.git-stats
 /.gitprofile
