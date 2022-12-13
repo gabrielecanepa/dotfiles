@@ -5585,10 +5585,10 @@ create-gatsby@^0.5.1:
   resolved "https://registry.yarnpkg.com/create-gatsby/-/create-gatsby-0.5.1.tgz#a99519416c1a73ae27562b9035b6357f22748319"
   integrity sha512-iQ3Z757x02uw9Z3ereR/+RNjiQPCKLEAh3GLqfcTNNVeGgRd07XdgIgGIZrbuNaKL/3EGdfejd7ElJ1UBLQSHQ==
 
-create-next-app@^12.0.10:
-  version "12.3.3"
-  resolved "https://registry.yarnpkg.com/create-next-app/-/create-next-app-12.3.3.tgz#6d9ec53962bbfa06a8c9e21ba381d39e6bd1e269"
-  integrity sha512-Thfq3f0khot8nMNZSrHyx5aNagodL2MOEuHxRy7Uv/2qbibi51saAi2NymnZvtzedc/TqIaNlHnuYwRTZqagJA==
+create-next-app@^13.0.6:
+  version "13.0.6"
+  resolved "https://registry.yarnpkg.com/create-next-app/-/create-next-app-13.0.6.tgz#e7cd1e174da89e57e807a9ab572d3ce116c885d3"
+  integrity sha512-dVJNqFWR7JWYCQwIcF1X8QJlatTV/B9iVj0QbdScXnZQQWQFz8k+kfgKeYulrSay5qVuNxadMcCgs6/nPm4/Fw==
 
 create-require@^1.1.0:
   version "1.1.1"
