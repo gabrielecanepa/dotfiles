@@ -6,30 +6,58 @@
 /* Icons */
 
 /* Files */
-/* .gitignore.global */
-.show-file-icons .file-icon.\.gitignore\.global-name-file-icon::before {
-  font-family: devopicons !important;
-  content: "\e602" !important;
-  color: #ac4142 !important;
+
+/* .aliases */
+.\.aliases-name-file-icon::before {
+  font-family: file-icons !important;
+  color: #825078 !important;
+  content: "\f0c8" !important;
 }
-.show-file-icons .file-icon.\.env-name-file-icon::before {
+/* .Brewfile .Brewfile.lock.json */
+.\.brewfile-name-file-icon::before,
+.\.brewfile\.lock\.json-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\1f37a" !important;
+  color: #ffbd5d !important;
+  font-size: 13.8px !important;
+}
+/* .env */
+.\.env-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;
 }
+/* .gitignore.global .gitprofile */
+.\.gitignore\.global-name-file-icon::before,
+.\.gitprofile-name-file-icon::before {
+  font-family: devopicons !important;
+  content: "\e602" !important;
+}
+.\.gitignore\.global-name-file-icon::before {
+  color: #ac4142 !important;
+}
+.\.gitprofile-name-file-icon::before {
+  color: #cccccc !important;
+}
+/* .macos */
+.\.macos-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\e925" !important;
+}
 
 /* Folders */
+
 /* .git */
-.show-file-icons .folder-icon.\.git-name-folder-icon::before {
+.\.git-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
 }
 /* .github */
-.show-file-icons .folder-icon.\.github-name-folder-icon::before {
+.\.github-name-folder-icon::before {
   font-family: octicons !important;
   content: "\e602" !important;
 }
 /* .vscode */
-.show-file-icons .folder-icon.\.vscode-name-folder-icon::before {
+.\.vscode-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e60c" !important;
 }
