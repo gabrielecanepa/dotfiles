@@ -1,7 +1,6 @@
 #!/bin/zsh
 
 function brew() {
-  # install dump cleanup check list
   local function dump_brewfile() {
     printf "${fg[blue]}==>${reset_color} Updating Brewfile"
     brew dump

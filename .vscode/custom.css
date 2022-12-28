@@ -1,50 +1,11 @@
+/* Editor */
+
 /* Reduce opacity of active indentation */
 .monaco-editor .indent-active {
   opacity: 0.2;
 }
 
-/* Icons */
-
-/* Files */
-
-/* .aliases */
-.\.aliases-name-file-icon::before {
-  font-family: file-icons !important;
-  color: #825078 !important;
-  content: "\f0c8" !important;
-}
-/* .Brewfile .Brewfile.lock.json */
-.\.brewfile-name-file-icon::before,
-.\.brewfile\.lock\.json-name-file-icon::before {
-  font-family: file-icons !important;
-  content: "\1f37a" !important;
-  color: #ffbd5d !important;
-  font-size: 13.8px !important;
-}
-/* .env */
-.\.env-name-file-icon::before {
-  font-family: fontawesome !important;
-  content: "\f013" !important;
-}
-/* .gitignore.global .gitprofile */
-.\.gitignore\.global-name-file-icon::before,
-.\.gitprofile-name-file-icon::before {
-  font-family: devopicons !important;
-  content: "\e602" !important;
-}
-.\.gitignore\.global-name-file-icon::before {
-  color: #ac4142 !important;
-}
-.\.gitprofile-name-file-icon::before {
-  color: #cccccc !important;
-}
-/* .macos */
-.\.macos-name-file-icon::before {
-  font-family: file-icons !important;
-  content: "\e925" !important;
-}
-
-/* Folders */
+/* Directories */
 
 /* .git */
 .\.git-name-folder-icon::before {
@@ -60,4 +21,60 @@
 .\.vscode-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e60c" !important;
+}
+
+/* Files */
+
+/* Scripts: .aliases .zprofile */
+.\.aliases-name-file-icon::before {
+  font-family: file-icons !important;
+  color: #825078 !important;
+  content: "\f0c8" !important;
+}
+.\.zprofile-name-file-icon::before {
+  color: #cccccc !important;
+}
+/* Homebrew: .Brewfile .Brewfile.lock.json */
+.\.brewfile-name-file-icon::before,
+.\.brewfile\.lock\.json-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\1f37a" !important;
+  font-size: 13.8px !important;
+}
+.\.brewfile-name-file-icon::before {
+  color: #ffbd5d !important;
+}
+/* Settings: .CFUserTextEncoding .crontab .env .hushlogin */
+.\.cfusertextencoding-name-file-icon::before,
+.\.crontab-name-file-icon::before,
+.\.env-name-file-icon::before,
+.\.hushlogin-name-file-icon::before {
+  font-family: fontawesome !important;
+  content: "\f013" !important;
+}
+/* Git: .gitignore.global .gitprofile */
+.\.gitignore\.global-name-file-icon::before,
+.\.gitprofile-name-file-icon::before {
+  font-family: devopicons !important;
+  content: "\e602" !important;
+}
+.\.gitignore\.global-name-file-icon::before {
+  color: #ac4142 !important;
+}
+.\.gitprofile-name-file-icon::before {
+  color: #cccccc !important;
+}
+/* Terminal: .iterm2 .shellcheckrc */
+.\.iterm2-name-file-icon::before {
+  font-family: mfixx !important;
+  content: "\f158" !important;
+}
+.\.shellcheckrc-name-file-icon::before {
+  font-family: fontawesome !important;
+  content: "\f120" !important;
+}
+/* Apple: .macos */
+.\.macos-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\e925" !important;
 }
