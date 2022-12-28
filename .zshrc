@@ -6,6 +6,10 @@ export EDITOR="code"
 export VISUAL="$EDITOR"
 export GIT_EDITOR="code --wait"
 
+# Mac preferences
+export CLOUD="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
+export MACPREFS_BACKUP_DIRS=("$HOME/.macprefs" "$CLOUD/MacPrefs")
+
 # Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
@@ -59,6 +63,7 @@ plugins=(
   colors256
   gatekeeper
   google
+  macprefs
   node_modules
   profile
   uptodate
@@ -91,7 +96,7 @@ export HOMEBREW_BUNDLE_NO_LOCK=0
 
 # Node.js
 export PATH="$PATH:./node_modules/.bin"
-if type -a nvm > /dev/null; then
+if type -a nvm >/dev/null; then
   export NVM_DIR="$HOME/.nvm"
   [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" --no-use
   [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
@@ -99,14 +104,14 @@ fi
 
 # Ruby
 export PATH="$PATH:$HOME/.rbenv/bin"
-if type -a rbenv > /dev/null; then
+if type -a rbenv >/dev/null; then
   eval "$(rbenv init -)"
 fi
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PATH:$PYENV_ROOT/bin"
-if type -a pyenv > /dev/null; then
+if type -a pyenv >/dev/null; then
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
@@ -115,7 +120,7 @@ fi
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # Check setup using the profile plugin
-type -a profile > /dev/null && ! profile check && return 1
+type -a profile >/dev/null && ! profile check && return 1
 
 # Load aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"

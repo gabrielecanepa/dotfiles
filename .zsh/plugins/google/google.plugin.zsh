@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function google () {
   case $1 in

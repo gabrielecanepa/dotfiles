@@ -1,4 +1,5 @@
 tap "algolia/algolia-cli"
+tap "clintmod/formulas"
 tap "github/gh"
 tap "hashicorp/tap"
 tap "heroku/brew"
@@ -23,6 +24,8 @@ brew "bzip2"
 brew "freetype"
 # Core application library for C
 brew "glib"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # C library implementing the SSH2 protocol
@@ -47,12 +50,24 @@ brew "composer"
 brew "coreutils"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq", restart_service: true
+# Collection of reusable C++ library artifacts developed at Facebook
+brew "folly"
+# Shared library for Watchman and Eden projects
+brew "edencommon"
 # Programming language for highly scalable real-time systems
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
 # Command-line tool to interact with exercism.io
 brew "exercism"
+# C++14 implementation of the TLS-1.3 standard
+brew "fizz"
+# Modular, composable client/server abstractions framework
+brew "wangle"
+# Facebook's branch of Apache Thrift, including a new C++ server
+brew "fbthrift"
+# Thrift functions for querying information from a service
+brew "fb303"
 # C routines to compute the Discrete Fourier Transform
 brew "fftw"
 # Toolkit for image loading and pixel buffer manipulation
@@ -99,6 +114,8 @@ brew "kotlin"
 brew "libxml2"
 # YAML Parser
 brew "libyaml"
+# Keep your Mac's application settings in sync
+brew "mackup"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Open source relational database management system
@@ -145,6 +162,8 @@ brew "xclip"
 brew "yarn"
 # Algolia CLI utility
 brew "algolia/algolia-cli/algolia"
+# Backup and Restore your Mac System and App Preferences
+brew "clintmod/formulas/macprefs"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome

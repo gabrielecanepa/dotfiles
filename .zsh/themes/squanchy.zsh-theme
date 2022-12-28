@@ -45,11 +45,11 @@ ZSH_THEME_NODE_PROMPT_PREFIX="%{$fg[green]%}$icon_node "
 ZSH_THEME_NODE_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function node_prompt() {
-  local function version() {
-    node -v &>/dev/null && node -v | sed "s/v//" || echo "⚠️"
+  local function node_version() {
+    node -v &>/dev/null && node -v | sed "s/v//" || echo "?"
   }
 
-  echo "$ZSH_THEME_NODE_PROMPT_PREFIX$(version)$ZSH_THEME_NODE_PROMPT_SUFFIX"
+  echo "$ZSH_THEME_NODE_PROMPT_PREFIX$(node_version)$ZSH_THEME_NODE_PROMPT_SUFFIX"
 }
 
 ## Ruby
@@ -57,7 +57,7 @@ ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$icon_ruby "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function ruby_prompt() {
-  ruby_prompt_info &>/dev/null && echo "${$(ruby_prompt_info)//[\(\)]/}" || echo "⚠️"
+  ruby_prompt_info &>/dev/null && echo "${$(ruby_prompt_info)//[\(\)]/}" || echo "?"
 }
 
 ## Python
@@ -65,11 +65,11 @@ ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$icon_python "
 ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function python_prompt() {
-  local function version() {
-    type -a python &>/dev/null && python -V | sed "s/Python //" || echo "⚠️"
+  local function python_version() {
+    type -a python &>/dev/null && python -V | sed "s/Python //" || echo "?"
   }
-
-  echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
+  
+  echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
 }
 
 ## PHP
