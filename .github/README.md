@@ -1,6 +1,6 @@
 ## Installation
 
-1. To display icons in your terminal, download a font like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.otf?raw=true), then install it in your system and make it the default font in all apps using a terminal interface (Terminal, iTerm, VSCode, etc.)
+1. To display icons in your terminal, download a font like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true), then install it in your system and make it the default font in all apps using a terminal interface (Terminal, iTerm, VSCode, etc.)
 
 2. Clone the repository and move all files to your `$HOME`
 
