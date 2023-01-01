@@ -13,6 +13,7 @@
 /.yarnrc
 /.zcompdump**
 /.zprofile
+/Applications
 
 # folders
 /*/
