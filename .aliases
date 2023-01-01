@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Core
-alias ls="/usr/local/bin/gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
+if type -a gls >/dev/null; then
+  alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
+else
+  alias ls="ls -h -G -p"
+fi
 alias ll="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
 alias omzr="omz reload"
