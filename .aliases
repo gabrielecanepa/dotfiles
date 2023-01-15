@@ -25,6 +25,10 @@ alias aliases="$EDITOR $HOME/.aliases"
 alias sshrc="$EDITOR $HOME/.ssh"
 alias zshrc="$EDITOR $HOME/.zshrc"
 
+# Functions
+alias hide="chflags hidden"
+alias unhide="chflags nohidden"
+
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
