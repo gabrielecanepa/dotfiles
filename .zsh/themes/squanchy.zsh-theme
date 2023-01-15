@@ -46,7 +46,7 @@ ZSH_THEME_NODE_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function node_prompt() {
   local function node_version() {
-    node -v &>/dev/null && node -v | sed "s/v//" || echo "?"
+    node -v &>/dev/null && node -v | sed "s/v//" || echo "n/a"
   }
 
   echo "$ZSH_THEME_NODE_PROMPT_PREFIX$(node_version)$ZSH_THEME_NODE_PROMPT_SUFFIX"
@@ -57,7 +57,7 @@ ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$icon_ruby "
 ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function ruby_prompt() {
-  ruby_prompt_info &>/dev/null && echo "${$(ruby_prompt_info)//[\(\)]/}" || echo "?"
+  ruby_prompt_info &>/dev/null && echo "${$(ruby_prompt_info)//[\(\)]/}" || echo "n/a"
 }
 
 ## Python
@@ -66,33 +66,31 @@ ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
 
 local function python_prompt() {
   local function python_version() {
-    type -a python &>/dev/null && python -V | sed "s/Python //" || echo "?"
+    type -a python &>/dev/null && python -V | sed "s/Python //" || echo "n/a"
   }
-  
+
   echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
 }
 
 ## PHP
-# ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$icon_php "
-# ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$icon_php "
+ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
 
-# function php_version() {
-#   php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3
-# }
-# function php_prompt() {
-#   echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX"
-# }
+local function php_version() {
+  php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3
+}
+local function php_prompt() {
+  echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX"
+}
 
 # Prompt
-PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) %{$fg[cyan]%}%c ' # pre-prompt and path
-PROMPT+='$(git_prompt)' # git
+PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) %{$fg[cyan]%}%c $(git_prompt)' # pre-prompt path git
 
 # Right prompt
-local rprompts=()
+local rprompts=() rprompt
 for rprompt in $ZSH_THEME_RPROMPTS; do
   local function rprompt_fn() { echo "$(${rprompt}_prompt)" }
   rprompts+="$(rprompt_fn)"
 done
-unset rprompt
 
 RPROMPT="${(j:  :)rprompts}"

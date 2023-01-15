@@ -2,20 +2,16 @@ tap "algolia/algolia-cli"
 tap "clintmod/formulas"
 tap "github/gh"
 tap "hashicorp/tap"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "potatolabs/git-redate"
 tap "rcmdnk/file"
-# Library for command-line editing
-brew "readline"
-# Record and share terminal sessions
-brew "asciinema"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
+# Library for command-line editing
+brew "readline"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Freely available high-quality data compressor
@@ -24,30 +20,16 @@ brew "bzip2"
 brew "freetype"
 # Core application library for C
 brew "glib"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
+# YAML Parser
+brew "libyaml"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # C library implementing the SSH2 protocol
 brew "libssh2"
 # Open source suite of directory software
 brew "openldap"
-# Libraries to talk to Microsoft SQL Server and Sybase databases
-brew "freetds"
-# Network authentication protocol
-brew "krb5"
-# Postgres C API library
-brew "libpq"
-# Regular expressions library
-brew "oniguruma"
-# Granddaddy of HTML tools, with support for modern standards
-brew "tidy-html5"
-# General-purpose scripting language
-brew "php", restart_service: true
-# Dependency Manager for PHP
-brew "composer"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq", restart_service: true
 # Collection of reusable C++ library artifacts developed at Facebook
@@ -58,8 +40,6 @@ brew "edencommon"
 brew "erlang"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
-# Command-line tool to interact with exercism.io
-brew "exercism"
 # C++14 implementation of the TLS-1.3 standard
 brew "fizz"
 # Modular, composable client/server abstractions framework
@@ -70,6 +50,10 @@ brew "fbthrift"
 brew "fb303"
 # C routines to compute the Discrete Fourier Transform
 brew "fftw"
+# Fast and simple Node.js version manager
+brew "fnm"
+# Libraries to talk to Microsoft SQL Server and Sybase databases
+brew "freetds"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
 # GitHub command-line tool
@@ -96,26 +80,24 @@ brew "librsvg"
 brew "graphviz"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
-# Add GitHub support to git on the command-line
-brew "hub"
-# Command-line benchmarking tool
-brew "hyperfine"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
+# Regular expressions library
+brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Statically typed programming language for the JVM
 brew "kotlin"
+# Network authentication protocol
+brew "krb5"
+# Postgres C API library
+brew "libpq"
 # GNOME XML library
 brew "libxml2"
-# YAML Parser
-brew "libyaml"
-# Keep your Mac's application settings in sync
-brew "mackup"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Open source relational database management system
@@ -150,8 +132,6 @@ brew "shellcheck"
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Pager/text based browser
-brew "w3m"
 # Watch files and take action when they change
 brew "watchman"
 # Internet file retriever
@@ -164,11 +144,7 @@ brew "yarn"
 brew "algolia/algolia-cli/algolia"
 # Backup and Restore your Mac System and App Preferences
 brew "clintmod/formulas/macprefs"
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Reverse proxy, secure introspectable tunnels to localhost
-cask "ngrok"
 # Mach-O disassembler
 cask "otx"
