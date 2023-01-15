@@ -14,10 +14,14 @@
 /.zcompdump**
 /.zprofile
 /Applications
+/Downloads
+/Movies
+/Music
 
 # folders
 /*/
 !/.github/
+!/.macos/
 !/.vscode/
 /.vscode/extensions/
 /.vscode/argv.json
