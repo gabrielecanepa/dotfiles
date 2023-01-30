@@ -1,18 +1,18 @@
 # Tabs
-ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
-ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
+ZSH_THEME_TERM_TITLE_IDLE=""
+ZSH_THEME_TERM_TAB_TITLE_IDLE=""
 
 # Icons
-local icon="\\u"
-local icon_branch="${icon}e727"
-local icon_commit="${icon}e729"
-local icon_github="${icon}f7a3"
-local icon_node="${icon}e718"
-local icon_ruby="${icon}f43b"
-local icon_php="${icon}e608"
-local icon_python="${icon}f81f"
+icon="\\u"
+icon_branch="${icon}e727"
+icon_commit="${icon}e729"
+icon_github="${icon}f7a3"
+icon_node="${icon}e718"
+icon_ruby="${icon}f43b"
+icon_php="${icon}e608"
+icon_python="${icon}f81f"
 
-# Prompts
+# Prompt
 
 ## Git
 ZSH_THEME_GIT_PROMPT_PREFIX=""
@@ -26,71 +26,60 @@ ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 
-local function git_prompt() {
-  # Hide branch if current path is specified in a parent gitignore
-  git check-ignore . &>/dev/null && return 1
+function git_prompt() {
+  git check-ignore . &>/dev/null && return 1 # return if in a parent .gitignore
 
-  local git_prompt="%F{202}$icon_branch$(git_prompt_info)$(git_prompt_status) "
+  local git_prompt="%F{202}$icon_branch$(git_prompt_info)%{$reset_color%}$(git_prompt_status)"
 
   if git config --get remote.origin.url &>/dev/null; then
-    echo "%{$reset_color%}$icon_github$icon_commit$git_prompt"
-    return 0
+    echo "$icon_github$icon_commit$git_prompt "
+  else
+    echo "$git_prompt "
   fi
-
-  echo $git_prompt
 }
 
 ## Node.js
-ZSH_THEME_NODE_PROMPT_PREFIX="%{$fg[green]%}$icon_node "
-ZSH_THEME_NODE_PROMPT_SUFFIX="%{$reset_color%}"
-
-local function node_prompt() {
-  local function node_version() {
-    node -v &>/dev/null && node -v | sed "s/v//" || echo "n/a"
-  }
-
-  echo "$ZSH_THEME_NODE_PROMPT_PREFIX$(node_version)$ZSH_THEME_NODE_PROMPT_SUFFIX"
+function node_prompt() {
+  local node_version="$(node -v &>/dev/null && echo ${$(node -v)#v} || echo n/a)"
+  echo "%{$fg[green]%}$icon_node $node_version%{$reset_color%}"
 }
 
 ## Ruby
-ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}$icon_ruby "
-ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
-
-local function ruby_prompt() {
-  ruby_prompt_info &>/dev/null && echo "${$(ruby_prompt_info)//[\(\)]/}" || echo "n/a"
+function ruby_prompt() {
+  local ruby_version="$(ruby -v &>/dev/null && echo ${(M)$(ruby -v)##[0-9].[0-9].[0-9]} || echo n/a)"
+  echo "%{$fg[red]%}$icon_ruby $ruby_version%{$reset_color%}"
 }
 
 ## Python
-ZSH_THEME_PYTHON_PROMPT_PREFIX="%{$fg[yellow]%}$icon_python "
-ZSH_THEME_PYTHON_PROMPT_SUFFIX="%{$reset_color%}"
-
-local function python_prompt() {
-  local function python_version() {
-    type -a python &>/dev/null && python -V | sed "s/Python //" || echo "n/a"
-  }
-
-  echo "$ZSH_THEME_PYTHON_PROMPT_PREFIX$(python_version)$ZSH_THEME_PYTHON_PROMPT_SUFFIX"
+function python_prompt() {
+  local python_version="$(python3 -V &>/dev/null && echo ${$(python3 -V)#Python} || echo n/a)"
+  echo "%{$fg[yellow]%}$icon_python $python_version%{$reset_color%}"
 }
 
 ## PHP
-ZSH_THEME_PHP_PROMPT_PREFIX="%{$fg[blue]%}$icon_php "
-ZSH_THEME_PHP_PROMPT_SUFFIX="%{$reset_color%}"
-
-local function php_version() {
-  php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3
-}
-local function php_prompt() {
-  echo "$ZSH_THEME_PHP_PROMPT_PREFIX$(php_version)$ZSH_THEME_PHP_PROMPT_SUFFIX"
+function php_prompt() {
+  local php_version="$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)"
+  echo "%{$fg[blue]%}$icon_php $php_version%{$reset_color%}"
 }
 
-# Prompt
-PROMPT='%(?:%{$fg_bold[green]%}➜:%{$fg_bold[red]%}➜) %{$fg[cyan]%}%c $(git_prompt)' # pre-prompt path git
+PROMPT='%(?:%{$fg_bold[green]%}✓:%{$fg_bold[red]%}✗)%{$reset_color%} ' # status
+PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # current path
+PROMPT+='$(git_prompt)' # git
 
 # Right prompt
-local rprompts=() rprompt
-for rprompt in $ZSH_THEME_RPROMPTS; do
-  local function rprompt_fn() { echo "$(${rprompt}_prompt)" }
-  rprompts+="$(rprompt_fn)"
+rprompts=()
+
+for rprompt in $(tr ' ' '\n' <<< "${ZSH_THEME_RPROMPTS[@]}" | awk '!u[$0]++' | tr '\n' ' '); do
+  case $rprompt in
+    node) rprompts+='$(node_prompt)';;
+    ruby) rprompts+='$(ruby_prompt)';;
+    python) rprompts+='$(python_prompt)';;
+    php) rprompts+='$(php_prompt)';;
+    *) echo "${fg[red]}Unknown theme prompt: $rprompt";;
+  esac
 done
 
 RPROMPT="${(j:  :)rprompts}"
+
+# Cleanups
+unset icon rprompt rprompts
