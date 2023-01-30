@@ -42,12 +42,12 @@ fi
 plugins=(
   colored-man-pages
   colorize
+  fnm
   gh
   git-auto-fetch
   gitfast
   last-working-dir
   rbenv
-  themes
   # From zsh users
   zsh-autosuggestions
   zsh-completions
