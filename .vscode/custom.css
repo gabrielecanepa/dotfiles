@@ -11,6 +11,7 @@
 .\.git-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
+  opacity: 0.5 !important;
 }
 
 /* .github */
@@ -31,20 +32,22 @@
   content: "\ea1a" !important;
 }
 
+/* .zsh */
+.\.zsh-name-folder-icon::before {
+  font-family: file-icons !important;
+  content: "\f0c8" !important;
+}
+
 /* Files */
 
-/* Scripts: .aliases .zprofile */
+/* .aliases */
 .\.aliases-name-file-icon::before {
   font-family: file-icons !important;
   color: #825078 !important;
   content: "\f0c8" !important;
 }
 
-.\.zprofile-name-file-icon::before {
-  color: #cccccc !important;
-}
-
-/* Homebrew: .Brewfile .Brewfile.lock.json */
+/* .Brewfile .Brewfile.lock.json */
 .\.brewfile-name-file-icon::before,
 .\.brewfile\.lock\.json-name-file-icon::before {
   font-family: file-icons !important;
@@ -56,7 +59,7 @@
   color: #ffbd5d !important;
 }
 
-/* Settings: .CFUserTextEncoding .crontab .env .hushlogin */
+/* .CFUserTextEncoding .crontab .env .hushlogin */
 .\.cfusertextencoding-name-file-icon::before,
 .\.crontab-name-file-icon::before,
 .\.env-name-file-icon::before,
@@ -65,34 +68,31 @@
   content: "\f013" !important;
 }
 
-/* Git: .gitignore.global .gitprofile */
+/* .gitignore.global .gitprofile */
 .\.gitignore\.global-name-file-icon::before,
 .\.gitprofile-name-file-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
-}
-
-.\.gitignore\.global-name-file-icon::before {
   color: #ac4142 !important;
 }
 
 .\.gitprofile-name-file-icon::before {
-  color: #cccccc !important;
+  opacity: .5 !important;
 }
 
-/* Terminal: .iterm2 .shellcheckrc */
-.\.iterm2-name-file-icon::before {
-  font-family: mfixx !important;
-  content: "\f158" !important;
+/* .macos */
+.\.macos-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\e925" !important;
 }
 
+/* .shellcheckrc */
 .\.shellcheckrc-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f120" !important;
 }
 
-/* Apple: .macos */
-.\.macos-name-file-icon::before {
-  font-family: file-icons !important;
-  content: "\e925" !important;
+/* .zprofile */
+.\.zprofile-name-file-icon::before {
+  opacity: .5 !important;
 }
