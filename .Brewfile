@@ -14,6 +14,8 @@ brew "automake"
 brew "readline"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Collection of portable C++ source libraries
+brew "boost"
 # Freely available high-quality data compressor
 brew "bzip2"
 # Software library to render fonts
@@ -64,6 +66,8 @@ brew "ghostscript"
 brew "gist"
 # Distributed revision control system
 brew "git"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
 # Common error values for all GnuPG components
@@ -90,6 +94,8 @@ brew "inetutils"
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Development kit for the Java programming language
+brew "openjdk"
 # Statically typed programming language for the JVM
 brew "kotlin"
 # Network authentication protocol
@@ -115,7 +121,7 @@ brew "pipenv"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Object-relational database system
-brew "postgresql@14"
+brew "postgresql@14", restart_service: true
 # Python version management
 brew "pyenv"
 # Install various Ruby versions and implementations
