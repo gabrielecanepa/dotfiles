@@ -104,6 +104,8 @@ brew "krb5"
 brew "libpq"
 # GNOME XML library
 brew "libxml2"
+# Mac App Store command-line interface
+brew "mas"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Open source relational database management system
@@ -154,3 +156,11 @@ brew "clintmod/formulas/macprefs"
 cask "chromedriver"
 # Mach-O disassembler
 cask "otx"
+mas "1Password for Safari", id: 1569813296
+mas "AdGuard for Safari", id: 1440147259
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
