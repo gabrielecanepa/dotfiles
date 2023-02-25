@@ -1,4 +1,4 @@
-// Dotfiles VSCode settings
+// VSCode settings for dotfiles repository
 {
   "files.exclude": {
     "**/.svn": true,
@@ -6,6 +6,7 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
+    ".bash_history": true,
     ".bundle": true,
     ".cache": true,
     ".CFUserTextEncoding": true,
@@ -21,6 +22,7 @@
     ".rbenv": true,
     ".solargraph": true,
     ".ssh": true,
+    ".th-client": true,
     ".tldrc": true,
     ".Trash": true,
     ".zsh_sessions": true,

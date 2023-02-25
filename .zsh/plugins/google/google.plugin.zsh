@@ -9,11 +9,9 @@ function google () {
       echo "Commands:"
       echo -e "  help\t\t Print this help message"
       ;;
-
     "")
       open https://google.com
       ;;
-
     *)
       local q="$@"
       open https://google.com/search\?q\=${q// /+}
