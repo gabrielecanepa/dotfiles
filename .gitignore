@@ -1,6 +1,6 @@
-# Local gitignore for dotfiles repository
+# Local gitignore for dotfiles repository.
 
-# files
+# Files
 /.*.backup
 /.*_history
 /.*hst
@@ -18,7 +18,7 @@
 /Movies
 /Music
 
-# folders
+# Folders
 /*/
 !/.github/
 !/.macos/
@@ -27,3 +27,4 @@
 /.vscode/argv.json
 !/.yarn/
 !/.zsh/
+/.zsh/plugins/zsh-*/
