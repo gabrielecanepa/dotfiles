@@ -42,7 +42,16 @@ function node_prompt() {
 
 ## Ruby
 function ruby_prompt() {
-  local ruby_version="$(ruby -v &>/dev/null && echo ${(M)$(ruby -v)##[0-9].[0-9].[0-9]} || echo n/a)"
+  if ruby -v &>/dev/null; then
+    local ruby_version="$(echo ${(M)$(ruby -v)##[0-9].[0-9].[0-9]})"
+  else
+    if [[ -f ./.ruby-version ]]; then
+      local ruby_version="$(cat .ruby-version) ⚠"
+    else
+      local ruby_version="n/a"
+    fi
+  fi
+
   echo "%{$fg[red]%}$ZSH_THEME_ICON_RUBY $ruby_version%{$reset_color%}"
 }
 
