@@ -28,7 +28,7 @@ ZSH_COMPDUMP="$HOME/.zcompdump"
 
 # Options
 CASE_SENSITIVE=0
-COMPLETION_WAITING_DOTS=0
+COMPLETION_WAITING_DOTS=""
 DISABLE_AUTO_TITLE=0
 DISABLE_AUTO_UPDATE=1
 DISABLE_LS_COLORS=0
@@ -94,14 +94,13 @@ fi
 # Ruby
 export PATH="$PATH:$HOME/.rbenv/bin"
 if command -v rbenv >/dev/null; then
-  eval "$(rbenv init -)"
+  eval "$(rbenv init - zsh)"
 fi
 
 # Python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PATH:$PYENV_ROOT/bin"
+export PATH="$PATH:$HOME/.pyenv/bin"
 if command -v pyenv >/dev/null; then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init - zsh)"
 fi
 
 # Avoid duplicates in PATH
