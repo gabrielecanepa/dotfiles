@@ -2,11 +2,16 @@
 
 function brew() {
   case "$1" in
+    dump)
+      command brew bundle dump --global --force --describe --cleanup
+      ;;
+    fresh)
+      command brew update && command brew upgrade && command brew cleanup && command brew doctor
+      ;;
     install|uninstall|upgrade|tap|untap)
-      if command brew $@; then
-        printf "${fg[blue]}==>${reset_color} Updating Brewfile"
-        command brew bundle dump --global --force --describe --cleanup
-        echo "\r"
+      command brew $@
+      if [[ $? -eq 0 ]] && [[ $2 =~ "^(-h|--help)$" ]]; then
+        brew dump
       fi
       ;;
     *)
