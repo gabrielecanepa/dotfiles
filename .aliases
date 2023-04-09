@@ -8,17 +8,16 @@ else
 fi
 alias ll="ls -la"
 alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
-alias omzr="omz reload"
 
 # Paths
-wd="$WORKING_DIR"
+wd=$([[ -d "$WORKING_DIR" ]] && echo "$WORKING_DIR" || echo "$HOME")
 tmp="$wd/tmp"
-cloud="/Users/$USER/Library/Mobile Documents/com~apple~CloudDocs"
+cloud="/Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs"
 
 # Directories
 alias cdw="cd $wd"
 alias tmp="cd $tmp"
-alias cdcloud="cd $cloud"
+alias cdc="cd $cloud"
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"
@@ -29,13 +28,17 @@ alias zshrc="$EDITOR $HOME/.zshrc"
 alias hide="chflags hidden"
 alias unhide="chflags nohidden"
 
+# Apps
+alias te="open -a TextEdit"
+
+# Shortcuts
+alias omzr="omz reload"
+alias ghv="gh repo view --web"
+
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias serve="ruby -run -e httpd . -p 8000"
-
-# Apps
-alias te="open -a TextEdit"
 
 # Git short aliases: gcm -> git cm -> git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do
@@ -43,11 +46,10 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
     alias g"""${git_alias}"="git $git_alias"
   fi
 done
-unset git_alias
 
 # VSCode workspaces: code-<project> -> code /path/to/project.code-workspace
-for workspace in $(find $wd -type f -name "*.code-workspace" -maxdepth 4); do
-  workspace_name="$workspace:t:r"
-  alias code-"""$workspace_name"="code $workspace"
+for workspace in ~/.vscode/workspaces/*.code-workspace; do
+  alias code-"""$workspace:t:r"="code $workspace"
 done
-unset workspace workspace_name
+
+unset git_alias workspace
