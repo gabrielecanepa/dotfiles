@@ -5,9 +5,18 @@
   opacity: 0.2;
 }
 
+/* Reduce opacity of ignored files/folders icon */
+.monaco-decoration-itemColor--9ieymw::before {
+  opacity: 0.5;
+}
+
 /* Directories */
 
 /* .git */
+.\.git-name-folder-icon {
+  color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
+}
+
 .\.git-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
@@ -18,6 +27,12 @@
 .\.github-name-folder-icon::before {
   font-family: octicons !important;
   content: "\e602" !important;
+}
+
+/* .private */
+.\.private-name-folder-icon::before {
+  font-family: octicons !important;
+  content: "\f06a" !important;
 }
 
 /* .vscode */
@@ -76,10 +91,6 @@
   color: #ac4142 !important;
 }
 
-.\.gitprofile-name-file-icon::before {
-  opacity: .5 !important;
-}
-
 /* .macos */
 .\.macos-name-file-icon::before {
   font-family: file-icons !important;
@@ -90,9 +101,4 @@
 .\.shellcheckrc-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f120" !important;
-}
-
-/* .zprofile */
-.\.zprofile-name-file-icon::before {
-  opacity: .5 !important;
 }
