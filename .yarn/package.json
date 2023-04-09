@@ -6,7 +6,6 @@
     "bundle-phobia-cli": "^0.14.6",
     "create-cra-template": "^1.2.3",
     "create-next-app": "^13.0.6",
-    "cross-env": "^7.0.2",
     "eslint": "^8.14.0",
     "gatsby-cli": "^2.16.1",
     "minify": "^9.1.0",
