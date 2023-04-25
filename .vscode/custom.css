@@ -74,10 +74,11 @@
   color: #ffbd5d !important;
 }
 
-/* .CFUserTextEncoding .crontab .env .hushlogin */
+/* .CFUserTextEncoding .crontab .env .env.example .hushlogin */
 .\.cfusertextencoding-name-file-icon::before,
 .\.crontab-name-file-icon::before,
 .\.env-name-file-icon::before,
+.\.env\.example-name-file-icon::before,
 .\.hushlogin-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;

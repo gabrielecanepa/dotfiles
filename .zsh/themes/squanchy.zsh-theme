@@ -22,7 +22,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 
 function git_prompt() {
-  # Return if the current path is not in a Git repository or is specified in a parent .gitignore
+  # Return if the current path is not in a Git repository or specified in a parent .gitignore
   ! git rev-parse --is-inside-work-tree &>/dev/null || git check-ignore . &>/dev/null && echo "" && return 0
 
   local git_prompt="%F{202}$ZSH_THEME_ICON_BRANCH$(git_prompt_info)%{$reset_color%}$(git_prompt_status)"
