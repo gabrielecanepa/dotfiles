@@ -6,7 +6,7 @@ function env-latest() {
 
   # Check the specified version manager.
   if [[ -z "$version_manager" ]] || ! command -v $version_manager >/dev/null || ! [[ " ${version_managers[@]} " =~ " ${version_manager} " ]]; then
-    echo "${fg[red]}Error: you must specify a supported version manager$reset_color"
+    echo "${fg[red]}error${reset_color} You must specify a supported version manager$reset_color"
     return 1
   fi
 
@@ -25,4 +25,15 @@ function rbenv-latest() {
 }
 function pyenv-latest() {
   env-latest pyenv $@
+}
+
+function env-upgrade() {
+  echo "${fg[blue]}info${reset_color} Installing latest Node version"
+  fnm install --lts && fnm use lts-latest
+
+  echo "\n${fg[blue]}info${reset_color} Installing latest Ruby version"
+  ruby -v
+
+  echo "\n${fg[blue]}info${reset_color} Installing latest Python version"
+  pyenv install $(pyenv-latest) && pyenv global $(pyenv-latest)
 }
