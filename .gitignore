@@ -24,7 +24,6 @@
 !/.macos/
 !/.vscode/
 /.vscode/extensions/
-/.vscode/workspaces/
 /.vscode/argv.json
 !/.yarn/
 !/.zsh/
