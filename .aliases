@@ -12,12 +12,13 @@ alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
 # Paths
 wd=$([[ -d "$WORKING_DIR" ]] && echo "$WORKING_DIR" || echo "$HOME")
 tmp="$wd/tmp"
-cloud="/Users/$USER/Library/Mobile\ Documents/com~apple~CloudDocs"
+cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
 # Directories
 alias cdw="cd $wd"
 alias tmp="cd $tmp"
-alias cdc="cd $cloud"
+alias cdc="cd \"$cloud\""
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"
