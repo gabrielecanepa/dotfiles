@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "name": "gabrielecanepa",
+      "path": "/Users/gabrielecanepa"
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "git.ignoredRepositories": [
+      "/Users/gabrielecanepa/.nvm",
+      "/Users/gabrielecanepa/.oh-my-zsh"
+    ]
+  }
+}
