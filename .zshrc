@@ -23,7 +23,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
-ZSH_THEME_RPROMPTS=(node ruby python)
+ZSH_THEME_SQUANCHY_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
 
 # Options
@@ -73,37 +73,24 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Git
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # private git profile
+[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
-# Node.js
-export PATH="$PATH:./node_modules/.bin"
 # fnm
-if command -v fnm >/dev/null; then
-  eval "$(fnm env --use-on-cd)"
-fi
-# nvm
-if command -v nvm >/dev/null; then
-  export NVM_DIR="$HOME/.nvm"
-  [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" --no-use
-  [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
-fi
+export PATH="$PATH:./node_modules/.bin"
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 
-# Ruby
+# rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
-if command -v rbenv >/dev/null; then
-  eval "$(rbenv init - zsh)"
-fi
+command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 
-# Python
+# pyenv
 export PATH="$PATH:$HOME/.pyenv/bin"
-if command -v pyenv >/dev/null; then
-  eval "$(pyenv init - zsh)"
-fi
+command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Avoid duplicates in PATH
+# Avoid duplicates in $PATH
 typeset -aU path
 
 # Load aliases and run cron jobs
