@@ -22,9 +22,11 @@
     ".rbenv": true,
     ".solargraph": true,
     ".ssh": true,
+    ".synamedia": true, // Sky Go
     ".th-client": true,
     ".tldrc": true,
     ".Trash": true,
+    ".vscode-cli": true,
     ".zsh_sessions": true,
     "Applications": true,
     "Backups": true,
