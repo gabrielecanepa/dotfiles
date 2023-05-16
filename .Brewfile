@@ -158,6 +158,7 @@ cask "chromedriver"
 cask "otx"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
+mas "Color Picker", id: 1545870783
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
