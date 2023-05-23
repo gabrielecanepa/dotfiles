@@ -48,7 +48,12 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
   fi
 done
 
-# VSCode workspaces: code-<project> -> code /path/to/project.code-workspace
+# VSCode Insiders: alias to `code`` if EDITOR=code-insiders
+if [[ "$EDITOR" == "code-insiders" ]]; then
+  alias code="code-insiders"
+fi
+
+# VSCode workspaces: code-<workspace> -> code ~/.vscode/workspaces/<workspace>.code-workspace
 for workspace in ~/.vscode/workspaces/*.code-workspace; do
   alias code-"""$workspace:t:r"="code $workspace"
 done
