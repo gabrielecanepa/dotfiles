@@ -74,14 +74,29 @@
       [[ ! -d $icloud_folder ]] && mkdir $icloud_folder
 
       case $folder in
-        Applications|Downloads|Movies|Music) # replace with symlink to icloud
-          [[ -d ~/$folder ]] && mv ~/$folder/* $icloud_folder
-          rm -rf ~/$folder && ln -sf $icloud_folder ~/$folder
-          [[ $folder -eq "Applications" ]] && ln -sf $icloud_folder /Applications/iCloud\ Applications
+        # Add symlink to icloud
+        Applications)
+          ln -sf $icloud_folder /Applications/iCloud\ Applications
           ;;
-        Developer|Pictures) # add a symlink to icloud
+        Developer|Pictures)
           ln -sf $icloud_folder ~/$folder/iCloud\ $folder
+          ;;
+        # Replace with symlink to icloud
+        Downloads|Movies|Music)
+          mv ~/$folder/* $icloud_folder
+          sudo rm -rf ~/$folder && ln -sf $icloud_folder ~/$folder
           ;;
       esac
     done
+    ```
+
+9. Sync Mac preferences with iCloud
+
+    ```sh
+    icloud_system=~/Library/Mobile\ Documents/com~apple~CloudDocs/System/Preferences
+    icloud_preferences=$icloud/System/Preferences
+
+    [[ ! -d $icloud_system ]] && mkdir $icloud_system
+    [[ ! -d $icloud_preferences ]] && sudo cp -r ~/Library/Preferences $icloud_preferences
+    sudo rm -rf ~/Library/Preferences && ln -sf $icloud_preferences ~/Library/Preferences
     ```

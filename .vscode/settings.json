@@ -1,4 +1,4 @@
-// VSCode settings for dotfiles repository
+// Settings for dotfiles repository.
 {
   "files.exclude": {
     "**/.svn": true,
@@ -22,10 +22,11 @@
     ".rbenv": true,
     ".solargraph": true,
     ".ssh": true,
-    ".synamedia": true, // Sky Go
+    ".synamedia": true,
     ".th-client": true,
     ".tldrc": true,
     ".Trash": true,
+    ".ts_node_repl_history": true,
     ".vscode-cli": true,
     ".zsh_sessions": true,
     "Applications": true,
