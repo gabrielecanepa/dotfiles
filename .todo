@@ -1,3 +1,4 @@
 - [ ] Autoupgrade node, ruby, python
 - [ ] Autoupgrade brew packages
 - [ ] Autoupgrade yarn packages
+- [ ] Dump brew packages in lock file

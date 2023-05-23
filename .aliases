@@ -34,7 +34,7 @@ alias te="open -a TextEdit"
 
 # Shortcuts
 alias omzr="omz reload"
-alias ghv="gh repo view --web"
+alias ghrv="gh repo view --web"
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
