@@ -39,6 +39,7 @@
 # Aliases
 [alias]
   a = add
+  acm = !git add -A && git commit -m
   aliases = !git config --get-regexp \"alias.*\" | sed \"s/alias.//\"
   br = branch
   ci = commit --interactive
