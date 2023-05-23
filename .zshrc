@@ -2,9 +2,9 @@
 
 # Profile
 export LANG="en_US.UTF-8"
-export EDITOR="code"
-export VISUAL="code"
-export GIT_EDITOR="code --wait"
+export EDITOR="code-insiders"
+export VISUAL="$EDITOR"
+export GIT_EDITOR="$EDITOR --wait"
 
 # Binaries
 export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"

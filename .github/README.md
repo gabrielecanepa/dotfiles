@@ -6,7 +6,7 @@
 
     ```sh
     git clone git@github.com:gabrielecanepa/dotfiles.git
-    # Move manually or move all (WARN: this will overwrite the existing files)
+    # Move manually or move all (WARN: the following command will overwrite any existing file)
     mv -vf dotfiles/* ~/ && rm -rf dotfiles && cd ~
     ```
 
@@ -16,7 +16,7 @@
     touch ~/.profile
     ```
 
-    In `.profile`:
+    In `.profile` or `.zprofile`:
 
     ```sh
     export NAME="..."
@@ -90,7 +90,7 @@
     done
     ```
 
-9. Sync Mac preferences with iCloud
+9. Sync Mac preferences using iCloud
 
     ```sh
     icloud_system=~/Library/Mobile\ Documents/com~apple~CloudDocs/System/Preferences

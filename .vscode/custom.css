@@ -35,8 +35,9 @@
   content: "\f06a" !important;
 }
 
-/* .vscode */
-.\.vscode-name-folder-icon::before {
+/* .vscode .vscode-insiders */
+.\.vscode-name-folder-icon::before,
+.\.vscode-insiders-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e60c" !important;
 }
