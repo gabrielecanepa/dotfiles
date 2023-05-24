@@ -11,6 +11,8 @@
   rebase = true
 [help]
   autocorrect = 1
+[advice]
+  skippedCherryPicks = false
 
 # Branches
 [branch "main"]

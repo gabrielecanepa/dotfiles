@@ -23,6 +23,7 @@
 !/.github/
 !/.macos/
 !/.vscode/
+/.vscode/cli/
 /.vscode/extensions/
 /.vscode/argv.json
 !/.yarn/

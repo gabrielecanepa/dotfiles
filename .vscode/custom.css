@@ -77,12 +77,17 @@
 
 /* .CFUserTextEncoding .crontab .env .env.example .hushlogin */
 .\.cfusertextencoding-name-file-icon::before,
-.\.crontab-name-file-icon::before,
 .\.env-name-file-icon::before,
 .\.env\.example-name-file-icon::before,
 .\.hushlogin-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;
+}
+
+/* .crontab */
+.\.crontab-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\1f558" !important;
 }
 
 /* .gitignore.global .gitprofile */
