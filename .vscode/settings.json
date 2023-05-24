@@ -28,6 +28,7 @@
     ".Trash": true,
     ".ts_node_repl_history": true,
     ".vscode-cli": true,
+    ".vscode-insiders": true,
     ".zsh_sessions": true,
     "Applications": true,
     "Backups": true,
