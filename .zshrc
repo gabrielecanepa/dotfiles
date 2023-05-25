@@ -9,7 +9,7 @@ export GIT_EDITOR="$EDITOR --wait"
 # Binaries
 export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"
 
-# Homebrew
+# Homebrew - https://brew.sh
 export HOMEBREW_PREFIX="/opt/homebrew";
 export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
 export HOMEBREW_REPOSITORY="/opt/homebrew";
@@ -19,7 +19,7 @@ export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-# Oh My Zsh - https://github.com/robbyrussell/oh-my-zsh/wiki
+# Oh My Zsh - https://ohmyz.sh
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
@@ -72,27 +72,27 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Git
+# Git - https://git-scm.com
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
-# fnm
+# fnm - https://github.com/Schniz/fnm
 export PATH="$PATH:./node_modules/.bin"
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 
-# rbenv
+# rbenv - https://github.com/rbenv/rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
 command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 
-# pyenv
+# pyenv - https://github.com/pyenv/pyenv
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Avoid duplicates in $PATH
+# Avoid duplicates in PATH
 typeset -aU path
 
 # Load aliases and run cron jobs
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-[[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
+crontab -l &>/dev/null && return 0 || crontab "$HOME/.crontab.reboot"
