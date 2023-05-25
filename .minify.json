@@ -1,10 +1,10 @@
 {
-  "html": {},
   "css": {
     "compatibility": "*"
   },
+  "html": {},
+  "img": {},
   "js": {
     "module": true
-  },
-  "img": {}
+  }
 }

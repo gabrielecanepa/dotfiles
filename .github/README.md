@@ -10,13 +10,13 @@
     mv -vf dotfiles/* ~/ && rm -rf dotfiles && cd ~
     ```
 
-3. Create a `.profile` or `.zprofile` file and export the required variables:
+3. Create a `.profile` file and export the required variables:
 
     ```sh
     touch ~/.profile
     ```
 
-    In `.profile` or `.zprofile`:
+    In `.profile`:
 
     ```sh
     export NAME="..."
@@ -34,7 +34,7 @@
     done
     ```
 
-1. Install Homebrew and the bundled packages:
+5. Install Homebrew and the bundled packages:
 
     ```sh
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

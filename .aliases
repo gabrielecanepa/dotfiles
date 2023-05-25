@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # Core
-if type -a gls >/dev/null; then
+if command -v gls >/dev/null; then
   alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
 else
   alias ls="ls -h -G -p"
@@ -43,7 +43,7 @@ alias serve="ruby -run -e httpd . -p 8000"
 
 # Git short aliases: gcm -> git cm -> git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  if ! type -a "g$git_alias" >/dev/null; then
+  if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
 done
