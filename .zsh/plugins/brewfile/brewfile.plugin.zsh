@@ -6,11 +6,11 @@ function brew() {
       command brew bundle dump --global --force --describe --cleanup
       ;;
     fresh)
-      command brew update && command brew upgrade && command brew cleanup && command brew doctor
+      command brew update && command brew upgrade && command brew cleanup && command brew doctor && command brew bundle --global
       ;;
     install|uninstall|upgrade|tap|untap)
       command brew $@
-      if [[ $? -eq 0 ]] && [[ $2 =~ "^(-h|--help)$" ]]; then
+      if [[ $? -eq 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
         brew dump
       fi
       ;;
