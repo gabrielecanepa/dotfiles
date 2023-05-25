@@ -9,10 +9,10 @@
 /.git-stats
 /.gitprofile
 /.netrc
+/.profile
 /.viminfo
 /.yarnrc
 /.zcompdump**
-/.zprofile
 /Applications
 /Downloads
 /Movies
@@ -22,10 +22,8 @@
 /*/
 !/.github/
 !/.macos/
-!/.vscode/
-/.vscode/cli/
-/.vscode/extensions/
-/.vscode/argv.json
+!/.vscode/custom.css
+!/.vscode/settings.json
 !/.yarn/
 !/.zsh/
 /.zsh/plugins/zsh-*/
