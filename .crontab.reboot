@@ -1,2 +1,0 @@
-# Mac preferences backup
-@reboot sleep 10; crontab /Users/gabrielecanepa/.crontab

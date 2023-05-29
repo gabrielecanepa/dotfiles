@@ -61,7 +61,10 @@
   re = remote
   remote = remote -v
   reset-origin = !"git remote remove origin &>/dev/null; git remote add origin"
+  ro = reset-origin
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  set-origin = !sh -c 'git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)'
+  so = set-origin
   st = status -sb
   sweep = !"git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
   undo = reset --hard

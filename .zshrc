@@ -4,7 +4,7 @@
 export LANG="en_US.UTF-8"
 export EDITOR="code-insiders"
 export VISUAL="$EDITOR"
-export GIT_EDITOR="$EDITOR --wait"
+export GIT_EDITOR="code-insiders --wait"
 
 # Binaries
 export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"
@@ -95,4 +95,4 @@ typeset -aU path
 
 # Load aliases and run cron jobs
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-crontab -l &>/dev/null && return 0 || crontab "$HOME/.crontab.reboot"
+[[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"

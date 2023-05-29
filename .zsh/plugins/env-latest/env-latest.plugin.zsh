@@ -32,8 +32,10 @@ function env-upgrade() {
   fnm install --lts && fnm use lts-latest
 
   echo "\n${fg[blue]}info${reset_color} Installing latest Ruby version"
-  ruby -v
+  rbenv install $(rbenv-latest) && rbenv global $(rbenv-latest)
 
   echo "\n${fg[blue]}info${reset_color} Installing latest Python version"
   pyenv install $(pyenv-latest) && pyenv global $(pyenv-latest)
+
+  return 0
 }
