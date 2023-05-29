@@ -1,8 +1,8 @@
 ## Installation
 
-1. **Fonts**
+1. **Font**
     
-   To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then, install it in your system and make it default in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
+   To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then install it in your system and use it in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
 
 2. **Dotfiles**
 
@@ -12,10 +12,10 @@
     git clone git@github.com:gabrielecanepa/dotfiles.git
     ```
     
-    then move all files to your `$HOME` directory, manually or all together:
+    then move all files to your `$HOME` directory, manually or in bulk:
 
     > **Warning**  
-    > The following command will overwrite any existing files
+    > The following command will overwrite all existing files.
     
     ```sh
     mv -vf dotfiles/* ~/ && cd ~
@@ -52,8 +52,6 @@
       git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
     done
     ```
-    
-    > **Note**: reload with `omz reload` or `zsh` to apply the new configuration
 
 5. **Homebrew**
 
@@ -68,7 +66,8 @@
     ```sh
     brew bundle --file ~/.Brewfile
     ```
-    > **Note**: reload with `omz reload` or `zsh` to apply the new configuration
+    > **Note**  
+    > Reload with `omz reload` to apply all changes.
 
 6. **Node.js**, **Ruby** and **Python**
 
@@ -82,14 +81,15 @@
     rbenv install $(rbenv-latest) && rbenv global $(rbenv-latest)
     pyenv install $(pyenv-latest) && pyenv global $(pyenv-latest)
     ```
-    > **Note**: reload with `omz reload` or `zsh` to apply the new configuration
+    > **Note**  
+    > Reload with `zsh` to apply all changes.
 
 7. **Yarn**
 
     Set up and install global [Yarn](https://yarnpkg.com) packages with:
     
     > **Warning**  
-    > All existing packages will be moved to `~/.config/yarn/global.backup`
+    > Any existing packages will be moved to `~/.config/yarn/global.backup`.
 
     ```sh
     # Set up global folder and link to ~/.yarn
@@ -104,9 +104,14 @@
 8. **iCloud**
 
     > **Warning**  
-    > This operation will permanently replace some system folders with symbolic links to iCloud
+    > This operation will permanently replace some system folders with symlinks to iCloud Drive.
     
-    Sync local folders with iCloud:
+    The following script will:
+    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuos synchronization using iCloud.
+    - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a cloud folder can be useful to store additional assets and resources.
+    - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
+ 
+    <br>
 
     ```sh
     for folder in Applications Developer Downloads Movies Music Pictures; do
@@ -114,18 +119,22 @@
       [[ ! -d $icloud_folder ]] && mkdir $icloud_folder
 
       case $folder in
-        # Add symlink to icloud
-        Developer)
-          ln -sf $icloud_folder ~/$folder/icloud
-          ;;
-        Pictures)
-          ln -sf $icloud_folder ~/$folder/iCloud
-          ;;
         # Replace with symlink to icloud
         Applications|Downloads|Movies|Music)
           mv ~/$folder/* $icloud_folder 2>/dev/null
           sudo rm -rf ~/$folder && ln -sf $icloud_folder ~/$folder
           ;;
+        # Add symlink to icloud
+        Developer)
+          ln -sf $icloud_folder ~/Developer/icloud
+          ;;
+        Pictures)
+          ln -sf $icloud_folder ~/Pictures/iCloud
+          ;;
       esac
     done
     ```
+
+    > **Note**  
+    > You can link applications stored in the cloud with `ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app` or create an alias and move it to `/Applications`.
+    > The applications will become available in the system and update when the version changes.

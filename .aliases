@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Core
 if command -v gls >/dev/null; then
@@ -48,13 +48,13 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
   fi
 done
 
-# VSCode Insiders: alias to `code`` if EDITOR=code-insiders
+# VSCode Insiders: alias to `code` if EDITOR=code-insiders
 if [[ "$EDITOR" == "code-insiders" ]]; then
   alias code="code-insiders"
 fi
 
 # VSCode workspaces: code-<workspace> -> code ~/.vscode/workspaces/<workspace>.code-workspace
-for workspace in ~/.vscode/workspaces/*.code-workspace; do
+for workspace in $(find ~/.vscode/workspaces/*.code-workspace 2>/dev/null); do
   alias code-"""$workspace:t:r"="code $workspace"
 done
 

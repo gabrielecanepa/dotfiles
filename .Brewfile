@@ -26,10 +26,6 @@ brew "libyaml"
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# C library implementing the SSH2 protocol
-brew "libssh2"
-# Open source suite of directory software
-brew "openldap"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq", restart_service: true
 # Collection of reusable C++ library artifacts developed at Facebook
@@ -100,6 +96,8 @@ brew "kotlin"
 brew "krb5"
 # Postgres C API library
 brew "libpq"
+# C library implementing the SSH2 protocol
+brew "libssh2"
 # GNOME XML library
 brew "libxml2"
 # Mac App Store command-line interface
@@ -114,6 +112,8 @@ brew "neofetch"
 brew "nghttp2"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx", restart_service: true
+# Open source suite of directory software
+brew "openldap"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Python dependency management tool
@@ -152,8 +152,6 @@ brew "algolia/algolia-cli/algolia"
 brew "clintmod/formulas/macprefs"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Mach-O disassembler
-cask "otx"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
