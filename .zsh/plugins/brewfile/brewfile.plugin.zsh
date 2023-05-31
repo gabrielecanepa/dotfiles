@@ -10,7 +10,7 @@ function brew() {
       ;;
     install|uninstall|upgrade|tap|untap)
       command brew $@
-      if [[ $? -eq 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
+      if [[ $? == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
         brew dump
       fi
       ;;

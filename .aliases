@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Core
 if command -v gls >/dev/null; then

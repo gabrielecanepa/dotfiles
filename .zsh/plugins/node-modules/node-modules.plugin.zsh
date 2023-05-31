@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function node-modules () {
   local _cut="\r\033[1A\033[0K"

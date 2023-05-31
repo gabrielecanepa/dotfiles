@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function gatekeeper() {
   case $1 in

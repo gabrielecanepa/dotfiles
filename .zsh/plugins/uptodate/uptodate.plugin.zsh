@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function uptodate() {
   local plugin_name="uptodate"

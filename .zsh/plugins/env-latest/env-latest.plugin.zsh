@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function env-latest() {
   local version_manager=$1

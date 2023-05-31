@@ -1,4 +1,4 @@
-#/bin/sh
+#/bin/zsh
 
 function colors256() {
   for code in {000..255}; do
