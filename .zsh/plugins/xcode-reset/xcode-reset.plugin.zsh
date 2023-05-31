@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 function xcode-reset() {
   if [ "$2" ]; then

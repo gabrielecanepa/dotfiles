@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Profile
 export LANG="en_US.UTF-8"

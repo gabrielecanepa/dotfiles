@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Print the current profile or execute one of the commands
 # profile [check|config|install|reload|help]
