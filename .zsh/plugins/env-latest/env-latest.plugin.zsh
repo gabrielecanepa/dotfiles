@@ -11,7 +11,7 @@ function env-latest() {
   fi
 
   local args=${@:2}
-  local versions=$($version_manager install --list | sed 's/^[ \t]*//;s/[ \t]*$//')
+  local versions=$($version_manager install -L | sed 's/^[ \t]*//;s/[ \t]*$//')
 
   if [[ -z "$args" ]]; then
     echo $versions | grep -vi "[A-Za-z\-]" | tail -1

@@ -152,6 +152,8 @@ brew "algolia/algolia-cli/algolia"
 brew "clintmod/formulas/macprefs"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
+# Tool to optimize images to a smaller size
+cask "imageoptim"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783

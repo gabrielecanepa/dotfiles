@@ -39,7 +39,7 @@ alias ghrv="gh repo view --web"
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-alias serve="ruby -run -e httpd . -p 8000"
+alias server="ruby -run -e httpd . -p 8000"
 
 # Git short aliases: gcm -> git cm -> git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do

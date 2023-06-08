@@ -6,7 +6,10 @@ function brew() {
       command brew bundle dump --global --force --describe --cleanup
       ;;
     fresh)
-      command brew update && command brew upgrade && command brew cleanup && command brew doctor && command brew bundle --global
+      command brew update && 
+      command brew bundle --global &&
+      command brew cleanup && 
+      command brew doctor
       ;;
     install|uninstall|upgrade|tap|untap)
       command brew $@
