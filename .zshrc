@@ -56,7 +56,7 @@ plugins=(
   gitfast
   last-working-dir
   rbenv
-  # From zsh-users
+  # From https://github.com/zsh-users
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
@@ -90,9 +90,9 @@ command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Avoid duplicates in PATH
-typeset -aU path
-
 # Load aliases and run cron jobs
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
+
+# Avoid duplicates in PATH
+typeset -aU path
