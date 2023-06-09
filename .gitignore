@@ -22,8 +22,11 @@
 /*/
 !/.github/
 !/.macos/
-!/.vscode/custom.css
-!/.vscode/settings.json
+!/.vscode/
+/.vscode/cli/
+/.vscode/extensions/
+/.vscode/workspaces/
+/.vscode/argv.json
 !/.yarn/
 !/.zsh/
 /.zsh/plugins/zsh-*/

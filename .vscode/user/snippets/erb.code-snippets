@@ -1,0 +1,18 @@
+{
+	"Embed Ruby": {
+		"prefix": "er",
+		"scope": "html.erb",
+		"body": [
+			"<% $0 %>",
+		],
+		"description": "Embed Ruby"
+	},
+	"Print embedded Ruby": {
+		"prefix": "pe",
+		"scope": "html.erb",
+		"body": [
+			"<%= $0 %>",
+		],
+		"description": "Print embedded Ruby"
+	}
+}
