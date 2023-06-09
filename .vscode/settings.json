@@ -10,7 +10,6 @@
     ".bundle": true,
     ".cache": true,
     ".CFUserTextEncoding": true,
-    ".config": true,
     ".docker": true,
     ".gem": true,
     ".local": true,
@@ -21,14 +20,17 @@
     ".pyenv": true,
     ".rbenv": true,
     ".solargraph": true,
-    ".ssh": true,
     ".synamedia": true,
     ".th-client": true,
     ".tldrc": true,
     ".Trash": true,
     ".ts_node_repl_history": true,
+    ".vscode/cli": true,
+    ".vscode/extensions": true,
+    ".vscode/argv.json": true,
     ".vscode-cli": true,
     ".vscode-insiders": true,
+    ".yarn/berry": true,
     ".zsh_sessions": true,
     "Applications": true,
     "Backups": true,
@@ -49,5 +51,9 @@
     ".yarnrc": true,
     ".zcompdump*": true,
     ".zsh_history": true
-  }
+  },
+  "git.repositoryScanIgnoredFolders": [
+    ".Trash",
+    "node_modules"
+  ]
 }
