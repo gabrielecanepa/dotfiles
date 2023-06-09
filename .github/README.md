@@ -138,3 +138,23 @@
     > **Note**  
     > You can link applications stored in the cloud with `ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app` or create an alias and move it to `/Applications`.
     > The applications will become available in the system and update when the version changes.
+
+9. **VSCode**
+
+    Create some symlinks to backup VSCode settings and extensions in dotfiles:
+
+    ```sh
+    # Settings
+    code=~/Library/Application\ Support/Code/User
+    code_insiders=~/Library/Application\ Support/Code\ -\ Insiders/User
+
+    for file in keybindings.json settings.json snippets; do
+      rm -rf $code/$file $code_insiders/$file
+      ln -sf ~/.vscode/user/$file $code/$file
+      ln -sf ~/.vscode/user/$file $code_insiders/$file
+    done
+    
+    # Extensions
+    rm -rf ~/.vscode/extensions/extensions.json
+    ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
+    ```
