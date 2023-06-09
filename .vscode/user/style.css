@@ -1,22 +1,31 @@
-/* Editor */
+/*==== Editor ====*/
 
 /* Reduce opacity of active indentation */
 .monaco-editor .indent-active {
-  opacity: 0.2;
+  opacity: 0.2 !important;
 }
 
-/* Reduce opacity of ignored files/folders icon */
+/*==== File icons ====*/
+
+/*== Global ==*/
+
+/* Adapt the icon color of ignored files/folders to the git status */
 .monaco-decoration-itemColor--9ieymw::before {
-  opacity: 0.5;
+  opacity: 0.5 !important;
 }
 
-/* Directories */
+/*== Directories ==*/
+
+/* .config */
+.\.config-name-folder-icon::before {
+  font-family: fontawesome !important;
+  content: "\f013" !important;
+}
 
 /* .git */
-.\.git-name-folder-icon {
+.\.git-name-folder-icon .label-name {
   color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
 }
-
 .\.git-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
@@ -33,6 +42,12 @@
 .\.private-name-folder-icon::before {
   font-family: octicons !important;
   content: "\f06a" !important;
+}
+
+/* .ssh */
+.\.ssh-name-folder-icon::before {
+  font-family: fontawesome !important;
+  content: "\f120" !important;
 }
 
 /* .vscode .vscode-insiders */
@@ -54,7 +69,7 @@
   content: "\f0c8" !important;
 }
 
-/* Files */
+/*== Files ==*/
 
 /* .aliases */
 .\.aliases-name-file-icon::before {
@@ -70,7 +85,6 @@
   content: "\1f37a" !important;
   font-size: 13.8px !important;
 }
-
 .\.brewfile-name-file-icon::before {
   color: #ffbd5d !important;
 }
@@ -82,6 +96,12 @@
 .\.hushlogin-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;
+}
+
+/* .code-snippets */
+.code-snippets-ext-file-icon::before {
+  font-family: file-icons !important;
+  content: "\eb22" !important;
 }
 
 /* .crontab */
@@ -106,8 +126,9 @@
 
 /* .shellcheckrc */
 .\.shellcheckrc-name-file-icon::before {
-  font-family: fontawesome !important;
-  content: "\f120" !important;
+  font-family: file-icons !important;
+  content: "\f0c8" !important;
+  color: #aaaaff !important;
 }
 
 /* craco.config.ts */

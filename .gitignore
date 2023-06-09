@@ -28,5 +28,7 @@
 /.vscode/workspaces/
 /.vscode/argv.json
 !/.yarn/
+/.yarn/berry/
+/.yarn/node_modules/
 !/.zsh/
 /.zsh/plugins/zsh-*/

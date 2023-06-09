@@ -1,13 +1,10 @@
 #!/bin/sh
 
 # Core
-if command -v gls >/dev/null; then
-  alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
-else
-  alias ls="ls -h -G -p"
-fi
+alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
+! command -v gls >/dev/null && alias ls="command ls -h -G -p"
 alias ll="ls -la"
-alias lss="du -sh * 2>/dev/null | sort -hr" # sort by size
+alias lss="du -sh * 2>/dev/null | sort -hr" # by size
 
 # Paths
 wd=$([[ -d "$WORKING_DIR" ]] && echo "$WORKING_DIR" || echo "$HOME")
@@ -35,27 +32,32 @@ alias te="open -a TextEdit"
 # Shortcuts
 alias omzr="omz reload"
 alias ghrv="gh repo view --web"
+alias ynpx="yarn dlx"
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias server="ruby -run -e httpd . -p 8000"
 
-# Git short aliases: gcm -> git cm -> git commit -m
+# Git
+
+# Short aliases: gcm → git cm → git commit -m
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
 done
 
-# VSCode Insiders: alias to `code` if EDITOR=code-insiders
-if [[ "$EDITOR" == "code-insiders" ]]; then
-  alias code="code-insiders"
-fi
+unset git_alias
 
-# VSCode workspaces: code-<workspace> -> code ~/.vscode/workspaces/<workspace>.code-workspace
-for workspace in $(find ~/.vscode/workspaces/*.code-workspace 2>/dev/null); do
-  alias code-"""$workspace:t:r"="code $workspace"
+# VSCode
+
+# Alias VSCode to VSCode Insiders if set as editor
+[[ "$EDITOR" == "code-insiders" ]] && alias code="code-insiders"
+
+# Workspaces: code-my-workspace → code ~/.vscode/workspaces/my-workspace.code-workspace
+for vscode_workspace in $(find ~/.vscode/workspaces/*.code-workspace 2>/dev/null); do
+  alias code-"""$vscode_workspace:t:r"="code $vscode_workspace"
 done
 
-unset git_alias workspace
+unset vscode_workspace

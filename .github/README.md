@@ -66,8 +66,6 @@
     ```sh
     brew bundle --file ~/.Brewfile
     ```
-    > **Note**  
-    > Reload with `omz reload` to apply all changes.
 
 6. **Node.js**, **Ruby** and **Python**
 
@@ -81,14 +79,12 @@
     rbenv install $(rbenv-latest) && rbenv global $(rbenv-latest)
     pyenv install $(pyenv-latest) && pyenv global $(pyenv-latest)
     ```
-    > **Note**  
-    > Reload with `zsh` to apply all changes.
 
 7. **Yarn**
 
-    Set up and install global [Yarn](https://yarnpkg.com) packages with:
+    Set up and install global [Yarn](https://classic.yarnpkg.com) packages with:
     
-    > **Warning**  
+    > **Note**  
     > Any existing packages will be moved to `~/.config/yarn/global.backup`.
 
     ```sh
@@ -101,13 +97,22 @@
     yarn global add
     ```
 
+    Install [Yarn Berry](https://yarnpkg.com) using [Corepack](https://nodejs.org/api/corepack):
+
+    ```sh
+    corepack enable # if not already enabled
+    corepack prepare yarn@stable --activate
+    ```
+
+    Thanks to the [berry plugin](../.zsh/plugins/berry/berry.plugin.zsh), the classic version will be available with the standard `yarn` command, while the new version can be used with `berry`.
+
 8. **iCloud**
 
     > **Warning**  
-    > This operation will permanently replace some system folders with symlinks to iCloud Drive.
+    > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
     
     The following script will:
-    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuos synchronization using iCloud.
+    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
     - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a cloud folder can be useful to store additional assets and resources.
     - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
  
@@ -141,7 +146,10 @@
 
 9. **VSCode**
 
-    Create some symlinks to backup VSCode settings and extensions in dotfiles:
+    > **Warning**  
+    > The following operations will permanently replace some system folders with symlinks to `~/.vscode/user`.
+
+    Create symlinks to backup VSCode settings and extensions, working with both the stable and insiders versions:
 
     ```sh
     # Settings
