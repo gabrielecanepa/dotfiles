@@ -103,5 +103,13 @@
   {
     "key": "ctrl+shift+t",
     "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "-workbench.action.closeWindow"
+  },
+  {
+    "key": "shift+cmd+w",
+    "command": "workbench.action.closeAllEditors"
   }
 ]

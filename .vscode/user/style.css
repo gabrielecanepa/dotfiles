@@ -131,6 +131,14 @@
   color: #aaaaff !important;
 }
 
+/* .yarnrc.yml */
+.\.yarnrc\.yml-name-file-icon::before {
+  color: #46788d !important;
+  content: "\ea1a" !important;
+  font-family: file-icons !important;
+  background-image: unset !important;
+}
+
 /* craco.config.ts */
 .craco\.config\.ts-name-file-icon::before {
   font-family: octicons !important;

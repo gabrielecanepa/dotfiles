@@ -10,6 +10,7 @@
     ".bundle": true,
     ".cache": true,
     ".CFUserTextEncoding": true,
+    ".copilot-cli-access-token": true,
     ".docker": true,
     ".gem": true,
     ".local": true,

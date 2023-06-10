@@ -1,31 +1,59 @@
 #!/bin/zsh
 
-alias yarn=/opt/homebrew/bin/yarn
+function yarn() {
+  case $1 in 
+    init)
+      if [[ "${@:2}" == "-2" ]]; then
+        berry init
+        return $?
+      fi
+      ;;
+    pnp)
+      berry ${@:2}
+      return $?
+      ;;
+  esac
+  
+  /opt/homebrew/bin/yarn $@
+}
 
 function berry() {
-  local berry_bin=${"$(type -a yarn | grep "Caches" | head -n 1)"//yarn is /}
-  local berry_config=~/.yarn/berry
-  local berry_tmp=$berry_config/.zsh-plugin.tmp
+  local berry=$(which -a yarn | grep "$HOME" | head -n 1)
 
-  if [[ -z "$berry_bin" ]]; then
-    echo "Wrong yarn executable: $berry_bin"
-    return 1
-  fi
+  case "$1" in
+    init)
+      /opt/homebrew/bin/yarn init -2
+      local exit_code=$?
 
-  if [[ ! -d "$berry_config" ]]; then
-    mkdir -p "$berry_config"
-  fi
+      $berry add >/dev/null
 
-  eval "$berry_bin $@" > $berry_tmp
-  local exit_code=$?
-  cat $berry_tmp | sed "s/yarn/berry/g"
-  rm $berry_tmp
+      # Adjust editorconfig.
+      if [[ -f ~/.editorconfig ]]; then
+        rm -rf .editorconfig
+        touch .editorconfig
+        echo "root = true\n" >> .editorconfig
+        echo "$(cat ~/.editorconfig)" >> .editorconfig
+      fi
 
-  if [[ $1 == "init" ]] && [[ $exit_code == 0 ]]; then
-    rm -rf .gitattributes .gitignore
-    echo "yarn/" >> .gitignore
-    echo ".pnp.*" >> .gitignore
-  fi
+      # Add yarn folder and pnp files to gitignore.
+      rm -rf .gitattributes .gitignore
+      echo ".yarn/" >> .gitignore
+      echo ".pnp.*" >> .gitignore
 
-  return $exit_code
+      # Add current node version.
+      if node -v &>/dev/null; then 
+        echo ${$(node -v)#v} > .node-version
+      fi
+
+      # reinitialize git
+      rm -rf .git && git init >/dev/null
+
+      return $exit_code
+      ;;
+    *)
+      $berry $@
+      ;;
+  esac
 }
+
+alias yarnpnp="berry"
