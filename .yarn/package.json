@@ -2,11 +2,12 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@algolia/cli": "^4.0.8",
+    "@githubnext/github-copilot-cli": "^0.1.33",
     "@vue/cli": "^3.4.0",
     "bundle-phobia-cli": "^0.14.6",
     "create-cra-template": "^1.2.3",
     "create-next-app": "^13.0.6",
-    "eslint": "^8.14.0",
+    "eslint": "^8.42.0",
     "gatsby-cli": "^2.16.1",
     "minify": "^9.1.0",
     "netlify-cli": "^8.1.3",

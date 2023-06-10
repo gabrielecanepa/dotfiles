@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC3028
 
 # Core
 alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
@@ -13,9 +14,10 @@ cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
 # Directories
+alias cdc="cd \"$cloud\""
 alias cdw="cd $wd"
 alias tmp="cd $tmp"
-alias cdc="cd \"$cloud\""
+mkdircd() { mkdir -p "$@" && cd "$_" || return $?; }
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"

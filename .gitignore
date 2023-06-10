@@ -5,6 +5,7 @@
 /.*_history
 /.*hst
 /.*padl
+/.copilot-cli-access-token
 /.gist
 /.git-stats
 /.gitprofile

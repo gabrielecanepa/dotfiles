@@ -97,7 +97,7 @@
     yarn global add
     ```
 
-    Install [Yarn Berry](https://yarnpkg.com) using [Corepack](https://nodejs.org/api/corepack):
+    Install [Yarn Pnp](https://yarnpkg.com/features/pnp) using [Corepack](https://nodejs.org/api/corepack):
 
     ```sh
     corepack enable # if not already enabled
