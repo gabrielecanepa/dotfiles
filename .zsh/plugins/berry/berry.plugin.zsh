@@ -10,7 +10,11 @@ function yarn() {
       $package ${@:3} &&
       echo "${fg[blue]}info${reset_color} Removing $package..." &&
       /opt/homebrew/bin/yarn global remove $package &>/dev/null &&
-      echo "${fg[green]}success${reset_color} Done!" &&
+      echo "${fg[green]}success${reset_color} Done!"
+      return $?
+      ;;
+    fresh)
+      yarn global upgrade
       return $?
       ;;
     init)
