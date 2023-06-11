@@ -1,4 +1,17 @@
-# Local gitignore for dotfiles repository.
+# Folders
+/*/
+!/.github/
+!/.macos/
+!/.vscode/
+/.vscode/cli/
+/.vscode/extensions/
+/.vscode/workspaces/
+/.vscode/argv.json
+!/.yarn/
+/.yarn/berry/
+/.yarn/node_modules/
+!/.zsh/
+/.zsh/plugins/zsh-*/
 
 # Files
 /.*.backup
@@ -18,18 +31,3 @@
 /Downloads
 /Movies
 /Music
-
-# Folders
-/*/
-!/.github/
-!/.macos/
-!/.vscode/
-/.vscode/cli/
-/.vscode/extensions/
-/.vscode/workspaces/
-/.vscode/argv.json
-!/.yarn/
-/.yarn/berry/
-/.yarn/node_modules/
-!/.zsh/
-/.zsh/plugins/zsh-*/

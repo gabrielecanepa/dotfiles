@@ -1,18 +1,97 @@
 {
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.formatOnSave": false
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[php]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "application.shellEnvironmentResolutionTimeout": 20,
+  "css.format.newlineBetweenRules": false,
+  "css.format.spaceAroundSelectorSeparator": true,
+  "css.lint.duplicateProperties": "warning",
   "editor.accessibilitySupport": "off",
-  "editor.guides.highlightActiveIndentation": true,
-  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.shellcheck": true
   },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
   "editor.formatOnType": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.guides.highlightActiveIndentation": true,
   "editor.inlineSuggest.enabled": true,
   "editor.lightbulb.enabled": false,
+  "editor.maxTokenizationLineLength": 200000,
+  "editor.minimap.enabled": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
-  "editor.formatOnPaste": true,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "︎": true
+  },
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "emmet.includeLanguages": {
+    "blade": "html",
+    "erb": "html",
+    "javascript": "javascriptreact",
+    "vue": "html"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "explorer.autoReveal": "focusNoScroll",
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
@@ -33,194 +112,133 @@
     "tsconfig.json": "jsonc"
   },
   "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/.git": false,
+    "/Users/gabrielecanepa/.bin": true
+  },
   "files.insertFinalNewline": true,
+  "git.allowForcePush": true,
   "git.autofetch": true,
+  "git.autofetchPeriod": 60,
   "git.autoRepositoryDetection": "subFolders",
+  "git.confirmForcePush": false,
   "git.confirmSync": false,
+  "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
+  "git.ignoredRepositories": [
+    "/Users/gabrielecanepa"
+  ],
+  "git.ignoreLegacyWarning": true,
+  "git.ignoreMissingGitWarning": true,
+  "git.ignoreSubmodules": true,
+  "git.rebaseWhenSync": true,
   "github.copilot.enable": {
     "*": true,
-    "plaintext": true,
+    "javascript": true,
     "markdown": true,
+    "plaintext": true,
     "scminput": false,
-    "yaml": true,
-    "javascript": true
+    "yaml": true
   },
+  "githubPullRequests.pullBranch": "never",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
+  "html.format.indentInnerHtml": true,
+  "html.format.templating": true,
+  "iridium.npm.packageManager": "yarn",
+  "iridium.npm.showAlgoliaInfo": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "javascript.format.semicolons": "remove",
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "less.lint.duplicateProperties": "warning",
+  "markdown.extension.italic.indicator": "_",
+  "php.suggest.basic": false,
+  "php.validate.run": "onType",
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSpacing": false,
+  "prettier.enable": false,
+  "prettier.endOfLine": "auto",
+  "prettier.jsxSingleQuote": true,
+  "prettier.printWidth": 160,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.vueIndentScriptAndStyle": true,
+  "redhat.telemetry.enabled": false,
+  "ruby.rubocop.autocorrectOnSave": true,
+  "scss.lint.compatibleVendorPrefixes": "warning",
+  "scss.lint.duplicateProperties": "warning",
+  "scss.lint.float": "warning",
+  "search.useGlobalIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "shellcheck.customArgs": [],
+  "shellcheck.enable": true,
+  "shellcheck.enableQuickFix": true,
+  "shellcheck.exclude": [],
+  "shellcheck.ignoreFileSchemes": [
+    "git",
+    "gitfs"
+  ],
+  "shellcheck.ignorePatterns": {
+    "**/*.example": true,
+    "**/*.xonshrc": true,
+    "**/*.xsh": true
+  },
+  "shellcheck.run": "onType",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.enableBell": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh"
+  ],
+  "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.tabs.enabled": true,
-  "togglequotes.chars": ["\"", "'", "`"],
+  "terminal.integrated.tabs.location": "left",
+  "togglequotes.chars": [
+    "\"",
+    "'",
+    "`"
+  ],
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.tsdk": "/Users/gabrielecanepa/.config/yarn/global/node_modules/typescript/lib",
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
+  "vscode_custom_css.imports": [
+    "file:///Users/gabrielecanepa/.vscode/user/style.css"
+  ],
+  "vscode_custom_css.statusbar": false,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.autoDetectColorScheme": true,
+  "window.zoomLevel": 1.6,
+  "workbench.colorCustomizations": {},
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook",
     "git-rebase-todo": "default"
   },
-  "emmet.includeLanguages": {
-    "erb": "html",
-    "javascript": "javascriptreact",
-    "blade": "html",
-    "vue": "html"
-  },
-  "emmet.showSuggestionsAsSnippets": true,
-  "emmet.syntaxProfiles": {
-    "javascript": "jsx"
-  },
-  "emmet.triggerExpansionOnTab": true,
-  "eslint.codeAction.showDocumentation": {
-    "enable": true
-  },
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  "eslint.packageManager": "yarn",
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "prettier.arrowParens": "avoid",
-  "prettier.semi": false,
-  "prettier.vueIndentScriptAndStyle": true,
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "javascript.format.semicolons": "remove",
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-  "javascript.preferences.quoteStyle": "single",
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "typescript.preferences.quoteStyle": "single",
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[html]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "html.format.indentInnerHtml": true,
-  "html.format.templating": true,
-  "css.lint.duplicateProperties": "warning",
-  "scss.lint.compatibleVendorPrefixes": "warning",
-  "scss.lint.duplicateProperties": "warning",
-  "scss.lint.float": "warning",
-  "less.lint.duplicateProperties": "warning",
-  "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": false
-  },
-  "[php]": {
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "php.suggest.basic": false,
-  "php.validate.run": "onType",
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.enablePersistentSessions": false,
-  "editor.unicodeHighlight.ambiguousCharacters": false,
-  "[ruby]": {
-    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
-  },
-  "prettier.jsxSingleQuote": true,
-  "prettier.singleQuote": true,
-  "shellcheck.enable": true,
-  "shellcheck.enableQuickFix": true,
-  "shellcheck.run": "onType",
-  "shellcheck.exclude": [],
-  "shellcheck.customArgs": [],
-  "shellcheck.ignorePatterns": {
-    "**/*.xonshrc": true,
-    "**/*.xsh": true,
-    "**/*.example": true
-  },
-  "shellcheck.ignoreFileSchemes": ["git", "gitfs"],
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "typescript.tsdk": "/Users/gabrielecanepa/.config/yarn/global/node_modules/typescript/lib",
-  "workbench.startupEditor": "none",
-  "editor.maxTokenizationLineLength": 200000,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "git.allowForcePush": true,
-  "git.autofetchPeriod": 60,
-  "git.rebaseWhenSync": true,
-  "git.confirmForcePush": false,
-  "git.ignoredRepositories": ["/Users/gabrielecanepa"],
-  "search.useGlobalIgnoreFiles": true,
-  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
-  "git.ignoreSubmodules": true,
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "terminal.integrated.cursorStyle": "underline",
-  "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
-  "terminal.integrated.tabs.location": "left",
-  "githubPullRequests.pullBranch": "never",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "git.ignoreMissingGitWarning": true,
-  "editor.formatOnSave": true,
-  "git.detectSubmodules": false,
-  "git.ignoreLegacyWarning": true,
-  "prettier.endOfLine": "auto",
-  "prettier.printWidth": 160,
-  "workbench.colorTheme": "GitHub Dark Default",
-  "editor.minimap.enabled": false,
-  "iridium.npm.packageManager": "yarn",
-  "iridium.npm.showAlgoliaInfo": false,
-  "files.exclude": {
-    "**/.git": false,
-    "/Users/gabrielecanepa/.bin": true
-  },
+  "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "file-icons",
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/style.css"],
-  "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
-  },
-  "explorer.compactFolders": false,
-  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
+  "workbench.preferredDarkColorTheme": "GitHub Dark",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
-  "workbench.preferredLightColorTheme": "GitHub Light Default",
-  "workbench.colorCustomizations": {},
-  "workbench.fontAliasing": "auto",
-  "workbench.tree.expandMode": "doubleClick",
-  "workbench.editor.enablePreviewFromCodeNavigation": true,
-  "editor.unicodeHighlight.allowedCharacters": {
-    "︎": true
-  },
-  "prettier.bracketSpacing": false,
-  "terminal.integrated.cursorBlinking": true,
-  "vscode_custom_css.statusbar": false,
-  "application.shellEnvironmentResolutionTimeout": 20,
-  "explorer.confirmDelete": false,
-  "window.zoomLevel": 1.6,
-  "window.autoDetectColorScheme": true,
-  "ruby.rubocop.autocorrectOnSave": true,
-  "redhat.telemetry.enabled": false,
-  "markdown.extension.italic.indicator": "_",
-  "prettier.enable": false,
-  "css.format.newlineBetweenRules": false,
-  "css.format.spaceAroundSelectorSeparator": true
+  "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.startupEditor": "none",
+  "workbench.tree.expandMode": "doubleClick"
 }

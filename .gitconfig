@@ -37,6 +37,9 @@
   process = git-lfs filter-process
   required = true
   smudge = git-lfs smudge -- %f
+[filter "ignore-vscode-theme"]
+  clean = sed /workbench.colorTheme/d
+	smudge = sed /workbench.colorTheme/d
 
 # Aliases
 [alias]
