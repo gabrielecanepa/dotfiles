@@ -4,13 +4,14 @@ function yarn() {
   case $1 in 
     create)
       # Run package in a temporary environment.
-      local package=create-$2
+      local package="create-$2"
       echo "${fg[blue]}info${reset_color} Fetching $package..."
-      /opt/homebrew/bin/yarn global add $package ${@:3} &>/dev/null &&
+      /opt/homebrew/bin/yarn global add $package &>/dev/null &&
       $package ${@:3} &&
       echo "${fg[blue]}info${reset_color} Removing $package..." &&
       /opt/homebrew/bin/yarn global remove $package &>/dev/null &&
-      echo "${fg[green]}success${reset_color} Done!"
+      echo "${fg[green]}success${reset_color} Done!" &&
+      cd $3
       return $?
       ;;
     fresh)
