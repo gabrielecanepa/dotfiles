@@ -4,6 +4,7 @@ tap "github/gh"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-versions"
+tap "homebrew/core"
 tap "homebrew/services"
 tap "rcmdnk/file"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -27,7 +28,7 @@ brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Lightweight DNS forwarder and DHCP server
-brew "dnsmasq", restart_service: true
+brew "dnsmasq"
 # Collection of reusable C++ library artifacts developed at Facebook
 brew "folly"
 # Shared library for Watchman and Eden projects
@@ -105,23 +106,25 @@ brew "mas"
 # General-purpose lossless data-compression library
 brew "zlib"
 # Open source relational database management system
-brew "mysql", restart_service: true
+brew "mysql"
 # Fast, highly customisable system info script
 brew "neofetch"
 # HTTP/2 C Library
 brew "nghttp2"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
-brew "nginx", restart_service: true
+brew "nginx"
 # Open source suite of directory software
 brew "openldap"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Python dependency management tool
 brew "pipenv"
+# 📦🚀 Fast, disk space efficient package manager
+brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Object-relational database system
-brew "postgresql@14", restart_service: true
+brew "postgresql@14"
 # Python version management
 brew "pyenv"
 # Install various Ruby versions and implementations
@@ -129,7 +132,7 @@ brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
-brew "redis", restart_service: true
+brew "redis"
 # Low-level access to audio, keyboard, mouse, joystick, and graphics
 brew "sdl2"
 # Static analysis and lint tool, for (ba)sh scripts

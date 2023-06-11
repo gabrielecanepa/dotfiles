@@ -63,11 +63,11 @@ plugins=(
   zsh-syntax-highlighting
   # Custom from ~/.zsh
   berry
-  brewfile
   colors256
   env-latest
   gatekeeper
   google
+  homebrew
   node-modules
   xcode-reset
 )
