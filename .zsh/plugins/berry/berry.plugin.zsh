@@ -2,18 +2,32 @@
 
 function yarn() {
   case $1 in 
+    create)
+      # Run package in a temporary environment.
+      local package=create-$2
+      echo "${fg[blue]}info${reset_color} Fetching $package..."
+      /opt/homebrew/bin/yarn global add $package ${@:3} &>/dev/null &&
+      $package ${@:3} &&
+      echo "${fg[blue]}info${reset_color} Removing $package..." &&
+      /opt/homebrew/bin/yarn global remove $package &>/dev/null &&
+      echo "${fg[green]}success${reset_color} Done!" &&
+      return $?
+      ;;
     init)
+      # Use berry if the -2 arg is passed.
       if [[ "${@:2}" == "-2" ]]; then
         berry init
         return $?
       fi
       ;;
     pnp)
+      # Redirect to berry.
       berry ${@:2}
       return $?
       ;;
   esac
   
+  # Run classic yarn.
   /opt/homebrew/bin/yarn $@
 }
 
