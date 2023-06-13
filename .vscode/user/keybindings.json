@@ -1,10 +1,10 @@
 [
   {
-    "key": "ctrl+cmd+left",
+    "key": "ctrl+shift+left",
     "command": "workbench.action.moveEditorLeftInGroup"
   },
   {
-    "key": "ctrl+cmd+right",
+    "key": "ctrl+shift+right",
     "command": "workbench.action.moveEditorRightInGroup"
   },
   {
@@ -111,5 +111,9 @@
   {
     "key": "shift+cmd+w",
     "command": "workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.files.action.collapseExplorerFolders"
   }
 ]

@@ -13,7 +13,7 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features",
@@ -60,6 +60,9 @@
   "editor.maxTokenizationLineLength": 200000,
   "editor.minimap.enabled": false,
   "editor.multiCursorModifier": "ctrlCmd",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.unicodeHighlight.allowedCharacters": {
@@ -97,6 +100,7 @@
   "files.associations": {
     ".aliases": "shellscript",
     ".env.example": "dotenv",
+    ".eslintrc": "jsonc",
     ".gcloudignore": "dotenv",
     ".gitignore*": "ignore",
     ".gitprofile": "properties",
@@ -112,6 +116,7 @@
     "tsconfig.json": "jsonc"
   },
   "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
   "files.exclude": {
     "**/.git": false,
     "/Users/gabrielecanepa/.bin": true
@@ -121,16 +126,23 @@
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
   "git.autoRepositoryDetection": "subFolders",
+  "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
+  "git.fetchOnPull": true,
   "git.ignoredRepositories": [
     "/Users/gabrielecanepa"
   ],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.ignoreSubmodules": true,
+  "git.inputValidationLength": 80,
+  "git.inputValidationSubjectLength": 60,
+  "git.mergeEditor": true,
+  "git.pruneOnFetch": true,
+  "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
   "github.copilot.enable": {
     "*": true,
@@ -155,6 +167,8 @@
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
   "javascript.format.semicolons": "remove",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifierEnding": "minimal",
   "javascript.preferences.quoteStyle": "single",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "less.lint.duplicateProperties": "warning",
@@ -191,6 +205,15 @@
     "**/*.xsh": true
   },
   "shellcheck.run": "onType",
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)",
+    "tw\\.[^`]+`([^`]*)`",
+    "tw\\(.*?\\).*?`([^`]*)"
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
@@ -215,6 +238,9 @@
   ],
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
   "typescript.tsdk": "/Users/gabrielecanepa/.config/yarn/global/node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
