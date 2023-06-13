@@ -69,6 +69,7 @@ plugins=(
   google
   homebrew
   node-modules
+  node-version
   xcode-reset
 )
 
