@@ -15,17 +15,19 @@ function yarn() {
       return $?
       ;;
     fresh)
-      yarn global upgrade
+      # Upgrade global dependencies.
+      local dependencies="$(cat package.json | jq -r '.dependencies | keys | .[]' | tr '\n' ' ')"
+      yarn global upgrade $dependencies
       return $?
       ;;
     init)
-      # Use berry if the -2 arg is passed.
+      # Use berry if the `-2` arg is passed.
       if [[ "${@:2}" == "-2" ]]; then
         berry init
         return $?
       fi
       ;;
-    pnp)
+    2|3|pnp)
       # Redirect to berry.
       berry ${@:2}
       return $?
@@ -46,7 +48,7 @@ function berry() {
 
       $berry add >/dev/null
 
-      # Adjust editorconfig.
+      # Review editorconfig.
       if [[ -f ~/.editorconfig ]]; then
         rm -rf .editorconfig
         touch .editorconfig
@@ -60,11 +62,9 @@ function berry() {
       echo ".pnp.*" >> .gitignore
 
       # Add current node version.
-      if node -v &>/dev/null; then 
-        echo ${$(node -v)#v} > .node-version
-      fi
+      node -v &>/dev/null && echo ${$(node -v)#v} > .node-version
 
-      # reinitialize git
+      # Reinitialize Git.
       rm -rf .git && git init >/dev/null
 
       return $exit_code
@@ -75,4 +75,6 @@ function berry() {
   esac
 }
 
+alias yarn2="berry"
+alias yarn3="berry"
 alias yarnpnp="berry"
