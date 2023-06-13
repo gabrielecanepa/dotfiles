@@ -62,7 +62,6 @@ plugins=(
   zsh-completions
   zsh-syntax-highlighting
   # Custom from ~/.zsh
-  berry
   colors256
   env-latest
   gatekeeper
@@ -71,6 +70,7 @@ plugins=(
   node-modules
   node-version
   xcode-reset
+  yarnx
 )
 
 . "$ZSH/oh-my-zsh.sh"
