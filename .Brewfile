@@ -3,6 +3,7 @@ tap "clintmod/formulas"
 tap "github/gh"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
+tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
@@ -61,6 +62,8 @@ brew "ghostscript"
 brew "gist"
 # Distributed revision control system
 brew "git"
+# Git extension for versioning large files
+brew "git-lfs"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
 # GNU Transport Layer Security (TLS) Library
@@ -153,6 +156,8 @@ brew "yarn"
 brew "algolia/algolia-cli/algolia"
 # Backup and Restore your Mac System and App Preferences
 brew "clintmod/formulas/macprefs"
+# Virtual Audio Driver
+cask "blackhole-2ch"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
 # Tool to optimize images to a smaller size
