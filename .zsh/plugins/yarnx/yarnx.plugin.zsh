@@ -16,12 +16,11 @@ function yarn() {
       ;;
     fresh)
       # Upgrade global dependencies.
-      local dependencies="$(cat package.json | jq -r '.dependencies | keys | .[]' | tr '\n' ' ')"
-      yarn global upgrade $dependencies
+      yarn global upgrade $(cat ~/.yarn/package.json | jq -r '.dependencies | keys | .[]' | tr '\n' ' ')
       return $?
       ;;
     init)
-      # Use berry if the `-2` arg is passed.
+      # Use berry when `-2` arg is passed.
       if [[ "${@:2}" == "-2" ]]; then
         berry init
         return $?
@@ -39,7 +38,7 @@ function yarn() {
 }
 
 function berry() {
-  local berry=$(which -a yarn | grep "$HOME" | head -n 1)
+  local berry="$(which -a yarn | grep "$HOME" | head -n 1)"
 
   case "$1" in
     init)
@@ -48,7 +47,7 @@ function berry() {
 
       $berry add >/dev/null
 
-      # Review editorconfig.
+      # Custom editorconfig.
       if [[ -f ~/.editorconfig ]]; then
         rm -rf .editorconfig
         touch .editorconfig
@@ -76,5 +75,4 @@ function berry() {
 }
 
 alias yarn2="berry"
-alias yarn3="berry"
 alias yarnpnp="berry"
