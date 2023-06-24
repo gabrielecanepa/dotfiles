@@ -17,13 +17,13 @@
         "revision": "bc5d166838a22d5b07edc2fed23fa2a7dbaddf7a"
       },
       "homebrew/cask": {
-        "revision": "6ccc3d17c27385dedf5c685d611b454791087ba6"
+        "revision": "f0f0dc7444911cbe569b6b8258d9c81bfe63e39f"
       },
       "homebrew/cask-versions": {
         "revision": "c3665abf5bdbcccfa6394c6fc6d06301f647cb24"
       },
       "homebrew/core": {
-        "revision": "4386bc865eafd01e1b031d02bb97e73c92f51188"
+        "revision": "6e5de457879e0b55da72203c0cc4f518c82c2cf6"
       },
       "homebrew/services": {
         "revision": "4206f0012d166d86402d69867eca70fb36616c9a"
@@ -3832,6 +3832,10 @@
       "Color Picker": {
         "id": "1545870783",
         "version": "1.13.1"
+      },
+      "NepTunes": {
+        "id": "1006739057",
+        "version": "3.2.0"
       }
     }
   },
@@ -3848,7 +3852,7 @@
       "ventura": {
         "HOMEBREW_VERSION": "4.0.24",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "4386bc865eafd01e1b031d02bb97e73c92f51188",
+        "Homebrew/homebrew-core": "6e5de457879e0b55da72203c0cc4f518c82c2cf6",
         "CLT": "14.3.1.0.1.1683849156",
         "Xcode": "14.3.1",
         "macOS": "13.4"

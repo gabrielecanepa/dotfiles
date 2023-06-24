@@ -30,3 +30,18 @@ function brew() {
       ;;
   esac
 }
+
+function mas() {
+  case "$1" in
+    install|uninstall|upgrade)
+      command mas $@
+
+      if [[ $? == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
+        (brew dump && brew global >/dev/null &)
+      fi
+      ;;
+    *)
+      command mas $@
+      ;;
+  esac
+}
