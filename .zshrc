@@ -1,10 +1,6 @@
 #!/bin/zsh
 
-# Profile
 export LANG="en_US.UTF-8"
-export EDITOR="code-insiders"
-export VISUAL="$EDITOR"
-export GIT_EDITOR="code-insiders --wait"
 
 # Binaries
 export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"
@@ -63,17 +59,21 @@ plugins=(
   zsh-syntax-highlighting
   # Custom from ~/.zsh
   colors256
-  env-latest
   gatekeeper
   google
   homebrew
+  lts
   node-modules
   node-version
+  profile
   xcode-reset
   yarnx
 )
 
 . "$ZSH/oh-my-zsh.sh"
+
+# Check profile installation.
+! profile check && return 1
 
 # Git - https://git-scm.com
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
@@ -93,9 +93,9 @@ command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Load aliases and run cron jobs
+# Load aliases and run cron jobs.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
-# Avoid duplicates in PATH
+# Avoid duplicates in PATH.
 typeset -aU path
