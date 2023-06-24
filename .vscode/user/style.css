@@ -1,7 +1,7 @@
 /*==== Editor ====*/
 
 /* Reduce opacity of active indentation */
-.monaco-editor .indent-active {
+.indent-active {
   opacity: 0.2 !important;
 }
 
@@ -17,54 +17,52 @@
 /*== Directories ==*/
 
 /* .config */
-.\.config-name-folder-icon::before {
+.file-icons-enabled .\.config-name-folder-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;
 }
-
 /* .git */
-.\.git-name-folder-icon .label-name {
+.file-icons-enabled .\.git-name-folder-icon .label-name {
   color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
 }
-.\.git-name-folder-icon::before {
+.file-icons-enabled .\.git-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
   opacity: 0.5 !important;
 }
-
 /* .github */
-.\.github-name-folder-icon::before {
+.file-icons-enabled .\.github-name-folder-icon::before {
   font-family: octicons !important;
   content: "\e602" !important;
 }
-
+/* .macos */
+.file-icons-enabled .\.macos-name-folder-icon::before {
+  font-family: file-icons !important;
+  content: "\e925" !important;
+}
 /* .private */
-.\.private-name-folder-icon::before {
+.file-icons-enabled .\.private-name-folder-icon::before {
   font-family: octicons !important;
   content: "\f06a" !important;
 }
-
 /* .ssh */
-.\.ssh-name-folder-icon::before {
+.file-icons-enabled .\.ssh-name-folder-icon::before {
   font-family: fontawesome !important;
   content: "\f120" !important;
 }
-
 /* .vscode .vscode-insiders */
-.\.vscode-name-folder-icon::before,
-.\.vscode-insiders-name-folder-icon::before {
+.file-icons-enabled .\.vscode-name-folder-icon::before,
+.file-icons-enabled .\.vscode-insiders-name-folder-icon::before {
   font-family: devopicons !important;
   content: "\e60c" !important;
 }
-
 /* .yarn */
-.\.yarn-name-folder-icon::before {
+.file-icons-enabled .\.yarn-name-folder-icon::before {
   font-family: file-icons !important;
   content: "\ea1a" !important;
 }
-
 /* .zsh */
-.\.zsh-name-folder-icon::before {
+.file-icons-enabled .\.zsh-name-folder-icon::before {
   font-family: file-icons !important;
   content: "\f0c8" !important;
 }
@@ -72,95 +70,86 @@
 /*== Files ==*/
 
 /* .aliases */
-.\.aliases-name-file-icon::before {
+.file-icons-enabled .\.aliases-name-file-icon::before {
   font-family: file-icons !important;
   color: #825078 !important;
   content: "\f0c8" !important;
 }
-
 /* .Brewfile .Brewfile.lock.json */
-.\.brewfile-name-file-icon::before,
-.\.brewfile\.lock\.json-name-file-icon::before {
+.file-icons-enabled .\.brewfile-name-file-icon::before,
+.file-icons-enabled .\.brewfile\.lock\.json-name-file-icon::before {
   font-family: file-icons !important;
   content: "\1f37a" !important;
   font-size: 13.8px !important;
 }
-.\.brewfile-name-file-icon::before {
+.file-icons-enabled .\.brewfile-name-file-icon::before {
   color: #ffbd5d !important;
 }
-
 /* .CFUserTextEncoding .crontab .env .env.example .hushlogin */
-.\.cfusertextencoding-name-file-icon::before,
-.\.env-name-file-icon::before,
-.\.env\.example-name-file-icon::before,
-.\.hushlogin-name-file-icon::before {
+.file-icons-enabled .\.cfusertextencoding-name-file-icon::before,
+.file-icons-enabled .\.env-name-file-icon::before,
+.file-icons-enabled .\.env\.example-name-file-icon::before,
+.file-icons-enabled .\.hushlogin-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f013" !important;
 }
-
 /* .code-snippets */
-.code-snippets-ext-file-icon::before {
+.file-icons-enabled .code-snippets-ext-file-icon::before {
   font-family: file-icons !important;
   content: "\eb22" !important;
+  color: #007acc !important;
 }
-
 /* .crontab */
-.\.crontab-name-file-icon::before {
+.file-icons-enabled .\.crontab-name-file-icon::before {
   font-family: file-icons !important;
   content: "\1f558" !important;
 }
-
 /* .gitignore.global .gitprofile */
-.\.gitignore\.global-name-file-icon::before,
-.\.gitprofile-name-file-icon::before {
+.file-icons-enabled .\.gitignore\.global-name-file-icon::before,
+.file-icons-enabled .\.gitprofile-name-file-icon::before {
   font-family: devopicons !important;
   content: "\e602" !important;
   color: #ac4142 !important;
 }
-
 /* .macos */
-.\.macos-name-file-icon::before {
+.file-icons-enabled .\.macos-name-file-icon::before {
   font-family: file-icons !important;
   content: "\e925" !important;
+  color: #6a9fb5 !important;
 }
-
 /* .shellcheckrc */
-.\.shellcheckrc-name-file-icon::before {
+.file-icons-enabled .\.shellcheckrc-name-file-icon::before {
   font-family: file-icons !important;
   content: "\f0c8" !important;
   color: #aaaaff !important;
 }
-
 /* .yarnrc.yml */
-.\.yarnrc\.yml-name-file-icon::before {
+.file-icons-enabled .\.yarnrc\.yml-name-file-icon::before {
   color: #46788d !important;
   content: "\ea1a" !important;
   font-family: file-icons !important;
   background-image: unset !important;
 }
-
 /* craco.config.ts */
-.craco\.config\.ts-name-file-icon::before {
+.file-icons-enabled .craco\.config\.ts-name-file-icon::before {
   font-family: octicons !important;
   content: "\f02f" !important;
   color: #1f8e76 !important;
 }
-
 /* postcss.config.cjs postcss.config.js */
-.postcss\.config\.cjs-name-file-icon::before {
+.file-icons-enabled .postcss\.config\.cjs-name-file-icon::before {
   font-family: file-icons !important;
   content: "\e910" !important;
   color: #90a959 !important;
 }
-.postcss\.config\.js-name-file-icon::before,
-.postcss\.config\.ts-name-file-icon::before {
+.file-icons-enabled .postcss\.config\.js-name-file-icon::before,
+.file-icons-enabled .postcss\.config\.ts-name-file-icon::before {
   font-family: file-icons !important;
   content: "\e910" !important;
   color: #c82829 !important;
 }
-
 /* tsconfig.*.json */
-.tsconfig\.paths\.json-name-file-icon::before {
+.file-icons-enabled .tsconfig\.paths\.json-name-file-icon::before {
   color: #6a9fb5 !important;
   content: "\eb1b" !important;
   font-family: file-icons !important;

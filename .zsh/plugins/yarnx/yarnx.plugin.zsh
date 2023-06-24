@@ -5,22 +5,27 @@ function yarn() {
     create)
       # Run package in a temporary environment.
       local package="create-$2"
-      echo "${fg[blue]}info${reset_color} Fetching $package..."
+      local installed=false
+
       /opt/homebrew/bin/yarn global add $package &>/dev/null &&
-      $package ${@:3} &&
-      echo "${fg[blue]}info${reset_color} Removing $package..." &&
-      /opt/homebrew/bin/yarn global remove $package &>/dev/null &&
-      echo "${fg[green]}success${reset_color} Done!" &&
-      cd $3
-      return $?
+      installed=true &&
+      $package ${@:3}
+      
+      local exit_code=$?
+
+      if [[ $installed ]]; then
+        (/opt/homebrew/bin/yarn global remove $package &>/dev/null &)
+      fi
+
+      return $exit_code
       ;;
     fresh)
       # Upgrade global dependencies.
-      yarn global upgrade $(cat ~/.yarn/package.json | jq -r '.dependencies | keys | .[]' | tr '\n' ' ')
+      /opt/homebrew/bin/yarn global upgrade $(cat ~/.yarn/package.json | jq -r '.dependencies | keys | .[]' | tr '\n' ' ')
       return $?
       ;;
     init)
-      # Use berry when `-2` arg is passed.
+      # Use berry when the `-2` flag is passed.
       if [[ "${@:2}" == "-2" ]]; then
         berry init
         return $?

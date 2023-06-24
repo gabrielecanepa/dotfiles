@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-# Backup to .profile
+# Backup to default profile.
 [[ -f ~/.profile ]] && . ~/.profile
