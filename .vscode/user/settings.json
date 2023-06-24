@@ -200,9 +200,11 @@
     "gitfs"
   ],
   "shellcheck.ignorePatterns": {
-    "**/*.example": true,
     "**/*.xonshrc": true,
-    "**/*.xsh": true
+    "**/*.xsh": true,
+    "**/*.example": true,
+    "**/*.macos": true,
+    "**/*.profile": true
   },
   "shellcheck.run": "onType",
   "tailwindCSS.experimental.classRegex": [
@@ -261,7 +263,7 @@
   },
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "file-icons",
-  "workbench.preferredDarkColorTheme": "GitHub Dark",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function xcode-reset() {
-  if [ "$2" ]; then
+  if [[ ! -z "$2" ]]; then
     echo "${fg[red]}Unknown option: $2$reset_color"
     return 1
   fi
@@ -10,7 +10,7 @@ function xcode-reset() {
   printf "Are you sure you want to continue? (y/N) "
   read -r choice
 
-  if [[ "${choice:l}" = "y" ]]; then
+  if [[ "${choice:l}" == "y" ]]; then
     sudo rm -rf "$(xcode-select -print-path)"
     echo "xcode-select: note: command line tools removed"
     xcode-select --install

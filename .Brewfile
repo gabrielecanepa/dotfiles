@@ -8,6 +8,8 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "rcmdnk/file"
+# New file format for still image compression
+brew "jpeg-xl"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
 # Library for command-line editing
@@ -122,7 +124,7 @@ brew "openldap"
 brew "pinentry-mac"
 # Python dependency management tool
 brew "pipenv"
-# 📦🚀 Fast, disk space efficient package manager
+# Fast, disk space efficient package manager
 brew "pnpm"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Backup to .profile
+# Load default profile.
 [[ -f ~/.profile ]] && . ~/.profile

@@ -1,4 +1,4 @@
-// Settings for dotfiles repository.
+// Settings for local dotfiles repository.
 {
   "files.exclude": {
     "**/.svn": true,

@@ -1,11 +1,11 @@
 #!/bin/zsh
 
-function node-modules () {
+function node-modules() {
   local _cut="\r\033[1A\033[0K"
   local _cmd=$1
   local _path=$(realpath ${2:-.})
 
-  local function validate_path () {
+  local function validate_path() {
     [[ -z "$_path" ]] && echo "${fg[red]}Error: you must specify a valid directory$reset_color" && return 1
     [[ ! -d "$_path" ]] && echo "${fg[red]}Error: $_path is not a valid directory$reset_color" && return 1
     return 0
