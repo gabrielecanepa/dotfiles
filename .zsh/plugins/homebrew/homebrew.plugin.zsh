@@ -12,18 +12,18 @@ function brew() {
       command brew cleanup && 
       command brew doctor
       ;;
+    global)
+      command brew bundle --global
+      ;;
     reset)
       command brew update-reset
       ;;
     install|uninstall|reinstall|upgrade|tap|untap)
       command brew $@
-      local exit_code=$?
 
       if [[ $? == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
-        brew dump
+        (brew dump && brew global >/dev/null &)
       fi
-
-      return $exit_code
       ;;
     *)
       command brew $@
