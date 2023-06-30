@@ -47,17 +47,18 @@ autoload -Uz compinit
 plugins=(
   colored-man-pages
   colorize
-  fnm
   gh
   git-auto-fetch
   gitfast
   last-working-dir
+  nodenv
   rbenv
   # From https://github.com/zsh-users
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
   # Custom from ~/.zsh
+  _dotfiles
   colors256
   gatekeeper
   google
@@ -73,7 +74,7 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Check profile installation.
-! profile check && return 1
+command -v profile >/dev/null && ! profile check && return 1
 
 # Git - https://git-scm.com
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
@@ -81,15 +82,15 @@ git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
-# fnm - https://github.com/Schniz/fnm
+# Node - nodenv https://github.com/nodenv/nodenv
 export PATH="$PATH:./node_modules/.bin"
-command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
+command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
 
-# rbenv - https://github.com/rbenv/rbenv
+# Ruby - rbenv https://github.com/rbenv/rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
 command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 
-# pyenv - https://github.com/pyenv/pyenv
+# Python - pyenv https://github.com/pyenv/pyenv
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 

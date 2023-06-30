@@ -69,15 +69,13 @@
 
 6. **Node.js**, **Ruby** and **Python**
 
-    Install the latest versions of [Node.js](https://nodejs.org) with [fnm](https://github.com/Schniz/fnm), [Ruby](https://ruby-lang.org) with [rbenv](https://github.com/rbenv/rbenv) and [Python](https://python.org) with [pyenv](https://github.com/pyenv/pyenv):
+    Install the latest versions of [Node.js](https://nodejs.org) with [`nodenv`](https://github.com/nodenv/nodenv), [Ruby](https://ruby-lang.org) with [`rbenv`](https://github.com/rbenv/rbenv) and [Python](https://python.org) with [`pyenv`](https://github.com/pyenv/pyenv):
 
     ```sh
     # Make sure that all packages are up-to-date.
     brew update && brew upgrade
 
-    fnm install --lts && fnm use lts-latest
-    rbenv install $(rbenv-latest) && rbenv global $(rbenv-latest)
-    pyenv install $(pyenv-latest) && pyenv global $(pyenv-latest)
+    lts install node ruby python
     ```
 
 7. **Yarn**
