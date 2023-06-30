@@ -50,8 +50,6 @@ brew "fbthrift"
 brew "fb303"
 # C routines to compute the Discrete Fourier Transform
 brew "fftw"
-# Fast and simple Node.js version manager
-brew "fnm"
 # Libraries to talk to Microsoft SQL Server and Sybase databases
 brew "freetds"
 # Toolkit for image loading and pixel buffer manipulation
@@ -118,6 +116,8 @@ brew "neofetch"
 brew "nghttp2"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
+# Manage multiple NodeJS versions
+brew "nodenv"
 # Open source suite of directory software
 brew "openldap"
 # Pinentry for GPG on Mac
