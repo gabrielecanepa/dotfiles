@@ -158,8 +158,6 @@ brew "yarn"
 brew "algolia/algolia-cli/algolia"
 # Backup and Restore your Mac System and App Preferences
 brew "clintmod/formulas/macprefs"
-# Virtual Audio Driver
-cask "blackhole-2ch"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
 # Tool to optimize images to a smaller size
