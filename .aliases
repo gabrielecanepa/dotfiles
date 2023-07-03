@@ -1,5 +1,4 @@
 #!/bin/sh
-# shellcheck disable=SC3028
 
 # Core
 alias ls="/bin/ls -h -G -p"
@@ -13,7 +12,7 @@ alias lss="du -sh * 2>/dev/null | sort -hr" # by size
 # Paths
 wd="$WORKING_DIR"
 # Backup wd to ~/Developer or HOME if not set.
-[[ -z $wd ]] && [[ -d "$HOME/Developer" ]] && wd="$HOME/Developer" || wd="$HOME"
+[[ -z $wd ]] && ([[ -d "$HOME/Developer" ]] && wd="$HOME/Developer" || wd="$HOME")
 tmp="$wd/tmp"
 cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"

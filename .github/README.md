@@ -1,5 +1,8 @@
 ## Installation
 
+> **Warning:** 
+> If you want to try the following dotfiles, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
+
 1. **Font**
     
    To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then install it in your system and use it in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
@@ -43,33 +46,25 @@
 
     ```sh
     /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
-    ```
     
-    ```sh
-    zsh_plugins=(zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
-
-    for plugin in $zsh_plugins; do
+    for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
       git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
     done
     ```
 
 5. **Homebrew**
 
-    Install [Homebrew](https://brew.sh)
+    Install [Homebrew](https://brew.sh) and the bundled packages:
 
     ```sh
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
     
-    and the bundled packages:
-    
-    ```sh
     brew bundle --file ~/.Brewfile
     ```
 
 6. **Node.js**, **Ruby** and **Python**
 
-    Install the latest versions of [Node.js](https://nodejs.org) with [`nodenv`](https://github.com/nodenv/nodenv), [Ruby](https://ruby-lang.org) with [`rbenv`](https://github.com/rbenv/rbenv) and [Python](https://python.org) with [`pyenv`](https://github.com/pyenv/pyenv):
+    Install the latest stable version of [Node.js](https://nodejs.org) ([`nodenv`](https://github.com/nodenv/nodenv)), [Ruby](https://ruby-lang.org) ([`rbenv`](https://github.com/rbenv/rbenv)) and [Python](https://python.org) ([`pyenv`](https://github.com/pyenv/pyenv)) using the custom [`lts` plugin](../.zsh/plugins/lts/lts.plugin.zsh):
 
     ```sh
     # Make sure that all packages are up-to-date.
@@ -81,73 +76,72 @@
 7. **Yarn**
 
     Set up and install global [Yarn](https://classic.yarnpkg.com) packages with:
-    
-    > **Note**  
-    > Any existing packages will be moved to `~/.config/yarn/global.backup`.
 
     ```sh
-    # Set up global folder and link to ~/.yarn
-    [[ -d ~/.config/yarn/global ]] && cp -r ~/.config/yarn/global ~/.config/yarn/global.backup && rm -rf ~/.config/yarn/global
     [[ ! -d ~/.config/yarn ]] && mkdir -p ~/.config/yarn
     ln -sf ~/.yarn ~/.config/yarn/global
-
-    # Install packages
     yarn global add
     ```
 
-    Install [Yarn Pnp](https://yarnpkg.com/features/pnp) using [Corepack](https://nodejs.org/api/corepack):
+    Install [Yarn Pnp](https://yarnpkg.com/features/pnp) using Node.js's [Corepack](https://nodejs.org/api/corepack):
 
     ```sh
-    corepack enable # if not already enabled
+    corepack enable
     corepack prepare yarn@stable --activate
     ```
 
-    Thanks to the [berry plugin](../.zsh/plugins/berry/berry.plugin.zsh), the classic version will be available with the standard `yarn` command, while the new version can be used with `berry`.
+    When using the custom [`yarnx` plugin](../.zsh/plugins/yarnx/yarnx.plugin.zsh) plugin, the classic version will be available under `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
 
 8. **iCloud**
 
     > **Warning**  
     > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
-    
-    The following script will:
-    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
-    - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a cloud folder can be useful to store additional assets and resources.
-    - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
+    >
+    > The snippet will:
+    > - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
+    > - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a remote folder can be used to store additional assets and resources.
+    > - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
  
     <br>
 
     ```sh
     for folder in Applications Developer Downloads Movies Music Pictures; do
-      icloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
-      [[ ! -d $icloud_folder ]] && mkdir $icloud_folder
+      cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
+      [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
 
       case $folder in
-        # Replace with symlink to icloud
+        # Replace with a symlink to iCloud.
         Applications|Downloads|Movies|Music)
-          mv ~/$folder/* $icloud_folder 2>/dev/null
-          sudo rm -rf ~/$folder && ln -sf $icloud_folder ~/$folder
+          mv ~/$folder/* $cloud_folder 2>/dev/null
+          sudo rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder
           ;;
-        # Add symlink to icloud
+        # Create a symlink to iCloud.
         Developer)
-          ln -sf $icloud_folder ~/Developer/icloud
+          ln -sf $cloud_folder ~/Developer/icloud
           ;;
         Pictures)
-          ln -sf $icloud_folder ~/Pictures/iCloud
+          ln -sf $cloud_folder ~/Pictures/iCloud
           ;;
       esac
     done
     ```
 
-    > **Note**  
-    > You can link applications stored in the cloud with `ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app` or create an alias and move it to `/Applications`.
-    > The applications will become available in the system and update when the version changes.
+    You can link single applications stored in the iCloud `Applications` folder with: 
+    
+    ```sh
+    ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
+    ``` 
+    
+    Or alternatevely create an alias manually and move it to `/Applications`.
+    
+    The applications stored in the cloud will maintain all system-wide functionalities and update automatically.
 
 9. **VSCode**
 
     > **Warning**  
     > The following operations will permanently replace some system folders with symlinks to `~/.vscode/user`.
 
-    Create symlinks to backup VSCode settings and extensions, working with both the stable and insiders versions:
+    Use symlinks to backup VSCode settings and extensions for both stable and insiders versions:
 
     ```sh
     # Settings
@@ -163,4 +157,12 @@
     # Extensions
     rm -rf ~/.vscode/extensions/extensions.json
     ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
+    ```
+
+10. **MacOS**
+
+    Apply the system settings specified in [`.macos`](../.macos):
+
+    ```sh
+    . ~/.macos
     ```

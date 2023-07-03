@@ -11,6 +11,7 @@
 /.yarn/berry/
 /.yarn/node_modules/
 !/.zsh/
+/.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
 
 # Files

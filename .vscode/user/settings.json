@@ -13,7 +13,7 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features",
@@ -85,7 +85,6 @@
   },
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
-  "eslint.packageManager": "yarn",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -132,12 +131,8 @@
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": [
-    "/Users/gabrielecanepa"
-  ],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
-  "git.ignoreSubmodules": true,
   "git.inputValidationLength": 80,
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
@@ -177,10 +172,13 @@
   "php.validate.run": "onType",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
-  "prettier.enable": false,
+  "prettier.configPath": "~/.prettierrc",
   "prettier.endOfLine": "auto",
+  "prettier.insertPragma": true,
   "prettier.jsxSingleQuote": true,
   "prettier.printWidth": 160,
+  "prettier.requireConfig": true,
+  "prettier.resolveGlobalModules": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
@@ -189,7 +187,6 @@
   "scss.lint.compatibleVendorPrefixes": "warning",
   "scss.lint.duplicateProperties": "warning",
   "scss.lint.float": "warning",
-  "search.useGlobalIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
   "shellcheck.customArgs": [],
   "shellcheck.enable": true,
@@ -200,11 +197,12 @@
     "gitfs"
   ],
   "shellcheck.ignorePatterns": {
-    "**/*.xonshrc": true,
-    "**/*.xsh": true,
+    "**/*.aliases": true,
     "**/*.example": true,
     "**/*.macos": true,
-    "**/*.profile": true
+    "**/*.profile": true,
+    "**/*.xonshrc": true,
+    "**/*.xsh": true
   },
   "shellcheck.run": "onType",
   "tailwindCSS.experimental.classRegex": [
