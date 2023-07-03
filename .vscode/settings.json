@@ -16,6 +16,7 @@
     ".local": true,
     ".npm": true,
     ".node-gyp": true,
+    ".nodenv": true,
     ".nvm": true,
     ".oh-my-zsh": true,
     ".pyenv": true,
