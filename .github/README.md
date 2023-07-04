@@ -1,7 +1,8 @@
 ## Installation
 
-> **Warning:** 
-> If you want to try the following dotfiles, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
+> **Warning**  
+> If you want to try the following dotfiles, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. 
+> Use at your own risk!
 
 1. **Font**
     
@@ -9,16 +10,16 @@
 
 2. **Dotfiles**
 
-    Clone [the repository](https://github.com/gabrielecanepa/dotfiles)
+    Clone [this repository](https://github.com/gabrielecanepa/dotfiles):
 
     ```sh
     git clone git@github.com:gabrielecanepa/dotfiles.git
     ```
     
-    then move all files to your `$HOME` directory, manually or in bulk:
+    Then move all files to your home directory, manually or in bulk.
 
     > **Warning**  
-    > The following command will overwrite all existing files.
+    > The following command will overwrite all existing files in your home directory. Make sure to backup your data before proceeding.
     
     ```sh
     mv -vf dotfiles/* ~/ && cd ~
@@ -26,13 +27,13 @@
 
 3. **Profile** 
 
-    Create a `.profile` file
+    Create a `.profile` file in your home directory:
 
     ```sh
     touch ~/.profile
     ```
 
-    and use it to export the following variables:
+    And use it to export the following variables:
 
     ```sh
     export NAME="..."
@@ -42,7 +43,7 @@
 
 4. **Oh My Zsh**
 
-    Install [Oh My Zsh](https://ohmyz.sh) with [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions), [zsh-completions](https://github.com/zsh-users/zsh-completions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting):
+    Install [Oh My Zsh](https://ohmyz.sh) with [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions), [`zsh-completions`](https://github.com/zsh-users/zsh-completions) and [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting):
 
     ```sh
     /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -54,11 +55,10 @@
 
 5. **Homebrew**
 
-    Install [Homebrew](https://brew.sh) and the bundled packages:
+    Install [Homebrew](https://brew.sh) and the packages bundled in [`.Brewfile`](../.Brewfile):
 
     ```sh
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
     brew bundle --file ~/.Brewfile
     ```
 
@@ -78,8 +78,10 @@
     Set up and install global [Yarn](https://classic.yarnpkg.com) packages with:
 
     ```sh
+    # Set up global folder.
     [[ ! -d ~/.config/yarn ]] && mkdir -p ~/.config/yarn
     ln -sf ~/.yarn ~/.config/yarn/global
+  
     yarn global add
     ```
 
@@ -96,12 +98,12 @@
 
     > **Warning**  
     > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
-    >
-    > The snippet will:
-    > - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
-    > - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a remote folder can be used to store additional assets and resources.
-    > - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
- 
+
+    The snippet will:
+    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
+    - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a remote folder can be used to store additional assets and resources.
+    - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
+
     <br>
 
     ```sh
@@ -126,13 +128,14 @@
     done
     ```
 
-    You can link single applications stored in the iCloud `Applications` folder with: 
+    You can now link single applications stored in the cloud folder with:
     
     ```sh
+    # ~/Applications corresponds to ~/Library/Mobile Documents/com~apple~CloudDocs/Applications
     ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
     ``` 
     
-    Or alternatevely create an alias manually and move it to `/Applications`.
+    Or create aliases manually and move them to `/Applications`.
     
     The applications stored in the cloud will maintain all system-wide functionalities and update automatically.
 
@@ -141,7 +144,7 @@
     > **Warning**  
     > The following operations will permanently replace some system folders with symlinks to `~/.vscode/user`.
 
-    Use symlinks to backup VSCode settings and extensions for both stable and insiders versions:
+    Use symlinks to backup VSCode settings and extensions used in both stable and insiders versions:
 
     ```sh
     # Settings
