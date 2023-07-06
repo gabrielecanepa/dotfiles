@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.1",
+  "name": "gabrielecanepa.com",
+  "description": "",
+  "theme": {
+    "colors": {
+      "frame": [
+        255,
+        99,
+        72
+      ],
+      "toolbar": [
+        255,
+        99,
+        72
+      ],
+      "omnibox_background": [
+        255,
+        99,
+        72
+      ],
+      "bookmark_text": [
+        68,
+        68,
+        68
+      ],
+      "ntp_background": [
+        255,
+        99,
+        72
+      ],
+      "ntp_header": [
+        255,
+        99,
+        72
+      ],
+      "ntp_link": [
+        27,
+        115,
+        232
+      ]
+    }
+  }
+}
