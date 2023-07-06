@@ -163,6 +163,7 @@ cask "chromedriver"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
 mas "1Password for Safari", id: 1569813296
+mas "Actions", id: 1586435171
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
 mas "GarageBand", id: 682658836
@@ -171,6 +172,7 @@ mas "Keynote", id: 409183694
 mas "NepTunes", id: 1006739057
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Termius", id: 1176074088
 mas "Xcode", id: 497799835
 vscode "be5invis.vscode-custom-css"
 vscode "bradlc.vscode-tailwindcss"
