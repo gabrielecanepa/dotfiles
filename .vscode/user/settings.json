@@ -131,6 +131,9 @@
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
+  "git.ignoredRepositories": [
+    "/Users/gabrielecanepa/.oh-my-zsh"
+  ],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationLength": 80,
@@ -266,5 +269,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
 }
