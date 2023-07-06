@@ -16,6 +16,11 @@
 
 /*== Directories ==*/
 
+/* .chrome */
+.file-icons-enabled .\.chrome-name-folder-icon::before {
+  font-family: devopicons !important;
+  content: "\e643" !important;
+}
 /* .config */
 .file-icons-enabled .\.config-name-folder-icon::before {
   font-family: fontawesome !important;

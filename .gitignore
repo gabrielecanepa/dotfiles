@@ -1,5 +1,8 @@
-# Folders
+# Local ignores for dotfiles repository.
+
+# === Directories ===
 /*/
+!/.chrome/
 !/.github/
 !/.macos/
 !/.vscode/
@@ -28,6 +31,8 @@
 /.viminfo
 /.yarnrc
 /.zcompdump**
+
+# Symlinks
 /Applications
 /Downloads
 /Movies
