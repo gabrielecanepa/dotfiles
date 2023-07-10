@@ -1,13 +1,14 @@
 #!/bin/sh
 
 # Core
-alias ls="/bin/ls -h -G -p"
+alias ls="/bin/ls -GHhp"
 # Use GNU ls if available.
 if command -v gls >/dev/null; then
-  alias ls="gls -h --color --group-directories-first -I .DS_Store -I 'Icon'$'\r'"
+  alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 fi
 alias ll="ls -la"
-alias lss="du -sh * 2>/dev/null | sort -hr" # by size
+# Sort by size.
+lss() { du -L --si -d 1 $@ 2>/dev/null | sort -hr; }
 
 # Paths
 wd="$WORKING_DIR"
