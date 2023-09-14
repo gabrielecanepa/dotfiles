@@ -7,7 +7,7 @@
     "bundle-phobia-cli": "^0.14.14",
     "create-cra-template": "^1.2.3",
     "create-next-app": "^13.4.5",
-    "eslint": "^8.42.0",
+    "eslint": "^8.49.0",
     "gatsby-cli": "^5.10.0",
     "minify": "^10.2.0",
     "netlify-cli": "^15.5.0",
