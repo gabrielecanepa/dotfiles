@@ -13,32 +13,24 @@ function lts() (
 
   local function get_version_manager() {
     case $1 in
-      node)
-        echo "nodenv"
-        ;;
-      ruby)
-        echo "rbenv"
-        ;;
-      python)
-        echo "pyenv"
-        ;;
-      *)
-        return 1
-        ;;
+      node) echo "nodenv" ;;
+      ruby) echo "rbenv" ;;
+      python) echo "pyenv" ;;
+      *) return 1 ;;
     esac
   }
 
   local function get_latest_version() {
-    local args=(${@:2})
     local vm=$(get_version_manager $1)
+    local prefix=(${@:2})
 
     case $1 in
       node|ruby|python)
         local versions="$($vm install --list | sed "s/^[ \t]*//;s/[ \t]*$//")"
 
-        [[ -z "$2" ]] && \
-        echo $versions | grep -vi "[A-Za-z\-]" | tail -1 || \
-        echo $versions | grep "^$args" | tail -1
+        [[ -z "$prefix" ]] &&
+        (echo $versions | grep -vi "[A-Za-z\-]" | tail -1) ||
+        (echo $versions | grep "^$prefix" | tail -1)
         ;;
       *)
         return 1
@@ -46,7 +38,7 @@ function lts() (
     esac
   }
 
-  case "$1" in
+  case $1 in
     install|upgrade)
       [[ -z "$args" ]] && local langs=(${LANGS[@]}) || local langs=($args)
 
@@ -61,6 +53,7 @@ function lts() (
       fi
 
       for lang in $langs; do
+        [[ -z "$2" ]]
         local prefix="$(echo $2 | cut -d. -f1,2)"
 
         echo "${fg[blue]}info${reset_color} Installing latest ${(C)lang} version..."
