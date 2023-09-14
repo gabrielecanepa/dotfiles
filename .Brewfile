@@ -52,6 +52,10 @@ brew "fb303"
 brew "fftw"
 # Libraries to talk to Microsoft SQL Server and Sybase databases
 brew "freetds"
+# Library for encoding and decoding .avif files
+brew "libavif"
+# Graphics library to dynamically manipulate images
+brew "gd"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
 # GitHub command-line tool
@@ -74,6 +78,8 @@ brew "libgpg-error"
 brew "gnupg"
 # Generate introspection data for GObject libraries
 brew "gobject-introspection"
+# GNU triangulated surface library
+brew "gts"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Library to render SVG files using Cairo
@@ -160,10 +166,10 @@ brew "algolia/algolia-cli/algolia"
 brew "clintmod/formulas/macprefs"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Horizontal and vertical rulers
-cask "free-ruler"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
+# Open-source BitTorrent client
+cask "transmission"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
@@ -171,7 +177,6 @@ mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "MusicBar", id: 6447295161
-mas "NepTunes", id: 1006739057
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Termius", id: 1176074088
@@ -200,4 +205,3 @@ vscode "timonwong.shellcheck"
 vscode "VisualStudioExptTeam.vscodeintellicode"
 vscode "VisualStudioExptTeam.vscodeintellicode-completions"
 vscode "yzhang.markdown-all-in-one"
-vscode "znck.grammarly"
