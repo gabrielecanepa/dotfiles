@@ -164,12 +164,30 @@ brew "yarn"
 brew "algolia/algolia-cli/algolia"
 # Backup and Restore your Mac System and App Preferences
 brew "clintmod/formulas/macprefs"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
+# Free app that makes your Internet safer
+cask "cloudflare-warp"
+# Cut and paste files in Finder
+cask "command-x"
+# Customise menu item keyboard shortcuts
+cask "customshortcuts"
+# Web browser
+cask "google-chrome"
+# Grammarly for desktop
+cask "grammarly-desktop"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
+# App to write, plan, collaborate, and get organized
+cask "notion"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Open-source BitTorrent client
 cask "transmission"
+# Open-source code editor
+cask "visual-studio-code"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
@@ -180,6 +198,7 @@ mas "MusicBar", id: 6447295161
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Termius", id: 1176074088
+mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
 vscode "be5invis.vscode-custom-css"
 vscode "bradlc.vscode-tailwindcss"
