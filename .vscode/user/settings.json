@@ -16,7 +16,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
   "[markdown]": {
@@ -167,6 +167,7 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "less.lint.duplicateProperties": "warning",
   "markdown.extension.italic.indicator": "_",
+  "markdown.extension.toc.levels": "2..6",
   "php.suggest.basic": false,
   "php.validate.run": "onType",
   "prettier.arrowParens": "avoid",
