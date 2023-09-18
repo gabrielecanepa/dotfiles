@@ -184,6 +184,8 @@ cask "imageoptim"
 cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Collect, organize & share colors
+cask "sip"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
