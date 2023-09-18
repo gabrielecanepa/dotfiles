@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "GitHub Light",
+  "theme": {
+    "colors": {
+      "frame": [204, 210, 216],
+      "toolbar": [230, 233, 237],
+      "omnibox_background": [204, 210, 216],
+      "ntp_background": [241, 243, 245],
+      "ntp_header": [241, 243, 245],
+      "bookmark_text": [0, 0, 0],
+      "ntp_text": [36, 41, 47],
+      "ntp_link": [36, 41, 47]
+    }
+  }
+}
