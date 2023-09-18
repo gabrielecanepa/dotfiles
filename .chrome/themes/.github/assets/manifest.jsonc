@@ -36,21 +36,21 @@
     // All images must be stored in PNG format or they will not render properly.
     // https://developer.chrome.com/docs/extensions/mv3/themes/#images
     "images": {
-      "theme_frame": "...",
-      "theme_frame_inactive": "...",
-      "theme_frame_incognito": "...",
-      "theme_frame_incognito_inactive": "...",
-      "theme_toolbar": "...",
-      "theme_tab_background": "...",
-      "theme_tab_background_inactive": "...",
-      "theme_tab_background_incognito": "...",
-      "theme_tab_background_incognito_inactive": "...",
-      "theme_tab_background_v": "...",
-      "theme_ntp_background": "...",
-      "theme_frame_overlay": "...",
-      "theme_frame_overlay_inactive": "...",
       "theme_button_background": "...",
+      "theme_frame_inactive": "...",
+      "theme_frame_incognito_inactive": "...",
+      "theme_frame_incognito": "...",
+      "theme_frame_overlay_inactive": "...",
+      "theme_frame_overlay": "...",
+      "theme_frame": "...",
       "theme_ntp_attribution": "...",
+      "theme_ntp_background": "...",
+      "theme_tab_background_inactive": "...",
+      "theme_tab_background_incognito_inactive": "...",
+      "theme_tab_background_incognito": "...",
+      "theme_tab_background_v": "...",
+      "theme_tab_background": "...",
+      "theme_toolbar": "...",
       "theme_window_control_background": "..."
     },
     // This field lets you specify properties such as background alignment, background repeat, and an alternate logo.
@@ -61,8 +61,8 @@
       "ntp_logo_alternate": "..."
     },
     // You can specify tints to be applied to parts of the UI such as buttons, the frame, and the background tab. 
-    // Google Chrome supports tints, not images, because images don't work across platforms and are brittle in the case of adding new buttons.
-    // Tints are in Hue-Saturation-Lightness (HSL) format, using floating-point numbers in the range 0 - 1.0. You can use -1.0 for any of the HSL values to specify no change.
+    // Chrome supports tints  because images don't work across platforms and are brittle with new buttons.
+    // Tints are in HSL format and use floating-point numbers in the range 0 - 1.0, with -1.0 specifying no change.
     "tints": {
       "background_tab": "...",
       "buttons": "...",

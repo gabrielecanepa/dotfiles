@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.1",
+  "name": "Sienna",
+  "theme": {
+    "colors": {
+      "frame": [255, 109, 82],
+      "toolbar": [255, 109, 82],
+      "tab_background_text": [68, 68, 68],
+      "omnibox_background": [255, 109, 82],
+      "omnibox_text": [68, 68, 68],
+      "bookmark_text": [68, 68, 68],
+      "ntp_background": [255, 109, 82],
+      "ntp_header": [255, 109, 82],
+      "ntp_link": [68, 68, 68],
+      "ntp_text": [68, 68, 68]
+    }
+  }
+}
