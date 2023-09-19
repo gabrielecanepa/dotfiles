@@ -186,6 +186,8 @@ cask "notion"
 cask "obsidian"
 # Collect, organize & share colors
 cask "sip"
+# Team communication and collaboration software
+cask "slack"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
@@ -207,6 +209,7 @@ vscode "bradlc.vscode-tailwindcss"
 vscode "BriteSnow.vscode-toggle-quotes"
 vscode "csstools.postcss"
 vscode "dbaeumer.vscode-eslint"
+vscode "Dylbill.math-on-all-numbers"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
 vscode "file-icons.file-icons"
