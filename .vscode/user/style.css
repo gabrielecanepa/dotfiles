@@ -45,8 +45,9 @@
   font-family: file-icons !important;
   content: "\e925" !important;
 }
-/* .private */
-.file-icons-enabled .\.private-name-folder-icon::before {
+/* .private private */
+.file-icons-enabled .\.private-name-folder-icon::before,
+.file-icons-enabled .private-name-folder-icon::before {
   font-family: octicons !important;
   content: "\f06a" !important;
 }

@@ -7,6 +7,7 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     ".bash_history": true,
+    ".bun": true,
     ".bundle": true,
     ".cache": true,
     ".CFUserTextEncoding": true,
@@ -54,8 +55,5 @@
     ".zcompdump*": true,
     ".zsh_history": true
   },
-  "git.repositoryScanIgnoredFolders": [
-    ".Trash",
-    "node_modules"
-  ]
+  "git.repositoryScanIgnoredFolders": [".Trash", "node_modules"]
 }
