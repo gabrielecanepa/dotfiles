@@ -17,13 +17,13 @@
         "revision": "f3389cc6ab60a49ae01dfdd343beb937b1f48c55"
       },
       "homebrew/cask": {
-        "revision": "c72e7799a94336da26c4c58d59be142700c6a176"
+        "revision": "92c1e4a70dd7d7607abc8a044171841b3494287c"
       },
       "homebrew/cask-versions": {
-        "revision": "590cc0375484dd721da6da3e1731dd1b810e03ff"
+        "revision": "a098918dfb930fbefff6f50b5421987447c3a41e"
       },
       "homebrew/core": {
-        "revision": "bd4243150470fcc0c09a17a22daf4fc70a0e728c"
+        "revision": "96b02438253d2a15280eceb6a3e42ff83ce43887"
       },
       "homebrew/services": {
         "revision": "221a5b3ec3adc9fd37652015f1fa16933ed07a22"
@@ -3308,6 +3308,11 @@
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
           "files": {
+            "arm64_sonoma": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/xclip/blobs/sha256:c6bd5e4a94069253d31ed2ccbdb50ae870148ee2b48dc8d2d09e0ade83721c70",
+              "sha256": "c6bd5e4a94069253d31ed2ccbdb50ae870148ee2b48dc8d2d09e0ade83721c70"
+            },
             "arm64_ventura": {
               "cellar": ":any",
               "url": "https://ghcr.io/v2/homebrew/core/xclip/blobs/sha256:e335771d3bb8f072b25c2cf6404f12540cfbd8692d97cd678a086a08b76f2771",
@@ -3322,6 +3327,11 @@
               "cellar": ":any",
               "url": "https://ghcr.io/v2/homebrew/core/xclip/blobs/sha256:2a9e42621fbc329856454f299e2da20b8776de9136cf1233a97ec4662ef2b5fe",
               "sha256": "2a9e42621fbc329856454f299e2da20b8776de9136cf1233a97ec4662ef2b5fe"
+            },
+            "sonoma": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/xclip/blobs/sha256:f0b19adc2c73932facc1b1ad253546c88466ad5e04e0dea7fbe37901d9d03a1f",
+              "sha256": "f0b19adc2c73932facc1b1ad253546c88466ad5e04e0dea7fbe37901d9d03a1f"
             },
             "ventura": {
               "cellar": ":any",
@@ -4605,7 +4615,7 @@
         }
       },
       "1password": {
-        "version": "8.10.15",
+        "version": "8.10.16",
         "options": {
           "full_name": "1password"
         }
@@ -4639,12 +4649,18 @@
         "options": {
           "full_name": "sip"
         }
+      },
+      "slack": {
+        "version": "4.34.119",
+        "options": {
+          "full_name": "slack"
+        }
       }
     },
     "mas": {
       "1Password for Safari": {
         "id": "1569813296",
-        "version": "2.15.0"
+        "version": "2.15.1"
       },
       "AdGuard for Safari": {
         "id": "1440147259",
@@ -4697,7 +4713,7 @@
       },
       "Termius": {
         "id": "1176074088",
-        "version": "8.1.2"
+        "version": "8.2.0"
       },
       "Looking Glass": {
         "id": "1602004436",
@@ -4733,7 +4749,8 @@
       "VisualStudioExptTeam.vscodeintellicode": null,
       "VisualStudioExptTeam.vscodeintellicode-completions": null,
       "yzhang.markdown-all-in-one": null,
-      "znck.grammarly": null
+      "znck.grammarly": null,
+      "Dylbill.math-on-all-numbers": null
     }
   },
   "system": {
@@ -4747,9 +4764,9 @@
         "macOS": "12.6.1"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.1.11",
+        "HOMEBREW_VERSION": "4.1.12",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "bd4243150470fcc0c09a17a22daf4fc70a0e728c",
+        "Homebrew/homebrew-core": "96b02438253d2a15280eceb6a3e42ff83ce43887",
         "CLT": "14.3.1.0.1.1683849156",
         "Xcode": "14.3.1",
         "macOS": "13.4"
