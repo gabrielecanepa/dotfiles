@@ -58,7 +58,6 @@ plugins=(
   zsh-completions
   zsh-syntax-highlighting
   # Custom from ~/.zsh
-  _dotfiles
   colors256
   gatekeeper
   google

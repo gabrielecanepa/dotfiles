@@ -1,6 +1,6 @@
 # Local ignores for dotfiles repository.
 
-# === Directories ===
+# Directories
 /*/
 !/.chrome/
 !/.github/
