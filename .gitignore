@@ -3,6 +3,7 @@
 # Directories
 /*/
 !/.chrome/
+/.chrome/extensions/*/
 !/.github/
 !/.macos/
 !/.vscode/
