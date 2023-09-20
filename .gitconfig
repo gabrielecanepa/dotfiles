@@ -62,7 +62,7 @@
   po = !sh -c 'git push --set-upstream origin $(git branch --show-current)'
   ps = !git pull && git sweep
   re = remote
-  remote = remote -v
+  rv = remote -v
   reset-origin = !"git remote remove origin &>/dev/null; git remote add origin"
   ro = reset-origin
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
