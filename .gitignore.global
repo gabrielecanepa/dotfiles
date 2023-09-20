@@ -15,6 +15,7 @@
 *.iso
 *.jar
 *.rar
+*.pak
 *.tar
 *.zip
 
