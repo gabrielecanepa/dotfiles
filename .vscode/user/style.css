@@ -119,6 +119,12 @@
   content: "\e602" !important;
   color: #ac4142 !important;
 }
+/* .jobs */
+.file-icons-enabled .\.jobs-name-file-icon::before {
+  font-family: fontawesome !important;
+  content: "\f085" !important;
+  /* color: #90a959 !important; */
+}
 /* .macos */
 .file-icons-enabled .\.macos-name-file-icon::before {
   font-family: file-icons !important;

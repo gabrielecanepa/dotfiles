@@ -97,6 +97,8 @@ command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 [[ -f "$HOME/.globals" ]] && . "$HOME/.globals"
 # Load aliases.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
+# Run jobs in background.
+[[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
 # Run cronjobs.
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 

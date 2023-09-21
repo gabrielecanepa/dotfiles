@@ -1,119 +1,119 @@
 [
   {
-    "key": "ctrl+shift+left",
-    "command": "workbench.action.moveEditorLeftInGroup"
+    "command": "workbench.action.moveEditorLeftInGroup",
+    "key": "ctrl+shift+left"
   },
   {
-    "key": "ctrl+shift+right",
-    "command": "workbench.action.moveEditorRightInGroup"
+    "command": "workbench.action.moveEditorRightInGroup",
+    "key": "ctrl+shift+right"
   },
   {
-    "key": "ctrl+cmd+right",
-    "command": "-workbench.action.moveEditorToNextGroup"
+    "command": "-workbench.action.moveEditorToNextGroup",
+    "key": "ctrl+cmd+right"
   },
   {
-    "key": "cmd+k shift+cmd+left",
-    "command": "-workbench.action.moveEditorLeftInGroup"
+    "command": "-workbench.action.moveEditorLeftInGroup",
+    "key": "cmd+k shift+cmd+left"
   },
   {
-    "key": "cmd+k shift+cmd+right",
-    "command": "-workbench.action.moveEditorRightInGroup"
+    "command": "-workbench.action.moveEditorRightInGroup",
+    "key": "cmd+k shift+cmd+right"
   },
   {
-    "key": "ctrl+alt+cmd+l ctrl+alt+cmd+v",
     "command": "workbench.action.terminal.resizePaneLeft",
+    "key": "ctrl+alt+cmd+l ctrl+alt+cmd+v",
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
+    "command": "-editor.action.smartSelect.shrink",
     "key": "ctrl+shift+cmd+left",
-    "command": "-editor.action.smartSelect.shrink",
     "when": "editorTextFocus"
   },
   {
+    "command": "-editor.action.smartSelect.shrink",
     "key": "ctrl+shift+left",
-    "command": "-editor.action.smartSelect.shrink",
     "when": "editorTextFocus"
   },
   {
+    "command": "-editor.action.smartSelect.expand",
     "key": "ctrl+shift+right",
-    "command": "-editor.action.smartSelect.expand",
     "when": "editorTextFocus"
   },
   {
-    "key": "shift+alt+cmd+right",
     "command": "workbench.action.terminal.focusNextPane",
+    "key": "shift+alt+cmd+right",
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
-    "key": "alt+cmd+right",
     "command": "-workbench.action.terminal.focusNextPane",
+    "key": "alt+cmd+right",
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
-    "key": "shift+alt+cmd+left",
     "command": "workbench.action.terminal.focusPreviousPane",
+    "key": "shift+alt+cmd+left",
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
-    "key": "alt+cmd+left",
     "command": "-workbench.action.terminal.focusPreviousPane",
+    "key": "alt+cmd+left",
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
-    "key": "ctrl+shift+cmd+right",
     "command": "-editor.action.smartSelect.expand",
+    "key": "ctrl+shift+cmd+right",
     "when": "editorTextFocus"
   },
   {
-    "key": "alt+\\",
     "command": "-editor.action.inlineSuggest.trigger",
+    "key": "alt+\\",
     "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible"
   },
   {
-    "key": "tab",
     "command": "-markdown.extension.onTabKey",
+    "key": "tab",
     "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'markdown'"
   },
   {
-    "key": "cmd+r",
-    "command": "-workbench.action.gotoSymbol"
+    "command": "-workbench.action.gotoSymbol",
+    "key": "cmd+r"
   },
   {
-    "key": "cmd+r",
     "command": "revealFileInOS",
+    "key": "cmd+r",
     "when": "!editorFocus"
   },
   {
-    "key": "alt+cmd+r",
     "command": "-revealFileInOS",
+    "key": "alt+cmd+r",
     "when": "!editorFocus"
   },
   {
-    "key": "cmd+backspace",
-    "command": "workbench.action.removeRootFolder"
+    "command": "workbench.action.removeRootFolder",
+    "key": "cmd+backspace"
   },
   {
-    "key": "cmd+t",
-    "command": "-workbench.action.quickOpen"
+    "command": "-workbench.action.quickOpen",
+    "key": "cmd+t"
   },
   {
-    "key": "cmd+t",
-    "command": "-workbench.action.showAllSymbols"
+    "command": "-workbench.action.showAllSymbols",
+    "key": "cmd+t"
   },
   {
-    "key": "ctrl+shift+t",
-    "command": "workbench.action.terminal.new"
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+shift+t"
   },
   {
-    "key": "shift+cmd+w",
-    "command": "-workbench.action.closeWindow"
+    "command": "-workbench.action.closeWindow",
+    "key": "shift+cmd+w"
   },
   {
-    "key": "shift+cmd+w",
-    "command": "workbench.action.closeAllEditors"
+    "command": "workbench.action.closeAllEditors",
+    "key": "shift+cmd+w"
   },
   {
-    "key": "ctrl+\\",
-    "command": "workbench.files.action.collapseExplorerFolders"
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "key": "alt+\\"
   }
 ]
