@@ -93,8 +93,11 @@ command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Load aliases and run cron jobs.
+# Load global variables.
+[[ -f "$HOME/.globals" ]] && . "$HOME/.globals"
+# Load aliases.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
+# Run cronjobs.
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
 # Avoid duplicates in PATH.
