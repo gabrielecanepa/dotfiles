@@ -75,8 +75,9 @@
 
 /*== Files ==*/
 
-/* .aliases */
-.file-icons-enabled .\.aliases-name-file-icon::before {
+/* .aliases .globals */
+.file-icons-enabled .\.aliases-name-file-icon::before,
+.file-icons-enabled .\.globals-name-file-icon::before {
   font-family: file-icons !important;
   color: #825078 !important;
   content: "\f0c8" !important;
