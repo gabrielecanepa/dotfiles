@@ -39,8 +39,8 @@ function brew() {
       command brew $@
       local exit_code=$?
 
-      if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $? == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
-        ((brew dump && brew global) >/dev/null &) >/dev/null
+      if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $exit_code == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
+        ((brew dump && brew global) &>/dev/null &) &>/dev/null
       fi
 
       return $exit_code
