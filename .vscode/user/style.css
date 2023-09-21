@@ -162,6 +162,12 @@
   content: "\e910" !important;
   color: #c82829 !important;
 }
+/* svgo.config.js */
+.file-icons-enabled .svgo\.config\.js-name-file-icon::before {
+  font-family: mfixx !important;
+  color: #f4bf75 !important;
+  content: "\f15c" !important;
+}
 /* tsconfig.*.json */
 .file-icons-enabled .tsconfig\.paths\.json-name-file-icon::before {
   color: #6a9fb5 !important;
