@@ -84,6 +84,8 @@ cask "obsidian"
 cask "sip"
 # Team communication and collaboration software
 cask "slack"
+# SSH client
+cask "termius"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
@@ -97,7 +99,6 @@ mas "Keynote", id: 409183694
 mas "MusicBar", id: 6447295161
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Termius", id: 1176074088
 mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
 vscode "be5invis.vscode-custom-css"
