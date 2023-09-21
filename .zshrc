@@ -81,6 +81,11 @@ git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
+# Bun - https://bun.sh
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$PATH:$BUN_INSTALL/bin"
+[[ -f "$BUN_INSTALL/_bun" ]] && . "$BUN_INSTALL/_bun"
+
 # Node - nodenv https://github.com/nodenv/nodenv
 export PATH="$PATH:./node_modules/.bin"
 command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
