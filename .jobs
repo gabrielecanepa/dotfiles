@@ -1,0 +1,12 @@
+# VSCode
+
+extensions=$VSCODE_CUSTOM/extensions.json
+keybindings=$VSCODE_CUSTOM/keybindings.json
+settings=$VSCODE_CUSTOM/settings.json
+
+# Format extensions on change.
+echo $extensions | entr -s "jq '.' $extensions | sponge $extensions" &&
+# Sort keybindings on change.
+echo $keybindings | entr -s "jq --sort-keys '.' $keybindings | sponge $keybindings" &&
+# Sort settings on change.
+echo $settings | entr -s "jq --sort-keys '.' $settings | sponge $settings"

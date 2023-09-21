@@ -85,7 +85,12 @@
   },
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "explorer.autoReveal": "focusNoScroll",
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
@@ -120,18 +125,20 @@
   },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
+  "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
-  "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
+  "git.ignoredRepositories": [
+    "/Users/gabrielecanepa/.oh-my-zsh"
+  ],
   "git.inputValidationLength": 80,
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
@@ -192,17 +199,25 @@
   "shellcheck.enable": true,
   "shellcheck.enableQuickFix": true,
   "shellcheck.exclude": [],
-  "shellcheck.ignoreFileSchemes": ["git", "gitfs"],
+  "shellcheck.ignoreFileSchemes": [
+    "git",
+    "gitfs"
+  ],
   "shellcheck.ignorePatterns": {
     "**/*.aliases": true,
     "**/*.example": true,
+    "**/*.jobs": true,
     "**/*.macos": true,
     "**/*.profile": true,
     "**/*.xonshrc": true,
     "**/*.xsh": true
   },
   "shellcheck.run": "onType",
-  "tailwindCSS.experimental.classRegex": ["tw`([^`]*)", "tw\\.[^`]+`([^`]*)`", "tw\\(.*?\\).*?`([^`]*)"],
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)",
+    "tw\\.[^`]+`([^`]*)`",
+    "tw\\(.*?\\).*?`([^`]*)"
+  ],
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
     "typescriptreact": "javascript"
@@ -217,11 +232,18 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh"
+  ],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": ["\"", "'", "`"],
+  "togglequotes.chars": [
+    "\"",
+    "'",
+    "`"
+  ],
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -231,7 +253,9 @@
   "typescript.tsdk": "/Users/gabrielecanepa/.config/yarn/global/node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/style.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/gabrielecanepa/.vscode/user/style.css"
+  ],
   "vscode_custom_css.statusbar": false,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.autoDetectColorScheme": true,

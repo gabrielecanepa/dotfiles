@@ -1,1 +1,2 @@
+# Sync preferences to iCloud.
 # */5 * * * * rsync -avP --delete --exclude=.DS_Store /Users/gabrielecanepa/Library/Preferences/ /Users/gabrielecanepa/Library/Mobile\ Documents/com~apple~CloudDocs/Preferences
