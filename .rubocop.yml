@@ -8,14 +8,15 @@ AllCops:
     - script/**/*
     - public/**/*
     - vendor/**/*
-    - "**/*.erb"
+    - "*.Brewfile"
+    - "*.erb"
   Include:
     - Rakefile
     - config.ru
-    - "**/Gemfile"
-    - "**/*.gemspec"
-    - "**/*.rake"
-    - "**/*.rb"
+    - Gemfile
+    - "*.gemspec"
+    - "*.rake"
+    - "*.rb"
   NewCops: enable
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
@@ -107,8 +108,6 @@ Metrics/CollectionLiteralLength:
   Enabled: true
 Naming/BlockForwarding:
   Enabled: true
-Naming/FileName:
-  Exclude: [".Brewfile"]
 Naming/MethodParameterName:
   MinNameLength: 1
 Security/CompoundHash:
