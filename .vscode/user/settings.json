@@ -106,6 +106,7 @@
     ".gcloudignore": "dotenv",
     ".gitignore*": "ignore",
     ".gitprofile": "properties",
+    ".jobs": "shellscript",
     ".json": "json",
     ".mdx": "markdown",
     ".pryrc": "ruby",
