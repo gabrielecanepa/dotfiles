@@ -4,9 +4,9 @@ extensions=$VSCODE_CUSTOM/extensions.json
 keybindings=$VSCODE_CUSTOM/keybindings.json
 settings=$VSCODE_CUSTOM/settings.json
 
-# Format extensions on change.
-echo $extensions | entr -s "jq '.' $extensions | sponge $extensions" &&
-# Sort keybindings on change.
-echo $keybindings | entr -s "jq --sort-keys '.' $keybindings | sponge $keybindings" &&
-# Sort settings on change.
+# Format extensions and sort by id.
+echo $extensions | entr -s "jq --sort-keys 'sort_by(.identifier.id)' $extensions | sponge $extensions" &&
+# Sort keybindings by command.
+echo $keybindings | entr -s "jq --sort-keys 'sort_by(.command)' $keybindings | sponge $keybindings" &&
+# Sort settings by key.
 echo $settings | entr -s "jq --sort-keys '.' $settings | sponge $settings"
