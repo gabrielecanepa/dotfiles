@@ -114,6 +114,6 @@
   },
   {
     "command": "workbench.files.action.collapseExplorerFolders",
-    "key": "alt+\\"
+    "key": "ctrl+\\"
   }
 ]
