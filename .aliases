@@ -19,9 +19,10 @@ cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 
 # Directories
-alias cdc="cd \"$cloud\""
-alias cdw="cd $wd"
-alias tmp="cd $tmp"
+alias cdc="cd '$cloud'"
+alias cdd="cd '$cloud/Downloads'"
+alias cdw="cd '$wd'"
+alias tmp="cd '$tmp'"
 mkdircd() { mkdir -p "$@" && cd "$_" || return $?; }
 
 # Files
