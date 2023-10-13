@@ -25,6 +25,11 @@
     "when": "editorTextFocus"
   },
   {
+    "command": "-inlineChat.start",
+    "key": "cmd+i",
+    "when": "inlineChatHasProvider && !editorReadonly"
+  },
+  {
     "command": "-markdown.extension.onTabKey",
     "key": "tab",
     "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'markdown'"
@@ -71,6 +76,11 @@
     "command": "-workbench.action.terminal.focusPreviousPane",
     "key": "alt+cmd+left",
     "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "inlineChat.start",
+    "key": "ctrl+i",
+    "when": "inlineChatHasProvider && !editorReadonly"
   },
   {
     "command": "revealFileInOS",
