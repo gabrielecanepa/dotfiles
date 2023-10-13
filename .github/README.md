@@ -70,7 +70,7 @@
     # Make sure that all packages are up-to-date.
     brew update && brew upgrade
 
-    lts install node ruby python
+    lts install
     ```
 
 7. **Yarn**
@@ -78,7 +78,7 @@
     Set up and install global [Yarn](https://classic.yarnpkg.com) packages with:
 
     ```sh
-    # Set up global folder.
+    # Set up a global folder.
     [[ ! -d ~/.config/yarn ]] && mkdir -p ~/.config/yarn
     ln -sf ~/.yarn ~/.config/yarn/global
   
@@ -100,9 +100,9 @@
     > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
 
     The snippet will:
-    - Replace the Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
-    - Create a symlink named `icloud` in the Developer folder pointing to the corresponding cloud folder. Synchronization is not needed as everything in the local Developer folder should be tracked with Git, but a remote folder can be used to store additional assets and resources.
-    - Create a symlink named `iCloud` in Pictures pointing to the same cloud folder. The local Pictures folder has an ACL preventing user deletion and can't be replaced.
+    - Replace the user Applications, Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
+    - Create a symlink named `icloud` in the Developer folder pointing to a new cloud folder. Synchronization is not needed when using Git, but a remote folder can still be useful to store assets and resources.
+    - Create a symlink named `iCloud` in `/Applications` and `~/Pictures` directing to their cloud folders. Application is a system folder, and the user Pictures folder has an ACL preventing deletion.
 
     <br>
 
@@ -116,6 +116,7 @@
         Applications|Downloads|Movies|Music)
           mv ~/$folder/* $cloud_folder 2>/dev/null
           sudo rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder
+          [[ $folder == "Applications" ]] && ln -sf $cloud_folder /Applications/iCloud
           ;;
         # Create a symlink to iCloud.
         Developer)
@@ -128,16 +129,16 @@
     done
     ```
 
-    You can now link single applications stored in the cloud folder with:
+    You can link single applications stored in the cloud folder with:
     
     ```sh
-    # ~/Applications corresponds to ~/Library/Mobile Documents/com~apple~CloudDocs/Applications
-    ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
+    $app="Bartender"
+    ln -sf ~/Applications/${app}.app /Applications/${app}.app
     ``` 
     
-    Or create aliases manually and move them to `/Applications`.
+    Or create system aliases and move them to `/Applications`.
     
-    The applications stored in the cloud will maintain all system-wide functionalities and update automatically.
+    Applications stored in the cloud will maintain all system-wide functionalities and update automatically.
 
 9. **VSCode**
 
