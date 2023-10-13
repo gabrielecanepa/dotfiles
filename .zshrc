@@ -76,6 +76,7 @@ plugins=(
 command -v profile >/dev/null && ! profile check && return 1
 
 # Git - https://git-scm.com
+export FILTER_BRANCH_SQUELCH_WARNING=1
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
