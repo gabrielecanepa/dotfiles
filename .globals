@@ -1,4 +1,0 @@
-#!/bin/sh
-
-# VSCode
-export VSCODE_CUSTOM=~/.vscode/user
