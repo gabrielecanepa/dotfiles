@@ -158,12 +158,14 @@
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
+  "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
   "iridium.npm.packageManager": "yarn",
   "iridium.npm.showAlgoliaInfo": false,
+  "iridium.npm.showSupportIcon": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
@@ -176,6 +178,7 @@
   "less.lint.duplicateProperties": "warning",
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.toc.levels": "2..6",
+  "optimizeImages.app": "ImageOptim",
   "php.suggest.basic": false,
   "php.validate.run": "onType",
   "prettier.arrowParens": "avoid",
