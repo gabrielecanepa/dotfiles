@@ -258,6 +258,29 @@
   },
   {
     "identifier": {
+      "id": "figma.figma-vscode-extension",
+      "uuid": "bff510dc-dcac-4daf-925c-299ee91fb135"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.2.7",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "bff510dc-dcac-4daf-925c-299ee91fb135",
+      "installedTimestamp": 1695397298471,
+      "isPreReleaseVersion": false,
+      "preRelease": false,
+      "publisherDisplayName": "Figma",
+      "publisherId": "99d5ace2-231e-4a28-a0f2-9bc082c99e54",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "figma.figma-vscode-extension-0.2.7",
+    "version": "0.2.7"
+  },
+  {
+    "identifier": {
       "id": "file-icons.file-icons",
       "uuid": "43335a8d-5929-408b-874a-65f08362642c"
     },
@@ -313,12 +336,14 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.114.426",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.123.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.123.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.123.0",
       "scheme": "file"
     },
     "metadata": {
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1695214506076,
+      "installedTimestamp": 1696605285892,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "preRelease": false,
@@ -327,8 +352,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.114.426",
-    "version": "1.114.426"
+    "relativeLocation": "github.copilot-1.123.0",
+    "version": "1.123.0"
   },
   {
     "identifier": {
@@ -571,12 +596,12 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-vscode.live-server-0.4.9",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-vscode.live-server-0.4.11",
       "scheme": "file"
     },
     "metadata": {
       "id": "4eae7368-ec63-429d-8449-57a7df5e2117",
-      "installedTimestamp": 1688937248731,
+      "installedTimestamp": 1696605285915,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "preRelease": false,
@@ -585,8 +610,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "ms-vscode.live-server-0.4.9",
-    "version": "0.4.9"
+    "relativeLocation": "ms-vscode.live-server-0.4.11",
+    "version": "0.4.11"
   },
   {
     "identifier": {
@@ -643,8 +668,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/ultram4rine.vscode-choosealicense-0.9.3",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/ultram4rine.vscode-choosealicense-0.9.3",
       "path": "/Users/gabrielecanepa/.vscode/extensions/ultram4rine.vscode-choosealicense-0.9.3",
       "scheme": "file"
     },
