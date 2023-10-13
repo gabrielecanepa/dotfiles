@@ -99,11 +99,12 @@ command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 export PATH="$PATH:$HOME/.pyenv/bin"
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Load global variables.
-[[ -f "$HOME/.globals" ]] && . "$HOME/.globals"
+# Define global variables.
+export VSCODE_CUSTOM=~/.vscode/user
+
 # Load aliases.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-# Run jobs in background.
+# Run background jobs
 [[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
 # Run cronjobs.
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
