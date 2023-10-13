@@ -59,6 +59,7 @@ plugins=(
   zsh-syntax-highlighting
   # Custom from ~/.zsh
   colors256
+  dependencies
   gatekeeper
   google
   homebrew
