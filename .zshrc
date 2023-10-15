@@ -89,8 +89,9 @@ export PATH="$PATH:$BUN_INSTALL/bin"
 [[ -f "$BUN_INSTALL/_bun" ]] && . "$BUN_INSTALL/_bun"
 
 # Node - nodenv https://github.com/nodenv/nodenv
-export PATH="$PATH:./node_modules/.bin"
 command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
+# npm - https://www.npmjs.com
+export PATH="$PATH:./node_modules/.bin:$(yarn global bin)"
 
 # Ruby - rbenv https://github.com/rbenv/rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
