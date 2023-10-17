@@ -70,6 +70,8 @@ cask "cloudflare-warp"
 cask "command-x"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
+# Collaborative team software
+cask "figma"
 # Web browser
 cask "google-chrome"
 # Grammarly for desktop
