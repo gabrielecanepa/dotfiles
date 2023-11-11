@@ -56,10 +56,10 @@ function mas() {
     upgrade
   )
 
-  command mas $@
+  sudo command mas $@
   local exit_code=$?
 
-  if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $? == 0 ]]; then
+  if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $exit_code == 0 ]]; then
     ((brew dump && brew global) >/dev/null &) >/dev/null
   fi
 
