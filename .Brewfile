@@ -22,6 +22,8 @@ brew "gh"
 brew "gist"
 # Distributed revision control system
 brew "git"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -88,6 +90,8 @@ cask "sip"
 cask "slack"
 # SSH client
 cask "termius"
+# Unpacks archive files
+cask "the-unarchiver"
 # Open-source BitTorrent client
 cask "transmission"
 # Open-source code editor
@@ -120,7 +124,6 @@ vscode "GitHub.github-vscode-theme"
 vscode "github.vscode-github-actions"
 vscode "GitHub.vscode-pull-request-github"
 vscode "hogashi.crontab-syntax-highlight"
-vscode "idered.npm"
 vscode "idleberg.applescript"
 vscode "jock.svg"
 vscode "LoranKloeze.ruby-rubocop-revived"
@@ -130,6 +133,7 @@ vscode "ms-vscode.live-server"
 vscode "redhat.vscode-yaml"
 vscode "timonwong.shellcheck"
 vscode "ultram4rine.vscode-choosealicense"
+vscode "valentjn.vscode-ltex"
 vscode "VisualStudioExptTeam.vscodeintellicode"
 vscode "VisualStudioExptTeam.vscodeintellicode-completions"
 vscode "yzhang.markdown-all-in-one"
