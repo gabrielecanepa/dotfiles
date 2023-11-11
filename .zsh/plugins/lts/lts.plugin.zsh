@@ -1,12 +1,27 @@
 #!/bin/zsh
 
 function lts() (
-  local LANGS=(node ruby python)
-  local args=(${@:2})
+  local LANGS=(node python ruby)
+
+  local function print_help_message() {
+    echo "Command line utility to quickly find and install the latest stable version of common programming languages.\n"
+
+    echo "Usage: lts [install] [language@version]"
+    echo "Supported languages: ${LANGS[@]}\n"
+
+    echo "Commands:"
+    echo "  lts <language@prefix>               Get the latest version of a language matching an optional prefix"
+    echo "  lts install                         Install the latest version of all languages"
+    echo "  lts install <language@prefix>       Install the latest version of the specified languages matching an optional prefix"
+    echo "Examples:"
+    echo "  lts node                            Get the latest version of Node"
+    echo "  lts node@18                         Get the latest version of Node 18"
+    echo "  lts install python ruby@2           Install the latest version of Python and Ruby 2"
+    echo "  lts install ruby@2.6                Install the latest patch of Ruby 2.6"
+  }
 
   local function validate_language() {
     if [[ -z "$1" ]] || ! [[ " ${LANGS[@]} " =~ " $1 " ]]; then
-      echo "${fg[red]}error${reset_color} Invalid option: $1"
       return 1
     fi
   }
@@ -14,115 +29,118 @@ function lts() (
   local function get_version_manager() {
     case $1 in
       node) echo "nodenv" ;;
-      ruby) echo "rbenv" ;;
       python) echo "pyenv" ;;
+      ruby) echo "rbenv" ;;
       *) return 1 ;;
     esac
   }
 
   local function get_latest_version() {
-    local vm=$(get_version_manager $1)
-    local prefix=(${@:2})
+    local parts=(${(s/@/)1})
 
-    case $1 in
-      node|ruby|python)
-        local versions="$($vm install --list | sed "s/^[ \t]*//;s/[ \t]*$//")"
+    if [[ ${#parts[@]} > 2 ]] || [[ $1 =~ "@" && -z $parts[2] ]]; then
+      echo "${fg[red]}error${reset_color} Invalid version: $1"
+      return 1
+    fi
 
-        [[ -z "$prefix" ]] &&
-        (echo $versions | grep -vi "[A-Za-z\-]" | tail -1) ||
-        (echo $versions | grep "^$prefix" | tail -1)
+    local lang=${parts[1]}
+    local prefix=${parts[2]}
+    local vm=$(get_version_manager $lang)
+
+    case $lang in
+      node|python)
+        local opt="--list"
+        ;;
+      ruby)
+        local opt="--list-all"
         ;;
       *)
         return 1
         ;;
     esac
+
+    local versions="$($vm install $opt | grep -vi "[A-Za-z\-]" | sed -e "s/^[[:space:]]*//" -e "s/[[:space:]]*$//")"
+    if [[ ! -z "$prefix" ]]; then
+      if [[ $prefix =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        versions="$(echo $versions | grep "^$prefix")"
+      else
+        versions="$(echo $versions | grep "^$prefix\\.")"
+      fi
+    fi
+    echo $versions | tail -1
   }
 
   local function get_language_name() {
     case $1 in
       node) echo "Node.js" ;;
-      ruby|python) echo "Ruby" ;;
+      python) echo "Python" ;;
+      ruby) echo "Ruby" ;;
       *) return 1 ;;
     esac
   }
 
-  local function print_help_message() {
-    echo "lts is a command line utility to quickly find and install the latest stable version of a language.\n"
-
-    echo "Usage: lts [install] [language] [version]"
-    echo "Current language support: ${LANGS[@]}\n"
-
-    echo "Commands:"
-    echo "  lts <language> [version]            Get the specified or latest version of a language"
-    echo "  lts install                         Install the latest version of all languages"
-    echo "  lts install <languages>             Install the latest version of the specified languages"
-    echo "  lts install <language> [version]    Install the specified or latest version of a language"
-    echo "Examples:"
-    echo "  lts node                            Get the latest version of Node.js"
-    echo "  lts node 12                         Get latest version 12 of Node.js"
-    echo "  lts install node ruby               Install the latest version of Node.js and Ruby"
-    echo "  lts install ruby 2.7                Install latest 2.7 version of Ruby"
-  }
-
   case $1 in
     install)
-      [[ -z "$args" ]] && local langs=(${LANGS[@]}) || local langs=($args)
-
-      # Check if all languages are supported.
-      local unsupported=()
-
-      for lang in $langs; do ! validate_language $lang >/dev/null && unsupported+=($lang); done
-
-      if [[ -n "$unsupported" ]]; then
-        echo "${fg[red]}error${reset_color} Unsupported languages: ${unsupported[@]}"
-        return 1
-      fi
+      local args=(${@:2})
+      [[ -z "$args" ]] && local versions=(${LANGS[@]}) || local versions=($args)
 
       local updated=()
 
-      for lang in $langs; do
-        local vm=$(get_version_manager $lang)
-        local current=$($vm global)
-        local latest=$(get_latest_version $lang)
+      for version in $versions; do
+        local parts=(${(s/@/)version})
+        local lang=${parts[1]}
+
+        if ! validate_language $lang; then
+          echo "${fg[red]}error${reset_color} Invalid argument: $version"
+          return 1
+        fi
+
         local lang_name=$(get_language_name $lang)
+        local vm=$(get_version_manager $lang)
 
-        echo "${fg[blue]}info${reset_color} Installing $lang_name v$latest..."
+        local old=$($vm global)
+        local new=$(get_latest_version $version)
 
-        $vm install $latest --skip-existing && $vm global $latest
-
-        if [[ $current == $latest ]]; then
-          echo "Already on latest version."
+        if [[ $old == $new ]]; then
+          echo "${fg[blue]}info${reset_color} $lang_name $new is already installed"
           continue
         fi
 
-        echo "${fg[green]} success${reset_color} Updated $lang_name from version $current to $latest."
+        echo "${fg[blue]}info${reset_color} Retrieving $lang_name $new..."
+        if ! $vm install $new --skip-existing; then
+          echo "${fg[red]}error${reset_color} Failed to install $lang_name $new"
+          return 1
+        fi
+        if ! $vm global $new; then
+          echo "${fg[red]}error${reset_color} Failed to set $lang_name version to $new"
+          return 1
+        fi
+        echo "${fg[green]}success${reset_color} Installed $lang_name $new"
       done
       ;;
     *)
-      if [[ -z $1 ]] || [[ $1 =~ "^(-h|--help)$" ]]; then
+      local args=($@)
+
+      if [[ -z $args ]] || [[ $args =~ "^(-h|--help)$" ]]; then
         print_help_message
         return 0
       fi
 
-      local lang=$1
-
-      # Check the version manager.
-      ! validate_language $lang && return 1
-
-      # Get the version manager.
-      local vm=$(get_version_manager $lang)
-
-      # Extract the latest version.
-      if [[ -z "$args" ]]; then
-        local version="$($vm install --list | grep -vi "[A-Za-z\-]" | tail -1)"
-      else
-        local version="$($vm install --list | grep "^$args" | tail -1)"
+      if [[ ${#args[@]} > 1 ]]; then
+        echo "${fg[red]}error${reset_color} Invalid arguments: ${args[@]}"
+        return 1
       fi
 
+      local parts=(${(s/@/)args})
+      local lang=${parts[1]}
 
+      if ! validate_language $lang; then
+        echo "${fg[red]}error${reset_color} Invalid argument: $lang"
+        return 1
+      fi
+
+      local version=$(get_latest_version $1)
       [[ -z "$version" ]] && return 1
-      
-      # Trim and print the latest version.
-      echo $version | sed -e "s/^[[:space:]]*//" -e "s/[[:space:]]*$//"
+      echo $version
   esac
 )
