@@ -56,10 +56,12 @@
   fo = fetch origin
   get = !git pull --rebase && git submodule update --init --recursive
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  lgg = log --graph --all --decorate --oneline
   log = log --color --graph
   p = push
   pf = push --force
   po = !sh -c 'git push --set-upstream origin $(git branch --show-current)'
+  pof = !sh -c 'git push --set-upstream origin $(git branch --show-current) --force'
   ps = !git pull && git sweep
   re = remote
   rv = remote -v
