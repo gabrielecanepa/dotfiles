@@ -19,8 +19,8 @@
 /.zsh/plugins/zsh-*/
 
 # Files
-/.*.backup
 /.*_history
+/.*.backup
 /.*hst
 /.*padl
 /.copilot-cli-access-token
@@ -28,13 +28,14 @@
 /.git-stats
 /.gitprofile
 /.netrc
+/.npmrc
 /.profile
 /.viminfo
 /.yarnrc
 /.zcompdump**
 
 # Symlinks
-/Applications
-/Downloads
-/Movies
-/Music
+/*Applications
+/*Downloads
+/*Movies
+/*Music
