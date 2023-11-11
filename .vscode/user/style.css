@@ -40,6 +40,11 @@
   font-family: octicons !important;
   content: "\e602" !important;
 }
+/* .husky */
+.file-icons-enabled .\.husky-name-folder-icon::before {
+  font-family: file-icons !important;
+  content: "\1f436" !important;
+}
 /* .macos */
 .file-icons-enabled .\.macos-name-folder-icon::before {
   font-family: file-icons !important;
@@ -119,11 +124,16 @@
   content: "\e602" !important;
   color: #ac4142 !important;
 }
+/* .husky/* */
+.file-icons-enabled .\.husky-name-dir-icon.name-file-icon::before {
+  font-family: file-icons;
+  color: #825078;
+  content: "\f0c8";
+}
 /* .jobs */
 .file-icons-enabled .\.jobs-name-file-icon::before {
   font-family: fontawesome !important;
   content: "\f085" !important;
-  /* color: #90a959 !important; */
 }
 /* .macos */
 .file-icons-enabled .\.macos-name-file-icon::before {
@@ -173,4 +183,24 @@
   color: #6a9fb5 !important;
   content: "\eb1b" !important;
   font-family: file-icons !important;
+}
+/* tsup.config.js tsup.config.ts */
+.file-icons-enabled .tsup\.config\.js-name-file-icon::before,
+.file-icons-enabled .tsup\.config\.ts-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\ea61" !important;
+  color: #6c6c6c !important;
+}
+@media (prefers-color-scheme: dark) {
+  .file-icons-enabled .tsup\.config\.js-name-file-icon::before,
+  .file-icons-enabled .tsup\.config\.ts-name-file-icon::before {
+    color: #cccccc !important;
+  }
+}
+/* vitest.config.js vitest.config.ts */
+.file-icons-enabled .vitest\.config\.js-name-file-icon::before,
+.file-icons-enabled .vitest\.config\.ts-name-file-icon::before {
+  font-family: file-icons !important;
+  content: "\2607" !important;
+  color: #7b9a36 !important;
 }
