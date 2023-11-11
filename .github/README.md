@@ -89,6 +89,8 @@ ln -sf ~/.yarn ~/.config/yarn/global
 yarn global add
 ```
 
+#### Yarn Pnp
+
 Install [Yarn Pnp](https://yarnpkg.com/features/pnp) using Node.js's [Corepack](https://nodejs.org/api/corepack):
 
 ```sh
@@ -99,6 +101,8 @@ corepack prepare yarn@stable --activate
 When using the custom [yarnx plugin](../.zsh/plugins/yarnx/yarnx.plugin.zsh) plugin, the classic version will be available under `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
 
 ### iCloud
+
+#### Cloud folders
 
 > **Warning**  
 > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
@@ -132,6 +136,8 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
 done
 ```
 
+#### Cloud applications
+
 You can easily link single applications stored in the cloud with:
 
 ```sh
@@ -141,6 +147,8 @@ ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
 Applications stored in the cloud can maintain all system-wide functionalities and update automatically.
 
 ### VSCode
+
+#### Settings, snippets and extensions
 
 > **Warning**  
 > The following operations will permanently replace some system folders with symlinks.
@@ -157,3 +165,17 @@ done
 rm -rf ~/.vscode/extensions/extensions.json
 ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
 ```
+
+#### Keybindings
+
+To avoid triggering beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the file `~/Library/KeyBindings/DefaultKeyBinding.dict` with the following content:
+
+```
+{
+  "^@\UF701" = "noop";
+  "^@\UF702" = "noop";
+  "^@\UF703" = "noop";
+}
+```
+
+For more information see [this issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
