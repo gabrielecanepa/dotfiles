@@ -3,20 +3,29 @@
 # Core
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
-# Use GNU ls if available.
+## Use GNU `ls` if available.
 command -v gls >/dev/null && alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
-# Sort by size.
-lss() { du -L --si -d 1 $@ 2>/dev/null | sort -hr; }
+## Use `lss` to sort by size.
+lss() { du -L --si -d 1 $@ 2>/dev/null | sort -hr }
+## Follow symbolic links on `cd`.
+cd() {
+  if command -v alisma >/dev/null && [[ -f "$1" || -L "$1" ]]; then
+    builtin cd "$(alisma -p "$1")"
+    return $?
+  fi
+  builtin cd "$@"
+}
 
 # Directories
 [[ -z $WORKING_DIR ]] && ([[ -d "$HOME/Developer" ]] && WORKING_DIR="$HOME/Developer" || WORKING_DIR="$HOME")
+wd="$WORKING_DIR"
 tmp="$WORKING_DIR/tmp"
 cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 alias cdc="cd '$cloud'"
 alias cdd="cd '$cloud/Downloads'"
-alias cdw="cd '$WORKING_DIR'"
-alias cdww="cd '$WORKING_DIR/$USER'"
+alias cdw="cd '$wd'"
+alias cdww="cd '$wd/$USER'"
 alias tmp="cd '$tmp'"
 mkdircd() { mkdir -p "$@" && cd "$_" || return $?; }
 
@@ -41,14 +50,15 @@ alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias server="ruby -run -e httpd . -p 8000"
 
-# Git shortcuts: gcm → git cm → git commit -m
+# Git quick shortcuts: `gcm` → `git cm` → `git commit -m`
 for git_alias in $(git aliases | sed 's/\ .*//'); do
+  # only if the command doesn't already exist.
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
 done
 
-# VSCode workspaces: code-myworkspace → code ~/.vscode/workspaces/myworkspace.code-workspace
+# VSCode workspaces: `code-myworkspace` → `code ~/.vscode/workspaces/myworkspace.code-workspace`
 for vscode_workspace in $(find ~/.vscode/workspaces/*.code-workspace 2>/dev/null); do
   alias code-"""$vscode_workspace:t:r"="code $vscode_workspace"
 done
