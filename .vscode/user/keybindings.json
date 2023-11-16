@@ -25,6 +25,11 @@
     "when": "editorTextFocus"
   },
   {
+    "command": "-extension.htmlTagWrap",
+    "key": "alt+w",
+    "when": "editorTextFocus"
+  },
+  {
     "command": "-inlineChat.start",
     "key": "cmd+i",
     "when": "inlineChatHasProvider && !editorReadonly"
@@ -60,6 +65,10 @@
     "key": "ctrl+cmd+right"
   },
   {
+    "command": "-workbench.action.moveEditorToPreviousGroup",
+    "key": "ctrl+cmd+left"
+  },
+  {
     "command": "-workbench.action.quickOpen",
     "key": "cmd+t"
   },
@@ -78,6 +87,11 @@
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
+    "command": "extension.htmlTagWrap",
+    "key": "ctrl+shift+w",
+    "when": "editorTextFocus"
+  },
+  {
     "command": "inlineChat.start",
     "key": "ctrl+i",
     "when": "inlineChatHasProvider && !editorReadonly"
@@ -93,37 +107,35 @@
   },
   {
     "command": "workbench.action.moveEditorLeftInGroup",
-    "key": "ctrl+shift+left"
+    "key": "ctrl+cmd+left"
   },
   {
     "command": "workbench.action.moveEditorRightInGroup",
-    "key": "ctrl+shift+right"
+    "key": "ctrl+cmd+right"
   },
   {
     "command": "workbench.action.removeRootFolder",
     "key": "cmd+backspace"
   },
   {
-    "command": "workbench.action.terminal.focusNextPane",
-    "key": "shift+alt+cmd+right",
-    "when": "terminalFocus && terminalProcessSupported"
-  },
-  {
-    "command": "workbench.action.terminal.focusPreviousPane",
-    "key": "shift+alt+cmd+left",
-    "when": "terminalFocus && terminalProcessSupported"
-  },
-  {
     "command": "workbench.action.terminal.new",
     "key": "ctrl+shift+t"
   },
   {
-    "command": "workbench.action.terminal.resizePaneLeft",
-    "key": "ctrl+alt+cmd+l ctrl+alt+cmd+v",
-    "when": "terminalFocus && terminalProcessSupported"
-  },
-  {
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+\\"
+  },
+  {
+    "key": "alt+w",
+    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "when": "!activeEditorGroupEmpty"
+  },
+  {
+    "key": "shift+alt+w",
+    "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
   }
 ]
