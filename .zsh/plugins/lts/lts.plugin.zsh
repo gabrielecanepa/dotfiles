@@ -39,7 +39,7 @@ function lts() (
     local parts=(${(s/@/)1})
 
     if [[ ${#parts[@]} > 2 ]] || [[ $1 =~ "@" && -z $parts[2] ]]; then
-      echo "${fg[red]}error${reset_color} Invalid version: $1"
+      echo "${fg[red]}ERROR${reset_color} Invalid version: $1"
       return 1
     fi
 
@@ -60,6 +60,7 @@ function lts() (
     esac
 
     local versions="$($vm install $opt | grep -vi "[A-Za-z\-]" | sed -e "s/^[[:space:]]*//" -e "s/[[:space:]]*$//")"
+
     if [[ ! -z "$prefix" ]]; then
       if [[ $prefix =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         versions="$(echo $versions | grep "^$prefix")"
@@ -67,6 +68,7 @@ function lts() (
         versions="$(echo $versions | grep "^$prefix\\.")"
       fi
     fi
+
     echo $versions | tail -1
   }
 
@@ -89,9 +91,10 @@ function lts() (
       for version in $versions; do
         local parts=(${(s/@/)version})
         local lang=${parts[1]}
+        local prefix=${parts[2]}
 
         if ! validate_language $lang; then
-          echo "${fg[red]}error${reset_color} Invalid argument: $version"
+          echo "${fg[red]}ERROR${reset_color} Invalid argument: $version"
           return 1
         fi
 
@@ -102,20 +105,39 @@ function lts() (
         local new=$(get_latest_version $version)
 
         if [[ $old == $new ]]; then
-          echo "${fg[blue]}info${reset_color} $lang_name $new is already installed"
+          if [[ "$(lts $lang)" == $new ]]; then
+            echo "Already on latest $lang_name version"
+            continue
+          fi
+
+          local prefix_parts=(${(s/./)prefix})
+
+          if [[ ${#prefix_parts[@]} > 2 ]]; then
+            echo "$lang_name $new is already installed"
+            continue
+          fi
+
+          echo "Already on latest $lang_name $prefix version ($new)"
           continue
         fi
 
-        echo "${fg[blue]}info${reset_color} Retrieving $lang_name $new..."
+        if $vm versions | grep -q $new; then
+          echo -n "$lang_name $new is already installed. Do you want to switch to it? [Y/n] "
+          read -k1 -r choice
+          [[ ! $choice =~ ^[Nn]$ ]] && $vm global $new
+          unset choice
+          continue
+        fi
+
         if ! $vm install $new --skip-existing; then
-          echo "${fg[red]}error${reset_color} Failed to install $lang_name $new"
+          echo "${fg[red]}ERROR${reset_color} Failed to install $lang_name $new"
           return 1
         fi
         if ! $vm global $new; then
-          echo "${fg[red]}error${reset_color} Failed to set $lang_name version to $new"
+          echo "${fg[red]}ERROR${reset_color} Failed to set $lang_name version to $new"
           return 1
         fi
-        echo "${fg[green]}success${reset_color} Installed $lang_name $new"
+        echo "${fg[green]}SUCCESS${reset_color} Installed $lang_name $new"
       done
       ;;
     *)
@@ -127,7 +149,7 @@ function lts() (
       fi
 
       if [[ ${#args[@]} > 1 ]]; then
-        echo "${fg[red]}error${reset_color} Invalid arguments: ${args[@]}"
+        echo "${fg[red]}ERROR${reset_color} Invalid arguments: ${args[@]}"
         return 1
       fi
 
@@ -135,7 +157,7 @@ function lts() (
       local lang=${parts[1]}
 
       if ! validate_language $lang; then
-        echo "${fg[red]}error${reset_color} Invalid argument: $lang"
+        echo "${fg[red]}ERROR${reset_color} Invalid argument: $lang"
         return 1
       fi
 

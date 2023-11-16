@@ -35,15 +35,16 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
 
-zle_highlight+=(paste:none) # disable text highlight on paste
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # avoid slow pasting
 zstyle ':completion:*' list-dirs-first true # list directories first
 zstyle ':omz:update' mode auto # autoupdate omz
+zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow paste
+zle_highlight+=(paste:none) # disable text highlight on paste
 
-# Cache
+# Completion
 autoload -Uz compinit
-[[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
+[[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C # optimize caches
 
+# Plugins
 plugins=(
   colored-man-pages
   colorize
@@ -61,6 +62,7 @@ plugins=(
   colors256
   dependencies
   gatekeeper
+  gh+
   google
   homebrew
   lts
@@ -68,7 +70,7 @@ plugins=(
   node-version
   profile
   xcode-reset
-  yarnx
+  yarn+
 )
 
 . "$ZSH/oh-my-zsh.sh"
