@@ -30,6 +30,8 @@ brew "oniguruma"
 brew "jq"
 # Network authentication protocol
 brew "krb5"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Mac App Store command-line interface
 brew "mas"
 # General-purpose lossless data-compression library
@@ -84,6 +86,8 @@ cask "imageoptim"
 cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Modified browser that helps in responsive web development
+cask "responsively"
 # Collect, organize & share colors
 cask "sip"
 # Team communication and collaboration software
@@ -133,7 +137,7 @@ vscode "ms-vscode.live-server"
 vscode "redhat.vscode-yaml"
 vscode "timonwong.shellcheck"
 vscode "ultram4rine.vscode-choosealicense"
-vscode "valentjn.vscode-ltex"
 vscode "VisualStudioExptTeam.vscodeintellicode"
 vscode "VisualStudioExptTeam.vscodeintellicode-completions"
 vscode "yzhang.markdown-all-in-one"
+vscode "znck.grammarly"
