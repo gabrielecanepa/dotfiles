@@ -2,15 +2,15 @@
   "license": "UNLICENSED",
   "dependencies": {
     "bundle-phobia-cli": "^0.14.14",
-    "create-next-app": "^13.5.4",
+    "create-next-app": "^14.0.2",
     "gatsby-cli": "^5.12.2",
     "minify": "^10.5.2",
-    "netlify-cli": "^16.7.0",
-    "node-gyp": "^9.4.0",
+    "netlify-cli": "^17.3.1",
+    "node-gyp": "^10.0.1",
     "semver": "^7.5.4",
     "serve": "^14.2.1",
     "themer": "^6.5.2",
-    "vercel": "^32.4.1",
+    "vercel": "^32.5.4",
     "wifi-password-cli": "^1.0.0"
   }
 }
