@@ -9,7 +9,7 @@
 
 /*== Global ==*/
 
-/* Adapt the icon color of ignored files/folders to the git status */
+/* Match color of ignored files/folders to git status */
 .monaco-decoration-itemColor--9ieymw::before {
   opacity: 0.5 !important;
 }
@@ -50,11 +50,10 @@
   font-family: file-icons !important;
   content: "\e925" !important;
 }
-/* .private private */
-.file-icons-enabled .\.private-name-folder-icon::before,
-.file-icons-enabled .private-name-folder-icon::before {
-  font-family: octicons !important;
-  content: "\f06a" !important;
+/* .next */
+.file-icons-enabled .\.next-name-folder-icon::before {
+  font-family: file-icons !important;
+  content: "\24c3" !important;
 }
 /* .ssh */
 .file-icons-enabled .\.ssh-name-folder-icon::before {
@@ -76,6 +75,17 @@
 .file-icons-enabled .\.zsh-name-folder-icon::before {
   font-family: file-icons !important;
   content: "\f0c8" !important;
+}
+/* private .private */
+.file-icons-enabled .\.private-name-folder-icon::before,
+.file-icons-enabled .private-name-folder-icon::before {
+  font-family: octicons !important;
+  content: "\f06a" !important;
+}
+/* build */
+.file-icons-enabled .build-name-folder-icon::before {
+  font-family: octicons !important;
+  content: "\f0c4" !important;
 }
 
 /*== Files ==*/
