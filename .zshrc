@@ -5,7 +5,7 @@ export LANG="en_US.UTF-8"
 # Binaries
 export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"
 
-# Homebrew - https://brew.sh
+# Homebrew (https://brew.sh)
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
 export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
@@ -16,7 +16,7 @@ export HOMEBREW_NO_INSTALL_FROM_API=1
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
-# Oh My Zsh - https://ohmyz.sh
+# Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
@@ -54,7 +54,7 @@ plugins=(
   last-working-dir
   nodenv
   rbenv
-  # From https://github.com/zsh-users
+  # From zsh-users
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
@@ -78,29 +78,27 @@ plugins=(
 # Check profile installation.
 command -v profile >/dev/null && ! profile check && return 1
 
-# Git - https://git-scm.com
+# Git (https://git-scm.com)
 export FILTER_BRANCH_SQUELCH_WARNING=1
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 
-# Bun - https://bun.sh
+# Node.js - nodenv (https://github.com/nodenv)
+command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
+# npm (https://npmjs.com)
+export PATH="$PATH:./node_modules/.bin:$(npm get prefix)/bin"
+
+# Bun (https://bun.sh)
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$PATH:$BUN_INSTALL/bin"
 [[ -f "$BUN_INSTALL/_bun" ]] && . "$BUN_INSTALL/_bun"
 
-# Node - nodenv https://github.com/nodenv/nodenv
-command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
-# npm - https://www.npmjs.com
-export PATH="$PATH:./node_modules/.bin:$(yarn global bin)"
-
-# Ruby - rbenv https://github.com/rbenv/rbenv
-export PATH="$PATH:$HOME/.rbenv/bin"
+# Ruby - rbenv (https://github.com/rbenv)
 command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 
-# Python - pyenv https://github.com/pyenv/pyenv
-export PATH="$PATH:$HOME/.pyenv/bin"
+# Python - pyenv (https://github.com/pyenv)
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
 # Define global variables.
