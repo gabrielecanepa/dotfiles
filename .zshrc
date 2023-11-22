@@ -53,6 +53,7 @@ plugins=(
   gitfast
   last-working-dir
   nodenv
+  pyenv
   rbenv
   # From zsh-users
   zsh-autosuggestions
@@ -68,6 +69,7 @@ plugins=(
   lts
   node-modules
   node-version
+  npm-global
   profile
   xcode-reset
   yarn+
@@ -79,21 +81,24 @@ plugins=(
 command -v profile >/dev/null && ! profile check && return 1
 
 # Git (https://git-scm.com)
-export FILTER_BRANCH_SQUELCH_WARNING=1
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile" # use private git profile
+[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Node.js - nodenv (https://github.com/nodenv)
 command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
-# npm (https://npmjs.com)
-export PATH="$PATH:./node_modules/.bin:$(npm get prefix)/bin"
+export PATH="$PATH:./node_modules/.bin"
+
+# pnpm
+export PNPM_HOME="$HOME/.pnpm"
+export PATH="$PATH:$PNPM_HOME"
 
 # Bun (https://bun.sh)
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$PATH:$BUN_INSTALL/bin"
-[[ -f "$BUN_INSTALL/_bun" ]] && . "$BUN_INSTALL/_bun"
+export BUN_HOME="$HOME/.bun"
+export PATH="$PATH:$BUN_HOME/bin"
+[[ -f "$BUN_HOME/_bun" ]] && . "$BUN_HOME/_bun"
 
 # Ruby - rbenv (https://github.com/rbenv)
 command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
@@ -101,7 +106,7 @@ command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 # Python - pyenv (https://github.com/pyenv)
 command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 
-# Define global variables.
+# Global variables.
 export VSCODE_CUSTOM=~/.vscode/user
 
 # Load aliases.

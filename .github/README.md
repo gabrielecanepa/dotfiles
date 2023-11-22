@@ -6,7 +6,7 @@
 
 ### Fonts
     
-   To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then install it in your system and use it in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
+To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then install it in your system and use it in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
 
 ### Dotfiles
 
@@ -43,9 +43,9 @@ export EMAIL="..."
 export WORKING_DIR="..."
 ```
 
-### Oh My Zsh
+### [Oh My Zsh](https://ohmyz.sh)
 
-Install [Oh My Zsh](https://ohmyz.sh) with [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions), [`zsh-completions`](https://github.com/zsh-users/zsh-completions) and [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting):
+Install Oh My Zsh with [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions), [`zsh-completions`](https://github.com/zsh-users/zsh-completions) and [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -55,30 +55,50 @@ for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
 done
 ```
 
-### Homebrew
+### [Homebrew](https://brew.sh)
 
-Install [Homebrew](https://brew.sh) and the packages bundled in [`.Brewfile`](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.Brewfile):
+Install Homebrew and the packages bundled in [`.Brewfile`](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.Brewfile):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle --file ~/.Brewfile
 ```
 
-### Node.js, Ruby and Python
+### [Node.js](https://nodejs.org), [Ruby](https://ruby-lang.org) and [Python](https://python.org)
 
-Install the latest stable version of Node.js ([nodenv](https://github.com/nodenv/nodenv)), Ruby ([rbenv](https://github.com/rbenv/rbenv)) and Python ([pyenv](https://github.com/pyenv/pyenv)) using the custom [lts plugin](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.zsh/plugins/lts/lts.plugin.zsh):
+Install the latest stable version of Node.js ([nodenv](https://github.com/nodenv/nodenv)), Ruby ([rbenv](https://github.com/rbenv/rbenv)) and Python ([pyenv](https://github.com/pyenv/pyenv)) using the custom [`lts` plugin](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.zsh/plugins/lts/lts.plugin.zsh):
 
 ```sh
 # Make sure that all packages are up-to-date.
 brew update && brew upgrade
-
 # Install the latest stable version of node, ruby and python.
 lts install
 ```
 
-### Yarn
+### [npm](https://npmjs.com)
 
-Set up and install global [Yarn](https://classic.yarnpkg.com) packages with:
+First, install the node versions specified in [`.npm/versions`](/.npm/versions). 
+
+```sh
+for version in $(command ls ~/.npm/versions); do
+  nodenv install $version
+done
+```
+
+For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the version-specific global packages:
+
+```sh
+for version in $(command ls ~/.npm/versions); do
+  if nodenv global $version; then
+    cd ~/.npm/versions/$version
+    npm -g install $(dependencies -L)
+  fi
+done
+```
+
+### [Yarn](https://classic.yarnpkg.com)
+
+Set up and install global Yarn packages with:
 
 ```sh
 # Set up a global folder.
@@ -89,20 +109,20 @@ ln -sf ~/.yarn ~/.config/yarn/global
 yarn global add
 ```
 
-#### Yarn Pnp
+### [Yarn PnP](https://yarnpkg.com)
 
-Install [Yarn Pnp](https://yarnpkg.com/features/pnp) using Node.js's [Corepack](https://nodejs.org/api/corepack):
+Install Yarn Pnp using Node.js [Corepack](https://nodejs.org/api/corepack):
 
 ```sh
 corepack enable
 corepack prepare yarn@stable --activate
 ```
 
-When using the custom [yarnx plugin](../.zsh/plugins/yarnx/yarnx.plugin.zsh) plugin, the classic version will be available under `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
+When using the custom [`yarnx` plugin](/.zsh/plugins/yarnx/yarnx.plugin.zsh), the classic version will be available with `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
 
-### iCloud
+### [iCloud](https://icloud.com)
 
-#### Cloud folders
+#### Folders
 
 > **Warning**  
 > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
@@ -116,18 +136,22 @@ The snippet will:
 
 ```sh
 for folder in Applications Developer Downloads Movies Music Pictures; do
+  # Create the folder in iCloud Drive if it doesn't exist.
   cloud_path=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
   [[ ! -d $cloud_path ]] && mkdir $cloud_path
 
   case $folder in
+    # Replace with a symlink to the system folder.
     Applications)
       rm -rf ~/Applications 
       ln -sf /Applications ~/Applications
       ln -sf $cloud_path /Applications/iCloud
       ;;
+    # Create a symlink named `iCloud`.
     Developer|Pictures)
       ln -sf $cloud_path ~/$folder/iCloud
       ;;
+    # Replace with a symlink to the cloud folder.
     Downloads|Movies|Music)
       [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_path 2>/dev/null
       rm -rf ~/$folder && ln -sf $cloud_path ~/$folder
@@ -136,7 +160,7 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
 done
 ```
 
-#### Cloud applications
+#### Applications
 
 You can easily link single applications stored in the cloud with:
 
@@ -146,7 +170,7 @@ ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
 
 Applications stored in the cloud can maintain all system-wide functionalities and update automatically.
 
-### VSCode
+### [VSCode](https://code.visualstudio.com)
 
 #### Settings, snippets and extensions
 

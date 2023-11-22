@@ -2,10 +2,22 @@
 
 # Directories
 /*/
+!/.bun
+/.bun/_bun
+/.bun/bin/
+/.bun/install/cache
 !/.chrome/
 /.chrome/extensions/*/
 !/.github/
 !/.macos/
+!/.npm/
+/.npm/_*
+/.npm/bin/
+!/.pnpm/
+/.pnpm/*
+!/.pnpm/global/
+/.pnpm/global/**/.pnpm
+/.pnpm/store/
 !/.vscode/
 /.vscode/cli/
 /.vscode/extensions/
@@ -13,7 +25,6 @@
 /.vscode/argv.json
 !/.yarn/
 /.yarn/berry/
-/.yarn/node_modules/
 !/.zsh/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
@@ -39,3 +50,7 @@
 /*Downloads
 /*Movies
 /*Music
+
+# Common
+node_modules/
+.DS_Store
