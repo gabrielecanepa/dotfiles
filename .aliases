@@ -42,8 +42,9 @@ alias unhide="chflags nohidden"
 alias te="open -a TextEdit"
 
 # Shortcuts
-alias omzr="omz reload"
 alias ghrv="gh repo view --web"
+alias omzr="omz reload"
+alias pn="pnpm"
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
