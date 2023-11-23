@@ -14,16 +14,16 @@
         "revision": "61445bd76b04051a4f0755e031299d18bb0a4b29"
       },
       "homebrew/bundle": {
-        "revision": "2e260ed6045780e8c4ebf55d7c471db5c9146188"
+        "revision": "d6fbeee54ba344be59731ff3e93fb105b2567e34"
       },
       "homebrew/cask": {
-        "revision": "fbe61171367fc5e367e1724b34ad9e6ba924a3b0"
+        "revision": "159689d9b6ae77434b157ff3d665dd5301d90d84"
       },
       "homebrew/cask-versions": {
-        "revision": "9b5f3d45a094e16cac604827e8ac16c24c999a26"
+        "revision": "5b8e9e7973e1daa68d69fdadc624c5d7bbebe681"
       },
       "homebrew/core": {
-        "revision": "76067409c2fa1d1300fc7636c677188aac94609f"
+        "revision": "89bc3aaae613643bb620f54317e1e20f82fd4937"
       },
       "homebrew/services": {
         "revision": "5fb08c19687736c0b8604bf972831deb2cf2328f"
@@ -4999,7 +4999,7 @@
       "sonoma": {
         "HOMEBREW_VERSION": "4.1.21",
         "HOMEBREW_PREFIX": "/opt/homebrew",
-        "Homebrew/homebrew-core": "76067409c2fa1d1300fc7636c677188aac94609f",
+        "Homebrew/homebrew-core": "89bc3aaae613643bb620f54317e1e20f82fd4937",
         "CLT": "15.0.0.0.1.1694021235",
         "Xcode": "15.0.1",
         "macOS": "14.0"

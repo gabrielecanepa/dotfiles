@@ -42,8 +42,6 @@ brew "mysql"
 brew "nginx"
 # Manage multiple NodeJS versions
 brew "nodenv"
-# Fast, disk space efficient package manager
-brew "pnpm"
 # Object-relational database system
 brew "postgresql@14"
 # Python version management
@@ -62,8 +60,6 @@ brew "sponge"
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# JavaScript package manager
-brew "yarn"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Automated testing of webapps for Google Chrome
