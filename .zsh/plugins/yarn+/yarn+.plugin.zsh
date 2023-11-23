@@ -8,7 +8,7 @@ function yarn() {
       ;;
     fresh)
       # Upgrade global dependencies to the latest version.
-      yarn global upgrade --latest
+      command yarn global upgrade --latest
       ;;
     init)
       # Use berry if the `-2` flag is passed.
@@ -16,7 +16,7 @@ function yarn() {
       ;;
     up)
       # Upgrade local dependencies to the latest version.
-      yarn upgrade --latest
+      command yarn upgrade --latest
       ;;
     2|3|pnp)
       # Redirect to berry.
@@ -24,7 +24,7 @@ function yarn() {
       ;;
     *)
       # Run classic yarn.
-      /opt/homebrew/bin/yarn $@
+      command yarn $@
       ;;
   esac
 }
@@ -44,7 +44,7 @@ function yarnx() {
     local package="$name"
   fi
   
-  if ! yarn global add $package >/dev/null; then
+  if ! command yarn global add $package >/dev/null; then
     echo "${fg[red]}error${reset_color} Failed to install $package"
     return 1
   fi
@@ -54,7 +54,7 @@ function yarnx() {
     local exit_code=$?
   fi
 
-  (yarn global remove $name &>/dev/null &)
+  (command yarn global remove $name &>/dev/null &)
 
   return $exit_code || 0
 }
@@ -64,7 +64,7 @@ function berry() {
 
   case "$1" in
     init)
-      /opt/homebrew/bin/yarn init -2
+      command yarn init -2
       local exit_code=$?
 
       $berry add >/dev/null
