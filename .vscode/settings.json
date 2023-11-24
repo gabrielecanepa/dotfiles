@@ -29,6 +29,7 @@
     ".oh-my-zsh": true,
     ".pnpm/store": true,
     ".pnpm-state": true,
+    ".pnpm-store": true,
     ".pyenv": true,
     ".python_history": true,
     ".rbenv": true,
