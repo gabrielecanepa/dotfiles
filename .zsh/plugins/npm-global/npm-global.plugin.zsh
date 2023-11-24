@@ -39,10 +39,11 @@ function npm() {
   command npm config set fund false --location=global
 
   # Run original command and exit if not global.
-  command npm $@
+  command npm $@ | tr -d '\n'
   local npm_exit=$?
 
   if [[ $npm_exit != 0 || $global != true || ! ${GLOBAL_COMMANDS[@]} =~ $params[1] ]]; then
+    echo
     return $npm_exit
   fi
 
@@ -59,9 +60,10 @@ function npm() {
 
   # Set node engine.
   local engine="$(command npm pkg get engines.node | sed -e 's/[{}"\n]//g')"
-  [[ $? != 0 ]] && command npm pkg get engines.node && return $?
+  [[ $? != 0 ]] && command npm pkg get engines.node && echo && return $?
   [[ -z "$engine" ]] && command npm pkg set engines.node=$version
 
   cd "$dir"
+  echo
   return $npm_exit
 }
