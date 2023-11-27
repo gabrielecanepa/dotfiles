@@ -92,7 +92,7 @@ plugins=(
   path
   profile
   xcode-reset
-  yarn1
+  yarn@1
 )
 
 . "$ZSH/oh-my-zsh.sh"
