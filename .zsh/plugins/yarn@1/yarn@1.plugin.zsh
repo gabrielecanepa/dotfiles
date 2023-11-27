@@ -1,18 +1,21 @@
 #!/bin/zsh
 
-function yarn() {
-  # Return if yarn is in current environment.
-  if [[ $(which -a yarn) != *"node_modules"* ]]; then
+function yarn1() {
+  # Return if yarn is in local environment.
+  if [[ $(which -a yarn) == *"node_modules"* ]]; then
     command yarn $@
     return $?
   fi
 
   local dir="$(pwd)"
   cd $dir
+
   local version=$(command yarn -v)
 
-  [[ $version != "1."* ]] && command yarn policies set-version 1 >/dev/null
-  
+  if [[ $version != "1."* ]]; then 
+    command yarn policies set-version "$(npm view yarn version)" >/dev/null
+  fi
+
   case $1 in 
     create)
       # Redirect to yarnx.
@@ -20,15 +23,15 @@ function yarn() {
       ;;
     fresh)
       # Upgrade global dependencies to the latest version.
-      command yarn global upgrade --latest
+      NODE_OPTIONS="--no-deprecation" command yarn global upgrade --latest
       ;;
     init)
       # Use berry if `-2` is specified.
       [[ "${@:2}" == "-2" ]] && berry init
       ;;
-    up)
+    latest)
       # Upgrade local dependencies to the latest version.
-      command yarn upgrade --latest
+      NODE_OPTIONS="--no-deprecation" command yarn upgrade --latest
       ;;
     2|3|pnp)
       # Redirect to berry.
@@ -36,7 +39,7 @@ function yarn() {
       ;;
     *)
       # Run classic yarn.
-      command yarn $@
+      NODE_OPTIONS="--no-deprecation" command yarn $@
       ;;
   esac
 
