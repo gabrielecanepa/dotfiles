@@ -1,6 +1,18 @@
 #!/bin/zsh
 
 function yarn() {
+  # Return if yarn is in current environment.
+  if [[ $(which -a yarn) != *"node_modules"* ]]; then
+    command yarn $@
+    return $?
+  fi
+
+  local dir="$(pwd)"
+  cd $dir
+  local version=$(command yarn -v)
+
+  [[ $version != "1."* ]] && command yarn policies set-version 1 >/dev/null
+  
   case $1 in 
     create)
       # Redirect to yarnx.
@@ -11,7 +23,7 @@ function yarn() {
       command yarn global upgrade --latest
       ;;
     init)
-      # Use berry if the `-2` flag is passed.
+      # Use berry if `-2` is specified.
       [[ "${@:2}" == "-2" ]] && berry init
       ;;
     up)
@@ -27,6 +39,11 @@ function yarn() {
       command yarn $@
       ;;
   esac
+
+  exit=$?
+  [[ $version != "1."* ]] && command yarn policies set-version $version >/dev/null
+  cd $dir
+  return $exit
 }
 
 function yarnx() {
