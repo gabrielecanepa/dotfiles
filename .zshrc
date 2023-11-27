@@ -82,7 +82,7 @@ plugins=(
   colors256
   dependencies
   gatekeeper
-  gh-runs
+  gh-run
   google
   homebrew
   lts
