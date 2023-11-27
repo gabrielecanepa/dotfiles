@@ -89,6 +89,7 @@ plugins=(
   node-modules
   node-version
   npm-global
+  path
   profile
   xcode-reset
   yarn1
