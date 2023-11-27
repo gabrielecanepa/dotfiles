@@ -77,23 +77,23 @@ lts install
 
 ### [npm](https://npmjs.com)
 
-First, install the node versions specified in [`.npm/versions`](/.npm/versions). 
+First, install the Node.js versions specified in [`.npm/versions`](/.npm/versions). For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install its global packages:
 
 ```sh
 for version in $(command ls ~/.npm/versions); do
-  nodenv install $version
+  nodenv install $version --skip-existing
+  cd ~/.npm/versions/$version
+  npm -g install $(dependencies -L)
 done
 ```
 
-For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the version-specific global packages:
+### [pnpm](https://pnpm.js.org)
+
+Install pnpm and its global packages:
 
 ```sh
-for version in $(command ls ~/.npm/versions); do
-  if nodenv global $version; then
-    cd ~/.npm/versions/$version
-    npm -g install $(dependencies -L)
-  fi
-done
+npm install -g pnpm
+pnpm install -g
 ```
 
 ### [Yarn](https://classic.yarnpkg.com)
@@ -109,16 +109,16 @@ ln -sf ~/.yarn ~/.config/yarn/global
 yarn global add
 ```
 
-### [Yarn PnP](https://yarnpkg.com)
+#### [Yarn PnP](https://yarnpkg.com)
 
-Install Yarn Pnp using Node.js [Corepack](https://nodejs.org/api/corepack):
+Install Yarn Pnp using [Corepack](https://nodejs.org/api/corepack):
 
 ```sh
 corepack enable
 corepack prepare yarn@stable --activate
 ```
 
-When using the custom [`yarnx` plugin](/.zsh/plugins/yarnx/yarnx.plugin.zsh), the classic version will be available with `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
+When using the custom [`yarn1` plugin](/.zsh/plugins/yarn1/yarn1.plugin.zsh), the classic version will be available with `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
 
 ### [iCloud](https://icloud.com)
 
@@ -177,17 +177,17 @@ Applications stored in the cloud can maintain all system-wide functionalities an
 > **Warning**  
 > The following operations will permanently replace some system folders with symlinks.
 
-Use symlinks to backup VSCode keybindings, settings, snippets and extensions to `~/.vscode/user`:
+Set `VSCODE_CUSTOM` in [`.zshrc`](/.zshrc) and use symlinks to backup keybindings, settings, snippets and extensions:
 
 ```sh
-for file in keybindings.json settings.json snippets; do
-  path=~/Library/Application\ Support/Code/User/$file
-  rm -rf $path
-  ln -sf ~/.vscode/user/$file $path
+for _type in keybindings.json settings.json snippets; do
+  _path=~/Library/Application\ Support/Code/User/$_type
+  rm -rf $_path
+  ln -sf $VSCODE_CUSTOM/$_type $_path
 done
 
 rm -rf ~/.vscode/extensions/extensions.json
-ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
+ln -sf $VSCODE_CUSTOM/extensions.json ~/.vscode/extensions/extensions.json
 ```
 
 #### Keybindings
