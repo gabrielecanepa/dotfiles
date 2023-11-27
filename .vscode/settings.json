@@ -45,8 +45,6 @@
     ".vscode/argv.json": true,
     ".vscode/cli": true,
     ".vscode/extensions": true,
-    ".yarn": true,
-    ".yarnrc": true,
     ".zcompdump*": true,
     ".zsh_history": true,
     ".zsh_sessions": true,
