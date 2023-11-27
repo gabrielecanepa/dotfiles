@@ -25,6 +25,7 @@
 /.vscode/argv.json
 !/.yarn/
 /.yarn/berry/
+/.yarn/releases/
 !/.zsh/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
