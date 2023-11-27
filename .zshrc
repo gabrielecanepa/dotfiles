@@ -1,20 +1,39 @@
 #!/bin/zsh
 
+# Environment
 export LANG="en_US.UTF-8"
 
 # Binaries
-export PATH="$PATH:$HOME/.bin:./bin:./.bin:$HOME/.local/bin:/usr/local/sbin"
+export PATH="./node_modules/.bin:/usr/local/sbin:$PATH"
 
 # Homebrew (https://brew.sh)
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
 export HOMEBREW_NO_INSTALL_FROM_API=1
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+
+# Git (https://git-scm.com)
+[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
+git config --file "$HOME/.gitprofile" user.name "$NAME"
+git config --file "$HOME/.gitprofile" user.email "$EMAIL"
+git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+export FILTER_BRANCH_SQUELCH_WARNING=1
+
+# Version managers
+# nodenv (https://github.com/nodenv/nodenv)
+# pyenv (https://github.com/pyenv/pyenv)
+# rbenv (https://github.com/rbenv/rbenv)
+for vm in nodenv pyenv rbenv; do
+  ! command -v $vm >/dev/null && continue
+  export ${vm:u}_ROOT="$HOME/.${vm}"
+  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
+  eval "$(${vm} init --path - zsh)"
+done; unset vm
 
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
@@ -42,7 +61,7 @@ zle_highlight+=(paste:none) # disable text highlight on paste
 
 # Completion
 autoload -Uz compinit
-[[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C # optimize caches
+[[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
 
 # Plugins
 plugins=(
@@ -63,7 +82,7 @@ plugins=(
   colors256
   dependencies
   gatekeeper
-  gh+
+  gh-runs
   google
   homebrew
   lts
@@ -72,7 +91,7 @@ plugins=(
   npm-global
   profile
   xcode-reset
-  yarn+
+  yarn1
 )
 
 . "$ZSH/oh-my-zsh.sh"
@@ -80,34 +99,8 @@ plugins=(
 # Check profile installation.
 command -v profile >/dev/null && ! profile check && return 1
 
-# Git (https://git-scm.com)
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
-git config --file "$HOME/.gitprofile" user.name "$NAME"
-git config --file "$HOME/.gitprofile" user.email "$EMAIL"
-git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
-export FILTER_BRANCH_SQUELCH_WARNING=1
-
-# Node.js - nodenv (https://github.com/nodenv)
-command -v nodenv >/dev/null && eval "$(nodenv init - zsh)"
-export PATH="$PATH:./node_modules/.bin"
-
-# pnpm
-export PNPM_HOME="$HOME/.pnpm"
-export PATH="$PATH:$PNPM_HOME"
-
-# Bun (https://bun.sh)
-export BUN_HOME="$HOME/.bun"
-export PATH="$PATH:$BUN_HOME/bin"
-[[ -f "$BUN_HOME/_bun" ]] && . "$BUN_HOME/_bun"
-
-# Ruby - rbenv (https://github.com/rbenv)
-command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
-
-# Python - pyenv (https://github.com/pyenv)
-command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
-
-# Global variables.
-export VSCODE_CUSTOM=~/.vscode/user
+# Export global variables.
+export VSCODE_CUSTOM="$HOME/.vscode/user"
 
 # Load aliases.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
