@@ -2,6 +2,7 @@
   "dependencies": {
     "bundle-phobia-cli": "^0.14.14",
     "corepack": "^0.23.0",
+    "cowsay": "^1.5.0",
     "create-next-app": "^14.0.3",
     "eslint": "^8.54.0",
     "gatsby-cli": "^5.12.4",
