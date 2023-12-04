@@ -78,8 +78,6 @@ cask "google-chrome"
 cask "grammarly-desktop"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
-# App to write, plan, collaborate, and get organized
-cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Modified browser that helps in responsive web development
@@ -112,7 +110,6 @@ vscode "bradlc.vscode-tailwindcss"
 vscode "BriteSnow.vscode-toggle-quotes"
 vscode "csstools.postcss"
 vscode "dbaeumer.vscode-eslint"
-vscode "Dylbill.math-on-all-numbers"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
 vscode "fabiospampinato.vscode-optimize-images"
