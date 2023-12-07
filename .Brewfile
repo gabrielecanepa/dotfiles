@@ -14,6 +14,8 @@ brew "libyaml"
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Suite of command-line tools for converting to and working with CSV
+brew "csvkit"
 # Run arbitrary commands when files change
 brew "entr"
 # GitHub command-line tool
@@ -94,6 +96,8 @@ cask "the-unarchiver"
 cask "transmission"
 # Open-source code editor
 cask "visual-studio-code"
+# Native desktop client for WhatsApp
+cask "whatsapp"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "GarageBand", id: 682658836
