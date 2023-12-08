@@ -15,7 +15,7 @@ function lts() (
     echo "  lts install <language@prefix>       Install the latest version of the specified languages matching an optional prefix"
     echo "Examples:"
     echo "  lts node                            Get the latest version of Node"
-    echo "  lts node@18                         Get the latest version of Node 18"
+    echo "  lts node@18                         Get the latest minor version of Node 18"
     echo "  lts install python ruby@2           Install the latest version of Python and Ruby 2"
     echo "  lts install ruby@2.6                Install the latest patch of Ruby 2.6"
   }
@@ -137,7 +137,6 @@ function lts() (
           echo "${fg[red]}ERROR${reset_color} Failed to set $lang_name version to $new"
           return 1
         fi
-        echo "${fg[green]}SUCCESS${reset_color} Installed $lang_name $new"
       done
       ;;
     *)
