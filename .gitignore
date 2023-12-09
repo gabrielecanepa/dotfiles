@@ -18,6 +18,9 @@
 !/.pnpm/global/
 /.pnpm/global/**/.pnpm
 /.pnpm/store/
+!/.ssh/
+/.ssh/id_*
+/.ssh/known_hosts
 !/.vscode/
 /.vscode/cli/
 /.vscode/extensions/
