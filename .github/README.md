@@ -1,16 +1,15 @@
-## Installation
 
+## Installation
 > **Warning**  
-> If you want to try the following dotfiles, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. 
-> Use at your own risk!
+> If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what that entails!
 
 ### Fonts
     
-To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco Nerd Mono](https://github.com/Karmenzind/monaco-nerd-fonts/blob/master/fonts/Monaco%20Nerd%20Font%20Complete%20Mono.ttf?raw=true). Then install it in your system and use it in apps using terminal interfaces (Terminal, iTerm, VSCode, etc).
+To display icons in your terminal, download a font supporting Nerd Fonts, like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts), and use it in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
 
 ### Dotfiles
 
-Clone [this repository](https://github.com/gabrielecanepa/dotfiles):
+Clone this repository:
 
 ```sh
 git clone git@github.com:gabrielecanepa/dotfiles.git
@@ -18,13 +17,13 @@ git clone git@github.com:gabrielecanepa/dotfiles.git
 gh repo clone gabrielecanepa/dotfiles
 ```
 
-Then move all files to your home directory, manually or in bulk.
+And move all files to your home directory, manually or in bulk.
 
 > **Warning**  
 > The following command will overwrite all existing files in your home directory, make sure to backup your data before proceeding.
 
 ```sh
-mv -vf dotfiles/* ~/ && cd ~
+mv -vf dotfiles/* ~ && cd ~
 ```
 
 ### Profile
@@ -43,21 +42,32 @@ export EMAIL="..."
 export WORKING_DIR="..."
 ```
 
+### SSH
+
+Generate a new SSH key and copy it to the clipboard:
+
+```sh
+ssh-keygen -t ed25519 -C "<comment>"
+tr -d '\n' < ~/.ssh/id_ed25519.pub | pbcopy
+```
+
+Add the public key to [GitHub](https://github.com/settings/ssh/new) and [GitLab](https://gitlab.com/-/profile/keys).
+
 ### [Oh My Zsh](https://ohmyz.sh)
 
-Install Oh My Zsh with [`zsh-autosuggestions`](https://github.com/zsh-users/zsh-autosuggestions), [`zsh-completions`](https://github.com/zsh-users/zsh-completions) and [`zsh-syntax-highlighting`](https://github.com/zsh-users/zsh-syntax-highlighting):
+Install Oh My Zsh with plugins from [zsh-users](https://github.com/zsh-users):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
 for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
-done
+done; unset plugin
 ```
 
 ### [Homebrew](https://brew.sh)
 
-Install Homebrew and the packages bundled in [`.Brewfile`](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.Brewfile):
+Install Homebrew and all packages specified in the [`Brewfile`](/.Brewfile):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -66,7 +76,7 @@ brew bundle --file ~/.Brewfile
 
 ### [Node.js](https://nodejs.org), [Ruby](https://ruby-lang.org) and [Python](https://python.org)
 
-Install the latest stable version of Node.js ([nodenv](https://github.com/nodenv/nodenv)), Ruby ([rbenv](https://github.com/rbenv/rbenv)) and Python ([pyenv](https://github.com/pyenv/pyenv)) using the custom [`lts` plugin](https://github.com/gabrielecanepa/dotfiles/blob/dotfiles/.zsh/plugins/lts/lts.plugin.zsh):
+Install the latest stable version of Node.js, Ruby and Python using the custom [`lts` plugin](/.zsh/plugins/lts/lts.plugin.zsh):
 
 ```sh
 # Make sure that all packages are up-to-date.
@@ -77,19 +87,19 @@ lts install
 
 ### [npm](https://npmjs.com)
 
-First, install the Node.js versions specified in [`.npm/versions`](/.npm/versions). For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install its global packages:
+Install all versions in `.npm/global`. For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the supported global packages:
 
 ```sh
-for version in $(command ls ~/.npm/versions); do
+for version in $(command ls ~/.npm/global); do
   nodenv install $version --skip-existing
-  cd ~/.npm/versions/$version
+  cd ~/.npm/global/$version
   npm -g install $(dependencies -L)
-done
+done; unset version
 ```
 
 ### [pnpm](https://pnpm.js.org)
 
-Install pnpm and its global packages:
+Install pnpm and global packages:
 
 ```sh
 npm install -g pnpm
@@ -98,7 +108,7 @@ pnpm install -g
 
 ### [Yarn](https://classic.yarnpkg.com)
 
-Set up and install global Yarn packages with:
+Set up and install global Yarn packages:
 
 ```sh
 # Set up a global folder.
@@ -111,80 +121,82 @@ yarn global add
 
 #### [Yarn PnP](https://yarnpkg.com)
 
-Install Yarn Pnp using [Corepack](https://nodejs.org/api/corepack):
+Install Yarn Pnp using [Corepack](https://github.com/nodejs/corepack):
 
 ```sh
 corepack enable
 corepack prepare yarn@stable --activate
 ```
 
-When using the custom [`yarn1` plugin](/.zsh/plugins/yarn1/yarn1.plugin.zsh), the classic version will be available with `yarn`, while the new version can be activated with either `yarn2`, `yarnpnp` or `berry`.
+When using the custom [`yarn@1` plugin](/.zsh/plugins/yarn@1/yarn@1.plugin.zsh), the classic version will be available with `yarn`, while PnP can be activated with either `yarn2`, `yarnpnp` or `berry`.
 
 ### [iCloud](https://icloud.com)
 
 #### Folders
 
+Use this script to:
+- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between the cloud and the local machine.
+- Replace the home `Applications` folder with a symlink to the system applications folder, the one used by all users on the machine.
+- Create a symlink named `iCloud`, pointing to the related cloud folder, in `Applications`, `Developer` and `Pictures`.
+
 > **Warning**  
 > The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
-
-The snippet will:
-- Replace the user Downloads, Movies and Music folders with a symbolic link to the corresponding (new or existing) folder in `~/Library/Mobile Documents/com~apple~CloudDocs`. This grants continuous synchronization using iCloud.
-- Replace the user Applications folder with a symlink to the system Applications folder.
-- Create a symlink named `iCloud` in `/Applications`, `~/Developer` and `~/Pictures` directing to the related cloud folders.
 
 <br>
 
 ```sh
 for folder in Applications Developer Downloads Movies Music Pictures; do
   # Create the folder in iCloud Drive if it doesn't exist.
-  cloud_path=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
-  [[ ! -d $cloud_path ]] && mkdir $cloud_path
+  cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
+  [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
 
   case $folder in
     # Replace with a symlink to the system folder.
     Applications)
       rm -rf ~/Applications 
       ln -sf /Applications ~/Applications
-      ln -sf $cloud_path /Applications/iCloud
+      ln -sf $cloud_folder /Applications/iCloud
       ;;
     # Create a symlink named `iCloud`.
     Developer|Pictures)
-      ln -sf $cloud_path ~/$folder/iCloud
+      ln -sf $cloud_folder ~/$folder/iCloud
       ;;
     # Replace with a symlink to the cloud folder.
     Downloads|Movies|Music)
-      [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_path 2>/dev/null
-      rm -rf ~/$folder && ln -sf $cloud_path ~/$folder
+      [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
+      rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder
       ;;
   esac
-done
+done; unset cloud_folder folder
 ```
 
 #### Applications
 
-You can easily link single applications stored in the cloud with:
+You can easily link applications stored in the cloud to the system folder:
 
 ```sh
-ln -sf ~/Applications/<APP_NAME>.app /Applications/<APP_NAME>.app
+for app in Bartender Dash iTerm2; do
+  ln -sf ~/Applications/$app.app /Applications/$app.app
+done; unset app
 ``` 
 
-Applications stored in the cloud can maintain all system-wide functionalities and update automatically.
+The apps will maintain all system-wide functionalities and update automatically.
 
 ### [VSCode](https://code.visualstudio.com)
 
 #### Settings, snippets and extensions
 
+Set `VSCODE_CUSTOM` in [`.zshrc`](/.zshrc) and use symlinks to backup keybindings, settings, snippets and extensions.
+
 > **Warning**  
 > The following operations will permanently replace some system folders with symlinks.
 
-Set `VSCODE_CUSTOM` in [`.zshrc`](/.zshrc) and use symlinks to backup keybindings, settings, snippets and extensions:
-
 ```sh
-for _type in keybindings.json settings.json snippets; do
-  _path=~/Library/Application\ Support/Code/User/$_type
-  rm -rf $_path
-  ln -sf $VSCODE_CUSTOM/$_type $_path
-done
+for config in keybindings.json settings.json snippets; do
+  file=~/Library/Application\ Support/Code/User/$config
+  rm -rf $file
+  ln -sf $VSCODE_CUSTOM/$config $file
+done; unset config file
 
 rm -rf ~/.vscode/extensions/extensions.json
 ln -sf $VSCODE_CUSTOM/extensions.json ~/.vscode/extensions/extensions.json
@@ -192,7 +204,13 @@ ln -sf $VSCODE_CUSTOM/extensions.json ~/.vscode/extensions/extensions.json
 
 #### Keybindings
 
-To avoid triggering beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the file `~/Library/KeyBindings/DefaultKeyBinding.dict` with the following content:
+To avoid emitting beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the configuration file:
+
+```sh
+touch ~/Library/KeyBindings/DefaultKeyBinding.dict
+```
+
+And populate it with the following content:
 
 ```
 {
@@ -202,4 +220,4 @@ To avoid triggering beeps with the keyboard combinations `^⌘←`, `^⌘↓` an
 }
 ```
 
-For more information see [this issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
+For more information see [this Electron issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
