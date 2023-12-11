@@ -80,6 +80,8 @@ cask "google-chrome"
 cask "grammarly-desktop"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Modified browser that helps in responsive web development
