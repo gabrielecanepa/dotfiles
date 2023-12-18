@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-# Print the current profile or execute one of the commands
-# profile [check|config|install|reload|help]
+## 
+# Prints the current profile or executes a command among `config`, `install`, `reload`, `check`, or `help`.
+#
 function profile() (
   local CUT="\r\033[1A\033[0K"
 
@@ -27,8 +28,10 @@ function profile() (
     "vim"             # Vim
   )
 
-  # Convert editor cli command to app name
-  # get_editor_name <command>
+  ## 
+  # Converts the CLI name of an editor into the application name.
+  # get_editor_name <editor>
+  #
   local function get_editor_name() {
     case $1 in
       code)
@@ -49,8 +52,10 @@ function profile() (
     esac
   }
 
-  # Conver editor cli command to git cli command
-  # get_git_editor <command>
+  ## 
+  # Converts the editor CLI command into the corresponding Git command.
+  # get_git_editor <editor>
+  #
   local function get_git_editor() {
     case $1 in
       atom|code|code-insiders)
@@ -68,8 +73,10 @@ function profile() (
     esac
   }
 
-  # Log the specified error message
+  ##
+  # Logs the specified error message.
   # log_error <message>
+  #
   local function log_error() {
     tput civis # hide cursor
     echo "${CUT}${fg[red]}$1\c$reset_color"
@@ -79,8 +86,10 @@ function profile() (
     tput cnorm # show cursor
   }
 
-  # Read, validate, and store an input
+  ## 
+  # Reads, validates, and stores an input.
   # get_input <input> [--allow-blank]
+  #
   local function get_input() {
     local allow_blank=$([[ "$2" == --allow-blank ]] && echo true || echo false)
 
@@ -130,7 +139,6 @@ function profile() (
     esac
   }
 
-  # Commands
   case $1 in
     config)
       local changed_keys=0
@@ -170,7 +178,7 @@ function profile() (
         echo ""
       fi
 
-      if [[ $changed_keys > 0 ]] || $is_reload; then
+      if [[ $changed_keys > 0 ]] || $is_installation || $is_reload; then
         echo -n "" > "$HOME/.profile"
         for key in NAME EMAIL WORKING_DIR EDITOR; do
           echo "export $key=\"${(P)key}\"" >> "$HOME/.profile"
@@ -255,5 +263,3 @@ function profile() (
       ;;
   esac
 )
-
- [ ]
