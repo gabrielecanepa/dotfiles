@@ -55,6 +55,7 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
 
+setopt globdots # globbing hidden files
 zstyle ':completion:*' list-dirs-first true # list directories first
 zstyle ':omz:update' mode auto # autoupdate omz
 zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow paste
@@ -99,7 +100,7 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Check profile installation.
-command -v profile >/dev/null && ! profile check && return 1
+type profile &>/dev/null && profile check
 
 # Export global variables.
 export VSCODE_CUSTOM="$HOME/.vscode/user"
@@ -111,5 +112,5 @@ export VSCODE_CUSTOM="$HOME/.vscode/user"
 # Run cronjobs.
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
-# Avoid duplicates in PATH.
+# Remove duplicates from path.
 typeset -aU path
