@@ -1,5 +1,5 @@
-
 ## Installation
+
 > **Warning**  
 > If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what that entails!
 
@@ -13,33 +13,21 @@ Clone this repository:
 
 ```sh
 git clone git@github.com:gabrielecanepa/dotfiles.git
-# or
-gh repo clone gabrielecanepa/dotfiles
+cd dotfiles
 ```
 
-And move all files to your home directory, manually or in bulk.
+And copy all files to your home directory, manually or in bulk:
 
 > **Warning**  
-> The following command will overwrite all existing files in your home directory, make sure to backup your data before proceeding.
+> The following command will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
 
 ```sh
-mv -vf dotfiles/* ~ && cd ~
-```
+bak_dir=$(mkdir -p ~/.bak/dotfiles/$(date +%Y-%m-%d) && echo $_)
 
-### Profile
-
-Create a `.profile` file in your home directory
-
-```sh
-touch ~/.profile
-```
-
-and use it to export the following variables:
-
-```sh
-export NAME="..."
-export EMAIL="..."
-export WORKING_DIR="..."
+for config in $(ls -A); do
+  [[ -e ~/$config ]]; && cp -fr ~/$config $bak_dir
+  cp -fr $config ~/$config
+done; unset config bak_dir
 ```
 
 ### SSH
@@ -55,19 +43,36 @@ Add the public key to [GitHub](https://github.com/settings/ssh/new) and [GitLab]
 
 ### [Oh My Zsh](https://ohmyz.sh)
 
-Install Oh My Zsh with plugins from [zsh-users](https://github.com/zsh-users):
+Install Oh My Zsh and some essential plugins from [zsh-users](https://github.com/zsh-users):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
-for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
+zsh_user_plugins=(
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
+)
+
+for plugin in $zsh_user_plugins; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
-done; unset plugin
+done; unset plugin zsh_user_plugins
+
+# Apply the changes.
+PROFILE=0 omz reload
+```
+
+### Profile
+
+Use the [`profile` command](/.zsh/plugins/profile/profile.plugin.zsh) to create your profile with a guided prompt.
+
+```sh
+profile install
 ```
 
 ### [Homebrew](https://brew.sh)
 
-Install Homebrew and all packages specified in the [`Brewfile`](/.Brewfile):
+Install Homebrew and the packages specified in [`.Brewfile`](/.Brewfile):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -87,7 +92,7 @@ lts install
 
 ### [npm](https://npmjs.com)
 
-Install all versions in `.npm/global`. For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the supported global packages:
+Install the versions listed in `.npm/global`. For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the supported global packages:
 
 ```sh
 for version in $(command ls ~/.npm/global); do
@@ -135,7 +140,7 @@ When using the custom [`yarn@1` plugin](/.zsh/plugins/yarn@1/yarn@1.plugin.zsh),
 #### Folders
 
 Use this script to:
-- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between the cloud and the local machine.
+- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between cloud and local machine.
 - Replace the home `Applications` folder with a symlink to the system applications folder, the one used by all users on the machine.
 - Create a symlink named `iCloud`, pointing to the related cloud folder, in `Applications`, `Developer` and `Pictures`.
 
@@ -180,7 +185,7 @@ for app in Bartender Dash iTerm2; do
 done; unset app
 ``` 
 
-The apps will maintain all system-wide functionalities and update automatically.
+The apps will become available in the menu and maintain all system-wide functionalities, including automatic updates.
 
 ### [VSCode](https://code.visualstudio.com)
 
@@ -220,4 +225,4 @@ And populate it with the following content:
 }
 ```
 
-For more information see [this Electron issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
+For more information see [this comment](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
