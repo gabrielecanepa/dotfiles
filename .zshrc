@@ -16,6 +16,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Git (https://git-scm.com)
 [[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
