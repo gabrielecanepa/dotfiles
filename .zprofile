@@ -1,4 +1,6 @@
 #!/bin/zsh
 
-# Backup to default profile.
-[[ -f ~/.profile ]] && . ~/.profile
+if [[ -z "$NAME" && -z "$EMAIL" ]]; then
+  # Redirect to default profile.
+  [[ -f ~/.profile ]] && . ~/.profile
+fi
