@@ -164,6 +164,30 @@
   },
   {
     "identifier": {
+      "id": "dylbill.math-on-all-numbers",
+      "uuid": "11349b48-7421-4307-997b-cefbd75bf0e4"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/dylbill.math-on-all-numbers-0.0.4",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "11349b48-7421-4307-997b-cefbd75bf0e4",
+      "installedTimestamp": 1702982441564,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Dylbill",
+      "publisherId": "74be026b-5ddc-4eb3-87a4-d22ef19b7530",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "dylbill.math-on-all-numbers-0.0.4",
+    "version": "0.0.4"
+  },
+  {
+    "identifier": {
       "id": "eamodio.gitlens",
       "uuid": "4de763bd-505d-4978-9575-2b7696ecf94e"
     },
@@ -266,7 +290,6 @@
     },
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/file-icons.file-icons-1.1.0",
       "path": "/Users/gabrielecanepa/.vscode/extensions/file-icons.file-icons-1.1.0",
       "scheme": "file"
     },
@@ -746,6 +769,7 @@
     "metadata": {
       "id": "f2c8b652-2886-45ef-8bc0-c8d1ee8a0e9f",
       "installedTimestamp": 1699955649114,
+      "isApplicationScoped": true,
       "isPreReleaseVersion": false,
       "preRelease": false,
       "publisherDisplayName": "Rahul Kadyan",

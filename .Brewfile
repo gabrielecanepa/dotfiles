@@ -6,6 +6,8 @@ tap "homebrew/core"
 tap "homebrew/services"
 # Library for command-line editing
 brew "readline"
+# Command-line interface for SQLite
+brew "sqlite"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # YAML Parser
@@ -32,6 +34,8 @@ brew "oniguruma"
 brew "jq"
 # Network authentication protocol
 brew "krb5"
+# Postgres C API library
+brew "libpq", link: true
 # Library to render SVG files using Cairo
 brew "librsvg"
 # Mac App Store command-line interface
@@ -45,7 +49,7 @@ brew "nginx"
 # Manage multiple NodeJS versions
 brew "nodenv"
 # Object-relational database system
-brew "postgresql@14"
+brew "postgresql@15"
 # Python version management
 brew "pyenv"
 # Install various Ruby versions and implementations
@@ -116,6 +120,7 @@ vscode "bradlc.vscode-tailwindcss"
 vscode "BriteSnow.vscode-toggle-quotes"
 vscode "csstools.postcss"
 vscode "dbaeumer.vscode-eslint"
+vscode "Dylbill.math-on-all-numbers"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
 vscode "fabiospampinato.vscode-optimize-images"
