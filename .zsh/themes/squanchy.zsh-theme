@@ -1,22 +1,26 @@
 function load_squanchy_theme() {
   ##
   # Returns the given language and version appending a symbol if the version is not the latest.
-  #
-  # Example: `version_prompt node@21.1.0 # => 21.1.0↑`
+  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
   ##
   local function version_prompt() {
     local split=(${(s/@/)1})
     local lang="${split[1]}"
     local version="${split[2]}"
-    local lts="$(lts "$lang")"
 
-    # Return n/a if the language or version are not specified.
+    # Return n/a if language or version are not specified.
     [[ -z "$lang" || -z "$version" ]] && echo "n/a" && return 0
-    # Return the initial version if lts is not installed.
-    ! command -v lts &>/dev/null && echo "$version" && return 0
+    # Return initial version if lts is not installed or version is local.
+    ! command -v lts &>/dev/null || \
+    ([[ "$lang" == "node" ]] && ([[ -f ".nvmrc" ]] || [[ -f ".node-version" ]])) || \
+    ([[ "$lang" == "ruby" ]] && [[ -f ".ruby-version" ]]) || \
+    ([[ "$lang" == "python" ]] && [[ -f ".python-version" ]]) && \
+    echo "$version" && return 0
+
 
     # Split version and lts into parts.
     local version_parts=(${(s/./)version})
+    local lts="$(lts "$lang")"
     local lts_parts=(${(s/./)lts})
 
     if [[ "$version_parts[1]" != "$lts_parts[1]" ]]; then
