@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "Le Wagon",
+  "theme": {
+    "colors": {
+      "frame": [211, 49, 33],
+      "background_tab": [191, 29, 13],
+      "tab_background_text": [255, 255, 255],
+      "toolbar": [240, 240, 240],
+      "tab_text": [0, 0, 0],
+      "toolbar_button_icon": [40, 40, 40],
+      "omnibox_background": [255, 255, 255],
+      "omnibox_text": [40, 40, 40],
+      "toolbar_text": [40, 40, 40],
+      "bookmark_text": [40, 40, 40],
+      "ntp_background": [255, 255, 255],
+      "ntp_header": [255, 255, 255],
+      "ntp_link": [0, 0, 0],
+      "ntp_text": [0, 0, 0],
+      "frame_inactive": [211, 49, 33],
+      "background_tab_inactive": [211, 49, 33],
+      "tab_background_text_inactive": [255, 255, 255]
+    }
+  }
+}
