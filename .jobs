@@ -1,8 +1,8 @@
 # VSCode
 
-extensions=$VSCODE_CUSTOM/extensions.json
-keybindings=$VSCODE_CUSTOM/keybindings.json
-settings=$VSCODE_CUSTOM/settings.json
+extensions="$HOME/.vscode/user/extensions.json"
+keybindings="$HOME/.vscode/user/keybindings.json"
+settings="$HOME/.vscode/user/settings.json"
 
 # Format extensions and sort by id.
 echo $extensions | entr -s "jq --sort-keys 'sort_by(.identifier.id)' $extensions | sponge $extensions"
@@ -10,3 +10,5 @@ echo $extensions | entr -s "jq --sort-keys 'sort_by(.identifier.id)' $extensions
 echo $keybindings | entr -s "jq --sort-keys 'sort_by(.command)' $keybindings | sponge $keybindings"
 # Sort settings by key.
 echo $settings | entr -s "jq --sort-keys '.' $settings | sponge $settings"
+
+unset extensions keybindings settings
