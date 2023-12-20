@@ -4,26 +4,19 @@
 export LANG="en_US.UTF-8"
 
 # Binaries
-export PATH="./node_modules/.bin:/usr/local/sbin:$PATH"
+export PATH="$PATH:/usr/local/sbin:./node_modules/.bin"
 
 # Homebrew (https://brew.sh)
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 export HOMEBREW_NO_INSTALL_FROM_API=1
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
-export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}" 
 export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-# Git (https://git-scm.com)
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
-git config --file "$HOME/.gitprofile" user.name "$NAME"
-git config --file "$HOME/.gitprofile" user.email "$EMAIL"
-git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
-export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Version managers
 # nodenv (https://github.com/nodenv/nodenv)
@@ -100,10 +93,14 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Check profile installation.
-type profile &>/dev/null && profile check
+type profile &>/dev/null && ! profile check && return 1
 
-# Export global variables.
-export VSCODE_CUSTOM="$HOME/.vscode/user"
+# Git (https://git-scm.com)
+[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
+git config --file "$HOME/.gitprofile" user.name "$NAME"
+git config --file "$HOME/.gitprofile" user.email "$EMAIL"
+git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Load aliases.
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
