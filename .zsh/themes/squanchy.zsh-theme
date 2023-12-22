@@ -12,11 +12,10 @@ function load_squanchy_theme() {
     [[ -z "$lang" || -z "$version" ]] && echo "n/a" && return 0
     # Return initial version if lts is not installed or version is local.
     ! command -v lts &>/dev/null || \
-    ([[ "$lang" == "node" ]] && ([[ -f ".nvmrc" ]] || [[ -f ".node-version" ]])) || \
-    ([[ "$lang" == "ruby" ]] && [[ -f ".ruby-version" ]]) || \
-    ([[ "$lang" == "python" ]] && [[ -f ".python-version" ]]) && \
+    ([[ "$lang" == "node" ]] && nodenv local &>/dev/null) || \
+    ([[ "$lang" == "ruby" ]] && rbenv local &>/dev/null) || \
+    ([[ "$lang" == "python" ]] && pyenv local &>/dev/null) && \
     echo "$version" && return 0
-
 
     # Split version and lts into parts.
     local version_parts=(${(s/./)version})
