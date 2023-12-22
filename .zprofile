@@ -1,6 +1,5 @@
-#!/bin/zsh
-
-if [[ -z "$NAME" && -z "$EMAIL" ]]; then
-  # Redirect to default profile.
-  [[ -f ~/.profile ]] && . ~/.profile
-fi
+export NAME="Gabriele Canepa"
+export EMAIL="git@gabrielecanepa.com"
+export WORKING_DIR="/Users/gabrielecanepa/Developer"
+export EDITOR="code"
+export GIT_EDITOR="code --wait"

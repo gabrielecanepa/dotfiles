@@ -46,10 +46,10 @@
 /.gitprofile
 /.netrc
 /.npmrc
-/.profile
 /.viminfo
 /.yarnrc
 /.zcompdump**
+/.zprofile
 
 # Symlinks
 /*Applications
