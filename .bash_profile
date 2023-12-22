@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Load default profile.
-[[ -f ~/.profile ]] && . ~/.profile
+# Source zprofile.
+[[ -f ~/.zprofile ]] && . ~/.zprofile

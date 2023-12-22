@@ -179,11 +179,11 @@ function profile() (
       fi
 
       if [[ $changed_keys > 0 ]] || $is_installation || $is_reload; then
-        echo -n "" > "$HOME/.profile"
+        echo -n "" > "$HOME/.zprofile"
         for key in NAME EMAIL WORKING_DIR EDITOR; do
-          echo "export $key=\"${(P)key}\"" >> "$HOME/.profile"
+          echo "export $key=\"${(P)key}\"" >> "$HOME/.zprofile"
         done
-        echo "export GIT_EDITOR=\"$(get_git_editor $EDITOR)\"" >> "$HOME/.profile"
+        echo "export GIT_EDITOR=\"$(get_git_editor $EDITOR)\"" >> "$HOME/.zprofile"
       else
         echo "Nothing changed"
         return 0
@@ -223,7 +223,7 @@ function profile() (
       ;;
 
     check)
-      if ! . "$HOME/.profile" 2>/dev/null; then
+      if ! . "$HOME/.zprofile" 2>/dev/null; then
         echo "${fg[red]}Profile not found for user $USER$reset_color"
         echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1
