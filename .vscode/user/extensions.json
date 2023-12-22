@@ -75,22 +75,25 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.3",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
       "scheme": "file"
     },
     "metadata": {
       "id": "4db62a7c-7d70-419c-96d2-6c3a4dc77ea5",
-      "installedTimestamp": 1699011425107,
+      "installedTimestamp": 1703257410043,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Tailwind Labs",
       "publisherId": "84722833-669b-4c7d-920e-b60e43fae19a",
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "bradlc.vscode-tailwindcss-0.10.3",
-    "version": "0.10.3"
+    "relativeLocation": "bradlc.vscode-tailwindcss-0.10.4",
+    "version": "0.10.4"
   },
   {
     "identifier": {

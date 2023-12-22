@@ -48,8 +48,8 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
 done; unset git_alias
 
 # VSCode
-for vscode_workspace in $(find ~/.vscode/workspaces/*.code-workspace 2>/dev/null); do
-  alias code-"""$vscode_workspace:t:r"="code $vscode_workspace"
+for vscode_workspace in $(command ls ~/.vscode/workspaces/ 2>/dev/null); do
+  alias code-"$vscode_workspace"="code ~/.vscode/workspaces/$vscode_workspace/$vscode_workspace.code-workspace"
 done; unset vscode_workspace
 
 # Network

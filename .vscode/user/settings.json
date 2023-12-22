@@ -212,7 +212,6 @@
     "**/*.example": true,
     "**/*.jobs": true,
     "**/*.macos": true,
-    "**/*.profile": true,
     "**/*.xonshrc": true,
     "**/*.xsh": true
   },
