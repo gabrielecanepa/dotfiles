@@ -75,14 +75,12 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
-      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.4",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.10.5",
       "scheme": "file"
     },
     "metadata": {
       "id": "4db62a7c-7d70-419c-96d2-6c3a4dc77ea5",
-      "installedTimestamp": 1703257410043,
+      "installedTimestamp": 1704781752259,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -92,8 +90,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "bradlc.vscode-tailwindcss-0.10.4",
-    "version": "0.10.4"
+    "relativeLocation": "bradlc.vscode-tailwindcss-0.10.5",
+    "version": "0.10.5"
   },
   {
     "identifier": {
@@ -340,12 +338,12 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.143.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.147.0",
       "scheme": "file"
     },
     "metadata": {
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1702477437368,
+      "installedTimestamp": 1704874733088,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -355,8 +353,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.143.0",
-    "version": "1.143.0"
+    "relativeLocation": "github.copilot-1.147.0",
+    "version": "1.147.0"
   },
   {
     "identifier": {
@@ -674,21 +672,23 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/ultram4rine.vscode-choosealicense-0.9.3",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ultram4rine.vscode-choosealicense-0.9.4",
       "scheme": "file"
     },
     "metadata": {
       "id": "3f3c77bc-5721-4a52-b693-e4049ae2256d",
-      "installedTimestamp": 1695303528754,
+      "installedTimestamp": 1703667914993,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "ultram4rine",
       "publisherId": "602999bc-a640-4a1e-a9f4-4d2f2ea07c0f",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "ultram4rine.vscode-choosealicense-0.9.3",
-    "version": "0.9.3"
+    "relativeLocation": "ultram4rine.vscode-choosealicense-0.9.4",
+    "version": "0.9.4"
   },
   {
     "identifier": {
@@ -743,21 +743,23 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.5.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.1",
       "scheme": "file"
     },
     "metadata": {
       "id": "98790d67-10fa-497c-9113-f6c7489207b2",
-      "installedTimestamp": 1686267374034,
+      "installedTimestamp": 1704874733094,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Yu Zhang",
       "publisherId": "36c8b41c-6ef6-4bf5-a5b7-65bef29b606f",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "yzhang.markdown-all-in-one-3.5.1",
-    "version": "3.5.1"
+    "relativeLocation": "yzhang.markdown-all-in-one-3.6.1",
+    "version": "3.6.1"
   },
   {
     "identifier": {
