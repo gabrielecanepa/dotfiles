@@ -6,9 +6,16 @@
 function profile() (
   local CUT="\r\033[1A\033[0K"
 
-  local PROFILE_CMD="${fg[green]}profile$reset_color"
-  local PROFILE_CONFIG_CMD="$PROFILE_CMD ${fg[white]}config$reset_color"
-  local PROFILE_INSTALL_CMD="$PROFILE_CMD ${fg[white]}install$reset_color"
+  local _profile_cmd="${fg[green]}profile"
+  local PROFILE_CMD="${_profile_cmd}${reset_color}"
+  local PROFILE_CONFIG_CMD="${_profile_cmd} config${reset_color}"
+  local PROFILE_INSTALL_CMD="${_profile_cmd} install${reset_color}"
+
+  local ICON_USER="\\uf2bd"
+  local ICON_NAME="\\uf040"
+  local ICON_EMAIL="\\uf0e0"
+  local ICON_WORKING_DIR="\\uf07c"
+  local ICON_EDITOR="\\uf121"
 
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
@@ -79,10 +86,10 @@ function profile() (
   #
   local function log_error() {
     tput civis # hide cursor
-    echo "${CUT}${fg[red]}$1\c$reset_color"
+    echo "${CUT}${fg[red]}$1\c${reset_color}"
     sleep 1
     echo
-    echo -n "$reset_color${CUT}> "
+    echo -n "${reset_color}${CUT}> "
     tput cnorm # show cursor
   }
 
@@ -154,7 +161,7 @@ function profile() (
       fi
 
       if ! $is_reload; then
-        echo "${fg_bold[blue]}👤 $USER$reset_color"
+        echo "${fg_bold[blue]}$ICON_USER $USER${reset_color}"
 
         if ! $is_installation; then
           echo "(hit ⏎  if unchanged)"
@@ -204,7 +211,7 @@ function profile() (
 
     install)
       if profile check >/dev/null; then
-        echo "${fg[yellow]}WARNING: you already have a profile installed for the user $USER$reset_color"
+        echo "${fg[yellow]}WARNING: you already have a profile installed for the user $USER${reset_color}"
         echo -n "Do you want to override the current profile? (y/N) "
         read -r choice
         if [[ "$choice" =~ [yY] ]]; then
@@ -223,12 +230,12 @@ function profile() (
       ;;
 
     check)
-      if ! . "$HOME/.zprofile" 2>/dev/null; then
-        echo "${fg[red]}Profile not found for user $USER$reset_color"
+      if [[ -z "$HOME/.profile" || -z "$HOME/.zprofile" ]]; then
+        echo "${fg[red]}Missing profile for user $USER${reset_color}"
         echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1
-      elif [[ ! $NAME =~ $NAME_REGEX ]] || [[ ! $EMAIL =~ $EMAIL_REGEX ]] || ! type -a $EDITOR >/dev/null || [[ ! -d $WORKING_DIR ]]; then
-        echo "${fg[red]}⚠️  Profile installed incorrectly for user $USER$reset_color"
+      elif [[ -z "$NAME" ]] || [[ ! "$NAME" =~ $NAME_REGEX ]] || [[ -z "$EMAIL" ]] || [[ ! "$EMAIL" =~ $EMAIL_REGEX ]] || [[ -z "$WORKING_DIR" ]] || [[ ! -d "$WORKING_DIR" ]] || [[ -z "$EDITOR" ]] || ! type -a "$EDITOR" >/dev/null; then
+        echo "${fg[red]}⚠️  Incorrect profile for user $USER${reset_color}"
         echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1
       fi
@@ -247,15 +254,15 @@ function profile() (
 
     *)
       if [[ ! -z $1 ]]; then
-        echo "${fg[red]}Unknown command: $1$reset_color"
+        echo "${fg[red]}Unknown command: $1${reset_color}"
         profile help
       else
         if profile check; then
-          echo "${fg_bold[blue]}👤 $USER$reset_color"
-          echo " ⌙ 📝 $NAME"
-          echo " ⌙ 📧 $EMAIL"
-          echo " ⌙ 📁 ~/$WORKING_DIR_NAME"
-          echo " ⌙ 💻 $(get_editor_name $EDITOR)"
+          print -P "${fg_bold[blue]}$ICON_USER $USER${reset_color}"
+          print -P "%F{209}$ICON_NAME${reset_color} $NAME"
+          print -P "%F{015}$ICON_EMAIL${reset_color} $EMAIL"
+          print -P "%F{220}$ICON_WORKING_DIR${reset_color} $WORKING_DIR"
+          print -P "%F{032}$ICON_EDITOR${reset_color} $(get_editor_name $EDITOR)"
         else
           return 1
         fi
@@ -263,3 +270,8 @@ function profile() (
       ;;
   esac
 )
+
+# Load .zprofile if not already loaded.
+if [[ -z "$NAME" && -z "$EMAIL" && -z "$WORKING_DIR" && -z "$EDITOR" && -z "$GIT_EDITOR" && -f "$HOME/.zprofile" ]]; then
+  source "$HOME/.zprofile"
+fi
