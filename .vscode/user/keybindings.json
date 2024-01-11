@@ -126,16 +126,28 @@
     "key": "ctrl+\\"
   },
   {
-    "key": "alt+w",
-    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup"
+    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
+    "key": "alt+w"
   },
   {
-    "key": "ctrl+shift+tab",
     "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "key": "ctrl+shift+tab",
     "when": "!activeEditorGroupEmpty"
   },
   {
-    "key": "shift+alt+w",
-    "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
+    "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
+    "key": "shift+alt+w"
+  },
+  {
+    "command": "-workbench.action.splitEditor",
+    "key": "cmd+\\"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "cmd+\\"
+  },
+  {
+    "command": "-workbench.action.toggleSidebarVisibility",
+    "key": "cmd+b"
   }
 ]
