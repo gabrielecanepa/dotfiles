@@ -138,6 +138,8 @@ Style/EachWithObject:
   Enabled: false
 Style/EmptyHeredoc:
   Enabled: true
+Style/EmptyMethod:
+  Enabled: false
 Style/EndlessMethod:
   Enabled: true
 Style/EnvHome:
