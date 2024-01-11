@@ -2,17 +2,13 @@
   "PHP Standard Tag": {
     "prefix": "php",
     "scope": "php, html",
-    "body": [
-      "<?php $0 ?>",
-    ],
+    "body": ["<?php $0 ?>"],
     "description": "PHP Standard Tag"
   },
   "PHP Short Echo Tag": {
     "prefix": "phpe",
     "scope": "php, html",
-    "body": [
-      "<?= $0 ?>",
-    ],
+    "body": ["<?= $0 ?>"],
     "description": "PHP Short Echo Tag"
   }
 }
