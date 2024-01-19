@@ -4,7 +4,7 @@
 export LANG="en_US.UTF-8"
 
 # Binaries
-export PATH="$PATH:/usr/local/sbin:./node_modules/.bin"
+export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin"
 
 # Homebrew (https://brew.sh)
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -48,7 +48,7 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
 
-setopt globdots # globbing hidden files
+setopt globdots # glob hidden files
 zstyle ':completion:*' list-dirs-first true # list directories first
 zstyle ':omz:update' mode auto # autoupdate omz
 zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow paste
