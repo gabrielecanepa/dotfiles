@@ -1,6 +1,30 @@
 [
   {
     "identifier": {
+      "id": "akamud.vscode-theme-onelight",
+      "uuid": "ee33fd31-7bb4-4252-8368-fdd5bcd94cf8"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/akamud.vscode-theme-onelight-2.3.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "ee33fd31-7bb4-4252-8368-fdd5bcd94cf8",
+      "installedTimestamp": 1704982967291,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Mahmoud Ali",
+      "publisherId": "1a680e61-b64e-4eff-bbbb-2085b0618f52",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "akamud.vscode-theme-onelight-2.3.0",
+    "version": "2.3.0"
+  },
+  {
+    "identifier": {
       "id": "be5invis.vscode-custom-css",
       "uuid": "1b160753-ae5e-42bb-82ad-d115ce5c10f4"
     },
@@ -21,29 +45,6 @@
     },
     "relativeLocation": "be5invis.vscode-custom-css-7.2.1",
     "version": "7.2.1"
-  },
-  {
-    "identifier": {
-      "id": "bennycode.sort-everything",
-      "uuid": "4fe1a931-5171-4c6d-8d27-c1034a85fe4b"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/bennycode.sort-everything-1.3.3",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "4fe1a931-5171-4c6d-8d27-c1034a85fe4b",
-      "installedTimestamp": 1695285758774,
-      "isPreReleaseVersion": false,
-      "preRelease": false,
-      "publisherDisplayName": "Benny Neugebauer",
-      "publisherId": "32a5bcc6-cb67-4afa-afbc-9c72be962f59",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "bennycode.sort-everything-1.3.3",
-    "version": "1.3.3"
   },
   {
     "identifier": {
@@ -146,22 +147,23 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/dbaeumer.vscode-eslint-2.4.2",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/dbaeumer.vscode-eslint-2.4.3",
       "scheme": "file"
     },
     "metadata": {
       "id": "583b2b34-2c1e-4634-8c0b-0b82e283ea3a",
-      "installedTimestamp": 1687467679822,
+      "installedTimestamp": 1705330184559,
       "isApplicationScoped": false,
-      "isPreReleaseVersion": false,
+      "isPreReleaseVersion": true,
+      "pinned": false,
       "preRelease": true,
       "publisherDisplayName": "Microsoft",
       "publisherId": "29859a75-d81b-4f0e-8578-2c80ecee6f99",
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "dbaeumer.vscode-eslint-2.4.2",
-    "version": "2.4.2"
+    "relativeLocation": "dbaeumer.vscode-eslint-2.4.3",
+    "version": "2.4.3"
   },
   {
     "identifier": {
@@ -194,12 +196,12 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.6.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.7.0",
       "scheme": "file"
     },
     "metadata": {
       "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
-      "installedTimestamp": 1702637700362,
+      "installedTimestamp": 1705566083029,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -209,8 +211,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "eamodio.gitlens-14.6.1",
-    "version": "14.6.1"
+    "relativeLocation": "eamodio.gitlens-14.7.0",
+    "version": "14.7.0"
   },
   {
     "identifier": {
@@ -338,12 +340,12 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.147.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.152.0",
       "scheme": "file"
     },
     "metadata": {
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1704874733088,
+      "installedTimestamp": 1705663756934,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -353,8 +355,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.147.0",
-    "version": "1.147.0"
+    "relativeLocation": "github.copilot-1.152.0",
+    "version": "1.152.0"
   },
   {
     "identifier": {
@@ -455,53 +457,6 @@
   },
   {
     "identifier": {
-      "id": "hogashi.crontab-syntax-highlight",
-      "uuid": "608f80f3-12af-4601-a960-2e3334c95c3f"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/hogashi.crontab-syntax-highlight-0.0.2",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "608f80f3-12af-4601-a960-2e3334c95c3f",
-      "installedTimestamp": 1686267193141,
-      "isPreReleaseVersion": false,
-      "preRelease": false,
-      "publisherDisplayName": "hogashi",
-      "publisherId": "cda3ac93-3b90-4351-9ef9-d39301b76472",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "hogashi.crontab-syntax-highlight-0.0.2",
-    "version": "0.0.2"
-  },
-  {
-    "identifier": {
-      "id": "idleberg.applescript",
-      "uuid": "d57cfcbb-5746-48be-a607-96967331a91c"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/idleberg.applescript-0.25.1",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "d57cfcbb-5746-48be-a607-96967331a91c",
-      "installedTimestamp": 1697406666595,
-      "isApplicationScoped": false,
-      "isPreReleaseVersion": false,
-      "preRelease": false,
-      "publisherDisplayName": "idleberg",
-      "publisherId": "d142cf02-af52-4395-9363-148909445cb3",
-      "targetPlatform": "undefined",
-      "updated": true
-    },
-    "relativeLocation": "idleberg.applescript-0.25.1",
-    "version": "0.25.1"
-  },
-  {
-    "identifier": {
       "id": "jock.svg",
       "uuid": "4ae6dc82-7981-4f10-bd81-2d72aec37f39"
     },
@@ -522,29 +477,6 @@
     },
     "relativeLocation": "jock.svg-1.5.3",
     "version": "1.5.3"
-  },
-  {
-    "identifier": {
-      "id": "lorankloeze.ruby-rubocop-revived",
-      "uuid": "87592fe7-f129-48db-bb23-72bffd27882f"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/lorankloeze.ruby-rubocop-revived-0.9.5",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "87592fe7-f129-48db-bb23-72bffd27882f",
-      "installedTimestamp": 1686269013138,
-      "isPreReleaseVersion": false,
-      "preRelease": false,
-      "publisherDisplayName": "LoranKloeze",
-      "publisherId": "17f413a1-1850-437d-994d-88f50d0185cb",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "lorankloeze.ruby-rubocop-revived-0.9.5",
-    "version": "0.9.5"
   },
   {
     "identifier": {
@@ -643,6 +575,54 @@
   },
   {
     "identifier": {
+      "id": "richie5um2.vscode-sort-json",
+      "uuid": "3fb77af3-b8b3-4cb9-9137-f555bd80e2b1"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/richie5um2.vscode-sort-json-1.20.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "3fb77af3-b8b3-4cb9-9137-f555bd80e2b1",
+      "installedTimestamp": 1705348334004,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "richie5um2",
+      "publisherId": "c410f7b8-d406-4e23-b77b-3719c4d5efb7",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "richie5um2.vscode-sort-json-1.20.0",
+    "version": "1.20.0"
+  },
+  {
+    "identifier": {
+      "id": "rubocop.vscode-rubocop",
+      "uuid": "0c8a5e35-3970-4e8f-a565-c3c49a265ac6"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/rubocop.vscode-rubocop-0.7.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "0c8a5e35-3970-4e8f-a565-c3c49a265ac6",
+      "installedTimestamp": 1705348623826,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "RuboCop Headquarters",
+      "publisherId": "742dc922-19e1-43d6-bde7-8abcbaa68769",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "rubocop.vscode-rubocop-0.7.0",
+    "version": "0.7.0"
+  },
+  {
+    "identifier": {
       "id": "timonwong.shellcheck",
       "uuid": "f95d8fff-f70a-4ae5-bb06-5c47ddbc8fc6"
     },
@@ -738,17 +718,41 @@
   },
   {
     "identifier": {
+      "id": "vortizhe.simple-ruby-erb",
+      "uuid": "56a57ae2-56b7-4053-a3e0-897e198f0d03"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/vortizhe.simple-ruby-erb-0.2.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "id": "56a57ae2-56b7-4053-a3e0-897e198f0d03",
+      "installedTimestamp": 1704983273439,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Victor Ortiz Heredia",
+      "publisherId": "0c659136-47cf-4ec1-a002-4f50dffea483",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "vortizhe.simple-ruby-erb-0.2.1",
+    "version": "0.2.1"
+  },
+  {
+    "identifier": {
       "id": "yzhang.markdown-all-in-one",
       "uuid": "98790d67-10fa-497c-9113-f6c7489207b2"
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.2",
       "scheme": "file"
     },
     "metadata": {
       "id": "98790d67-10fa-497c-9113-f6c7489207b2",
-      "installedTimestamp": 1704874733094,
+      "installedTimestamp": 1705330184606,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -758,8 +762,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "yzhang.markdown-all-in-one-3.6.1",
-    "version": "3.6.1"
+    "relativeLocation": "yzhang.markdown-all-in-one-3.6.2",
+    "version": "3.6.2"
   },
   {
     "identifier": {
