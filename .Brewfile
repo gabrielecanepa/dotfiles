@@ -1,4 +1,5 @@
 tap "github/gh"
+tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
@@ -8,6 +9,8 @@ tap "homebrew/services"
 brew "readline"
 # Command-line interface for SQLite
 brew "sqlite"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # YAML Parser
@@ -16,6 +19,8 @@ brew "libyaml"
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
 # Suite of command-line tools for converting to and working with CSV
 brew "csvkit"
 # Run arbitrary commands when files change
@@ -66,6 +71,8 @@ brew "sponge"
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Everything you need to get started with Heroku
+brew "heroku/brew/heroku"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Automated testing of webapps for Google Chrome
