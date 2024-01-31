@@ -147,14 +147,14 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/dbaeumer.vscode-eslint-2.4.3",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/dbaeumer.vscode-eslint-2.4.4",
       "scheme": "file"
     },
     "metadata": {
       "id": "583b2b34-2c1e-4634-8c0b-0b82e283ea3a",
-      "installedTimestamp": 1705330184559,
+      "installedTimestamp": 1706539131058,
       "isApplicationScoped": false,
-      "isPreReleaseVersion": true,
+      "isPreReleaseVersion": false,
       "pinned": false,
       "preRelease": true,
       "publisherDisplayName": "Microsoft",
@@ -162,8 +162,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "dbaeumer.vscode-eslint-2.4.3",
-    "version": "2.4.3"
+    "relativeLocation": "dbaeumer.vscode-eslint-2.4.4",
+    "version": "2.4.4"
   },
   {
     "identifier": {
@@ -268,12 +268,14 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.1",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.3",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.3",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.3",
       "scheme": "file"
     },
     "metadata": {
       "id": "bff510dc-dcac-4daf-925c-299ee91fb135",
-      "installedTimestamp": 1702373165435,
+      "installedTimestamp": 1706738399185,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -283,8 +285,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "figma.figma-vscode-extension-0.3.1",
-    "version": "0.3.1"
+    "relativeLocation": "figma.figma-vscode-extension-0.3.3",
+    "version": "0.3.3"
   },
   {
     "identifier": {
@@ -340,12 +342,12 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.152.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.156.0",
       "scheme": "file"
     },
     "metadata": {
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1705663756934,
+      "installedTimestamp": 1706708471946,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -355,8 +357,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.152.0",
-    "version": "1.152.0"
+    "relativeLocation": "github.copilot-1.156.0",
+    "version": "1.156.0"
   },
   {
     "identifier": {
