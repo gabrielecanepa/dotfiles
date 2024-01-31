@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ##
-# Plugin to easily keep track of globally installed npm packages.
+# Plugin to easily manage global npm packages.
 #
 function npm() {
   local GLOBAL_COMMANDS=(
@@ -9,11 +9,14 @@ function npm() {
     uninstall unlink remove rm r un
     update up upgrade udpate
   )
+
+  local dir="$(pwd)"
   local args=($@)
+
+  # Initialize params and options.
   local params=()
   local opts=()
   local global=false
-  local dir="$(pwd)"
 
   # Parse arguments.
   for arg in $args; do
@@ -36,10 +39,12 @@ function npm() {
   unset arg
 
   # Disable npm fund.
-  command npm config set fund false --location=global
+  if [[ "$(command npm config get fund)" == true ]]; then
+    command npm config set fund false
+  fi
 
   # Run original command and exit if not global.
-  command npm $@ | tr -d '\n'
+  command npm $@
   local npm_exit=$?
 
   if [[ $npm_exit != 0 || $global != true || ! ${GLOBAL_COMMANDS[@]} =~ $params[1] ]]; then
@@ -64,6 +69,5 @@ function npm() {
   [[ -z "$engine" ]] && command npm pkg set engines.node=$version
 
   cd "$dir"
-  echo
   return $npm_exit
 }
