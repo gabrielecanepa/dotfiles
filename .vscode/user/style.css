@@ -119,12 +119,11 @@
 .file-icons-enabled .\.brewfile-name-file-icon::before {
   color: #ffbd5d !important;
 }
-/* .CFUserTextEncoding .crontab .env .env.example .env.sample .hushlogin */
+/* .CFUserTextEncoding .crontab .env .env.example .env.sample */
 .file-icons-enabled .\.cfusertextencoding-name-file-icon::before,
 .file-icons-enabled .\.env-name-file-icon::before,
 .file-icons-enabled .\.env\.example-name-file-icon::before,
-.file-icons-enabled .\.env\.sample-name-file-icon::before,
-.file-icons-enabled .\.hushlogin-name-file-icon::before {
+.file-icons-enabled .\.env\.sample-name-file-icon::before {
   font-family: fa !important;
   content: "\f013" !important;
 }
@@ -151,11 +150,6 @@
   font-family: fi;
   color: #825078;
   content: "\f0c8";
-}
-/* .jobs */
-.file-icons-enabled .\.jobs-name-file-icon::before {
-  font-family: fa !important;
-  content: "\f085" !important;
 }
 /* .macos */
 .file-icons-enabled .\.macos-name-file-icon::before {
