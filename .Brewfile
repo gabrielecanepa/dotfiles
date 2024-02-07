@@ -69,6 +69,8 @@ brew "shellcheck"
 brew "sponge"
 # Simplified and community-driven man pages
 brew "tldr"
+# Terminal multiplexer
+brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Everything you need to get started with Heroku
@@ -133,7 +135,6 @@ vscode "esbenp.prettier-vscode"
 vscode "fabiospampinato.vscode-optimize-images"
 vscode "figma.figma-vscode-extension"
 vscode "file-icons.file-icons"
-vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "github.github-vscode-theme"
 vscode "github.vscode-github-actions"
