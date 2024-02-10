@@ -1,6 +1,20 @@
 #/bin/sh
 
-# Load .zprofile if not already loaded.
-if [[ -z "$NAME" || -z "$EMAIL" && -f "$HOME/.zprofile" ]]; then
-  source "$HOME/.zprofile"
-fi
+# Load ~/.zprofile if not already loaded.
+
+_VARS=(
+  NAME
+  EMAIL
+  WORKING_DIR
+  EDITOR
+  GIT_EDITOR
+)
+
+for _var in "${_VARS[@]}"; do
+  if [ -z "$(eval echo \$$_var)" ]; then
+    source "$HOME/.zprofile"
+    break
+  fi
+done; unset var
+
+unset _VARS
