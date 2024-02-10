@@ -37,34 +37,36 @@ function dependencies() {
   local peer_dependencies="$(cat "$root/package.json" | jq -r '.peerDependencies | keys | .[]' 2>/dev/null)"
   local optional_dependencies="$(cat "$root/package.json" | jq -r '.optionalDependencies | keys | .[]' 2>/dev/null)"
 
-  [[ ${#opts[@]} == 0 ]] && local output="$dependencies"
-
-  for opt in $opts; do
-    case $opt in
-      --dev)
-        [[ -z "$dev_dependencies" ]] && continue
-        [[ -z "$output" ]] && output="$dev_dependencies" || output="$output\n$dev_dependencies"
-        ;;
-      --peer)
-        [[ -z "$peer_dependencies" ]] && continue
-        [[ -z "$output" ]] && output="$peer_dependencies" || output="$output\n$peer_dependencies"
-        ;;
-      --optional)
-        [[ -z "$optional_dependencies" ]] && continue
-        [[ -z "$output" ]] && output="$optional_dependencies" || output="$output\n$optional_dependencies"
-        ;;
-      --all)
-        if [[ ${args[(r)--dev]} == --dev || ${args[(r)--peer]} == --peer || ${args[(r)--optional]} == --optional ]]; then
-          echo "Can't specify --all with --dev, --peer or --optional"
-          return 1
-        fi
-        for group in dependencies dev_dependencies peer_dependencies optional_dependencies; do
-          [[ -z "${(P)group}" ]] && continue
-          [[ -z "$output" ]] && output="${(P)group}" || output="$output\n${(P)group}"
-        done
-        ;;
-    esac
-  done
+  if [[ ${#opts[@]} == 0 ]]; then
+    local output="$dependencies"
+  else
+    for opt in $opts; do
+      case $opt in
+        --dev)
+          [[ -z "$dev_dependencies" ]] && continue
+          [[ -z "$output" ]] && output="$dev_dependencies" || output="$output\n$dev_dependencies"
+          ;;
+        --peer)
+          [[ -z "$peer_dependencies" ]] && continue
+          [[ -z "$output" ]] && output="$peer_dependencies" || output="$output\n$peer_dependencies"
+          ;;
+        --optional)
+          [[ -z "$optional_dependencies" ]] && continue
+          [[ -z "$output" ]] && output="$optional_dependencies" || output="$output\n$optional_dependencies"
+          ;;
+        --all)
+          if [[ ${args[(r)--dev]} == --dev || ${args[(r)--peer]} == --peer || ${args[(r)--optional]} == --optional ]]; then
+            echo "Can't specify --all with --dev, --peer or --optional"
+            return 1
+          fi
+          for group in dependencies dev_dependencies peer_dependencies optional_dependencies; do
+            [[ -z "${(P)group}" ]] && continue
+            [[ -z "$output" ]] && output="${(P)group}" || output="$output\n${(P)group}"
+          done
+          ;;
+      esac
+    done
+  fi
 
   [[ -z "$output" ]] && return 0
   local output_list="$(echo $output | tr '\n' ' ')"
