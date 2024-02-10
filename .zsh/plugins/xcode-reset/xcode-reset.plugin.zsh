@@ -1,20 +1,28 @@
 #!/bin/zsh
 
-function xcode-reset() {
-  if [[ ! -z "$2" ]]; then
-    echo "${fg[red]}Unknown option: $2$reset_color"
-    return 1
-  fi
+function xcode-select() {
+  case "$1" in
+    reset)
+      if [[ ! -z "$2" ]]; then
+        echo "${fg[red]}Unknown option: $2$reset_color"
+        return 1
+      fi
 
-  echo "${fg[yellow]}warning$reset_color This will remove and reinstall the Xcode Command Line Tools."
-  printf "Are you sure you want to continue? (y/N) "
-  read -r choice
+      echo "${fg[yellow]}warning$reset_color This will remove and reinstall the Xcode Command Line Tools."
+      printf "Are you sure you want to continue? (y/N) "
+      read -r choice
 
-  if [[ "${choice:l}" == "y" ]]; then
-    sudo rm -rf "$(xcode-select -print-path)"
-    echo "xcode-select: note: command line tools removed"
-    xcode-select --install
-  fi
+      if [[ "${choice:l}" == "y" ]]; then
+        sudo rm -rf "$(xcode-select -print-path)"
+        echo "xcode-select: note: command line tools removed"
+        xcode-select --install
+      fi
 
-  unset choice
+      unset choice
+      ;;
+
+    *)
+      command xcode-select "$@"
+      ;;
+  esac
 }

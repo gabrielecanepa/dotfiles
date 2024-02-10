@@ -69,25 +69,29 @@ plugins=(
   nodenv
   pyenv
   rbenv
-  # From zsh-users
+  # zsh-users
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
-  # Custom from ~/.zsh
-  colors256
-  dependencies
-  gatekeeper
+  # Custom
+  brewfile
   gh-run
-  google
-  homebrew
   lts
-  node-modules
   node-version
   npm-global
   path
+  plugin
   profile
   xcode-reset
-  yarn@1
+  yarn1
+)
+lazy_plugins=(
+  # Custom
+  colors256
+  dependencies
+  gatekeeper
+  google
+  node-modules
 )
 
 . "$ZSH/oh-my-zsh.sh"
