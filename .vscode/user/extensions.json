@@ -197,8 +197,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.0",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.0",
       "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.0",
       "scheme": "file"
     },
@@ -339,30 +337,6 @@
   },
   {
     "identifier": {
-      "id": "github.copilot",
-      "uuid": "23c4aeee-f844-43cd-b53e-1113e483f1a6"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.159.0",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1707392317347,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "publisherDisplayName": "GitHub",
-      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "github.copilot-1.159.0",
-    "version": "1.159.0"
-  },
-  {
-    "identifier": {
       "id": "github.copilot-chat",
       "uuid": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f"
     },
@@ -441,13 +415,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.80.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.80.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "69ddd764-339a-4ecc-97c1-9c4ece58e36d",
-      "installedTimestamp": 1706802181685,
+      "installedTimestamp": 1707747666079,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -457,8 +431,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.vscode-pull-request-github-0.80.0",
-    "version": "0.80.0"
+    "relativeLocation": "github.vscode-pull-request-github-0.80.1",
+    "version": "0.80.1"
   },
   {
     "identifier": {
