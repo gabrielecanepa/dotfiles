@@ -27,8 +27,6 @@ brew "csvkit"
 brew "entr"
 # GitHub command-line tool
 brew "gh"
-# Command-line utility for uploading Gists
-brew "gist"
 # Distributed revision control system
 brew "git"
 # GNU implementation of the famous stream editor
@@ -135,7 +133,6 @@ vscode "esbenp.prettier-vscode"
 vscode "fabiospampinato.vscode-optimize-images"
 vscode "figma.figma-vscode-extension"
 vscode "file-icons.file-icons"
-vscode "github.copilot-chat"
 vscode "github.github-vscode-theme"
 vscode "github.vscode-github-actions"
 vscode "github.vscode-pull-request-github"
