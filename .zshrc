@@ -48,13 +48,12 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
 
-setopt globdots # glob hidden files
-zstyle ':completion:*' list-dirs-first true # list directories first
-zstyle ':omz:update' mode auto # autoupdate omz
-zstyle ':bracketed-paste-magic' active-widgets '.self-*' # fix slow paste
-zle_highlight+=(paste:none) # disable text highlight on paste
+zstyle ':completion:*' list-dirs-first true
+zstyle ':omz:update' mode auto
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+zle_highlight+=(paste:none)
 
-# Completion
+# Completions
 autoload -Uz compinit
 [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
 
@@ -69,7 +68,7 @@ plugins=(
   nodenv
   pyenv
   rbenv
-  # zsh-users
+  # From zsh-users
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
@@ -86,7 +85,6 @@ plugins=(
   yarn1
 )
 lazy_plugins=(
-  # Custom
   colors256
   dependencies
   gatekeeper
@@ -96,7 +94,7 @@ lazy_plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Check profile installation.
+# Check profile
 type profile &>/dev/null && ! profile check && return 1
 
 # Git (https://git-scm.com)
@@ -106,12 +104,12 @@ git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 export FILTER_BRANCH_SQUELCH_WARNING=1
 
-# Load aliases.
+# Load aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
 # Run background jobs
 [[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
-# Run cronjobs.
+# Run cronjobs
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
-# Remove duplicates from path.
+# Remove duplicates from path
 typeset -aU path
