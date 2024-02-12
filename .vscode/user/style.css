@@ -119,11 +119,8 @@
 .file-icons-enabled .\.brewfile-name-file-icon::before {
   color: #ffbd5d !important;
 }
-/* .CFUserTextEncoding .crontab .env .env.example .env.sample */
-.file-icons-enabled .\.cfusertextencoding-name-file-icon::before,
-.file-icons-enabled .\.env-name-file-icon::before,
-.file-icons-enabled .\.env\.example-name-file-icon::before,
-.file-icons-enabled .\.env\.sample-name-file-icon::before {
+/* .CFUserTextEncoding .crontab */
+.file-icons-enabled .\.cfusertextencoding-name-file-icon::before {
   font-family: fa !important;
   content: "\f013" !important;
 }
@@ -137,6 +134,16 @@
 .file-icons-enabled .\.crontab-name-file-icon::before {
   font-family: fi !important;
   content: "\1f558" !important;
+  font-size: 100% !important;
+  color: unset !important;
+}
+/* .env .env.example .env.sample */
+.file-icons-enabled .\.env-name-file-icon::before,
+.file-icons-enabled .\.env\.example-name-file-icon::before,
+.file-icons-enabled .\.env\.sample-name-file-icon::before {
+  font-family: fa !important;
+  content: "\f013" !important;
+  color: unset !important;
 }
 /* .gitignore.global .gitprofile */
 .file-icons-enabled .\.gitignore\.global-name-file-icon::before,
@@ -156,6 +163,12 @@
   font-family: fi !important;
   content: "\e925" !important;
   color: #6a9fb5 !important;
+}
+/* .netrc */
+.file-icons-enabled .\.netrc-name-file-icon::before {
+  font-family: mf !important;
+  content: "\f160" !important;
+  color: unset !important;
 }
 /* .shellcheckrc */
 .file-icons-enabled .\.shellcheckrc-name-file-icon::before {
