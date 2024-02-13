@@ -337,6 +337,32 @@
   },
   {
     "identifier": {
+      "id": "github.copilot",
+      "uuid": "23c4aeee-f844-43cd-b53e-1113e483f1a6"
+    },
+    "location": {
+      "$mid": 1,
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.160.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.160.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.160.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
+      "installedTimestamp": 1707862850844,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "GitHub",
+      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "github.copilot-1.160.0",
+    "version": "1.160.0"
+  },
+  {
+    "identifier": {
       "id": "github.copilot-chat",
       "uuid": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f"
     },
@@ -348,15 +374,13 @@
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
-      "installedTimestamp": 1707515580994,
-      "isApplicationScoped": false,
+      "installedTimestamp": 1707862849494,
       "isPreReleaseVersion": false,
       "pinned": false,
-      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": true
+      "updated": false
     },
     "relativeLocation": "github.copilot-chat-0.12.1",
     "version": "0.12.1"
