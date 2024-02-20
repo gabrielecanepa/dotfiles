@@ -170,12 +170,6 @@
   content: "\f160" !important;
   color: unset !important;
 }
-/* .shellcheckrc */
-.file-icons-enabled .\.shellcheckrc-name-file-icon::before {
-  font-family: fi !important;
-  content: "\f0c8" !important;
-  color: #aaaaff !important;
-}
 /* .yarnrc.yml */
 .file-icons-enabled .\.yarnrc\.yml-name-file-icon::before {
   color: #46788d !important;
