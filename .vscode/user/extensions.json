@@ -174,7 +174,6 @@
     },
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.2",
       "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.2",
       "scheme": "file"
     },
@@ -318,22 +317,26 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.162.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1708168138640,
+      "installedTimestamp": 1708711073601,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.copilot-1.162.0",
-    "version": "1.162.0"
+    "relativeLocation": "github.copilot-1.165.0",
+    "version": "1.165.0"
   },
   {
     "identifier": {
