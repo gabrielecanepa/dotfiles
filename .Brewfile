@@ -89,7 +89,7 @@ cask "figma"
 cask "google-chrome"
 # Grammarly for desktop
 cask "grammarly-desktop"
-# Tool to optimize images to a smaller size
+# Tool to optimise images to a smaller size
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
@@ -97,7 +97,7 @@ cask "nordvpn"
 cask "obsidian"
 # Modified browser that helps in responsive web development
 cask "responsively"
-# Collect, organize & share colors
+# Collect, organise & share colours
 cask "sip"
 # Team communication and collaboration software
 cask "slack"
@@ -111,6 +111,8 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Video communication and virtual meeting platform
+cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "GarageBand", id: 682658836
@@ -122,12 +124,11 @@ mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
 vscode "akamud.vscode-theme-onelight"
 vscode "be5invis.vscode-custom-css"
-vscode "bradgashler.htmltagwrap"
+vscode "bennycode.sort-everything"
 vscode "bradlc.vscode-tailwindcss"
 vscode "britesnow.vscode-toggle-quotes"
 vscode "csstools.postcss"
 vscode "dbaeumer.vscode-eslint"
-vscode "dylbill.math-on-all-numbers"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
 vscode "fabiospampinato.vscode-optimize-images"
