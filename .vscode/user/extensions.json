@@ -222,16 +222,14 @@
     },
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.0",
       "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "c4fbeffc-ec74-42dc-afd4-2410d646ba97",
-      "installedTimestamp": 1709716464202,
+      "installedTimestamp": 1709716603810,
       "isPreReleaseVersion": false,
-      "pinned": false,
       "publisherDisplayName": "Fabio Spampinato",
       "publisherId": "4288bdb9-145e-438b-ab6b-4a6839ee9c6f",
       "targetPlatform": "undefined",
@@ -342,26 +340,21 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.165.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.171.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1708711073601,
-      "isApplicationScoped": false,
+      "installedTimestamp": 1709716605954,
       "isPreReleaseVersion": false,
-      "pinned": false,
-      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": true
+      "updated": false
     },
-    "relativeLocation": "github.copilot-1.165.0",
-    "version": "1.165.0"
+    "relativeLocation": "github.copilot-1.171.0",
+    "version": "1.171.0"
   },
   {
     "identifier": {
@@ -370,22 +363,21 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.12.2",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.13.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
-      "installedTimestamp": 1708168138282,
+      "installedTimestamp": 1709716605960,
       "isPreReleaseVersion": false,
-      "pinned": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
       "updated": false
     },
-    "relativeLocation": "github.copilot-chat-0.12.2",
-    "version": "0.12.2"
+    "relativeLocation": "github.copilot-chat-0.13.0",
+    "version": "0.13.0"
   },
   {
     "identifier": {
@@ -441,24 +433,22 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.80.1",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "69ddd764-339a-4ecc-97c1-9c4ece58e36d",
-      "installedTimestamp": 1707747666079,
-      "isApplicationScoped": false,
+      "installedTimestamp": 1709716608337,
       "isPreReleaseVersion": false,
-      "pinned": false,
-      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": true
+      "updated": false
     },
-    "relativeLocation": "github.vscode-pull-request-github-0.80.1",
-    "version": "0.80.1"
+    "relativeLocation": "github.vscode-pull-request-github-0.82.0",
+    "version": "0.82.0"
   },
   {
     "identifier": {
