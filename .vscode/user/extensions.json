@@ -217,6 +217,31 @@
   },
   {
     "identifier": {
+      "id": "fabiospampinato.vscode-open-in-application",
+      "uuid": "c4fbeffc-ec74-42dc-afd4-2410d646ba97"
+    },
+    "location": {
+      "$mid": 1,
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "c4fbeffc-ec74-42dc-afd4-2410d646ba97",
+      "installedTimestamp": 1709716464202,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Fabio Spampinato",
+      "publisherId": "4288bdb9-145e-438b-ab6b-4a6839ee9c6f",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.1.0",
+    "version": "2.1.0"
+  },
+  {
+    "identifier": {
       "id": "fabiospampinato.vscode-optimize-images",
       "uuid": "28ab2178-c402-481e-a433-c2d6d8a50275"
     },
