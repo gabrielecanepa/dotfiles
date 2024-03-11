@@ -26,7 +26,7 @@ function brew() {
     fresh)
       command brew update && 
       command brew upgrade &&
-      command brew bundle --global --cleanup &&
+      brew dump &&
       command brew doctor
       ;;
     global)
