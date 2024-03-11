@@ -3,9 +3,9 @@
 # Core
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
-## Use GNU `ls` if available.
+## Use GNU ls if available
 command -v gls >/dev/null && alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
-## Sort by size.
+## Sort by size
 lss() { du -L --si -d 1 $@ 2>/dev/null | sort -hr }
 
 # Directories
@@ -41,16 +41,16 @@ alias yarn="yarn1"
 
 # Git
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  # only if the command doesn't already exist.
+  # Only if it doesn't already exist
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
 done; unset git_alias
 
 # VSCode
-for vscode_workspace in $(command ls ~/.vscode/workspaces/ 2>/dev/null); do
-  alias code-"$vscode_workspace"="code ~/.vscode/workspaces/$vscode_workspace/$vscode_workspace.code-workspace"
-done; unset vscode_workspace
+for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
+  alias code-"$(basename "$workspace" .code-workspace)"="code $workspace"
+done; unset workspace
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
