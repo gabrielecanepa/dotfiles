@@ -3,7 +3,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.html-language-features",
     "editor.formatOnSave": true
   },
   "[javascript]": {
@@ -13,11 +13,10 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": null
   },
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
@@ -27,7 +26,10 @@
     "editor.tabSize": 4
   },
   "[ruby]": {
-    "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived"
+    "editor.defaultFormatter": "rubocop.vscode-rubocop"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
@@ -41,14 +43,19 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
+  "accessibility.signals.terminalBell": {
+    "sound": "on"
+  },
   "application.shellEnvironmentResolutionTimeout": 20,
   "css.format.newlineBetweenRules": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
+  "customvscodeuicss.css": "/Users/gabrielecanepa/.vscode/user/style.css",
+  "diffEditor.ignoreTrimWhitespace": false,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.shellcheck": true
+    "source.fixAll.shellcheck": "explicit"
   },
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -56,7 +63,7 @@
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveIndentation": true,
   "editor.inlineSuggest.enabled": true,
-  "editor.lightbulb.enabled": false,
+  "editor.lightbulb.enabled": "off",
   "editor.maxTokenizationLineLength": 200000,
   "editor.minimap.enabled": false,
   "editor.multiCursorModifier": "ctrlCmd",
@@ -95,10 +102,11 @@
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.css": "css",
     "*.json": "json",
+    "*.md": "markdown",
     ".aliases": "shellscript",
     ".env.example": "dotenv",
     ".env.sample": "dotenv",
@@ -143,6 +151,7 @@
   "git.inputValidationLength": 80,
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
+  "git.openRepositoryInParentFolders": "never",
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
@@ -161,11 +170,14 @@
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
+  "grammarly.files.include": [
+    "**/*.md",
+    "**/*.txt"
+  ],
+  "html.autoCreateQuotes": true,
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
-  "iridium.npm.packageManager": "yarn",
-  "iridium.npm.showAlgoliaInfo": false,
-  "iridium.npm.showSupportIcon": false,
+  "html.format.unformatted": "html,style",
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
@@ -175,15 +187,27 @@
   "javascript.preferences.importModuleSpecifierEnding": "minimal",
   "javascript.preferences.quoteStyle": "single",
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "json.schemaDownload.enable": true,
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "**/site.webmanifest"
+      ],
+      "url": "https://json.schemastore.org/web-manifest.json"
+    }
+  ],
   "less.lint.duplicateProperties": "warning",
+  "license.author": "Gabriele Canepa <contact@gabrielecanepa.com>",
+  "license.default": "mit",
+  "license.year": "auto",
   "markdown.extension.italic.indicator": "_",
-  "markdown.extension.toc.levels": "2..6",
+  "markdown.extension.toc.levels": "2..3",
   "optimizeImages.app": "ImageOptim",
+  "optimizeImages.imageRegex": ".*\\.(png|gif|jpe?g|svg)$",
   "php.suggest.basic": false,
   "php.validate.run": "onType",
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
-  "prettier.configPath": "~/.prettierrc",
   "prettier.endOfLine": "auto",
   "prettier.insertPragma": true,
   "prettier.jsxSingleQuote": true,
@@ -194,7 +218,7 @@
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
   "redhat.telemetry.enabled": false,
-  "ruby.rubocop.autocorrectOnSave": true,
+  "rubocop.autocorrect": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
   "scss.lint.duplicateProperties": "warning",
   "scss.lint.float": "warning",
@@ -212,10 +236,14 @@
     "**/*.example": true,
     "**/*.jobs": true,
     "**/*.macos": true,
+    "**/*.profile": true,
     "**/*.xonshrc": true,
     "**/*.xsh": true
   },
   "shellcheck.run": "onType",
+  "svg.completion.emmet": true,
+  "svg.preview.background": "editor",
+  "svg.preview.mode": "svg",
   "tailwindCSS.experimental.classRegex": [
     "tw`([^`]*)",
     "tw\\.[^`]+`([^`]*)`",
@@ -230,9 +258,9 @@
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "underline",
   "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.enableBell": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.ignoreProcessNames": [
@@ -253,16 +281,12 @@
   "typescript.preferences.importModuleSpecifierEnding": "minimal",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
-  "typescript.tsdk": "/Users/gabrielecanepa/.config/yarn/global/node_modules/typescript/lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": [
-    "file:///Users/gabrielecanepa/.vscode/user/style.css"
-  ],
-  "vscode_custom_css.statusbar": false,
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.autoDetectColorScheme": true,
-  "window.zoomLevel": 1.6,
+  "window.newWindowDimensions": "maximized",
+  "window.zoomLevel": 2,
   "workbench.colorCustomizations": {},
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.focusRecentEditorAfterClose": false,
