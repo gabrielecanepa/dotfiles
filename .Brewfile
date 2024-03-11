@@ -13,14 +13,14 @@ brew "sqlite"
 brew "python@3.11"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
 # YAML Parser
 brew "libyaml"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # Suite of command-line tools for converting to and working with CSV
 brew "csvkit"
 # Run arbitrary commands when files change
@@ -123,7 +123,6 @@ mas "Pages", id: 409201541
 mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
 vscode "akamud.vscode-theme-onelight"
-vscode "be5invis.vscode-custom-css"
 vscode "bennycode.sort-everything"
 vscode "bradlc.vscode-tailwindcss"
 vscode "britesnow.vscode-toggle-quotes"
@@ -141,11 +140,11 @@ vscode "github.github-vscode-theme"
 vscode "github.vscode-github-actions"
 vscode "github.vscode-pull-request-github"
 vscode "jock.svg"
+vscode "kencocaceo.customvscodeuicss"
 vscode "mikestead.dotenv"
 vscode "ms-vscode.atom-keybindings"
 vscode "ms-vscode.live-server"
 vscode "redhat.vscode-yaml"
-vscode "richie5um2.vscode-sort-json"
 vscode "rubocop.vscode-rubocop"
 vscode "timonwong.shellcheck"
 vscode "ultram4rine.vscode-choosealicense"

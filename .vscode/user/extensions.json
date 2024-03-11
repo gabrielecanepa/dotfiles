@@ -25,29 +25,6 @@
   },
   {
     "identifier": {
-      "id": "be5invis.vscode-custom-css",
-      "uuid": "1b160753-ae5e-42bb-82ad-d115ce5c10f4"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/be5invis.vscode-custom-css-7.2.1",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "1b160753-ae5e-42bb-82ad-d115ce5c10f4",
-      "installedTimestamp": 1686266983412,
-      "isPreReleaseVersion": false,
-      "preRelease": false,
-      "publisherDisplayName": "be5invis",
-      "publisherId": "8c148d69-cbc6-480b-bd8b-a42715926324",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "be5invis.vscode-custom-css-7.2.1",
-    "version": "7.2.1"
-  },
-  {
-    "identifier": {
       "id": "bennycode.sort-everything",
       "uuid": "4fe1a931-5171-4c6d-8d27-c1034a85fe4b"
     },
@@ -174,22 +151,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.8.2",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.9.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
-      "installedTimestamp": 1708368913987,
+      "installedTimestamp": 1709833022661,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitKraken",
       "publisherId": "678d198b-9b2e-49d3-96ff-6d801c9575df",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "eamodio.gitlens-14.8.2",
-    "version": "14.8.2"
+    "relativeLocation": "eamodio.gitlens-14.9.0",
+    "version": "14.9.0"
   },
   {
     "identifier": {
@@ -222,21 +201,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "c4fbeffc-ec74-42dc-afd4-2410d646ba97",
-      "installedTimestamp": 1709716603810,
+      "installedTimestamp": 1709833022655,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "Fabio Spampinato",
       "publisherId": "4288bdb9-145e-438b-ab6b-4a6839ee9c6f",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.1.0",
-    "version": "2.1.0"
+    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.1.1",
+    "version": "2.1.1"
   },
   {
     "identifier": {
@@ -268,12 +250,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.3",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.4",
       "scheme": "file"
     },
     "metadata": {
+      "hasPreReleaseVersion": false,
       "id": "bff510dc-dcac-4daf-925c-299ee91fb135",
-      "installedTimestamp": 1706738399185,
+      "installedTimestamp": 1710148718563,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -283,8 +266,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "figma.figma-vscode-extension-0.3.3",
-    "version": "0.3.3"
+    "relativeLocation": "figma.figma-vscode-extension-0.3.4",
+    "version": "0.3.4"
   },
   {
     "identifier": {
@@ -340,21 +323,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.171.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.172.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1709716605954,
+      "installedTimestamp": 1709833022648,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.copilot-1.171.0",
-    "version": "1.171.0"
+    "relativeLocation": "github.copilot-1.172.0",
+    "version": "1.172.0"
   },
   {
     "identifier": {
@@ -433,7 +419,6 @@
     },
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.0",
       "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.0",
       "scheme": "file"
     },
@@ -472,6 +457,30 @@
     },
     "relativeLocation": "jock.svg-1.5.3",
     "version": "1.5.3"
+  },
+  {
+    "identifier": {
+      "id": "kencocaceo.customvscodeuicss",
+      "uuid": "d950aad1-90ea-4ab3-914a-a61c2cd0d872"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/kencocaceo.customvscodeuicss-2.0.5",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "d950aad1-90ea-4ab3-914a-a61c2cd0d872",
+      "installedTimestamp": 1710148777578,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "kencoca.ceo",
+      "publisherId": "18d62bcd-7791-4cc2-945e-a68600d17cd5",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "kencocaceo.customvscodeuicss-2.0.5",
+    "version": "2.0.5"
   },
   {
     "identifier": {
@@ -570,30 +579,6 @@
   },
   {
     "identifier": {
-      "id": "richie5um2.vscode-sort-json",
-      "uuid": "3fb77af3-b8b3-4cb9-9137-f555bd80e2b1"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/richie5um2.vscode-sort-json-1.20.0",
-      "scheme": "file"
-    },
-    "metadata": {
-      "id": "3fb77af3-b8b3-4cb9-9137-f555bd80e2b1",
-      "installedTimestamp": 1705348334004,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "preRelease": false,
-      "publisherDisplayName": "richie5um2",
-      "publisherId": "c410f7b8-d406-4e23-b77b-3719c4d5efb7",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "richie5um2.vscode-sort-json-1.20.0",
-    "version": "1.20.0"
-  },
-  {
-    "identifier": {
       "id": "rubocop.vscode-rubocop",
       "uuid": "0c8a5e35-3970-4e8f-a565-c3c49a265ac6"
     },
@@ -623,22 +608,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.35.0-darwin-arm64",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.37.0-darwin-arm64",
       "scheme": "file"
     },
     "metadata": {
+      "hasPreReleaseVersion": false,
       "id": "f95d8fff-f70a-4ae5-bb06-5c47ddbc8fc6",
-      "installedTimestamp": 1701158237769,
+      "installedTimestamp": 1710148718318,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Timon Wong",
       "publisherId": "04757770-dd50-443e-aae4-e1c7cf9c24f5",
       "targetPlatform": "darwin-arm64",
       "updated": true
     },
-    "relativeLocation": "timonwong.shellcheck-0.35.0-darwin-arm64",
-    "version": "0.35.0"
+    "relativeLocation": "timonwong.shellcheck-0.37.0-darwin-arm64",
+    "version": "0.37.0"
   },
   {
     "identifier": {
