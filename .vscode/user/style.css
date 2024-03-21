@@ -1,9 +1,6 @@
 /*==== Editor ====*/
 
-/* Reduce opacity of active indentation */
-.indent-active {
-  opacity: 0.2 !important;
-}
+/* ... */
 
 /*==== Icons ====*/
 
@@ -12,7 +9,7 @@
   opacity: 0.5 !important;
 }
 
-/* Directories */
+/* == Directories == */
 
 /* All directories */
 .file-icons-enabled .folder-icon::before {
@@ -95,7 +92,7 @@
   content: "\f06a" !important;
 }
 
-/* Files */
+/* == Files == */
 
 /* .aliases .globals */
 .file-icons-enabled .\.aliases-name-file-icon::before,
@@ -103,6 +100,12 @@
   font-family: fi !important;
   color: #825078 !important;
   content: "\f0c8" !important;
+}
+/* atomizer.config.js */
+.file-icons-enabled .atomizer\.config\.js-name-file-icon::before {
+  font-family: devicons !important;
+  content: "\e664" !important;
+  color: #377eaa !important;
 }
 /* .Brewfile .Brewfile.lock.json */
 .file-icons-enabled .\.brewfile-name-file-icon::before,
