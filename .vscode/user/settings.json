@@ -195,6 +195,12 @@
         "**/site.webmanifest"
       ],
       "url": "https://json.schemastore.org/web-manifest.json"
+    },
+    {
+      "fileMatch": [
+        ".chrome/themes/**/manifest.json"
+      ],
+      "url": "https://raw.githubusercontent.com/gabrielecanepa/chrome-theme-json-schema/main/manifest.json"
     }
   ],
   "less.lint.duplicateProperties": "warning",
