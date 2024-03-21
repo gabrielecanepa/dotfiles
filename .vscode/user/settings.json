@@ -287,7 +287,26 @@
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 2,
-  "workbench.colorCustomizations": {},
+  "workbench.colorCustomizations": {
+    "[GitHub Dark Default]": {
+      "activityBar.activeBorder": "#238636",
+      "activityBarBadge.background": "#f85149",
+      "statusBar.background": "#2f81f7",
+      "statusBar.foreground": "#ffffff",
+      "statusBarItem.remoteBackground": "#238636",
+      "tab.activeBorderTop": "#2f81f7"
+    },
+    "[GitHub Light]": {
+      "activityBar.activeBorder": "#159739",
+      "activityBarBadge.background": "#cf222e",
+      "statusBar.background": "#0969da",
+      "statusBar.border": "#0969da",
+      "statusBar.foreground": "#ffffff",
+      "statusBarItem.remoteBackground": "#159739",
+      "statusBarItem.remoteForeground": "#ffffff",
+      "tab.activeBorderTop": "#159739"
+    }
+  },
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editorAssociations": {
