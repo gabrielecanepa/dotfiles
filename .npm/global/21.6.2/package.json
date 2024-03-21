@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "pnpm": "^8.15.4"
+  },
+  "engines": {
+    "node": "21.6.2"
+  }
+}
