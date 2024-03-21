@@ -104,11 +104,12 @@ git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 export FILTER_BRANCH_SQUELCH_WARNING=1
 
-# Load aliases
+# Aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-# Run background jobs
+type gh &>/dev/null && eval "$(gh copilot alias -- zsh)"
+# Background jobs
 [[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
-# Run cronjobs
+# Cronjobs
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
 # Remove duplicates from path
