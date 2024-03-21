@@ -1,6 +1,30 @@
 [
   {
     "identifier": {
+      "id": "acss-io.atomic-css-snippets",
+      "uuid": "8fb5cfb1-e4e2-454f-96e5-f5f6eff6909a"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/acss-io.atomic-css-snippets-1.0.10",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "8fb5cfb1-e4e2-454f-96e5-f5f6eff6909a",
+      "installedTimestamp": 1710177700320,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "acss-io",
+      "publisherId": "9666892e-aa79-4455-8916-0a166903c780",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "acss-io.atomic-css-snippets-1.0.10",
+    "version": "1.0.10"
+  },
+  {
+    "identifier": {
       "id": "akamud.vscode-theme-onelight",
       "uuid": "ee33fd31-7bb4-4252-8368-fdd5bcd94cf8"
     },
@@ -177,22 +201,26 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.1.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
       "scheme": "file"
     },
     "metadata": {
+      "hasPreReleaseVersion": false,
       "id": "96fa4707-6983-4489-b7c5-d5ffdfdcce90",
-      "installedTimestamp": 1692278569034,
+      "installedTimestamp": 1711018672683,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Prettier",
       "publisherId": "d16f4e39-2ffb-44e3-9c0d-79d873570e3a",
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "esbenp.prettier-vscode-10.1.0",
-    "version": "10.1.0"
+    "relativeLocation": "esbenp.prettier-vscode-10.3.0",
+    "version": "10.3.0"
   },
   {
     "identifier": {
@@ -201,13 +229,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.1.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.2.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "c4fbeffc-ec74-42dc-afd4-2410d646ba97",
-      "installedTimestamp": 1709833022655,
+      "installedTimestamp": 1710285703207,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -217,8 +245,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.1.1",
-    "version": "2.1.1"
+    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.2.0",
+    "version": "2.2.0"
   },
   {
     "identifier": {
@@ -323,13 +351,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.172.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.175.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1709833022648,
+      "installedTimestamp": 1710834931534,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -339,8 +367,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.172.0",
-    "version": "1.172.0"
+    "relativeLocation": "github.copilot-1.175.0",
+    "version": "1.175.0"
   },
   {
     "identifier": {
@@ -349,21 +377,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.13.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.13.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
-      "installedTimestamp": 1709716605960,
+      "installedTimestamp": 1710285703202,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.copilot-chat-0.13.0",
-    "version": "0.13.0"
+    "relativeLocation": "github.copilot-chat-0.13.1",
+    "version": "0.13.1"
   },
   {
     "identifier": {
@@ -419,21 +450,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.82.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "69ddd764-339a-4ecc-97c1-9c4ece58e36d",
-      "installedTimestamp": 1709716608337,
+      "installedTimestamp": 1711018672860,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.vscode-pull-request-github-0.82.0",
-    "version": "0.82.0"
+    "relativeLocation": "github.vscode-pull-request-github-0.82.1",
+    "version": "0.82.1"
   },
   {
     "identifier": {
@@ -579,6 +613,30 @@
   },
   {
     "identifier": {
+      "id": "riipandi.vscode-atomizer-theme",
+      "uuid": "a0717a89-aae3-41d9-b3d3-a23dbe5fca35"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/riipandi.vscode-atomizer-theme-2.2.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "a0717a89-aae3-41d9-b3d3-a23dbe5fca35",
+      "installedTimestamp": 1710177741707,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Aris Ripandi",
+      "publisherId": "56914bb4-8e95-474b-a0ed-ca024a610d92",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "riipandi.vscode-atomizer-theme-2.2.0",
+    "version": "2.2.0"
+  },
+  {
+    "identifier": {
       "id": "rubocop.vscode-rubocop",
       "uuid": "0c8a5e35-3970-4e8f-a565-c3c49a265ac6"
     },
@@ -659,21 +717,24 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.2.30",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.3.1",
       "scheme": "file"
     },
     "metadata": {
+      "hasPreReleaseVersion": false,
       "id": "876e8f93-74d0-4f4f-91b7-34a09f19f444",
-      "installedTimestamp": 1686267350138,
+      "installedTimestamp": 1710517178148,
+      "isApplicationScoped": false,
       "isPreReleaseVersion": false,
+      "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Microsoft",
       "publisherId": "e8db1608-52e8-4d8d-92a6-779c5db302a9",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "visualstudioexptteam.vscodeintellicode-1.2.30",
-    "version": "1.2.30"
+    "relativeLocation": "visualstudioexptteam.vscodeintellicode-1.3.1",
+    "version": "1.3.1"
   },
   {
     "identifier": {

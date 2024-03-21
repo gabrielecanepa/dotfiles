@@ -122,6 +122,7 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
+vscode "acss-io.atomic-css-snippets"
 vscode "akamud.vscode-theme-onelight"
 vscode "bennycode.sort-everything"
 vscode "bradlc.vscode-tailwindcss"
