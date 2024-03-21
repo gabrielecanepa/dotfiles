@@ -123,6 +123,7 @@
     ".stylelintrc": "json",
     ".svg": "html",
     ".todo": "markdown",
+    ".vscode/**/settings.json": "jsonc",
     "NOTES": "markdown",
     "tsconfig.json": "jsonc"
   },
