@@ -201,15 +201,15 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
-      "path": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.3.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.4.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.4.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/esbenp.prettier-vscode-10.4.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "96fa4707-6983-4489-b7c5-d5ffdfdcce90",
-      "installedTimestamp": 1711018672683,
+      "installedTimestamp": 1711082533503,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -219,8 +219,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "esbenp.prettier-vscode-10.3.0",
-    "version": "10.3.0"
+    "relativeLocation": "esbenp.prettier-vscode-10.4.0",
+    "version": "10.4.0"
   },
   {
     "identifier": {
