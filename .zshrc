@@ -4,7 +4,7 @@
 export LANG="en_US.UTF-8"
 
 # Binaries
-export PATH="$PATH:/usr/local/sbin:./bin:./node_modules/.bin"
+export PATH="./bin:./node_modules/.bin:/usr/local/sbin:$PATH"
 
 # Homebrew (https://brew.sh)
 export HOMEBREW_PREFIX="/opt/homebrew"
