@@ -72,7 +72,7 @@
   so = set-origin
   st = status -sb
   sweep = !"git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
-  undo = reset --hard
+  undo = reset --soft HEAD^
   unstage = reset HEAD --
   untrack = rm --cache --
   zip = !sh -c 'git archive HEAD -o $(basename $PWD).zip'
