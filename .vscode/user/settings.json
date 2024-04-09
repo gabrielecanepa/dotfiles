@@ -47,7 +47,8 @@
     "sound": "on"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
-  "css.format.newlineBetweenRules": false,
+  "conventionalCommits.showNewVersionNotes": false,
+  "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
   "customvscodeuicss.css": "/Users/gabrielecanepa/.vscode/user/style.css",
@@ -99,12 +100,18 @@
     "typescriptreact"
   ],
   "explorer.autoReveal": "focusNoScroll",
+  "explorer.autoRevealExclude": {
+    "**/.git": true,
+    "**/bower_components": true,
+    "**/node_modules": true
+  },
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    "*.css": "css",
     "*.json": "json",
     "*.md": "markdown",
     ".aliases": "shellscript",
@@ -226,6 +233,8 @@
   "prettier.vueIndentScriptAndStyle": true,
   "redhat.telemetry.enabled": false,
   "rubocop.autocorrect": true,
+  "scss.format.newlineBetweenSelectors": false,
+  "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
   "scss.lint.duplicateProperties": "warning",
   "scss.lint.float": "warning",
@@ -327,5 +336,7 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
+  "sort-json.settings.promptCollectionKeys": true,
+  "sort-json.settings.objectSortType": "Key"
 }

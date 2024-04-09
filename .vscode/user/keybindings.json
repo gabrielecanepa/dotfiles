@@ -6,12 +6,12 @@
   },
   {
     "command": "-editor.action.smartSelect.expand",
-    "key": "ctrl+shift+right",
+    "key": "ctrl+shift+cmd+right",
     "when": "editorTextFocus"
   },
   {
     "command": "-editor.action.smartSelect.expand",
-    "key": "ctrl+shift+cmd+right",
+    "key": "ctrl+shift+right",
     "when": "editorTextFocus"
   },
   {
@@ -73,8 +73,17 @@
     "key": "cmd+t"
   },
   {
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "key": "ctrl+shift+tab",
+    "when": "!activeEditorGroupEmpty"
+  },
+  {
     "command": "-workbench.action.showAllSymbols",
     "key": "cmd+t"
+  },
+  {
+    "command": "-workbench.action.splitEditor",
+    "key": "cmd+\\"
   },
   {
     "command": "-workbench.action.terminal.focusNextPane",
@@ -87,9 +96,21 @@
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
+    "command": "-workbench.action.toggleSidebarVisibility",
+    "key": "cmd+b"
+  },
+  {
     "command": "extension.htmlTagWrap",
     "key": "ctrl+shift+w",
     "when": "editorTextFocus"
+  },
+  {
+    "command": "git.push",
+    "key": "ctrl+alt+p"
+  },
+  {
+    "command": "git.pushForce",
+    "key": "ctrl+shift+alt+p"
   },
   {
     "command": "inlineChat.start",
@@ -114,6 +135,14 @@
     "key": "ctrl+cmd+right"
   },
   {
+    "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
+    "key": "shift+alt+w"
+  },
+  {
+    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
+    "key": "alt+w"
+  },
+  {
     "command": "workbench.action.removeRootFolder",
     "key": "cmd+backspace"
   },
@@ -122,32 +151,11 @@
     "key": "ctrl+shift+t"
   },
   {
-    "command": "workbench.files.action.collapseExplorerFolders",
-    "key": "ctrl+\\"
-  },
-  {
-    "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
-    "key": "alt+w"
-  },
-  {
-    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
-    "key": "ctrl+shift+tab",
-    "when": "!activeEditorGroupEmpty"
-  },
-  {
-    "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
-    "key": "shift+alt+w"
-  },
-  {
-    "command": "-workbench.action.splitEditor",
-    "key": "cmd+\\"
-  },
-  {
     "command": "workbench.action.toggleSidebarVisibility",
     "key": "cmd+\\"
   },
   {
-    "command": "-workbench.action.toggleSidebarVisibility",
-    "key": "cmd+b"
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "key": "ctrl+\\"
   }
 ]
