@@ -15,6 +15,18 @@
 .file-icons-enabled .folder-icon::before {
   color: inherit !important;
 }
+/* __tests__ */
+.file-icons-enabled .__tests__-name-folder-icon::before {
+  font-family: fi !important;
+  content: "\ea63" !important;
+  font-size: 121% !important;
+}
+/* .bin bin */
+.file-icons-enabled .\.bin-name-folder-icon::before,
+.file-icons-enabled .bin-name-folder-icon::before {
+  font-family: fi !important;
+  content: "\f0c8" !important;
+}
 /* .chrome */
 .file-icons-enabled .\.chrome-name-folder-icon::before {
   font-family: devicons !important;
@@ -184,6 +196,20 @@
   font-family: octicons !important;
   content: "\f02f" !important;
   color: #1f8e76 !important;
+}
+/* jest.setup.ts */
+.file-icons-enabled .jest\.setup\.ts-name-file-icon::before {
+  content: "\ea39" !important;
+  font-size: 107% !important;
+  font-family: fi !important;
+  color: #f5c06d !important;
+}
+/* next-env.d.ts */
+.file-icons-enabled .next-env\.d\.ts-name-file-icon::before {
+  color: #7f7f7f !important;
+  content: "\24c3" !important;
+  font-size: 107% !important;
+  font-family: fi !important;
 }
 /* postcss.config.cjs postcss.config.js */
 .file-icons-enabled .postcss\.config\.cjs-name-file-icon::before {
