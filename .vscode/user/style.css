@@ -223,6 +223,15 @@
   content: "\e910" !important;
   color: #c82829 !important;
 }
+/* release.config.(js|cjs|mjs) */
+.file-icons-enabled .release\.config\.js-name-file-icon::before,
+.file-icons-enabled .release\.config\.cjs-name-file-icon::before,
+.file-icons-enabled .release\.config\.mjs-name-file-icon::before {
+  color: #7f7f7f !important;
+  content: "\1f7cd" !important;
+  font-size: 114% !important;
+  font-family: fi !important;
+}
 /* svgo.config.js */
 .file-icons-enabled .svgo\.config\.js-name-file-icon::before {
   font-family: mfixx !important;
