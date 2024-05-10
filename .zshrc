@@ -48,9 +48,10 @@ HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
 
-zstyle ':completion:*' list-dirs-first true
-zstyle ':omz:update' mode auto
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+zstyle ':completion:*' list-dirs-first true
+zstyle ':omz:alpha:lib:git' async-prompt false
+zstyle ':omz:update' mode auto
 zle_highlight+=(paste:none)
 
 # Completions
