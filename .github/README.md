@@ -86,6 +86,11 @@ Install the latest stable version of Node.js, Ruby and Python using the custom [
 ```sh
 # Make sure that all packages are up-to-date.
 brew update && brew upgrade
+# Link version files to the home directory.
+declare -A vms=([nodenv]=.node-version [rbenv]=.ruby-version [pyenv]=.python-version)
+for vm in ${(k)vms}; do
+  cat ~/.$vm/version > ~/$vms[$vm] && rm ~/.$vm/version && ln -sf ~/$vms[$vm] ~/.$vm/version
+done; unset vm vms
 # Install the latest stable version of node, ruby and python.
 lts install
 ```
