@@ -5,6 +5,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "shopify/shopify"
 # Library for command-line editing
 brew "readline"
 # Command-line interface for SQLite
@@ -73,6 +74,8 @@ brew "tmux"
 brew "tree"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
+# A CLI tool to build for the Shopify platform
+brew "shopify/shopify/shopify-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Automated testing of webapps for Google Chrome
