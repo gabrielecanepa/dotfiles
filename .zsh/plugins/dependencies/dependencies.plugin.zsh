@@ -6,7 +6,7 @@ function dependencies() {
     return 1
   }
 
-  local OPTS=(-L --dev --peer --optional --all)
+  local OPTS=(-L --list --dev --peer --optional --all)
   local args=($@)
   local dir=$(pwd)
   local opts=()
@@ -24,13 +24,16 @@ function dependencies() {
       echo "Invalid option: $arg"
       return 1
     fi
-    [[ $arg == "-L" ]] && list=true && continue
+    if [[ $arg == "-L" || $arg == "--list" ]]; then
+      list=true
+      continue
+    fi
     opts+=($arg)
   done
 
   root="$(get_package_root "$dir")"
   [[ $? != 0 ]] && echo "Invalid path: $dir" && return 1
-  [[ ! -f "$root/package.json" ]] && echo "No package.json found" && return 1
+  [[ ! -f "$root/package.json" ]] && echo "No package.json found." && return 1
 
   local package_json="$(cat "$root/package.json")"
   local dependencies="$(echo $package_json | jq -r '.dependencies | keys | .[]' 2>/dev/null)"
