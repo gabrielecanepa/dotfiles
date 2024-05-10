@@ -77,6 +77,7 @@
     "︎": true
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
     "blade": "html",
     "erb": "html",
@@ -216,6 +217,7 @@
   "license.year": "auto",
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.toc.levels": "2..3",
+  "markdown.preview.doubleClickToSwitchToEditor": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|jpe?g|svg)$",
   "php.suggest.basic": false,
@@ -257,6 +259,8 @@
     "**/*.xsh": true
   },
   "shellcheck.run": "onType",
+  "sort-json.settings.objectSortType": "Key",
+  "sort-json.settings.promptCollectionKeys": true,
   "svg.completion.emmet": true,
   "svg.preview.background": "editor",
   "svg.preview.mode": "svg",
@@ -336,7 +340,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "sort-json.settings.promptCollectionKeys": true,
-  "sort-json.settings.objectSortType": "Key"
+  "workbench.tree.expandMode": "doubleClick"
 }
