@@ -4,6 +4,18 @@
 # Plugin to easily manage global npm packages.
 #
 function npm() {
+  if [[ $1 == fresh ]]; then
+    if [[ ! -z "${@:2}" ]]; then
+      echo "Unknown arguments: ${@:2}"
+      echo
+      echo "To update all global dependencies, run:"
+      echo "  npm fresh"
+      return 1
+    fi
+    npm update --location=global
+    return $?
+  fi
+
   local GLOBAL_COMMANDS=(
     add i in ins inst insta instal isnt isnta isntal isntall
     uninstall unlink remove rm r un
