@@ -49,6 +49,56 @@
   },
   {
     "identifier": {
+      "id": "alexcvzz.vscode-sqlite",
+      "uuid": "eaee103c-e866-4b73-87f8-3749cab64da2"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/alexcvzz.vscode-sqlite-0.14.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "eaee103c-e866-4b73-87f8-3749cab64da2",
+      "installedTimestamp": 1713525570837,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "alexcvzz",
+      "publisherId": "6effff99-3dc3-4943-9e90-5cd2ee65a1ea",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "alexcvzz.vscode-sqlite-0.14.1",
+    "version": "0.14.1"
+  },
+  {
+    "identifier": {
+      "id": "bennycode.sort-everything",
+      "uuid": "4fe1a931-5171-4c6d-8d27-c1034a85fe4b"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/bennycode.sort-everything-1.4.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "4fe1a931-5171-4c6d-8d27-c1034a85fe4b",
+      "installedTimestamp": 1713557074480,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Benny Neugebauer",
+      "publisherId": "32a5bcc6-cb67-4afa-afbc-9c72be962f59",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "bennycode.sort-everything-1.4.1",
+    "version": "1.4.1"
+  },
+  {
+    "identifier": {
       "id": "bradlc.vscode-tailwindcss",
       "uuid": "4db62a7c-7d70-419c-96d2-6c3a4dc77ea5"
     },
@@ -94,6 +144,31 @@
     },
     "relativeLocation": "britesnow.vscode-toggle-quotes-0.3.6",
     "version": "0.3.6"
+  },
+  {
+    "identifier": {
+      "id": "castwide.solargraph",
+      "uuid": "349e83e2-207c-4309-a8d2-dfa43f7ee0c9"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/castwide.solargraph-0.24.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "349e83e2-207c-4309-a8d2-dfa43f7ee0c9",
+      "installedTimestamp": 1713280016916,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Castwide",
+      "publisherId": "8244762e-597b-434d-b303-f780ff47b36c",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "castwide.solargraph-0.24.1",
+    "version": "0.24.1"
   },
   {
     "identifier": {
@@ -151,24 +226,25 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.9.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-14.9.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
-      "installedTimestamp": 1709833022661,
+      "installedTimestamp": 1713992000525,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "GitKraken",
       "publisherId": "678d198b-9b2e-49d3-96ff-6d801c9575df",
+      "source": "gallery",
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "eamodio.gitlens-14.9.0",
-    "version": "14.9.0"
+    "relativeLocation": "eamodio.gitlens-14.9.1",
+    "version": "14.9.1"
   },
   {
     "identifier": {
@@ -195,32 +271,6 @@
     },
     "relativeLocation": "esbenp.prettier-vscode-10.4.0",
     "version": "10.4.0"
-  },
-  {
-    "identifier": {
-      "id": "fabiospampinato.vscode-open-in-application",
-      "uuid": "c4fbeffc-ec74-42dc-afd4-2410d646ba97"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/fabiospampinato.vscode-open-in-application-2.2.0",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "c4fbeffc-ec74-42dc-afd4-2410d646ba97",
-      "installedTimestamp": 1710285703207,
-      "isApplicationScoped": false,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "preRelease": false,
-      "publisherDisplayName": "Fabio Spampinato",
-      "publisherId": "4288bdb9-145e-438b-ab6b-4a6839ee9c6f",
-      "targetPlatform": "undefined",
-      "updated": true
-    },
-    "relativeLocation": "fabiospampinato.vscode-open-in-application-2.2.0",
-    "version": "2.2.0"
   },
   {
     "identifier": {
@@ -252,24 +302,25 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.4",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/figma.figma-vscode-extension-0.3.5",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "bff510dc-dcac-4daf-925c-299ee91fb135",
-      "installedTimestamp": 1710148718563,
+      "installedTimestamp": 1715177456109,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Figma",
       "publisherId": "99d5ace2-231e-4a28-a0f2-9bc082c99e54",
+      "source": "gallery",
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "figma.figma-vscode-extension-0.3.4",
-    "version": "0.3.4"
+    "relativeLocation": "figma.figma-vscode-extension-0.3.5",
+    "version": "0.3.5"
   },
   {
     "identifier": {
@@ -325,39 +376,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.178.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.188.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1712309169099,
-      "isApplicationScoped": false,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "preRelease": false,
-      "publisherDisplayName": "GitHub",
-      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
-      "targetPlatform": "undefined",
-      "updated": true
-    },
-    "relativeLocation": "github.copilot-1.178.0",
-    "version": "1.178.0"
-  },
-  {
-    "identifier": {
-      "id": "github.copilot-chat",
-      "uuid": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.14.0",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
-      "installedTimestamp": 1712567009051,
+      "installedTimestamp": 1715245584204,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
@@ -368,8 +393,37 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-chat-0.14.0",
-    "version": "0.14.0"
+    "relativeLocation": "github.copilot-1.188.0",
+    "version": "1.188.0"
+  },
+  {
+    "identifier": {
+      "id": "github.copilot-chat",
+      "uuid": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f"
+    },
+    "location": {
+      "$mid": 1,
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.15.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
+      "installedTimestamp": 1715332195608,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "GitHub",
+      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": true
+    },
+    "relativeLocation": "github.copilot-chat-0.15.1",
+    "version": "0.15.1"
   },
   {
     "identifier": {
@@ -444,6 +498,110 @@
     },
     "relativeLocation": "github.vscode-pull-request-github-0.86.1",
     "version": "0.86.1"
+  },
+  {
+    "identifier": {
+      "id": "github.vscode-pull-request-github",
+      "uuid": "69ddd764-339a-4ecc-97c1-9c4ece58e36d"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.88.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "69ddd764-339a-4ecc-97c1-9c4ece58e36d",
+      "installedTimestamp": 1714733019613,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "GitHub",
+      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": true
+    },
+    "relativeLocation": "github.vscode-pull-request-github-0.88.0",
+    "version": "0.88.0"
+  },
+  {
+    "identifier": {
+      "id": "github.vscode-pull-request-github",
+      "uuid": "69ddd764-339a-4ecc-97c1-9c4ece58e36d"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-pull-request-github-0.88.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "69ddd764-339a-4ecc-97c1-9c4ece58e36d",
+      "installedTimestamp": 1715177456102,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "GitHub",
+      "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": true
+    },
+    "relativeLocation": "github.vscode-pull-request-github-0.88.1",
+    "version": "0.88.1"
+  },
+  {
+    "identifier": {
+      "id": "graphql.vscode-graphql",
+      "uuid": "55ef6448-487b-49a0-a66e-4d2d9bb82229"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/graphql.vscode-graphql-0.9.3",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "55ef6448-487b-49a0-a66e-4d2d9bb82229",
+      "installedTimestamp": 1714650321781,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "GraphQL Foundation",
+      "publisherId": "9d328ac4-bbff-4fd6-95dd-57cb0830ba22",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "graphql.vscode-graphql-0.9.3",
+    "version": "0.9.3"
+  },
+  {
+    "identifier": {
+      "id": "graphql.vscode-graphql-syntax",
+      "uuid": "e1ab76b1-9acd-4ffa-baf7-1d9eaf7cf3d2"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/graphql.vscode-graphql-syntax-1.3.6",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "e1ab76b1-9acd-4ffa-baf7-1d9eaf7cf3d2",
+      "installedTimestamp": 1714650318858,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "GraphQL Foundation",
+      "publisherId": "9d328ac4-bbff-4fd6-95dd-57cb0830ba22",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "graphql.vscode-graphql-syntax-1.3.6",
+    "version": "1.3.6"
   },
   {
     "identifier": {
@@ -538,6 +696,264 @@
     },
     "relativeLocation": "million.million-lint-0.0.33",
     "version": "0.0.33"
+  },
+  {
+    "identifier": {
+      "id": "ms-python.debugpy",
+      "uuid": "4bd5d2c9-9d65-401a-b0b2-7498d9f17615"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-python.debugpy-2024.6.0-darwin-arm64",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "4bd5d2c9-9d65-401a-b0b2-7498d9f17615",
+      "installedTimestamp": 1714730152602,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+      "source": "gallery",
+      "targetPlatform": "darwin-arm64",
+      "updated": true
+    },
+    "relativeLocation": "ms-python.debugpy-2024.6.0-darwin-arm64",
+    "version": "2024.6.0"
+  },
+  {
+    "identifier": {
+      "id": "ms-python.python",
+      "uuid": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-python.python-2024.4.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5",
+      "installedTimestamp": 1714488448195,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "ms-python.python-2024.4.1",
+    "version": "2024.4.1"
+  },
+  {
+    "identifier": {
+      "id": "ms-python.python",
+      "uuid": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-python.python-2024.6.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "f1f59ae4-9318-4f3c-a9b5-81b2eaa5f8a5",
+      "installedTimestamp": 1714733019546,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": true
+    },
+    "relativeLocation": "ms-python.python-2024.6.0",
+    "version": "2024.6.0"
+  },
+  {
+    "identifier": {
+      "id": "ms-python.vscode-pylance",
+      "uuid": "364d2426-116a-433a-a5d8-a5098dc3afbd"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-python.vscode-pylance-2024.5.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "364d2426-116a-433a-a5d8-a5098dc3afbd",
+      "installedTimestamp": 1715177456483,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "998b010b-e2af-44a5-a6cd-0b5fd3b9b6f8",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": true
+    },
+    "relativeLocation": "ms-python.vscode-pylance-2024.5.1",
+    "version": "2024.5.1"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.jupyter",
+      "uuid": "6c2f1801-1e7f-45b2-9b5c-7782f1e076e8"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.jupyter-2024.3.1-darwin-arm64",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "6c2f1801-1e7f-45b2-9b5c-7782f1e076e8",
+      "installedTimestamp": 1714488450422,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "darwin-arm64",
+      "updated": false
+    },
+    "relativeLocation": "ms-toolsai.jupyter-2024.3.1-darwin-arm64",
+    "version": "2024.3.1"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.jupyter",
+      "uuid": "6c2f1801-1e7f-45b2-9b5c-7782f1e076e8"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.jupyter-2024.4.0-darwin-arm64",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "6c2f1801-1e7f-45b2-9b5c-7782f1e076e8",
+      "installedTimestamp": 1714733019526,
+      "isApplicationScoped": false,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "preRelease": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "darwin-arm64",
+      "updated": true
+    },
+    "relativeLocation": "ms-toolsai.jupyter-2024.4.0-darwin-arm64",
+    "version": "2024.4.0"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.jupyter-keymap",
+      "uuid": "9f6dc8db-620c-4844-b8c5-e74914f1be27"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.jupyter-keymap-1.1.2",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "9f6dc8db-620c-4844-b8c5-e74914f1be27",
+      "installedTimestamp": 1714488450429,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "ms-toolsai.jupyter-keymap-1.1.2",
+    "version": "1.1.2"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.jupyter-renderers",
+      "uuid": "b15c72f8-d5fe-421a-a4f7-27ed9f6addbf"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.jupyter-renderers-1.0.17",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "b15c72f8-d5fe-421a-a4f7-27ed9f6addbf",
+      "installedTimestamp": 1714488450434,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "ms-toolsai.jupyter-renderers-1.0.17",
+    "version": "1.0.17"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.vscode-jupyter-cell-tags",
+      "uuid": "ab4fb32a-befb-4102-adf9-1652d0cd6a5e"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.vscode-jupyter-cell-tags-0.1.9",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "ab4fb32a-befb-4102-adf9-1652d0cd6a5e",
+      "installedTimestamp": 1714488450443,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "ms-toolsai.vscode-jupyter-cell-tags-0.1.9",
+    "version": "0.1.9"
+  },
+  {
+    "identifier": {
+      "id": "ms-toolsai.vscode-jupyter-slideshow",
+      "uuid": "e153ca70-b543-4865-b4c5-b31d34185948"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-toolsai.vscode-jupyter-slideshow-0.1.6",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "e153ca70-b543-4865-b4c5-b31d34185948",
+      "installedTimestamp": 1714488450449,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "ac8eb7c9-3e59-4b39-8040-f0484d8170ce",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "ms-toolsai.vscode-jupyter-slideshow-0.1.6",
+    "version": "0.1.6"
   },
   {
     "identifier": {
@@ -661,6 +1077,31 @@
   },
   {
     "identifier": {
+      "id": "tamasfe.even-better-toml",
+      "uuid": "b2215d5f-675e-4a2b-b6ac-1ca737518b78"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/tamasfe.even-better-toml-0.19.2",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "b2215d5f-675e-4a2b-b6ac-1ca737518b78",
+      "installedTimestamp": 1714731302143,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "tamasfe",
+      "publisherId": "78c2102e-13a2-49ea-ac79-8d1bbacbbf0e",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "tamasfe.even-better-toml-0.19.2",
+    "version": "0.19.2"
+  },
+  {
+    "identifier": {
       "id": "thinker.sort-json",
       "uuid": "e998b582-9632-4bbf-8a73-0c385e564cd9"
     },
@@ -690,24 +1131,25 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.37.0-darwin-arm64",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.37.1-darwin-arm64",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "f95d8fff-f70a-4ae5-bb06-5c47ddbc8fc6",
-      "installedTimestamp": 1710148718318,
+      "installedTimestamp": 1712995638299,
       "isApplicationScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
       "preRelease": false,
       "publisherDisplayName": "Timon Wong",
       "publisherId": "04757770-dd50-443e-aae4-e1c7cf9c24f5",
+      "source": "gallery",
       "targetPlatform": "darwin-arm64",
       "updated": true
     },
-    "relativeLocation": "timonwong.shellcheck-0.37.0-darwin-arm64",
-    "version": "0.37.0"
+    "relativeLocation": "timonwong.shellcheck-0.37.1-darwin-arm64",
+    "version": "0.37.1"
   },
   {
     "identifier": {
