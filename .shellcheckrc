@@ -1,32 +1,16 @@
-# Definitions from https://shellcheck.net
+# https://shellcheck.net
 
-# Can't follow non-constant source. Use a directive to specify location.
-disable=SC1090
-# Not following: (error message here)
-disable=SC1091
-# Note that A && B || C is not if-then-else. C may run when A is true.
-disable=SC2015
-# foo appears unused. Verify it or export it.
-disable=SC2034
-# Use ./*.txt instead of *.txt to avoid expanding to a list of files that could exceed ARG_MAX.
-disable=SC2038
-# For loops over find output are fragile. Use find -exec or a while read loop.
-disable=SC2044
-# Use "${var:?}" to ensure this never expands to /* thus deleting all files.
-disable=SC2115
-# Consider using 'printf' instead of 'echo' to avoid interpretation of backslash escapes.
-disable=SC2128
-# This expands the positional parameters, but not in all cases. Use set -u or set -o nounset in the subshell or use an explicit list of parameters (${1}, ${2}, etc.).
-disable=SC2139
-# Argument mixes string and array. Use * or separate argument.
-disable=SC2145
-# Possible misspelling: MYVAR may not be assigned, but MY_VAR is.
-disable=SC2153
-# var is referenced but not assigned.
-disable=SC2154
-# Prefer [[ ]] over [ ] for conditions.
-disable=SC2250
-# Backslash is literal in "\c". Prefer explicit escaping: "\\c".
-disable=SC2312
-# In POSIX sh, 'set -e' is not supported. Use a subshell to workaround.
-disable=SC3010
+disable=SC1090 # Can't follow non-constant source. Use a directive to specify location.
+disable=SC1091 # Not following: (error message here)
+disable=SC2015 # Note that A && B || C is not if-then-else. C may run when A is true.
+disable=SC2034 # VAR appears unused. Verify it or export it.
+disable=SC2038 # Use ./*glob* or -- *glob* so names with dashes won't become options.
+disable=SC2044 # For loops over find output are fragile. Use find -exec or a while read loop.
+disable=SC2115 # Use "${var:?}" to ensure this never expands to /* and delete the if block.
+disable=SC2128 # Expanding an array without an index only gives the first element.
+disable=SC2139 # This is an associative array. Use arr[key]=val
+disable=SC2145 # Argument mixes string and array. Use * or separate argument.
+disable=SC2154 # var is referenced but not assigned.
+disable=SC2250 # Prefer [[ ]] over [ ] for conditions.
+disable=SC2312 # Backslash is literal in "\c". Prefer explicit escaping: "\\c".
+disable=SC3010 # In POSIX sh, 'set -e' is not supported. Use a subshell to workaround.
