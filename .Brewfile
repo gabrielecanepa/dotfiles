@@ -77,6 +77,8 @@ brew "heroku/brew/heroku"
 brew "shopify/shopify/shopify-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
+cask "1password-cli"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
 # Free app that makes your Internet safer
