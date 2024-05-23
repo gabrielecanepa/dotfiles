@@ -1,25 +1,39 @@
 #!/bin/sh
 
-# Core
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
+
 ## Use GNU ls if available
-command -v gls >/dev/null && alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
+if command -v gls >/dev/null; then
+  alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
+fi
+
 ## Sort by size
-lss() { du -L --si -d 1 $@ 2>/dev/null | sort -hr }
+lss() { 
+  du -L --si -d 1 "$@" 2>/dev/null | sort -hr 
+}
 
 # Directories
-[[ -z $WORKING_DIR ]] && ([[ -d "$HOME/Developer" ]] && WORKING_DIR="$HOME/Developer" || WORKING_DIR="$HOME")
 wd="$WORKING_DIR"
 tmp="$WORKING_DIR/tmp"
-cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
-alias cdc="cd '$cloud'"
-alias cdd="cd '$cloud/Downloads'"
+
+alias cdc="cd '$icloud'"
+alias cdd="cd '$icloud/Downloads'"
 alias cdw="cd '$wd'"
 alias cdww="cd '$wd/$USER'"
 alias tmp="cd '$tmp'"
-mkdircd() { mkdir -p "$@" && cd "$_" || return $?; }
+
+mkdircd() { 
+  dir="$(mkdir -pv "$@")"
+  cd "$dir" || return 1
+}
+
+mkdircode() {
+  dir="$(mkdir -pv "$@")"
+  code "$dir" || return 1
+}
 
 # Files
 alias aliases="$EDITOR $HOME/.aliases"
@@ -29,7 +43,7 @@ alias zshrc="$EDITOR $HOME/.zshrc"
 # Apps
 alias te="open -a TextEdit"
 
-# Functions
+# Shortcuts
 alias hide="chflags hidden"
 alias unhide="chflags nohidden"
 
@@ -37,17 +51,17 @@ alias unhide="chflags nohidden"
 alias ghrv="gh repo view --web"
 alias omzr="omz reload"
 alias pn="pnpm"
-alias yarn="yarn1"
+alias pnx="pnpx"
+alias yarn="npx yarn@1"
 
-# Git
+# Git short aliases
 for git_alias in $(git aliases | sed 's/\ .*//'); do
-  # Only if it doesn't already exist
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
 done; unset git_alias
 
-# VSCode
+# VSCode workspaces
 for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
   alias code-"$(basename "$workspace" .code-workspace)"="code $workspace"
 done; unset workspace
