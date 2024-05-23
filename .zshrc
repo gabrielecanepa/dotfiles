@@ -2,9 +2,7 @@
 
 # Environment
 export LANG="en_US.UTF-8"
-
-# Binaries
-export PATH="./bin:./node_modules/.bin:/usr/local/sbin:$PATH"
+export PATH="./bin:./.bin:$PATH"
 
 # Homebrew (https://brew.sh)
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -60,6 +58,7 @@ autoload -Uz compinit
 
 # Plugins
 plugins=(
+  1password
   colored-man-pages
   colorize
   gh
@@ -105,13 +104,16 @@ git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 export FILTER_BRANCH_SQUELCH_WARNING=1
 
+# Node (https://nodejs.org)
+export PATH="./node_modules/.bin:$PATH"
+
 # Aliases
 [[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-type gh &>/dev/null && eval "$(gh copilot alias -- zsh)"
+eval "$(gh copilot alias -- zsh)"
 # Background jobs
 [[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
 # Cronjobs
 [[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
 
-# Remove duplicates from path
+# Avoid duplicates in $PATH
 typeset -aU path
