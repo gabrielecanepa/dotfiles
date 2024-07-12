@@ -1,42 +1,53 @@
-/*==== Editor ====*/
+/* ##Globals## */
 
-/* ... */
-
-/*==== Icons ====*/
+/* Root */
+:root {
+  --icon-obsidian: url("https://i.ibb.co/1spcF9B/obsidian-light.png");
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --icon-obsidian: url("https://i.ibb.co/9w0jKZX/obsidian-dark.png");
+  }
+}
 
 /* Match color of ignored files/folders to git status */
 .monaco-decoration-itemColor--9ieymw::before {
   opacity: 0.5 !important;
 }
 
-/* == Directories == */
+/* ##Icons## */
 
-/* All directories */
+/* All icons */
 .file-icons-enabled .folder-icon::before {
   color: inherit !important;
 }
+/* Test */
 /* __tests__ */
 .file-icons-enabled .__tests__-name-folder-icon::before {
   font-family: fi !important;
   content: "\ea63" !important;
   font-size: 121% !important;
 }
+/* Binaries */
 /* .bin bin */
 .file-icons-enabled .\.bin-name-folder-icon::before,
 .file-icons-enabled .bin-name-folder-icon::before {
   font-family: fi !important;
   content: "\f0c8" !important;
 }
+/* Chrome */
 /* .chrome */
 .file-icons-enabled .\.chrome-name-folder-icon::before {
   font-family: devicons !important;
   content: "\e643" !important;
 }
+/* Configurations */
 /* .config */
 .file-icons-enabled .\.config-name-folder-icon::before {
   font-family: fa !important;
   content: "\f013" !important;
 }
+/* Git */
 /* .git */
 .file-icons-enabled .\.git-name-folder-icon .label-name {
   color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
@@ -46,79 +57,91 @@
   content: "\e602" !important;
   opacity: 0.5 !important;
 }
+/* GitHub */
 /* .github */
 .file-icons-enabled .\.github-name-folder-icon::before {
   font-family: octicons !important;
   content: "\e602" !important;
 }
+/* Husky */
 /* .husky */
 .file-icons-enabled .\.husky-name-folder-icon::before {
   font-family: fi !important;
   content: "\1f436" !important;
 }
-/* .macos */
+/* MacOS */
+/* .macos/ */
 .file-icons-enabled .\.macos-name-folder-icon::before {
   font-family: fi !important;
   content: "\e925" !important;
 }
-/* .next */
+/* .macos */
+.file-icons-enabled .\.macos-name-file-icon::before {
+  font-family: fi !important;
+  content: "\e925" !important;
+  color: #6a9fb5 !important;
+}
+/* Next.js */
+/* .next/ */
 .file-icons-enabled .\.next-name-folder-icon::before {
   font-family: fi !important;
   content: "\24c3" !important;
 }
-/* .npm */
+/* npm */
+/* .npm/ */
 .file-icons-enabled .\.npm-name-folder-icon::before {
   font-family: fi !important;
   content: "\e91c" !important;
 }
-/* .pnpm */
+/* pnpm */
+/* .pnpm/ */
 .file-icons-enabled .\.pnpm-name-folder-icon::before {
   font-family: fi !important;
   content: "\eB86" !important;
+}
+/* Shell */
+/* .aliases */
+.file-icons-enabled .\.aliases-name-file-icon::before {
+  font-family: fi !important;
+  color: #825078 !important;
+  content: "\f0c8" !important;
+}
+/* .zcompdump */
+.file-icons-enabled .\.zcompdump-name-file-icon::before {
+  font-family: fi !important;
+  content: "\f0c8" !important;
+  color: #6a9fb5 !important;
 }
 /* .ssh */
 .file-icons-enabled .\.ssh-name-folder-icon::before {
   font-family: fa !important;
   content: "\f120" !important;
 }
-/* .vscode .vscode-insiders */
-.file-icons-enabled .\.vscode-name-folder-icon::before,
-.file-icons-enabled .\.vscode-insiders-name-folder-icon::before {
-  font-family: devicons !important;
-  content: "\e60c" !important;
-}
 /* .zsh */
 .file-icons-enabled .\.zsh-name-folder-icon::before {
   font-family: fi !important;
   content: "\f0c8" !important;
 }
-/* build */
+/* Folders */
+/* build/ */
 .file-icons-enabled .build-name-folder-icon::before {
   font-family: octicons !important;
   content: "\f0c4" !important;
 }
-/* private .private */
+/* private/ .private/ */
 .file-icons-enabled .\.private-name-folder-icon::before,
 .file-icons-enabled .private-name-folder-icon::before {
   font-family: octicons !important;
   content: "\f06a" !important;
 }
-
-/* == Files == */
-
-/* .aliases .globals */
-.file-icons-enabled .\.aliases-name-file-icon::before,
-.file-icons-enabled .\.globals-name-file-icon::before {
-  font-family: fi !important;
-  color: #825078 !important;
-  content: "\f0c8" !important;
-}
-/* atomizer.config.js */
+/* Atomizer */
+/* .atomizer.config.js */
 .file-icons-enabled .atomizer\.config\.js-name-file-icon::before {
   font-family: devicons !important;
   content: "\e664" !important;
   color: #377eaa !important;
 }
+/* Homebrew */
 /* .Brewfile .Brewfile.lock.json */
 .file-icons-enabled .\.brewfile-name-file-icon::before,
 .file-icons-enabled .\.brewfile\.lock\.json-name-file-icon::before {
@@ -126,19 +149,21 @@
   content: "\1f37a" !important;
   font-size: 13.8px !important;
 }
+/* .Brewfile */
 .file-icons-enabled .\.brewfile-name-file-icon::before {
   color: #ffbd5d !important;
 }
-/* .CFUserTextEncoding .crontab */
-.file-icons-enabled .\.cfusertextencoding-name-file-icon::before {
-  font-family: fa !important;
-  content: "\f013" !important;
+/* VSCode */
+/* .vscode .vscode-insiders */
+.file-icons-enabled .\.vscode-name-folder-icon::before,
+.file-icons-enabled .\.vscode-insiders-name-folder-icon::before {
+  font-family: devicons !important;
+  content: "\e60c" !important;
 }
-/* .code-snippets */
+/* *.code-snippets */
 .file-icons-enabled .code-snippets-ext-file-icon::before {
   font-family: fi !important;
   content: "\eb22" !important;
-  color: #007acc !important;
 }
 /* .crontab */
 .file-icons-enabled .\.crontab-name-file-icon::before {
@@ -147,6 +172,7 @@
   font-size: 100% !important;
   color: unset !important;
 }
+/* Env */
 /* .env .env.example .env.sample */
 .file-icons-enabled .\.env-name-file-icon::before,
 .file-icons-enabled .\.env\.example-name-file-icon::before,
@@ -155,6 +181,7 @@
   content: "\f013" !important;
   color: unset !important;
 }
+/* Git */
 /* .gitignore.global .gitprofile */
 .file-icons-enabled .\.gitignore\.global-name-file-icon::before,
 .file-icons-enabled .\.gitprofile-name-file-icon::before {
@@ -162,56 +189,72 @@
   content: "\e602" !important;
   color: #ac4142 !important;
 }
-/* .husky/* */
+/* Husky - .husky/* */
 .file-icons-enabled .\.husky-name-dir-icon.name-file-icon::before {
   font-family: fi;
   color: #825078;
   content: "\f0c8";
 }
-/* .macos */
-.file-icons-enabled .\.macos-name-file-icon::before {
-  font-family: fi !important;
-  content: "\e925" !important;
-  color: #6a9fb5 !important;
-}
-/* .netrc */
+/* Net - .netrc */
 .file-icons-enabled .\.netrc-name-file-icon::before {
   font-family: mf !important;
   content: "\f160" !important;
   color: unset !important;
 }
-/* .yarnrc.yml */
+/* Yarn - .yarnrc.yml */
 .file-icons-enabled .\.yarnrc\.yml-name-file-icon::before {
   color: #46788d !important;
   content: "\ea1a" !important;
   font-family: fi !important;
   background-image: unset !important;
 }
-/* commitlint.config.ts */
+/* commitlint */
+/* .commitlintrc */
+.file-icons-enabled .\.commitlintrc-name-file-icon::before {
+  color: #769eb3 !important;
+  content: "\1f191" !important;
+  font-size: 107% !important;
+  font-family: fi !important;
+}
+/* commitlint.config.mjs commitlint.config.ts */
+.file-icons-enabled .commitlint\.config\.mjs-name-file-icon::before,
 .file-icons-enabled .commitlint\.config\.ts-name-file-icon::before {
   content: "\1f191" !important;
 }
-/* craco.config.ts */
+/* CRACO - craco.config.ts */
 .file-icons-enabled .craco\.config\.ts-name-file-icon::before {
   font-family: octicons !important;
   content: "\f02f" !important;
   color: #1f8e76 !important;
 }
-/* jest.setup.ts */
+/* Jest - jest.setup.ts */
 .file-icons-enabled .jest\.setup\.ts-name-file-icon::before {
   content: "\ea39" !important;
   font-size: 107% !important;
   font-family: fi !important;
   color: #f5c06d !important;
 }
-/* next-env.d.ts */
+/* Next.js - next-env.d.ts */
 .file-icons-enabled .next-env\.d\.ts-name-file-icon::before {
   color: #7f7f7f !important;
   content: "\24c3" !important;
   font-size: 107% !important;
   font-family: fi !important;
 }
-/* postcss.config.cjs postcss.config.js */
+/** Node.js **/
+/* .nodenv/ */
+.file-icons-enabled .\.nodenv-name-folder-icon::before {
+  content: "\e618" !important;
+  font-size: 114% !important;
+  font-family: devicons !important;
+}
+/* Obsidian */
+.file-icons-enabled .\.obsidian-name-folder-icon::before {
+  background-image: var(--icon-obsidian) !important;
+  content: "" !important;
+  background-size: 0.92em !important;
+}
+/* PostCSS postcss.config.cjs postcss.config.js */
 .file-icons-enabled .postcss\.config\.cjs-name-file-icon::before {
   font-family: fi !important;
   content: "\e910" !important;
@@ -223,7 +266,14 @@
   content: "\e910" !important;
   color: #c82829 !important;
 }
-/* release.config.(js|cjs|mjs) */
+/* Python */
+/* .pyenv/ */
+.file-icons-enabled .\.pyenv-name-folder-icon::before {
+  content: "\f14c" !important;
+  font-family: mf !important;
+}
+/* release-it - release.config.(js|cjs|mjs) */
+.file-icons-enabled .\.release-it\.json-name-file-icon::before,
 .file-icons-enabled .release\.config\.js-name-file-icon::before,
 .file-icons-enabled .release\.config\.cjs-name-file-icon::before,
 .file-icons-enabled .release\.config\.mjs-name-file-icon::before {
@@ -232,19 +282,26 @@
   font-size: 114% !important;
   font-family: fi !important;
 }
-/* svgo.config.js */
+/** Ruby **/
+/* .rbenv/ */
+.file-icons-enabled .\.rbenv-name-folder-icon::before {
+  content: "\f047" !important;
+  font-size: 114% !important;
+  font-family: octicons !important;
+}
+/* svgo - svgo.config.js */
 .file-icons-enabled .svgo\.config\.js-name-file-icon::before {
   font-family: mfixx !important;
   color: #f4bf75 !important;
   content: "\f15c" !important;
 }
-/* tsconfig.*.json */
+/* TypeScript - tsconfig.*.json */
 .file-icons-enabled .tsconfig\.paths\.json-name-file-icon::before {
   color: #6a9fb5 !important;
   content: "\eb1b" !important;
   font-family: fi !important;
 }
-/* tsup.config.js tsup.config.ts */
+/* Tsup - tsup.config.js tsup.config.ts */
 .file-icons-enabled .tsup\.config\.js-name-file-icon::before,
 .file-icons-enabled .tsup\.config\.ts-name-file-icon::before {
   font-family: fi !important;
@@ -257,7 +314,7 @@
     color: #cccccc !important;
   }
 }
-/* vitest.config.js vitest.config.ts */
+/* Vitest - vitest.config.js vitest.config.ts */
 .file-icons-enabled .vitest\.config\.js-name-file-icon::before,
 .file-icons-enabled .vitest\.config\.ts-name-file-icon::before {
   font-family: fi !important;

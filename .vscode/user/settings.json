@@ -13,10 +13,10 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
@@ -73,9 +73,6 @@
   },
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
-  "editor.unicodeHighlight.allowedCharacters": {
-    "︎": true
-  },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
@@ -116,6 +113,7 @@
     "*.json": "json",
     "*.md": "markdown",
     ".aliases": "shellscript",
+    ".commentlintrc": "json",
     ".env.example": "dotenv",
     ".env.sample": "dotenv",
     ".eslintrc": "jsonc",
@@ -138,43 +136,41 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 500,
   "files.exclude": {
-    "**/.git": false,
-    "/Users/gabrielecanepa/.bin": true
+    "**/.git": false
   },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
+  "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
-  "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
+  "git.ignoreLegacyWarning": true,
+  "git.ignoreMissingGitWarning": true,
   "git.ignoredRepositories": [
     "/Users/gabrielecanepa/.oh-my-zsh"
   ],
-  "git.ignoreLegacyWarning": true,
-  "git.ignoreMissingGitWarning": true,
-  "git.inputValidationLength": 80,
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "never",
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
+  "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
-    "javascript": true,
     "markdown": true,
-    "plaintext": true,
-    "scminput": false,
-    "yaml": true
+    "plaintext": false,
+    "scminput": false
   },
   "githubPullRequests.pullBranch": "never",
   "gitlens.advanced.messages": {
-    "suppressLineUncommittedWarning": true
+    "suppressLineUncommittedWarning": true,
+    "suppressRebaseSwitchToTextWarning": true
   },
   "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
@@ -240,6 +236,9 @@
   "scss.lint.compatibleVendorPrefixes": "warning",
   "scss.lint.duplicateProperties": "warning",
   "scss.lint.float": "warning",
+  "search.exclude": {
+    "**/.git": true
+  },
   "security.workspace.trust.untrustedFiles": "open",
   "shellcheck.customArgs": [],
   "shellcheck.enable": true,
@@ -249,15 +248,6 @@
     "git",
     "gitfs"
   ],
-  "shellcheck.ignorePatterns": {
-    "**/*.aliases": true,
-    "**/*.example": true,
-    "**/*.jobs": true,
-    "**/*.macos": true,
-    "**/*.profile": true,
-    "**/*.xonshrc": true,
-    "**/*.xsh": true
-  },
   "shellcheck.run": "onType",
   "sort-json.settings.objectSortType": "Key",
   "sort-json.settings.promptCollectionKeys": true,

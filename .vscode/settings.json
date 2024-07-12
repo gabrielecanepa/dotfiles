@@ -20,17 +20,13 @@
     ".Music": true,
     ".node_repl_history": true,
     ".node-gyp": true,
-    ".nodenv": true,
     ".npm/_*": true,
     ".nvm": true,
-    ".oh-my-zsh": true,
     ".pnpm-state": true,
     ".pnpm-store": true,
     ".pnpm/store": true,
     ".psql_history": true,
-    ".pyenv": true,
     ".python_history": true,
-    ".rbenv": true,
     ".solargraph": true,
     ".subversion": true,
     ".synamedia": true,
@@ -48,7 +44,8 @@
     ".yarn/bin": true,
     ".yarn/cache": true,
     ".yarn/releases": true,
-    ".zcompdump*": true,
+    ".zcompdump-*": true,
+    ".zcompdump.*": true,
     ".zsh_history": true,
     ".zsh_sessions": true,
     "*_history": true,
@@ -69,8 +66,5 @@
     "Pictures": true,
     "Public": true
   },
-  "git.repositoryScanIgnoredFolders": [
-    ".Trash",
-    "node_modules"
-  ]
+  "git.repositoryScanIgnoredFolders": [".Trash", "node_modules"]
 }

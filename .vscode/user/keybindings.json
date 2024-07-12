@@ -49,6 +49,10 @@
     "key": "shift+cmd+w"
   },
   {
+    "command": "-workbench.action.files.saveWithoutFormatting",
+    "key": "cmd+k s"
+  },
+  {
     "command": "-workbench.action.gotoSymbol",
     "key": "cmd+r"
   },
@@ -67,6 +71,10 @@
   {
     "command": "-workbench.action.moveEditorToPreviousGroup",
     "key": "ctrl+cmd+left"
+  },
+  {
+    "command": "-workbench.action.openGlobalKeybindings",
+    "key": "cmd+k cmd+s"
   },
   {
     "command": "-workbench.action.quickOpen",
@@ -127,6 +135,10 @@
     "key": "shift+cmd+w"
   },
   {
+    "command": "workbench.action.files.saveWithoutFormatting",
+    "key": "ctrl+s"
+  },
+  {
     "command": "workbench.action.moveEditorLeftInGroup",
     "key": "ctrl+cmd+left"
   },
@@ -135,12 +147,24 @@
     "key": "ctrl+cmd+right"
   },
   {
+    "command": "workbench.action.openGlobalKeybindings",
+    "key": "alt+cmd+[Comma]"
+  },
+  {
+    "command": "workbench.action.openGlobalKeybindingsFile",
+    "key": "shift+alt+cmd+[Comma]"
+  },
+  {
     "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
     "key": "shift+alt+w"
   },
   {
     "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
     "key": "alt+w"
+  },
+  {
+    "command": "workbench.action.openSettingsJson",
+    "key": "shift+cmd+[Comma]"
   },
   {
     "command": "workbench.action.removeRootFolder",
