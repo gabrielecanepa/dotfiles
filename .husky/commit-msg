@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. "$(dirname "$0")/init.sh"
+
+# Skip commits starting with [tmp]
+[[ $(cat "$1") =~ ^\[tmp\]* ]] && exit 0
+
+# Run commitlint and shellcheck
+commitlint --edit "$1"
+run shellcheck

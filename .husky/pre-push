@@ -1,0 +1,8 @@
+#!/bin/sh
+
+. "$(dirname "$0")/init.sh"
+
+# Run commitlint on unpushed commits
+commitlint --from=HEAD --to="$(git remote)/$(git branch --show-current)"
+# Run shellcheck
+run shellcheck
