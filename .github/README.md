@@ -1,156 +1,199 @@
 ## Installation
 
-> **Warning**  
-> If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what that entails!
+> [!WARNING]
+> If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
 
-### Fonts
-    
-To display icons in your terminal, download a font supporting Nerd Fonts, like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts), and use it in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
+<!-- no toc -->
+1. [SSH](#1-ssh)
+2. [Homebrew](#2-homebrew)
+3. [Oh My Zsh](#3-oh-my-zsh)
+4. [Dotfiles](#4-dotfiles)
+5. [Configuration](#5-configuration)
+    - [Shell profile](#shell-profile)
+6. [Languages and dependencies](#6-languages-and-dependencies)
+    - [Node.js](#nodejs)
+    - [Ruby](#ruby)
+    - [Python](#python)
+7. [VSCode](#7-vscode)
+    - [Settings, snippets and extensions](#settings-snippets-and-extensions)
+    - [Keybindings](#keybindings)
+8. [Resources](#8-resources)
+   - [Fonts](#fonts)
+   - [iCloud](#icloud)
 
-### Dotfiles
+### 1. SSH
 
-Clone this repository:
-
-```sh
-git clone git@github.com:gabrielecanepa/dotfiles.git
-cd dotfiles
-```
-
-And copy all files to your home directory, manually or in bulk:
-
-> **Warning**  
-> The following command will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
-
-```sh
-bak_dir=$(mkdir -p ~/.bak/dotfiles/$(date +%Y-%m-%d) && echo $_)
-
-for config in $(ls -A); do
-  [[ -e ~/$config ]]; && cp -fr ~/$config $bak_dir
-  cp -fr $config ~/$config
-done; unset config bak_dir
-```
-
-### SSH
-
-Generate a new SSH key and copy it to the clipboard:
+If not already present, generate a new SSH key and copy it to the clipboard:
 
 ```sh
 ssh-keygen -t ed25519 -C "<comment>"
 tr -d '\n' < ~/.ssh/id_ed25519.pub | pbcopy
 ```
 
-Add the public key to [GitHub](https://github.com/settings/ssh/new) and [GitLab](https://gitlab.com/-/profile/keys).
+Add the key to [GitHub](https://github.com/settings/ssh/new), [GitLab](https://gitlab.com/-/profile/keys) and any other services you use.
 
-### [Oh My Zsh](https://ohmyz.sh)
+### 2. Homebrew
 
-Install Oh My Zsh and some essential plugins from [zsh-users](https://github.com/zsh-users):
+Install [Homebrew](https://brew.sh):
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 3. Oh My Zsh
+
+Install [Oh My Zsh](https://ohmyz.sh) and some essential plugins from [zsh-users](https://github.com/zsh-users):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
-zsh_user_plugins=(
-  zsh-autosuggestions
-  zsh-completions
-  zsh-syntax-highlighting
-)
-
-for plugin in $zsh_user_plugins; do
+for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
-done; unset plugin zsh_user_plugins
+done
 
-# Apply the changes.
-PROFILE=0 omz reload
+# Restart the shell.
+zsh
 ```
 
-### Profile
+### 4. Dotfiles
 
-Use the [`profile` command](/.zsh/plugins/profile/profile.plugin.zsh) to create your profile with a guided prompt.
+Clone this repository:
+
+```sh
+git clone git@github.com:gabrielecanepa/dotfiles.git
+```
+
+And copy all files to your home directory, manually or in bulk:
+
+> [!WARNING]
+> The following bulk operation will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
+
+```sh
+cd dotfiles
+
+bak=$(mkdir -p ~/.bak/dotfiles/$(date +%Y%m%d) && echo $_)
+
+for config in $(ls -A); do
+  [[ -e ~/$config ]] && cp -fr ~/$config $bak
+  cp -fr $config ~/$config
+done
+
+cd ..
+rm -rf dotfiles
+```
+
+Install all the packages listed in the [Brewfile](/.Brewfile):
+
+```sh
+brew bundle --file ~/.Brewfile
+```
+
+### 5. Configuration
+
+#### Shell profile
+
+Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell profile using a guided prompt:
 
 ```sh
 profile install
 ```
 
-### [Homebrew](https://brew.sh)
+### 6. Languages and dependencies
 
-Install Homebrew and the packages specified in [`.Brewfile`](/.Brewfile):
+#### Node.js
 
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew bundle --file ~/.Brewfile
-```
-
-### [Node.js](https://nodejs.org), [Ruby](https://ruby-lang.org) and [Python](https://python.org)
-
-Install the latest stable version of Node.js, Ruby and Python using the custom [`lts` plugin](/.zsh/plugins/lts/lts.plugin.zsh):
+Install the saved [Node.js](https://nodejs.org) with [nodenv](https://github.com/nodenv/nodenv) and use the custom [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install global packages:
 
 ```sh
-# Make sure that all packages are up-to-date.
-brew update && brew upgrade
-# Link version files to the home directory.
-declare -A vms=([nodenv]=.node-version [rbenv]=.ruby-version [pyenv]=.python-version)
-for vm in ${(k)vms}; do
-  cat ~/.$vm/version > ~/$vms[$vm] && rm ~/.$vm/version && ln -sf ~/$vms[$vm] ~/.$vm/version
-done; unset vm vms
-# Install the latest stable version of node, ruby and python.
-lts install
-```
-
-### [npm](https://npmjs.com)
-
-Install the versions listed in `.npm/global`. For each version, use the [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install the supported global packages:
-
-```sh
-for version in $(command ls ~/.npm/global); do
+for version in $(command ls ~/.npm/versions); do
   nodenv install $version --skip-existing
-  cd ~/.npm/global/$version
+  cd ~/.npm/versions/$version
   npm -g install $(dependencies -L)
-done; unset version
+done
 ```
 
-### [pnpm](https://pnpm.js.org)
-
-Install pnpm and global packages:
+Link the global Node.js version to the current one:
 
 ```sh
-npm install -g pnpm
-pnpm install -g
+nodenv global $(cat ~/.node-version)
+rm -f ~/.nodenv/version && ln -sf ~/.node-version ~/.nodenv/version
 ```
 
-### [Yarn](https://classic.yarnpkg.com)
+#### Ruby
 
-Set up and install global Yarn packages:
+Install and link the [Ruby](https://www.ruby-lang.org) version in use with [rbenv](https://github.com/rbenv/rbenv):
 
 ```sh
-# Set up a global folder.
-[[ ! -d ~/.config/yarn ]] && mkdir -p ~/.config/yarn
-ln -sf ~/.yarn ~/.config/yarn/global
-
-# Install the packages specified in ~/.yarn
-yarn global add
+rbenv install $(cat ~/.ruby-version) --skip-existing
+rbenv global $(cat ~/.ruby-version)
+rm -f ~/.rbenv/version && ln -sf ~/.ruby-version ~/.rbenv/version
 ```
 
-#### [Yarn PnP](https://yarnpkg.com)
+#### Python
 
-Install Yarn Pnp using [Corepack](https://github.com/nodejs/corepack):
+Install and link the [Python](https://www.python.org) version in use with [pyenv](https://github.com/pyenv/pyenv):
 
 ```sh
-corepack enable
-corepack prepare yarn@stable --activate
+pyenv install $(cat ~/.python-version) --skip-existing
+pyenv global $(cat ~/.python-version)
+rm -f ~/.pyenv/version && ln -sf ~/.python-version ~/.pyenv/version
 ```
 
-When using the custom [`yarn@1` plugin](/.zsh/plugins/yarn@1/yarn@1.plugin.zsh), the classic version will be available with `yarn`, while PnP can be activated with either `yarn2`, `yarnpnp` or `berry`.
+### 7. [VSCode](https://code.visualstudio.com)
 
-### [iCloud](https://icloud.com)
+#### Settings, snippets and extensions
 
-#### Folders
+Use symlinks to backup keybindings, settings, snippets and extensions.
 
-Use this script to:
-- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between cloud and local machine.
-- Replace the home `Applications` folder with a symlink to the system applications folder, the one used by all users on the machine.
+> [!WARNING]
+> The following operations will permanently replace some system folders with symlinks.
+
+```sh
+for config in keybindings.json settings.json snippets; do
+  file=~/Library/Application\ Support/Code/User/$config
+  rm -rf $file
+  ln -sf ~/.vscode/user/$config $file
+done
+
+rm -rf ~/.vscode/extensions/extensions.json
+ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
+```
+
+#### Keybindings
+
+To avoid emitting beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the following configuration file:
+
+```sh
+touch ~/Library/KeyBindings/DefaultKeyBinding.dict
+```
+
+And populate it with the following content:
+
+```
+{
+  "^@\UF701" = "noop";
+  "^@\UF702" = "noop";
+  "^@\UF703" = "noop";
+}
+```
+
+For more information see [this GitHub issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
+
+### 8. Resources
+
+#### Fonts
+    
+To display icons in your terminal, download a font supporting Nerd Fonts, like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts), and use it in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
+
+#### iCloud
+
+Use the following script to:
+- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between the cloud and your local machine.
+- Replace the home `Applications` folder with a symlink to the system applications folder.
 - Create a symlink named `iCloud`, pointing to the related cloud folder, in `Applications`, `Developer` and `Pictures`.
 
-> **Warning**  
-> The following operations will permanently replace some system folders with symbolic links to iCloud Drive.
+> [!WARNING]
+> The following operations will permanently replace some system folders with symbolic links to iCloud Drive. Make sure to back up your data before proceeding.
 
 <br>
 
@@ -177,57 +220,19 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
       rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder
       ;;
   esac
-done; unset cloud_folder folder
+done
 ```
 
-#### Applications
+The new folder icons can be replaced manually. System icons can be found here:
+
+```sh
+open /System/Library/Extensions/IOStorageFamily.kext/Contents/Resources
+```
 
 You can easily link applications stored in the cloud to the system folder:
 
 ```sh
-for app in Bartender Dash iTerm2; do
-  ln -sf ~/Applications/$app.app /Applications/$app.app
-done; unset app
+ln -sf ~/Applications/Bartender.app /Applications/Bartender.app
 ``` 
 
-The apps will become available in the menu and maintain all system-wide functionalities, including automatic updates.
-
-### [VSCode](https://code.visualstudio.com)
-
-#### Settings, snippets and extensions
-
-Set `VSCODE_CUSTOM` in [`.zshrc`](/.zshrc) and use symlinks to backup keybindings, settings, snippets and extensions.
-
-> **Warning**  
-> The following operations will permanently replace some system folders with symlinks.
-
-```sh
-for config in keybindings.json settings.json snippets; do
-  file=~/Library/Application\ Support/Code/User/$config
-  rm -rf $file
-  ln -sf $VSCODE_CUSTOM/$config $file
-done; unset config file
-
-rm -rf ~/.vscode/extensions/extensions.json
-ln -sf $VSCODE_CUSTOM/extensions.json ~/.vscode/extensions/extensions.json
-```
-
-#### Keybindings
-
-To avoid emitting beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the configuration file:
-
-```sh
-touch ~/Library/KeyBindings/DefaultKeyBinding.dict
-```
-
-And populate it with the following content:
-
-```
-{
-  "^@\UF701" = "noop";
-  "^@\UF702" = "noop";
-  "^@\UF703" = "noop";
-}
-```
-
-For more information see [this comment](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
+The app will become available in the menu and maintain all system-wide functionalities, including automatic updates.
