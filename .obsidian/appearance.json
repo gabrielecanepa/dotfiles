@@ -1,0 +1,10 @@
+{
+  "accentColor": "#0969da",
+  "cssTheme": "Things",
+  "theme": "system",
+  "translucency": false,
+  "enabledCssSnippets": [
+    "things"
+  ],
+  "showViewHeader": true
+}

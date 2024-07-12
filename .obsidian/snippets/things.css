@@ -1,0 +1,59 @@
+/* Variables */
+.theme-light,
+.theme-dark {
+  --link-decoration: none;
+  --link-external-decoration: none;
+  --text-accent-hover: var(--text-accent);
+  --tooltip-delay: 500ms;
+}
+.theme-light {
+  --text-accent: #0969da;
+}
+.theme-dark {
+  --text-accent: #4493f8;
+}
+
+/* Use inherited text color for bold */
+strong,
+.cm-strong {
+  color: inherit !important;
+}
+
+/* Show tooltip after delay */
+@keyframes showTooltip {
+  from {
+    visibility: hidden;
+  }
+  99% {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
+.tooltip {
+  visibility: hidden;
+  animation: showTooltip var(--tooltip-delay) forwards !important;
+}
+
+/* Hide drop overlay */
+.workspace-drop-overlay {
+  display: none !important;
+}
+
+/* Style checkboxes */
+.task-list-item-checkbox {
+  border-color: var(--color-base-35) !important;
+}
+
+/* Hide tab when no other tab is open */
+.workspace-tab-header[aria-label="New tab"][data-type="empty"]:first-child {
+  display: none !important;
+}
+
+/* Style link favicons */
+img.link-favicon {
+  box-shadow: none !important;
+  margin-right: 0.2em !important;
+  height: 0.9em !important;
+}
