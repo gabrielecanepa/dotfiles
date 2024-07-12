@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "corepack": "^0.28.0",
+    "husky": "^9.0.11",
+    "npm": "^10.5.2",
+    "pnpm": "^9.1.2"
+  },
+  "engines": {
+    "node": "21.7.3"
+  }
+}
