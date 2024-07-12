@@ -21,7 +21,6 @@ export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 # pyenv (https://github.com/pyenv/pyenv)
 # rbenv (https://github.com/rbenv/rbenv)
 for vm in nodenv pyenv rbenv; do
-  ! command -v $vm >/dev/null && continue
   export ${vm:u}_ROOT="$HOME/.${vm}"
   export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
   eval "$(${vm} init --path - zsh)"
@@ -52,10 +51,6 @@ zstyle ':omz:alpha:lib:git' async-prompt false
 zstyle ':omz:update' mode auto
 zle_highlight+=(paste:none)
 
-# Completions
-autoload -Uz compinit
-[[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]] && compinit || compinit -C
-
 # Plugins
 plugins=(
   1password
@@ -66,6 +61,7 @@ plugins=(
   gitfast
   last-working-dir
   nodenv
+  npm
   pyenv
   rbenv
   # From zsh-users
@@ -86,6 +82,7 @@ plugins=(
 )
 lazy_plugins=(
   colors256
+  completions
   dependencies
   gatekeeper
   google
@@ -94,26 +91,30 @@ lazy_plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
+# Completions
+completions generate obs
+. "$HOME/.config/tabtab/zsh/__tabtab.zsh"
+
 # Check profile
-type profile &>/dev/null && ! profile check && return 1
+! profile check && return 1
 
 # Git (https://git-scm.com)
-[[ ! -f "$HOME/.gitprofile" ]] && touch "$HOME/.gitprofile"
 git config --file "$HOME/.gitprofile" user.name "$NAME"
 git config --file "$HOME/.gitprofile" user.email "$EMAIL"
 git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
-export FILTER_BRANCH_SQUELCH_WARNING=1
 
 # Node (https://nodejs.org)
 export PATH="./node_modules/.bin:$PATH"
 
 # Aliases
-[[ -f "$HOME/.aliases" ]] && . "$HOME/.aliases"
-eval "$(gh copilot alias -- zsh)"
+. "$HOME/.aliases"
 # Background jobs
-[[ -f "$HOME/.jobs" ]] && (. "$HOME/.jobs" >/dev/null &) >/dev/null
+(. "$HOME/.jobs" >/dev/null &) >/dev/null
 # Cronjobs
-[[ -f "$HOME/.crontab" ]] && crontab "$HOME/.crontab"
+crontab "$HOME/.crontab"
 
 # Avoid duplicates in $PATH
 typeset -aU path
+
+# Clear screen
+clear
