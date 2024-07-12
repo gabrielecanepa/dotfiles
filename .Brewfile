@@ -5,6 +5,7 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "shopify/shopify"
+tap "yakitrak/yakitrak"
 # Library for command-line editing
 brew "readline"
 # Command-line interface for SQLite
@@ -75,14 +76,13 @@ brew "tree"
 brew "heroku/brew/heroku"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
+brew "yakitrak/yakitrak/obs"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Free app that makes your Internet safer
-cask "cloudflare-warp"
 # Cut and paste files in Finder
 cask "command-x"
 # Customise menu item keyboard shortcuts
@@ -97,12 +97,10 @@ cask "grammarly-desktop"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
+# App to write, plan, collaborate, and get organised
+cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# Modified browser that helps in responsive web development
-cask "responsively"
-# Collect, organise & share colours
-cask "sip"
 # Team communication and collaboration software
 cask "slack"
 # SSH client
@@ -119,9 +117,11 @@ cask "whatsapp"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
+mas "Color Picker", id: 1545870783
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
+mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Toggl Track", id: 1291898086
