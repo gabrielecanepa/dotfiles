@@ -62,6 +62,7 @@
   pf = push --force
   po = !sh -c 'git push --set-upstream origin $(git branch --show-current)'
   pof = !sh -c 'git push --set-upstream origin $(git branch --show-current) --force'
+  pristine = !git reset --hard && git clean -df
   ps = !git pull && git sweep
   re = remote
   rv = remote -v

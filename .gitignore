@@ -2,35 +2,30 @@
 
 # Directories
 /*/
-!/.bun
-/.bun/_bun
-/.bun/bin/
-/.bun/install/cache
 !/.chrome/
-/.chrome/extensions/*/
+!/.config/
+/.config/configstore
+/.config/grammarly*/
+/.config/op/
+/.config/raycast/
 !/.github/
-!/.macos/
+!/.husky/
 !/.npm/
 /.npm/_*
-/.npm/bin/
+!/.obsidian/
+/.obsidian/plugins/
+/.obsidian/themes/
 !/.pnpm/
 /.pnpm/*
-!/.pnpm/global/
-/.pnpm/global/**/.pnpm
-/.pnpm/store/
+!/.pnpm/5/
+/.pnpm/5/.pnpm
 !/.ssh/
-/.ssh/id_*
-/.ssh/known_hosts
+/.ssh/*
+!/.ssh/config
 !/.vscode/
-/.vscode/cli/
-/.vscode/extensions/
-/.vscode/workspaces/
-/.vscode/argv.json
-!/.yarn/
-/.yarn/berry/
-/.yarn/bin/
-/.yarn/cache/
-/.yarn/releases/
+/.vscode/*
+/.vscode/user/
+/.vscode/settings.json/
 !/.zsh/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
@@ -46,17 +41,17 @@
 /.git-stats
 /.gitprofile
 /.netrc
-/.npmrc
 /.viminfo
 /.yarnrc
-/.zcompdump**
+/.zcompdump-*
+/.zcompdump.*
 /.zprofile
 
-# Symlinks
-/*Applications
-/*Downloads
-/*Movies
-/*Music
+# System folders
+/Applications
+/Downloads
+/Movies
+/Music
 
 # Common
 node_modules/
