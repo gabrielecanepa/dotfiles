@@ -35,12 +35,11 @@ mkdircode() {
   code "$dir" || return 1
 }
 
-# Files
+# Open in editor
+alias home="$EDITOR $HOME"
 alias aliases="$EDITOR $HOME/.aliases"
 alias sshrc="$EDITOR $HOME/.ssh"
 alias zshrc="$EDITOR $HOME/.zshrc"
-
-# Apps
 alias te="open -a TextEdit"
 
 # Shortcuts
