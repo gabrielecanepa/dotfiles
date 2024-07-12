@@ -2,6 +2,10 @@
 
 # VSCode
 
+extensions="$HOME/.vscode/user/extensions.json"
+keybindings="$HOME/.vscode/user/keybindings.json"
+settings="$HOME/.vscode/user/settings.json"
+
 # Format extensions and sort by id.
 echo "$HOME/.vscode/user/extensions.json" | entr -s "jq --sort-keys 'sort_by(.identifier.id)' $extensions | sponge $extensions"
 # Sort keybindings by command.
