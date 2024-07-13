@@ -35,7 +35,6 @@
 /.*.backup
 /.*hst
 /.*padl
-/.Brewfile.lock.json
 /.copilot-cli-access-token
 /.gist
 /.git-stats
