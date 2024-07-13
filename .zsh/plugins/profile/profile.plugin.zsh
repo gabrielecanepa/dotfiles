@@ -11,12 +11,6 @@ function profile() (
   local PROFILE_CONFIG_CMD="${_profile_cmd} config${reset_color}"
   local PROFILE_INSTALL_CMD="${_profile_cmd} install${reset_color}"
 
-  local ICON_USER="\\uf2bd"
-  local ICON_NAME="\\uf040"
-  local ICON_EMAIL="\\uf0e0"
-  local ICON_WORKING_DIR="\\uf07c"
-  local ICON_EDITOR="\\uf121"
-
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
 
@@ -54,7 +48,7 @@ function profile() (
         echo "Sublime Text"
         ;;
       *)
-        echo "${(C)1}"
+        echo $1
         ;;
     esac
   }
@@ -137,7 +131,7 @@ function profile() (
             if [[ -z "$editor_name" ]]; then
               log_error "$editor is not a valid command"
             else
-              log_error "$editor_name is not installed"
+              log_error "$editor_name not found"
             fi
           fi
           read -r editor
@@ -151,20 +145,20 @@ function profile() (
       local changed_keys=0
       local is_installation=$([[ "$2" == install ]] && echo true || echo false)
       local is_reload=$([[ "$2" == reload ]] && echo true || echo false)
-      local name_msg="🔏 First and last name ($($is_installation && echo 'no accent or special characters' || echo $NAME))"
-      local email_msg="📧 Email address ($($is_installation && echo 'to sign your commits' || echo $EMAIL))"
-      local working_dir_msg="📁 Working directory (relative to $HOME, $($is_installation && echo 'e.g. Developer' || echo current is $WORKING_DIR_NAME))"
-      local editor_msg="⌨️  Text editor (shell command, e.g. code, subl, vim$(! $is_installation && echo \; current app is $(get_editor_name $EDITOR)))"
+      local name_msg="Name ($($is_installation && echo 'no accent or special characters' || echo $NAME))"
+      local email_msg="Email ($($is_installation && echo 'to sign your commits' || echo $EMAIL))"
+      local working_dir_msg="Working directory ($($is_installation && echo "relative to $HOME, e.g. Developer" || echo $WORKING_DIR_NAME))"
+      local editor_msg="Editor ($($is_installation && echo "shell command, e.g. code, nano, vim" || echo $EDITOR))"
 
       if ! $is_installation && ! profile check; then
         return 1
       fi
 
       if ! $is_reload; then
-        echo "${fg_bold[blue]}$ICON_USER $USER${reset_color}"
+        echo "${fg_bold[blue]}👤 $USER${reset_color}"
 
         if ! $is_installation; then
-          echo "(hit ⏎  if unchanged)"
+          echo "(hit ⏎ if unchanged)"
         fi
 
         echo ""
@@ -181,8 +175,6 @@ function profile() (
           fi
         done
         key=
-
-        echo ""
       fi
 
       if [[ $changed_keys > 0 ]] || $is_installation || $is_reload; then
@@ -192,18 +184,17 @@ function profile() (
         done
         echo "export GIT_EDITOR=\"$(get_git_editor $EDITOR)\"" >> "$HOME/.zprofile"
       else
-        echo "Nothing changed"
         return 0
       fi
 
       if $is_reload; then
-        echo "${fg_bold[blue]}$USER${reset_color}'s profile reloaded and ready for use"
+        echo "${fg_bold[blue]}$USER${reset_color}'s profile reloaded and ready for use."
       else
-        echo "${fg_bold[blue]}$USER${reset_color}'s profile successfully configured"
+        echo "\n${fg_bold[blue]}$USER${reset_color}'s profile successfully configured."
       fi
 
       if $is_installation; then
-        echo "Type $PROFILE_CMD to print your current configuration or $PROFILE_CONFIG_CMD to modify it"
+        echo "Type $PROFILE_CMD to print your current configuration or $PROFILE_CONFIG_CMD to modify it."
       fi
 
       exec zsh --login
@@ -215,10 +206,8 @@ function profile() (
         echo -n "Do you want to override the current profile? (y/N) "
         read -r choice
         if [[ "$choice" =~ [yY] ]]; then
-          profile config install
-        else
           echo ""
-          echo "Installation aborted"
+          profile config install
         fi
       else
         profile config install
@@ -258,11 +247,11 @@ function profile() (
         profile help
       else
         if profile check; then
-          print -P "${fg_bold[blue]}$ICON_USER $USER${reset_color}"
-          print -P "%F{209}$ICON_NAME${reset_color} $NAME"
-          print -P "%F{015}$ICON_EMAIL${reset_color} $EMAIL"
-          print -P "%F{220}$ICON_WORKING_DIR${reset_color} $WORKING_DIR"
-          print -P "%F{032}$ICON_EDITOR${reset_color} $(get_editor_name $EDITOR)"
+          print -P "${fg_bold[blue]}👤 $USER${reset_color}"
+          print -P "%F{015}Name:${reset_color} $NAME"
+          print -P "%F{015}Email:${reset_color} $EMAIL"
+          print -P "%F{015}Working directory:${reset_color} $WORKING_DIR"
+          print -P "%F{015}Editor:${reset_color} $(get_editor_name $EDITOR)"
         else
           return 1
         fi
@@ -270,8 +259,3 @@ function profile() (
       ;;
   esac
 )
-
-# Load .zprofile if not already loaded.
-if [[ -z "$NAME" && -z "$EMAIL" && -z "$WORKING_DIR" && -z "$EDITOR" && -z "$GIT_EDITOR" && -f "$HOME/.zprofile" ]]; then
-  source "$HOME/.zprofile"
-fi
