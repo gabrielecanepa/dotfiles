@@ -24,7 +24,7 @@ function brew() {
   
   case $cmd in
     dump)
-      command brew bundle dump --file="$BREWFILE" --force --all --describe --cleanup --no-restart $args
+      command brew bundle dump --file="$BREWFILE" --brews --casks --taps --mas --describe --force --cleanup --no-restart $args
       ;;
     fresh)
       command brew update && 
