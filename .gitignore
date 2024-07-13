@@ -43,8 +43,7 @@
 /.netrc
 /.viminfo
 /.yarnrc
-/.zcompdump-*
-/.zcompdump.*
+/.zcompdump*
 /.zprofile
 
 # System folders
