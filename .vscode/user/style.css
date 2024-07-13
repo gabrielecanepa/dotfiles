@@ -117,7 +117,9 @@
   font-family: fa !important;
   content: "\f120" !important;
 }
-/* .zsh */
+/* Zsh */
+/* .oh-my-zsh/ .zsh/ */
+.file-icons-enabled .\.oh-my-zsh-name-folder-icon::before,
 .file-icons-enabled .\.zsh-name-folder-icon::before {
   font-family: fi !important;
   content: "\f0c8" !important;
