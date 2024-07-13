@@ -98,6 +98,15 @@ Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to c
 profile install
 ```
 
+#### Environment variables
+
+Copy the `.env.example` file to `.env` and fill in the environment-specific values you need:
+
+```sh
+cp ~/.env.example ~/.env
+echo "VAR=value" >> ~/.env
+```
+
 ### 6. Languages and dependencies
 
 #### Node.js
@@ -105,9 +114,9 @@ profile install
 Install the saved [Node.js](https://nodejs.org) with [nodenv](https://github.com/nodenv/nodenv) and use the custom [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install global packages:
 
 ```sh
-for version in $(command ls ~/.npm/versions); do
+for version in $(command ls ~/.npm/global); do
   nodenv install $version --skip-existing
-  cd ~/.npm/versions/$version
+  cd ~/.npm/global/$version
   npm -g install $(dependencies -L)
 done
 ```
@@ -164,6 +173,7 @@ ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
 To avoid emitting beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the following configuration file:
 
 ```sh
+[[ ! -d ~/Library/KeyBindings ]] && mkdir ~/Library/KeyBindings
 touch ~/Library/KeyBindings/DefaultKeyBinding.dict
 ```
 

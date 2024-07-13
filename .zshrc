@@ -3,6 +3,7 @@
 # Environment
 export LANG="en_US.UTF-8"
 export PATH="./bin:./.bin:$PATH"
+[[ -f ~/.env ]] && . ~/.env
 
 # Homebrew (https://brew.sh)
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -95,7 +96,7 @@ lazy_plugins=(
 completions generate obs
 . "$HOME/.config/tabtab/zsh/__tabtab.zsh"
 
-# Check profile
+# Profile
 ! profile check && return 1
 
 # Git (https://git-scm.com)
@@ -106,14 +107,12 @@ git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 # Node (https://nodejs.org)
 export PATH="./node_modules/.bin:$PATH"
 
-# Aliases
+# Aliases, background jobs, cronjobs
 . "$HOME/.aliases"
-# Background jobs
 (. "$HOME/.jobs" >/dev/null &) >/dev/null
-# Cronjobs
 crontab "$HOME/.crontab"
 
-# Avoid duplicates in $PATH
+# Avoid duplicates in PATH
 typeset -aU path
 
 # Clear screen
