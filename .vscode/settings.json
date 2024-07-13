@@ -1,5 +1,11 @@
 {
   "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+    "*_history": true,
     ".bash_history": true,
     ".bun": true,
     ".bun/_bun": true,
@@ -18,8 +24,8 @@
     ".local": true,
     ".Movies": true,
     ".Music": true,
-    ".node_repl_history": true,
     ".node-gyp": true,
+    ".node_repl_history": true,
     ".npm/_*": true,
     ".nvm": true,
     ".pnpm-state": true,
@@ -48,12 +54,6 @@
     ".zcompdump.*": true,
     ".zsh_history": true,
     ".zsh_sessions": true,
-    "*_history": true,
-    "**/.DS_Store": true,
-    "**/.hg": true,
-    "**/.svn": true,
-    "**/CVS": true,
-    "**/Thumbs.db": true,
     "Applications": true,
     "Backups": true,
     "Desktop": true,
@@ -66,5 +66,5 @@
     "Pictures": true,
     "Public": true
   },
-  "git.repositoryScanIgnoredFolders": [".Trash", "node_modules"]
+  "git.repositoryScanIgnoredFolders": [".oh-my-zsh"]
 }
