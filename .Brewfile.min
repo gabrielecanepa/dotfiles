@@ -1,0 +1,149 @@
+tap "github/gh"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "shopify/shopify"
+tap "yakitrak/yakitrak"
+# Library for command-line editing
+brew "readline"
+# Command-line interface for SQLite
+brew "sqlite"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
+# YAML Parser
+brew "libyaml"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Suite of command-line tools for converting to and working with CSV
+brew "csvkit"
+# Run arbitrary commands when files change
+brew "entr"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# Regular expressions library
+brew "oniguruma"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Network authentication protocol
+brew "krb5"
+# Postgres C API library
+brew "libpq", link: true
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Mac App Store command-line interface
+brew "mas"
+# General-purpose lossless data-compression library
+brew "zlib"
+# Open source relational database management system
+brew "mysql"
+# HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
+brew "nginx"
+# Manage multiple NodeJS versions
+brew "nodenv"
+# Object-relational database system
+brew "postgresql@15"
+# Python version management
+brew "pyenv"
+# Install various Ruby versions and implementations
+brew "ruby-build"
+# Ruby version manager
+brew "rbenv"
+# Persistent key-value database, with built-in net interface
+brew "redis"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Soak up standard input and write to a file
+brew "sponge"
+# Simplified and community-driven man pages
+brew "tldr"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Everything you need to get started with Heroku
+brew "heroku/brew/heroku"
+# A CLI tool to build for the Shopify platform
+brew "shopify/shopify/shopify-cli"
+brew "yakitrak/yakitrak/obs"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Automated testing of webapps for Google Chrome
+cask "chromedriver"
+# Customise menu item keyboard shortcuts
+cask "customshortcuts"
+# Collaborative team software
+cask "figma"
+# Web browser
+cask "google-chrome"
+# Grammarly for desktop
+cask "grammarly-desktop"
+# Tool to optimise images to a smaller size
+cask "imageoptim"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
+# Boot loader to inject/patch current features for unsupported Macs
+cask "opencore-patcher"
+# Unpacks archive files
+cask "the-unarchiver"
+# Open-source code editor
+cask "visual-studio-code"
+# Video communication and virtual meeting platform
+cask "zoom"
+mas "1Password for Safari", id: 1569813296
+mas "AdGuard for Safari", id: 1440147259
+mas "Color Picker", id: 1545870783
+mas "Command X", id: 6448461551
+mas "Microsoft Remote Desktop", id: 1295203466
+vscode "acss-io.atomic-css-snippets"
+vscode "akamud.vscode-theme-onelight"
+vscode "alexcvzz.vscode-sqlite"
+vscode "bennycode.sort-everything"
+vscode "bradlc.vscode-tailwindcss"
+vscode "britesnow.vscode-toggle-quotes"
+vscode "castwide.solargraph"
+vscode "csstools.postcss"
+vscode "eamodio.gitlens"
+vscode "esbenp.prettier-vscode"
+vscode "fabiospampinato.vscode-optimize-images"
+vscode "figma.figma-vscode-extension"
+vscode "file-icons.file-icons"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.github-vscode-theme"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-syntax"
+vscode "jock.svg"
+vscode "kencocaceo.customvscodeuicss"
+vscode "mikestead.dotenv"
+vscode "million.million-lint"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode.atom-keybindings"
+vscode "ms-vscode.live-server"
+vscode "redhat.vscode-yaml"
+vscode "rubocop.vscode-rubocop"
+vscode "tamasfe.even-better-toml"
+vscode "thinker.sort-json"
+vscode "ultram4rine.vscode-choosealicense"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "visualstudioexptteam.vscodeintellicode-completions"
+vscode "vivaxy.vscode-conventional-commits"
+vscode "vortizhe.simple-ruby-erb"
+vscode "yzhang.markdown-all-in-one"

@@ -142,15 +142,18 @@
   color: #377eaa !important;
 }
 /* Homebrew */
-/* .Brewfile .Brewfile.lock.json */
+/* .Brewfile .Brewfile.lock.json .Brewfile.min .Brewfile.min.lock.json */
 .file-icons-enabled .\.brewfile-name-file-icon::before,
-.file-icons-enabled .\.brewfile\.lock\.json-name-file-icon::before {
+.file-icons-enabled .\.brewfile\.lock\.json-name-file-icon::before,
+.file-icons-enabled .\.brewfile\.min-name-file-icon::before,
+.file-icons-enabled .\.brewfile\.min\.lock\.json-name-file-icon::before {
   font-family: fi !important;
   content: "\1f37a" !important;
   font-size: 13.8px !important;
 }
-/* .Brewfile */
-.file-icons-enabled .\.brewfile-name-file-icon::before {
+/* .Brewfile .Brewfile.min */
+.file-icons-enabled .\.brewfile-name-file-icon::before,
+.file-icons-enabled .\.brewfile\.min-name-file-icon::before {
   color: #ffbd5d !important;
 }
 /* VSCode */

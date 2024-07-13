@@ -4,6 +4,7 @@ function brew() {
   local cmd=$1
   local args="${@:2}"
 
+  local DEFAULT_BREWFILE="~/.Brewfile"
   local DUMP_COMMANDS=(
     install
     uninstall
@@ -18,10 +19,12 @@ function brew() {
     tap
     untap
   )
+
+  [[ -z "$BREWFILE" ]] && export BREWFILE="$DEFAULT_BREWFILE"
   
   case $cmd in
     dump)
-      command brew bundle dump --global --force --all --describe --cleanup --no-restart $args
+      command brew bundle dump --file="$BREWFILE" --force --all --describe --cleanup --no-restart $args
       ;;
     fresh)
       command brew update && 
@@ -31,7 +34,7 @@ function brew() {
       command brew doctor
       ;;
     global)
-      command brew bundle --global $args
+      command brew bundle --file="$BREWFILE" $args
       ;;
     reset)
       command brew update-reset $args
