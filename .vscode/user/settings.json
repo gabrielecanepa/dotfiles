@@ -58,6 +58,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.shellcheck": "explicit"
   },
+  "editor.fontSize": 11.9,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
@@ -135,18 +136,18 @@
   },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
-  "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
   "git.autofetchPeriod": 60,
+  "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
+  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
-  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "never",
@@ -165,6 +166,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
+  "gitlens.showWelcomeOnInstall": false,
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
   "grammarly.files.include": ["**/*.md", "**/*.txt"],
@@ -236,7 +238,7 @@
   "svg.completion.emmet": true,
   "svg.preview.background": "editor",
   "svg.preview.mode": "svg",
-  "tailwindCSS.experimental.classRegex": ["tw`([^`]*)", "tw\\.[^`]+`([^`]*)`", "tw\\(.*?\\).*?`([^`]*)"],
+  "tailwindCSS.experimental.classRegex": ["tw\\(.*?\\).*?`([^`]*)", "tw\\.[^`]+`([^`]*)`", "tw`([^`]*)"],
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
     "typescriptreact": "javascript"
@@ -300,7 +302,6 @@
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
-  "workbench.tree.expandMode": "doubleClick",
-  "gitlens.showWelcomeOnInstall": false,
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "workbench.tree.expandMode": "doubleClick"
 }
