@@ -16,11 +16,13 @@ lss() {
 # Directories
 wd="$WORKING_DIR"
 tmp="$WORKING_DIR/tmp"
-icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-obsidian="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
+cloud="$HOME/Library/Mobile Documents"
+icloud="$cloud/com~apple~CloudDocs"
+downloads="$icloud/Downloads"
+obsidian="$cloud/iCloud~md~obsidian/Documents"
 
 alias cdc="cd '$icloud'"
-alias cdd="cd '$icloud/Downloads'"
+alias cdd="cd '$downloads'"
 alias cdw="cd '$wd'"
 alias cdww="cd '$wd/$USER'"
 alias tmp="cd '$tmp'"
