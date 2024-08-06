@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "pnpm": "^8.12.1",
-    "yarn": "^1.22.21"
-  },
-  "engines": {
-    "node": "21.4.0"
-  }
-}
