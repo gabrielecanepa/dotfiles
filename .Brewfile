@@ -1,3 +1,4 @@
+tap "azure/functions"
 tap "github/gh"
 tap "heroku/brew"
 tap "homebrew/bundle"
@@ -14,6 +15,8 @@ brew "sqlite"
 brew "python@3.11"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
 # YAML Parser
@@ -50,6 +53,8 @@ brew "zlib"
 brew "mysql"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
+# Platform built on V8 to build network applications
+brew "node"
 # Manage multiple NodeJS versions
 brew "nodenv"
 # Object-relational database system
@@ -72,6 +77,8 @@ brew "tldr"
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Azure Functions Core Tools 4.0
+brew "azure/functions/azure-functions-core-tools@4"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # A CLI tool to build for the Shopify platform
@@ -81,10 +88,10 @@ brew "yakitrak/yakitrak/obs"
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Cut and paste files in Finder
-cask "command-x"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
 # Collaborative team software
@@ -118,6 +125,7 @@ cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
+mas "Command X", id: 6448461551
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
