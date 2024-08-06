@@ -95,6 +95,8 @@ lazy_plugins=(
 # Completions
 completions generate obs
 . "$HOME/.config/tabtab/zsh/__tabtab.zsh"
+autoload bashcompinit && bashcompinit
+source $(brew --prefix)/etc/bash_completion.d/az
 
 # Profile
 ! profile check && return 1
