@@ -411,13 +411,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.220.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.221.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1722880416317,
+      "installedTimestamp": 1723108917463,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -430,8 +430,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.220.0",
-    "version": "1.220.0"
+    "relativeLocation": "github.copilot-1.221.0",
+    "version": "1.221.0"
   },
   {
     "identifier": {
@@ -440,8 +440,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.18.1",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.18.1",
       "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.18.1",
       "scheme": "file"
     },
@@ -1060,6 +1058,33 @@
     },
     "relativeLocation": "ms-vscode.live-server-0.4.14",
     "version": "0.4.14"
+  },
+  {
+    "identifier": {
+      "id": "ms-vscode.vscode-speech",
+      "uuid": "e6610e16-9699-4e1d-a5d7-9bb1643db131"
+    },
+    "location": {
+      "$mid": 1,
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/ms-vscode.vscode-speech-0.10.0-darwin-arm64",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/ms-vscode.vscode-speech-0.10.0-darwin-arm64",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/ms-vscode.vscode-speech-0.10.0-darwin-arm64",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "e6610e16-9699-4e1d-a5d7-9bb1643db131",
+      "installedTimestamp": 1723216663493,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Microsoft",
+      "publisherId": "5f5636e7-69ed-4afe-b5d6-8d231fb3d3ee",
+      "source": "gallery",
+      "targetPlatform": "darwin-arm64",
+      "updated": false
+    },
+    "relativeLocation": "ms-vscode.vscode-speech-0.10.0-darwin-arm64",
+    "version": "0.10.0"
   },
   {
     "identifier": {
