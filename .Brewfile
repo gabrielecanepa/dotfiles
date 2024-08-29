@@ -6,11 +6,8 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "shopify/shopify"
-tap "yakitrak/yakitrak"
 # Library for command-line editing
 brew "readline"
-# Command-line interface for SQLite
-brew "sqlite"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Official Amazon AWS command-line interface
@@ -83,7 +80,6 @@ brew "azure/functions/azure-functions-core-tools@4"
 brew "heroku/brew/heroku"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
-brew "yakitrak/yakitrak/obs"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -124,6 +120,7 @@ cask "whatsapp"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
+mas "Azure VPN Client", id: 1553936137
 mas "Color Picker", id: 1545870783
 mas "Command X", id: 6448461551
 mas "GarageBand", id: 682658836
