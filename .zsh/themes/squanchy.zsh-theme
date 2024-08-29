@@ -1,40 +1,4 @@
-function load_squanchy_theme() {
-  ##
-  # Returns the given language and version appending a symbol if the version is not the latest.
-  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
-  ##
-  local function version_prompt() {
-    local split=(${(s/@/)1})
-    local lang="${split[1]}"
-    local version="${split[2]}"
-
-    # Return n/a if language or version are not specified.
-    [[ -z "$lang" || -z "$version" ]] && echo "n/a" && return 0
-    # Return initial version if lts is not installed or version is local.
-    ! command -v lts &>/dev/null || \
-    ([[ "$lang" == "node" ]] && nodenv local &>/dev/null) || \
-    ([[ "$lang" == "ruby" ]] && rbenv local &>/dev/null) || \
-    ([[ "$lang" == "python" ]] && pyenv local &>/dev/null) && \
-    echo "$version" && return 0
-
-    # Split version and lts into parts.
-    local version_parts=(${(s/./)version})
-    local lts="$(lts "$lang")"
-    local lts_parts=(${(s/./)lts})
-
-    if [[ "$version_parts[1]" != "$lts_parts[1]" ]]; then
-      local lts="$(lts "$lang@$version_parts[1]")"
-      local lts_parts=(${(s/./)lts})
-    fi
-
-    if [[ "$lts_parts[2]" -gt "$version_parts[2]" || "$lts_parts[3]" -gt "$version_parts[3]" ]]; then
-      echo "$version↑"
-      return 0
-    fi
-    echo "$version"
-  }
-
-  # Settings
+function _squanchy() {
   ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
   ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
@@ -53,6 +17,61 @@ function load_squanchy_theme() {
   ZSH_THEME_SQUANCHY_ICON_PYTHON="\\ue606"
   ZSH_THEME_SQUANCHY_ICON_RUBY="\\ueb48"
 
+  ##
+  # Returns the current version of the specified language.
+  # @example `get_version node # => 16.0.0`
+  ##
+  local function get_version() {
+    local lang="$1"
+    [[ $lang == "python" ]] && flag="-V" || flag="-v"
+    ! $lang $flag &>/dev/null && echo "" && return 1
+    case $lang in
+      node) echo "${$(node -v)#v}";;
+      ruby) [[ "$(ruby -v)" =~ ([0-9].[0-9].[0-9]) ]] && echo $match;;
+      python) echo "${$(python -V)#Python }";;
+      php) echo "${$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)}";;
+    esac
+    echo ""
+    return 1
+  }
+
+  ##
+  # Returns the given language and version appending a symbol if the version is not the latest.
+  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
+  ##
+  local function version_prompt() {
+    local lang=$1
+    local version=$(get_version $lang)
+
+    # Return version with warning if the version is not installed.
+    if [[ -z "$version" ]]; then
+      version="$(cat ./.${lang}-version 2>/dev/null)"
+      [[ -z "$version" ]] && echo "n/a" || echo "$version⚠"
+      return 0
+    fi
+
+    # Return initial version if `lts` is not installed.
+    ! command -v lts &>/dev/null && echo $version && return 0
+
+    local version_parts=(${(s/./)version})
+    local lts="$(lts "$lang")"
+    local lts_parts=(${(s/./)lts})
+
+    if [[ "$lts_parts[1]" > "$version_parts[1]" || "$lts_parts[2]" > "$version_parts[2]" || "$lts_parts[3]" > "$version_parts[3]" ]]; then
+      local has_upgrade=true
+    fi
+
+    if [[ "$(pwd)" != "$HOME" && -f "./.${lang}-version" ]]; then
+      # Return version with flag if the version is local.
+      [[ $has_upgrade == true ]] && local suffix="⚐" || local suffix="⚑"
+    else
+      # Return version with upgrades.
+      [[ $has_upgrade == true ]] && local suffix="↑"
+    fi
+
+    echo "$version$suffix"
+  }
+
   ## Git
   local function git_prompt() {
     # Return if current path is not in a git repository or a parent gitignore.
@@ -67,43 +86,20 @@ function load_squanchy_theme() {
 
   ## Node.js
   local function node_prompt() {
-    if node -v &>/dev/null; then
-      local version="${$(node -v)#v}"
-      local node_version=$(version_prompt "node@$version")
-    elif [[ -f "./.node-version" ]]; then
-      local node_version="${$(cat .node-version)#v} ⚠"
-    elif [[ -f "./.nvmrc" ]]; then
-      local node_version="${$(cat .nvmrc)#v} ⚠"
-    else
-      local node_version="n/a"
-    fi
-    echo "%{$fg[green]%}$ZSH_THEME_SQUANCHY_ICON_NODE $node_version%{$reset_color%}"
+    local version_prompt="$(version_prompt node)"
+    echo "%{$fg[green]%}$ZSH_THEME_SQUANCHY_ICON_NODE $version_prompt%{$reset_color%}"
   }
 
   ## Ruby
   local function ruby_prompt() {
-    if ruby -v &>/dev/null; then
-      local version="$(echo ${(M)$(ruby -v)##[0-9].[0-9].[0-9]})"
-      local ruby_version=$(version_prompt "ruby@$version")
-    elif [[ -f "./.ruby-version" ]]; then
-      local ruby_version="$(cat .ruby-version) ⚠"
-    else
-      local ruby_version="n/a"
-    fi
-    echo "%{$fg[red]%}$ZSH_THEME_SQUANCHY_ICON_RUBY $ruby_version%{$reset_color%}"
+    local version_prompt="$(version_prompt ruby)"
+    echo "%{$fg[red]%}$ZSH_THEME_SQUANCHY_ICON_RUBY $version_prompt%{$reset_color%}"
   }
 
   ## Python
   local function python_prompt() {
-    if python -V &>/dev/null; then
-      local version="${$(python -V)#Python }"
-      local python_version=$(version_prompt "python@$version")
-    elif [[ -f "./.python-version" ]]; then
-      local python_version="$(cat .python-version) ⚠"
-    else
-      local python_version="n/a"
-    fi
-    echo "%{$fg[yellow]%}$ZSH_THEME_SQUANCHY_ICON_PYTHON $python_version%{$reset_color%}"
+    local version_prompt="$(version_prompt python)"
+    echo "%{$fg[yellow]%}$ZSH_THEME_SQUANCHY_ICON_PYTHON $version_prompt%{$reset_color%}"
   }
 
   ## PHP
@@ -133,5 +129,5 @@ function load_squanchy_theme() {
   unset rprompts
 }
 
-load_squanchy_theme
-unset -f load_squanchy_theme
+_squanchy
+unset -f _squanchy
