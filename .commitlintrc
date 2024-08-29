@@ -9,6 +9,7 @@
         "docs",
         "git",
         "node",
+        "py",
         "ruby",
         "shell",
         "tool",
