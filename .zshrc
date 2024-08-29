@@ -71,6 +71,7 @@ plugins=(
   zsh-syntax-highlighting
   # Custom
   brewfile
+  completions
   gh-run
   lts
   node-version
@@ -83,7 +84,6 @@ plugins=(
 )
 lazy_plugins=(
   colors256
-  completions
   dependencies
   gatekeeper
   google
@@ -93,10 +93,10 @@ lazy_plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Completions
-completions generate obs
-. "$HOME/.config/tabtab/zsh/__tabtab.zsh"
 autoload bashcompinit && bashcompinit
-source $(brew --prefix)/etc/bash_completion.d/az
+. $(brew --prefix)/etc/bash_completion.d/az
+. "$HOME/.config/tabtab/zsh/__tabtab.zsh"
+completions npm
 
 # Profile
 ! profile check && return 1
@@ -116,6 +116,3 @@ crontab "$HOME/.crontab"
 
 # Avoid duplicates in PATH
 typeset -aU path
-
-# Clear screen
-clear

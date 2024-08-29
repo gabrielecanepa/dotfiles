@@ -1,35 +1,30 @@
 #!/bin/zsh
 
+# Set completions path
+[[ -z "$ZSH_COMPLETIONS" ]] && export ZSH_COMPLETIONS="$ZSH_CUSTOM/completions"
+[[ ! -d "$ZSH_COMPLETIONS" ]] && mkdir -p "$ZSH_COMPLETIONS"
+
 function completions() {
-  if [[ -z "$ZSH_COMPLETIONS" ]]; then
-    local ZSH_COMPLETIONS="$ZSH/completions"
+  local clis=($@)
+  local comp
+  read -u0 -t comp
+
+  [[ ${#clis[@]} == 0 ]] && echo "Usage: completions <cli> [<cli> ...]" && return 1
+
+  if [[ -n "$comp" ]]; then
+    [[ ${#clis[@]} > 1 ]] && echo "Error: only one cli can be passed when using stdin" && return 1
+    echo "$comp" > "$ZSH_COMPLETIONS/_${clis[0]}"
+  else
+    for cli in $clis; do
+      ! command -v $cli >/dev/null && echo "Command not found: $cli" && return 1
+      local comp="$(eval "$cli completion zsh")"
+
+      if [[ -z "$comp" ]] ; then
+        echo "Error: no completions found for $cli"
+        continue
+      fi
+
+      echo $comp > "$ZSH_COMPLETIONS/_$cli"
+    done; unset cli
   fi
-  [[ ! -d "$ZSH_COMPLETIONS" ]] && mkdir -p "$ZSH_COMPLETIONS"
-
-  local cmd="$1"
-  local args=(${@:2})
-  
-  case "$cmd" in
-    generate)
-      for arg in "${args[@]}"; do
-        if ! command -v "$arg" &>/dev/null; then
-          echo "[zsh-plugin-completions] command not found: $arg"
-          return 1
-        fi
-
-        local completions="$(eval "$arg completion zsh")"
-
-        if [[ -z "$completions" ]] ; then
-          echo "no completions found for $arg"
-          return 1
-        fi
-
-        echo $completions > "$ZSH_COMPLETIONS/_$arg"
-      done
-      ;;
-    *)
-      echo "Usage: completions generate <command>"
-      return 1
-      ;;
-  esac
 }

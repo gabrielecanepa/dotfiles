@@ -27,6 +27,7 @@
 /.vscode/user/
 /.vscode/settings.json/
 !/.zsh/
+/.zsh/completions/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
 
