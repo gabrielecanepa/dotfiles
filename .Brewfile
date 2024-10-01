@@ -9,13 +9,13 @@ tap "shopify/shopify"
 # Library for command-line editing
 brew "readline"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
+brew "python@3.12"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Microsoft Azure CLI 2.0
 brew "azure-cli"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # YAML Parser
 brew "libyaml"
 # Dependency manager for Cocoa projects
@@ -120,7 +120,6 @@ cask "whatsapp"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
-mas "Azure VPN Client", id: 1553936137
 mas "Color Picker", id: 1545870783
 mas "Command X", id: 6448461551
 mas "GarageBand", id: 682658836
