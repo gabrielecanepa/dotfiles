@@ -157,8 +157,8 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
+    "plaintext": true,
     "markdown": true,
-    "plaintext": false,
     "scminput": false
   },
   "githubPullRequests.pullBranch": "never",
