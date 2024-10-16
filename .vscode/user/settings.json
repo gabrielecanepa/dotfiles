@@ -112,8 +112,7 @@
     "*.md": "markdown",
     ".aliases": "shellscript",
     ".commentlintrc": "json",
-    ".env.example": "dotenv",
-    ".env.sample": "dotenv",
+    ".env.*": "dotenv",
     ".eslintrc": "jsonc",
     ".gcloudignore": "dotenv",
     ".gitignore*": "ignore",
@@ -306,6 +305,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "emmet.excludeLanguages": []
+  "workbench.tree.expandMode": "doubleClick"
 }

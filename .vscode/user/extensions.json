@@ -495,7 +495,6 @@
     },
     "location": {
       "$mid": 1,
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.21.2",
       "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.21.2",
       "scheme": "file"
     },
@@ -738,13 +737,15 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/million.million-lint-1.0.9",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/million.million-lint-1.0.11",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/million.million-lint-1.0.11",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/million.million-lint-1.0.11",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "c76878d7-9496-4200-bf09-b930e13c3f07",
-      "installedTimestamp": 1728322501520,
+      "installedTimestamp": 1728994209311,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -757,8 +758,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "million.million-lint-1.0.9",
-    "version": "1.0.9"
+    "relativeLocation": "million.million-lint-1.0.11",
+    "version": "1.0.11"
   },
   {
     "identifier": {
