@@ -1,23 +1,23 @@
-# https://docs.rubocop.org
+# RuboCop - https://docs.rubocop.org
 
 AllCops:
   Exclude:
-    - bin/**/*
-    - config/**/*
-    - db/**/*
-    - script/**/*
-    - public/**/*
-    - vendor/**/*
-    - "*.Brewfile"
-    - "*.erb"
+    - "bin/**/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "script/**/*"
+    - "public/**/*"
+    - "vendor/**/*"
+    - "**/*.Brewfile"
+    - "**/*.erb"
   Include:
-    - Rakefile
-    - config.ru
-    - Gemfile
-    - "*.Gemfile"
-    - "*.gemspec"
-    - "*.rake"
-    - "*.rb"
+    - "**/*.rb"
+    - "**/*.gemfile"
+    - "**/*.gemspec"
+    - "**/*.rake"
+    - "**/*.ru"
+    - "**/Gemfile"
+    - "**/Rakefile"
   NewCops: enable
 
 Gemspec/DeprecatedAttributeAssignment:
@@ -114,7 +114,7 @@ Naming/BlockForwarding:
   Enabled: true
 Naming/FileName:
   Enabled: true
-  
+
 Naming/MethodParameterName:
   MinNameLength: 1
 Security/CompoundHash:
