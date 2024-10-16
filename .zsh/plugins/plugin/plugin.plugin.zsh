@@ -7,7 +7,7 @@ function plugin() {
   local name="$1"
 
   if [[ -z "$name" ]]; then
-    echo "plugin: dynamically load a zsh plugin."
+    echo "plugin: load or reload a zsh plugin."
     echo "Usage: plugin <name> [args]"
     return 0
   fi

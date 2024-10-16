@@ -72,6 +72,7 @@ plugins=(
   # Custom
   brewfile
   completions
+  gemfile
   gh-run
   lts
   node-version

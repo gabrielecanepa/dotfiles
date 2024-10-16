@@ -33,7 +33,7 @@ function dependencies() {
 
   root="$(get_package_root "$dir")"
   [[ $? != 0 ]] && echo "Invalid path: $dir" && return 1
-  [[ ! -f "$root/package.json" ]] && echo "No package.json found." && return 1
+  [[ ! -f "$root/package.json" ]] && echo "No package.json found" && return 1
 
   local package_json="$(cat "$root/package.json")"
   local dependencies="$(echo $package_json | jq -r '.dependencies | keys | .[]' 2>/dev/null)"

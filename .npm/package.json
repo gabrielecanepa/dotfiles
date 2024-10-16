@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "commitlint": "*",
+    "corepack": "*",
+    "cowsay": "*",
+    "npm": "*",
+    "pnpm": "*",
+    "www": "*"
+  }
+}

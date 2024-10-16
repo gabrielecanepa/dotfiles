@@ -2,6 +2,8 @@
 
 # Directories
 /*/
+!/.bundle/
+/.bundle/cache
 !/.chrome/
 !/.config/
 /.config/configstore

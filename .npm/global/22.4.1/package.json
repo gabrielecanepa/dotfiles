@@ -1,0 +1,13 @@
+{
+  "engines": {
+    "node": "22.4.1"
+  },
+  "dependencies": {
+    "commitlint": "^19.3.0",
+    "corepack": "^0.29.3",
+    "cowsay": "^1.6.0",
+    "npm": "^10.8.2",
+    "pnpm": "^9.7.0",
+    "www": "^0.0.0"
+  }
+}

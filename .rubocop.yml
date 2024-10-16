@@ -112,6 +112,9 @@ Metrics/CollectionLiteralLength:
   Enabled: true
 Naming/BlockForwarding:
   Enabled: true
+Naming/FileName:
+  Enabled: true
+  
 Naming/MethodParameterName:
   MinNameLength: 1
 Security/CompoundHash:

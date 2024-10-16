@@ -80,6 +80,7 @@
     "blade": "html",
     "erb": "html",
     "javascript": "javascriptreact",
+    "markdown": "markdown",
     "vue": "html"
   },
   "emmet.showSuggestionsAsSnippets": true,
@@ -92,6 +93,7 @@
   },
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
+  "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.autoReveal": "focusNoScroll",
   "explorer.autoRevealExclude": {
@@ -157,8 +159,8 @@
   "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
     "*": true,
-    "plaintext": true,
     "markdown": true,
+    "plaintext": true,
     "scminput": false
   },
   "githubPullRequests.pullBranch": "never",
@@ -266,6 +268,7 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
+  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/style.css"],
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
@@ -303,5 +306,6 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
+  "emmet.excludeLanguages": []
 }

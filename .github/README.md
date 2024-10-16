@@ -125,7 +125,7 @@ Link the global Node.js version to the current one:
 
 ```sh
 nodenv global $(cat ~/.node-version)
-rm -f ~/.nodenv/version && ln -sf ~/.node-version ~/.nodenv/version
+rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 ```
 
 #### Ruby
@@ -135,7 +135,7 @@ Install and link the [Ruby](https://www.ruby-lang.org) version in use with [rben
 ```sh
 rbenv install $(cat ~/.ruby-version) --skip-existing
 rbenv global $(cat ~/.ruby-version)
-rm -f ~/.rbenv/version && ln -sf ~/.ruby-version ~/.rbenv/version
+rm -f $RBENV_ROOT/version && ln -sf ~/.ruby-version $RBENV_ROOT/version
 ```
 
 #### Python
@@ -145,7 +145,7 @@ Install and link the [Python](https://www.python.org) version in use with [pyenv
 ```sh
 pyenv install $(cat ~/.python-version) --skip-existing
 pyenv global $(cat ~/.python-version)
-rm -f ~/.pyenv/version && ln -sf ~/.python-version ~/.pyenv/version
+rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
 ### 7. [VSCode](https://code.visualstudio.com)
