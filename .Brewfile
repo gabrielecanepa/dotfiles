@@ -12,12 +12,10 @@ brew "readline"
 brew "python@3.12"
 # Official Amazon AWS command-line interface
 brew "awscli"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
-# Microsoft Azure CLI 2.0
-brew "azure-cli"
 # YAML Parser
 brew "libyaml"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
@@ -32,6 +30,8 @@ brew "gh"
 brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -58,6 +58,8 @@ brew "nodenv"
 brew "postgresql@15"
 # Python version management
 brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -90,6 +92,8 @@ cask "chatgpt"
 cask "chromedriver"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
+# App to build and share containerised applications and microservices
+cask "docker"
 # Collaborative team software
 cask "figma"
 # Web browser
