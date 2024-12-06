@@ -5,6 +5,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "powershell/tap"
 tap "shopify/shopify"
 # Library for command-line editing
 brew "readline"
@@ -80,6 +81,8 @@ brew "tree"
 brew "azure/functions/azure-functions-core-tools@4"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
+# Formula to install PowerShell
+brew "powershell/tap/powershell"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
 # Password manager that keeps all passwords secure behind one password
@@ -108,6 +111,8 @@ cask "nordvpn"
 cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Desktop agent for Postman on the Web
+cask "postman-agent"
 # Team communication and collaboration software
 cask "slack"
 # SSH client
@@ -120,6 +125,8 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Connect to Windows
+cask "windows-app"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
@@ -129,7 +136,6 @@ mas "Command X", id: 6448461551
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Toggl Track", id: 1291898086
