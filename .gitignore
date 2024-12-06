@@ -9,7 +9,7 @@
 /.config/configstore
 /.config/grammarly*/
 /.config/op/
-/.config/raycast/
+/.config/simple-update-notifier/
 !/.github/
 !/.husky/
 !/.npm/
