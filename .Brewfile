@@ -1,6 +1,5 @@
 tap "azure/functions"
 tap "github/gh"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -79,8 +78,6 @@ brew "tmux"
 brew "tree"
 # Azure Functions Core Tools 4.0
 brew "azure/functions/azure-functions-core-tools@4"
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
 # Formula to install PowerShell
 brew "powershell/tap/powershell"
 # A CLI tool to build for the Shopify platform
@@ -115,6 +112,8 @@ cask "obsidian"
 cask "postman-agent"
 # Team communication and collaboration software
 cask "slack"
+# Native GUI tool for relational databases
+cask "tableplus"
 # SSH client
 cask "termius"
 # Unpacks archive files
