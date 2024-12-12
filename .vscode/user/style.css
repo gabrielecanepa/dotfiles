@@ -20,10 +20,11 @@
 }
 
 /* Atomizer */
-.file-icons-enabled .atomizer\.config\.js-name-file-icon::before {
+.file-icons-enabled .atomizer\.config\.js-name-file-icon::before,
+.file-icons-enabled .atomizer\.config\.mjs-name-file-icon::before,
+.file-icons-enabled .atomizer\.config\.cjs-name-file-icon::before {
   font-family: devicons !important;
   content: "\e664" !important;
-  color: #377eaa !important;
 }
 
 /* Azure */
@@ -32,13 +33,6 @@
 .file-icons-enabled .\.azurefunctions-name-folder-icon::before {
   font-family: fi !important;
   content: "\1f680" !important;
-}
-
-/* Binaries */
-.file-icons-enabled .\.bin-name-folder-icon::before,
-.file-icons-enabled .bin-name-folder-icon::before {
-  font-family: fi !important;
-  content: "\f0c8" !important;
 }
 
 /* Build */
@@ -88,8 +82,7 @@
 
 /* Env */
 .file-icons-enabled .\.env-name-file-icon::before,
-.file-icons-enabled .\.env\.example-name-file-icon::before,
-.file-icons-enabled .\.env\.sample-name-file-icon::before {
+.file-icons-enabled .file-icon[aria-label*="/.env."]::before {
   font-family: fa !important;
   content: "\f013" !important;
   color: unset !important;
@@ -103,6 +96,12 @@
   content: "\ea0f" !important;
   font-size: 114% !important;
   font-family: fi !important;
+}
+
+/* Fastify */
+.file-icons-enabled .\.fastify-name-folder-icon::before {
+  font-family: fi !important;
+  content: "\eac9" !important;
 }
 
 /* Git */
@@ -171,6 +170,25 @@
   color: #6a9fb5 !important;
 }
 
+/* MikroORM */
+.file-icons-enabled .mikro-orm\.config\.js-name-file-icon::before,
+.file-icons-enabled .mikro-orm\.config\.ts-name-file-icon::before {
+  content: "\f10e" !important;
+  font-family: mf !important;
+}
+
+/* NestJS */
+.file-icons-enabled .nest-cli\.json-name-file-icon::before {
+  font-family: fi !important;
+  content: "\eac9" !important;
+  color: #e0234f !important;
+}
+.file-icons-enabled .\.nest-name-folder-icon::before,
+.file-icons-enabled .\.nest_repl_history-name-file-icon::before {
+  font-family: fi !important;
+  content: "\eac9" !important;
+}
+
 /* Netrc */
 .file-icons-enabled .\.netrc-name-file-icon::before {
   font-family: mf !important;
@@ -235,6 +253,13 @@
   font-family: mf !important;
 }
 
+/* Rbenv */
+.file-icons-enabled .\.rbenv-name-folder-icon::before {
+  content: "\f047" !important;
+  font-size: 114% !important;
+  font-family: octicons !important;
+}
+
 /* Release-it */
 .file-icons-enabled .\.release-it\.json-name-file-icon::before,
 .file-icons-enabled .\.release-it\.ts-name-file-icon::before,
@@ -244,8 +269,20 @@
 .file-icons-enabled .\.release-it\.yml-name-file-icon::before,
 .file-icons-enabled .\.release-it\.toml-name-file-icon::before {
   font-size: 114% !important;
-  font-family: octicons !important;
-  content: "\f033" !important;
+  font-family: fa !important;
+  content: "\f135" !important;
+}
+
+/* Shadcn */
+.file-icons-enabled .components\.json-name-file-icon::before {
+  font-family: fi !important;
+  content: "\e9b3" !important;
+  color: #52525b !important;
+}
+@media (prefers-color-scheme: dark) {
+  .file-icons-enabled .components\.json-name-file-icon::before {
+    color: #cccccc !important;
+  }
 }
 
 /* SSH */
@@ -301,6 +338,20 @@
   color: #6a9fb5 !important;
   content: "\eb1b" !important;
   font-family: fi !important;
+}
+.file-icons-enabled .monaco-list-row[aria-label^="tsconfig\."] .file-icon::before,
+.file-icons-enabled .tsconfig-name-dir-icon.json-ext-file-icon:not(.package\.json-name-file-icon)::before {
+  color: #46788d !important;
+  content: "\eb1b" !important;
+  font-size: 121% !important;
+  font-family: fi !important;
+}
+
+/* UnoCSS */
+.file-icons-enabled .uno\.config\.ts-name-file-icon::before {
+  font-family: fi !important;
+  content: "\e9b3" !important;
+  color: #858585 !important;
 }
 
 /* Vitest */
