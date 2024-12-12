@@ -66,6 +66,7 @@
   ps = !git pull && git sweep
   re = remote
   rv = remote -v
+  redo = !sh -c 'git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD'
   reset-origin = !"git remote remove origin &>/dev/null; git remote add origin"
   ro = reset-origin
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
