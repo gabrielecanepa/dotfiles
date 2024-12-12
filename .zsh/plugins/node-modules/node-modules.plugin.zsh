@@ -29,7 +29,7 @@ function node-modules() {
         read -r _choice
         if [[ $_choice =~ [yY] ]]; then
           find $_path -name "node_modules" -type d -prune -exec rm -rf '{}' +
-          echo "${fg[green]}$([[ $node_modules_count -gt 1 ]] && echo "$node_modules_count ")node_modules folder$([[ $node_modules_count -gt 1 ]] && echo s) successfully deleted$reset_color"
+          echo "${fg[green]}Successfully deleted $([[ $node_modules_count -gt 1 ]] && echo "$node_modules_count ")node_modules folder$([[ $node_modules_count -gt 1 ]] && echo s)$reset_color"
         fi
         unset _choice
       else

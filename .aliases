@@ -3,7 +3,7 @@
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
 
-## Use GNU ls if available
+## Use GNU `ls` if available
 if command -v gls >/dev/null; then
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 fi
@@ -15,6 +15,7 @@ lss() {
 
 # Directories
 wd="$WORKING_DIR"
+wdu="$WORKING_DIR/$USER"
 tmp="$WORKING_DIR/tmp"
 cloud="$HOME/Library/Mobile Documents"
 icloud="$cloud/com~apple~CloudDocs"
@@ -24,7 +25,7 @@ obsidian="$cloud/iCloud~md~obsidian/Documents"
 alias cdc="cd '$icloud'"
 alias cdd="cd '$downloads'"
 alias cdw="cd '$wd'"
-alias cdww="cd '$wd/$USER'"
+alias cdwu="cd '$wdu'"
 alias tmp="cd '$tmp'"
 
 mkdircd() { 

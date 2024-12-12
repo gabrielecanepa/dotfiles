@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function gem() {
-  local GEMFILE="$HOME/.bundle/Gemfile"
+  [[ -z "$GEMFILE" ]] && local GEMFILE="$HOME/.bundle/Gemfile"
   local GEM_SOURCE="https://rubygems.org"
 
   local cmd="$1"
@@ -10,6 +10,10 @@ function gem() {
 
   local args_error="ERROR:  While executing gem ... (Gem::CommandLineError)
     The $cmd command does not accept any arguments (Gem::CommandLineError)"
+
+  local function _global() {
+    cat $GEMFILE | tail -n +3 | sed "s/gem \"//" | sed "s/\"//"
+  }
 
   local function _leaves() {
     local gems=($(command gem list -l | sed "s/ (.*//" | sort))
@@ -36,8 +40,17 @@ function gem() {
       _leaves
       ;;
 
+    global)
+      [[ ! -z $args ]] && echo $args_error && return 1
+      _global
+      ;;
+
     install|uninstall)
-      [[ $cmd == "install" && -z "$args" ]] && command gem install $(_leaves) || command gem $@
+      if [[ $cmd == "install" && -z "$args" ]]; then
+        command gem install $(_leaves)
+      else
+        command gem $@
+      fi
       local exit=$?
       ((gem dump) >/dev/null &) >/dev/null
       return $exit
@@ -51,12 +64,17 @@ function gem() {
 
 function rbenv() {
   local cmd="$1"
+  local arg="$2"
+
+  local _install_gems() {
+    ((gem install >/dev/null) >/dev/null &) >/dev/null
+  }
 
   case $cmd in
     global|install|local|uninstall)
       command rbenv $@
-      exit=$?
-      ((gem install) >/dev/null &) >/dev/null
+      local exit=$?
+      [[ "$arg" =~ ^[0-9]\.[0-9]\.[0-9]$ ]] && _install_gems
       return $exit
       ;;
     *)
