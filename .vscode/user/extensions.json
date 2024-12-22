@@ -188,13 +188,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.12.11",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.12.17",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "4db62a7c-7d70-419c-96d2-6c3a4dc77ea5",
-      "installedTimestamp": 1727259402947,
+      "installedTimestamp": 1734731607172,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -207,8 +207,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "bradlc.vscode-tailwindcss-0.12.11",
-    "version": "0.12.11"
+    "relativeLocation": "bradlc.vscode-tailwindcss-0.12.17",
+    "version": "0.12.17"
   },
   {
     "identifier": {
@@ -292,23 +292,27 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-16.0.5",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/eamodio.gitlens-16.1.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "4de763bd-505d-4978-9575-2b7696ecf94e",
-      "installedTimestamp": 1733608851647,
+      "installedTimestamp": 1734731607172,
+      "isApplicationScoped": false,
+      "isBuiltin": false,
+      "isMachineScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitKraken",
       "publisherId": "678d198b-9b2e-49d3-96ff-6d801c9575df",
       "source": "gallery",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "eamodio.gitlens-16.0.5",
-    "version": "16.0.5"
+    "relativeLocation": "eamodio.gitlens-16.1.1",
+    "version": "16.1.1"
   },
   {
     "identifier": {
@@ -443,13 +447,15 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.251.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1734032352796,
+      "installedTimestamp": 1734731607171,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -462,8 +468,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.251.0",
-    "version": "1.251.0"
+    "relativeLocation": "github.copilot-1.254.0",
+    "version": "1.254.0"
   },
   {
     "identifier": {
@@ -472,13 +478,13 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.23.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-chat-0.23.2",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "7ec7d6e6-b89e-4cc5-a59b-d6c4d238246f",
-      "installedTimestamp": 1734021283343,
+      "installedTimestamp": 1734544128618,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -491,8 +497,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-chat-0.23.1",
-    "version": "0.23.1"
+    "relativeLocation": "github.copilot-chat-0.23.2",
+    "version": "0.23.2"
   },
   {
     "identifier": {
