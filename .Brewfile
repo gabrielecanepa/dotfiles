@@ -6,6 +6,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "powershell/tap"
 tap "shopify/shopify"
+tap "supabase/tap"
 # Library for command-line editing
 brew "readline"
 # Interpreted, interactive, object-oriented programming language
@@ -82,6 +83,8 @@ brew "azure/functions/azure-functions-core-tools@4"
 brew "powershell/tap/powershell"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
+# Supabase CLI
+brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
