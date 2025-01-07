@@ -141,7 +141,7 @@
   "git.allowForcePush": true,
   "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
-  "git.autofetchPeriod": 60,
+  "git.autofetchPeriod": 3,
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
