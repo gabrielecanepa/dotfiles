@@ -447,15 +447,15 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.254.0",
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/github.copilot-1.255.0",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.255.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.255.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1734731607171,
+      "installedTimestamp": 1736243951390,
       "isApplicationScoped": false,
       "isBuiltin": false,
       "isMachineScoped": false,
@@ -468,8 +468,8 @@
       "targetPlatform": "undefined",
       "updated": true
     },
-    "relativeLocation": "github.copilot-1.254.0",
-    "version": "1.254.0"
+    "relativeLocation": "github.copilot-1.255.0",
+    "version": "1.255.0"
   },
   {
     "identifier": {
@@ -1123,14 +1123,16 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.37.1-darwin-arm64",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/timonwong.shellcheck-0.37.4-darwin-arm64",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "f95d8fff-f70a-4ae5-bb06-5c47ddbc8fc6",
-      "installedTimestamp": 1712995638299,
+      "installedTimestamp": 1735812513927,
       "isApplicationScoped": false,
+      "isBuiltin": false,
+      "isMachineScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
       "preRelease": false,
@@ -1140,8 +1142,8 @@
       "targetPlatform": "darwin-arm64",
       "updated": true
     },
-    "relativeLocation": "timonwong.shellcheck-0.37.1-darwin-arm64",
-    "version": "0.37.1"
+    "relativeLocation": "timonwong.shellcheck-0.37.4-darwin-arm64",
+    "version": "0.37.4"
   },
   {
     "identifier": {

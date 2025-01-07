@@ -181,5 +181,20 @@
   {
     "command": "workbench.files.action.collapseExplorerFolders",
     "key": "ctrl+\\"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-workbench.action.editor.changeLanguageMode",
+    "when": "!notebookEditorFocused"
+  },
+  {
+    "key": "ctrl+alt+l",
+    "command": "workbench.action.editor.changeLanguageMode",
+    "when": "!notebookEditorFocused"
+  },
+  {
+    "key": "cmd+k m",
+    "command": "-workbench.action.editor.changeLanguageMode",
+    "when": "!notebookEditorFocused"
   }
 ]
