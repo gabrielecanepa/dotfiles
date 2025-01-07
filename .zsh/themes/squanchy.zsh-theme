@@ -1,4 +1,4 @@
-function _squanchy() {
+function squanchy() {
   ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
   ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"
   ZSH_THEME_GIT_PROMPT_CLEAN=""
@@ -18,9 +18,21 @@ function _squanchy() {
   ZSH_THEME_SQUANCHY_ICON_RUBY="\\ueb48"
 
   ##
+  # Returns the version manager for the specified language.
+  #
+  local function get_version_manager() {
+    case $1 in
+      node) echo "nodenv" ;;
+      python) echo "pyenv" ;;
+      ruby) echo "rbenv" ;;
+      *) return 1 ;;
+    esac
+  }
+
+  ##
   # Returns the current version of the specified language.
   # @example `get_version node # => 16.0.0`
-  ##
+  #
   local function get_version() {
     local lang="$1"
     [[ $lang == "python" ]] && flag="-V" || flag="-v"
@@ -38,44 +50,61 @@ function _squanchy() {
   ##
   # Returns the given language and version appending a symbol if the version is not the latest.
   # @example `version_prompt node@21.1.0 # => 21.1.0↑`
-  ##
+  #
   local function version_prompt() {
     local lang=$1
-    local version=$(get_version $lang)
+    local version_manager=$(get_version_manager $lang)
+    local global_version="$($version_manager global 2>/dev/null)"
+    local local_version=""
 
-    # Return version with warning if the version is not installed.
-    if [[ -z "$version" ]]; then
-      version="$(cat ./.${lang}-version 2>/dev/null)"
-      [[ -z "$version" ]] && echo "n/a" || echo "$version⚠"
+    # Local version #
+    if [ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$HOME" ]; then
+      local local_version="$(cat "$(git rev-parse --show-toplevel 2>/dev/null)/.$lang-version" 2>/dev/null)"
+      if [ -n "$local_version" ]; then
+        if $version_manager versions | grep -q $local_version; then
+          echo "${local_version}⚑"
+        else
+          echo "${local_version}⚐"
+        fi
+        return 0
+      fi
+    fi
+
+    # Global version #
+    
+    # Display n/a if no global version is set.
+    if [ -z "$global_version" ]; then
+      echo "n/a"
       return 0
     fi
 
-    # Return initial version if `lts` is not installed.
-    ! command -v lts &>/dev/null && echo $version && return 0
-
-    local version_parts=(${(s/./)version})
-    local lts="$(lts "$lang")"
-    local lts_parts=(${(s/./)lts})
-
-    if [[ "$lts_parts[1]" > "$version_parts[1]" || "$lts_parts[2]" > "$version_parts[2]" || "$lts_parts[3]" > "$version_parts[3]" ]]; then
-      local has_upgrade=true
+    # Show global version if the `lts` plugin is not installed.
+    if ! command -v lts &>/dev/null; then
+      echo "$global_version"
+      return 0
     fi
 
-    if [[ "$(pwd)" != "$HOME" && -f "./.${lang}-version" ]]; then
-      # Return version with flag if the version is local.
-      [[ $has_upgrade == true ]] && local suffix="⚐" || local suffix="⚑"
-    else
-      # Return version with upgrades.
-      [[ $has_upgrade == true ]] && local suffix="↑"
+    # Show global version with warning if the global version is not the latest.
+    local global_version_parts=(${(s/./)global_version})
+    local lts_version="$(lts "$lang")"
+    local lts_version_parts=(${(s/./)lts_version})
+
+    if [[ "$lts_version_parts[1]" > "$global_version_parts[1]" || "$lts_version_parts[2]" > "$global_version_parts[2]" || "$lts_version_parts[3]" > "$global_version_parts[3]" ]]; then
+      echo "${global_version}↑"
+      return 0
     fi
 
-    echo "$version$suffix"
+    # Default to global version.
+    echo "$global_version"
   }
 
   ## Git
   local function git_prompt() {
-    # Return if current path is not in a git repository or a parent gitignore.
-    ! git rev-parse --is-inside-work-tree &>/dev/null || git check-ignore . &>/dev/null && echo "" && return 0
+    # Return if the current path not in a git repository or ignored.
+    if ! git rev-parse --is-inside-work-tree &>/dev/null || git check-ignore . &>/dev/null; then 
+      echo ""
+      return 0
+    fi
     local git_prompt="%F{202}$ZSH_THEME_SQUANCHY_ICON_BRANCH$(git_prompt_info)%{$reset_color%}$(git_prompt_status)"
     if git config --get remote.origin.url &>/dev/null; then
       echo "$ZSH_THEME_SQUANCHY_ICON_GITHUB$ZSH_THEME_SQUANCHY_ICON_COMMIT$git_prompt "
@@ -129,5 +158,4 @@ function _squanchy() {
   unset rprompts
 }
 
-_squanchy
-unset -f _squanchy
+squanchy
