@@ -21,6 +21,7 @@
     ".docker": true,
     ".Downloads": true,
     ".gem": true,
+    ".gk": true,
     ".ipython": true,
     ".irb_history": true,
     ".lesshst": true,

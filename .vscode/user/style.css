@@ -41,6 +41,13 @@
   content: "\f0c4" !important;
 }
 
+/* Bundler */
+.file-icons-enabled .\.bundle-name-folder-icon::before {
+  content: "\f047" !important;
+  font-size: 114% !important;
+  font-family: "octicons" !important;
+}
+
 /* Chrome */
 .file-icons-enabled .\.chrome-name-folder-icon::before {
   font-family: devicons !important;
