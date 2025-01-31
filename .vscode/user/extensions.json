@@ -184,23 +184,27 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.14.1",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/bradlc.vscode-tailwindcss-0.14.2",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "4db62a7c-7d70-419c-96d2-6c3a4dc77ea5",
-      "installedTimestamp": 1737631516601,
+      "installedTimestamp": 1738193295395,
+      "isApplicationScoped": false,
+      "isBuiltin": false,
+      "isMachineScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "Tailwind Labs",
       "publisherId": "84722833-669b-4c7d-920e-b60e43fae19a",
       "source": "gallery",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "bradlc.vscode-tailwindcss-0.14.1",
-    "version": "0.14.1"
+    "relativeLocation": "bradlc.vscode-tailwindcss-0.14.2",
+    "version": "0.14.2"
   },
   {
     "identifier": {
@@ -226,6 +230,34 @@
     },
     "relativeLocation": "britesnow.vscode-toggle-quotes-0.3.6",
     "version": "0.3.6"
+  },
+  {
+    "identifier": {
+      "id": "chakra-ui.panda-css-vscode",
+      "uuid": "b7c9290a-0ff5-499d-a7ae-42fb9417ac86"
+    },
+    "location": {
+      "$mid": 1,
+      "external": "file:///Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
+      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": true,
+      "id": "b7c9290a-0ff5-499d-a7ae-42fb9417ac86",
+      "installedTimestamp": 1738319405114,
+      "isPreReleaseVersion": true,
+      "pinned": false,
+      "preRelease": true,
+      "publisherDisplayName": "Chakra",
+      "publisherId": "674a23d4-7a89-4ed2-90d2-47e37b0b4bbe",
+      "source": "gallery",
+      "targetPlatform": "darwin-arm64",
+      "updated": false
+    },
+    "relativeLocation": "chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
+    "version": "0.4.17162781"
   },
   {
     "identifier": {
@@ -457,23 +489,27 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.258.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.copilot-1.261.0",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "23c4aeee-f844-43cd-b53e-1113e483f1a6",
-      "installedTimestamp": 1737631669742,
+      "installedTimestamp": 1738251716550,
+      "isApplicationScoped": false,
+      "isBuiltin": false,
+      "isMachineScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "source": "gallery",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.copilot-1.258.0",
-    "version": "1.258.0"
+    "relativeLocation": "github.copilot-1.261.0",
+    "version": "1.261.0"
   },
   {
     "identifier": {
@@ -561,23 +597,27 @@
     },
     "location": {
       "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-github-actions-0.27.0",
+      "path": "/Users/gabrielecanepa/.vscode/extensions/github.vscode-github-actions-0.27.1",
       "scheme": "file"
     },
     "metadata": {
       "hasPreReleaseVersion": false,
       "id": "04f49bfc-8330-4eee-8237-ea938fb755ef",
-      "installedTimestamp": 1737631713675,
+      "installedTimestamp": 1738275448470,
+      "isApplicationScoped": false,
+      "isBuiltin": false,
+      "isMachineScoped": false,
       "isPreReleaseVersion": false,
       "pinned": false,
+      "preRelease": false,
       "publisherDisplayName": "GitHub",
       "publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
       "source": "gallery",
       "targetPlatform": "undefined",
-      "updated": false
+      "updated": true
     },
-    "relativeLocation": "github.vscode-github-actions-0.27.0",
-    "version": "0.27.0"
+    "relativeLocation": "github.vscode-github-actions-0.27.1",
+    "version": "0.27.1"
   },
   {
     "identifier": {
@@ -685,6 +725,31 @@
   },
   {
     "identifier": {
+      "id": "josee9988.minifyall",
+      "uuid": "0be0c393-8fd2-4ff8-9c13-e2789b45fc59"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/josee9988.minifyall-2.10.0",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "0be0c393-8fd2-4ff8-9c13-e2789b45fc59",
+      "installedTimestamp": 1737898447443,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Jose Gracia Berenguer",
+      "publisherId": "d1fe0d24-e662-4aad-941f-67589011e6f3",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "josee9988.minifyall-2.10.0",
+    "version": "2.10.0"
+  },
+  {
+    "identifier": {
       "id": "kencocaceo.customvscodeuicss",
       "uuid": "d950aad1-90ea-4ab3-914a-a61c2cd0d872"
     },
@@ -706,6 +771,31 @@
     },
     "relativeLocation": "kencocaceo.customvscodeuicss-2.0.5",
     "version": "2.0.5"
+  },
+  {
+    "identifier": {
+      "id": "lokalise.i18n-ally",
+      "uuid": "8ab81d13-c812-4a2f-8f19-c32e3655e53c"
+    },
+    "location": {
+      "$mid": 1,
+      "path": "/Users/gabrielecanepa/.vscode/extensions/lokalise.i18n-ally-2.13.1",
+      "scheme": "file"
+    },
+    "metadata": {
+      "hasPreReleaseVersion": false,
+      "id": "8ab81d13-c812-4a2f-8f19-c32e3655e53c",
+      "installedTimestamp": 1738142866701,
+      "isPreReleaseVersion": false,
+      "pinned": false,
+      "publisherDisplayName": "Lokalise",
+      "publisherId": "860d5498-69af-4ea7-b054-bebc9d036be4",
+      "source": "gallery",
+      "targetPlatform": "undefined",
+      "updated": false
+    },
+    "relativeLocation": "lokalise.i18n-ally-2.13.1",
+    "version": "2.13.1"
   },
   {
     "identifier": {
@@ -1155,81 +1245,6 @@
   },
   {
     "identifier": {
-      "id": "visualstudioexptteam.intellicode-api-usage-examples",
-      "uuid": "9fa2a00e-3bfa-4c2a-abc4-a865bb2b5cf3"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/visualstudioexptteam.intellicode-api-usage-examples-0.2.9",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "9fa2a00e-3bfa-4c2a-abc4-a865bb2b5cf3",
-      "installedTimestamp": 1737631944032,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "publisherDisplayName": "Microsoft",
-      "publisherId": "e8db1608-52e8-4d8d-92a6-779c5db302a9",
-      "source": "gallery",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "visualstudioexptteam.intellicode-api-usage-examples-0.2.9",
-    "version": "0.2.9"
-  },
-  {
-    "identifier": {
-      "id": "visualstudioexptteam.vscodeintellicode",
-      "uuid": "876e8f93-74d0-4f4f-91b7-34a09f19f444"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.3.2",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "876e8f93-74d0-4f4f-91b7-34a09f19f444",
-      "installedTimestamp": 1737631944031,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "publisherDisplayName": "Microsoft",
-      "publisherId": "e8db1608-52e8-4d8d-92a6-779c5db302a9",
-      "source": "gallery",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "visualstudioexptteam.vscodeintellicode-1.3.2",
-    "version": "1.3.2"
-  },
-  {
-    "identifier": {
-      "id": "visualstudioexptteam.vscodeintellicode-completions",
-      "uuid": "b8febe71-368d-482e-96f5-6f53d03e640b"
-    },
-    "location": {
-      "$mid": 1,
-      "path": "/Users/gabrielecanepa/.vscode/extensions/visualstudioexptteam.vscodeintellicode-completions-2.0.1",
-      "scheme": "file"
-    },
-    "metadata": {
-      "hasPreReleaseVersion": false,
-      "id": "b8febe71-368d-482e-96f5-6f53d03e640b",
-      "installedTimestamp": 1737631963237,
-      "isPreReleaseVersion": false,
-      "pinned": false,
-      "publisherDisplayName": "Microsoft",
-      "publisherId": "e8db1608-52e8-4d8d-92a6-779c5db302a9",
-      "source": "gallery",
-      "targetPlatform": "undefined",
-      "updated": false
-    },
-    "relativeLocation": "visualstudioexptteam.vscodeintellicode-completions-2.0.1",
-    "version": "2.0.1"
-  },
-  {
-    "identifier": {
       "id": "vivaxy.vscode-conventional-commits",
       "uuid": "b6b26bce-33f4-4bce-bf92-89812388ed0a"
     },
@@ -1284,8 +1299,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.2",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.2",
       "path": "/Users/gabrielecanepa/.vscode/extensions/yzhang.markdown-all-in-one-3.6.2",
       "scheme": "file"
     },

@@ -40,15 +40,11 @@
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
   "accessibility.signals.terminalBell": {
     "sound": "on"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
-  "comment-divider.length": 32,
   "conventionalCommits.promptCI": true,
   "conventionalCommits.promptFooter": false,
   "conventionalCommits.showNewVersionNotes": false,
@@ -56,11 +52,14 @@
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
   "diffEditor.ignoreTrimWhitespace": false,
+  "dotenv.enableAutocloaking": false,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.shellcheck": "explicit"
   },
+  "editor.colorDecoratorsActivatedOn": "click",
+  "editor.defaultColorDecorators": "always",
   "editor.fontSize": 11.9,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -77,6 +76,29 @@
   },
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "textMateRules": []
+  },
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
@@ -109,12 +131,17 @@
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.css": "css",
+    "*.css": "postcss",
+    "*.js": "javascript",
     "*.json": "json",
+    "*.jsx": "javascriptreact",
     "*.md": "markdown",
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact",
     ".aliases": "shellscript",
     ".commentlintrc": "json",
-    ".env.*": "dotenv",
+    ".env*": "dotenv",
+    ".env.*": "properties",
     ".eslintrc": "jsonc",
     ".gcloudignore": "dotenv",
     ".gitignore*": "ignore",
@@ -184,7 +211,6 @@
     "tags": true,
     "worktrees": true
   },
-  "grammarly.files.include": ["**/*.md", "**/*.txt"],
   "html.autoCreateQuotes": true,
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
@@ -216,8 +242,6 @@
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.toc.levels": "2..3",
   "markdown.preview.doubleClickToSwitchToEditor": false,
-  "optimizeImages.app": "ImageOptim",
-  "optimizeImages.imageRegex": ".*\\.(png|gif|jpe?g|svg)$",
   "php.suggest.basic": false,
   "php.validate.run": "onType",
   "prettier.arrowParens": "avoid",
@@ -231,7 +255,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
-  "redhat.telemetry.enabled": false,
   "rubocop.autocorrect": true,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,

@@ -5,6 +5,13 @@
   opacity: 0.5 !important;
 }
 
+/* ### Sidebars ### */
+
+/* Hide VSCode Custom CSS status bar item */
+#be5invis\.vscode-custom-css {
+  display: none !important;
+}
+
 /* ### Icons ### */
 
 /* All */
@@ -208,6 +215,7 @@
   font-family: fi !important;
   content: "\24c3" !important;
 }
+.file-icons-enabled .next\.config\.ts-name-file-icon::before,
 .file-icons-enabled .next-env\.d\.ts-name-file-icon::before {
   color: #7f7f7f !important;
   content: "\24c3" !important;
@@ -226,6 +234,13 @@
 .file-icons-enabled .\.npm-name-folder-icon::before {
   font-family: fi !important;
   content: "\e91c" !important;
+}
+
+/* Panda CSS */
+.file-icons-enabled .panda\.config\.ts-name-file-icon::before {
+  font-family: fi !important;
+  content: "\eac1" !important;
+  color: #f4bf75 !important;
 }
 
 /* Pnpm */

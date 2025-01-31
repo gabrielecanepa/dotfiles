@@ -183,18 +183,31 @@
     "key": "ctrl+\\"
   },
   {
+    "command": "-workbench.action.editor.changeLanguageMode",
     "key": "ctrl+shift+l",
-    "command": "-workbench.action.editor.changeLanguageMode",
     "when": "!notebookEditorFocused"
   },
   {
-    "key": "ctrl+alt+l",
     "command": "workbench.action.editor.changeLanguageMode",
+    "key": "ctrl+alt+l",
     "when": "!notebookEditorFocused"
   },
   {
-    "key": "cmd+k m",
     "command": "-workbench.action.editor.changeLanguageMode",
+    "key": "cmd+k m",
     "when": "!notebookEditorFocused"
+  },
+  {
+    "command": "-rerunSearchEditorSearch",
+    "key": "shift+cmd+r",
+    "when": "inSearchEditor"
+  },
+  {
+    "command": "workbench.action.reloadWindow",
+    "key": "shift+cmd+r"
+  },
+  {
+    "command": "-workbench.action.reloadWindow",
+    "key": "ctrl+alt+cmd+l"
   }
 ]
