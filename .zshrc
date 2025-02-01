@@ -54,7 +54,6 @@ zle_highlight+=(paste:none)
 
 # Plugins
 plugins=(
-  1password
   colored-man-pages
   colorize
   gh
@@ -73,15 +72,11 @@ plugins=(
   brewfile
   completions
   gemfile
-  gh-run
   lts
-  node-version
   npm-global
   path
   plugin
   profile
-  xcode-reset
-  yarn1
 )
 lazy_plugins=(
   colors256
@@ -96,7 +91,6 @@ lazy_plugins=(
 # Completions
 autoload bashcompinit && bashcompinit
 . $(brew --prefix)/etc/bash_completion.d/az
-. "$HOME/.config/tabtab/zsh/__tabtab.zsh"
 completions npm
 
 # Profile

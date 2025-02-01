@@ -238,8 +238,6 @@
     },
     "location": {
       "$mid": 1,
-      "external": "file:///Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
-      "fsPath": "/Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
       "path": "/Users/gabrielecanepa/.vscode/extensions/chakra-ui.panda-css-vscode-0.4.17162781-darwin-arm64",
       "scheme": "file"
     },

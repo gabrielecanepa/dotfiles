@@ -77,22 +77,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
     "[*Light*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
           }
         }
       ]
@@ -331,11 +331,11 @@
     "git-rebase-todo": "default"
   },
   "workbench.fontAliasing": "auto",
-  "workbench.iconTheme": "file-icons",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
+  "workbench.iconTheme": "file-icons"
 }
