@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Source zprofile.
+# Source zprofile
 [[ -f ~/.zprofile ]] && . ~/.zprofile

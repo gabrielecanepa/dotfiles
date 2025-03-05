@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. "$(dirname "$0")/init.sh"
+. "$(dirname "$0")/init"
 
 # Skip commits starting with [tmp]
 [[ $(cat "$1") =~ ^\[tmp\]* ]] && exit 0

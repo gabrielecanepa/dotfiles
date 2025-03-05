@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. "$(dirname "$0")/init.sh"
+. "$(dirname "$0")/init"
 
 # Run commitlint on unpushed commits
 commitlint --from=HEAD --to="$(git remote)/$(git branch --show-current)"

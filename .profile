@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Load ~/.zprofile if not already loaded.
+# Load ~/.zprofile if not already loaded
 
 VARS="NAME EMAIL WORKING_DIR EDITOR GIT_EDITOR"
 

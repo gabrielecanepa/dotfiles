@@ -1,7 +1,7 @@
-## Installation
-
 > [!WARNING]
 > If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
+
+## Installation
 
 <!-- no toc -->
 1. [SSH](#1-ssh)
@@ -17,7 +17,7 @@
 7. [VSCode](#7-vscode)
     - [Settings, snippets and extensions](#settings-snippets-and-extensions)
     - [Keybindings](#keybindings)
-8. [Resources](#8-resources)
+8. [Assets](#8-resources)
    - [Fonts](#fonts)
    - [iCloud](#icloud)
 
@@ -51,7 +51,7 @@ for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
 done
 
-# Restart the shell.
+# Restart the shell
 zsh
 ```
 
@@ -60,26 +60,24 @@ zsh
 Clone this repository:
 
 ```sh
+gh repo clone gabrielecanepa/dotfiles
+# or
 git clone git@github.com:gabrielecanepa/dotfiles.git
 ```
 
-And copy all files to your home directory, manually or in bulk:
+Copy all files to your home directory, manually or in bulk.
 
 > [!WARNING]
 > The following bulk operation will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
 
 ```sh
 cd dotfiles
-
 bak=$(mkdir -p ~/.bak/dotfiles/$(date +%Y%m%d) && echo $_)
 
 for config in $(ls -A); do
   [[ -e ~/$config ]] && cp -fr ~/$config $bak
   cp -fr $config ~/$config
 done
-
-cd ..
-rm -rf dotfiles
 ```
 
 Install all the packages listed in the [Brewfile](/.Brewfile):
@@ -104,24 +102,20 @@ Copy the `.env.example` file to `.env` and fill in the environment-specific valu
 
 ```sh
 cp ~/.env.example ~/.env
-echo "VAR=value" >> ~/.env
 ```
 
 ### 6. Languages and dependencies
 
 #### Node.js
 
-Install the saved [Node.js](https://nodejs.org) with [nodenv](https://github.com/nodenv/nodenv) and use the custom [`dependencies` plugin](/.zsh/plugins/dependencies/dependencies.plugin.zsh) to install global packages:
+Install the [Node.js](https://nodejs.org) version in use with [nodenv](https://github.com/nodenv/nodenv) and all saved global packages:
 
 ```sh
-for version in $(command ls ~/.npm/global); do
-  nodenv install $version --skip-existing
-  cd ~/.npm/global/$version
-  npm -g install $(dependencies -L)
-done
+nodenv install $(cat ~/.node_version) --skip-existing
+npm -g install
 ```
 
-Link the global Node.js version to the current one:
+Link the nodeenv version to the tracked one:
 
 ```sh
 nodenv global $(cat ~/.node-version)
@@ -130,32 +124,30 @@ rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 
 #### Ruby
 
-Install and link the [Ruby](https://www.ruby-lang.org) version in use with [rbenv](https://github.com/rbenv/rbenv):
+Install and link the [Ruby](https://ruby-lang.org) version in use with [rbenv](https://github.com/rbenv/rbenv):
 
 ```sh
 rbenv install $(cat ~/.ruby-version) --skip-existing
-rbenv global $(cat ~/.ruby-version)
 rm -f $RBENV_ROOT/version && ln -sf ~/.ruby-version $RBENV_ROOT/version
 ```
 
 #### Python
 
-Install and link the [Python](https://www.python.org) version in use with [pyenv](https://github.com/pyenv/pyenv):
+Install and link the [Python](https://python.org) version in use with [pyenv](https://github.com/pyenv/pyenv):
 
 ```sh
 pyenv install $(cat ~/.python-version) --skip-existing
-pyenv global $(cat ~/.python-version)
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### 7. [VSCode](https://code.visualstudio.com)
+### 7. VSCode
 
 #### Settings, snippets and extensions
 
 Use symlinks to backup keybindings, settings, snippets and extensions.
 
 > [!WARNING]
-> The following operations will permanently replace some system folders with symlinks.
+> The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.
 
 ```sh
 for config in keybindings.json settings.json snippets; do
@@ -170,7 +162,7 @@ ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
 
 #### Keybindings
 
-To avoid emitting beeps with the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘`, create the following configuration file:
+To avoid emitting beeps in Electron-based applications when using the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘` (see https://github.com/electron/electron/issues/2617) create the keybinding settings file:
 
 ```sh
 [[ ! -d ~/Library/KeyBindings ]] && mkdir ~/Library/KeyBindings
@@ -187,13 +179,11 @@ And populate it with the following content:
 }
 ```
 
-For more information see [this GitHub issue](https://github.com/electron/electron/issues/2617#issuecomment-571447707).
-
-### 8. Resources
+### 8. Assets
 
 #### Fonts
     
-To display icons in your terminal, download a font supporting Nerd Fonts, like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts), and use it in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
+To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts). Activate the fonts in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
 
 #### iCloud
 
@@ -233,16 +223,8 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
 done
 ```
 
-The new folder icons can be replaced manually. System icons can be found here:
+The new folder icons can be replaced manually with the system icons stored here:
 
 ```sh
 open /System/Library/Extensions/IOStorageFamily.kext/Contents/Resources
 ```
-
-You can easily link applications stored in the cloud to the system folder:
-
-```sh
-ln -sf ~/Applications/Bartender.app /Applications/Bartender.app
-``` 
-
-The app will become available in the menu and maintain all system-wide functionalities, including automatic updates.

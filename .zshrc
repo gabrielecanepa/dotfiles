@@ -78,6 +78,7 @@ plugins=(
   plugin
   profile
 )
+# Plugins loaded when run
 lazy_plugins=(
   colors256
   dependencies
@@ -109,5 +110,5 @@ export PATH="./node_modules/.bin:$PATH"
 (. "$HOME/.jobs" >/dev/null &) >/dev/null
 crontab "$HOME/.crontab"
 
-# Avoid duplicates in PATH
+# Avoid duplicates in path
 typeset -aU path

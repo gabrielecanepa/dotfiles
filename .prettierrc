@@ -15,7 +15,7 @@
   "singleAttributePerLine": false,
   "overrides": [
     {
-      "files": "*.(css|scss|sass)",
+      "files": "*.(css|scss|sass|yml|yaml)",
       "options": {
         "singleQuote": false
       }

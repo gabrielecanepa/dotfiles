@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "pnpm": "^8.15.6"
-  },
-  "engines": {
-    "node": "21.6.2"
-  }
-}

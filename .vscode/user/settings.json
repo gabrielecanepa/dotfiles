@@ -72,22 +72,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Light*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    },
     "[*Dark*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
           }
         }
       ]
@@ -162,7 +162,7 @@
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
   "git.autofetch": true,
-  "git.autofetchPeriod": 3,
+  "git.autofetchPeriod": 30,
   "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
@@ -328,11 +328,11 @@
     "git-rebase-todo": "default"
   },
   "workbench.fontAliasing": "auto",
+  "workbench.iconTheme": "file-icons",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "workbench.iconTheme": "file-icons"
+  "workbench.tree.expandMode": "doubleClick"
 }
