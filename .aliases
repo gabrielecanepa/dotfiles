@@ -13,6 +13,13 @@ lss() {
   du -L --si -d 1 "$@" 2>/dev/null | sort -hr 
 }
 
+## Remove directories and sub-directories
+rmm() {
+  for folder in "$@"; do
+    find . -type d -name "$folder" -prune -exec rm -rf {} \;
+  done
+}
+
 # Directories
 wd="$WORKING_DIR"
 wdu="$WORKING_DIR/$USER"
