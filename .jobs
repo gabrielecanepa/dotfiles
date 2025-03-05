@@ -1,13 +1,1 @@
 #!/bin/sh
-
-# VSCode
-# Format settings on updates
-
-extensions="$HOME/.vscode/user/extensions.json"
-echo "$extensions" | entr -s "jq --sort-keys 'sort_by(.identifier.id)' $extensions | sponge $extensions"
-
-keybindings="$HOME/.vscode/user/keybindings.json"
-echo "$keybindings" | entr -s "jq --sort-keys 'sort_by(.command)' $keybindings | sponge $keybindings"
-
-settings="$HOME/.vscode/user/settings.json"
-echo "$settings" | entr -s "jq --sort-keys '.' $settings | sponge $settings"
