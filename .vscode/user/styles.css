@@ -52,7 +52,7 @@
 .file-icons-enabled .\.bundle-name-folder-icon::before {
   content: "\f047" !important;
   font-size: 114% !important;
-  font-family: "octicons" !important;
+  font-family: octicons !important;
 }
 
 /* Chrome */
@@ -237,9 +237,15 @@
 }
 
 /* Panda CSS */
+.file-icons-enabled .panda-name-folder-icon::before,
+.file-icons-enabled .styled-system-name-folder-icon::before,
+.file-icons-enabled .panda\.config\.js-name-file-icon::before,
 .file-icons-enabled .panda\.config\.ts-name-file-icon::before {
   font-family: fi !important;
   content: "\eac1" !important;
+}
+.file-icons-enabled .panda\.config\.js-name-file-icon::before,
+.file-icons-enabled .panda\.config\.ts-name-file-icon::before {
   color: #f4bf75 !important;
 }
 
@@ -260,6 +266,16 @@
   font-family: fi !important;
   content: "\e910" !important;
   color: #c82829 !important;
+}
+
+/* Prettier */
+.file-icons-enabled .prettier\.config\.js-name-file-icon::before {
+  color: #ed9f2e !important;
+}
+.file-icons-enabled .prettier\.config\.ts-name-file-icon::before {
+  content: "\eaa1" !important;
+  font-size: 107% !important;
+  font-family: "fi" !important;
 }
 
 /* Private */
@@ -289,7 +305,8 @@
 .file-icons-enabled .\.release-it\.cjs-name-file-icon::before,
 .file-icons-enabled .\.release-it\.yaml-name-file-icon::before,
 .file-icons-enabled .\.release-it\.yml-name-file-icon::before,
-.file-icons-enabled .\.release-it\.toml-name-file-icon::before {
+.file-icons-enabled .\.release-it\.toml-name-file-icon::before,
+.file-icons-enabled .release-it\.config\.ts-name-file-icon::before {
   font-size: 114% !important;
   font-family: fa !important;
   content: "\f135" !important;
@@ -307,10 +324,34 @@
   }
 }
 
+/* Shopify */
+.file-icons-enabled .\.shopify-name-folder-icon::before {
+  content: "\e9cf" !important;
+  font-size: 107% !important;
+  font-family: "fi" !important;
+}
+
 /* SSH */
 .file-icons-enabled .\.ssh-name-folder-icon::before {
   font-family: fa !important;
   content: "\f120" !important;
+}
+
+/* Stylelint */
+.file-icons-enabled .stylelint\.config\.ts-name-file-icon::before {
+  content: "\e93d" !important;
+  font-size: 107% !important;
+  font-family: "fi" !important;
+}
+
+/* Supabase */
+.file-icons-enabled .supabase-name-folder-icon::before {
+  font-family: octicons !important;
+  content: "\26a1" !important;
+  transform: scale(1.1) !important;
+  padding-right: 0 !important;
+  margin-right: 4px !important;
+  margin-left: 2px !important;
 }
 
 /* Svgo */
@@ -321,6 +362,7 @@
 }
 
 /* Test */
+.file-icons-enabled .test-name-folder-icon::before,
 .file-icons-enabled .__tests__-name-folder-icon::before {
   font-family: fi !important;
   content: "\ea63" !important;
