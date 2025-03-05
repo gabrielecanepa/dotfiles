@@ -83,8 +83,6 @@ brew "azure/functions/azure-functions-core-tools@4"
 brew "powershell/tap/powershell"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
-# Supabase CLI
-brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -95,8 +93,6 @@ cask "chatgpt"
 cask "chromedriver"
 # Customise menu item keyboard shortcuts
 cask "customshortcuts"
-# App to build and share containerised applications and microservices
-cask "docker"
 # Collaborative team software
 cask "figma"
 # Web browser
