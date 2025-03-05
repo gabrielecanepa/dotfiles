@@ -108,11 +108,6 @@
     "key": "cmd+b"
   },
   {
-    "command": "extension.htmlTagWrap",
-    "key": "ctrl+shift+w",
-    "when": "editorTextFocus"
-  },
-  {
     "command": "git.push",
     "key": "ctrl+alt+p"
   },

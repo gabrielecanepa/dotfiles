@@ -25,9 +25,6 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
-  "[ruby]": {
-    "editor.defaultFormatter": "rubocop.vscode-rubocop"
-  },
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
@@ -58,8 +55,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.shellcheck": "explicit"
   },
-  "editor.colorDecoratorsActivatedOn": "click",
-  "editor.defaultColorDecorators": "always",
   "editor.fontSize": 11.9,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -131,7 +126,7 @@
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.css": "postcss",
+    "*.css": "tailwindcss",
     "*.js": "javascript",
     "*.json": "json",
     "*.jsx": "javascriptreact",
@@ -166,18 +161,18 @@
   },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
-  "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
   "git.autofetchPeriod": 3,
+  "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
+  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
-  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
   "git.inputValidationSubjectLength": 60,
   "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "never",
@@ -267,6 +262,7 @@
   },
   "search.useGlobalIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
+  "settingsSync.ignoredExtensions": ["riipandi.vscode-atomizer-theme"],
   "shellcheck.customArgs": [],
   "shellcheck.enable": true,
   "shellcheck.enableQuickFix": true,
@@ -299,7 +295,7 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/style.css"],
+  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 2,
@@ -328,6 +324,7 @@
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter-notebook",
+    "*.svg": "default",
     "git-rebase-todo": "default"
   },
   "workbench.fontAliasing": "auto",
