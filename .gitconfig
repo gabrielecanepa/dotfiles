@@ -47,6 +47,7 @@
   acm = !git add -A && git commit -m
   aliases = !git config --get-regexp \"alias.*\" | sed \"s/alias.//\"
   br = branch
+  bru = !git branch --set-upstream-to=origin $(git branch --show-current)
   ci = commit --interactive
   cm = commit -m
   co = checkout
@@ -60,21 +61,21 @@
   log = log --color --graph
   p = push
   pf = push --force
-  po = !sh -c 'git push --set-upstream origin $(git branch --show-current)'
-  pof = !sh -c 'git push --set-upstream origin $(git branch --show-current) --force'
+  pu = !git push --set-upstream origin $(git branch --show-current)
+  puf = !git push --set-upstream origin $(git branch --show-current) --force
   pristine = !git reset --hard && git clean -df
   ps = !git pull && git sweep
   re = remote
   rv = remote -v
-  redo = !sh -c 'git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD'
+  redo = !git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD
   reset-origin = !"git remote remove origin &>/dev/null; git remote add origin"
   ro = reset-origin
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
-  set-origin = !sh -c 'git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)'
+  set-origin = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
   so = set-origin
   st = status -sb
-  sweep = !"git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+  sweep = !git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
   undo = reset --soft HEAD^
   unstage = reset HEAD --
   untrack = rm --cache --
-  zip = !sh -c 'git archive HEAD -o $(basename $PWD).zip'
+  zip = !git archive HEAD -o $(basename $PWD).zip
