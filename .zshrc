@@ -73,6 +73,7 @@ plugins=(
   completions
   gemfile
   lts
+  node-version
   npm-global
   path
   plugin
