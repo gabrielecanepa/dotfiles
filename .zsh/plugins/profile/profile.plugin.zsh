@@ -6,10 +6,10 @@
 function profile() (
   local CUT="\r\033[1A\033[0K"
 
-  local _profile_cmd="${fg[green]}profile"
+  local _profile_cmd="${fg_bold[green]}profile"
   local PROFILE_CMD="${_profile_cmd}${reset_color}"
-  local PROFILE_CONFIG_CMD="${_profile_cmd} config${reset_color}"
-  local PROFILE_INSTALL_CMD="${_profile_cmd} install${reset_color}"
+  local PROFILE_CONFIG_CMD="$PROFILE_CONFIG_CMD config"
+  local PROFILE_INSTALL_CMD="$PROFILE_CMD install"
 
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
@@ -224,8 +224,8 @@ function profile() (
         echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1
       elif [[ -z "$NAME" ]] || [[ ! "$NAME" =~ $NAME_REGEX ]] || [[ -z "$EMAIL" ]] || [[ ! "$EMAIL" =~ $EMAIL_REGEX ]] || [[ -z "$WORKING_DIR" ]] || [[ ! -d "$WORKING_DIR" ]] || [[ -z "$EDITOR" ]] || ! type -a "$EDITOR" >/dev/null; then
-        echo "${fg[red]}⚠️  Incorrect profile for user $USER${reset_color}"
-        echo "Type $PROFILE_INSTALL_CMD to install a new profile"
+        echo "⚠️  A profile is not installed for user $USER"
+        echo "Type $PROFILE_INSTALL_CMD to add a new profile"
         return 1
       fi
       ;;

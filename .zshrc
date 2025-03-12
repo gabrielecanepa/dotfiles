@@ -96,12 +96,12 @@ autoload bashcompinit && bashcompinit
 completions npm
 
 # Profile
-! profile check && return 1
-
-# Git (https://git-scm.com)
-git config --file "$HOME/.gitprofile" user.name "$NAME"
-git config --file "$HOME/.gitprofile" user.email "$EMAIL"
-git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+if profile check; then
+  # Git (https://git-scm.com)
+  git config --file "$HOME/.gitprofile" user.name "$NAME"
+  git config --file "$HOME/.gitprofile" user.email "$EMAIL"
+  git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+fi
 
 # Node (https://nodejs.org)
 export PATH="./node_modules/.bin:$PATH"
