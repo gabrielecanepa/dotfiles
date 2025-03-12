@@ -72,22 +72,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
     "[*Light*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
           }
         }
       ]
@@ -126,6 +126,13 @@
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    "*.css": "css",
+    "*.js": "javascript",
+    "*.json": "jsonc",
+    "*.jsx": "javascriptreact",
+    "*.liquid": "liquid",
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact",
     ".aliases": "shellscript",
     ".commentlintrc": "json",
     ".env*": "dotenv",
@@ -181,6 +188,7 @@
     "plaintext": true,
     "scminput": false
   },
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
   "githubPullRequests.pullBranch": "never",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true,
@@ -245,6 +253,7 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
+  "redhat.telemetry.enabled": false,
   "rubocop.autocorrect": true,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
