@@ -131,10 +131,12 @@ mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Color Picker", id: 1545870783
 mas "Command X", id: 6448461551
+mas "Ethernet Status", id: 1186187538
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Status Bar Music Player", id: 6446059108
 mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
