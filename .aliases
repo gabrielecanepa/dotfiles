@@ -1,19 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
 
-## Use GNU `ls` if available
+# Use GNU `ls` if available
 if command -v gls >/dev/null; then
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 fi
 
-## Sort by size
+# Sort by size
 lss() { 
   du -L --si -d 1 "$@" 2>/dev/null | sort -hr 
 }
 
-## Remove directories and sub-directories
+# Remove directories and sub-directories
 rmm() {
   for folder in "$@"; do
     find . -type d -name "$folder" -prune -exec rm -rf {} \;
@@ -48,8 +48,10 @@ mkdircode() {
 # Open in editor
 alias home="$EDITOR $HOME"
 alias aliases="$EDITOR $HOME/.aliases"
+alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias sshrc="$EDITOR $HOME/.ssh"
 alias zshrc="$EDITOR $HOME/.zshrc"
+# Open with
 alias te="open -a TextEdit"
 
 # Shortcuts
@@ -63,7 +65,8 @@ alias pn="pnpm"
 alias pnx="pnpx"
 alias yarn="npx yarn@1"
 
-# Git short aliases
+# Git 
+# Short aliases
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"

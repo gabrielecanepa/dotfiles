@@ -126,9 +126,8 @@
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.css": "css",
+    "*.css": "tailwindcss",
     "*.js": "javascript",
-    "*.json": "jsonc",
     "*.jsx": "javascriptreact",
     "*.liquid": "liquid",
     "*.ts": "typescript",
