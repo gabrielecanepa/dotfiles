@@ -54,6 +54,7 @@
   df = diff
   ds = diff --stat -r
   f = fetch
+  fa = fetch --all
   fo = fetch origin
   get = !git pull --rebase && git submodule update --init --recursive
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
