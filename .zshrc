@@ -27,6 +27,14 @@ for vm in nodenv pyenv rbenv; do
   eval "$(${vm} init --path - zsh)"
 done; unset vm
 
+# Node.js (https://nodejs.org)
+export PATH="./node_modules/.bin:$PATH"
+export PNPM_HOME="$HOME/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
@@ -45,7 +53,6 @@ ENABLE_CORRECTION=0
 HIST_STAMPS="yyyy-mm-dd"
 HYPHEN_INSENSITIVE=0
 UPDATE_ZSH_DAYS=7
-
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 zstyle ':completion:*' list-dirs-first true
 zstyle ':omz:alpha:lib:git' async-prompt false
@@ -79,21 +86,8 @@ plugins=(
   plugin
   profile
 )
-# Plugins loaded when run
-lazy_plugins=(
-  colors256
-  dependencies
-  gatekeeper
-  google
-  node-modules
-)
 
 . "$ZSH/oh-my-zsh.sh"
-
-# Completions
-autoload bashcompinit && bashcompinit
-. $(brew --prefix)/etc/bash_completion.d/az
-completions npm
 
 # Profile
 if profile check; then
@@ -103,8 +97,10 @@ if profile check; then
   git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
 fi
 
-# Node (https://nodejs.org)
-export PATH="./node_modules/.bin:$PATH"
+# Completions
+autoload bashcompinit && bashcompinit
+. $(brew --prefix)/etc/bash_completion.d/az
+completions npm
 
 # Aliases, background jobs, cronjobs
 . "$HOME/.aliases"
