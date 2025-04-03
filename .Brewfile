@@ -1,9 +1,7 @@
 tap "azure/functions"
 tap "github/gh"
-tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "homebrew/services"
 tap "powershell/tap"
 tap "shopify/shopify"
 tap "supabase/tap"
@@ -71,8 +69,6 @@ brew "redis"
 brew "shellcheck"
 # Soak up standard input and write to a file
 brew "sponge"
-# Simplified and community-driven man pages
-brew "tldr"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
@@ -123,8 +119,6 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Connect to Windows
-cask "windows-app"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
@@ -137,6 +131,5 @@ mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Status Bar Music Player", id: 6446059108
 mas "Toggl Track", id: 1291898086
 mas "Xcode", id: 497799835
