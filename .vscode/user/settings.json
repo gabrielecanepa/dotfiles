@@ -28,6 +28,9 @@
   "[scss]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -72,22 +75,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Light*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    },
     "[*Dark*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
           }
         }
       ]
@@ -127,11 +130,18 @@
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.css": "tailwindcss",
+    "*.css.liquid": "liquid-css",
     "*.js": "javascript",
+    "*.js.liquid": "liquid-javascript",
+    "*.json": "jsonc",
+    "*.json.liquid": "json",
     "*.jsx": "javascriptreact",
     "*.liquid": "liquid",
+    "*.md.liquid": "markdown",
+    "*.scss.liquid": "liquid-scss",
     "*.ts": "typescript",
     "*.tsx": "typescriptreact",
+    "*.yaml.liquid": "yaml",
     ".aliases": "shellscript",
     ".commentlintrc": "json",
     ".env*": "dotenv",
@@ -187,7 +197,7 @@
     "plaintext": true,
     "scminput": false
   },
-  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
+  "github.copilot.selectedCompletionModel": "",
   "githubPullRequests.pullBranch": "never",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true,

@@ -325,6 +325,13 @@
 }
 
 /* Shopify */
+.show-file-icons .liquid-ext-file-icon.ext-file-icon.file-icon::before {
+  color: #90a959 !important;
+  content: "\e9cf" !important;
+  font-size: 107% !important;
+  font-family: "fi" !important;
+  background-image: unset !important;
+}
 .file-icons-enabled .\.shopify-name-folder-icon::before {
   content: "\e9cf" !important;
   font-size: 107% !important;
@@ -389,14 +396,6 @@
   }
 }
 
-/* Turbo */
-.file-icons-enabled .turbo\.json-name-file-icon::before,
-.file-icons-enabled .\.turbo-name-folder-icon::before {
-  content: "\25B2" !important;
-  font-size: 107% !important;
-  font-family: fi !important;
-}
-
 /* TypeScript */
 .file-icons-enabled .tsconfig\.paths\.json-name-file-icon::before {
   color: #6a9fb5 !important;
@@ -416,6 +415,15 @@
   font-family: fi !important;
   content: "\e9b3" !important;
   color: #858585 !important;
+}
+
+/* Vercel */
+.file-icons-enabled .\.vercel-name-folder-icon::before,
+.file-icons-enabled .turbo\.json-name-file-icon::before,
+.file-icons-enabled .\.turbo-name-folder-icon::before {
+  content: "\25B2" !important;
+  font-size: 107% !important;
+  font-family: fi !important;
 }
 
 /* Vitest */
