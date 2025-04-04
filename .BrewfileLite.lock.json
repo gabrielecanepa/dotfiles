@@ -11,10 +11,10 @@
         "revision": "0e8e000753e19b5422efb94a688abfd62c908fcb"
       },
       "homebrew/cask": {
-        "revision": "c42c552f149eee2330eaa0f67ae3df7b64ee5adb"
+        "revision": "eba56121b4f3e30e6a223a0f401ad973bd2d0301"
       },
       "homebrew/core": {
-        "revision": "edd6833010fd30ab9c57b2f088b5110cbc65dca7"
+        "revision": "205b2f953ba050dcea389d66f894c912930d14cc"
       },
       "homebrew/services": {
         "revision": "a4aabffc344b7e9476f95fd66bd59b123e89ed98"
@@ -1659,6 +1659,12 @@
         "options": {
           "full_name": "opencore-patcher"
         }
+      },
+      "whatsapp": {
+        "version": "2.24.13.80",
+        "options": {
+          "full_name": "whatsapp"
+        }
       }
     },
     "mas": {
@@ -1746,7 +1752,7 @@
       "sonoma": {
         "HOMEBREW_VERSION": "4.3.9",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "edd6833010fd30ab9c57b2f088b5110cbc65dca7",
+        "Homebrew/homebrew-core": "205b2f953ba050dcea389d66f894c912930d14cc",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.4",
         "macOS": "14.5"

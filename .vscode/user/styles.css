@@ -141,17 +141,16 @@
 }
 
 /* Homebrew */
-.file-icons-enabled .\.brewfile-name-file-icon::before,
-.file-icons-enabled .\.brewfile\.lock\.json-name-file-icon::before,
-.file-icons-enabled .\.brewfile\.min-name-file-icon::before,
-.file-icons-enabled .\.brewfile\.min\.lock\.json-name-file-icon::before {
+.file-icons-enabled .file-icon[aria-label^="~/.Brewfile"]::before {
   font-family: fi !important;
   content: "\1f37a" !important;
   font-size: 13.8px !important;
 }
-.file-icons-enabled .\.brewfile-name-file-icon::before,
-.file-icons-enabled .\.brewfile\.min-name-file-icon::before {
+.file-icons-enabled .file-icon[aria-label^="~/.Brewfile"]:not([aria-label*=".lock"])::before {
   color: #ffbd5d !important;
+}
+.file-icons-enabled .file-icon[aria-label^="~/.Brewfile.lock"]::before {
+  color: #75b5aa !important;
 }
 
 /* Husky */
