@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "commitlint": "19.7.1",
+    "commitlint": "19.8.0",
     "husky": "9.1.7",
-    "pnpm": "9.15.4"
+    "pnpm": "10.10.0"
   }
 }
