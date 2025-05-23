@@ -1,18 +1,15 @@
-/* ### Global ### */
+/* 
+  Global 
+ */
 
-/* Match color of ignored files to git status */
+/* Match color of ignored files with git status */
 .monaco-decoration-itemColor--9ieymw::before {
   opacity: 0.5 !important;
 }
 
-/* ### Sidebars ### */
-
-/* Hide VSCode Custom CSS status bar item */
-#be5invis\.vscode-custom-css {
-  display: none !important;
-}
-
-/* ### Icons ### */
+/* 
+  Icons 
+ */
 
 /* All */
 .file-icons-enabled .folder-icon::before {
@@ -138,6 +135,25 @@
 .file-icons-enabled .\.github-name-folder-icon::before {
   font-family: octicons !important;
   content: "\e602" !important;
+}
+
+/* GraphQL */
+.file-icons-enabled .\.graphqlrc::before,
+.file-icons-enabled .\.graphqlrc\.js::before,
+.file-icons-enabled .\.graphqlrc\.json::before,
+.file-icons-enabled .\.graphqlrc\.toml::before,
+.file-icons-enabled .\.graphqlrc\.ts::before,
+.file-icons-enabled .\.graphqlrc\.yml::before,
+.file-icons-enabled .graphql\.config\.js-name-file-icon::before,
+.file-icons-enabled .graphql\.config\.json-name-file-icon::before,
+.file-icons-enabled .graphql\.config\.toml-name-file-icon::before,
+.file-icons-enabled .graphql\.config\.ts-name-file-icon::before,
+.file-icons-enabled .codegen\.ts-name-file-icon::before,
+.file-icons-enabled .codegen\.config\.ts-name-file-icon::before,
+.file-icons-enabled .gql-name-folder-icon::before {
+  content: "\e97c" !important;
+  font-size: 107% !important;
+  font-family: "fi" !important;
 }
 
 /* Homebrew */
@@ -277,6 +293,20 @@
   font-family: "fi" !important;
 }
 
+/* Prisma */
+.file-icons-enabled .prisma-name-folder-icon::before {
+  font-family: fi !important;
+  content: "\eac5" !important;
+  font-size: 104% !important;
+}
+.file-icons-enabled .prisma-lang-file-icon::before {
+  font-family: fi !important;
+  content: "\eac5" !important;
+  font-size: 102% !important;
+  color: #03bfa5 !important;
+  background: none !important;
+}
+
 /* Private */
 .file-icons-enabled .\.private-name-folder-icon::before,
 .file-icons-enabled .private-name-folder-icon::before {
@@ -369,6 +399,7 @@
 
 /* Test */
 .file-icons-enabled .test-name-folder-icon::before,
+.file-icons-enabled .tests-name-folder-icon::before,
 .file-icons-enabled .__tests__-name-folder-icon::before {
   font-family: fi !important;
   content: "\ea63" !important;

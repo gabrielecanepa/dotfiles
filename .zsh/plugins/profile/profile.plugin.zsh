@@ -1,61 +1,39 @@
 #!/bin/zsh
 
+##
+# Profile plugin for Zsh
+# This plugin allows you to manage your Zsh profile, including setting up your name, email, working directory, and editor.
+# It provides commands to install, reload, and check the profile configuration.
+#
+# Usage
+#   profile                 # Print the current profile
+#   profile install|i       # Install a new profile
+#   profile config          # Configure the profile
+#   profile reload          # Reload the current profile
+#   profile check           # Check if the profile is installed correctly
+#   profile help|-h|--help  # Print help message
+#
+# Options
+#   PROFILE_SEPARATOR: sets a custom separator for the profile output
+
 ## 
 # Prints the current profile or executes a command among `config`, `install`, `reload`, `check`, or `help`.
 #
 function profile() (
   local CUT="\r\033[1A\033[0K"
-
-  local _profile_cmd="${fg_bold[green]}profile"
-  local PROFILE_CMD="${_profile_cmd}${reset_color}"
-  local PROFILE_CONFIG_CMD="$PROFILE_CONFIG_CMD config"
-  local PROFILE_INSTALL_CMD="$PROFILE_CMD install"
-
+  local PROFILE_CMD="${fg_bold[green]}profile${reset_color}"
+  local PROFILE_CONFIG_CMD="$PROFILE_CONFIG_CMD${fg_bold[green]} config${reset_color}"
+  local PROFILE_INSTALL_CMD="$PROFILE_CMD${fg_bold[green]} install${reset_color}"
+  local WORKING_DIR_NAME=${WORKING_DIR/\/Users\/$USER\//}
   local NAME_REGEX="[A-Za-z\s,\.]{2,}"
   local EMAIL_REGEX="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}"
+  local SEPARATOR=" | "
 
-  local WORKING_DIR_NAME=${WORKING_DIR/\/Users\/$USER\//}
-
-  local EDITORS=(
-    "atom"            # Atom
-    "brackets"        # Brackets
-    "coda"            # Coda
-    "code"            # Visual Studio Code
-    "code-insiders"   # Visual Studio Code Insiders
-    "emacs"           # Emacs
-    "mate"            # TextMate
-    "nano"            # Nano
-    "subl"            # Sublime Text
-    "vim"             # Vim
-  )
-
-  ## 
-  # Converts the CLI name of an editor into the application name.
-  # get_editor_name <editor>
-  #
-  local function get_editor_name() {
-    case $1 in
-      code)
-        echo "Visual Studio Code"
-        ;;
-      code-insiders)
-        echo "Visual Studio Code Insiders"
-        ;;
-      mate)
-        echo "Text Mate"
-        ;;
-      subl)
-        echo "Sublime Text"
-        ;;
-      *)
-        echo $1
-        ;;
-    esac
-  }
+  [[ -n "$PROFILE_SEPARATOR" ]] && SEPARATOR=$PROFILE_SEPARATOR
 
   ## 
   # Converts the editor CLI command into the corresponding Git command.
-  # get_git_editor <editor>
+  # get_git_editor <command>
   #
   local function get_git_editor() {
     case $1 in
@@ -74,17 +52,44 @@ function profile() (
     esac
   }
 
+  ## 
+  # Converts the editor CLI command into the corresponding application name.
+  # get_editor_name <command>
+  #
+  local function get_editor_name() {
+    case $1 in
+      atom)
+        echo "Atom"
+        ;;
+      code|code-insiders)
+        echo "Visual Studio Code"
+        ;;
+      nano)
+        echo "Nano"
+        ;;
+      subl)
+        echo "Sublime Text"
+        ;;
+      vim)
+        echo "Vim"
+        ;;
+      *)
+        echo $1
+        ;;
+    esac
+  }
+
   ##
   # Logs the specified error message.
   # log_error <message>
   #
   local function log_error() {
-    tput civis # hide cursor
+    tput civis
     echo "${CUT}${fg[red]}$1\c${reset_color}"
     sleep 1
     echo
     echo -n "${reset_color}${CUT}> "
-    tput cnorm # show cursor
+    tput cnorm
   }
 
   ## 
@@ -126,13 +131,7 @@ function profile() (
           if [[ -z "$editor" ]]; then
             log_error "You must specify an editor"
           else
-            local editor_name=$(get_editor_name "$editor")
-
-            if [[ -z "$editor_name" ]]; then
-              log_error "$editor is not a valid command"
-            else
-              log_error "$editor_name not found"
-            fi
+            log_error "$editor not found"
           fi
           read -r editor
         done
@@ -150,17 +149,11 @@ function profile() (
       local working_dir_msg="Working directory ($($is_installation && echo "relative to $HOME, e.g. Developer" || echo $WORKING_DIR_NAME))"
       local editor_msg="Editor ($($is_installation && echo "shell command, e.g. code, nano, vim" || echo $EDITOR))"
 
-      if ! $is_installation && ! profile check; then
-        return 1
-      fi
+      ! $is_installation && ! profile check && return 1
 
       if ! $is_reload; then
         echo "${fg_bold[blue]}👤 $USER${reset_color}"
-
-        if ! $is_installation; then
-          echo "(hit ⏎ if unchanged)"
-        fi
-
+        ! $is_installation && echo "(hit ⏎ if unchanged)"
         echo ""
 
         for key in NAME EMAIL WORKING_DIR EDITOR; do
@@ -174,6 +167,7 @@ function profile() (
             changed_keys+=1
           fi
         done
+        
         key=
       fi
 
@@ -200,7 +194,7 @@ function profile() (
       exec zsh --login
       ;;
 
-    install)
+    install|i)
       if profile check >/dev/null; then
         echo "${fg[yellow]}WARNING: you already have a profile installed for the user $USER${reset_color}"
         echo -n "Do you want to override the current profile? (y/N) "
@@ -231,14 +225,14 @@ function profile() (
       ;;
 
     help|-h|--help)
-      echo "Usage: profile [command]"
+      echo "Usage: profile <command>"
       echo
       echo "Commands:"
-      echo -e "  config\t Edit the current profile"
-      echo -e "  install\t Install a new profile"
-      echo -e "  reload\t Reload the current profile"
-      echo -e "  check\t\t Check if the current profile is installed correctly"
-      echo -e "  help\t\t Print this help message"
+      echo -e "  config          Edit the current profile"
+      echo -e "  install|i       Install a new profile"
+      echo -e "  reload          Reload the current profile"
+      echo -e "  check           Check if the current profile is installed correctly"
+      echo -e "  help|-h|--help  Print this help message"
       ;;
 
     *)
@@ -246,12 +240,14 @@ function profile() (
         echo "${fg[red]}Unknown command: $1${reset_color}"
         profile help
       else
+        local editor=$(get_editor_name $(echo $EDITOR | head -n1 | cut -d " " -f1))
+
         if profile check; then
-          print -P "${fg_bold[blue]}👤 $USER${reset_color}"
-          print -P "%F{015}Name:${reset_color} $NAME"
-          print -P "%F{015}Email:${reset_color} $EMAIL"
-          print -P "%F{015}Working directory:${reset_color} $WORKING_DIR"
-          print -P "%F{015}Editor:${reset_color} $(get_editor_name $EDITOR)"
+          print -P "%F{039}user  $SEPARATOR%{$reset_color%}$USER"
+          print -P "%F{039}name  $SEPARATOR%{$reset_color%}$NAME"
+          print -P "%F{039}email $SEPARATOR%{$reset_color%}$EMAIL"
+          print -P "%F{039}path  $SEPARATOR%{$reset_color%}~/$WORKING_DIR_NAME"
+          print -P "%F{039}editor$SEPARATOR%{$reset_color%}$editor"
         else
           return 1
         fi

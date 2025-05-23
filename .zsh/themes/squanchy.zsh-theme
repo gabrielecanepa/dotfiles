@@ -1,3 +1,5 @@
+autoload -U colors && colors
+
 function squanchy() {
   ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
   ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"

@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Clear on startup
+clear
+
 # Environment
 export LANG="en_US.UTF-8"
 export PATH="./bin:./.bin:$PATH"
@@ -77,8 +80,11 @@ plugins=(
   zsh-syntax-highlighting
   # Custom
   brewfile
-  completions
+  colors256
+  dependencies
+  gatekeeper
   gemfile
+  google
   lts
   node-version
   npm-global
@@ -102,10 +108,8 @@ autoload bashcompinit && bashcompinit
 . $(brew --prefix)/etc/bash_completion.d/az
 completions npm
 
-# Aliases, background jobs, cronjobs
+# Aliases
 . "$HOME/.aliases"
-(. "$HOME/.jobs" >/dev/null &) >/dev/null
-crontab "$HOME/.crontab"
 
 # Avoid duplicates in path
 typeset -aU path

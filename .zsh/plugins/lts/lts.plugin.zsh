@@ -6,13 +6,13 @@ function lts() (
   local function print_help_message() {
     echo "Command line utility to quickly find and install the latest stable version of common programming languages.\n"
 
-    echo "Usage: lts [install] [language@version]"
+    echo "Usage: lts [install|i] <language@prefix>"
     echo "Supported languages: ${LANGS[@]}\n"
 
     echo "Commands:"
     echo "  lts <language@prefix>               Get the latest version of a language matching an optional prefix"
     echo "  lts install                         Install the latest version of all languages"
-    echo "  lts install <language@prefix>       Install the latest version of the specified languages matching an optional prefix"
+    echo "  lts i <language@prefix>       Install the latest version of the specified languages matching an optional prefix"
     echo "Examples:"
     echo "  lts node                            Get the latest version of Node"
     echo "  lts node@18                         Get the latest minor version of Node 18"
@@ -82,7 +82,7 @@ function lts() (
   }
 
   case $1 in
-    install)
+    install|i)
       local args=(${@:2})
       [[ -z "$args" ]] && local versions=(${LANGS[@]}) || local versions=($args)
 

@@ -1,5 +1,4 @@
-# RuboCop - https://docs.rubocop.org
-
+# https://docs.rubocop.org
 AllCops:
   Exclude:
     - "bin/**/*"

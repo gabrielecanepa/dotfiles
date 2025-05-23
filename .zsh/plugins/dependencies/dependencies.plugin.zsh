@@ -36,10 +36,10 @@ function dependencies() {
   [[ ! -f "$root/package.json" ]] && echo "No package.json found" && return 1
 
   local package_json="$(cat "$root/package.json")"
-  local dependencies="$(echo $package_json | jq -r '.dependencies | keys | .[]' 2>/dev/null)"
-  local dev_dependencies="$(echo $package_json | jq -r '.devDependencies | keys | .[]' 2>/dev/null)"
-  local peer_dependencies="$(echo $package_json | jq -r '.peerDependencies | keys | .[]' 2>/dev/null)"
-  local optional_dependencies="$(echo $package_json | jq -r '.optionalDependencies | keys | .[]' 2>/dev/null)"
+  local dependencies="$(jq -r '.dependencies | keys[]' $package_json 2>/dev/null)"
+  local dev_dependencies="$(jq -r '.devDependencies | keys[]' $package_json 2>/dev/null)"
+  local peer_dependencies="$(jq -r '.peerDependencies | keys[]' $package_json  2>/dev/null)"
+  local optional_dependencies="$(jq -r '.optionalDependencies | keys[]' $package_json  2>/dev/null)"
 
   if [[ ${#opts[@]} == 0 ]]; then
     local output="$dependencies"

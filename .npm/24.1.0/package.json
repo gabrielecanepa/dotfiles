@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "commitlint": "^19.8.1",
+    "corepack": "^0.32.0",
+    "npm": "^11.3.0",
+    "pnpm": "^10.11.0"
+  }
+}

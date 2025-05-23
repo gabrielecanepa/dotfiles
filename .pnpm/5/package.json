@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"@shopify/cli": "^3.80.6",
+		"serve": "^14.2.4",
+		"vercel": "^41.4.1"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	}
+}

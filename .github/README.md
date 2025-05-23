@@ -51,7 +51,7 @@ for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
 done
 
-# Restart the shell
+# Restart
 zsh
 ```
 
@@ -65,7 +65,7 @@ gh repo clone gabrielecanepa/dotfiles
 git clone git@github.com:gabrielecanepa/dotfiles.git
 ```
 
-Copy all files to your home directory, manually or in bulk.
+Copy the files to your home directory, manually or in bulk.
 
 > [!WARNING]
 > The following bulk operation will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
@@ -80,7 +80,7 @@ for config in $(ls -A); do
 done
 ```
 
-Install all the packages listed in the [Brewfile](/.Brewfile):
+Install the packages listed in the [Brewfile](/.Brewfile):
 
 ```sh
 brew bundle --file ~/.Brewfile
@@ -90,7 +90,7 @@ brew bundle --file ~/.Brewfile
 
 #### Shell profile
 
-Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell profile using a guided prompt:
+Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell profile with a guided prompt:
 
 ```sh
 profile install

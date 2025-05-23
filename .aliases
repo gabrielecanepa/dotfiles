@@ -57,6 +57,7 @@ alias te="open -a TextEdit"
 # Shortcuts
 alias hide="chflags hidden"
 alias unhide="chflags nohidden"
+alias rehistory="history >/dev/null"
 
 # CLI
 alias ghrv="gh repo view --web"
@@ -81,4 +82,3 @@ done; unset workspace
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-alias serve="ruby -run -e httpd . -p 8000"

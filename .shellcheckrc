@@ -1,4 +1,4 @@
-# ShellCheck - https://shellcheck.net
+# https://shellcheck.net
 external-sources=true
 disable=SC1090
 disable=SC1091
