@@ -81,6 +81,7 @@ plugins=(
   # Custom
   brewfile
   colors256
+  completions
   dependencies
   gatekeeper
   gemfile
