@@ -3,16 +3,15 @@ tap "github/gh"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "powershell/tap"
-tap "shopify/shopify"
 tap "supabase/tap"
 # Library for command-line editing
 brew "readline"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # YAML Parser
 brew "libyaml"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
 # Microsoft Azure CLI 2.0
 brew "azure-cli"
 # Dependency manager for Cocoa projects
@@ -53,6 +52,8 @@ brew "nginx"
 brew "node"
 # Manage multiple NodeJS versions
 brew "nodenv"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
 # Object-relational database system
 brew "postgresql@15"
 # Python version management
@@ -77,8 +78,6 @@ brew "tree"
 brew "azure/functions/azure-functions-core-tools@4"
 # Formula to install PowerShell
 brew "powershell/tap/powershell"
-# A CLI tool to build for the Shopify platform
-brew "shopify/shopify/shopify-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -87,8 +86,8 @@ cask "1password-cli"
 cask "chatgpt"
 # Automated testing of webapps for Google Chrome
 cask "chromedriver"
-# Customise menu item keyboard shortcuts
-cask "customshortcuts"
+# Disk usage utility
+cask "disk-inventory-x"
 # Collaborative team software
 cask "figma"
 # Web browser
