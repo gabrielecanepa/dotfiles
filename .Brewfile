@@ -98,6 +98,8 @@ cask "grammarly-desktop"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
+# Handy utility to manage and customize the notch area
+cask "notchnook"
 # App to write, plan, collaborate, and get organised
 cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
