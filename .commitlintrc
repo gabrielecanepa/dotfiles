@@ -13,7 +13,14 @@
         "ruby",
         "shell",
         "tool",
-        "vscode",
+        "vscode"
+      ]
+    ],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "npm",
         "zsh"
       ]
     ],
@@ -25,21 +32,6 @@
     "type-empty": [
       2,
       "never"
-    ],
-    "scope-enum": [
-      2,
-      "always",
-      [
-        "config",
-        "ext",
-        "plugin",
-        "theme",
-        "tap",
-        "brew",
-        "cask",
-        "mas",
-        "zsh"
-      ]
     ],
     "scope-case": [
       2,
