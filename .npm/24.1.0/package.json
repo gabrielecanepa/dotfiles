@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "24.1.0"
+  },
   "dependencies": {
     "commitlint": "^19.8.1",
     "corepack": "^0.32.0",

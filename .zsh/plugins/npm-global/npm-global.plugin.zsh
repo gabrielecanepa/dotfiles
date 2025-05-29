@@ -37,12 +37,12 @@ function npm-global() {
 
     if [[ -f package.json ]]; then
       command npm uninstall $(jq -r '.dependencies | keys[]' package.json | tr '\n' ' ')
-    else
-      echo "{}" > package.json
     fi
 
+    echo "{\n  \"engines\": {\n    \"node\": \"$(node_version)\"\n  }\n}" > package.json
     command npm install $(global_dependencies)
     local exit=$?
+    rm -rf node_modules
     cd - >/dev/null
     return $exit
   }
