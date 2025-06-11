@@ -1,23 +1,20 @@
-# Local ignores for dotfiles repository.
+# Local ignores for dotfiles repository
 
 # Directories
 /*/
 !/.bundle/
 /.bundle/cache
-!/.chrome/
-/.config/
 !/.github/
 !/.husky/
 !/.npm/
 /.npm/_*
-!/.pnpm/
 !/.ssh/
 /.ssh/*
 !/.ssh/config
 !/.vscode/
 /.vscode/*
 !/.vscode/user/
-!/.vscode/settings.json/
+!/.vscode/settings.json
 !/.zsh/
 /.zsh/completions/
 /.zsh/plugins/_*/
@@ -37,13 +34,10 @@
 /.yarnrc
 /.zcompdump*
 /.zprofile
+/.zshenv
 
 # System folders
 /Applications
 /Downloads
 /Movies
 /Music
-
-# Common
-node_modules/
-.DS_Store
