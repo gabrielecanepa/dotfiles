@@ -1,7 +1,15 @@
-# Local ignores for dotfiles repository
+# Ignores for dotfiles repository
+
+# Ignore everything by default
+/*
+
+# System folders
+/Applications
+/Downloads
+/Movies
+/Music
 
 # Directories
-/*/
 !/.bundle/
 /.bundle/cache
 !/.github/
@@ -35,9 +43,3 @@
 /.zcompdump*
 /.zprofile
 /.zshenv
-
-# System folders
-/Applications
-/Downloads
-/Movies
-/Music
