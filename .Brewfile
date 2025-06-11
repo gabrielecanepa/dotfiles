@@ -102,8 +102,6 @@ cask "imageoptim"
 cask "nordvpn"
 # Handy utility to manage and customize the notch area
 cask "notchnook"
-# App to write, plan, collaborate, and get organised
-cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Desktop agent for Postman on the Web
@@ -124,7 +122,6 @@ cask "visual-studio-code"
 cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
 mas "AdGuard for Safari", id: 1440147259
 mas "Ethernet Status", id: 1186187538
 mas "GarageBand", id: 682658836
