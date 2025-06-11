@@ -1,12 +1,8 @@
-#!/bin/zsh
-
 # Clear on startup
 clear
 
-# Environment
 export LANG="en_US.UTF-8"
 export PATH="./bin:./.bin:$PATH"
-[[ -f ~/.env ]] && . ~/.env
 
 # Homebrew (https://brew.sh)
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -105,9 +101,9 @@ if profile check; then
 fi
 
 # Completions
-autoload bashcompinit && bashcompinit
-. $(brew --prefix)/etc/bash_completion.d/az
-completions npm
+fpath=(~/.zsh/completions $fpath)
+autoload -U bashcompinit && bashcompinit
+autoload -U compinit && compinit
 
 # Aliases
 . "$HOME/.aliases"
