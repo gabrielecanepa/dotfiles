@@ -117,6 +117,19 @@ function npm-global() {
     
     return $exit
   }
+
+  function nodenv () {
+    command nodenv $@
+    local exit=$?
+
+    case $1 in
+      install)
+        ((npm install $(global_dependencies) --global && npm-dump) &>/dev/null &) &>/dev/null
+        ;;
+    esac
+
+    return $exit
+  }
 }
 
 npm-global
