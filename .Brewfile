@@ -28,6 +28,8 @@ brew "gh"
 brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Regular expressions library
