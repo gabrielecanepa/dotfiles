@@ -153,6 +153,11 @@
     "key": "ctrl+shift+alt+p"
   },
   {
+    "command": "workbench.action.quickchat.toggle",
+    "key": "ctrl+shift+cmd+i",
+    "when": "chatIsEnabled"
+  },
+  {
     "command": "-editor.action.smartSelect.shrink",
     "key": "ctrl+shift+cmd+left",
     "when": "editorTextFocus"
@@ -189,6 +194,11 @@
   {
     "command": "workbench.action.openGlobalKeybindingsFile",
     "key": "shift+alt+cmd+[Comma]"
+  },
+  {
+    "command": "-workbench.action.quickchat.toggle",
+    "key": "shift+alt+cmd+l",
+    "when": "chatIsEnabled"
   },
   {
     "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
