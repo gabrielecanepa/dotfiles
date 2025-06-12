@@ -48,7 +48,11 @@ function lts() (
     local vm=$(get_version_manager $lang)
 
     case $lang in
-      node|python)
+      node)
+        curl -s https://nodejs.org/en/download | grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+ (LTS)' | head -1 | sed 's/ (LTS)//' | sed 's/^v//'
+        return $?
+        ;;
+      python)
         local opt="--list"
         ;;
       ruby)

@@ -1,12 +1,11 @@
 {
   "engines": {
-    "node": "24.1.0"
+    "node": "22.16.0"
   },
   "dependencies": {
     "commitlint": "^19.8.1",
     "corepack": "^0.32.0",
-    "npm": "^11.3.0",
-    "pnpm": "^10.12.1",
-    "serve": "^14.2.4"
+    "npm": "^10.9.2",
+    "pnpm": "^10.12.1"
   }
 }
