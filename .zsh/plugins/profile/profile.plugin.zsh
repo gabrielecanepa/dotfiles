@@ -1,21 +1,5 @@
 #!/bin/zsh
 
-##
-# Profile plugin for Zsh
-# This plugin allows you to manage your Zsh profile, including setting up your name, email, working directory, and editor.
-# It provides commands to install, reload, and check the profile configuration.
-#
-# Usage
-#   profile                 # Print the current profile
-#   profile install|i       # Install a new profile
-#   profile config          # Configure the profile
-#   profile reload          # Reload the current profile
-#   profile check           # Check if the profile is installed correctly
-#   profile help|-h|--help  # Print help message
-#
-# Options
-#   PROFILE_SEPARATOR: sets a custom separator for the profile output
-
 ## 
 # Prints the current profile or executes a command among `config`, `install`, `reload`, `check`, or `help`.
 #
