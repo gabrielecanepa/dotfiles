@@ -88,6 +88,7 @@ plugins=(
   path
   plugin
   profile
+  vscode
 )
 
 . "$ZSH/oh-my-zsh.sh"
