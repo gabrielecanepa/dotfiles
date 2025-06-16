@@ -87,6 +87,7 @@ plugins=(
   npm-global
   path
   plugin
+  pnpm-completions
   profile
   vscode
 )
