@@ -103,9 +103,9 @@ if profile check; then
 fi
 
 # Completions
-fpath=(~/.zsh/completions $fpath)
-autoload -U bashcompinit && bashcompinit
-autoload -U compinit && compinit
+fpath=(~/.zsh/completions ~/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
 
 # Aliases
 . "$HOME/.aliases"

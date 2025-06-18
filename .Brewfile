@@ -90,6 +90,8 @@ cask "chatgpt"
 cask "chromedriver"
 # Disk usage utility
 cask "disk-inventory-x"
+# App to build and share containerised applications and microservices
+cask "docker"
 # Collaborative team software
 cask "figma"
 # Web browser
@@ -120,6 +122,8 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Screenshot tool
+cask "xnapper"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "AdGuard for Safari", id: 1440147259
