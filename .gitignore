@@ -1,45 +1,18 @@
-# Ignores for dotfiles repository
-
 # Ignore everything by default
-/*
+*
 
-# System folders
-/Applications
-/Downloads
-/Movies
-/Music
-
-# Directories
+# Track specific files and directories
 !/.bundle/
 /.bundle/cache
 !/.github/
 !/.husky/
 !/.npm/
 /.npm/_*
-!/.ssh/
-/.ssh/*
 !/.ssh/config
-!/.vscode/
-/.vscode/*
 !/.vscode/user/
 !/.vscode/settings.json
 !/.zsh/
 /.zsh/completions/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
-
-# Files
-/.*_history
-/.*.backup
-/.*hst
-/.*padl
-/.copilot-cli-access-token
-/.gist
-/.git-stats
-/.gitprofile
-/.netrc
-/.viminfo
-/.yarnrc
-/.zcompdump*
-/.zprofile
-/.zshenv
+!/.gitignore.global
