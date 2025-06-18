@@ -22,7 +22,6 @@
 # Logs and databases
 #####################
 *.log
-*.sql
 *.sqlite
 
 # Modules
@@ -53,4 +52,4 @@ Thumbs.db
 # Misc
 #######
 .private/
-*.private.*
+private/
