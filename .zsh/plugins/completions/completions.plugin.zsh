@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # Set completions path
-[[ -z "$ZSH_COMPLETIONS" ]] && export ZSH_COMPLETIONS="$ZSH_CUSTOM/completions"
-[[ ! -d "$ZSH_COMPLETIONS" ]] && mkdir -p "$ZSH_COMPLETIONS"
+[[ -z "$ZSH_COMPLETIONS_PATH" ]] && export ZSH_COMPLETIONS_PATH="$ZSH_CUSTOM/completions"
+[[ ! -d "$ZSH_COMPLETIONS_PATH" ]] && mkdir -p "$ZSH_COMPLETIONS_PATH"
 
 function completions() {
   local clis=($@)
@@ -13,18 +13,20 @@ function completions() {
 
   if [[ -n "$comp" ]]; then
     [[ ${#clis[@]} > 1 ]] && echo "Error: only one cli can be passed when using stdin" && return 1
-    echo "$comp" > "$ZSH_COMPLETIONS/_${clis[0]}"
+    echo "$comp" > "$ZSH_COMPLETIONS_PATH/_${clis[0]}"
   else
     for cli in $clis; do
-      ! command -v $cli >/dev/null && echo "Command not found: $cli" && return 1
-      local comp="$(eval "$cli completion zsh")"
+      ! command -v $cli >/dev/null && echo "[completions] Command not found: $cli" && return 1
+      local comp="$(eval "$cli completion zsh" 2>/dev/null)"
+      [[ -z "$comp" ]] && comp="$(eval "$cli completion --zsh" 2>/dev/null)"
+      [[ -z "$comp" ]] && comp="$(eval "$cli completion" 2>/dev/null)"
 
       if [[ -z "$comp" ]] ; then
-        echo "Error: no completions found for $cli"
+        echo "[completions] Error: can't find completions for $cli"
         continue
       fi
 
-      echo $comp > "$ZSH_COMPLETIONS/_$cli"
+      echo $comp > "$ZSH_COMPLETIONS_PATH/_$cli"
     done; unset cli
   fi
 }

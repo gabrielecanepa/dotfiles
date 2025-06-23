@@ -40,6 +40,8 @@ ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
 ZSH_THEME_SQUANCHY_LANGS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
+ZSH_COMPLETIONS=(docker npm pnpm supabase)
+ZSH_COMPLETIONS_PATH="$ZSH_CUSTOM/completions"
 
 # Options
 CASE_SENSITIVE=0
@@ -103,7 +105,8 @@ if profile check; then
 fi
 
 # Completions
-fpath=(~/.zsh/completions ~/.docker/completions $fpath)
+completions $ZSH_COMPLETIONS
+fpath=($ZSH_COMPLETIONS_PATH $fpath)
 autoload -Uz compinit
 compinit
 
