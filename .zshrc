@@ -38,7 +38,7 @@ esac
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME="squanchy"
-ZSH_THEME_SQUANCHY_LANGS=(node ruby python)
+ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZSH_COMPLETIONS=(docker npm pnpm supabase)
 ZSH_COMPLETIONS_PATH="$ZSH_CUSTOM/completions"

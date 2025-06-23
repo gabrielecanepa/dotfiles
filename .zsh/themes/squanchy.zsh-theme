@@ -146,8 +146,8 @@ function squanchy() {
 
   # Right prompt
   rprompts=()
-  [[ -z "$ZSH_THEME_SQUANCHY_LANGS" ]] && ZSH_THEME_SQUANCHY_LANGS=(node ruby python php)
-  for rprompt in $(tr ' ' '\n' <<< "${ZSH_THEME_SQUANCHY_LANGS[@]}" | awk '!u[$0]++' | tr '\n' ' '); do
+  [[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
+  for rprompt in $(tr ' ' '\n' <<< "${ZSH_THEME_RPROMPTS[@]}" | awk '!u[$0]++' | tr '\n' ' '); do
     case $rprompt in
       node) rprompts+='$(node_prompt)';;
       ruby) rprompts+='$(ruby_prompt)';;
