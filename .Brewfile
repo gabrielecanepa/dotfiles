@@ -80,6 +80,8 @@ brew "tree"
 brew "azure/functions/azure-functions-core-tools@4"
 # Formula to install PowerShell
 brew "powershell/tap/powershell"
+# Supabase CLI
+brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
@@ -91,7 +93,7 @@ cask "chromedriver"
 # Disk usage utility
 cask "disk-inventory-x"
 # App to build and share containerised applications and microservices
-cask "docker"
+cask "docker-desktop"
 # Collaborative team software
 cask "figma"
 # Web browser
