@@ -381,13 +381,17 @@
 }
 
 /* Supabase */
-.file-icons-enabled .supabase-name-folder-icon::before {
+.file-icons-enabled .seed\.config\.ts-name-file-icon::before {
   font-family: octicons !important;
   content: "\26a1" !important;
   transform: scale(1.1) !important;
   padding-right: 0 !important;
   margin-right: 4px !important;
   margin-left: 2px !important;
+}
+.file-icons-enabled .seed\.config\.ts-name-file-icon::before {
+  color: #40cf8f !important;
+  transform: scale(1) !important;
 }
 
 /* Svgo */

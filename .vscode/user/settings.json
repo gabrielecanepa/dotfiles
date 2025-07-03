@@ -71,22 +71,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
     "[*Light*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
           }
         }
       ]
@@ -202,7 +202,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
-  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification",
+  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification as described at https://conventionalcommits.org and provide a clear descriptive message that summarizes the changes made. All messages must be written in an imperative mood using base verb forms, e.g. 'Improve' not 'Improves', 'Enhance' not 'Enhances'. Add a dot at the end of each body paragraph.",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-sonnet-4",
   "gitlens.plusFeatures.enabled": false,

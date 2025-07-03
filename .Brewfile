@@ -51,7 +51,7 @@ brew "mysql"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Platform built on V8 to build network applications
-brew "node"
+brew "node", link: false
 # Manage multiple NodeJS versions
 brew "nodenv"
 # 7-Zip (high compression file archiver) implementation
