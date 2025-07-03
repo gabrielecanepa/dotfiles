@@ -1,27 +1,30 @@
 autoload -U colors && colors
 
-function squanchy() {
-  ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
-  ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"
-  ZSH_THEME_GIT_PROMPT_CLEAN=""
-  ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}*"
-  ZSH_THEME_GIT_PROMPT_DIRTY=""
-  ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
-  ZSH_THEME_GIT_PROMPT_PREFIX=""
-  ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_UNSTAGED=""
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
-  ZSH_THEME_SQUANCHY_ICON_BRANCH="\\ue727"
-  ZSH_THEME_SQUANCHY_ICON_COMMIT="\\ue729"
-  ZSH_THEME_SQUANCHY_ICON_GITHUB="\\uf09b"
-  ZSH_THEME_SQUANCHY_ICON_NODE="\\ue718"
-  ZSH_THEME_SQUANCHY_ICON_PHP="\\ue608"
-  ZSH_THEME_SQUANCHY_ICON_PYTHON="\\ue606"
-  ZSH_THEME_SQUANCHY_ICON_RUBY="\\ueb48"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}*"
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
+ZSH_THEME_GIT_PROMPT_PREFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_UNSTAGED=""
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
+ZSH_THEME_SQUANCHY_ICON_BRANCH="\\ue727"
+ZSH_THEME_SQUANCHY_ICON_COMMIT="\\ue729"
+ZSH_THEME_SQUANCHY_ICON_GITHUB="\\uf09b"
+ZSH_THEME_SQUANCHY_ICON_NODE="\\ue718"
+ZSH_THEME_SQUANCHY_ICON_PHP="\\ue608"
+ZSH_THEME_SQUANCHY_ICON_PYTHON="\\ue606"
+ZSH_THEME_SQUANCHY_ICON_RUBY="\\ueb48"
+ZSH_THEME_SQUANCHY_ICON_UP="↑"
+ZSH_THEME_SQUANCHY_ICON_PIN="⚑"
+ZSH_THEME_SQUANCHY_ICON_PIN_ALT="⚐"
 
+function squanchy() {
   ##
   # Returns the version manager for the specified language.
-  #
+  ##
   local function get_version_manager() {
     case $1 in
       node) echo "nodenv" ;;
@@ -33,8 +36,9 @@ function squanchy() {
 
   ##
   # Returns the current version of the specified language.
-  # @example `get_version node # => 16.0.0`
   #
+  # @example `get_version node # => 16.0.0`
+  ##
   local function get_version() {
     local lang="$1"
     [[ $lang == "python" ]] && flag="-V" || flag="-v"
@@ -51,22 +55,31 @@ function squanchy() {
 
   ##
   # Returns the given language and version appending a symbol if the version is not the latest.
-  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
   #
+  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
+  ##
   local function version_prompt() {
     local lang=$1
     local version_manager=$(get_version_manager $lang)
     local global_version="$($version_manager global 2>/dev/null)"
     local local_version=""
+    local global_version_parts=(${(s/./)global_version})
+    local lts_version="$(lts "$lang")"
+    local lts_version_parts=(${(s/./)lts_version})
+    local has_update=false
+
+    if [[ "$lts_version_parts[1]" > "$global_version_parts[1]" || "$lts_version_parts[2]" > "$global_version_parts[2]" || "$lts_version_parts[3]" > "$global_version_parts[3]" ]]; then
+      has_update=true
+    fi
 
     # Local version #
     if [ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$HOME" ]; then
       local local_version="$(cat "$(git rev-parse --show-toplevel 2>/dev/null)/.$lang-version" 2>/dev/null)"
       if [ -n "$local_version" ]; then
         if $version_manager versions | grep -q $local_version; then
-          echo "${local_version}⚑"
+          echo "${local_version}$ZSH_THEME_SQUANCHY_ICON_PIN$([[ $has_update == true ]] && echo $ZSH_THEME_SQUANCHY_ICON_UP)"
         else
-          echo "${local_version}⚐"
+          echo "${local_version}$ZSH_THEME_SQUANCHY_ICON_PIN_ALT"
         fi
         return 0
       fi
@@ -74,19 +87,19 @@ function squanchy() {
 
     # Global version #
     
-    # Display n/a if no global version is set.
+    # Display n/a if no global version is set
     if [ -z "$global_version" ]; then
       echo "n/a"
       return 0
     fi
 
-    # Show global version if the `lts` plugin is not installed.
+    # Show global version if lts is not installed
     if ! command -v lts &>/dev/null; then
       echo "$global_version"
       return 0
     fi
 
-    # Show global version with warning if the global version is not the latest.
+    # Show global version with warning if global version is not the latest
     local global_version_parts=(${(s/./)global_version})
     local lts_version="$(lts "$lang")"
     local lts_version_parts=(${(s/./)lts_version})
@@ -96,13 +109,13 @@ function squanchy() {
       return 0
     fi
 
-    # Default to global version.
+    # Default to global version
     echo "$global_version"
   }
 
   ## Git
   local function git_prompt() {
-    # Return if the current path not in a git repository or ignored.
+    # Return if the current path not in a git repository or ignored
     if ! git rev-parse --is-inside-work-tree &>/dev/null || git check-ignore . &>/dev/null; then 
       echo ""
       return 0
