@@ -341,6 +341,17 @@
   content: "\f135" !important;
 }
 
+/* Semantic Release */
+.file-icons-enabled .release\.config\.js-name-file-icon::before,
+.file-icons-enabled .release\.config\.cjs-name-file-icon::before,
+.file-icons-enabled .release\.config\.mjs-name-file-icon::before,
+.file-icons-enabled .release\.config\.ts-name-file-icon::before {
+  color: #7f7f7f !important;
+  content: "\1f7cd" !important;
+  font-size: 114% !important;
+  font-family: "fi" !important;
+}
+
 /* Shadcn */
 .file-icons-enabled .components\.json-name-file-icon::before {
   font-family: fi !important;
