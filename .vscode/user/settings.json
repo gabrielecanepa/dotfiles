@@ -71,22 +71,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Light*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    },
     "[*Dark*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
           }
         }
       ]
@@ -316,6 +316,7 @@
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 2,
+  "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
@@ -344,6 +345,7 @@
     "*.svg": "default",
     "git-rebase-todo": "default"
   },
+  "workbench.experimental.share.enabled": true,
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "file-icons",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
