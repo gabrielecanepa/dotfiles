@@ -23,7 +23,7 @@ rmm() {
 # Directories
 wd="$WORKING_DIR"
 wdu="$WORKING_DIR/$USER"
-tmp="$WORKING_DIR/tmp"
+tmp="$WORKING_DIR/.temp"
 cloud="$HOME/Library/Mobile Documents"
 icloud="$cloud/com~apple~CloudDocs"
 downloads="$icloud/Downloads"
