@@ -202,7 +202,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
-  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification as described at https://conventionalcommits.org and provide a clear descriptive message that summarizes the changes made. All messages must be written in an imperative mood using base verb forms, e.g. 'Improve' not 'Improves', 'Enhance' not 'Enhances'. Add a dot at the end of each body paragraph.",
+  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit to provide a clear descriptive message that summarizes the changes made. All messages must be written in an imperative mood using base verb forms ('Improve' and NOT 'Improves', 'Enhance' and NOT 'Enhances') and be sentence-case ('chore: Add..' and NOT 'chore: add..'). Write 0 to 3 body paragraphs, adding a dot at the end of each sentence.",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-sonnet-4",
   "gitlens.plusFeatures.enabled": false,
