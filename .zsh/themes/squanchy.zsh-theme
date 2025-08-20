@@ -10,6 +10,7 @@ ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
+ZSH_THEME_SQUANCHY_RPROMPT_EMPTY="n/a"
 ZSH_THEME_SQUANCHY_ICON_BRANCH="\\ue727"
 ZSH_THEME_SQUANCHY_ICON_COMMIT="\\ue729"
 ZSH_THEME_SQUANCHY_ICON_GITHUB="\\uf09b"
@@ -22,8 +23,15 @@ ZSH_THEME_SQUANCHY_ICON_PIN="⚑"
 ZSH_THEME_SQUANCHY_ICON_PIN_ALT="⚐"
 
 function squanchy() {
+  if [[ -z "$ZSH_THEME_RPROMPTS" ]]; then 
+    ZSH_THEME_RPROMPTS=(node ruby python php)
+  fi
+
   ##
-  # Returns the version manager for the specified language.
+  # Prints the version manager used for the specified language.
+  #
+  # @example `get_version_manager node # => nodenv`
+  # @example `get_version_manager python # => pyenv`
   ##
   local function get_version_manager() {
     case $1 in
@@ -35,7 +43,7 @@ function squanchy() {
   }
 
   ##
-  # Returns the current version of the specified language.
+  # Prints the current version of the specified language.
   #
   # @example `get_version node # => 16.0.0`
   ##
@@ -54,7 +62,7 @@ function squanchy() {
   }
 
   ##
-  # Returns the given language and version appending a symbol if the version is not the latest.
+  # Prints the given language and version appending symbols to indicate the status.
   #
   # @example `version_prompt node@21.1.0 # => 21.1.0↑`
   ##
@@ -85,11 +93,11 @@ function squanchy() {
       fi
     fi
 
-    # Global version #
+    ## Global version ##
     
-    # Display n/a if no global version is set
+    # Display the empty rprompt if global version is not set
     if [ -z "$global_version" ]; then
-      echo "n/a"
+      echo $ZSH_THEME_SQUANCHY_RPROMPT_EMPTY
       return 0
     fi
 
@@ -110,7 +118,7 @@ function squanchy() {
     fi
 
     # Default to global version
-    echo "$global_version"
+    echo $global_version
   }
 
   ## Git
@@ -168,9 +176,9 @@ function squanchy() {
       php) rprompts+='$(php_prompt)';;
       *) echo "${fg[red]}Unknown theme prompt: $rprompt$reset_color";;
     esac
-  done; unset rprompt
+  done
   RPROMPT="${(j:  :)rprompts}"
-  unset rprompts
+  unset rprompt rprompts
 }
 
 squanchy
