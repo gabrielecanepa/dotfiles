@@ -12,6 +12,7 @@
 !/.npm/
 !/.npm/**/*
 /.npm/_*
+/.npm/.DS_Store
 !/.ssh/
 !/.ssh/**/*
 /.ssh/id_*
