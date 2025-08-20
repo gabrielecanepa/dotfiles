@@ -44,6 +44,8 @@
     "sound": "on"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
+  "chat.agent.maxRequests": 60,
+  "chat.tools.autoApprove": true,
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
@@ -111,7 +113,6 @@
     "enable": true
   },
   "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.autoOpenDroppedFile": false,
@@ -123,6 +124,7 @@
   },
   "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
@@ -130,7 +132,6 @@
     "*.css.liquid": "liquid-css",
     "*.js": "javascript",
     "*.js.liquid": "liquid-javascript",
-    "*.json": "jsonc",
     "*.json.liquid": "json",
     "*.jsx": "javascriptreact",
     "*.liquid": "liquid",
@@ -187,7 +188,14 @@
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
@@ -202,7 +210,8 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
-  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit to provide a clear descriptive message that summarizes the changes made. All messages must be written in an imperative mood using base verb forms ('Improve' and NOT 'Improves', 'Enhance' and NOT 'Enhances') and be sentence-case ('chore: Add..' and NOT 'chore: add..'). Write 0 to 3 body paragraphs, adding a dot at the end of each sentence.",
+  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit, optionally adding a body including a list of maximum 10 points of 10 words or less explaining the changes. Both the title and the body must be written in an imperative mood using the first singular person base verb form and be sentence-case (e.g. 'chore: Add..' is correct, 'chore: Adds..' and 'chore: add..' are NOT correct).",
+  "gitlens.ai.largePromptWarningThreshold": 200000,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-sonnet-4",
   "gitlens.plusFeatures.enabled": false,
@@ -268,7 +277,6 @@
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
   "redhat.telemetry.enabled": false,
-  "rubocop.autocorrect": true,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
@@ -316,7 +324,6 @@
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 2,
-  "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
@@ -345,7 +352,6 @@
     "*.svg": "default",
     "git-rebase-todo": "default"
   },
-  "workbench.experimental.share.enabled": true,
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "file-icons",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
