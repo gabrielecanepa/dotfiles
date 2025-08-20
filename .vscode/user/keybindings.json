@@ -19,6 +19,11 @@
     "when": "terminalFocus && terminalProcessSupported"
   },
   {
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "key": "alt+cmd+left",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
     "command": "-revealFileInOS",
     "key": "alt+cmd+r",
     "when": "!editorFocus"
@@ -27,6 +32,11 @@
     "command": "-workbench.action.terminal.focusNextPane",
     "key": "alt+cmd+right",
     "when": "terminalFocus && terminalProcessSupported"
+  },
+  {
+    "command": "-workbench.action.terminal.focusNextPane",
+    "key": "alt+cmd+right",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
     "command": "-extension.htmlTagWrap",
@@ -90,6 +100,16 @@
     "key": "cmd+k shift+cmd+right"
   },
   {
+    "command": "-workbench.action.pinEditor",
+    "key": "cmd+k shift+enter",
+    "when": "!activeEditorIsPinned"
+  },
+  {
+    "command": "-workbench.action.unpinEditor",
+    "key": "cmd+k shift+enter",
+    "when": "activeEditorIsPinned"
+  },
+  {
     "command": "-workbench.action.gotoSymbol",
     "key": "cmd+r"
   },
@@ -132,12 +152,27 @@
     "key": "ctrl+cmd+left"
   },
   {
+    "command": "workbench.action.pinEditor",
+    "key": "ctrl+cmd+p",
+    "when": "!activeEditorIsPinned"
+  },
+  {
+    "command": "workbench.action.unpinEditor",
+    "key": "ctrl+cmd+p",
+    "when": "activeEditorIsPinned"
+  },
+  {
     "command": "-workbench.action.moveEditorToNextGroup",
     "key": "ctrl+cmd+right"
   },
   {
     "command": "workbench.action.moveEditorRightInGroup",
     "key": "ctrl+cmd+right"
+  },
+  {
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+cmd+t",
+    "when": "terminalProcessSupported"
   },
   {
     "command": "inlineChat.start",
@@ -166,6 +201,10 @@
     "command": "-editor.action.smartSelect.expand",
     "key": "ctrl+shift+cmd+right",
     "when": "editorTextFocus"
+  },
+  {
+    "command": "workbench.action.terminal.moveToEditor",
+    "key": "ctrl+shift+cmd+up"
   },
   {
     "command": "-workbench.action.editor.changeLanguageMode",
