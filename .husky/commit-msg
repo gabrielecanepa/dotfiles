@@ -2,8 +2,12 @@
 
 . "$(dirname "$0")/init"
 
-# Skip commits starting with [tmp]
-[[ $(cat "$1") =~ ^\[tmp\]* ]] && exit 0
+# Skip temporary commits
+case "$commit" in
+  "[tmp]"*|\#*)
+    exit 0
+    ;;
+esac
 
 # Run commitlint and shellcheck
 commitlint --edit "$1"
