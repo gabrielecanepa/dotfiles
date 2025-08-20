@@ -51,8 +51,8 @@ brew "mysql"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Platform built on V8 to build network applications
-brew "node", link: false
-# Manage multiple NodeJS versions
+brew "node"
+# Node.js version manager
 brew "nodenv"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
@@ -88,8 +88,6 @@ cask "1password"
 cask "1password-cli"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
-# Automated testing of webapps for Google Chrome
-cask "chromedriver"
 # Disk usage utility
 cask "disk-inventory-x"
 # App to build and share containerised applications and microservices
