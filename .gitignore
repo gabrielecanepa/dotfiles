@@ -4,15 +4,27 @@
 # Track specific files and directories
 !/.bundle/
 /.bundle/cache
+!/.config/
+!/.config/gh/
+!/.config/gh/config.yml
 !/.github/
 !/.husky/
 !/.npm/
+!/.npm/**/*
 /.npm/_*
-!/.ssh/config
+!/.ssh/
+!/.ssh/**/*
+/.ssh/id_*
+/.ssh/known_hosts
+!/.vscode/
 !/.vscode/user/
 !/.vscode/settings.json
 !/.zsh/
+!/.zsh/**/*
 /.zsh/completions/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
 !/.gitignore.global
+
+# Override specific files
+.DS_Store
