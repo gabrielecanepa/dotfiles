@@ -297,6 +297,7 @@
   "svg.completion.emmet": true,
   "svg.preview.background": "editor",
   "svg.preview.mode": "svg",
+  "terminal.external.osxExec": "Ghostty.app",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,

@@ -94,6 +94,8 @@ cask "disk-inventory-x"
 cask "docker-desktop"
 # Collaborative team software
 cask "figma"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Web browser
 cask "google-chrome"
 # Grammarly for desktop
