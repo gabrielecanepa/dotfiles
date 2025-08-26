@@ -73,22 +73,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
     "[*Light*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
           }
         }
       ]
@@ -128,6 +128,21 @@
   "explorer.confirmPasteNative": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    ".aliases": "shellscript",
+    ".commentlintrc": "json",
+    ".env.*": "properties",
+    ".env*": "dotenv",
+    ".eslintrc": "jsonc",
+    ".gcloudignore": "dotenv",
+    ".gitignore*": "ignore",
+    ".gitprofile": "properties",
+    ".jobs": "shellscript",
+    ".pryrc": "ruby",
+    ".remarkrc": "json",
+    ".sequelizerc": "javascript",
+    ".svg": "html",
+    ".todo": "markdown",
+    ".vscode/**/settings.json": "jsonc",
     "*.css": "tailwindcss",
     "*.css.liquid": "liquid-css",
     "*.js": "javascript",
@@ -140,21 +155,6 @@
     "*.ts": "typescript",
     "*.tsx": "typescriptreact",
     "*.yaml.liquid": "yaml",
-    ".aliases": "shellscript",
-    ".commentlintrc": "json",
-    ".env*": "dotenv",
-    ".env.*": "properties",
-    ".eslintrc": "jsonc",
-    ".gcloudignore": "dotenv",
-    ".gitignore*": "ignore",
-    ".gitprofile": "properties",
-    ".jobs": "shellscript",
-    ".pryrc": "ruby",
-    ".remarkrc": "json",
-    ".sequelizerc": "javascript",
-    ".svg": "html",
-    ".todo": "markdown",
-    ".vscode/**/settings.json": "jsonc",
     "config/*.json": "jsonc",
     "config/settings_data.json": "jsonc",
     "config/settings_schema.json": "jsonc",
@@ -211,10 +211,9 @@
     "suppressRebaseSwitchToTextWarning": true
   },
   "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit, optionally adding a body including a list of maximum 10 points of 10 words or less explaining the changes. Both the title and the body must be written in an imperative mood using the first singular person base verb form and be sentence-case (e.g. 'chore: Add..' is correct, 'chore: Adds..' and 'chore: add..' are NOT correct).",
-  "gitlens.ai.largePromptWarningThreshold": 200000,
+  "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:claude-sonnet-4",
-  "gitlens.plusFeatures.enabled": false,
+  "gitlens.ai.vscode.model": "copilot:gpt-5",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
