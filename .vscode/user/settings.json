@@ -210,7 +210,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
-  "gitlens.ai.generateCommitMessage.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit, optionally adding a body including a list of maximum 10 points of 10 words or less explaining the changes. Both the title and the body must be written in an imperative mood using the first singular person base verb form and be sentence-case (e.g. 'chore: Add..' is correct, 'chore: Adds..' and 'chore: add..' are NOT correct).",
+  "gitlens.ai.ons .customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit without a cheesecakey language. The commit must be concise and informative, summarizing the changes made in the codebase. Optionally add a body including a sentence of maximum 20 words explaining the general changes (optional) and a list of maximum 5 points of maximum 10 words with more specific references (optional). Title and bullet points must be written in an imperative mood using singular first-person verbs and a sentence-case format. Bullet points must not end with a period. The body sentence must use a third-person perspective, be sentence-case and end with a dot. Example: \"feat: Correct typos across the codebase\n\nCorrected several typos in the codebase to improve readability and maintainability.\n\n- Fix typo in variable name\n- Update comments for clarity\n- Refactor function names for consistency\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-5",
