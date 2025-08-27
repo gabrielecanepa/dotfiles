@@ -15,6 +15,7 @@
 !/.docker/config.json
 /.gem/
 /.gk/
+/.lemminx/
 /.local/
 /.nodenv/
 /.npm/
@@ -47,14 +48,9 @@
 /Pictures/
 /Public/
 
-# Symlinks
-/Applications
-/Downloads
-/Movies
-/Music
-
 # Files
 /.gitprofile
+/.lesshst
 /.netrc
 /.viminfo
 /.zcompdump*
@@ -62,3 +58,8 @@
 /.zshenv
 /.*_history
 
+# Symlinks
+/Applications
+/Downloads
+/Movies
+/Music

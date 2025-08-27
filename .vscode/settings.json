@@ -23,6 +23,7 @@
     ".docker": true,
     ".gem": true,
     ".gk": true,
+    ".lemminx": true,
     ".local": true,
     ".npm/_*": true,
     ".oh-my-zsh": true,
@@ -49,6 +50,7 @@
     "Public": true,
     // Files
     ".CFUserTextEncoding": true,
+    ".lesshst": true,
     ".viminfo": true,
     ".zcompdump*": true,
     "*_history": true,
