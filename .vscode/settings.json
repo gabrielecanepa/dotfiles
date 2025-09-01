@@ -1,5 +1,5 @@
 {
-  "git.scanRepositories": ["."],
+  "git.autoRepositoryDetection": false,
   "files.exclude": {
     // Global
     "**/.DS_Store": true,
@@ -26,7 +26,6 @@
     ".lemminx": true,
     ".local": true,
     ".npm/_*": true,
-    ".oh-my-zsh": true,
     ".pnpm/v10": true,
     ".pnpm-*": true,
     ".subversion": true,
