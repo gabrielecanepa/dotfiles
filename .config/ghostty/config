@@ -61,7 +61,7 @@ fullscreen = false
 title = 
 class = 
 x11-instance-name = 
-working-directory = inherit
+working-directory = home
 keybind = super+page_up=scroll_page_up
 keybind = super+ctrl+equal=equalize_splits
 keybind = super+physical:four=goto_tab:4

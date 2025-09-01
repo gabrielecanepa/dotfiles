@@ -1,4 +1,4 @@
-# Clear on startup
+# Clear screen on startup
 clear
 
 export LANG="en_US.UTF-8"
@@ -37,7 +37,7 @@ esac
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME="squanchy"
+# ZSH_THEME="squanchy"
 ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZSH_COMPLETIONS=(docker npm pnpm supabase)
@@ -91,6 +91,7 @@ plugins=(
   plugin
   pnpm-completions
   profile
+  themes
   vscode
 )
 
