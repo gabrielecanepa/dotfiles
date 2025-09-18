@@ -74,22 +74,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
     "[*Light*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
           }
         }
       ]
@@ -117,7 +117,6 @@
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.autoOpenDroppedFile": false,
-  "explorer.autoReveal": "focusNoScroll",
   "explorer.autoRevealExclude": {
     "**/.git": true,
     "**/bower_components": true,
@@ -156,12 +155,6 @@
     "*.ts": "typescript",
     "*.tsx": "typescriptreact",
     "*.yaml.liquid": "yaml",
-    "config/*.json": "jsonc",
-    "config/settings_data.json": "jsonc",
-    "config/settings_schema.json": "jsonc",
-    "locales/*.json": "jsonc",
-    "locales/en.json": "jsonc",
-    "locales/it.default.json": "jsonc",
     "NOTES": "markdown"
   },
   "files.autoSave": "afterDelay",
