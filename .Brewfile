@@ -10,8 +10,6 @@ brew "readline"
 brew "awscli"
 # YAML Parser
 brew "libyaml"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # Microsoft Azure CLI 2.0
 brew "azure-cli"
 # Dependency manager for Cocoa projects
@@ -20,6 +18,8 @@ brew "cocoapods"
 brew "coreutils"
 # Suite of command-line tools for converting to and working with CSV
 brew "csvkit"
+# Secure runtime for JavaScript and TypeScript
+brew "deno"
 # Run arbitrary commands when files change
 brew "entr"
 # GitHub command-line tool
@@ -62,6 +62,8 @@ brew "postgresql@15"
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -129,6 +131,7 @@ cask "xnapper"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "AdGuard for Safari", id: 1440147259
+mas "Barbee", id: 1548711022
 mas "Ethernet Status", id: 1186187538
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
