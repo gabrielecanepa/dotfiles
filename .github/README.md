@@ -1,5 +1,7 @@
+![](./image.png)
+
 > [!WARNING]
-> If you want to try the following dotfiles, you should first fork this repository, review the code and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
+> Before using the following dotfiles, you should first fork this repository, review the content and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
 
 ## Installation
 
@@ -14,7 +16,7 @@
     - [Node.js](#nodejs)
     - [Ruby](#ruby)
     - [Python](#python)
-7. [VSCode](#7-vscode)
+7. [VSCode and terminal](#7-vscode-and-terminal)
     - [Settings, snippets and extensions](#settings-snippets-and-extensions)
     - [Keybindings](#keybindings)
 8. [Assets](#8-resources)
@@ -140,24 +142,26 @@ pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### 7. VSCode
+### 7. VSCode and terminal
 
-#### Settings, snippets and extensions
+#### Settings and snippets
 
-Use symlinks to backup keybindings, settings, snippets and extensions.
+Use symlinks to backup keybindings, settings and snippets of [Visual Studio Code](https://code.visualstudio.com) and [iTerm2](https://iterm2.com).
 
 > [!WARNING]
 > The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.
 
 ```sh
+# VSCode
 for config in keybindings.json settings.json snippets; do
   file=~/Library/Application\ Support/Code/User/$config
   rm -rf $file
   ln -sf ~/.vscode/user/$config $file
 done
 
-rm -rf ~/.vscode/extensions/extensions.json
-ln -sf ~/.vscode/user/extensions.json ~/.vscode/extensions/extensions.json
+# iTerm
+rm -rf ~/.config/iterm2/AppSupport/DynamicProfiles
+ln -sf ~/.config/iterm2/profiles ~/.config/iterm2/AppSupport/DynamicProfiles
 ```
 
 #### Keybindings
@@ -223,7 +227,7 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
 done
 ```
 
-The new folder icons can be replaced manually with the system icons stored here:
+The icons of the generated symlink can be manually replaced with any of the available system icons:
 
 ```sh
 open /System/Library/Extensions/IOStorageFamily.kext/Contents/Resources

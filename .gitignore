@@ -10,6 +10,8 @@
 !/.config/gh/
 /.config/gh/hosts.yml
 !/.config/ghostty/
+!/.config/iterm2/
+/.config/iterm2/AppSupport
 !/.config/terminal/
 /.docker/
 !/.docker/config.json

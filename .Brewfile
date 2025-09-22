@@ -90,20 +90,22 @@ cask "1password"
 cask "1password-cli"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# Cut and paste files in Finder
+cask "command-x"
 # Disk usage utility
 cask "disk-inventory-x"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Collaborative team software
 cask "figma"
-# Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
 # Web browser
 cask "google-chrome"
 # Grammarly for desktop
 cask "grammarly-desktop"
 # Tool to optimise images to a smaller size
 cask "imageoptim"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
 # Handy utility to manage and customize the notch area
@@ -131,7 +133,6 @@ cask "xnapper"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "AdGuard for Safari", id: 1440147259
-mas "Barbee", id: 1548711022
 mas "Ethernet Status", id: 1186187538
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
