@@ -16,6 +16,14 @@ export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}" 
 export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+# Node.js (https://nodejs.org)
+export PATH="./node_modules/.bin:$PATH"
+export PNPM_HOME="$HOME/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 # Version managers
 # nodenv (https://github.com/nodenv/nodenv)
 # pyenv (https://github.com/pyenv/pyenv)
@@ -25,14 +33,6 @@ for vm in nodenv pyenv rbenv; do
   export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
   eval "$(${vm} init --path - zsh)"
 done; unset vm
-
-# Node.js (https://nodejs.org)
-export PATH="./node_modules/.bin:$PATH"
-export PNPM_HOME="$HOME/.pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
 
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"

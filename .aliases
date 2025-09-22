@@ -24,7 +24,7 @@ rmm() {
 wd="$WORKING_DIR"
 wdu="$WORKING_DIR/$USER"
 tmp="$WORKING_DIR/.temp"
-cloud="$HOME/Library/Mobile Documents"
+cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 icloud="$cloud/com~apple~CloudDocs"
 downloads="$icloud/Downloads"
 obsidian="$cloud/iCloud~md~obsidian/Documents"
@@ -49,8 +49,9 @@ mkdircode() {
 alias home="$EDITOR $HOME"
 alias aliases="$EDITOR $HOME/.aliases"
 alias gitconfig="$EDITOR $HOME/.gitconfig"
-alias sshrc="$EDITOR $HOME/.ssh"
 alias zshrc="$EDITOR $HOME/.zshrc"
+alias sshrc="$EDITOR $HOME/.ssh"
+
 # Open with
 alias te="open -a TextEdit"
 
@@ -59,7 +60,7 @@ alias hide="chflags hidden"
 alias unhide="chflags nohidden"
 alias rehistory="history >/dev/null"
 
-# CLI
+# CLIs
 alias ghrv="gh repo view --web"
 alias omzr="omz reload"
 alias pn="pnpm"
@@ -72,12 +73,12 @@ for git_alias in $(git aliases | sed 's/\ .*//'); do
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
   fi
-done; unset git_alias
+done
 
 # VSCode workspaces
 for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
   alias code-"$(basename "$workspace" .code-workspace)"="code $workspace"
-done; unset workspace
+done
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
