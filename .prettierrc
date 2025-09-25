@@ -19,6 +19,12 @@
       "options": {
         "singleQuote": false
       }
+    },
+    {
+      "files": [".commitlintrc", ".prettierrc"],
+      "options": {
+        "parser": "json"
+      }
     }
   ]
 }

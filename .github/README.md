@@ -6,19 +6,20 @@
 ## Installation
 
 <!-- no toc -->
+
 1. [SSH](#1-ssh)
 2. [Homebrew](#2-homebrew)
 3. [Oh My Zsh](#3-oh-my-zsh)
 4. [Dotfiles](#4-dotfiles)
 5. [Configuration](#5-configuration)
-    - [Shell profile](#shell-profile)
+   - [Shell profile](#shell-profile)
 6. [Languages and dependencies](#6-languages-and-dependencies)
-    - [Node.js](#nodejs)
-    - [Ruby](#ruby)
-    - [Python](#python)
+   - [Node.js](#nodejs)
+   - [Ruby](#ruby)
+   - [Python](#python)
 7. [VSCode and terminal](#7-vscode-and-terminal)
-    - [Settings, snippets and extensions](#settings-snippets-and-extensions)
-    - [Keybindings](#keybindings)
+   - [Settings, snippets and extensions](#settings-snippets-and-extensions)
+   - [Keybindings](#keybindings)
 8. [Assets](#8-resources)
    - [Fonts](#fonts)
    - [iCloud](#icloud)
@@ -186,12 +187,13 @@ And populate it with the following content:
 ### 8. Assets
 
 #### Fonts
-    
+
 To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts). Activate the fonts in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
 
 #### iCloud
 
 Use the following script to:
+
 - Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between the cloud and your local machine.
 - Replace the home `Applications` folder with a symlink to the system applications folder.
 - Create a symlink named `iCloud`, pointing to the related cloud folder, in `Applications`, `Developer` and `Pictures`.
@@ -210,7 +212,7 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
   case $folder in
     # Replace with a symlink to the system folder.
     Applications)
-      rm -rf ~/Applications 
+      rm -rf ~/Applications
       ln -sf /Applications ~/Applications
       ln -sf $cloud_folder /Applications/iCloud
       ;;

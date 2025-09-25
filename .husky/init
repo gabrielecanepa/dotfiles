@@ -3,5 +3,5 @@
 export HUSKY="$HOME/.husky"
 
 run() {
-  . "${HUSKY}/plugins/${1}"
+  . "${HUSKY}/bin/${1}"
 }

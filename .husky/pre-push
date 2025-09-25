@@ -2,8 +2,7 @@
 
 . "$(dirname "$0")/init"
 
-# Run commitlint on new commits
-commitlint --from=HEAD --to="$(git remote)/$(git branch --show-current)"
 
-# Run shellcheck
+commitlint --from=HEAD --to="$(git remote)/$(git branch --show-current)"
 run shellcheck
+prettier --check ".{commitlintrc,prettierrc}" ".{config,github,npm,vscode}/**/*.{css,json,md,yml}" --ignore-path .gitignore --ignore-unknown

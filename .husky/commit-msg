@@ -9,6 +9,5 @@ case "$commit" in
     ;;
 esac
 
-# Run commitlint and shellcheck
 commitlint --edit "$1"
 run shellcheck
