@@ -46,7 +46,6 @@
   "application.shellEnvironmentResolutionTimeout": 20,
   "chat.agent.maxRequests": 60,
   "chat.editing.confirmEditRequestRemoval": false,
-  "chat.tools.autoApprove": true,
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
@@ -213,16 +212,17 @@
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
   "gitlens.views.scm.grouped.views": {
-    "branches": true,
     "commits": false,
-    "contributors": true,
-    "launchpad": false,
+    "branches": true,
     "remotes": true,
-    "repositories": false,
-    "searchAndCompare": false,
     "stashes": true,
     "tags": true,
-    "worktrees": true
+    "worktrees": true,
+    "contributors": true,
+    "fileHistory": false,
+    "repositories": true,
+    "searchAndCompare": false,
+    "launchpad": false
   },
   "html.autoCreateQuotes": true,
   "html.format.indentInnerHtml": true,
@@ -253,6 +253,7 @@
   "license.author": "Gabriele Canepa <contact@gabrielecanepa.com>",
   "license.default": "mit",
   "license.year": "auto",
+  "markdown-pdf.displayHeaderFooter": false,
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.toc.levels": "2..3",
   "markdown.preview.doubleClickToSwitchToEditor": false,
@@ -353,5 +354,18 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
+  "gitlens.views.scm.grouped.hiddenViews": {
+    "commits": false,
+    "worktrees": true,
+    "branches": false,
+    "remotes": false,
+    "stashes": false,
+    "tags": false,
+    "contributors": false,
+    "repositories": true,
+    "fileHistory": false,
+    "launchpad": false,
+    "searchAndCompare": false
+  }
 }

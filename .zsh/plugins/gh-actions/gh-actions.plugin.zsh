@@ -5,7 +5,7 @@ function gh () {
     run)
       case $2 in
         clear)
-          local runs=($(gh run list -L 1000000000 --json databaseId  -q '.[].databaseId' ${@:3}))
+          local runs=($(gh run list --json databaseId  -q '.[].databaseId' ${@:3}))
           local repo="$(gh repo view --json nameWithOwner -q .nameWithOwner)"
           local msg="${fg_bold[green]}?$reset_color Are you sure you want to delete ${#runs[@]} workflow run$([[ ${#runs[@]} > 1 ]] && echo "s")? (Y/n) "
           local run=

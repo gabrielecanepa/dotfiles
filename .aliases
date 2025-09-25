@@ -51,6 +51,7 @@ alias aliases="$EDITOR $HOME/.aliases"
 alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias zshrc="$EDITOR $HOME/.zshrc"
 alias sshrc="$EDITOR $HOME/.ssh"
+alias docs="$EDITOR $wdu/docs"
 
 # Open with
 alias te="open -a TextEdit"

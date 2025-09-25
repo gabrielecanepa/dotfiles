@@ -90,10 +90,6 @@ cask "1password"
 cask "1password-cli"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
-# Cut and paste files in Finder
-cask "command-x"
-# Disk usage utility
-cask "disk-inventory-x"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Collaborative team software
@@ -133,6 +129,7 @@ cask "xnapper"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "AdGuard for Safari", id: 1440147259
+mas "Color Picker", id: 1545870783
 mas "Ethernet Status", id: 1186187538
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434

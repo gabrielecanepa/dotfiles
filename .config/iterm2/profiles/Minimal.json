@@ -1,11 +1,11 @@
 {
-  "Profiles": [
+  "Profiles" : [
     {
-      "Use Separate Colors for Light and Dark Mode": true,
-      "Name": "Minimal",
-      "Rewritable": true,
-      "Guid": "6fd064c6-b222-4c84-a768-26ff782e75c8",
-      "Window Type": 0
+      "Use Separate Colors for Light and Dark Mode" : true,
+      "Rewritable" : true,
+      "Name" : "Minimal",
+      "Guid" : "6fd064c6-b222-4c84-a768-26ff782e75c8",
+      "Window Type" : 0
     }
   ]
 }

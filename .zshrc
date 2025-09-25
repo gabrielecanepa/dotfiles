@@ -83,6 +83,7 @@ plugins=(
   dependencies
   gatekeeper
   gemfile
+  gh-actions
   google
   lts
   node-version
