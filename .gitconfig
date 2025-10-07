@@ -45,7 +45,7 @@
 [alias]
   a = add
   acm = !git add -A && git commit -m
-  aliases = !git config --get-regexp \"alias.*\" | sed \"s/alias.//\"
+  aliases = !git config --get-regexp 'alias.*' | sed 's/alias.//'
   br = branch
   bsu = !git branch --set-upstream-to=origin $(git branch --show-current)
   ci = commit --interactive
@@ -68,7 +68,7 @@
   re = remote
   rv = remote -v
   redo = !git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD
-  reset-origin = !"git remote remove origin &>/dev/null; git remote add origin"
+  reset-origin = !git remote remove origin &>/dev/null && git remote add origin
   ro = reset-origin
   serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   set-origin = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
