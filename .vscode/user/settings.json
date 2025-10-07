@@ -44,8 +44,19 @@
     "sound": "on"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
+  "biome.requireConfiguration": true,
+  "biome.suggestInstallingGlobally": false,
   "chat.agent.maxRequests": 60,
   "chat.editing.confirmEditRequestRemoval": false,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-pre-request.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-pre-request.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-pre-request.instructions.md": true
+  },
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
@@ -73,22 +84,22 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
-    "[*Light*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    },
     "[*Dark*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
             "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
           }
         }
       ]
@@ -183,6 +194,7 @@
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
+  "git.useEditorAsCommitInput": false,
   "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
@@ -207,22 +219,35 @@
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit without a cheesecakey language. The commit must be concise and informative, summarizing the changes made in the codebase. Optionally add a body including a sentence of maximum 20 words explaining the general changes (optional) and a list of maximum 5 points of maximum 10 words with more specific references (optional). Title and bullet points must be written in an imperative mood using singular first-person verbs and a sentence-case format. Bullet points must not end with a period. The body sentence must use a third-person perspective, be sentence-case and end with a dot. Example: \"feat: Correct typos across the codebase\n\nCorrected several typos in the codebase to improve readability and maintainability.\n\n- Fix typo in variable name\n- Update comments for clarity\n- Refactor function names for consistency\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-5",
+  "gitlens.ai.vscode.model": "copilot:claude-sonnet-4.5",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
-  "gitlens.views.scm.grouped.views": {
+  "gitlens.views.scm.grouped.hiddenViews": {
+    "branches": false,
     "commits": false,
-    "branches": true,
-    "remotes": true,
-    "stashes": true,
-    "tags": true,
-    "worktrees": true,
-    "contributors": true,
+    "contributors": false,
     "fileHistory": false,
+    "launchpad": false,
+    "remotes": false,
     "repositories": true,
     "searchAndCompare": false,
-    "launchpad": false
+    "stashes": false,
+    "tags": false,
+    "worktrees": true
+  },
+  "gitlens.views.scm.grouped.views": {
+    "branches": true,
+    "commits": false,
+    "contributors": true,
+    "fileHistory": false,
+    "launchpad": false,
+    "remotes": true,
+    "repositories": true,
+    "searchAndCompare": false,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true
   },
   "html.autoCreateQuotes": true,
   "html.format.indentInnerHtml": true,
@@ -260,6 +285,7 @@
   "MinifyAll.disableHexadecimalShortener": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
+  "postman.mcp.notifications.postmanMCP": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.endOfLine": "auto",
@@ -326,7 +352,7 @@
       "activityBarBadge.background": "#f85149",
       "statusBar.background": "#2f81f7",
       "statusBar.foreground": "#ffffff",
-      "statusBarItem.remoteBackground": "#238636",
+      "statusBarItem.remoteBackground": "#2f81f7",
       "tab.activeBorderTop": "#2f81f7"
     },
     "[GitHub Light]": {
@@ -335,7 +361,7 @@
       "statusBar.background": "#0969da",
       "statusBar.border": "#0969da",
       "statusBar.foreground": "#ffffff",
-      "statusBarItem.remoteBackground": "#159739",
+      "statusBarItem.remoteBackground": "#0969da",
       "statusBarItem.remoteForeground": "#ffffff",
       "tab.activeBorderTop": "#159739"
     }
@@ -354,18 +380,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "gitlens.views.scm.grouped.hiddenViews": {
-    "commits": false,
-    "worktrees": true,
-    "branches": false,
-    "remotes": false,
-    "stashes": false,
-    "tags": false,
-    "contributors": false,
-    "repositories": true,
-    "fileHistory": false,
-    "launchpad": false,
-    "searchAndCompare": false
-  }
+  "workbench.tree.expandMode": "doubleClick"
 }

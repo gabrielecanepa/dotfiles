@@ -432,6 +432,14 @@
   content: "\f253" !important;
 }
 
+/* Tsdown */
+.file-icons-enabled .tsdown\.config\.js-name-file-icon::before,
+.file-icons-enabled .tsdown\.config\.ts-name-file-icon::before {
+  font-family: fi !important;
+  content: "\ea61" !important;
+  color: #89a5e8 !important;
+}
+
 /* Tsup */
 .file-icons-enabled .tsup\.config\.js-name-file-icon::before,
 .file-icons-enabled .tsup\.config\.ts-name-file-icon::before {
