@@ -46,6 +46,14 @@
   content: "\1f680" !important;
 }
 
+/* Biome */
+.file-icons-enabled .biome\.json-name-file-icon::before {
+  content: "\25b2" !important;
+  font-size: 107% !important;
+  font-family: fi !important;
+  color: #61a5fa !important;
+}
+
 /* Build */
 .file-icons-enabled .build-name-folder-icon::before {
   font-family: octicons !important;
@@ -195,6 +203,14 @@
   color: #f5c06d !important;
 }
 
+/* Lefthook */
+.file-icons-enabled .lefthook\.json-name-file-icon::before {
+  color: #ac4142 !important;
+  content: "\eb8b" !important;
+  font-size: 121% !important;
+  font-family: "fi" !important;
+}
+
 /* Mac */
 .file-icons-enabled .\.macos-name-folder-icon::before {
   font-family: fi !important;
@@ -256,6 +272,14 @@
 .file-icons-enabled .\.npm-name-folder-icon::before {
   font-family: fi !important;
   content: "\e91c" !important;
+}
+
+/* Oxc */
+.file-icons-enabled .\.oxlintrc\.json-name-file-icon::before,
+.file-icons-enabled .oxlintrc\.json-name-file-icon::before {
+  font-size: 114% !important;
+  font-family: fa !important;
+  content: "\f13d" !important;
 }
 
 /* Panda CSS */
