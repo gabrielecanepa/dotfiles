@@ -3,6 +3,7 @@
 /.azure/
 /.azure-shell/
 /.azurefunctions/
+/.aws*/
 /.bun/
 /.bundle/*/
 /.cache/

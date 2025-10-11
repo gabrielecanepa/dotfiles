@@ -4,12 +4,14 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "powershell/tap"
 tap "supabase/tap"
-# Library for command-line editing
-brew "readline"
-# Official Amazon AWS command-line interface
-brew "awscli"
 # YAML Parser
 brew "libyaml"
+# Library for command-line editing
+brew "readline"
+# CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
+brew "aws-sam-cli"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Microsoft Azure CLI 2.0
 brew "azure-cli"
 # Dependency manager for Cocoa projects
@@ -26,6 +28,8 @@ brew "entr"
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Open-source GitLab command-line tool
+brew "glab"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
