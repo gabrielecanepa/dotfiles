@@ -46,9 +46,16 @@
   content: "\1f680" !important;
 }
 
+/* AWS */
+.file-icons-enabled .\.aws-name-folder-icon::before,
+.file-icons-enabled .\.aws-sam-name-folder-icon::before {
+  font-family: mf !important;
+  content: "\f103" !important;
+}
+
 /* Biome */
 .file-icons-enabled .biome\.json-name-file-icon::before {
-  content: "\25b2" !important;
+  content: url('data:image/svg+xml,<svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.9998 0L3.88147 5.56836C5.06473 5.19226 6.33764 5.1365 7.57154 5.43658L8.62544 5.69305L7.63389 10.0278L6.5785 9.77134C5.76778 9.57416 4.92268 9.76954 4.26909 10.3023C3.94215 10.5689 3.68459 10.9036 3.50807 11.2791L2.53254 10.7925C2.77933 10.2669 3.14015 9.7982 3.59592 9.42622C4.5076 8.68222 5.69627 8.40893 6.8281 8.68428L7.32237 6.52389C5.55187 6.09356 3.68596 6.52208 2.25948 7.6861C0.833162 8.85 0 10.6243 0 12.4998L14 12.5L6.9998 0Z" fill="%2360A5FA"/></svg>') !important;
   font-size: 107% !important;
   font-family: fi !important;
   color: #61a5fa !important;
@@ -274,12 +281,20 @@
   content: "\e91c" !important;
 }
 
+/* Nx */
+.file-icons-enabled .\.nx-name-folder-icon::before {
+  content: "\eb9c" !important;
+  font-size: 121% !important;
+  font-family: "fi" !important;
+}
+
 /* Oxc */
 .file-icons-enabled .\.oxlintrc\.json-name-file-icon::before,
 .file-icons-enabled .oxlintrc\.json-name-file-icon::before {
   font-size: 114% !important;
   font-family: fa !important;
   content: "\f13d" !important;
+  color: #ee804b !important;
 }
 
 /* Panda CSS */
@@ -478,6 +493,17 @@
   }
 }
 
+/* Turborepo */
+.file-icons-enabled .turbo\.json-name-file-icon::before,
+.file-icons-enabled .\.turbo-name-folder-icon::before {
+  content: "\f1ce" !important;
+  font-size: 107% !important;
+  font-family: fa !important;
+}
+.file-icons-enabled .turbo\.json-name-file-icon::before {
+  color: #3f79d5 !important;
+}
+
 /* TypeScript */
 .file-icons-enabled .tsconfig\.paths\.json-name-file-icon::before {
   color: #6a9fb5 !important;
@@ -500,10 +526,8 @@
 }
 
 /* Vercel */
-.file-icons-enabled .\.vercel-name-folder-icon::before,
-.file-icons-enabled .turbo\.json-name-file-icon::before,
-.file-icons-enabled .\.turbo-name-folder-icon::before {
-  content: "\25B2" !important;
+.file-icons-enabled .\.vercel-name-folder-icon::before {
+  content: "\25b2" !important;
   font-size: 107% !important;
   font-family: fi !important;
 }
