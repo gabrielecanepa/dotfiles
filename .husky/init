@@ -1,7 +1,0 @@
-#!/bin/sh
-
-export HUSKY="$HOME/.husky"
-
-run() {
-  . "${HUSKY}/bin/${1}"
-}

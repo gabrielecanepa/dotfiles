@@ -1,6 +1,0 @@
-#!/bin/sh
-# shellcheck disable=SC2086
-
-hooks=$(find .husky -maxdepth 1 -type f | grep -v ".DS_Store" | xargs)
-
-shellcheck $hooks .aliases .bash_profile .bashrc .profile

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-. "$(dirname "$0")/init"
-
 # Skip temporary commits
 case "$commit" in
   "[tmp]"*|\#*)
@@ -9,5 +7,4 @@ case "$commit" in
     ;;
 esac
 
-commitlint --edit "$1"
-run shellcheck
+npx commitlint --edit "$1" --quiet
