@@ -93,7 +93,8 @@ keybind = super+plus=increase_font_size:1
 keybind = super+q=quit
 keybind = super+home=scroll_to_top
 keybind = super+ctrl+left=resize_split:left,10
-keybind = alt+left=esc:b
+keybind = alt+left=unbind
+keybind = alt+right=unbind
 keybind = super+ctrl+up=resize_split:up,10
 keybind = super+left=text:\x01
 keybind = super+shift+up=jump_to_prompt:-1
@@ -104,7 +105,6 @@ keybind = super+minus=decrease_font_size:1
 keybind = shift+page_down=adjust_selection:page_down
 keybind = ctrl+tab=next_tab
 keybind = super+a=select_all
-keybind = alt+right=esc:f
 keybind = super+shift+enter=toggle_split_zoom
 keybind = super+alt+down=goto_split:down
 keybind = super+ctrl+f=toggle_fullscreen
@@ -192,7 +192,7 @@ app-notifications = no-clipboard-copy
 macos-non-native-fullscreen = false
 macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
-# macos-option-as-alt = false
+macos-option-as-alt = left
 macos-window-shadow = true
 macos-auto-secure-input = true
 macos-secure-input-indication = true
@@ -220,5 +220,3 @@ term = xterm-ghostty
 enquiry-response = 
 auto-update = download
 auto-update-channel = stable
-macos-option-as-alt = true
-
