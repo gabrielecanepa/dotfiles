@@ -25,15 +25,13 @@ wd="$WORKING_DIR"
 wdu="$WORKING_DIR/$USER"
 tmp="$WORKING_DIR/.temp"
 cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-icloud="$cloud/com~apple~CloudDocs"
-downloads="$icloud/Downloads"
-obsidian="$cloud/iCloud~md~obsidian/Documents"
+downloads="$cloud/Downloads"
 
-alias cdc="cd '$icloud'"
-alias cdd="cd '$downloads'"
 alias cdw="cd '$wd'"
 alias cdwu="cd '$wdu'"
 alias tmp="cd '$tmp'"
+alias cdc="cd '$cloud'"
+alias cdd="cd '$downloads'"
 
 mkdircd() { 
   dir="$(mkdir -pv "$@")"
@@ -83,4 +81,3 @@ done
 
 # Network
 alias ip="echo $(curl -s ipinfo.io/ip)"
-alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"

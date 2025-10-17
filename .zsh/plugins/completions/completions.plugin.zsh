@@ -22,7 +22,7 @@ function completions() {
       [[ -z "$comp" ]] && comp="$(eval "$cli completion" 2>/dev/null)"
 
       if [[ -z "$comp" ]] ; then
-        echo "[completions] Error: can't find completions for $cli"
+        echo "[plugin:completions] Can't generate completions for $cli"
         continue
       fi
 
