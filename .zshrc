@@ -1,4 +1,3 @@
-# Clear screen on startup
 clear
 
 export LANG="en_US.UTF-8"
@@ -17,12 +16,11 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Node.js (https://nodejs.org)
-export PATH="./node_modules/.bin:$PATH"
 export PNPM_HOME="$HOME/.pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# Bun (https://bun.sh)
+export BUN_HOME="$HOME/.bun"
+
+export PATH="./node_modules/.bin:$PNPM_HOME:$BUN_HOME/bin:$PATH"
 
 # Version managers
 # nodenv (https://github.com/nodenv/nodenv)
@@ -37,7 +35,7 @@ done; unset vm
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-# ZSH_THEME="squanchy"
+ZSH_THEME=
 ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZSH_COMPLETIONS=(docker npm pnpm supabase)
@@ -98,22 +96,25 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Profile
+# Git (https://git-scm.com)
 if profile check; then
-  # Git (https://git-scm.com)
-  git config --file "$HOME/.gitprofile" user.name "$NAME"
-  git config --file "$HOME/.gitprofile" user.email "$EMAIL"
-  git config --file "$HOME/.gitprofile" core.editor "$GIT_EDITOR"
+  git config --file $HOME/.gitprofile user.name $NAME
+  git config --file $HOME/.gitprofile user.email $EMAIL
+  git config --file $HOME/.gitprofile core.editor $GIT_EDITOR
+
+  for file in $HOME/.husky/*; do
+    ln -sf $file $HOME/.git/hooks/$(basename $file)
+  done; unset file
 fi
 
 # Completions
 completions $ZSH_COMPLETIONS
-fpath=($ZSH_COMPLETIONS_PATH $fpath)
+fpath=($ZSH_COMPLETIONS_PATH $fpath $HOME/.bun/_bun)
 autoload -Uz compinit
 compinit
 
 # Aliases
-. "$HOME/.aliases"
+. $HOME/.aliases
 
 # Avoid duplicates in path
 typeset -aU path

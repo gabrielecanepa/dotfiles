@@ -4,7 +4,10 @@
 /.azure-shell/
 /.azurefunctions/
 /.aws*/
-/.bun/
+!/.bun/
+/.bun/bin/
+/.bun/install/cache/
+/.bun/_*
 /.bundle/*/
 /.cache/
 /.config/*
@@ -23,7 +26,10 @@
 /.nodenv/
 /.npm/_*
 /.oh-my-zsh/
-/.pnpm/
+/.ollama/
+/.pnpm/*
+!/.pnpm/5/
+/.pnpm/5/.pnpm/
 /.pnpm-*/
 /.pyenv/
 /.rbenv/

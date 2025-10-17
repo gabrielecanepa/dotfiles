@@ -2,6 +2,7 @@ tap "azure/functions"
 tap "github/gh"
 tap "homebrew/cask"
 tap "homebrew/core"
+tap "oven-sh/bun"
 tap "powershell/tap"
 tap "supabase/tap"
 # YAML Parser
@@ -58,6 +59,8 @@ brew "nginx"
 brew "node"
 # Node.js version manager
 brew "nodenv"
+# Create, run, and share large language models (LLMs)
+brew "ollama", link: false
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
 # Object-relational database system
@@ -84,40 +87,30 @@ brew "tmux"
 brew "tree"
 # Azure Functions Core Tools 4.0
 brew "azure/functions/azure-functions-core-tools@4"
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun"
 # Formula to install PowerShell
 brew "powershell/tap/powershell"
 # Supabase CLI
 brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
-# Command-line interface for 1Password
-cask "1password-cli"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
-# Collaborative team software
-cask "figma"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Web browser
 cask "google-chrome"
-# Grammarly for desktop
-cask "grammarly-desktop"
 # Tool to optimise images to a smaller size
 cask "imageoptim"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Handy utility to manage and customize the notch area
-cask "notchnook"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
-# Desktop agent for Postman on the Web
-cask "postman-agent"
+# Colour picker for colours onscreen
+cask "pika"
 # Team communication and collaboration software
 cask "slack"
-# Native GUI tool for relational databases
-cask "tableplus"
 # SSH client
 cask "termius"
 # Unpacks archive files
@@ -128,14 +121,9 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Screenshot tool
-cask "xnapper"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "AdGuard for Safari", id: 1440147259
-mas "Color Picker", id: 1545870783
 mas "Ethernet Status", id: 1186187538
-mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
