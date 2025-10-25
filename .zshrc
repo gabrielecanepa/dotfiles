@@ -35,7 +35,7 @@ done; unset vm
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME=
+ZSH_THEME=default
 ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZSH_COMPLETIONS=(docker npm pnpm supabase)
