@@ -52,6 +52,16 @@
     ".github/instructions": true
   },
   "chat.mcp.gallery.enabled": true,
+  "chat.tools.terminal.autoApprove": {
+    "git": true,
+    "mv": true,
+    "npx": true,
+    "pnpm": true,
+    "rg": true,
+    "rm": true,
+    "sed": true,
+    "xargs": true
+  },
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
@@ -215,7 +225,7 @@
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit without a cheesecakey language. The commit must be concise and informative, summarizing the changes made in the codebase. Optionally add a body including a sentence of maximum 20 words explaining the general changes (optional) and a list of maximum 5 points of maximum 10 words with more specific references (optional). Title and bullet points must be written in an imperative mood using singular first-person verbs and a sentence-case format. Bullet points must not end with a period. The body sentence must use a third-person perspective, be sentence-case and end with a dot. Example: \"feat: Correct typos across the codebase\n\nCorrected several typos in the codebase to improve readability and maintainability.\n\n- Fix typo in variable name\n- Update comments for clarity\n- Refactor function names for consistency\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:claude-sonnet-4.5",
+  "gitlens.ai.vscode.model": "copilot:gpt-5-codex",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
