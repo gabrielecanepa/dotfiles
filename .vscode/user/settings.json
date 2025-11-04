@@ -1,16 +1,15 @@
 {
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -19,7 +18,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[php]": {
     "editor.insertSpaces": true,
@@ -32,20 +31,14 @@
     "editor.defaultFormatter": "jock.svg"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "accessibility.signals.terminalBell": {
-    "sound": "on"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
+  "biome.enabled": false,
   "biome.requireConfiguration": true,
-  "biome.suggestInstallingGlobally": false,
   "chat.agent.maxRequests": 60,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.instructionsFilesLocations": {
@@ -55,10 +48,8 @@
   "chat.tools.terminal.autoApprove": {
     "git": true,
     "mv": true,
-    "npx": true,
     "pnpm": true,
     "rg": true,
-    "rm": true,
     "sed": true,
     "xargs": true
   },
@@ -72,47 +63,21 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.shellcheck": "explicit"
   },
-  "editor.fontSize": 11.9,
-  "editor.formatOnPaste": true,
+  "editor.fontSize": 13,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true,
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveIndentation": "always",
   "editor.inlineSuggest.enabled": true,
   "editor.lightbulb.enabled": "off",
   "editor.maxTokenizationLineLength": 200000,
   "editor.minimap.enabled": false,
-  "editor.multiCursorModifier": "ctrlCmd",
   "editor.quickSuggestions": {
-    "strings": true
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
   },
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
-  "editor.tokenColorCustomizations": {
-    "[*Dark*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
-    },
-    "[*Light*]": {
-      "textMateRules": [
-        {
-          "scope": "ref.matchtext",
-          "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
-    },
-    "textMateRules": []
-  },
-  "editor.unicodeHighlight.ambiguousCharacters": false,
-  "editor.unicodeHighlight.invisibleCharacters": false,
   "emmet.includeLanguages": {
     "blade": "html",
     "erb": "html",
@@ -120,34 +85,25 @@
     "markdown": "markdown",
     "vue": "html"
   },
-  "emmet.showSuggestionsAsSnippets": true,
   "emmet.syntaxProfiles": {
     "javascript": "jsx"
   },
   "emmet.triggerExpansionOnTab": true,
-  "eslint.codeAction.showDocumentation": {
-    "enable": true
-  },
   "eslint.format.enable": true,
   "eslint.useFlatConfig": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.autoOpenDroppedFile": false,
-  "explorer.autoReveal": "focusNoScroll",
   "explorer.autoRevealExclude": {
     "**/.git": true,
-    "**/bower_components": true,
     "**/node_modules": true
   },
-  "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
   "explorer.confirmUndo": "light",
-  "extensions.ignoreRecommendations": true,
   "files.associations": {
     ".aliases": "shellscript",
     ".commentlintrc": "json",
-    ".env.*": "properties",
     ".env*": "dotenv",
     ".eslintrc": "jsonc",
     ".gcloudignore": "dotenv",
@@ -158,25 +114,12 @@
     ".pryrc": "ruby",
     ".remarkrc": "json",
     ".sequelizerc": "javascript",
-    ".svg": "html",
     ".todo": "markdown",
     ".vscode/**/settings.json": "jsonc",
-    "*.css": "tailwindcss",
-    "*.css.liquid": "liquid-css",
-    "*.js": "javascript",
-    "*.js.liquid": "liquid-javascript",
-    "*.json.liquid": "json",
-    "*.jsx": "javascriptreact",
-    "*.liquid": "liquid",
-    "*.md.liquid": "markdown",
-    "*.scss.liquid": "liquid-scss",
-    "*.ts": "typescript",
-    "*.tsx": "typescriptreact",
-    "*.yaml.liquid": "yaml",
     "NOTES": "markdown"
   },
   "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 500,
+  "files.autoSaveDelay": 1000,
   "files.exclude": {
     "**/.git": false
   },
@@ -191,7 +134,7 @@
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": ["/Users/gabrielecanepa/.oh-my-zsh"],
+  "git.ignoredRepositories": [".oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationSubjectLength": 60,
@@ -212,8 +155,7 @@
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
-    "plaintext": true,
-    "scminput": false
+    "plaintext": true
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
@@ -222,7 +164,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
-  "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification to provide a clear and descriptive commit without a cheesecakey language. The commit must be concise and informative, summarizing the changes made in the codebase. Optionally add a body including a sentence of maximum 20 words explaining the general changes (optional) and a list of maximum 5 points of maximum 10 words with more specific references (optional). Title and bullet points must be written in an imperative mood using singular first-person verbs and a sentence-case format. Bullet points must not end with a period. The body sentence must use a third-person perspective, be sentence-case and end with a dot. Example: \"feat: Correct typos across the codebase\n\nCorrected several typos in the codebase to improve readability and maintainability.\n\n- Fix typo in variable name\n- Update comments for clarity\n- Refactor function names for consistency\"",
+  "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-5-codex",
@@ -259,7 +201,6 @@
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
   "html.format.unformatted": "html,style",
-  "i18n-ally.ignoredLocales": [],
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
@@ -272,26 +213,20 @@
   "json.schemaDownload.enable": true,
   "json.schemas": [
     {
-      "fileMatch": ["**/site.webmanifest"],
+      "fileMatch": ["site.webmanifest"],
       "url": "https://json.schemastore.org/web-manifest.json"
     },
     {
-      "fileMatch": [".chrome/themes/**/manifest.json"],
+      "fileMatch": ["**chrome**/manifest.json"],
       "url": "https://raw.githubusercontent.com/gabrielecanepa/chrome-theme-json-schema/main/manifest.json"
     }
   ],
   "less.lint.duplicateProperties": "warning",
-  "license.author": "Gabriele Canepa <contact@gabrielecanepa.com>",
-  "license.default": "mit",
-  "license.year": "auto",
-  "markdown-pdf.displayHeaderFooter": false,
   "markdown.extension.italic.indicator": "_",
   "markdown.extension.toc.levels": "2..3",
   "markdown.preview.doubleClickToSwitchToEditor": false,
-  "MinifyAll.disableHexadecimalShortener": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
-  "postman.account.region": "EU",
   "postman.mcp.notifications.postmanMCP": false,
   "postman.settings.dotenv-detection-notification-visibility": false,
   "postman.telemetry.enabled": false,
@@ -314,20 +249,13 @@
   "scss.lint.float": "warning",
   "search.exclude": {
     "**/.git": true,
-    "**/.private": true
+    "**/.private": true,
+    "**/node_modules": true
   },
   "search.useGlobalIgnoreFiles": true,
+  "search.useIgnoreFiles": true,
   "security.workspace.trust.untrustedFiles": "open",
-  "settingsSync.ignoredExtensions": ["riipandi.vscode-atomizer-theme"],
-  "shellcheck.customArgs": [],
-  "shellcheck.enable": true,
-  "shellcheck.enableQuickFix": true,
-  "shellcheck.exclude": [],
-  "shellcheck.ignoreFileSchemes": ["git", "gitfs"],
-  "shellcheck.run": "onType",
   "svg.completion.emmet": true,
-  "svg.preview.background": "editor",
-  "svg.preview.mode": "svg",
   "terminal.external.osxExec": "Ghostty.app",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
@@ -354,7 +282,8 @@
   "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
   "window.newWindowDimensions": "maximized",
-  "window.zoomLevel": 2,
+  "window.dialogStyle": "native",
+  "window.zoomLevel": 1.4,
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
@@ -378,7 +307,6 @@
   "workbench.editor.enablePreviewFromCodeNavigation": true,
   "workbench.editor.focusRecentEditorAfterClose": false,
   "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook",
     "*.svg": "default",
     "git-rebase-todo": "default"
   },
