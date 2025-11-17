@@ -58,6 +58,7 @@ alias te="open -a TextEdit"
 alias hide="chflags hidden"
 alias unhide="chflags nohidden"
 alias rehistory="history >/dev/null"
+alias fresh="lts install && brew fresh"
 
 # CLIs
 alias ghrv="gh repo view --web"
