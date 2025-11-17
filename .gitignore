@@ -48,6 +48,8 @@
 /.vscode-cli/
 /.zcompdump.lock/
 /.zsh/completions/
+/.zsh/plugins/_*/
+/.zsh/plugins/zsh-/
 /.zsh_sessions/
 /Desktop/
 /Developer/
