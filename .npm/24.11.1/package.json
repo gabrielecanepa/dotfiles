@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "22.20.0"
+    "node": "24.11.1"
   },
   "dependencies": {
     "corepack": "^0.34.0",
