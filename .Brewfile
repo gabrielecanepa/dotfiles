@@ -1,20 +1,18 @@
-tap "azure/functions"
 tap "github/gh"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "oven-sh/bun"
-tap "powershell/tap"
 tap "supabase/tap"
 # YAML Parser
 brew "libyaml"
+# Data validation using Python type hints
+brew "pydantic"
 # Library for command-line editing
 brew "readline"
 # CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
 brew "aws-sam-cli"
 # Official Amazon AWS command-line interface
 brew "awscli"
-# Microsoft Azure CLI 2.0
-brew "azure-cli"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
@@ -55,12 +53,12 @@ brew "zlib"
 brew "mysql"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Node.js version manager
 brew "nodenv"
 # Create, run, and share large language models (LLMs)
-brew "ollama", link: false
+brew "ollama"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
 # Object-relational database system
@@ -81,18 +79,14 @@ brew "redis"
 brew "shellcheck"
 # Soak up standard input and write to a file
 brew "sponge"
+# Open source Firebase alternative
+brew "supabase"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Azure Functions Core Tools 4.0
-brew "azure/functions/azure-functions-core-tools@4"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
-# Formula to install PowerShell
-brew "powershell/tap/powershell"
-# Supabase CLI
-brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # OpenAI's official ChatGPT desktop app
