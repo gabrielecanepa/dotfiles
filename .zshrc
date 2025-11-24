@@ -109,7 +109,7 @@ fi
 
 # Completions
 completions $ZSH_COMPLETIONS
-fpath=($ZSH_COMPLETIONS_PATH $fpath $HOME/.bun/_bun)
+fpath=($ZSH_COMPLETIONS_PATH $fpath $HOME/.bun/_bun $HOME/.docker/completions)
 autoload -Uz compinit
 compinit
 
