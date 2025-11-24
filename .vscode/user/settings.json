@@ -39,7 +39,7 @@
   "application.shellEnvironmentResolutionTimeout": 20,
   "biome.enabled": false,
   "biome.requireConfiguration": true,
-  "chat.agent.maxRequests": 60,
+  "chat.agent.maxRequests": 200,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.instructionsFilesLocations": {
     ".github/instructions": true
@@ -49,6 +49,7 @@
     "git": true,
     "mv": true,
     "pnpm": true,
+    "python3": true,
     "rg": true,
     "sed": true,
     "xargs": true
@@ -73,11 +74,33 @@
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "comments": "on",
-    "strings": "on",
     "other": "on"
   },
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "textMateRules": []
+  },
   "emmet.includeLanguages": {
     "blade": "html",
     "erb": "html",
@@ -144,7 +167,6 @@
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
   "git.useEditorAsCommitInput": false,
-  "github.copilot.chat.agent.thinkingTool": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "github.copilot.chat.edits.temporalContext.enabled": true,
@@ -167,7 +189,7 @@
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-5-codex",
+  "gitlens.ai.vscode.model": "copilot:gpt-5.1-codex",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
@@ -241,7 +263,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
-  "redhat.telemetry.enabled": false,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
@@ -281,8 +302,8 @@
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
-  "window.newWindowDimensions": "maximized",
   "window.dialogStyle": "native",
+  "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 1.4,
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
