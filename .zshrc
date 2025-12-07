@@ -11,26 +11,9 @@ export HOMEBREW_NO_INSTALL_FROM_API=1
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}" 
-export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-# Node.js (https://nodejs.org)
-export PNPM_HOME="$HOME/.pnpm"
-# Bun (https://bun.sh)
-export BUN_HOME="$HOME/.bun"
-
-export PATH="./node_modules/.bin:$PNPM_HOME:$BUN_HOME/bin:$PATH"
-
-# Version managers
-# nodenv (https://github.com/nodenv/nodenv)
-# pyenv (https://github.com/pyenv/pyenv)
-# rbenv (https://github.com/rbenv/rbenv)
-for vm in nodenv pyenv rbenv; do
-  export ${vm:u}_ROOT="$HOME/.${vm}"
-  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
-  eval "$(${vm} init --path - zsh)"
-done; unset vm
 
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
@@ -101,11 +84,26 @@ if profile check; then
   git config --file $HOME/.gitprofile user.name $NAME
   git config --file $HOME/.gitprofile user.email $EMAIL
   git config --file $HOME/.gitprofile core.editor $GIT_EDITOR
-
+  # Hooks
   for file in $HOME/.husky/*; do
     ln -sf $file $HOME/.git/hooks/$(basename $file)
-  done; unset file
+  done
 fi
+
+# nodenv (https://github.com/nodenv/nodenv)
+# pyenv (https://github.com/pyenv/pyenv)
+# rbenv (https://github.com/rbenv/rbenv)
+for vm in nodenv pyenv rbenv; do
+  export ${vm:u}_ROOT="$HOME/.${vm}"
+  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
+  eval "$(${vm} init --path - zsh)"
+done; unset vm
+
+# Node.js (https://nodejs.org)
+# Bun (https://bun.sh)
+# pnpm (https://pnpm.io)
+export PNPM_HOME="$HOME/.pnpm/global"
+export PATH="./node_modules/.bin:$BUN_HOME/bin:$PNPM_HOME:$PATH"
 
 # Completions
 completions $ZSH_COMPLETIONS

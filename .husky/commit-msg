@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Skip temporary commits
 case "$commit" in
   "[tmp]"*|\#*)
     exit 0

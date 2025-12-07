@@ -1,30 +1,29 @@
-![](./image.png)
+![](./banner.png)
 
 > [!WARNING]
 > Before using the following dotfiles, you should first fork this repository, review the content and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
 
-## Installation
-
 <!-- no toc -->
 
-1. [SSH](#1-ssh)
-2. [Homebrew](#2-homebrew)
-3. [Oh My Zsh](#3-oh-my-zsh)
-4. [Dotfiles](#4-dotfiles)
-5. [Configuration](#5-configuration)
-   - [Shell profile](#shell-profile)
-6. [Languages and dependencies](#6-languages-and-dependencies)
-   - [Node.js](#nodejs)
-   - [Ruby](#ruby)
-   - [Python](#python)
-7. [VSCode and terminal](#7-vscode-and-terminal)
-   - [Settings, snippets and extensions](#settings-snippets-and-extensions)
-   - [Keybindings](#keybindings)
-8. [Assets](#8-resources)
-   - [Fonts](#fonts)
-   - [iCloud](#icloud)
+<h2>Installation</h2>
 
-### 1. SSH
+- [SSH](#ssh)
+- [Homebrew](#homebrew)
+- [Oh My Zsh](#oh-my-zsh)
+- [Dotfiles](#dotfiles)
+- [Shell profile](#shell-profile)
+- [Runtimes and dependencies](#runtimes-and-dependencies)
+  - [Node.js](#nodejs)
+  - [Ruby](#ruby)
+  - [Python](#python)
+- [VSCode and terminal](#vscode-and-terminal)
+  - [Settings and snippets](#settings-and-snippets)
+  - [Keybindings](#keybindings)
+- [Assets](#assets)
+  - [Fonts](#fonts)
+  - [iCloud](#icloud)
+
+### SSH
 
 If not already present, generate a new SSH key and copy it to the clipboard:
 
@@ -35,7 +34,7 @@ tr -d '\n' < ~/.ssh/id_ed25519.pub | pbcopy
 
 Add the key to [GitHub](https://github.com/settings/ssh/new), [GitLab](https://gitlab.com/-/profile/keys) and any other services you use.
 
-### 2. Homebrew
+### Homebrew
 
 Install [Homebrew](https://brew.sh):
 
@@ -43,14 +42,20 @@ Install [Homebrew](https://brew.sh):
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### 3. Oh My Zsh
+### Oh My Zsh
 
-Install [Oh My Zsh](https://ohmyz.sh) and some essential plugins from [zsh-users](https://github.com/zsh-users):
+Install [Oh My Zsh](https://ohmyz.sh) and some useful plugins from [zsh-users](https://github.com/zsh-users):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
-for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
+plugins=(
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
+)
+
+for plugin in ${plugins[@]}; do
   git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
 done
 
@@ -58,7 +63,7 @@ done
 zsh
 ```
 
-### 4. Dotfiles
+### Dotfiles
 
 Clone this repository:
 
@@ -89,9 +94,7 @@ Install the packages listed in the [Brewfile](/.Brewfile):
 brew bundle --file ~/.Brewfile
 ```
 
-### 5. Configuration
-
-#### Shell profile
+### Shell profile
 
 Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell profile with a guided prompt:
 
@@ -99,30 +102,45 @@ Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to c
 profile install
 ```
 
-#### Environment variables
-
-Copy the `.env.example` file to `.env` and fill in the environment-specific values you need:
-
-```sh
-cp ~/.env.example ~/.env
-```
-
-### 6. Languages and dependencies
+### Runtimes and dependencies
 
 #### Node.js
 
-Install the [Node.js](https://nodejs.org) version in use with [nodenv](https://github.com/nodenv/nodenv) and all saved global packages:
+Install the [Node.js](https://nodejs.org) version in use with [nodenv](https://github.com/nodenv/nodenv):
 
 ```sh
 nodenv install $(cat ~/.node_version) --skip-existing
-npm -g install
 ```
 
-Link the nodeenv version to the tracked one:
+Install the global npm dependencies listed in the global `package.json`, enable [Corepack](https://github.com/nodejs/corepack) and initialize [Husky](https://typicode.github.io/husky):
+
+```sh
+npm -g install $(jq -r '.dependencies | keys | join(" ")' ~/.npm/package.json)
+corepack enable
+husky
+```
+
+Link the local nodenv version to the tracked one:
 
 ```sh
 nodenv global $(cat ~/.node-version)
 rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
+```
+
+Link the global Bun and pnpm files to the tracked ones:
+
+```sh
+# Bun
+for file in bun.lockb package.json; do
+  rm -f $BUN_HOME/install/global/$file
+  ln -sf ~/.bun/$file $BUN_HOME/install/global/$file
+done
+
+# pnpm
+for file in package.json pnpm-lock.yaml; do
+  rm -f $PNPM_HOME/5/$file
+  ln -sf ~/.pnpm/$file $PNPM_HOME/5/$file
+done
 ```
 
 #### Ruby
@@ -143,7 +161,7 @@ pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### 7. VSCode and terminal
+### VSCode and terminal
 
 #### Settings and snippets
 
@@ -167,7 +185,7 @@ ln -sf ~/.config/iterm2/profiles ~/.config/iterm2/AppSupport/DynamicProfiles
 
 #### Keybindings
 
-To avoid emitting beeps in Electron-based applications when using the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘` (see https://github.com/electron/electron/issues/2617) create the keybinding settings file:
+To avoid emitting beeps in Electron-based applications when using the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘` (see [this issue](https://github.com/electron/electron/issues/2617)) create the keybinding settings file:
 
 ```sh
 [[ ! -d ~/Library/KeyBindings ]] && mkdir ~/Library/KeyBindings
@@ -184,11 +202,11 @@ And populate it with the following content:
 }
 ```
 
-### 8. Assets
+### Assets
 
 #### Fonts
 
-To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts). Activate the fonts in apps supporting command line interfaces (Terminal, iTerm, VSCode, etc).
+To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts). Activate the fonts in apps supporting command line interfaces (Terminal, Ghostty, VSCode, etc).
 
 #### iCloud
 
@@ -205,22 +223,22 @@ Use the following script to:
 
 ```sh
 for folder in Applications Developer Downloads Movies Music Pictures; do
-  # Create the folder in iCloud Drive if it doesn't exist.
+  # Create the folder in iCloud Drive
   cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
   [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
 
   case $folder in
-    # Replace with a symlink to the system folder.
+    # Replace with a symlink to the system folder
     Applications)
       rm -rf ~/Applications
       ln -sf /Applications ~/Applications
       ln -sf $cloud_folder /Applications/iCloud
       ;;
-    # Create a symlink named `iCloud`.
+    # Create a symlink named iCloud
     Developer|Pictures)
       ln -sf $cloud_folder ~/$folder/iCloud
       ;;
-    # Replace with a symlink to the cloud folder.
+    # Replace with a symlink to the cloud folder
     Downloads|Movies|Music)
       [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
       rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder

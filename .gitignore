@@ -4,10 +4,10 @@
 /.azure-shell/
 /.azurefunctions/
 /.aws*/
-!/.bun/
+!/.bun
 /.bun/bin/
-/.bun/install/cache/
-/.bun/_*
+/.bun/install/
+/.bun/_bun
 /.bundle/*/
 /.cache/
 /.config/*
@@ -28,8 +28,8 @@
 /.oh-my-zsh/
 /.ollama/
 /.pnpm/*
-!/.pnpm/5/
-/.pnpm/5/.pnpm/
+!/.pnpm/package.json
+!/.pnpm/pnpm-lock.yaml
 /.pnpm-*/
 /.pyenv/
 /.rbenv/
@@ -49,7 +49,7 @@
 /.zcompdump.lock/
 /.zsh/completions/
 /.zsh/plugins/_*/
-/.zsh/plugins/zsh-/
+/.zsh/plugins/zsh-*/
 /.zsh_sessions/
 /Desktop/
 /Developer/

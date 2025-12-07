@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "corepack": "^0.34.5",
+    "husky": "^9.1.7",
+    "npm": "^11.6.4",
+    "npm-check-updates": "^19.1.2",
+    "pnpm": "^10.24.0",
+    "turbo": "^2.6.3",
+    "vercel": "^49.1.1"
+  }
+}

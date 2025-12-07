@@ -338,5 +338,7 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick"
+  "workbench.tree.expandMode": "doubleClick",
+  "terminal.integrated.suggest.runOnEnter": "always",
+  "terminal.integrated.suggest.showStatusBar": false
 }
