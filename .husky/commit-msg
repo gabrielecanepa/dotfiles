@@ -6,4 +6,4 @@ case "$commit" in
     ;;
 esac
 
-npx commitlint --edit "$1" --quiet
+commitlint --edit "$1" --quiet
