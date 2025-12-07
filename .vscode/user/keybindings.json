@@ -278,5 +278,9 @@
     "command": "-markdown.extension.onTabKey",
     "key": "tab",
     "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'markdown'"
+  },
+  {
+    "command": "workbench.action.toggleStatusbarVisibility",
+    "key": "ctrl+shift+s"
   }
 ]
