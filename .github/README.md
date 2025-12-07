@@ -172,7 +172,7 @@ Use symlinks to backup keybindings, settings and snippets of [Visual Studio Code
 
 ```sh
 # VSCode
-for config in keybindings.json settings.json snippets; do
+for config in prompts snippets keybindings.json mcp.json settings.json; do
   file=~/Library/Application\ Support/Code/User/$config
   rm -rf $file
   ln -sf ~/.vscode/user/$config $file
