@@ -5,4 +5,4 @@ git_hooks=$(find .husky -maxdepth 1 -type f | grep -v ".DS_Store" | xargs)
 
 npx commitlint --from=HEAD --to="$(git remote)/$(git branch --show-current)" --quiet
 npx shellcheck $git_hooks .aliases .bash_profile .bashrc .profile
-npx prettier --check ".{commitlintrc,prettierrc}" ".{config,github,vscode}/**/*.{css,json,md,yml}" ".npm/*/package.json" --ignore-path .gitignore --ignore-unknown --log-level error
+npx prettier --check ".commitlintrc" ".{config,github,vscode}/**/*.{css,json,md,yml}" --ignore-path .gitignore --ignore-unknown --log-level error

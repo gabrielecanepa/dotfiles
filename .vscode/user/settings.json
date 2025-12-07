@@ -6,19 +6,19 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[php]": {
     "editor.insertSpaces": true,
@@ -31,19 +31,20 @@
     "editor.defaultFormatter": "jock.svg"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "prettier.prettier-vscode"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
   "biome.enabled": false,
   "biome.requireConfiguration": true,
   "chat.agent.maxRequests": 200,
+  "chat.agent.thinking.collapsedTools": "all",
+  "chat.checkpoints.showFileChanges": true,
   "chat.editing.confirmEditRequestRemoval": false,
-  "chat.instructionsFilesLocations": {
-    ".github/instructions": true
-  },
+  "chat.editing.confirmEditRequestRetry": false,
+  "chat.emptyState.history.enabled": true,
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
     "git": true,
@@ -51,9 +52,13 @@
     "pnpm": true,
     "python3": true,
     "rg": true,
+    "rm": true,
     "sed": true,
+    "test": true,
     "xargs": true
   },
+  "chat.tools.terminal.outputLocation": "none",
+  "css.format.newlineBetweenRules": false,
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
@@ -112,9 +117,6 @@
     "javascript": "jsx"
   },
   "emmet.triggerExpansionOnTab": true,
-  "eslint.format.enable": true,
-  "eslint.useFlatConfig": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.autoOpenDroppedFile": false,
   "explorer.autoRevealExclude": {
     "**/.git": true,
@@ -137,8 +139,9 @@
     ".pryrc": "ruby",
     ".remarkrc": "json",
     ".sequelizerc": "javascript",
-    ".todo": "markdown",
     ".vscode/**/settings.json": "jsonc",
+    "*.css": "tailwindcss",
+    "*.todo": "markdown",
     "NOTES": "markdown"
   },
   "files.autoSave": "afterDelay",
@@ -167,6 +170,8 @@
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
   "git.useEditorAsCommitInput": false,
+  "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.editor.temporalContext.enabled": true,
   "github.copilot.chat.edits.temporalContext.enabled": true,
@@ -189,7 +194,7 @@
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
   "gitlens.ai.model": "vscode",
-  "gitlens.ai.vscode.model": "copilot:gpt-5.1-codex",
+  "gitlens.ai.vscode.model": "copilot:claude-opus-4.5",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
@@ -223,6 +228,9 @@
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
   "html.format.unformatted": "html,style",
+  "i18n-ally.annotationInPlace": false,
+  "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
+  "inlineChat.enableV2": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
@@ -237,21 +245,14 @@
     {
       "fileMatch": ["site.webmanifest"],
       "url": "https://json.schemastore.org/web-manifest.json"
-    },
-    {
-      "fileMatch": ["**chrome**/manifest.json"],
-      "url": "https://raw.githubusercontent.com/gabrielecanepa/chrome-theme-json-schema/main/manifest.json"
     }
   ],
   "less.lint.duplicateProperties": "warning",
   "markdown.extension.italic.indicator": "_",
-  "markdown.extension.toc.levels": "2..3",
+  "markdown.extension.toc.levels": "2..4",
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
-  "postman.mcp.notifications.postmanMCP": false,
-  "postman.settings.dotenv-detection-notification-visibility": false,
-  "postman.telemetry.enabled": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.endOfLine": "auto",
@@ -289,6 +290,7 @@
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
+  "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.location": "left",
   "togglequotes.chars": ["\"", "'", "`"],
@@ -304,7 +306,9 @@
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
+  "window.newWindowProfile": "Default",
   "window.zoomLevel": 1.4,
+  "workbench.activityBar.location": "bottom",
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
@@ -338,7 +342,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "terminal.integrated.suggest.runOnEnter": "always",
-  "terminal.integrated.suggest.showStatusBar": false
+  "workbench.tree.expandMode": "doubleClick"
 }

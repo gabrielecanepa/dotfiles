@@ -3,7 +3,7 @@ version: 2
 updates:
   - package-ecosystem: npm
     directories:
-      - /.npm
+      - .npm
     versioning-strategy: increase
     schedule:
       interval: monthly
@@ -19,6 +19,6 @@ updates:
         applies-to: security-updates
         dependency-type: production
     commit-message:
-      prefix: build
-      prefix-development: build
+      prefix: npm
+      prefix-development: npm
       include: scope

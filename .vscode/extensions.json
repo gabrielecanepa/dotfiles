@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "ms-vscode.atom-keybindings",
+    "oven.bun-vscode",
+    "ms-azuretools.vscode-containers",
+    "be5invis.vscode-custom-css",
+    "dotenv.dotenv-vscode",
+    "tamasfe.even-better-toml",
+    "file-icons.file-icons",
+    "github.vscode-github-actions",
+    "github.copilot-chat",
+    "github.vscode-pull-request-github",
+    "github.github-vscode-theme",
+    "eamodio.gitlens",
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-preview-github-styles",
+    "csstools.postcss",
+    "prettier.prettier-vscode",
+    "timonwong.shellcheck",
+    "jock.svg",
+    "britesnow.vscode-toggle-quotes"
+  ]
+}
