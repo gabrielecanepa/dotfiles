@@ -13,7 +13,16 @@ export HOMEBREW_NO_ENV_HINTS=1
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}" 
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
+
+# nodenv (https://github.com/nodenv/nodenv)
+# pyenv (https://github.com/pyenv/pyenv)
+# rbenv (https://github.com/rbenv/rbenv)
+for vm in nodenv pyenv rbenv; do
+  export ${vm:u}_ROOT="$HOME/.${vm}"
+  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
+  eval "$(${vm} init --path - zsh)"
+done; unset vm
 
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
@@ -89,15 +98,6 @@ if profile check; then
     ln -sf $file $HOME/.git/hooks/$(basename $file)
   done
 fi
-
-# nodenv (https://github.com/nodenv/nodenv)
-# pyenv (https://github.com/pyenv/pyenv)
-# rbenv (https://github.com/rbenv/rbenv)
-for vm in nodenv pyenv rbenv; do
-  export ${vm:u}_ROOT="$HOME/.${vm}"
-  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
-  eval "$(${vm} init --path - zsh)"
-done; unset vm
 
 # Node.js (https://nodejs.org)
 # Bun (https://bun.sh)
