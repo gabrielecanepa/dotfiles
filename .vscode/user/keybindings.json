@@ -171,7 +171,7 @@
   },
   {
     "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+cmd+t",
+    "key": "ctrl+shift+t",
     "when": "terminalProcessSupported"
   },
   {
@@ -220,10 +220,6 @@
     "command": "-editor.action.smartSelect.expand",
     "key": "ctrl+shift+right",
     "when": "editorTextFocus"
-  },
-  {
-    "command": "workbench.action.terminal.new",
-    "key": "ctrl+shift+t"
   },
   {
     "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",

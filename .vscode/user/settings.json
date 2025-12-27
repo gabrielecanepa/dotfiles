@@ -39,12 +39,17 @@
   "application.shellEnvironmentResolutionTimeout": 20,
   "biome.enabled": false,
   "biome.requireConfiguration": true,
-  "chat.agent.maxRequests": 200,
-  "chat.agent.thinking.collapsedTools": "all",
+  "chat.agent.maxRequests": 40,
+  "chat.agent.thinking.collapsedTools": "withThinking",
+  "chat.agent.thinkingStyle": "collapsedPreview",
+  "chat.agentSessionsViewLocation": "view",
   "chat.checkpoints.showFileChanges": true,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
   "chat.emptyState.history.enabled": true,
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
     "git": true,
@@ -55,6 +60,7 @@
     "rm": true,
     "sed": true,
     "test": true,
+    "tsc": true,
     "xargs": true
   },
   "chat.tools.terminal.outputLocation": "none",
@@ -307,7 +313,7 @@
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
   "window.newWindowProfile": "Default",
-  "window.zoomLevel": 1.4,
+  "window.zoomLevel": 1.2,
   "workbench.activityBar.location": "bottom",
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
