@@ -4,20 +4,20 @@ function lts() (
   local LANGS=(node python ruby)
 
   local function print_help_message() {
-    echo "Command line utility to quickly find and install the latest stable version of common programming languages.\n"
+    echo "Quickly find and install the latest LTS release of a language.\n"
 
-    echo "Usage: lts [install|i] <language@prefix>"
+    echo "Usage: lts install <language@prefix>"
     echo "Supported languages: ${LANGS[@]}\n"
 
     echo "Commands:"
-    echo "  lts <language@prefix>               Get the latest version of a language matching an optional prefix"
-    echo "  lts install                         Install the latest version of all languages"
-    echo "  lts i <language@prefix>       Install the latest version of the specified languages matching an optional prefix"
+    echo "  lts <language@prefix>               Print the latest LTS release of a language matching an optional prefix"
+    echo "  lts install                         Install the latest LTS release of all supported languages"
+    echo "  lts i <language@prefix>             Install the latest LTS release of the specified languages"
     echo "Examples:"
-    echo "  lts node                            Get the latest version of Node"
-    echo "  lts node@18                         Get the latest minor version of Node 18"
-    echo "  lts install python ruby@2           Install the latest version of Python and Ruby 2"
-    echo "  lts install ruby@2.6                Install the latest patch of Ruby 2.6"
+    echo "  lts node                            Get the latest Node.js LTS release"
+    echo "  lts node@18                         Get the latest minor LTS version of Node.js 18"
+    echo "  lts install python ruby@2           Install the latest LTS release of Python and Ruby 2"
+    echo "  lts install ruby@2.6                Install the latest LTS patch of Ruby 2.6"
   }
 
   local function validate_language() {
