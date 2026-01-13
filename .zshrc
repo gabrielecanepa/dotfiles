@@ -30,8 +30,6 @@ ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME=default
 ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPDUMP="$HOME/.zcompdump"
-ZSH_COMPLETIONS=(docker npm pnpm supabase)
-ZSH_COMPLETIONS_PATH="$ZSH_CUSTOM/completions"
 
 # Options
 CASE_SENSITIVE=0
@@ -106,8 +104,8 @@ export PNPM_HOME="$HOME/.pnpm/global"
 export PATH="./node_modules/.bin:$BUN_HOME/bin:$PNPM_HOME:$PATH"
 
 # Completions
-completions $ZSH_COMPLETIONS
-fpath=($ZSH_COMPLETIONS_PATH $fpath $HOME/.bun/_bun $HOME/.docker/completions)
+completions docker npm supabase
+fpath=($fpath $ZSH_CUSTOM/completions $HOME/.bun/_bun $HOME/.docker/completions)
 autoload -Uz compinit
 compinit
 
