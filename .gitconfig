@@ -1,24 +1,14 @@
 # Core
-[include]
-  path = ~/.gitprofile
 [core]
   excludesfile = ~/.gitignore-global
   ignorecase = false
   pager = less -FRSX
-[init]
-  defaultBranch = main
-[pull]
-  rebase = true
-[help]
-  autocorrect = 1
+[include]
+  path = ~/.gitprofile
 [advice]
   skippedCherryPicks = false
-
-# Branches
-[branch "main"]
-  mergeoptions = --no-edit
-[branch "master"]
-  mergeoptions = --no-edit
+[help]
+  autocorrect = 1
 
 # Theme
 [color]
@@ -32,6 +22,20 @@
   remote = yellow
 
 # Commands
+[init]
+  defaultBranch = main
+[pull]
+  rebase = true
+[push]
+	autoSetupRemote = true
+
+# Branches
+[branch "main"]
+  mergeoptions = --no-edit
+[branch "master"]
+  mergeoptions = --no-edit
+
+# Filters
 [filter "lfs"]
   clean = git-lfs clean -- %f
   process = git-lfs filter-process
@@ -56,6 +60,7 @@
   f = fetch
   fa = fetch --all
   fo = fetch origin
+  fps = !git fetch --all && git pull --rebase && git sweep
   get = !git pull --rebase && git submodule update --init --recursive
   lg = log -10 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   lgg = log --graph --all --decorate --oneline
@@ -67,6 +72,8 @@
   ps = !git pull && git sweep
   re = remote
   rv = remote -v
+  rp = !git redo && git push
+  rpf = !git redo && git push --force
   redo = !git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD
   reset-origin = !git remote remove origin &>/dev/null && git remote add origin
   ro = reset-origin
@@ -74,7 +81,6 @@
   set-origin = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
   so = set-origin
   st = status -sb
-  sta = stash --all
   sweep = !git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
   undo = reset --soft HEAD^
   unstage = reset HEAD --
