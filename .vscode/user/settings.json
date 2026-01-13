@@ -41,14 +41,18 @@
   "biome.requireConfiguration": true,
   "chat.agent.maxRequests": 40,
   "chat.agent.thinking.collapsedTools": "withThinking",
-  "chat.agent.thinkingStyle": "collapsedPreview",
-  "chat.agentSessionsViewLocation": "view",
+  "chat.agent.thinkingStyle": "collapsed",
   "chat.checkpoints.showFileChanges": true,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
-  "chat.emptyState.history.enabled": true,
   "chat.instructionsFilesLocations": {
-    ".github/instructions": true
+    ".github/instructions": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-pre-request.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-pre-request.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-post-response.instructions.md": true,
+    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-pre-request.instructions.md": true
   },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
@@ -117,6 +121,7 @@
     "erb": "html",
     "javascript": "javascriptreact",
     "markdown": "markdown",
+    "typescript": "typescriptreact",
     "vue": "html"
   },
   "emmet.syntaxProfiles": {
@@ -134,21 +139,15 @@
   "explorer.confirmUndo": "light",
   "files.associations": {
     ".aliases": "shellscript",
-    ".commentlintrc": "json",
     ".env*": "dotenv",
-    ".eslintrc": "jsonc",
-    ".gcloudignore": "dotenv",
     ".gitignore*": "ignore",
     ".gitprofile": "properties",
     ".jobs": "shellscript",
-    ".oxlintrc.json": "jsonc",
     ".pryrc": "ruby",
-    ".remarkrc": "json",
-    ".sequelizerc": "javascript",
     ".vscode/**/settings.json": "jsonc",
     "*.css": "tailwindcss",
-    "*.todo": "markdown",
-    "NOTES": "markdown"
+    "NOTES": "markdown",
+    "TODO": "markdown"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
@@ -179,8 +178,6 @@
   "github.copilot.chat.alternateGptPrompt.enabled": true,
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "github.copilot.chat.codesearch.enabled": true,
-  "github.copilot.chat.editor.temporalContext.enabled": true,
-  "github.copilot.chat.edits.temporalContext.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
@@ -254,7 +251,10 @@
     }
   ],
   "less.lint.duplicateProperties": "warning",
+  "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='_title'></span></div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"></div>",
   "markdown.extension.italic.indicator": "_",
+  "markdown.extension.tableFormatter.delimiterRowNoPadding": true,
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
   "markdown.extension.toc.levels": "2..4",
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "optimizeImages.app": "ImageOptim",
@@ -270,6 +270,7 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
+  "remote.SSH.connectTimeout": 1800,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
