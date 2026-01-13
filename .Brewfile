@@ -3,12 +3,11 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "oven-sh/bun"
 tap "supabase/tap"
+tap "tw93/tap"
 # YAML Parser
 brew "libyaml"
 # Data validation using Python type hints
 brew "pydantic"
-# Library for command-line editing
-brew "readline"
 # CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
 brew "aws-sam-cli"
 # Official Amazon AWS command-line interface
@@ -62,7 +61,7 @@ brew "ollama"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
 # Object-relational database system
-brew "postgresql@15"
+brew "postgresql@16"
 # Python version management
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
@@ -87,6 +86,8 @@ brew "tmux"
 brew "tree"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
+# Comprehensive macOS cleanup and application uninstall tool
+brew "tw93/tap/mole"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # OpenAI's official ChatGPT desktop app
