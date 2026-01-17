@@ -1,6 +1,6 @@
 # Core
 [core]
-  excludesfile = ~/.gitignore-global
+  excludesfile = ~/.gitignore.global
   ignorecase = false
   pager = less -FRSX
 [include]
