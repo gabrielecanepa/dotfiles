@@ -10,6 +10,8 @@
 /.bun/_bun
 /.bundle/*/
 /.cache/
+/.claude/
+/.claude.json*
 /.config/*
 !/.config/gh/
 /.config/gh/hosts.yml

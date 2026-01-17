@@ -92,6 +92,8 @@ brew "tw93/tap/mole"
 cask "1password"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration
