@@ -29,7 +29,7 @@ function brew() {
     fresh)
       command brew update && 
       command brew upgrade &&
-      command brew cleanup &&
+      command brew cleanup --prune=all &&
       brew dump &&
       command brew doctor
       ;;
