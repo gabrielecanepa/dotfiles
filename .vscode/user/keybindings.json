@@ -278,5 +278,14 @@
   {
     "command": "workbench.action.toggleStatusbarVisibility",
     "key": "ctrl+shift+s"
+  },
+  {
+    "command": "workbench.action.openChat",
+    "key": "ctrl+shift+i"
+  },
+  {
+    "command": "-workbench.action.openChat",
+    "key": "cmd+n",
+    "when": "chatIsEnabled && inChat && inChatEditor"
   }
 ]

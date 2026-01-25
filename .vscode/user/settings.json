@@ -42,9 +42,12 @@
   "chat.agent.maxRequests": 40,
   "chat.agent.thinking.collapsedTools": "withThinking",
   "chat.agent.thinkingStyle": "collapsed",
+  "chat.allowAnonymousAccess": true,
   "chat.checkpoints.showFileChanges": true,
+  "chat.customAgentInSubagent.enabled": true,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
+  "chat.edits2.enabled": true,
   "chat.instructionsFilesLocations": {
     ".github/instructions": true,
     "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-post-response.instructions.md": true,
@@ -68,6 +71,8 @@
     "xargs": true
   },
   "chat.tools.terminal.outputLocation": "none",
+  "chat.useAgentSkills": true,
+  "chat.useNestedAgentsMdFiles": true,
   "css.format.newlineBetweenRules": false,
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
@@ -165,7 +170,9 @@
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": [".oh-my-zsh"],
+  "git.ignoredRepositories": [
+    ".oh-my-zsh"
+  ],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationSubjectLength": 60,
@@ -231,7 +238,6 @@
   "html.format.indentInnerHtml": true,
   "html.format.templating": true,
   "html.format.unformatted": "html,style",
-  "i18n-ally.annotationInPlace": false,
   "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
   "inlineChat.enableV2": true,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
@@ -246,7 +252,9 @@
   "json.schemaDownload.enable": true,
   "json.schemas": [
     {
-      "fileMatch": ["site.webmanifest"],
+      "fileMatch": [
+        "site.webmanifest"
+      ],
       "url": "https://json.schemastore.org/web-manifest.json"
     }
   ],
@@ -295,12 +303,19 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
-  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh"
+  ],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": ["\"", "'", "`"],
+  "togglequotes.chars": [
+    "\"",
+    "'",
+    "`"
+  ],
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -309,7 +324,9 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
+  ],
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
