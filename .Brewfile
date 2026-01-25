@@ -42,8 +42,6 @@ brew "jq"
 brew "krb5"
 # Postgres C API library
 brew "libpq", link: true
-# Library to render SVG files using Cairo
-brew "librsvg"
 # Mac App Store command-line interface
 brew "mas"
 # General-purpose lossless data-compression library
@@ -66,8 +64,6 @@ brew "postgresql@16"
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.12"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
@@ -78,8 +74,6 @@ brew "redis"
 brew "shellcheck"
 # Soak up standard input and write to a file
 brew "sponge"
-# Open source Firebase alternative
-brew "supabase"
 # Terminal multiplexer
 brew "tmux"
 # Display directories as trees (with optional color/HTML output)
@@ -90,10 +84,6 @@ brew "oven-sh/bun/bun"
 brew "tw93/tap/mole"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
-# Terminal-based AI coding assistant
-cask "claude-code"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -104,8 +94,6 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Colour picker for colours onscreen
-cask "pika"
 # Team communication and collaboration software
 cask "slack"
 # SSH client
@@ -118,8 +106,6 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Video communication and virtual meeting platform
-cask "zoom"
 mas "Ethernet Status", id: 1186187538
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
