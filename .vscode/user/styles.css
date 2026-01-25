@@ -41,6 +41,11 @@
   color: inherit !important;
 }
 
+/* Agents */
+.file-icons-enabled .\.agents\.md-name-file-icon::before {
+  content: "\ec4f" !important;
+}
+
 /* Aliases */
 .file-icons-enabled .\.aliases-name-file-icon::before {
   font-family: fi !important;
@@ -93,9 +98,20 @@
 }
 
 /* Chrome */
-.file-icons-enabled .\.chrome-name-folder-icon::before {
+.file-icons-enabled .\.chrome-name-folder-icon::before,
+.file-icons-enabled .claude\.md-name-file-icon::before {
   font-family: devicons !important;
   content: "\e643" !important;
+}
+
+/* Claude */
+.file-icons-enabled .\.claude-name-folder-icon::before,
+.file-icons-enabled .claude\.md-name-file-icon::before {
+  font-family: devicons !important;
+  content: "\e601" !important;
+}
+.file-icons-enabled .claude\.md-name-file-icon::before {
+  color: #cc7c5e !important;
 }
 
 /* Commitlint */
@@ -416,6 +432,7 @@
   font-size: 114% !important;
   font-family: fa !important;
   content: "\f135" !important;
+  transform: translateX(1.5px) !important;
 }
 
 /* Semantic Release */
