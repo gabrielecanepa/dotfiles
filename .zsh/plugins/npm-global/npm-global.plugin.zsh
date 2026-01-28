@@ -6,7 +6,7 @@ function npm-global() {
   mkdir -p "$NPM_GLOBAL"
 
   # Define commands that trigger a dump
-  local DUMP_COMMANDS=(
+  DUMP_COMMANDS=(
     install add i in ins inst insta instal isnt isntal isntall
     uninstall unlink remove rm r
     un update up upgrade udpate
@@ -61,12 +61,16 @@ function npm-global() {
   #
   function npm() {
     local args=($@)
+    local cmd
     local global=false
 
     for arg in $args; do
       if [[ $arg == --global || $arg =~ ^-[\w\d]*g[\w\d]*$ ]]; then
         global=true
-        break
+      else
+        if [[ -z $cmd ]] && [[ $arg != -* ]]; then
+          cmd=$arg
+        fi
       fi
     done
 
@@ -85,8 +89,8 @@ function npm-global() {
     command npm $@
     local exit=$?
 
-    for cmd in $DUMP_COMMANDS; do
-      if [[ $@ == *$cmd* ]]; then
+    for dump_cmd in $DUMP_COMMANDS; do
+      if [[ $dump_cmd == $cmd ]]; then
         ((npm-dump) &>/dev/null &) &>/dev/null
         break
       fi
