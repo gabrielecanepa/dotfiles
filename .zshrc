@@ -104,7 +104,7 @@ export PNPM_HOME="$HOME/.pnpm/global"
 export PATH="./node_modules/.bin:$BUN_HOME/bin:$PNPM_HOME:$PATH"
 
 # Completions
-completions docker npm supabase
+completions docker npm
 fpath=($fpath $ZSH_CUSTOM/completions $HOME/.bun/_bun $HOME/.docker/completions)
 autoload -Uz compinit
 compinit
