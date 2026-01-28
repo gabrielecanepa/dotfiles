@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "commitlint": "^20.3.1",
     "corepack": "^0.34.5",
     "npm": "^11.6.2",
     "npm-check-updates": "^19.3.1",
-    "pnpm": "^10.27.0"
+    "pnpm": "^10.27.0",
+    "prettier": "^3.8.1",
+    "shellcheck": "^4.1.0"
   }
 }
