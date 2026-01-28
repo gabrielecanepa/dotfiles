@@ -174,9 +174,7 @@
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": [
-    ".oh-my-zsh"
-  ],
+  "git.ignoredRepositories": [".oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationSubjectLength": 60,
@@ -256,9 +254,7 @@
   "json.schemaDownload.enable": true,
   "json.schemas": [
     {
-      "fileMatch": [
-        "site.webmanifest"
-      ],
+      "fileMatch": ["site.webmanifest"],
       "url": "https://json.schemastore.org/web-manifest.json"
     }
   ],
@@ -309,19 +305,12 @@
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.fontSize": 12.5,
-  "terminal.integrated.ignoreProcessNames": [
-    "bash",
-    "zsh"
-  ],
+  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": [
-    "\"",
-    "'",
-    "`"
-  ],
+  "togglequotes.chars": ["\"", "'", "`"],
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -330,9 +319,7 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": [
-    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
-  ],
+  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
