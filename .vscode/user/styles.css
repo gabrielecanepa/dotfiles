@@ -18,10 +18,10 @@
   padding-bottom: 6px !important;
 }
 .header-or-footer .actions-container {
-  gap: 3px !important;
+  gap: 4px !important;
 }
 .header-or-footer .action-label {
-  font-size: 19px !important;
+  font-size: 20px !important;
 }
 .header-or-footer .active-item-indicator::before {
   border-width: 1.5px !important;

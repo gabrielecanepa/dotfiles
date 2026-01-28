@@ -136,7 +136,11 @@
   "explorer.autoOpenDroppedFile": false,
   "explorer.autoRevealExclude": {
     "**/.git": true,
-    "**/node_modules": true
+    "**/.private": true,
+    "**/node_modules": true,
+    "**/NOTES": true,
+    "**/private": true,
+    "**/TODO": true
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -267,6 +271,7 @@
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
+  "postman.mcp.notifications.postmanMCP": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.endOfLine": "auto",
@@ -303,6 +308,7 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
+  "terminal.integrated.fontSize": 12.5,
   "terminal.integrated.ignoreProcessNames": [
     "bash",
     "zsh"
