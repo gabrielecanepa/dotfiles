@@ -6,19 +6,19 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "[javascript]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[php]": {
     "editor.insertSpaces": true,
@@ -31,15 +31,13 @@
     "editor.defaultFormatter": "jock.svg"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "prettier.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
-  "biome.enabled": false,
   "biome.requireConfiguration": true,
-  "chat.agent.maxRequests": 40,
   "chat.agent.thinking.collapsedTools": "withThinking",
   "chat.agent.thinkingStyle": "collapsed",
   "chat.allowAnonymousAccess": true,
@@ -49,13 +47,8 @@
   "chat.editing.confirmEditRequestRetry": false,
   "chat.edits2.enabled": true,
   "chat.instructionsFilesLocations": {
-    ".github/instructions": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-post-response.instructions.md": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-collections-pre-request.instructions.md": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-post-response.instructions.md": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-folder-pre-request.instructions.md": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-post-response.instructions.md": true,
-    "/var/folders/zq/x84bwkhs7js5rm74ttq6tyqm0000gn/T/postman-http-request-pre-request.instructions.md": true
+    ".claude/rules": true,
+    ".github/instructions": true
   },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
@@ -70,7 +63,20 @@
     "tsc": true,
     "xargs": true
   },
-  "chat.tools.terminal.outputLocation": "none",
+  "chat.tools.urls.autoApprove": {
+    "https://github.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://next-intl.dev": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://ui.shadcn.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    }
+  },
   "chat.useAgentSkills": true,
   "chat.useNestedAgentsMdFiles": true,
   "css.format.newlineBetweenRules": false,
@@ -185,12 +191,17 @@
   "git.rebaseWhenSync": true,
   "git.useEditorAsCommitInput": false,
   "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.copilotMemory.enabled": true,
   "github.copilot.chat.generateTests.codeLens": true,
+  "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
   "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.switchAgent.enabled": true,
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
@@ -204,8 +215,9 @@
     "suppressRebaseSwitchToTextWarning": true
   },
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-3-flash-preview",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
-  "gitlens.ai.model": "vscode",
+  "gitlens.ai.model": "gitkraken",
   "gitlens.ai.vscode.model": "copilot:claude-opus-4.5",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
@@ -252,6 +264,14 @@
   "javascript.preferences.quoteStyle": "single",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "json.schemaDownload.enable": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://biomejs.dev": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true
+  },
   "json.schemas": [
     {
       "fileMatch": ["site.webmanifest"],
@@ -260,14 +280,13 @@
   ],
   "less.lint.duplicateProperties": "warning",
   "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='_title'></span></div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"></div>",
-  "markdown.extension.italic.indicator": "_",
-  "markdown.extension.tableFormatter.delimiterRowNoPadding": true,
-  "markdown.extension.tableFormatter.normalizeIndentation": true,
-  "markdown.extension.toc.levels": "2..4",
   "markdown.preview.doubleClickToSwitchToEditor": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
+  "postman.account.region": "EU",
   "postman.mcp.notifications.postmanMCP": false,
+  "postman.settings.dotenv-detection-notification-visibility": false,
+  "postman.telemetry.enabled": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.endOfLine": "auto",

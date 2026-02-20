@@ -21,6 +21,13 @@
       }
     },
     {
+      "files": "*.json",
+      "options": {
+        "parser": "json",
+        "trailingComma": "none"
+      }
+    },
+    {
       "files": [".commitlintrc", ".prettierrc", "*.code-snippets"],
       "options": {
         "parser": "json"
