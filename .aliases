@@ -23,15 +23,16 @@ rmm() {
 # Directories
 wd="$WORKING_DIR"
 wdu="$WORKING_DIR/$USER"
-tmp="$WORKING_DIR/.temp"
-cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+tmp="$WORKING_DIR/.tmp"
+cloud="$HOME/Library/Mobile Documents"
+drive="$cloud/com~apple~CloudDocs"
 downloads="$cloud/Downloads"
 
 alias cdw="cd '$wd'"
 alias cdwu="cd '$wdu'"
-alias tmp="cd '$tmp'"
-alias cdc="cd '$cloud'"
 alias cdd="cd '$downloads'"
+alias tmp="cd '$tmp'"
+alias drive="cd '$drive'"
 
 mkdircd() { 
   dir="$(mkdir -pv "$@")"
@@ -49,7 +50,7 @@ alias aliases="$EDITOR $HOME/.aliases"
 alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias zshrc="$EDITOR $HOME/.zshrc"
 alias sshrc="$EDITOR $HOME/.ssh"
-alias docs="$EDITOR $wdu/docs"
+alias docs="$EDITOR \"$cloud/$(command ls "$cloud" | grep pro~writer)/Documents\""
 
 # Open with
 alias te="open -a TextEdit"
@@ -65,10 +66,8 @@ alias ghrv="gh repo view --web"
 alias omzr="omz reload"
 alias pn="pnpm"
 alias pnx="pnpx"
-alias yarn="npx yarn@1"
 
-# Git 
-# Short aliases
+# Git aliases
 for git_alias in $(git aliases | sed 's/\ .*//'); do
   if ! command -v "g$git_alias" >/dev/null; then
     alias g"""${git_alias}"="git $git_alias"
