@@ -41,11 +41,6 @@
   color: inherit !important;
 }
 
-/* Agents */
-.file-icons-enabled .\.agents\.md-name-file-icon::before {
-  content: "\ec4f" !important;
-}
-
 /* Aliases */
 .file-icons-enabled .\.aliases-name-file-icon::before {
   font-family: fi !important;
@@ -109,6 +104,7 @@
 
 /* Claude */
 .file-icons-enabled .\.claude-name-folder-icon::before,
+.file-icons-enabled .\.claude-name-dir-icon::before,
 .file-icons-enabled .claude\.md-name-file-icon::before {
   font-family: devicons !important;
   content: "\e601" !important;
@@ -133,6 +129,13 @@
 .file-icons-enabled .\.config-name-folder-icon::before {
   font-family: fa !important;
   content: "\f013" !important;
+}
+
+/* Convex */
+.file-icons-enabled .convex\.json-name-file-icon::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='1568' height='1579' viewBox='0 0 1568 1579' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M990.31 1243.78C1223.66 1218.3 1443.66 1096.11 1564.79 892.142C1507.43 1396.62 946.133 1715.47 487.974 1519.71C445.756 1501.71 409.417 1471.79 384.478 1433.31C281.517 1274.42 247.672 1072.24 296.302 888.758C435.246 1124.43 717.766 1268.89 990.31 1243.78Z' fill='%23F3B01C'/%3E%3Cpath d='M287.752 740.729C193.163 955.558 189.066 1207.08 305.031 1414.07C-103.072 1112.32 -98.619 466.582 300.043 167.852C336.917 140.241 380.738 123.853 426.696 121.359C615.696 111.562 807.723 183.35 942.392 317.128C668.779 319.8 402.292 492.055 287.752 740.729Z' fill='%238D2676'/%3E%3Cpath d='M1074.39 383.216C936.336 194.038 720.26 65.2475 483.521 61.3286C941.145 -142.812 1504.05 188.16 1565.32 677.492C1571.02 722.916 1563.54 769.23 1543.06 810.201C1457.55 980.853 1299.01 1113.21 1113.76 1162.19C1249.49 914.765 1232.75 612.473 1074.39 383.216Z' fill='%23EE342F'/%3E%3C/svg%3E%0A") !important;
+  content: "" !important;
+  background-size: 68% !important;
 }
 
 /* Craco */

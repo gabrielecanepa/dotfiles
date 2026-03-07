@@ -37,7 +37,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "application.shellEnvironmentResolutionTimeout": 20,
-  "biome.requireConfiguration": true,
+  "biome.suggestInstallingGlobally": false,
+  "chat.agent.maxRequests": 50,
   "chat.agent.thinking.collapsedTools": "withThinking",
   "chat.agent.thinkingStyle": "collapsed",
   "chat.allowAnonymousAccess": true,
@@ -48,30 +49,60 @@
   "chat.edits2.enabled": true,
   "chat.instructionsFilesLocations": {
     ".claude/rules": true,
-    ".github/instructions": true
+    ".copilot/instructions": true,
+    ".github/instructions": true,
+    "~/.claude/rules": true,
+    "~/.copilot/instructions": true,
+    "~/.github/instructions": true
   },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
+    "biome": true,
     "git": true,
     "mv": true,
+    "npx biome": true,
+    "npx next": true,
+    "npx tsc": true,
     "pnpm": true,
     "python3": true,
     "rg": true,
-    "rm": true,
     "sed": true,
+    "tee": true,
     "test": true,
     "tsc": true,
     "xargs": true
   },
   "chat.tools.urls.autoApprove": {
+    "https://*.claude.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://*.drizzle.team": true,
+    "https://*.npmjs.com": true,
+    "https://biomejs.dev": true,
+    "https://docs.convex.dev": true,
     "https://github.com": {
       "approveRequest": false,
       "approveResponse": true
     },
+    "https://neon.com": true,
     "https://next-intl.dev": {
       "approveRequest": false,
       "approveResponse": true
     },
+    "https://nuqs.47ng.com": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://nuqs.dev": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://shopify.dev": {
+      "approveRequest": false,
+      "approveResponse": true
+    },
+    "https://tiptap.dev": true,
     "https://ui.shadcn.com": {
       "approveRequest": false,
       "approveResponse": true
@@ -127,6 +158,9 @@
     },
     "textMateRules": []
   },
+  "editor.unicodeHighlight.allowedCharacters": {
+    "–": true
+  },
   "emmet.includeLanguages": {
     "blade": "html",
     "erb": "html",
@@ -144,10 +178,9 @@
     "**/.git": true,
     "**/.private": true,
     "**/node_modules": true,
-    "**/NOTES": true,
-    "**/private": true,
-    "**/TODO": true
+    "**/private": true
   },
+  "explorer.compactFolders": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmPasteNative": false,
@@ -160,9 +193,7 @@
     ".jobs": "shellscript",
     ".pryrc": "ruby",
     ".vscode/**/settings.json": "jsonc",
-    "*.css": "tailwindcss",
-    "NOTES": "markdown",
-    "TODO": "markdown"
+    "NOTES": "markdown"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
@@ -184,24 +215,26 @@
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationSubjectLength": 60,
-  "git.mergeEditor": true,
   "git.openRepositoryInParentFolders": "never",
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
   "git.useEditorAsCommitInput": false,
+  "github.copilot.chat.agent.autoFix": true,
+  "github.copilot.chat.alternateGeminiModelFPrompt.enabled": true,
   "github.copilot.chat.alternateGptPrompt.enabled": true,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   "github.copilot.chat.codeGeneration.useInstructionFiles": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.copilotMemory.enabled": true,
-  "github.copilot.chat.generateTests.codeLens": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
   "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.responsesApiReasoningEffort": "high",
   "github.copilot.chat.scopeSelection": true,
   "github.copilot.chat.switchAgent.enabled": true,
+  "github.copilot.chat.updated53CodexPrompt.enabled": true,
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
@@ -217,8 +250,8 @@
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
   "gitlens.ai.gitkraken.model": "gemini:gemini-3-flash-preview",
   "gitlens.ai.largePromptWarningThreshold": 1000000,
-  "gitlens.ai.model": "gitkraken",
-  "gitlens.ai.vscode.model": "copilot:claude-opus-4.5",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:oswe-vscode",
   "gitlens.rebaseEditor.ordering": "asc",
   "gitlens.showWhatsNewAfterUpgrades": false,
   "gitlens.views.repositories.files.layout": "list",
@@ -254,39 +287,32 @@
   "html.format.unformatted": "html,style",
   "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
   "inlineChat.enableV2": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
-  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
-  "javascript.format.semicolons": "remove",
-  "javascript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifierEnding": "minimal",
-  "javascript.preferences.quoteStyle": "single",
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+  "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+  "js/ts.format.semicolons": "remove",
+  "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "js/ts.preferences.importModuleSpecifierEnding": "minimal",
+  "js/ts.preferences.includePackageJsonAutoImports": "on",
+  "js/ts.preferences.quoteStyle": "single",
+  "js/ts.updateImportsOnFileMove.enabled": "always",
   "json.schemaDownload.enable": true,
   "json.schemaDownload.trustedDomains": {
     "https://biomejs.dev": true,
-    "https://json-schema.org/": true,
-    "https://json.schemastore.org/": true,
-    "https://raw.githubusercontent.com/": true,
-    "https://schemastore.azurewebsites.net/": true,
-    "https://www.schemastore.org/": true
+    "https://json-schema.org": true,
+    "https://json.schemastore.org": true,
+    "https://raw.githubusercontent.com": true,
+    "https://schemastore.azurewebsites.net": true,
+    "https://schemastore.org": true
   },
-  "json.schemas": [
-    {
-      "fileMatch": ["site.webmanifest"],
-      "url": "https://json.schemastore.org/web-manifest.json"
-    }
-  ],
   "less.lint.duplicateProperties": "warning",
   "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='_title'></span></div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"></div>",
   "markdown.preview.doubleClickToSwitchToEditor": false,
+  "merge-conflict.autoNavigateNextConflict.enabled": true,
+  "merge-conflict.codeLens.enabled": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
-  "postman.account.region": "EU",
-  "postman.mcp.notifications.postmanMCP": false,
-  "postman.settings.dotenv-detection-notification-visibility": false,
-  "postman.telemetry.enabled": false,
   "prettier.arrowParens": "avoid",
   "prettier.bracketSpacing": false,
   "prettier.endOfLine": "auto",
@@ -298,7 +324,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.vueIndentScriptAndStyle": true,
-  "remote.SSH.connectTimeout": 1800,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
@@ -318,7 +343,6 @@
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "underline",
-  "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.enableVisualBell": true,
@@ -330,13 +354,6 @@
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.location": "left",
   "togglequotes.chars": ["\"", "'", "`"],
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "minimal",
-  "typescript.preferences.includePackageJsonAutoImports": "on",
-  "typescript.preferences.quoteStyle": "single",
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
