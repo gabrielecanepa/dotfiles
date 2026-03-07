@@ -44,10 +44,10 @@ brew "krb5"
 brew "libpq", link: true
 # Mac App Store command-line interface
 brew "mas"
-# General-purpose lossless data-compression library
-brew "zlib"
 # Open source relational database management system
 brew "mysql"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Open-source, cross-platform JavaScript runtime environment
@@ -80,10 +80,10 @@ brew "tmux"
 brew "tree"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
-# Comprehensive macOS cleanup and application uninstall tool
-brew "tw93/tap/mole"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Brings the power of Copilot coding agent directly to your terminal
+cask "copilot-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -94,6 +94,10 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
+# Colour picker for colours onscreen
+cask "pika"
+# Desktop agent for Postman on the Web
+cask "postman-agent"
 # Team communication and collaboration software
 cask "slack"
 # SSH client
@@ -106,6 +110,8 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+mas "1Password for Safari", id: 1569813296
+mas "AdGuard Mini", id: 1440147259
 mas "Ethernet Status", id: 1186187538
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
