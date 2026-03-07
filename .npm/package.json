@@ -2,6 +2,7 @@
   "dependencies": {
     "commitlint": "^20.4.2",
     "corepack": "^0.34.6",
+    "depcheck": "^1.4.7",
     "husky": "^9.1.7",
     "npm": "^11.10.1",
     "npm-check-updates": "^19.4.1",
