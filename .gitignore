@@ -25,6 +25,7 @@
 /.docker/
 !/.docker/config.json
 /.gem/
+/.gitlab/
 /.gk/
 /.lemminx/
 /.local/
