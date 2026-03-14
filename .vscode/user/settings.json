@@ -320,23 +320,14 @@
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.fontSize": 12.5,
-  "terminal.integrated.ignoreProcessNames": [
-    "bash",
-    "zsh"
-  ],
+  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": [
-    "\"",
-    "'",
-    "`"
-  ],
+  "togglequotes.chars": ["\"", "'", "`"],
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": [
-    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
-  ],
+  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",

@@ -1,22 +1,22 @@
 # https://docs.rubocop.org
 AllCops:
   Exclude:
-    - "bin/**/*"
-    - "config/**/*"
-    - "db/**/*"
-    - "script/**/*"
-    - "public/**/*"
-    - "vendor/**/*"
-    - "**/*.Brewfile"
-    - "**/*.erb"
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'public/**/*'
+    - 'vendor/**/*'
+    - '**/*.Brewfile'
+    - '**/*.erb'
   Include:
-    - "**/*.rb"
-    - "**/*.gemfile"
-    - "**/*.gemspec"
-    - "**/*.rake"
-    - "**/*.ru"
-    - "**/Gemfile"
-    - "**/Rakefile"
+    - '**/*.rb'
+    - '**/*.gemfile'
+    - '**/*.gemspec'
+    - '**/*.rake'
+    - '**/*.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
   NewCops: enable
 
 Gemspec/DeprecatedAttributeAssignment:
@@ -185,24 +185,24 @@ Style/MapToSet:
 Style/MethodCallWithArgsParentheses:
   AllowedMethods:
     [
-      "authorize",
-      "desc",
-      "gem",
-      "has_many",
-      "head",
-      "print",
-      "printf",
-      "puts",
-      "raise",
-      "redirect_to",
-      "render",
-      "require",
-      "require_relative",
-      "ruby",
-      "run",
-      "separator",
-      "source",
-      "yield",
+      'authorize',
+      'desc',
+      'gem',
+      'has_many',
+      'head',
+      'print',
+      'printf',
+      'puts',
+      'raise',
+      'redirect_to',
+      'render',
+      'require',
+      'require_relative',
+      'ruby',
+      'run',
+      'separator',
+      'source',
+      'yield',
     ]
   Enabled: true
 Style/MinMaxComparison:

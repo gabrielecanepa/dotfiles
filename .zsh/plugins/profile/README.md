@@ -5,6 +5,7 @@ The `plugin` CLI allows you to manage your Zsh profile to automize the setup of 
 It provides commands to install, reload, and check the profile configuration.
 
 The default output has the following format:
+
 ```sh
 $ profile
 user   | john.doe

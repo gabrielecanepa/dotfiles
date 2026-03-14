@@ -1,5 +1,8 @@
 {
   "git.autoRepositoryDetection": false,
+  "git.ignoredRepositories": [".oh-my-zsh"],
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "oxc.enable.oxfmt": true,
   "files.exclude": {
     // Global
     "**/.DS_Store": true,

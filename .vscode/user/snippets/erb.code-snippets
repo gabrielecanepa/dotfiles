@@ -3,12 +3,12 @@
     "prefix": "er",
     "scope": "erb",
     "body": ["<% $0 %>"],
-    "description": "Embed Ruby"
+    "description": "Embed Ruby",
   },
   "Print embedded Ruby": {
     "prefix": "pe",
     "scope": "erb",
     "body": ["<%= $0 %>"],
-    "description": "Print embedded Ruby"
-  }
+    "description": "Print embedded Ruby",
+  },
 }

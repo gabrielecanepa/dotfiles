@@ -1,9 +1,11 @@
 #!/bin/sh
 
 case "$commit" in
-  "[tmp]"*|\#*)
+  \#*)
     exit 0
+    ;;
+  *)
+    commitlint --edit "$1" --quiet
     ;;
 esac
 
-npx commitlint --edit "$1" --quiet
