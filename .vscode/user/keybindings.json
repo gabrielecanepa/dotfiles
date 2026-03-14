@@ -64,11 +64,6 @@
     "key": "cmd+backspace"
   },
   {
-    "command": "-inlineChat.start",
-    "key": "cmd+i",
-    "when": "inlineChatHasProvider && !editorReadonly"
-  },
-  {
     "command": "-git.stageSelectedRanges",
     "key": "cmd+k alt+cmd+s",
     "when": "editorTextFocus && !operationInProgress && resourceScheme == 'file'"
@@ -173,11 +168,6 @@
     "command": "workbench.action.createTerminalEditor",
     "key": "ctrl+shift+t",
     "when": "terminalProcessSupported"
-  },
-  {
-    "command": "inlineChat.start",
-    "key": "ctrl+i",
-    "when": "inlineChatHasProvider && !editorReadonly"
   },
   {
     "command": "workbench.action.files.saveWithoutFormatting",
@@ -287,5 +277,18 @@
     "command": "-workbench.action.openChat",
     "key": "cmd+n",
     "when": "chatIsEnabled && inChat && inChatEditor"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+t",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "workbench.action.toggleAuxiliaryBar",
+    "key": "cmd+[Equal]"
+  },
+  {
+    "command": "-workbench.action.toggleAuxiliaryBar",
+    "key": "alt+cmd+b"
   }
 ]

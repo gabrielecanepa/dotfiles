@@ -1,44 +1,12 @@
 {
-  "[css]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[php]": {
     "editor.insertSpaces": true,
     "editor.tabSize": 4
   },
-  "[scss]": {
-    "editor.defaultFormatter": "vscode.css-language-features"
-  },
-  "[svg]": {
-    "editor.defaultFormatter": "jock.svg"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "application.shellEnvironmentResolutionTimeout": 20,
+  "biome.requireConfiguration": true,
   "biome.suggestInstallingGlobally": false,
-  "chat.agent.maxRequests": 50,
+  "chat.agent.maxRequests": 500,
   "chat.agent.thinking.collapsedTools": "withThinking",
   "chat.agent.thinkingStyle": "collapsed",
   "chat.allowAnonymousAccess": true,
@@ -57,12 +25,19 @@
   },
   "chat.mcp.gallery.enabled": true,
   "chat.tools.terminal.autoApprove": {
+    "./node_modules/.bin/knip": true,
+    "./node_modules/.bin/oxlint": true,
+    "./node_modules/.bin/tsc": true,
     "biome": true,
     "git": true,
-    "mv": true,
     "npx biome": true,
     "npx next": true,
+    "npx oxfmt": true,
+    "npx oxlint": true,
+    "npx prisma": true,
+    "npx react-router": true,
     "npx tsc": true,
+    "oxlint": true,
     "pnpm": true,
     "python3": true,
     "rg": true,
@@ -73,40 +48,34 @@
     "xargs": true
   },
   "chat.tools.urls.autoApprove": {
-    "https://*.claude.com": {
+    "https://*.claude.com": true,
+    "https://*.drizzle.team": true,
+    "https://*.npmjs.com": true,
+    "https://agentskills.io": true,
+    "https://azure.microsoft.com": {
       "approveRequest": false,
       "approveResponse": true
     },
-    "https://*.drizzle.team": true,
-    "https://*.npmjs.com": true,
+    "https://better-auth.com": true,
     "https://biomejs.dev": true,
     "https://docs.convex.dev": true,
-    "https://github.com": {
+    "https://github.com": true,
+    "https://learn.microsoft.com": {
       "approveRequest": false,
       "approveResponse": true
     },
     "https://neon.com": true,
-    "https://next-intl.dev": {
-      "approveRequest": false,
-      "approveResponse": true
-    },
-    "https://nuqs.47ng.com": {
-      "approveRequest": false,
-      "approveResponse": true
-    },
-    "https://nuqs.dev": {
-      "approveRequest": false,
-      "approveResponse": true
-    },
-    "https://shopify.dev": {
+    "https://next-intl.dev": true,
+    "https://nuqs.47ng.com": true,
+    "https://nuqs.dev": true,
+    "https://oxc.rs": true,
+    "https://shopify.dev": true,
+    "https://skills.sh": {
       "approveRequest": false,
       "approveResponse": true
     },
     "https://tiptap.dev": true,
-    "https://ui.shadcn.com": {
-      "approveRequest": false,
-      "approveResponse": true
-    }
+    "https://ui.shadcn.com": true
   },
   "chat.useAgentSkills": true,
   "chat.useNestedAgentsMdFiles": true,
@@ -169,6 +138,7 @@
     "typescript": "typescriptreact",
     "vue": "html"
   },
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
   "emmet.syntaxProfiles": {
     "javascript": "jsx"
   },
@@ -186,6 +156,7 @@
   "explorer.confirmPasteNative": false,
   "explorer.confirmUndo": "light",
   "files.associations": {
+    "*.css": "tailwindcss",
     ".aliases": "shellscript",
     ".env*": "dotenv",
     ".gitignore*": "ignore",
@@ -202,16 +173,15 @@
   },
   "files.insertFinalNewline": true,
   "git.allowForcePush": true,
+  "git.autoRepositoryDetection": "subFolders",
   "git.autofetch": true,
   "git.autofetchPeriod": 30,
-  "git.autoRepositoryDetection": "subFolders",
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.enableSmartCommit": true,
   "git.fetchOnPull": true,
-  "git.ignoredRepositories": [".oh-my-zsh"],
   "git.ignoreLegacyWarning": true,
   "git.ignoreMissingGitWarning": true,
   "git.inputValidationSubjectLength": 60,
@@ -221,20 +191,19 @@
   "git.rebaseWhenSync": true,
   "git.useEditorAsCommitInput": false,
   "github.copilot.chat.agent.autoFix": true,
-  "github.copilot.chat.alternateGeminiModelFPrompt.enabled": true,
-  "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "github.copilot.chat.anthropic.thinking.budgetTokens": 32000,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
-  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  "github.copilot.chat.backgroundCompaction": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.copilotMemory.enabled": true,
+  "github.copilot.chat.getSearchViewResultsSkill.enabled": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
   "github.copilot.chat.languageContext.typescript.enabled": true,
-  "github.copilot.chat.responsesApiReasoningEffort": "high",
-  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.responsesApiContextManagement.enabled": true,
   "github.copilot.chat.switchAgent.enabled": true,
-  "github.copilot.chat.updated53CodexPrompt.enabled": true,
+  "github.copilot.chat.updated53CodexPrompt.enabled": false,
   "github.copilot.enable": {
     "*": true,
     "markdown": true,
@@ -286,6 +255,7 @@
   "html.format.templating": true,
   "html.format.unformatted": "html,style",
   "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
+  "inlineChat.defaultModel": "Claude Haiku 4.5 (copilot)",
   "inlineChat.enableV2": true,
   "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
@@ -299,13 +269,23 @@
   "js/ts.updateImportsOnFileMove.enabled": "always",
   "json.schemaDownload.enable": true,
   "json.schemaDownload.trustedDomains": {
+    "https://*.vercel.sh": true,
     "https://biomejs.dev": true,
+    "https://developer.microsoft.com/json-schemas/": true,
     "https://json-schema.org": true,
+    "https://json-schema.org/": true,
     "https://json.schemastore.org": true,
+    "https://json.schemastore.org/": true,
     "https://raw.githubusercontent.com": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
     "https://schemastore.azurewebsites.net": true,
-    "https://schemastore.org": true
+    "https://schemastore.azurewebsites.net/": true,
+    "https://schemastore.org": true,
+    "https://ui.shadcn.com": true,
+    "https://www.schemastore.org/": true
   },
+  "knip.requireConfig": true,
   "less.lint.duplicateProperties": "warning",
   "markdown-pdf.headerTemplate": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='_title'></span></div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \"></div>",
   "markdown.preview.doubleClickToSwitchToEditor": false,
@@ -313,17 +293,9 @@
   "merge-conflict.codeLens.enabled": false,
   "optimizeImages.app": "ImageOptim",
   "optimizeImages.imageRegex": ".*\\.(png|gif|svg|jpe?g)$",
-  "prettier.arrowParens": "avoid",
-  "prettier.bracketSpacing": false,
-  "prettier.endOfLine": "auto",
-  "prettier.insertPragma": true,
-  "prettier.jsxSingleQuote": true,
-  "prettier.printWidth": 160,
-  "prettier.requireConfig": true,
-  "prettier.resolveGlobalModules": true,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.vueIndentScriptAndStyle": true,
+  "oxc.fixKind": "safe_fix_or_suggestion",
+  "oxc.requireConfig": true,
+  "oxc.unusedDisableDirectives": "deny",
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
@@ -348,20 +320,30 @@
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "Monaco Nerd Font Mono",
   "terminal.integrated.fontSize": 12.5,
-  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh"
+  ],
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
-  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.tabs.enabled": false,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": ["\"", "'", "`"],
+  "togglequotes.chars": [
+    "\"",
+    "'",
+    "`"
+  ],
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
+  ],
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
   "window.newWindowProfile": "Default",
-  "window.zoomLevel": 1.2,
+  "window.zoomLevel": 1.1,
   "workbench.activityBar.location": "bottom",
+  "workbench.browser.enableChatTools": true,
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",

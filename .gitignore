@@ -10,7 +10,9 @@
 /.bun/_bun
 /.bundle/*/
 /.cache/
-/.claude/
+/.claude/*/
+!/.claude/skills/
+/.claude/stats-cache.json
 /.claude.json*
 /.config/*
 !/.config/gh/
