@@ -88,12 +88,15 @@ plugins=(
 
 # Git (https://git-scm.com)
 if profile check; then
-  git config --file $HOME/.gitprofile user.name $NAME
-  git config --file $HOME/.gitprofile user.email $EMAIL
-  git config --file $HOME/.gitprofile core.editor $GIT_EDITOR
-  # Hooks
+  [[ "$(git config --file $HOME/.gitprofile user.name 2>/dev/null)" != "$NAME" ]] && git config --file $HOME/.gitprofile user.name "$NAME"
+  [[ "$(git config --file $HOME/.gitprofile user.email 2>/dev/null)" != "$EMAIL" ]] && git config --file $HOME/.gitprofile user.email "$EMAIL"
+  [[ "$(git config --file $HOME/.gitprofile core.editor 2>/dev/null)" != "$GIT_EDITOR" ]] && git config --file $HOME/.gitprofile core.editor "$GIT_EDITOR"
+    
   for file in $HOME/.husky/*; do
-    ln -sf $file $HOME/.git/hooks/$(basename $file)
+    [[ -d "$file" ]] && continue
+    hook="$HOME/.git/hooks/$(basename $file)"
+    [[ "$(readlink "$hook")" == "$file" ]] && continue
+    rm -f "$hook" && ln -s "$file" "$hook"
   done
 fi
 

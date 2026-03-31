@@ -10,7 +10,7 @@
 /.bun/_bun
 /.bundle/*/
 /.cache/
-/.claude/*/
+/.claude/*
 !/.claude/skills/
 /.claude/stats-cache.json
 /.claude.json*
@@ -22,8 +22,10 @@
 /.config/iterm2/AppSupport
 !/.config/terminal/
 /.copilot/
+/.context7/
 /.docker/
 !/.docker/config.json
+/.fly/
 /.gem/
 /.gitlab/
 /.gk/
@@ -47,6 +49,7 @@
 /.supabase/
 /.tmp/
 /.Trash/
+/.vite-plus/
 /.vscode/*
 !/.vscode/user/
 /.vscode/user/extensions/
@@ -62,11 +65,11 @@
 /Developer/
 /Documents/
 /Library/
-/Library *
 /Pictures/
 /Public/
 
 # Files
+/.gitconfig.local
 /.gitprofile
 /.lesshst
 /.netrc
@@ -79,5 +82,6 @@
 # Symlinks
 /Applications
 /Downloads
+/Library *
 /Movies
 /Music

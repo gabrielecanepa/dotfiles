@@ -1,16 +1,28 @@
-# Core
 [core]
   excludesfile = ~/.gitignore.global
   ignorecase = false
   pager = less -FRSX
 [include]
+  path = ~/.gitconfig.local
   path = ~/.gitprofile
+
 [advice]
   skippedCherryPicks = false
 [help]
   autocorrect = 1
 
-# Theme
+[init]
+  defaultBranch = main
+[pull]
+  rebase = true
+[push]
+	autoSetupRemote = true
+
+[branch "main"]
+  mergeoptions = --no-edit
+[branch "master"]
+  mergeoptions = --no-edit
+
 [color]
   branch = auto
   diff = auto
@@ -21,31 +33,17 @@
   current = green
   remote = yellow
 
-# Commands
-[init]
-  defaultBranch = main
-[pull]
-  rebase = true
-[push]
-	autoSetupRemote = true
 
-# Branches
-[branch "main"]
-  mergeoptions = --no-edit
-[branch "master"]
-  mergeoptions = --no-edit
 
-# Filters
 [filter "lfs"]
   clean = git-lfs clean -- %f
   process = git-lfs filter-process
   required = true
   smudge = git-lfs smudge -- %f
-[filter "ignore-vscode-theme"]
+[filter "vscode-theme"]
   clean = sed /workbench.colorTheme/d
 	smudge = sed /workbench.colorTheme/d
 
-# Aliases
 [alias]
   a = add
   acm = !git add -A && git commit -m

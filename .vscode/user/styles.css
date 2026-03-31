@@ -239,14 +239,15 @@
 }
 
 /* Git */
-.file-icons-enabled .\.git-name-folder-icon .label-name {
-  color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
-}
 .file-icons-enabled .\.git-name-folder-icon::before {
   font-family: devicons !important;
   content: "\e602" !important;
   opacity: 0.5 !important;
 }
+.file-icons-enabled .\.git-name-folder-icon .label-name {
+  color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
+}
+.file-icons-enabled .\.gitconfig\.local-name-file-icon::before,
 .file-icons-enabled .\.gitignore\.global-name-file-icon::before,
 .file-icons-enabled .\.gitprofile-name-file-icon::before {
   font-family: devicons !important;
