@@ -131,7 +131,7 @@
   },
   {
     "command": "workbench.action.editor.changeLanguageMode",
-    "key": "ctrl+alt+l",
+    "key": "ctrl+shift+l",
     "when": "!notebookEditorFocused"
   },
   {
@@ -290,5 +290,23 @@
   {
     "command": "-workbench.action.toggleAuxiliaryBar",
     "key": "alt+cmd+b"
+  },
+  {
+    "command": "agentSessions.showAgentSessionsSidebar",
+    "key": "alt+cmd+[Equal]"
+  },
+  {
+    "command": "agentSessions.hideAgentSessionsSidebar",
+    "key": "alt+cmd+[Equal]"
+  },
+  {
+    "command": "markdown.extension.checkTaskList",
+    "key": "cmd+k",
+    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  },
+  {
+    "command": "-markdown.extension.checkTaskList",
+    "key": "alt+c",
+    "when": "false"
   }
 ]
