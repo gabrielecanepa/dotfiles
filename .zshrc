@@ -103,8 +103,10 @@ fi
 # Node.js (https://nodejs.org)
 # Bun (https://bun.sh)
 # pnpm (https://pnpm.io)
+# Vite+ (https://viteplus.dev)
 export PNPM_HOME="$HOME/.pnpm/global"
 export PATH="./node_modules/.bin:$BUN_HOME/bin:$PNPM_HOME:$PATH"
+. "$HOME/.vite-plus/env"
 
 # Completions
 completions docker npm
