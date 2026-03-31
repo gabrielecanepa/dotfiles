@@ -22,6 +22,8 @@ brew "csvkit"
 brew "deno"
 # Run arbitrary commands when files change
 brew "entr"
+# Command-line tools for fly.io services
+brew "flyctl"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -82,6 +84,8 @@ brew "tree"
 brew "oven-sh/bun/bun"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Brings the power of Copilot coding agent directly to your terminal
 cask "copilot-cli"
 # App to build and share containerised applications and microservices
@@ -100,6 +104,8 @@ cask "pika"
 cask "postman-agent"
 # Team communication and collaboration software
 cask "slack"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # SSH client
 cask "termius"
 # Unpacks archive files
@@ -111,7 +117,6 @@ cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 mas "1Password for Safari", id: 1569813296
-mas "AdGuard Mini", id: 1440147259
 mas "Ethernet Status", id: 1186187538
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
