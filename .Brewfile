@@ -56,8 +56,6 @@ brew "nginx"
 brew "node"
 # Node.js version manager
 brew "nodenv"
-# Create, run, and share large language models (LLMs)
-brew "ollama"
 # 7-Zip (high compression file archiver) implementation
 brew "p7zip"
 # Object-relational database system
@@ -90,6 +88,8 @@ cask "claude-code"
 cask "copilot-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Font installers for Figma.app
+cask "figma-agent"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Web browser
@@ -98,8 +98,6 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Colour picker for colours onscreen
-cask "pika"
 # Desktop agent for Postman on the Web
 cask "postman-agent"
 # Team communication and collaboration software
@@ -117,6 +115,7 @@ cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
 mas "1Password for Safari", id: 1569813296
+mas "Color Picker", id: 1545870783
 mas "Ethernet Status", id: 1186187538
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
