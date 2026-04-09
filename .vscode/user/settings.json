@@ -10,14 +10,6 @@
   "chat.customAgentInSubagent.enabled": true,
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
-  "chat.instructionsFilesLocations": {
-    ".claude/rules": true,
-    ".copilot/instructions": true,
-    ".github/instructions": true,
-    "~/.claude/rules": true,
-    "~/.copilot/instructions": true,
-    "~/.github/instructions": true
-  },
   "chat.mcp.discovery.enabled": {
     "claude-desktop": true
   },
@@ -45,11 +37,11 @@
   },
   "chat.useAgentSkills": true,
   "chat.useNestedAgentsMdFiles": true,
-  "chat.viewSessions.orientation": "stacked",
   "css.format.newlineBetweenRules": false,
   "css.format.newlineBetweenSelectors": false,
   "css.format.spaceAroundSelectorSeparator": true,
   "css.lint.duplicateProperties": "warning",
+  "csv.enabled": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "dotenv.enableAutocloaking": false,
   "editor.accessibilitySupport": "off",
@@ -169,6 +161,11 @@
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   "github.copilot.chat.backgroundCompaction": true,
   "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Generate a single-line conventional commit message in the format `<type>: <description>`. Rules: use imperative mood, sentence case, no period at the end. Never include a scope. Never include a body or footer unless the change is a breaking change — in that case, add a `BREAKING CHANGE:` footer. Never include `Co-authored-by` or any other trailer. Keep the description concise (under 50 characters when possible). Allowed types: feat, fix, refactor, chore, docs, style, test, perf, ci, build, revert. Examples: `feat: Add date range filter to search`, `fix: Prevent duplicate API calls on mount`, `refactor: Simplify auth token refresh logic`, `chore: Update dependencies`."
+    }
+  ],
   "github.copilot.chat.copilotMemory.enabled": true,
   "github.copilot.chat.getSearchViewResultsSkill.enabled": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
@@ -181,7 +178,7 @@
   "github.copilot.chat.updated53CodexPrompt.enabled": false,
   "github.copilot.enable": {
     "*": true,
-    "markdown": false,
+    "markdown": true,
     "plaintext": true,
     "scminput": false
   },
@@ -192,6 +189,7 @@
     "suppressLineUncommittedWarning": true,
     "suppressRebaseSwitchToTextWarning": true
   },
+  "gitlens.ai.generateCommitMessage.customInstructions": "Generate a single-line conventional commit message in the format `<type>: <description>`. Rules: use imperative mood, sentence case, no period at the end. Never include a scope. Never include a body or footer unless the change is a breaking change — in that case, add a `BREAKING CHANGE:` footer. Never include `Co-authored-by` or any other trailer. Keep the description concise (under 50 characters when possible). Allowed types: feat, fix, refactor, chore, docs, style, test, perf, ci, build, revert. Examples: `feat: Add date range filter to search`, `fix: Prevent duplicate API calls on mount`, `refactor: Simplify auth token refresh logic`, `chore: Update dependencies`.",
   "gitlens.ai.generateCommits.customInstructions": "Use the Conventional Commit specification (https://conventionalcommits.org/en/v1.0.0) to provide a clear and descriptive technical message summarizing the changes made to the codebase. The optional body can include a sentence of maximum 20 words explaining the changes in more details, ending with a dot. The sentence in the body can be followed by a bullet list showing the changes in more detail, each point ending without a dot. The whole message must be written in an imperative form and sentence-case format. Example: \"feat: Implement a new feature\n\nCreate a new feature that allows users to filter search results by date.\n\n- Add date filter component\n- Update search API to handle date parameters\"",
   "gitlens.ai.gitkraken.model": "gemini:gemini-3-flash-preview",
   "gitlens.ai.largePromptWarningThreshold": 1000000,

@@ -16,9 +16,12 @@
   },
   "lastSelectedAgents": [
     "amp",
+    "antigravity",
     "cline",
     "codex",
     "cursor",
+    "deepagents",
+    "firebender",
     "gemini-cli",
     "github-copilot",
     "kimi-cli",

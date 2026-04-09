@@ -1,19 +1,15 @@
 # Folders
-/.azcopy/
-/.azure/
-/.azure-shell/
-/.azurefunctions/
+/.agents/plans/
+/.agents/skills/
 /.aws*/
-!/.bun
 /.bun/bin/
 /.bun/install/
 /.bun/_bun
 /.bundle/*/
 /.cache/
 /.claude/*
+!/.claude/rules
 !/.claude/skills/
-/.claude/stats-cache.json
-/.claude.json*
 /.config/*
 !/.config/gh/
 /.config/gh/hosts.yml
@@ -29,12 +25,10 @@
 /.gem/
 /.gitlab/
 /.gk/
-/.lemminx/
 /.local/
 /.nodenv/
 /.npm/_*
 /.oh-my-zsh/
-/.ollama/
 /.pnpm/*
 !/.pnpm/package.json
 !/.pnpm/pnpm-lock.yaml
@@ -44,10 +38,6 @@
 /.ssh/*
 !/.ssh/1Password/
 !/.ssh/config
-/.subversion/
-!/.subversion/config
-/.supabase/
-/.tmp/
 /.Trash/
 /.vite-plus/
 /.vscode/*
@@ -55,7 +45,6 @@
 /.vscode/user/extensions/
 !/.vscode/extensions.json
 !/.vscode/settings.json
-/.vscode-cli/
 /.zcompdump.lock/
 /.zsh/completions/
 /.zsh/plugins/_*/
@@ -69,6 +58,7 @@
 /Public/
 
 # Files
+/.claude.json
 /.gitconfig.local
 /.gitprofile
 /.lesshst

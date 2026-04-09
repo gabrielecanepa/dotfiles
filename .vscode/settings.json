@@ -4,17 +4,11 @@
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "oxc.enable.oxfmt": true,
   "files.exclude": {
-    // Global
     "**/.DS_Store": true,
     "**/.hg": true,
     "**/.svn": true,
     "**/CVS": true,
     "**/Thumbs.db": true,
-    // Folders
-    ".azcopy": true,
-    ".azure": true,
-    ".azure-shell": true,
-    ".azurefunctions": true,
     ".bash_history": true,
     ".bun/bin": true,
     ".bun/install": true,
@@ -49,12 +43,11 @@
     "Developer": true,
     "Documents": true,
     "Downloads": true,
-    "Library": true,
+    "Library*": true,
     "Movies": true,
     "Music": true,
     "Pictures": true,
     "Public": true,
-    // Files
     ".CFUserTextEncoding": true,
     ".lesshst": true,
     ".viminfo": true,
