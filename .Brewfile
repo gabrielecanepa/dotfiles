@@ -82,6 +82,8 @@ brew "tree"
 brew "oven-sh/bun/bun"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # Brings the power of Copilot coding agent directly to your terminal
