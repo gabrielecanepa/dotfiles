@@ -90,8 +90,6 @@ cask "claude-code"
 cask "copilot-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
-# Font installers for Figma.app
-cask "figma-agent"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Web browser
