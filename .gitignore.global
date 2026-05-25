@@ -19,10 +19,13 @@
 *.tar
 *.zip
 
-# Logs and databases
+# Logs, db, backups
 #####################
 *.log
 *.sqlite
+*.sql
+*.backup
+*.bak
 
 # Modules
 ##########
