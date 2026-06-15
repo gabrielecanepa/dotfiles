@@ -1,4 +1,5 @@
 # https://docs.rubocop.org
+
 AllCops:
   Exclude:
     - 'bin/**/*'
@@ -7,6 +8,7 @@ AllCops:
     - 'script/**/*'
     - 'public/**/*'
     - 'vendor/**/*'
+    - '**/Brewfile'
     - '**/*.Brewfile'
     - '**/*.erb'
   Include:
@@ -38,7 +40,7 @@ Layout/LineContinuationSpacing:
 Layout/LineEndStringConcatenationIndentation:
   Enabled: true
 Layout/LineLength:
-  Max: 140
+  Max: 120
 Layout/SpaceBeforeBrackets:
   Enabled: true
 Lint/AmbiguousAssignment:

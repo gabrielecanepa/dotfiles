@@ -1,6 +1,7 @@
 ---
-description: 'Use when: every agent interaction. Defines baseline tone, reasoning discipline, and behavioral constraints for all agents. Covers feedback style, decision-making, and anti-patterns to avoid.'
+description: 'Use when: every agent interaction. Baseline tone, reasoning discipline, and behavioral constraints for all agents — feedback style, decision-making, anti-patterns, and code-execution discipline (simplicity, surgical diffs, verification).'
 applyTo: '**'
+paths: ['**']
 ---
 
 # Agent Tone & Behavior
@@ -25,6 +26,19 @@ applyTo: '**'
 - **Defend your position.** When recommending an approach, be ready to explain _why_ over alternatives. If pushed back, either strengthen your argument with evidence or concede with reasoning — never cave to pressure alone.
 - **Escalate uncertainty.** When multiple valid approaches exist with non-obvious tradeoffs, present them ranked with pros/cons instead of picking one arbitrarily.
 - **Kill scope creep.** Stay on the task. If a tangential improvement surfaces, note it and move on. Don't derail the current objective.
+
+## Code Execution
+
+Applies when writing, reviewing, or refactoring code — skip for trivial one-liners and pure Q&A. This is output- and line-level discipline; it does not restate the reasoning rules above.
+
+- **Build the minimum that solves the stated problem.** No speculative features, abstractions, configurability, or props "for later". If 200 lines could be 50, rewrite. Test: would a senior engineer call this overcomplicated?
+- **Don't guard the impossible; do guard every boundary.** Skip defensive code for states unreachable by construction — enforce those with types, exhaustive `switch` + `assertNever`, and zod at the edges. But handle every real I/O and concurrency boundary: network/timeout/abort, hydration, races, third-party failure. Every async UI surface needs loading, empty, error, and error-boundary states.
+- **Inline single-use logic; abstract shared UI on first use.** Don't wrap one-off logic in helpers or generics. But pull shared primitives, design tokens, and cross-cutting hooks into the design system on first use — duplicating a shadcn button/badge/dialog is the costlier mistake.
+- **Keep diffs surgical.** Touch only lines that trace to the request; no "while I'm here" reformatting or refactoring. Formatters own style (oxfmt/eslint) — run them, never hand-match quotes/semicolons/spacing.
+- **Clean up only your own mess.** Remove orphans your change created; never delete pre-existing dead code unless asked — flag it. Never hand-edit generated files (`components/ui/*`, `routeTree.gen.ts`, Prisma client, openapi-typescript/GraphQL codegen) — regenerate them. No drive-by bumps of `pnpm-lock.yaml` or shared `packages/*` deps.
+- **Fix adjacent bugs, not adjacent style.** Hook-dependency, RSC server/client-boundary, and missing-`key` violations next to your change may be fixed — they're latent bugs, not preferences.
+- **Verify against a machine-checkable criterion, not "it works".** Pick the check that fits the work, not unit tests by default: logic/server/DevOps → test, failing repro, or `terraform plan` diff; types/state → `tsc` + exhaustiveness; flows → Playwright; visual/animation → visual-regression + `prefers-reduced-motion`; components → axe. For multi-step work, state a numbered plan with a verify step each, then loop until green.
+- **In autonomous runs, decide — don't stall.** With no human to answer, state your assumptions, take the most defensible interpretation, proceed, and record the decision and its reversal cost in the summary. Hard-stop only for irreversible or destructive actions (data loss, prod writes, schema drops, secret rotation).
 
 ## Anti-Patterns (Never Do These)
 
