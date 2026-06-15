@@ -30,13 +30,15 @@ function npm-global() {
       echo "  npm dump"
       return 1
     fi
-    cd $NPM_GLOBAL
-    echo "{}" > package.json
-    command npm install $(global_deps) --package-lock-only
-    local exit=$?
-    rm -rf node_modules
-    cd - >/dev/null
-    return $exit
+    (
+      cd "$NPM_GLOBAL" || exit 1
+      echo "{}" > package.json
+      command npm install $(global_deps) --package-lock-only
+      install_exit=$?
+      rm -rf node_modules
+      exit $install_exit
+    )
+    return $?
   }
 
   ##

@@ -76,7 +76,7 @@ function squanchy() {
     local lts_version_parts=(${(s/./)lts_version})
     local has_update=false
 
-    if [[ "$lts_version_parts[1]" > "$global_version_parts[1]" || "$lts_version_parts[2]" > "$global_version_parts[2]" || "$lts_version_parts[3]" > "$global_version_parts[3]" ]]; then
+    if (( ${lts_version_parts[1]:-0} > ${global_version_parts[1]:-0} || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} > ${global_version_parts[2]:-0}) || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} == ${global_version_parts[2]:-0} && ${lts_version_parts[3]:-0} > ${global_version_parts[3]:-0}) )); then
       has_update=true
     fi
 
@@ -112,7 +112,7 @@ function squanchy() {
     local lts_version="$(lts "$lang")"
     local lts_version_parts=(${(s/./)lts_version})
 
-    if [[ "$lts_version_parts[1]" > "$global_version_parts[1]" || "$lts_version_parts[2]" > "$global_version_parts[2]" || "$lts_version_parts[3]" > "$global_version_parts[3]" ]]; then
+    if (( ${lts_version_parts[1]:-0} > ${global_version_parts[1]:-0} || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} > ${global_version_parts[2]:-0}) || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} == ${global_version_parts[2]:-0} && ${lts_version_parts[3]:-0} > ${global_version_parts[3]:-0}) )); then
       echo "${global_version}↑"
       return 0
     fi

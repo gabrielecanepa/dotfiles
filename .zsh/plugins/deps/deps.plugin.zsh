@@ -1,4 +1,4 @@
-function dependencies() {
+function deps() {
   local function get_package_root() {
     [[ -z "$1" ]] && echo $(pwd) && return 0
     [[ -d "$1" && -z "${@:2}" ]] && readlink -f "$1" && return 0
@@ -36,34 +36,34 @@ function dependencies() {
   [[ ! -f "$root/package.json" ]] && echo "No package.json found" && return 1
 
   local package_json="$(cat "$root/package.json")"
-  local dependencies="$(jq -r '.dependencies | keys[]' $package_json 2>/dev/null)"
-  local dev_dependencies="$(jq -r '.devDependencies | keys[]' $package_json 2>/dev/null)"
-  local peer_dependencies="$(jq -r '.peerDependencies | keys[]' $package_json  2>/dev/null)"
-  local optional_dependencies="$(jq -r '.optionalDependencies | keys[]' $package_json  2>/dev/null)"
+  local deps="$(jq -r '.dependencies | keys[]' $package_json 2>/dev/null)"
+  local dev_deps="$(jq -r '.devDependencies | keys[]' $package_json 2>/dev/null)"
+  local peer_deps="$(jq -r '.peerDependencies | keys[]' $package_json  2>/dev/null)"
+  local optional_deps="$(jq -r '.optionalDependencies | keys[]' $package_json  2>/dev/null)"
 
   if [[ ${#opts[@]} == 0 ]]; then
-    local output="$dependencies"
+    local output="$deps"
   else
     for opt in $opts; do
       case $opt in
         --dev)
-          [[ -z "$dev_dependencies" ]] && continue
-          [[ -z "$output" ]] && output="$dev_dependencies" || output="$output\n$dev_dependencies"
+          [[ -z "$dev_deps" ]] && continue
+          [[ -z "$output" ]] && output="$dev_deps" || output="$output\n$dev_deps"
           ;;
         --peer)
-          [[ -z "$peer_dependencies" ]] && continue
-          [[ -z "$output" ]] && output="$peer_dependencies" || output="$output\n$peer_dependencies"
+          [[ -z "$peer_deps" ]] && continue
+          [[ -z "$output" ]] && output="$peer_deps" || output="$output\n$peer_deps"
           ;;
         --optional)
-          [[ -z "$optional_dependencies" ]] && continue
-          [[ -z "$output" ]] && output="$optional_dependencies" || output="$output\n$optional_dependencies"
+          [[ -z "$optional_deps" ]] && continue
+          [[ -z "$output" ]] && output="$optional_deps" || output="$output\n$optional_deps"
           ;;
         --all)
           if [[ ${args[(r)--dev]} == --dev || ${args[(r)--peer]} == --peer || ${args[(r)--optional]} == --optional ]]; then
             echo "Can't specify --all with --dev, --peer or --optional"
             return 1
           fi
-          for group in dependencies dev_dependencies peer_dependencies optional_dependencies; do
+          for group in deps dev_deps peer_deps optional_deps; do
             [[ -z "${(P)group}" ]] && continue
             [[ -z "$output" ]] && output="${(P)group}" || output="$output\n${(P)group}"
           done

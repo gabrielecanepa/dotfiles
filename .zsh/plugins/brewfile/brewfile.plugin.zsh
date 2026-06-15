@@ -4,7 +4,6 @@ function brew() {
   local cmd=$1
   local args="${@:2}"
 
-  local DEFAULT_BREWFILE="~/.Brewfile"
   local DUMP_COMMANDS=(
     install
     uninstall
@@ -20,21 +19,22 @@ function brew() {
     untap
   )
 
-  [[ -z "$BREWFILE" ]] && export BREWFILE="$DEFAULT_BREWFILE"
-  
   case $cmd in
     dump)
-      command brew bundle dump --file="$BREWFILE" --brews --casks --taps --mas --describe --force --no-restart $args
+      command brew bundle dump --brews --casks --taps --mas --force --no-restart $args
       ;;
     fresh)
-      command brew update && 
+      command brew update &&
       command brew upgrade &&
       command brew cleanup --prune=all &&
       brew dump &&
       command brew doctor
       ;;
     global)
-      command brew bundle --file="$BREWFILE" $args
+      command brew bundle $args
+      ;;
+    check)
+      command brew bundle check --verbose $args
       ;;
     reset)
       command brew update-reset $args
@@ -60,7 +60,11 @@ function mas() {
     upgrade
   )
 
-  sudo command mas $@
+  if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]]; then
+    sudo command mas $@
+  else
+    command mas $@
+  fi
   local exit_code=$?
 
   if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $exit_code == 0 ]]; then

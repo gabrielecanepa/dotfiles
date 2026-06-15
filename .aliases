@@ -2,22 +2,32 @@
 
 alias ls="/bin/ls -GHhp"
 alias ll="ls -la"
-
-# Use GNU `ls` if available
 if command -v gls >/dev/null; then
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 fi
 
-# Sort by size
+# Sorts by size
 lss() { 
   du -L --si -d 1 "$@" 2>/dev/null | sort -hr 
 }
 
-# Remove directories and sub-directories
+# Remove directories recursively
 rmm() {
   for folder in "$@"; do
     find . -type d -name "$folder" -prune -exec rm -rf {} \;
   done
+}
+
+# Create a directory and switch to it
+mkdircd() { 
+  dir="$(mkdir -pv "$@")"
+  cd "$dir" || return 1
+}
+
+# Create a directory and open it in VS Code
+mkdircode() {
+  dir="$(mkdir -pv "$@")"
+  code "$dir" || return 1
 }
 
 # Directories
@@ -27,32 +37,19 @@ tmp="$WORKING_DIR/.tmp"
 cloud="$HOME/Library/Mobile Documents"
 drive="$cloud/com~apple~CloudDocs"
 downloads="$cloud/Downloads"
-
 alias cdw="cd '$wd'"
 alias cdwu="cd '$wdu'"
 alias cdd="cd '$downloads'"
 alias tmp="cd '$tmp'"
 alias drive="cd '$drive'"
 
-mkdircd() { 
-  dir="$(mkdir -pv "$@")"
-  cd "$dir" || return 1
-}
-
-mkdircode() {
-  dir="$(mkdir -pv "$@")"
-  code "$dir" || return 1
-}
-
-# Open in editor
+# Editor
 alias home="$EDITOR $HOME"
 alias aliases="$EDITOR $HOME/.aliases"
 alias gitconfig="$EDITOR $HOME/.gitconfig"
 alias zshrc="$EDITOR $HOME/.zshrc"
 alias sshrc="$EDITOR $HOME/.ssh"
 alias docs="$EDITOR \"$cloud/$(command ls "$cloud" | grep pro~writer)/Documents\""
-
-# Open with
 alias te="open -a TextEdit"
 
 # Shortcuts
@@ -67,17 +64,14 @@ alias omzr="omz reload"
 alias pn="pnpm"
 alias pnx="pnpx"
 
-# Git aliases
-for git_alias in $(git aliases | sed 's/\ .*//'); do
-  if ! command -v "g$git_alias" >/dev/null; then
-    alias g"""${git_alias}"="git $git_alias"
-  fi
-done
-
-# VSCode workspaces
-for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
-  alias code-"$(basename "$workspace" .code-workspace)"="code $workspace"
-done
-
-# Network
-alias ip="echo $(curl -s ipinfo.io/ip)"
+# Git
+_git_aliases() {
+  for git_alias in $(git aliases | sed 's/ .*//'); do
+    command -v "g$git_alias" >/dev/null || alias "g${git_alias}"="git $git_alias"
+  done
+  for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
+    alias "code-$(basename "$workspace" .code-workspace)"="code $workspace"
+  done
+  add-zsh-hook -d precmd _git_aliases
+  unfunction _git_aliases
+}

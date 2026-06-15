@@ -1,0 +1,30 @@
+typeset -aU path fpath
+
+export LANG="en_US.UTF-8"
+
+# Homebrew (https://brew.sh)
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+export HOMEBREW_BUNDLE_FILE="$HOME/.homebrew/Brewfile"
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
+
+# Version managers (https://github.com/{nodenv,pyenv,rbenv})
+export NODENV_ROOT="$HOME/.nodenv"
+export PYENV_ROOT="$HOME/.pyenv"
+export RBENV_ROOT="$HOME/.rbenv"
+
+# Package managers (https://pnpm.io, https://bun.sh)
+export PNPM_HOME="$HOME/.pnpm/global"
+export BUN_HOME="$HOME/.bun"
+
+_init_path() {
+  path=(
+    "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
+    "$BUN_HOME/bin" "$PNPM_HOME"
+    "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
+    $path
+  )
+}
+_init_path

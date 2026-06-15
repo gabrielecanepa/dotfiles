@@ -197,7 +197,7 @@ function profile() (
       ;;
 
     check)
-      if [[ -z "$HOME/.profile" || -z "$HOME/.zprofile" ]]; then
+      if [[ ! -f "$HOME/.profile" || ! -f "$HOME/.zprofile" ]]; then
         echo "${fg[red]}Missing profile for user $USER${reset_color}"
         echo "Type $PROFILE_INSTALL_CMD to install a new profile"
         return 1

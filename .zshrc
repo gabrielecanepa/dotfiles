@@ -1,37 +1,14 @@
-clear
-
-export LANG="en_US.UTF-8"
-export PATH="./bin:./.bin:$PATH"
-
-# Homebrew (https://brew.sh)
-export HOMEBREW_PREFIX="/opt/homebrew"
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-export HOMEBREW_NO_INSTALL_FROM_API=1
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ENV_HINTS=1
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
-export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
-
-# nodenv (https://github.com/nodenv/nodenv)
-# pyenv (https://github.com/pyenv/pyenv)
-# rbenv (https://github.com/rbenv/rbenv)
-for vm in nodenv pyenv rbenv; do
-  export ${vm:u}_ROOT="$HOME/.${vm}"
-  export PATH="$(eval "echo $"${vm:u}_ROOT"")/bin:$PATH"
-  eval "$(${vm} init --path - zsh)"
-done; unset vm
 
 # Oh My Zsh (https://ohmyz.sh)
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME=default
+ZSH_THEME=shell
 ZSH_THEME_RPROMPTS=(node ruby python)
-ZSH_COMPDUMP="$HOME/.zcompdump"
-
-# Options
+ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
+[[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
 CASE_SENSITIVE=0
 COMPLETION_WAITING_DOTS=""
 DISABLE_AUTO_TITLE=0
@@ -48,7 +25,6 @@ zstyle ':omz:alpha:lib:git' async-prompt false
 zstyle ':omz:update' mode auto
 zle_highlight+=(paste:none)
 
-# Plugins
 plugins=(
   colored-man-pages
   colorize
@@ -68,10 +44,8 @@ plugins=(
   brewfile
   colors256
   completions
-  dependencies
+  deps
   gatekeeper
-  gemfile
-  gh-actions
   google
   lts
   node-version
@@ -80,18 +54,18 @@ plugins=(
   plugin
   pnpm-completions
   profile
-  themes
-  vscode
 )
 
+fpath=($ZSH_CUSTOM/completions $HOME/.docker/completions $fpath)
+
 . "$ZSH/oh-my-zsh.sh"
+_init_path
 
 # Git (https://git-scm.com)
 if profile check; then
   [[ "$(git config --file $HOME/.gitprofile user.name 2>/dev/null)" != "$NAME" ]] && git config --file $HOME/.gitprofile user.name "$NAME"
   [[ "$(git config --file $HOME/.gitprofile user.email 2>/dev/null)" != "$EMAIL" ]] && git config --file $HOME/.gitprofile user.email "$EMAIL"
   [[ "$(git config --file $HOME/.gitprofile core.editor 2>/dev/null)" != "$GIT_EDITOR" ]] && git config --file $HOME/.gitprofile core.editor "$GIT_EDITOR"
-    
   for file in $HOME/.husky/*; do
     [[ -d "$file" ]] && continue
     hook="$HOME/.git/hooks/$(basename $file)"
@@ -100,22 +74,11 @@ if profile check; then
   done
 fi
 
-# Node.js (https://nodejs.org)
-# Bun (https://bun.sh)
-# pnpm (https://pnpm.io)
-# Vite+ (https://viteplus.dev)
-export PNPM_HOME="$HOME/.pnpm/global"
-export PATH="./node_modules/.bin:$BUN_HOME/bin:$PNPM_HOME:$PATH"
-. "$HOME/.vite-plus/env"
-
 # Completions
-completions docker npm
-fpath=($fpath $ZSH_CUSTOM/completions $HOME/.bun/_bun $HOME/.docker/completions)
-autoload -Uz compinit
-compinit
+for comp in docker npm; do [[ -e $ZSH_CUSTOM/completions/_$comp ]] || completions $comp; done
+( [[ -s "$ZSH_COMPDUMP" && ( ! -s "$ZSH_COMPDUMP.zwc" || "$ZSH_COMPDUMP" -nt "$ZSH_COMPDUMP.zwc" ) ]] && zcompile "$ZSH_COMPDUMP" ) &!
 
 # Aliases
 . $HOME/.aliases
-
-# Avoid duplicates in path
-typeset -aU path
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _git_aliases

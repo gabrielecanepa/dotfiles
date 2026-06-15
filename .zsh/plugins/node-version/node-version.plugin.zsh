@@ -15,7 +15,3 @@ function node-version() {
       ;;
   esac
 }
-
-function node() {
-  [[ $1 == -V ]] && node-version || command node $@
-}
