@@ -1,14 +1,13 @@
 {
   "dependencies": {
-    "commitlint": "^20.5.0",
-    "corepack": "^0.34.6",
+    "commitlint": "^21.0.2",
     "depcheck": "^1.4.7",
     "husky": "^9.1.7",
-    "npm": "^11.12.1",
-    "npm-check-updates": "^19.6.6",
-    "oxfmt": "^0.43.0",
-    "pnpm": "^10.33.0",
+    "npm": "^11.17.0",
+    "npm-check-updates": "^22.2.3",
+    "oxfmt": "^0.54.0",
+    "pnpm": "^11.6.0",
     "shellcheck": "^4.1.0",
-    "skills": "^1.4.6"
+    "skills": "^1.5.11"
   }
 }
