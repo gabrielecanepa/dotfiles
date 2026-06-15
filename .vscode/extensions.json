@@ -1,23 +1,21 @@
 {
   "recommendations": [
+    "be5invis.vscode-custom-css",
+    "bierner.markdown-preview-github-styles",
+    "britesnow.vscode-toggle-quotes",
+    "csstools.postcss",
+    "dotenv.dotenv-vscode",
+    "eamodio.gitlens",
+    "file-icons.file-icons",
+    "github.copilot-chat",
+    "github.github-vscode-theme",
+    "github.vscode-github-actions",
+    "github.vscode-pull-request-github",
+    "jock.svg",
     "ms-vscode.atom-keybindings",
     "oven.bun-vscode",
-    "ms-azuretools.vscode-containers",
-    "be5invis.vscode-custom-css",
-    "dotenv.dotenv-vscode",
     "tamasfe.even-better-toml",
-    "file-icons.file-icons",
-    "github.vscode-github-actions",
-    "github.copilot-chat",
-    "github.vscode-pull-request-github",
-    "github.github-vscode-theme",
-    "eamodio.gitlens",
-    "yzhang.markdown-all-in-one",
-    "bierner.markdown-preview-github-styles",
-    "csstools.postcss",
-    "prettier.prettier-vscode",
     "timonwong.shellcheck",
-    "jock.svg",
-    "britesnow.vscode-toggle-quotes"
+    "yzhang.markdown-all-in-one"
   ]
 }

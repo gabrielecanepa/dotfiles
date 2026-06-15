@@ -74,9 +74,11 @@
 
 /* Agents */
 .file-icons-enabled .\.agents-name-folder-icon::before,
-.file-icons-enabled .agents\.md-name-file-icon::before {
+.file-icons-enabled .agents\.md-name-file-icon::before,
+.file-icons-enabled .\.codex-name-folder-icon::before {
   font-family: fi !important;
   content: "\eb75" !important;
+  font-size: 107% !important;
 }
 .file-icons-enabled .agents\.md-name-file-icon::before {
   color: var(--file-icons-dark) !important;
@@ -139,6 +141,13 @@
   content: "\f0c4" !important;
 }
 
+/* Bun */
+.file-icons-enabled .\.bun-name-folder-icon::before {
+  font-family: devicons !important;
+  content: "\e669" !important;
+  font-size: 112% !important;
+}
+
 /* Bundler */
 .file-icons-enabled .\.bundle-name-folder-icon::before {
   content: "\f047" !important;
@@ -159,6 +168,7 @@
 .file-icons-enabled .\.claude\.json-name-file-icon::before {
   font-family: devicons !important;
   content: "\e601" !important;
+  font-size: 110% !important;
 }
 .file-icons-enabled .claude\.md-name-file-icon::before {
   color: var(--file-icons-orange) !important;
@@ -179,6 +189,7 @@
 .file-icons-enabled .\.config-name-folder-icon::before {
   font-family: fa !important;
   content: "\f013" !important;
+  font-size: 115% !important;
 }
 
 /* Convex */
@@ -280,28 +291,15 @@
   font-family: "fi" !important;
 }
 
-/* Homebrew */
-.file-icons-enabled .file-icon[aria-label^="~/.Brewfile"]::before {
-  font-family: fi !important;
-  content: "\1f37a" !important;
-  font-size: 13.8px !important;
-}
-.file-icons-enabled .file-icon[aria-label^="~/.Brewfile"]:not([aria-label*=".lock"])::before {
-  color: var(--file-icons-homebrew) !important;
-}
-.file-icons-enabled .file-icon[aria-label^="~/.Brewfile.lock"]::before {
-  color: var(--file-icons-teal) !important;
-}
-
 /* Husky */
 .file-icons-enabled .\.husky-name-folder-icon::before {
   font-family: fi !important;
   content: "\1f436" !important;
 }
 .file-icons-enabled .\.husky-name-dir-icon.name-file-icon::before {
-  font-family: fi;
-  color: var(--file-icons-purple-dark);
-  content: "\f0c8";
+  font-family: fi !important;
+  color: var(--file-icons-purple-dark) !important;
+  content: "\f0c8" !important;
 }
 
 /* Jest */
@@ -333,7 +331,7 @@
   font-family: "fi" !important;
 }
 
-/* Mac */
+/* MacOS */
 .file-icons-enabled .\.macos-name-folder-icon::before {
   font-family: fi !important;
   content: "\e925" !important;
@@ -341,7 +339,7 @@
 .file-icons-enabled .\.macos-name-file-icon::before {
   font-family: fi !important;
   content: "\e925" !important;
-  color: var(--file-icons-blue) !important;
+  color: var(--file-icons-light) !important;
 }
 
 /* MCP */
