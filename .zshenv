@@ -19,6 +19,9 @@ export RBENV_ROOT="$HOME/.rbenv"
 export PNPM_HOME="$HOME/.pnpm/global"
 export BUN_HOME="$HOME/.bun"
 
+# Coding agents (https://github.com/copilot)
+export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
+
 _init_path() {
   path=(
     "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"

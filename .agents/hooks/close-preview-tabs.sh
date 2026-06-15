@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Stop + SessionEnd hook: close browser tabs left open by Claude's preview/test
 # runs. Stop fires on normal task completion (prompt cleanup); SessionEnd is the

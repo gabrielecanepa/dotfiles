@@ -128,16 +128,17 @@
   "files.associations": {
     "*.css": "tailwindcss",
     "*.json.lock": "jsonl",
-    ".CFUserTextEncoding": "plaintext",
-    ".aliases": "shellscript",
-    ".env*": "dotenv",
-    ".gitprofile": "properties",
-    ".vscode/**/settings.json": "jsonc",
     "NOTES": "markdown",
     "TODO": "markdown",
-    "ignore": "ignore",
     "pre-commit": "shellscript",
-    "pre-push": "shellscript"
+    "pre-push": "shellscript",
+    ".aliases": "shellscript",
+    ".CFUserTextEncoding": "plaintext",
+    ".commitlintrc": "json",
+    ".gitprofile": "properties",
+    ".vscode/**/settings.json": "jsonc",
+    "ignore": "ignore",
+    ".env*": "dotenv"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
@@ -344,5 +345,6 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": false,
   "workbench.tree.expandMode": "doubleClick"
 }

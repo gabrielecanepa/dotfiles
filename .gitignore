@@ -12,10 +12,13 @@
 !/.claude/rules/
 !/.claude/skills/
 !/.claude/CLAUDE.md
+!/.claude/settings.json
 !/.codex/
 /.codex/*
-!/.codex/skills/
 !/.codex/AGENTS.md
+!/.copilot/
+/.copilot/*
+!/.copilot/instructions
 !/.config/
 /.config/*
 !/.config/gh/

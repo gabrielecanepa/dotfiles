@@ -1,4 +1,14 @@
 {
+  "files.associations": {
+    ".aliases": "shellscript",
+    ".CFUserTextEncoding": "plaintext",
+    ".commitlintrc": "json",
+    ".gitprofile": "properties",
+    ".vscode/**/settings.json": "jsonc",
+    "ignore": "ignore",
+    "pre-commit": "shellscript",
+    "pre-push": "shellscript"
+  },
   "files.exclude": {
     "Applications": true,
     "Claude": true,
@@ -18,8 +28,8 @@
   "search.exclude": {
     "**/.claude": true,
     "**/.codex": true,
-    "**/node_modules": true,
     "**/bower_components": true,
+    "**/node_modules": true,
     "**/*.code-search": true
   },
   "git.autoRepositoryDetection": false,
