@@ -1,9 +1,8 @@
-tap "github/gh"
+tap "github/gh", trusted: true
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "oven-sh/bun"
-tap "supabase/tap"
-tap "tw93/tap"
+tap "oven-sh/bun", trusted: true
+tap "tw93/tap", trusted: true
 # YAML Parser
 brew "libyaml"
 # Data validation using Python type hints
@@ -20,44 +19,38 @@ brew "coreutils"
 brew "csvkit"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
-# Run arbitrary commands when files change
-brew "entr"
 # Command-line tools for fly.io services
 brew "flyctl"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
 brew "git"
+# Regular expressions library
+brew "oniguruma"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Open-source GitLab command-line tool
 brew "glab"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# OpenType text shaping engine
-brew "harfbuzz"
-# Regular expressions library
-brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Network authentication protocol
 brew "krb5"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Postgres C API library
 brew "libpq", link: true
 # Mac App Store command-line interface
 brew "mas"
 # Open source relational database management system
 brew "mysql"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # Node.js version manager
 brew "nodenv"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
 # Object-relational database system
 brew "postgresql@16"
 # Python version management
@@ -72,10 +65,6 @@ brew "rbenv"
 brew "redis"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
-# Soak up standard input and write to a file
-brew "sponge"
-# Terminal multiplexer
-brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
@@ -86,8 +75,6 @@ cask "1password"
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
-# Brings the power of Copilot coding agent directly to your terminal
-cask "copilot-cli"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -98,14 +85,10 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Desktop agent for Postman on the Web
-cask "postman-agent"
-# Team communication and collaboration software
-cask "slack"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
-# SSH client
-cask "termius"
 # Unpacks archive files
 cask "the-unarchiver"
 # Open-source BitTorrent client
