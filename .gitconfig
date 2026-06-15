@@ -1,28 +1,52 @@
 [core]
-  excludesfile = ~/.gitignore.global
   ignorecase = false
-  pager = less -FRSX
+	pager = delta
 [include]
-  path = ~/.gitconfig.local
   path = ~/.gitprofile
-
-[advice]
-  skippedCherryPicks = false
-[help]
-  autocorrect = 1
 
 [init]
   defaultBranch = main
+[branch]
+	sort = -committerdate
+[branch "main"]
+  mergeoptions = --no-edit
+[fetch]
+	prune = true
+	writeCommitGraph = true
+[transfer]
+	fsckObjects = true
 [pull]
   rebase = true
 [push]
 	autoSetupRemote = true
+	followTags = true
+[commit]
+  gpgsign = true
+	verbose = true
+[tag]
+	gpgsign = true
+[gpg]
+  format = ssh
+[column]
+	ui = auto
+[merge]
+	conflictstyle = zdiff3
+[rebase]
+	autosquash = true
+	autostash = true
+	updateRefs = true
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
+	colorMoved = dimmed-zebra
+[delta]
+	line-numbers = true
+	navigate = true
+	syntax-theme = auto
 
-[branch "main"]
-  mergeoptions = --no-edit
-[branch "master"]
-  mergeoptions = --no-edit
-
+[interactive]
+	diffFilter = delta --color-only
 [color]
   branch = auto
   diff = auto
@@ -32,8 +56,10 @@
 [color "branch"]
   current = green
   remote = yellow
-
-
+[advice]
+  skippedCherryPicks = false
+[help]
+  autocorrect = 1
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -41,8 +67,8 @@
   required = true
   smudge = git-lfs smudge -- %f
 [filter "vscode-theme"]
-  clean = sed /workbench.colorTheme/d
-	smudge = sed /workbench.colorTheme/d
+	clean = sed '/workbench.colorTheme.:/d'
+	smudge = cat
 
 [alias]
   a = add
@@ -64,23 +90,22 @@
   lgg = log --graph --all --decorate --oneline
   log = log --color --graph
   p = push
-  pf = push --force
+  pf = push --force-with-lease
   psu = !git push --set-upstream origin $(git branch --show-current)
   pristine = !git reset --hard && git clean -df
   ps = !git pull && git sweep
   re = remote
   rv = remote -v
   rp = !git redo && git push
-  rpf = !git redo && git push --force
+  rpf = !git redo && git push --force-with-lease
   redo = !git reset --soft HEAD^ && git add . && git commit -c ORIG_HEAD
   reset-origin = !git remote remove origin &>/dev/null && git remote add origin
   ro = reset-origin
-  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
   set-origin = !git branch --set-upstream-to=origin/$(git branch --show-current) $(git branch --show-current)
   so = set-origin
   st = status -sb
   sweep = !git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
   undo = reset --soft HEAD^
   unstage = reset HEAD --
-  untrack = rm --cache --
+	untrack = rm --cached --
   zip = !git archive HEAD -o $(basename $PWD).zip

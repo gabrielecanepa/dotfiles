@@ -1,27 +1,38 @@
-![](./banner.png)
+![](banner.png)
 
 > [!WARNING]
-> Before using the following dotfiles, you should first fork this repository, review the content and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk!
+> Before using the following dotfiles, fork this repository, review the content and remove things you don’t want or need.  
+> **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk.
 
-<!-- no toc -->
+## Installation
 
-<h2>Installation</h2>
+Run the install script to bootstrap the configuration:
+
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/gabrielecanepa/dotfiles/main/.github/install.sh)"
+```
+
+The script does the following:
+
+- Installs the configuration by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory
+- Backs up the replaced files into a timestamped backup folder in the default state directory
+- Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Visual Studio Code, and iCloud symlinks
+
+## Manual Setup
 
 - [SSH](#ssh)
 - [Homebrew](#homebrew)
 - [Oh My Zsh](#oh-my-zsh)
 - [Dotfiles](#dotfiles)
-- [Shell profile](#shell-profile)
-- [Runtimes and dependencies](#runtimes-and-dependencies)
+- [Git](#git)
+- [Shell Profile](#shell-profile)
+- [Runtimes](#runtimes)
   - [Node.js](#nodejs)
   - [Ruby](#ruby)
   - [Python](#python)
-- [VSCode and terminal](#vscode-and-terminal)
-  - [Settings and snippets](#settings-and-snippets)
+- [Visual Studio Code](#visual-studio-code)
   - [Keybindings](#keybindings)
-- [Assets](#assets)
-  - [Fonts](#fonts)
-  - [iCloud](#icloud)
+- [iCloud](#icloud)
 
 ### SSH
 
@@ -65,7 +76,20 @@ zsh
 
 ### Dotfiles
 
-Clone this repository:
+The `install.sh` script (see [Installation](#installation)) installs the configuration automatically by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory.
+
+> [!NOTE]
+> Before overwriting an existing file the script asks for confirmation (default _no_), so it is safe to re-run. Every replaced file is moved into a timestamped backup folder in the default state directory.
+
+To restore a file, just copy it back from that folder:
+
+```sh
+backup="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup"
+ls "$backup"
+cp "$backup/<timestamp>/.zshrc" ~/.zshrc
+```
+
+To clone the repository locally:
 
 ```sh
 gh repo clone gabrielecanepa/dotfiles
@@ -73,46 +97,44 @@ gh repo clone gabrielecanepa/dotfiles
 git clone git@github.com:gabrielecanepa/dotfiles.git
 ```
 
-Copy the files to your home directory, manually or in bulk.
-
-> [!WARNING]
-> The following bulk operation will overwrite all existing files in your home directory. Existing files will be backed up in `~/.bak`.
+Install the packages listed in [`Brewfile`](/.homebrew/Brewfile):
 
 ```sh
-cd dotfiles
-bak=$(mkdir -p ~/.bak/dotfiles/$(date +%Y%m%d) && echo $_)
-
-for config in $(ls -A); do
-  [[ -e ~/$config ]] && cp -fr ~/$config $bak
-  cp -fr $config ~/$config
-done
+brew bundle --file ~/.homebrew/Brewfile
 ```
 
-Install the packages listed in the [Brewfile](/.Brewfile):
+### Git
+
+> [!NOTE]
+> Skip this step if you cloned the repository with `gh repo clone` or `git clone` above, as your home directory is already version-controlled.
+
+After adding your SSH key to GitHub, initialize `~` as a git repo that tracks the remote:
 
 ```sh
-brew bundle --file ~/.Brewfile
+git -C ~ init -b main
+git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git
+git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD
 ```
 
-### Shell profile
+### Shell Profile
 
-Use the custom [`profile` plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell profile with a guided prompt:
+Use the custom [profile plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell configuration with a guided prompt:
 
 ```sh
 profile install
 ```
 
-### Runtimes and dependencies
+### Runtimes
 
 #### Node.js
 
-Install the [Node.js](https://nodejs.org) version in use with [nodenv](https://github.com/nodenv/nodenv):
+Install the Node.js version in use with [nodenv](https://github.com/nodenv/nodenv):
 
 ```sh
 nodenv install $(cat ~/.node_version) --skip-existing
 ```
 
-Install the global npm dependencies listed in the global `package.json`, enable [Corepack](https://github.com/nodejs/corepack) and initialize [Husky](https://typicode.github.io/husky):
+Install the global npm dependencies listed [`package.json`](../.npm/package.json), enable [Corepack](https://github.com/nodejs/corepack) and initialize [Husky](https://typicode.github.io/husky):
 
 ```sh
 npm -g install $(jq -r '.dependencies | keys | join(" ")' ~/.npm/package.json)
@@ -120,14 +142,14 @@ corepack enable
 husky
 ```
 
-Link the local nodenv version to the tracked one:
+Link the local nodenv version to the tracked `.node-version` file:
 
 ```sh
 nodenv global $(cat ~/.node-version)
 rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 ```
 
-Link the global Bun and pnpm files to the tracked ones:
+Link the global pnpm and Bun files to the tracked ones:
 
 ```sh
 # Bun
@@ -145,7 +167,7 @@ done
 
 #### Ruby
 
-Install and link the [Ruby](https://ruby-lang.org) version in use with [rbenv](https://github.com/rbenv/rbenv):
+Install and link the Ruby version in use with [rbenv](https://github.com/rbenv/rbenv):
 
 ```sh
 rbenv install $(cat ~/.ruby-version) --skip-existing
@@ -154,16 +176,14 @@ rm -f $RBENV_ROOT/version && ln -sf ~/.ruby-version $RBENV_ROOT/version
 
 #### Python
 
-Install and link the [Python](https://python.org) version in use with [pyenv](https://github.com/pyenv/pyenv):
+Install and link the Python version in use with [pyenv](https://github.com/pyenv/pyenv):
 
 ```sh
 pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### VSCode and terminal
-
-#### Settings and snippets
+### Visual Studio Code
 
 Use symlinks to backup keybindings, settings and snippets of [Visual Studio Code](https://code.visualstudio.com) and [iTerm2](https://iterm2.com).
 
@@ -172,15 +192,11 @@ Use symlinks to backup keybindings, settings and snippets of [Visual Studio Code
 
 ```sh
 # VSCode
-for config in prompts snippets keybindings.json mcp.json settings.json; do
+for config in prompts snippets keybindings.json settings.json; do
   file=~/Library/Application\ Support/Code/User/$config
   rm -rf $file
   ln -sf ~/.vscode/user/$config $file
 done
-
-# iTerm
-rm -rf ~/.config/iterm2/AppSupport/DynamicProfiles
-ln -sf ~/.config/iterm2/profiles ~/.config/iterm2/AppSupport/DynamicProfiles
 ```
 
 #### Keybindings
@@ -202,13 +218,7 @@ And populate it with the following content:
 }
 ```
 
-### Assets
-
-#### Fonts
-
-To display icons in your terminal, download a font supporting [Nerd Fonts](https://nerdfonts.com), like [Monaco](https://github.com/Karmenzind/monaco-nerd-fonts/tree/master/fonts). Activate the fonts in apps supporting command line interfaces (Terminal, Ghostty, VSCode, etc).
-
-#### iCloud
+### iCloud
 
 Use the following script to:
 

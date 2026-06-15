@@ -1,5 +1,7 @@
 #!/bin/sh
 
+commit="$(head -n1 "$1")"
+
 case "$commit" in
   \#*)
     exit 0
