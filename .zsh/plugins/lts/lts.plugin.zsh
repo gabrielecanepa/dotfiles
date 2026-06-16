@@ -49,7 +49,7 @@ function lts() (
 
     case $lang in
       node)
-        curl -s https://nodejs.org/en/download | grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+ (LTS)' | head -1 | sed 's/ (LTS)//' | sed 's/^v//'
+        curl -s https://nodejs.org/dist/index.json | jq -r 'map(select(.lts != false)) | .[0].version' | sed 's/^v//'
         return $?
         ;;
       python)
