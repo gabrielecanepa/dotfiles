@@ -1,0 +1,9 @@
+#!/bin/sh
+
+branch="$(git branch --show-current)"
+remote="$(git config "branch.$branch.remote" 2>/dev/null || echo origin)"
+upstream="$remote/$branch"
+
+git rev-parse --verify --quiet "$upstream" >/dev/null && commitlint --from "$upstream" --to HEAD --quiet
+shellcheck .config/git/hooks/* .aliases .bash_profile .bashrc .profile
+oxfmt --check --no-error-on-unmatched-pattern

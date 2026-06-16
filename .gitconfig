@@ -27,6 +27,8 @@
 	gpgsign = true
 [gpg]
   format = ssh
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/allowed_signers
 [column]
 	ui = auto
 [merge]

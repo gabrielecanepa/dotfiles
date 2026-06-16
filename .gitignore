@@ -31,7 +31,6 @@
 !/.config/terminal/
 !/.github/
 !/.homebrew/
-!/.husky/
 !/.npm/
 /.npm/*
 !/.npm/package.json

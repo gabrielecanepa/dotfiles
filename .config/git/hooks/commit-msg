@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "${GIT_REFLOG_ACTION:-}" in
+  rebase*|cherry-pick*) exit 0 ;;
+esac
+
+case "$(head -n1 "$1")" in
+  \#*) exit 0 ;;
+  *) commitlint --edit "$1" ;;
+esac
