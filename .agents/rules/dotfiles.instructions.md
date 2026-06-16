@@ -1,11 +1,11 @@
 ---
-description: 'Use when editing the $HOME dotfiles repo — shell, git, brew, husky, or agent config. Repo-specific conventions: the single-source-of-truth layout, the allowlist .gitignore, non-standard commit types, shell startup internals, and new-machine bootstrap.'
-applyTo: '.agents/**,.github/**,.homebrew/**,.husky/**,.zsh/**,.aliases,.bash_profile,.bashrc,.gitconfig,.macos,.profile,.zprofile,.zshenv,.zshrc'
+description: 'Use when editing the $HOME dotfiles repo — shell, git, brew, git hooks, or agent config. Repo-specific conventions: the single-source-of-truth layout, the allowlist .gitignore, non-standard commit types, shell startup internals, and new-machine bootstrap.'
+applyTo: '.agents/**,.config/git/**,.github/**,.homebrew/**,.zsh/**,.aliases,.bash_profile,.bashrc,.gitconfig,.macos,.profile,.zprofile,.zshenv,.zshrc'
 paths:
   - '.agents/**'
+  - '.config/git/**'
   - '.github/**'
   - '.homebrew/**'
-  - '.husky/**'
   - '.zsh/**'
   - '.aliases'
   - '.bash_profile'
@@ -32,15 +32,15 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 ## Commit conventions (this repo only)
 
-- Enforced by commitlint via husky `commit-msg`, re-checked on `pre-push` (which also runs `shellcheck` on shell dotfiles and `oxfmt --check`). Every message must pass `.commitlintrc`: `<type>(<scope>)?: <subject>` — type + subject required, lower-case, no empty subject.
-- **Allowed types (non-standard):** `brew`, `chore`, `docs`, `git`, `node`, `python`, `ruby`, `shell`, `vscode`. Only allowed scope: `npm`. Do **NOT** use `feat`/`fix`/`refactor` here.
-- **Agent config** (`.agents/**`, `AGENTS.md`, the rules/skills/hooks, and the `.claude`/`.codex`/`.copilot`/`.github` symlinks) → commit with type `docs`.
-- VS Code Copilot/GitLens emit standard `feat:`/`fix:` style — that's for **other** repos, not this one.
+- Enforced by commitlint via the `commit-msg` hook in `.config/git/local`, re-checked on `pre-push` (which also runs `shellcheck` on shell dotfiles and `oxfmt --check`). Every message must pass `.commitlintrc`: `<type>(<scope>)?: <subject>` — type + subject required, lower-case, no empty subject.
+- **Allowed types (non-standard):** `agents`, `brew`, `chore`, `docs`, `editor`, `git`, `node`, `python`, `ruby`, `shell`. Allowed scopes: `npm`, `zsh`. Do **NOT** use `feat`/`fix`/`refactor` here.
+- **Agent config** (`.agents/**`, `AGENTS.md`, the rules/skills/hooks, and the `.claude`/`.codex`/`.copilot`/`.github` symlinks) → commit with type `agents`.
+- **VS Code config** (`.vscode/**`) → commit with type `editor`. VS Code Copilot/GitLens emit standard `feat:`/`fix:` style — that's for **other** repos, not this one.
 
 ## Shell startup & internals
 
-- Startup order: `.zshenv` (env, Homebrew + `*ENV_ROOT` vars, PATH via `_init_path`) → `.zprofile` (**GENERATED** by the `profile` plugin; identity vars only — never hand-edit) → `.zshrc` (oh-my-zsh, plugins, completions) → `.aliases`. Put new env/PATH in `.zshenv`.
-- `.zshrc` auto-symlinks `.husky/*` hooks into `.git/hooks/` on shell start when `profile check` passes — do not hand-edit `.git/hooks/`.
+- Startup order: `.zshenv` (env, Homebrew + `*ENV_ROOT` vars, PATH defined by `initialize_path`) → `.zprofile` (**GENERATED** by the `profile` plugin; identity vars only — never hand-edit) → `.zshrc` (oh-my-zsh, plugins, calls `initialize_path` then unsets it, completions) → `.aliases`. Put new env/PATH in `.zshenv`.
+- Git hooks are native (no husky). The global `.gitconfig` sets `core.hooksPath` to `.config/git/hooks` (repo-wide hooks, e.g. sweep gone branches), and `.zshrc` sets a repo-local `core.hooksPath` of `.config/git/local` on `~` when `profile check` passes (commitlint, shellcheck, oxfmt). Edit hooks in `.config/git/`, not `.git/hooks/`.
 - Brewfile is at `.homebrew/Brewfile`.
 
 ## New-machine bootstrap

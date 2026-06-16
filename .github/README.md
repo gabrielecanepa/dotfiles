@@ -7,8 +7,7 @@
 
 #### Version-controlled home directory
 
-`~` is version-controlled.
-The [`.gitignore`](/.gitignore) acts as an allowlist, so files are tracked only once opted-in and nothing leaks in by accident.
+`~` is version-controlled. The [`.gitignore`](/.gitignore) acts as an allowlist, so files are tracked only once opted-in and nothing leaks in by accident. Git hooks run natively, with no extra tooling.
 
 #### Single script to install everywhere
 
@@ -146,6 +145,8 @@ git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git
 git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD
 ```
 
+[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) run natively, with no extra tooling: the global configuration points the hooks path to [`.config/git/hooks`](/.config/git/hooks), so any executable in there runs the corresponding git event in any repo on the machine.
+
 ### Shell Profile
 
 Use the custom `profile` plugin to create your shell configuration with a guided prompt:
@@ -164,12 +165,11 @@ Install the Node.js version in use with nodenv:
 nodenv install $(cat ~/.node-version) --skip-existing
 ```
 
-Install the global npm dependencies listed in [`package.json`](/.npm/package.json), enable Corepack and initialize Husky:
+Install the global npm dependencies listed in [`package.json`](/.npm/package.json) and enable Corepack:
 
 ```sh
 npm -g install $(jq -r '.dependencies | keys | join(" ")' ~/.npm/package.json)
 corepack enable
-husky
 ```
 
 Link the local nodenv version to the tracked `.node-version` file:

@@ -1,111 +1,132 @@
-#!/bin/zsh
+# Toggle macOS GateKeeper globally or strip the quarantine attribute from specific apps/resources.
+#
+# Usage: gatekeeper <command>
 
-function gatekeeper() {
-  local INFO="${fg[blue]}info${reset_color}"
-  local ERROR="${fg[red]}error${reset_color}"
-  local SUCCESS="${fg[green]}success${reset_color}"
-  local WARN="${fg[yellow]}warn${reset_color}"
+gatekeeper() {
+  emulate -L zsh
+
+  local info="${fg[blue]:-}info${reset_color:-}"
+  local error="${fg[red]:-}error${reset_color:-}"
+  local success="${fg[green]:-}success${reset_color:-}"
+  local warn="${fg[yellow]:-}warn${reset_color:-}"
 
   case $1 in
     status)
-      if sudo spctl --status >/dev/null 2>&1; then
-        echo "$INFO GateKeeper is enabled globally 🔒"
+      if command sudo spctl --status >/dev/null 2>&1; then
+        print -r -- "$info GateKeeper is enabled globally 🔒"
         return 0
       fi
 
-      echo "$WARN GateKeeper is currently disabled 🔓"
-      printf "Do you want to enable it? (Y/n) "
+      print -r -- "$warn GateKeeper is currently disabled 🔓"
+      printf 'Do you want to enable it? (Y/n) '
+      local choice
       read -r choice
-      if [[ -z "$choice" ]] || [[ "$choice" =~ [yY] ]]; then
+      if [[ -z "$choice" || "$choice" == [yY]* ]]; then
         gatekeeper enable
+        return $?
       fi
+      return 0
       ;;
     disable)
-      if ! sudo spctl --status >/dev/null 2>&1; then
-        echo "$INFO GateKeeper is already disabled 🔓"
+      if ! command sudo spctl --status >/dev/null 2>&1; then
+        print -r -- "$info GateKeeper is already disabled 🔓"
         return 0
       fi
 
       case $2 in
         "")
-          echo "$WARN This will disable GateKeeper globally"
-          printf "Are you sure you want to continue? (y/N) "
+          print -r -- "$warn This will disable GateKeeper globally" >&2
+          printf 'Are you sure you want to continue? (y/N) '
+          local choice
           read -r choice
-          
-          if [[ "$choice" =~ [yY] ]]; then
-            if ! sudo spctl --master-disable >/dev/null 2>&1; then
-              echo "$ERROR An issue occured, please check the logs"
+
+          if [[ "$choice" == [yY]* ]]; then
+            if ! command sudo spctl --master-disable >/dev/null 2>&1; then
+              print -r -- "$error An issue occurred, please check the logs" >&2
               return 1
             fi
 
-            echo "$SUCCESS GateKeeper disabled globally 🔓"
+            print -r -- "$success GateKeeper disabled globally 🔓"
+            return 0
           fi
+          return 0
           ;;
         -a)
-          local apps=(${@:3})
+          local -a apps=("${@:3}")
 
-          if [[ ${#apps[@]} == 0 ]]; then
-            echo "$ERROR No applications provided"
+          if (( $#apps == 0 )); then
+            print -r -- "$error No applications provided" >&2
             return 1
           fi
 
-          for app in ${apps[@]}; do
-            local app_path="/Applications/$app.app"
+          local app app_path
+          for app in "${apps[@]}"; do
+            app_path="/Applications/$app.app"
 
             if [[ ! -d "$app_path" ]]; then
-              echo "$ERROR $app is not installed"
+              print -r -- "$error $app is not installed" >&2
               return 1
             fi
 
-            if ! sudo xattr -r -d com.apple.quarantine "$app_path" 2>/dev/null; then
-              echo "$ERROR Can't disable GateKeeper for $app"
+            # Strip the quarantine flag so GateKeeper stops blocking it
+            if ! command sudo xattr -r -d com.apple.quarantine "$app_path" 2>/dev/null; then
+              print -r -- "$error Can't disable GateKeeper for $app" >&2
               return 1
             fi
 
-            echo "${fg[green]}success$reset_color GateKeeper disabled on $app 🔓"
+            print -r -- "$success GateKeeper disabled on $app 🔓"
           done
+          return 0
           ;;
         *)
-          for resource in ${@:2}; do
-            if ! sudo xattr -r -d com.apple.quarantine "$resource" 2>/dev/null; then
-              echo "$ERROR Can't disable GateKeeper on ${resource##*/}"
+          local resource
+          for resource in "${@:2}"; do
+            if ! command sudo xattr -r -d com.apple.quarantine "$resource" 2>/dev/null; then
+              # ${resource##*/} is the basename
+              print -r -- "$error Can't disable GateKeeper on ${resource##*/}" >&2
               return 1
             fi
-            
-            echo "$SUCCESS GateKeeper disabled on ${resource##*/} 🔓"
+
+            print -r -- "$success GateKeeper disabled on ${resource##*/} 🔓"
           done
+          return 0
           ;;
       esac
       ;;
     enable)
-      if sudo spctl --status >/dev/null 2>&1; then
-        echo "$INFO GateKeeper is already enabled 🔒"
+      if command sudo spctl --status >/dev/null 2>&1; then
+        print -r -- "$info GateKeeper is already enabled 🔒"
         return 0
       fi
 
-      if sudo spctl --master-enable >/dev/null 2>&1; then
-        echo "$SUCCESS GateKeeper enabled globally 🔒"
+      if command sudo spctl --master-enable >/dev/null 2>&1; then
+        print -r -- "$success GateKeeper enabled globally 🔒"
         return 0
       fi
 
-      echo "$ERROR An issue occured, please try again"
+      print -r -- "$error An issue occurred, please try again" >&2
+      return 1
       ;;
     help|-h|--help)
-      echo "Usage: gatekeeper <command>"
-      echo ""
-      echo "Commands:"
-      echo -e "  status \t\t Print the current status"
-      echo -e "  disable [resources] \t Disable GateKeeper on the specified resources, or globally if no arguments are provided"
-      echo -e "  disable -a [apps] \t Disable GateKeeper on the specified applications"
-      echo -e "  enable \t\t Enable GateKeeper globally"
-      echo -e "  help \t\t\t Show this help message"
+      print -r -- "Usage: gatekeeper <command>"
+      print -r --
+      print -r -- "Commands:"
+      print -r -- "    status               Print the current status."
+      print -r -- "    enable               Enable GateKeeper globally."
+      print -r -- "    disable [resources]  Disable GateKeeper globally, or strip quarantine from the given paths."
+      print -r -- "    disable -a [apps]    Strip quarantine from the named /Applications bundles."
+      print -r -- "    help                 Show this message."
+      return 0
       ;;
     *)
       if [[ -n "$1" ]]; then
-        echo "$ERROR Unknown command: $1"
-        echo ""
+        print -r -- "$error Unknown command: $1" >&2
+        print -- "" >&2
+        gatekeeper --help >&2
+        return 1
       fi
       gatekeeper --help
+      return 0
       ;;
   esac
 }

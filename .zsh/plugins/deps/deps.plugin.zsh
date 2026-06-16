@@ -1,78 +1,81 @@
-function deps() {
-  local function get_package_root() {
-    [[ -z "$1" ]] && echo $(pwd) && return 0
-    [[ -d "$1" && -z "${@:2}" ]] && readlink -f "$1" && return 0
-    [[ -f "$1" && "$(basename $1)" == "package.json" && -z "${@:2}" ]] && readlink -f "$(dirname "$1")" && return 0
+# Print the dependencies declared in a project's package.json.
+#
+# Usage: deps [<dir>|<path/to/package.json>] [-L|--list] [--dev|--peer|--optional|--all]
+
+# Resolve an input to the directory holding package.json: a dir, a package.json path, or empty for PWD. Return 1 otherwise.
+_deps_get_package_root() {
+  emulate -L zsh
+  local target=$1
+  [[ -z $target ]] && { print -r -- $PWD; return 0; }
+  [[ -d $target ]] && { print -r -- ${target:A}; return 0; }
+  [[ -f $target && ${target:t} == package.json ]] && { print -r -- ${target:h:A}; return 0; }
+  return 1
+}
+
+deps() {
+  emulate -L zsh
+
+  # $+commands[jq] is the membership test for jq on PATH.
+  if (( ! $+commands[jq] )); then
+    print -ru2 -- 'deps: jq is required but not installed'
     return 1
-  }
-
-  local OPTS=(-L --list --dev --peer --optional --all)
-  local args=($@)
-  local dir=$(pwd)
-  local opts=()
-  local list=false
-  local output=
-
-  if [[ -f "$1" || -d "$1" ]]; then
-    local dir="$(readlink "$1")"
-    [[ $? != 0 ]] && echo "Invalid path: $1" && return 1
-    args=(${@:2})
   fi
 
-  for arg in $args; do
-    if [[ ${OPTS[(r)$arg]} != $arg ]]; then
-      echo "Invalid option: $arg"
+  local -a opts_allowed=(-L --list --dev --peer --optional --all)
+  local -a args=("$@")
+  local dir=$PWD
+  local -a groups
+  local list=0
+
+  # First positional may be a path; if so, take it as the root and drop it from the options.
+  if [[ -f $1 || -d $1 ]]; then
+    dir=${1:A}
+    args=("${@:2}")
+  fi
+
+  local arg
+  for arg in "${args[@]}"; do
+    # (Ie) yields the index of an exact match; zero means $arg is not a known option.
+    if (( ! ${opts_allowed[(Ie)$arg]} )); then
+      print -ru2 -- "deps: invalid option: $arg"
       return 1
     fi
-    if [[ $arg == "-L" || $arg == "--list" ]]; then
-      list=true
-      continue
-    fi
-    opts+=($arg)
+    case $arg in
+      -L|--list) list=1 ;;
+      --dev) (( ${groups[(Ie)devDependencies]} )) || groups+=(devDependencies) ;;
+      --peer) (( ${groups[(Ie)peerDependencies]} )) || groups+=(peerDependencies) ;;
+      --optional) (( ${groups[(Ie)optionalDependencies]} )) || groups+=(optionalDependencies) ;;
+      --all)
+        # --all is exclusive: reject it alongside any per-group flag.
+        if (( ${args[(Ie)--dev]} || ${args[(Ie)--peer]} || ${args[(Ie)--optional]} )); then
+          print -ru2 -- "deps: can't specify --all with --dev, --peer or --optional"
+          return 1
+        fi
+        groups=(dependencies devDependencies peerDependencies optionalDependencies)
+        ;;
+    esac
   done
 
-  root="$(get_package_root "$dir")"
-  [[ $? != 0 ]] && echo "Invalid path: $dir" && return 1
-  [[ ! -f "$root/package.json" ]] && echo "No package.json found" && return 1
+  local root
+  root=$(_deps_get_package_root "$dir") || { print -ru2 -- "deps: invalid path: $dir"; return 1; }
+  [[ -f $root/package.json ]] || { print -ru2 -- 'deps: no package.json found'; return 1; }
 
-  local package_json="$(cat "$root/package.json")"
-  local deps="$(jq -r '.dependencies | keys[]' $package_json 2>/dev/null)"
-  local dev_deps="$(jq -r '.devDependencies | keys[]' $package_json 2>/dev/null)"
-  local peer_deps="$(jq -r '.peerDependencies | keys[]' $package_json  2>/dev/null)"
-  local optional_deps="$(jq -r '.optionalDependencies | keys[]' $package_json  2>/dev/null)"
+  (( ${#groups} )) || groups=(dependencies)
 
-  if [[ ${#opts[@]} == 0 ]]; then
-    local output="$deps"
-  else
-    for opt in $opts; do
-      case $opt in
-        --dev)
-          [[ -z "$dev_deps" ]] && continue
-          [[ -z "$output" ]] && output="$dev_deps" || output="$output\n$dev_deps"
-          ;;
-        --peer)
-          [[ -z "$peer_deps" ]] && continue
-          [[ -z "$output" ]] && output="$peer_deps" || output="$output\n$peer_deps"
-          ;;
-        --optional)
-          [[ -z "$optional_deps" ]] && continue
-          [[ -z "$output" ]] && output="$optional_deps" || output="$output\n$optional_deps"
-          ;;
-        --all)
-          if [[ ${args[(r)--dev]} == --dev || ${args[(r)--peer]} == --peer || ${args[(r)--optional]} == --optional ]]; then
-            echo "Can't specify --all with --dev, --peer or --optional"
-            return 1
-          fi
-          for group in deps dev_deps peer_deps optional_deps; do
-            [[ -z "${(P)group}" ]] && continue
-            [[ -z "$output" ]] && output="${(P)group}" || output="$output\n${(P)group}"
-          done
-          ;;
-      esac
+  local -a out
+  local group name
+  for group in "${groups[@]}"; do
+    # (f) splits jq's output on newlines, one dependency name per element.
+    for name in ${(f)"$(command jq -r "(.${group} // {}) | keys[]" "$root/package.json" 2>/dev/null)"}; do
+      out+=("$name")
     done
-  fi
+  done
 
-  [[ -z "$output" ]] && return 0
-  local output_list="$(echo $output | tr '\n' ' ')"
-  [[ $list == true ]] && echo $output_list || echo $output
+  (( ${#out} )) || return 0
+
+  if (( list )); then
+    print -r -- "${out[*]}"
+  else
+    print -rl -- "${out[@]}"
+  fi
 }

@@ -1,20 +1,22 @@
-#!/bin/zsh
+# Search Google in the default browser, or open google.com with no query.
+#
+# Usage: google <query>
 
-function google () {
-  case $1 in
+google() {
+  emulate -L zsh
+
+  case "$1" in
     help|-h|--help)
-      echo "Usage: google <query>"
-      echo "Open the default browser and search the provided query on Google.com"
-      echo
-      echo "Commands:"
-      echo -e "  help\t\t Print this help message"
+      print -r -- "Usage: google <query>"
+      print -r --
+      print -r -- "Open the default browser and search the given query on Google, or the homepage with no query."
       ;;
     "")
-      open https://google.com
+      command open https://google.com
       ;;
     *)
-      local q="$@"
-      open https://google.com/search\?q\=${q// /+}
+      local q=$*
+      command open "https://google.com/search?q=${q// /+}"
       ;;
   esac
 }

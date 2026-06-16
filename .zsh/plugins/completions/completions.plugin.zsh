@@ -1,31 +1,71 @@
-#!/bin/zsh
+# Generate and cache zsh completion files under $ZSH_COMPLETIONS_PATH.
+#
+# Usage: completions <cli> [<cli> ...]
 
-[[ -z "$ZSH_COMPLETIONS_PATH" ]] && export ZSH_COMPLETIONS_PATH="$ZSH_CUSTOM/completions"
-[[ ! -d "$ZSH_COMPLETIONS_PATH" ]] && mkdir -p "$ZSH_COMPLETIONS_PATH"
+[[ -z "${ZSH_COMPLETIONS_PATH:-}" ]] && export ZSH_COMPLETIONS_PATH="${ZSH_CUSTOM:-$HOME/.zsh}/completions"
+[[ -d "$ZSH_COMPLETIONS_PATH" ]] || mkdir -p "$ZSH_COMPLETIONS_PATH"
 
-function completions() {
-  local clis=($@)
-  local comp
-  [[ -t 0 ]] || IFS= read -rd '' comp
+completions() {
+  emulate -L zsh
 
-  [[ ${#clis[@]} == 0 ]] && echo "Usage: completions <cli> [<cli> ...]" && return 1
+  local -a clis=("$@")
+  local cli comp
+  integer rc=0
 
-  if [[ -n "$comp" ]]; then
-    [[ ${#clis[@]} > 1 ]] && echo "Error: only one cli can be passed when using stdin" && return 1
-    echo "$comp" > "$ZSH_COMPLETIONS_PATH/_${clis[1]}"
-  else
-    for cli in $clis; do
-      ! command -v $cli >/dev/null && echo "[completions] Command not found: $cli" && return 1
-      local comp="$(eval "$cli completion zsh" 2>/dev/null)"
-      [[ -z "$comp" ]] && comp="$(eval "$cli completion --zsh" 2>/dev/null)"
-      [[ -z "$comp" ]] && comp="$(eval "$cli completion" 2>/dev/null)"
-
-      if [[ -z "$comp" ]] ; then
-        echo "[plugin:completions] Can't generate completions for $cli"
-        continue
-      fi
-
-      echo $comp > "$ZSH_COMPLETIONS_PATH/_$cli"
-    done; unset cli
+  if (( ${#clis[@]} == 0 )); then
+    print -ru2 -- '[completions] usage: completions <cli> [<cli> ...]'
+    return 1
   fi
+
+  # Read piped/redirected completion text only when stdin is a pipe or regular
+  # file; this skips the no-redirect and /dev/null cases so the startup loop
+  # below never blocks on read.
+  if [[ -p /dev/stdin || -f /dev/stdin ]]; then
+    IFS= read -rd '' comp
+
+    if (( ${#clis[@]} > 1 )); then
+      print -ru2 -- '[completions] only one cli can be passed when using stdin'
+      return 1
+    fi
+
+    if ! print -r -- "$comp" > "$ZSH_COMPLETIONS_PATH/_${clis[1]}"; then
+      print -ru2 -- "[completions] failed to write completions for ${clis[1]}"
+      return 1
+    fi
+
+    return 0
+  fi
+
+  for cli in "${clis[@]}"; do
+    if (( ! ${+commands[$cli]} )); then
+      print -ru2 -- "[completions] command not found: $cli"
+      rc=1
+      continue
+    fi
+
+    # Probe the common completion-subcommand spellings, get first non-empty.
+    comp="$(command "$cli" completion zsh 2>/dev/null)"
+    [[ -n "$comp" ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
+    [[ -n "$comp" ]] || comp="$(command "$cli" completion 2>/dev/null)"
+
+    if [[ -z "$comp" ]]; then
+      print -ru2 -- "[completions] cannot generate completions for $cli"
+      rc=1
+      continue
+    fi
+
+    if ! print -r -- "$comp" > "$ZSH_COMPLETIONS_PATH/_$cli"; then
+      print -ru2 -- "[completions] failed to write completions for $cli"
+      rc=1
+      continue
+    fi
+  done
+
+  return $rc
 }
+
+# At startup, generate any configured completion that is not cached yet.
+for cli in ${ZSH_COMPLETIONS:-}; do
+  [[ -e "$ZSH_COMPLETIONS_PATH/_$cli" ]] || completions "$cli"
+done
+unset cli

@@ -173,10 +173,33 @@
     "**/.git": false
   },
   "files.insertFinalNewline": true,
+  "files.watcherExclude": {
+    "**/.Trash/**": true,
+    "**/.bun/**": true,
+    "**/.cache/**": true,
+    "**/.gem/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.local/share/**": true,
+    "**/.local/state/**": true,
+    "**/.next/**": true,
+    "**/.nodenv/**": true,
+    "**/.npm/**": true,
+    "**/.pnpm-store/**": true,
+    "**/.pnpm/**": true,
+    "**/.pyenv/**": true,
+    "**/.rbenv/**": true,
+    "**/.vscode-server/**": true,
+    "**/Library/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true
+  },
   "git.addAICoAuthor": "off",
   "git.allowForcePush": true,
-  "git.autoRepositoryDetection": "subFolders",
+  "git.autoRepositoryDetection": "openEditors",
+  "git.autoStash": true,
   "git.autofetch": true,
+  "git.autofetchPeriod": 10,
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
@@ -190,9 +213,20 @@
   "git.pruneOnFetch": true,
   "git.pullBeforeCheckout": true,
   "git.rebaseWhenSync": true,
+  "git.repositoryScanIgnoredFolders": [
+    ".bun",
+    ".cache",
+    ".pnpm-store",
+    ".pnpm",
+    ".vscode-server",
+    "Library",
+    "node_modules"
+  ],
+  "git.scanRepositories": [],
   "git.useEditorAsCommitInput": false,
   "github.copilot.chat.agent.autoFix": true,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
+  "github.copilot.chat.claudeAgent.allowAutoPermissions": true,
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -295,6 +329,7 @@
   "postman.mcp.notifications.postmanMCP": false,
   "postman.settings.dotenv-detection-notification-visibility": false,
   "postman.telemetry.enabled": false,
+  "scm.diffDecorations": "gutter",
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "scss.lint.compatibleVendorPrefixes": "warning",
@@ -369,8 +404,5 @@
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
   "workbench.preferredLightColorTheme": "GitHub Light",
   "workbench.startupEditor": "none",
-  "workbench.tree.expandMode": "doubleClick",
-  "git.autoStash": true,
-  "github.copilot.chat.claudeAgent.allowAutoPermissions": true,
-  "git.autofetchPeriod": 10
+  "workbench.tree.expandMode": "doubleClick"
 }

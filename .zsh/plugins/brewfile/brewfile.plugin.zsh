@@ -1,75 +1,89 @@
-#!/bin/zsh
+# Wrap brew/mas so package-mutating commands sync the Brewfile in the background.
+#
+# Usage: brew <command>
+#        mas <command>
 
-function brew() {
-  local cmd=$1
-  local args="${@:2}"
+_brewfile_sync() {
+  emulate -L zsh
+  if ! { command brew bundle dump --brews --casks --taps --mas --force --no-restart &&
+    command brew bundle } &>/dev/null; then
+    print -r -- 'brewfile: background Brewfile sync failed' >&2
+  fi
+}
 
-  local DUMP_COMMANDS=(
-    install
-    uninstall
-    remove
-    reinstall
-    upgrade
-    cleanup
-    link
-    unlink
-    pin
-    unpin
-    tap
-    untap
+brew() {
+  emulate -L zsh
+
+  # Subcommands that mutate installed packages, so a sync follows.
+  local -a dump_commands=(
+    install uninstall remove reinstall upgrade cleanup
+    link unlink pin unpin tap untap
   )
+
+  local cmd=$1
+  (( $# )) && shift
 
   case $cmd in
     dump)
-      command brew bundle dump --brews --casks --taps --mas --force --no-restart $args
+      command brew bundle dump --brews --casks --taps --mas --force --no-restart "$@"
       ;;
     fresh)
       command brew update &&
-      command brew upgrade &&
-      command brew cleanup --prune=all &&
-      brew dump &&
-      command brew doctor
+        command brew upgrade &&
+        command brew cleanup --prune=all &&
+        brew dump &&
+        command brew doctor
       ;;
     global)
-      command brew bundle $args
+      command brew bundle "$@"
       ;;
     check)
-      command brew bundle check --verbose $args
+      command brew bundle check --verbose "$@"
       ;;
     reset)
-      command brew update-reset $args
+      command brew update-reset "$@"
       ;;
     *)
-      command brew $@
-      local exit_code=$?
+      command brew "$cmd" "$@"
+      local exit=$?
 
-      if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $exit_code == 0 ]] && [[ ! $2 =~ "^(-h|--help)$" ]]; then
-        ((brew dump && brew global) &>/dev/null &) &>/dev/null
+      # Membership test: 1 when $cmd is in dump_commands.
+      # Skip the sync when the command only printed help.
+      if (( ${dump_commands[(Ie)$cmd]} )) && (( exit == 0 )) &&
+        [[ "$1" != '-h' && "$1" != '--help' ]]; then
+        # Run the sync detached so the prompt returns immediately.
+        _brewfile_sync &!
       fi
 
-      return $exit_code
+      return $exit
+      ;;
   esac
 }
 
-function mas() {
+mas() {
+  emulate -L zsh
+
+  local -a dump_commands=(install uninstall upgrade)
+
   local cmd=$1
+  local in_dump=${dump_commands[(Ie)$cmd]}
 
-  local DUMP_COMMANDS=(
-    install
-    uninstall
-    upgrade
-  )
-
-  if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]]; then
-    sudo command mas $@
+  if (( in_dump )); then
+    sudo command mas "$@"
   else
-    command mas $@
+    command mas "$@"
   fi
-  local exit_code=$?
+  local exit=$?
 
-  if [[ " ${DUMP_COMMANDS[@]} " =~ " $cmd " ]] && [[ $exit_code == 0 ]]; then
-    ((brew dump && brew global) >/dev/null &) >/dev/null
+  if (( in_dump )) && (( exit == 0 )); then
+    _brewfile_sync &!
   fi
 
-  return $exit_code
+  return $exit
 }
+
+# Register completion only when compdef and functions exist.
+if (( $+functions[compdef] )); then
+  (( $+functions[_brew] )) && compdef _brew brew
+  (( $+functions[_mas] )) && compdef _mas mas
+fi

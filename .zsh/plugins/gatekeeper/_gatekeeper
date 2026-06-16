@@ -1,0 +1,38 @@
+#compdef gatekeeper
+
+# Completion for the `gatekeeper` plugin command: the subcommand, then per-command arguments.
+
+_gatekeeper() {
+  emulate -L zsh
+  local curcontext="$curcontext" state line
+  local -a commands
+
+  commands=(
+    'status:Print the current GateKeeper status'
+    'enable:Enable GateKeeper globally'
+    'disable:Disable GateKeeper on resources or globally'
+    'help:Show the help message'
+  )
+
+  _arguments -C \
+    '1:command:->command' \
+    '*::arguments:->arguments' \
+    && return 0
+
+  case $state in
+    command)
+      _describe -t commands 'gatekeeper command' commands
+      ;;
+    arguments)
+      case ${line[1]} in
+        disable)
+          _arguments \
+            '-a[disable GateKeeper on the specified applications]' \
+            '*:resource:_files'
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_gatekeeper "$@"

@@ -1,0 +1,21 @@
+#compdef lts
+
+# Completion for the `lts` plugin command. Reads $_lts_langs, set when the plugin loads.
+
+_lts() {
+  emulate -L zsh
+
+  if (( CURRENT == 2 )); then
+    _alternative \
+      'commands:command:((install\:"install the latest LTS of one or more languages" i\:"alias for install"))' \
+      "languages:language:(${_lts_langs[*]})"
+    return
+  fi
+
+  # After install/i, every following word is a language; query mode takes only one.
+  if [[ $words[2] == (install|i) ]]; then
+    _values 'language' "${_lts_langs[@]}"
+  fi
+}
+
+_lts "$@"

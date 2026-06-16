@@ -22,7 +22,7 @@ export BUN_HOME="$HOME/.bun"
 # Coding agents (https://github.com/copilot)
 export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
-_init_path() {
+initialize_path() {
   path=(
     "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
     "$BUN_HOME/bin" "$PNPM_HOME"
@@ -30,4 +30,4 @@ _init_path() {
     $path
   )
 }
-_init_path
+initialize_path

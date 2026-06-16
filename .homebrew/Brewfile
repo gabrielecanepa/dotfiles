@@ -1,4 +1,5 @@
 tap "github/gh", trusted: true
+tap "homebrew/core"
 tap "oven-sh/bun", trusted: true
 tap "tw93/tap", trusted: true
 # YAML Parser

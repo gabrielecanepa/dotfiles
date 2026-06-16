@@ -1,13 +1,15 @@
-#!/bin/zsh
+# Print PATH and FPATH entries one per line.
+#
+# Usage: path
+#        fpath
 
-function path() {
-  for p in "${(s/:/)PATH}"; do
-    echo $p
-  done; unset p
+path() {
+  emulate -L zsh
+  # (s/:/) splits the value on ":" into one element per directory
+  print -rl -- "${(s/:/)PATH}"
 }
 
-function fpath() {
-  for p in "${(s/:/)FPATH}"; do
-    echo $p
-  done; unset p
+fpath() {
+  emulate -L zsh
+  print -rl -- "${(s/:/)FPATH}"
 }

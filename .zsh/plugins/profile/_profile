@@ -1,0 +1,27 @@
+#compdef profile
+
+# Completion for the `profile` plugin command.
+
+_profile() {
+  local -a subcommands
+  subcommands=(
+    'config:Edit the current profile'
+    'install:Install a new profile'
+    'i:Install a new profile'
+    'reload:Reload the current profile'
+    'check:Check if the current profile is installed correctly'
+    'help:Print the help message'
+  )
+
+  _arguments -C \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _describe -t commands 'profile command' subcommands
+      ;;
+  esac
+}
+
+_profile "$@"

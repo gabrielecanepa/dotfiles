@@ -1,0 +1,18 @@
+#compdef plugin
+
+# Completion for the `plugin` command: custom plugin directory names with a matching .plugin.zsh.
+
+_plugin() {
+  emulate -L zsh
+
+  # -U keeps names deduplicated.
+  local -aU names
+  local name
+  # (/N:t): directories only (/), null glob when none match (N), basename only (:t).
+  for name in "$ZSH_CUSTOM/plugins"/*(/N:t); do
+    [[ -f "$ZSH_CUSTOM/plugins/$name/$name.plugin.zsh" ]] && names+=("$name")
+  done
+  _describe -t plugins 'plugin' names
+}
+
+_plugin "$@"

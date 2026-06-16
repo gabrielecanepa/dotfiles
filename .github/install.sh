@@ -104,14 +104,13 @@ install_runtime nodenv .node-version
 install_runtime pyenv .python-version
 install_runtime rbenv .ruby-version
 
-# 8. npm + corepack + husky
+# 8. npm + corepack
 if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
   info "Installing global npm dependencies"
   deps="$(jq -r '.dependencies // {} | keys | join(" ")' "$HOME/.npm/package.json")"
   # shellcheck disable=SC2086
   [ -n "$deps" ] && npm -g install $deps
   command -v corepack >/dev/null 2>&1 && corepack enable
-  command -v husky >/dev/null 2>&1 && husky || true
 fi
 
 # 9. macOS defaults
@@ -125,6 +124,7 @@ if [ "$(uname)" = "Darwin" ]; then
   VSCODE_USER="$HOME/Library/Application Support/Code/User"
   if [ -d "$VSCODE_USER" ]; then
     info "Setting up Visual Studio Code"
+    # First-time symlink; `dotfiles init` re-asserts settings.json if Code clobbers it later.
     for config in prompts snippets keybindings.json settings.json; do
       if [ -e "$HOME/.vscode/user/$config" ]; then
         if [ -e "$VSCODE_USER/$config" ] || [ -L "$VSCODE_USER/$config" ]; then
