@@ -128,17 +128,17 @@
   "files.associations": {
     "*.css": "tailwindcss",
     "*.json.lock": "jsonl",
-    "NOTES": "markdown",
-    "TODO": "markdown",
-    "pre-commit": "shellscript",
-    "pre-push": "shellscript",
-    ".aliases": "shellscript",
     ".CFUserTextEncoding": "plaintext",
+    ".aliases": "shellscript",
     ".commitlintrc": "json",
+    ".env*": "dotenv",
     ".gitprofile": "properties",
     ".vscode/**/settings.json": "jsonc",
+    "NOTES": "markdown",
+    "TODO": "markdown",
     "ignore": "ignore",
-    ".env*": "dotenv"
+    "pre-commit": "shellscript",
+    "pre-push": "shellscript"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
@@ -173,8 +173,6 @@
       "text": "Generate a single-line conventional commit message in the format `<type>: <description>`. Rules: use imperative mood, sentence case, no period at the end. Never include a scope. Never include a body or footer unless the change is a breaking change — in that case, add a `BREAKING CHANGE:` footer. Never include `Co-authored-by` or any other trailer. Keep the description concise (under 50 characters when possible). Allowed types: feat, fix, refactor, chore, docs, style, test, perf, ci, build, revert. Examples: `feat: Add date range filter to search`, `fix: Prevent duplicate API calls on mount`, `refactor: Simplify auth token refresh logic`, `chore: Update dependencies`."
     }
   ],
-  "github.copilot.chat.copilotMemory.enabled": true,
-  "github.copilot.chat.getSearchViewResultsSkill.enabled": true,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "github.copilot.chat.languageContext.fix.typescript.enabled": true,
   "github.copilot.chat.languageContext.inline.typescript.enabled": true,
