@@ -1,8 +1,38 @@
 ![](banner.png)
 
 > [!WARNING]
-> Before using the following dotfiles, fork this repository, review the content and remove things you don’t want or need.  
-> **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk.
+> Before using the following dotfiles, fork this repository, review the content and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk.
+
+## Features
+
+#### Version-controlled home directory
+
+`~` is version-controlled.
+The [`.gitignore`](/.gitignore) acts as an allowlist, so files are tracked only once opted-in and nothing leaks in by accident.
+
+#### Single script to install everywhere
+
+[`install.sh`](/.github/install.sh) clones the repo, copies every managed file into the home, and sets up Homebrew, runtimes, packages, and all other managed tools. It confirms before overwriting and backs up whatever it replaces, so re-runs are safe.
+
+#### Synced Brewfile to manage all dependencies
+
+[`Brewfile`](/.homebrew/Brewfile) pins formulae, casks, App Store apps and VS Code extensions. The wrapped `brew` command keeps it always in sync, and `brew fresh` updates, upgrades, cleans, dumps, and runs health checks in one go.
+
+#### Fast and powerful shell configuration
+
+Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with guided profile setup, runtime version switching and LTS installation, completions, and more. The custom `squanchy` theme displays active runtime versions and symbols for available LTS upgrades.
+
+#### Pinned runtimes and dependencies
+
+Node, Ruby, and Python are pinned through nodenv, rbenv, and pyenv. The version managers read the tracked `.node-version`, `.ruby-version`, and `.python-version` files, so the machine and repos stay on the same versions.
+
+#### Single source of truth for AI agents
+
+The [`.agents`](/.agents) directory holds instructions, rules, and skills shared by Claude Code, Codex, and Copilot. Each tool's own config is a symlink into the folder, all three read the same source and never drift.
+
+#### Extended synchronization
+
+On macOS, VS Code keybindings, settings, and snippets are symlinked back into the repository, with `Downloads`, `Movies`, and `Music` being linked to iCloud Drive for continuous sync across machines.
 
 ## Installation
 
@@ -47,7 +77,7 @@ Add the key to [GitHub](https://github.com/settings/ssh/new), [GitLab](https://g
 
 ### Homebrew
 
-Install [Homebrew](https://brew.sh):
+Install Homebrew:
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -55,7 +85,7 @@ Install [Homebrew](https://brew.sh):
 
 ### Oh My Zsh
 
-Install [Oh My Zsh](https://ohmyz.sh) and some useful plugins from [zsh-users](https://github.com/zsh-users):
+Install Oh My Zsh and some useful plugins from [zsh-users](https://github.com/zsh-users):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -97,7 +127,7 @@ gh repo clone gabrielecanepa/dotfiles
 git clone git@github.com:gabrielecanepa/dotfiles.git
 ```
 
-Install the packages listed in [`Brewfile`](/.homebrew/Brewfile):
+Install the packages listed in `Brewfile`:
 
 ```sh
 brew bundle --file ~/.homebrew/Brewfile
@@ -118,7 +148,7 @@ git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD
 
 ### Shell Profile
 
-Use the custom [profile plugin](/.zsh/plugins/profile/profile.plugin.zsh) to create your shell configuration with a guided prompt:
+Use the custom `profile` plugin to create your shell configuration with a guided prompt:
 
 ```sh
 profile install
@@ -128,13 +158,13 @@ profile install
 
 #### Node.js
 
-Install the Node.js version in use with [nodenv](https://github.com/nodenv/nodenv):
+Install the Node.js version in use with nodenv:
 
 ```sh
-nodenv install $(cat ~/.node_version) --skip-existing
+nodenv install $(cat ~/.node-version) --skip-existing
 ```
 
-Install the global npm dependencies listed [`package.json`](../.npm/package.json), enable [Corepack](https://github.com/nodejs/corepack) and initialize [Husky](https://typicode.github.io/husky):
+Install the global npm dependencies listed in [`package.json`](/.npm/package.json), enable Corepack and initialize Husky:
 
 ```sh
 npm -g install $(jq -r '.dependencies | keys | join(" ")' ~/.npm/package.json)
@@ -167,7 +197,7 @@ done
 
 #### Ruby
 
-Install and link the Ruby version in use with [rbenv](https://github.com/rbenv/rbenv):
+Install and link the Ruby version in use with rbenv:
 
 ```sh
 rbenv install $(cat ~/.ruby-version) --skip-existing
@@ -176,7 +206,7 @@ rm -f $RBENV_ROOT/version && ln -sf ~/.ruby-version $RBENV_ROOT/version
 
 #### Python
 
-Install and link the Python version in use with [pyenv](https://github.com/pyenv/pyenv):
+Install and link the Python version in use with pyenv:
 
 ```sh
 pyenv install $(cat ~/.python-version) --skip-existing
@@ -185,7 +215,7 @@ rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 
 ### Visual Studio Code
 
-Use symlinks to backup keybindings, settings and snippets of [Visual Studio Code](https://code.visualstudio.com) and [iTerm2](https://iterm2.com).
+Use symlinks to backup keybindings, settings and snippets of Visual Studio Code.
 
 > [!WARNING]
 > The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.

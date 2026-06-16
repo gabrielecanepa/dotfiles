@@ -46,4 +46,4 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 ## New-machine bootstrap
 
 - `.github/install.sh` shallow-clones the repo over HTTPS into an auto-cleaned temp dir and installs each tracked file into `~`, prompting before overwriting an existing one. Replaced files are backed up (path-mirrored) to `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup/<timestamp>/` — restore one by copying it back.
-- After the script, `~` is not yet a git repo; initialize it with `git -C ~ init -b main && git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git && git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD` (see README §Git repository).
+- After the script, `~` is not yet a git repo; initialize it with `git -C ~ init -b main && git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git && git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD` (see README §Git).
