@@ -1,6 +1,6 @@
 [core]
   ignorecase = false
-	pager = delta
+	pager = less -FRSX
 [include]
   path = ~/.gitprofile
 
@@ -40,13 +40,6 @@
 [diff]
 	algorithm = histogram
 	colorMoved = dimmed-zebra
-[delta]
-	line-numbers = true
-	navigate = true
-	syntax-theme = auto
-
-[interactive]
-	diffFilter = delta --color-only
 [color]
   branch = auto
   diff = auto
@@ -66,9 +59,6 @@
   process = git-lfs filter-process
   required = true
   smudge = git-lfs smudge -- %f
-[filter "vscode-theme"]
-	clean = sed '/workbench.colorTheme.:/d'
-	smudge = cat
 
 [alias]
   a = add
