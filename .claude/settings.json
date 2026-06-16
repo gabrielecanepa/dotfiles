@@ -1,45 +1,43 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "effortLevel": "xhigh",
+  "fastMode": true,
+  "worktree": {
+    "baseRef": "fresh"
+  },
   "permissions": {
     "defaultMode": "auto"
   },
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "remoteControlAtStartup": true,
+  "autoCompactEnabled": true,
+  "alwaysThinkingEnabled": false,
+  "showThinkingSummaries": false,
+  "includeCoAuthoredBy": false,
+  "attribution": { "commit": "", "pr": "" },
+  "theme": "auto",
+  "preferredNotifChannel": "ghostty",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_CONFIG_DIR/hooks/guard-managed-files.sh",
-            "timeout": 5
-          }
-        ]
+        "hooks": [{ "type": "command", "command": "$CLAUDE_CONFIG_DIR/hooks/guard-managed-files.sh", "timeout": 5 }]
       }
     ],
     "Stop": [
       {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_CONFIG_DIR/hooks/close-preview-tabs.sh",
-            "timeout": 10
-          }
-        ]
+        "hooks": [{ "type": "command", "command": "$CLAUDE_CONFIG_DIR/hooks/close-preview-tabs.sh", "timeout": 10 }]
       }
     ],
     "SessionEnd": [
       {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$CLAUDE_CONFIG_DIR/hooks/close-preview-tabs.sh",
-            "timeout": 10
-          }
-        ]
+        "hooks": [{ "type": "command", "command": "$CLAUDE_CONFIG_DIR/hooks/close-preview-tabs.sh", "timeout": 10 }]
       }
     ]
-  },
-  "worktree": {
-    "baseRef": "fresh"
   },
   "enabledPlugins": {
     "vercel@claude-plugins-official": true,
@@ -53,15 +51,5 @@
         "repo": "anthropics/claude-plugins-official"
       }
     }
-  },
-  "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "auto",
-  "editorMode": "normal",
-  "preferredNotifChannel": "auto",
-  "remoteControlAtStartup": true,
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": false,
-  "skipAutoPermissionPrompt": true
+  }
 }
