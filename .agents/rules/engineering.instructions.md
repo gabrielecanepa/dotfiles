@@ -62,7 +62,7 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
 
   For multiple commits, give each its own message block and group the changes under it:
 
-  ````
+  ```
   ### Changes
 
   **docs: drop the model-selection section**
@@ -73,6 +73,6 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
   - [src/app.ts](src/app.ts) - guarded against empty input.
 
   Want me to run these commits?
-  ````
+  ```
 
 - If a task legitimately needs intermediate commits to proceed (e.g. a rebase, a bisect, or the user said "commit as you go"), that standing instruction counts as explicit permission for the scope they described; do not extend it beyond that scope.

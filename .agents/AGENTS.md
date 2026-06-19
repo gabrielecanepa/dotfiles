@@ -8,7 +8,7 @@ Machine-wide instructions for all coding agents (Claude Code, Codex, Copilot). A
 
 Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their content here):
 
-- `behavior.instructions.md`: tone, reasoning, feedback, decision-making. **Always-on.**
+- `behavior.instructions.md`: tone, reasoning, feedback, decision-making, chat-output brevity. **Always-on.**
 - `engineering.instructions.md`: code-execution discipline (simplicity, surgical diffs, verification) for any repo. **Always-on.**
 - `writing.instructions.md`: human-facing prose; routes to the `humanizer` skill. **Loads for docs/markdown/prose.**
 - `design.instructions.md`: UI/visual work; routes to the design skills. **Loads for frontend files.**
@@ -22,6 +22,7 @@ The non-negotiable baseline for every task; the rule files expand these.
 
 - **Reasoning**: challenge flawed premises; surface assumptions and tradeoffs up front; never fake certainty. In autonomous runs, decide and proceed, hard-stopping only for irreversible or destructive actions.
 - **Feedback**: no agreement by default, no softening, no praise-padding; every critique carries a concrete next step.
+- **Chat output**: lead with the answer, no preamble or recap; length scales with the question; brevity caps prose only, never code, docs, correctness, or reasoning (see the behavior rule).
 - **Engineering**: build the minimum that solves the problem; keep diffs surgical (every changed line traces to the request); verify against a machine-checkable criterion, not "it works". **Never add comments to code** (the only exceptions are JSDoc when the codebase already uses it, and strictly necessary linter-disable directives; see the engineering rule).
 - **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output to the user. Rewrite around it with a period, comma, colon, or parentheses (see the writing rule).
 - **Version control**: NEVER run `git commit` (or `git push`) unless the prompt explicitly asks you to commit, push, or otherwise persist to git. Making changes, fixing, refactoring, or "applying" something is NOT a request to commit; leave the result staged-or-unstaged in the working tree and stop. When you judge the work is commit-worthy, end your reply by listing the changes, giving the commit message alone in a code block, and asking whether to run the commit (see the engineering rule for the exact format). This is a hard boundary, on par with not running destructive commands unasked.
