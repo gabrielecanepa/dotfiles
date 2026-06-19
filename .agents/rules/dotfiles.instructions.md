@@ -25,6 +25,7 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 ## Single source of truth for agent config
 
 - Edit `.agents/{AGENTS.md,rules,skills,hooks}`. `~/.claude/*`, `~/.codex/AGENTS.md`, `~/.copilot/instructions`, and `~/.github/*` resolve to `.agents` via tracked symlinks. Never edit symlink targets directly or duplicate content across agents.
+- `.agents/hooks/` holds **Claude Code** hooks (not git hooks), wired in `.claude/settings.json` and reached via the `~/.claude/hooks` symlink: `guard-managed-files.sh` (PreToolUse, blocks writes to generated/symlinked managed files) and `close-preview-tabs.sh` (Stop/SessionEnd, closes leftover localhost tabs). Keep their behavior documented in the header comment of each script. Distinct from the git hooks in `.config/git/hooks/` covered below.
 
 ## Allowlist `.gitignore`
 
