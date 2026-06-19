@@ -36,5 +36,6 @@
   "git.ignoredRepositories": [".oh-my-zsh"],
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "oxc.enable.oxfmt": true,
+  "[instructions]": { "editor.formatOnSave": false },
   "markdown.extension.toc.levels": "3..6"
 }
