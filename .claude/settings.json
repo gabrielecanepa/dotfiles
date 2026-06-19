@@ -62,7 +62,6 @@
   },
   "alwaysThinkingEnabled": false,
   "effortLevel": "xhigh",
-  "fastMode": true,
   "showThinkingSummaries": false,
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
