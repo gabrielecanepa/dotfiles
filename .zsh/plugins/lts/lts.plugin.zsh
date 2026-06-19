@@ -2,7 +2,7 @@
 #
 # Usage: lts <command>
 
-typeset -ga _lts_langs=(node python ruby)
+typeset -ga _lts_langs=(node ruby python)
 
 _lts_print_help() {
   emulate -L zsh
@@ -10,14 +10,17 @@ _lts_print_help() {
   print -r --
   print -r -- 'Commands:'
   print -r -- '    <language@prefix>      Print the latest LTS release matching an optional version prefix.'
-  print -r -- '    install               Install the latest LTS of all supported languages.'
-  print -r -- '    i <language@prefix>   Install the latest LTS of the specified languages.'
+  print -r -- '    check [language]       Compare the active version against the latest LTS, for one or all languages.'
+  print -r -- '    install                Install the latest LTS of all supported languages.'
+  print -r -- '    i <language@prefix>    Install the latest LTS of the specified languages.'
   print -r --
   print -r -- "Languages: ${_lts_langs[*]}"
   print -r --
   print -r -- 'Examples:'
   print -r -- '    lts node                    Get the latest Node.js LTS release.'
   print -r -- '    lts node@18                 Get the latest minor LTS version of Node.js 18.'
+  print -r -- '    lts check                   Compare every active version against its latest LTS.'
+  print -r -- '    lts check node              Compare the active Node.js version against the latest LTS.'
   print -r -- '    lts install python ruby@2   Install the latest LTS of Python and Ruby 2.'
   print -r -- '    lts install ruby@2.6        Install the latest LTS patch of Ruby 2.6.'
 }
@@ -115,6 +118,110 @@ _lts_get_latest_version() {
 
   # Versions are sorted ascending, so the last line is the newest match.
   print -r -- "$versions" | command tail -1
+}
+
+# Resolve the active version (local file takes precedence over global) for a language.
+_lts_get_active_version() {
+  emulate -L zsh
+  local vm
+  vm=$(_lts_get_version_manager "$1") || return 1
+
+  if (( ! ${+commands[$vm]} )); then
+    _lts_error "Required tool not found: $vm"
+    return 1
+  fi
+
+  command "$vm" version-name
+}
+
+# Return $text wrapped in a foreground color when $_lts_use_color is set,
+# otherwise plain. The flag is decided once by the caller against the real
+# stdout, since [[ -t 1 ]] inside a $(...) capture would always read false.
+_lts_colorize() {
+  emulate -L zsh
+  local color=$1 text=$2
+  if (( _lts_use_color )); then
+    print -nP -- "%F{$color}${text}%f"
+  else
+    print -rn -- "$text"
+  fi
+}
+
+# Print the version comparison for one language. With $2 set, prefix the line
+# with the language name for the aggregate `lts check` listing. Exposes the
+# resolved latest version to the caller through $_lts_check_latest.
+# Returns 0 when up to date, 1 when outdated, 2 on error.
+_lts_check_language() {
+  emulate -L zsh
+  local lang=$1 labelled=$2 lang_name active latest
+
+  lang_name=$(_lts_get_language_name "$lang") || return 2
+  active=$(_lts_get_active_version "$lang") || return 2
+  latest=$(_lts_get_latest_version "$lang") || return 2
+  [[ -z $active || -z $latest ]] && return 2
+  _lts_check_latest=$latest
+
+  if [[ $active == "$latest" ]]; then
+    if [[ -n $labelled ]]; then
+      print -r -- "${lang_name}: $(_lts_colorize green "$active") (latest)"
+    else
+      print -r -- "Already on latest version ($(_lts_colorize green "$active"))"
+    fi
+    return 0
+  fi
+
+  local prefix=''
+  [[ -n $labelled ]] && prefix="${lang_name}: "
+  print -r -- "${prefix}$(_lts_colorize yellow "$active") → $(_lts_colorize green "$latest")"
+  return 1
+}
+
+_lts_check() {
+  emulate -L zsh
+
+  if (( $# > 1 )); then
+    _lts_error "Invalid arguments: $*"
+    return 1
+  fi
+
+  # Decide color once against the real stdout; _lts_colorize reads this flag.
+  local _lts_use_color=0
+  [[ -t 1 ]] && _lts_use_color=1
+  local _lts_check_latest
+
+  # Single language: print the comparison and the upgrade hint when behind.
+  if (( $# == 1 )); then
+    local lang=$1
+    if ! _lts_validate_language "$lang"; then
+      _lts_error "Invalid argument: $lang"
+      return 1
+    fi
+
+    _lts_check_language "$lang"
+    case $? in
+      0) ;;
+      1) print -r -- "Run \`lts install $lang\` to upgrade to $_lts_check_latest" ;;
+      *) return 1 ;;
+    esac
+    return 0
+  fi
+
+  # No language: list every supported language and a single summary footer.
+  local lang any_outdated=0
+  for lang in "${_lts_langs[@]}"; do
+    _lts_check_language "$lang" labelled
+    case $? in
+      0) ;;
+      1) any_outdated=1 ;;
+      *) return 1 ;;
+    esac
+  done
+
+  if (( any_outdated )); then
+    print -r -- 'Run `lts install` to upgrade to the latest versions'
+  else
+    print -r -- 'Already on the latest versions'
+  fi
 }
 
 _lts_install() {
@@ -217,6 +324,9 @@ lts() {
   case $1 in
     install|i)
       _lts_install "${@:2}"
+      ;;
+    check)
+      _lts_check "${@:2}"
       ;;
     *)
       _lts_query "$@"
