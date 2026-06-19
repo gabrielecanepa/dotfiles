@@ -41,11 +41,11 @@ Run the install script to bootstrap the configuration:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/gabrielecanepa/dotfiles/main/.github/install.sh)"
 ```
 
-The script does the following:
+The script runs the following main actions:
 
-- Installs the configuration by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory
-- Backs up the replaced files into a timestamped backup folder in the default state directory
-- Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Visual Studio Code, and iCloud symlinks
+1. Installs the configuration by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory
+2. Backs up the replaced files into a timestamped backup folder in the default state directory
+3. Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Visual Studio Code, and iCloud symlinks
 
 ## Manual Setup
 
@@ -145,7 +145,7 @@ git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git
 git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD
 ```
 
-[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) run natively, with no extra tooling: the global configuration points the hooks path to [`.config/git/hooks`](/.config/git/hooks), so any executable in there runs the corresponding git event in any repo on the machine.
+This repository wires its own checks with local [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) running Oxfmt, ShellCheck, commitlint and other code quality tools on commit and push.
 
 ### Shell Profile
 
@@ -182,16 +182,16 @@ rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 Link the global pnpm and Bun files to the tracked ones:
 
 ```sh
-# Bun
-for file in bun.lockb package.json; do
-  rm -f $BUN_HOME/install/global/$file
-  ln -sf ~/.bun/$file $BUN_HOME/install/global/$file
-done
-
 # pnpm
 for file in package.json pnpm-lock.yaml; do
   rm -f $PNPM_HOME/5/$file
   ln -sf ~/.pnpm/$file $PNPM_HOME/5/$file
+done
+
+# Bun
+for file in bun.lockb package.json; do
+  rm -f $BUN_HOME/install/global/$file
+  ln -sf ~/.bun/$file $BUN_HOME/install/global/$file
 done
 ```
 
@@ -221,7 +221,6 @@ Use symlinks to backup keybindings, settings and snippets of Visual Studio Code.
 > The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.
 
 ```sh
-# VSCode
 for config in prompts snippets keybindings.json settings.json; do
   file=~/Library/Application\ Support/Code/User/$config
   rm -rf $file
@@ -263,22 +262,22 @@ Use the following script to:
 
 ```sh
 for folder in Applications Developer Downloads Movies Music Pictures; do
-  # Create the folder in iCloud Drive
+  # Create folder in iCloud Drive
   cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
   [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
 
   case $folder in
-    # Replace with a symlink to the system folder
+    # Replace with symlink to system folder
     Applications)
       rm -rf ~/Applications
       ln -sf /Applications ~/Applications
       ln -sf $cloud_folder /Applications/iCloud
       ;;
-    # Create a symlink named iCloud
+    # Create symlink
     Developer|Pictures)
       ln -sf $cloud_folder ~/$folder/iCloud
       ;;
-    # Replace with a symlink to the cloud folder
+    # Replace with symlink to cloud folder
     Downloads|Movies|Music)
       [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
       rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder

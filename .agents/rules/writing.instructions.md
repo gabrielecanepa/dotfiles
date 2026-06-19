@@ -1,5 +1,5 @@
 ---
-description: 'Use when producing human-facing prose — docs, READMEs, comments-as-prose, blog/essays, marketing or UI copy, release notes, PR/issue descriptions, emails. Enforces the humanizer skill and bans the common AI-writing tells. Not for code, terse chat, or commit subjects.'
+description: 'Use when producing human-facing prose (docs, READMEs, comments-as-prose, blog/essays, marketing or UI copy, release notes, PR/issue descriptions, emails). Enforces the humanizer skill and bans the common AI-writing tells. Not for code, terse chat, or commit subjects.'
 applyTo: '**/*.markdown,**/*.md,**/*.mdc,**/*.mdx,**/*.rst,**/*.txt,**/README*,**/docs/**'
 paths:
   - '**/*.markdown'
@@ -14,7 +14,7 @@ paths:
 
 # Writing & Prose
 
-Applies to any substantial human-facing prose you produce — in files **and** in chat, PR/issue/release descriptions, and UI copy. Skip for: code and code comments, terse factual chat answers, conventional-commit subject lines, and pure technical reference where neutral plain text already _is_ the correct human voice — including instruction/config docs like these rule files, which are reference and may use dashes freely.
+Applies to any substantial human-facing prose you produce, in files **and** in chat, PR/issue/release descriptions, and UI copy. Skip the humanizer voice treatment for: code and code comments, terse factual chat answers, conventional-commit subject lines, and pure technical reference where neutral plain text already _is_ the correct human voice, including instruction/config docs like these rule files. Note one rule has no such skip: the dash ban below covers every committed file, reference docs included.
 
 ## When to invoke the `humanizer` skill
 
@@ -24,15 +24,15 @@ The skill's loop is **draft → audit ("what still makes this read as AI?") → 
 
 ## Baseline rules (apply even without invoking the skill)
 
-- **No em or en dashes** in final prose. Replace with a period, comma, colon, parentheses, or a rewrite. This is a hard constraint, not a "use sparingly".
+- **No em or en dashes** in any committed file, these rule and config docs included. Replace with a period, comma, colon, parentheses, or a rewrite. This is a hard constraint, not a "use sparingly". The one exception is the agent's live chat output to the user, which is ephemeral and not a committed artifact; the instant text lands in a file, the ban applies.
 - **No significance/promotional inflation**: drop "stands as a testament", "pivotal moment", "rich tapestry", "vibrant", "nestled in the heart of", "showcases", "underscores".
 - **Prefer `is`/`are`/`has`** over copula avoidance ("serves as", "boasts", "represents a").
 - **No rule-of-three padding**, no false ranges ("from X to Y"), no synonym cycling, no negative parallelisms ("not just X, it's Y") or tailing negations ("…, no guessing").
 - **Cut AI-vocabulary clusters and filler**: delve, leverage, crucial, seamless, "in order to", "it is important to note", excessive hedging.
-- **No collaborative/sycophantic artifacts** ("Great question!", "I hope this helps", "Let me know…") and **no signposting** ("Let's dive in", "Here's what you need to know") — just say the thing.
+- **No collaborative/sycophantic artifacts** ("Great question!", "I hope this helps", "Let me know…") and **no signposting** ("Let's dive in", "Here's what you need to know"): just say the thing.
 - **Mechanics**: sentence-case headings (not Title Case), straight quotes (not curly), no decorative emoji, no mechanical boldface or inline-header bullet lists.
-- **Active voice, specific detail, varied sentence length.** Add opinion/voice only for essays and personal writing; for reference/technical/legal text, neutral and plain is correct — don't inject personality there.
+- **Active voice, specific detail, varied sentence length.** Add opinion/voice only for essays and personal writing; for reference/technical/legal text, neutral and plain is correct, so don't inject personality there.
 
 ## Don't over-correct
 
-Edit for **clusters** of tells, not isolated ones. A lone "however", a single curly quote, formal vocabulary, or polished grammar is not evidence of AI — preserve specific detail, dated references, genuine asides, and earned voice. See the skill's "What NOT to flag" section before gutting legitimate prose.
+Edit for **clusters** of tells, not isolated ones. A lone "however", a single curly quote, formal vocabulary, or polished grammar is not evidence of AI. Preserve specific detail, dated references, genuine asides, and earned voice. See the skill's "What NOT to flag" section before gutting legitimate prose.
