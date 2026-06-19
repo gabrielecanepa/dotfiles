@@ -1,5 +1,6 @@
 zmodload zsh/datetime
 source ${0:A:h}/lib/git.zsh
+source ${0:A:h}/lib/title.zsh
 
 typeset -g _GIT_RPROMPT=""
 

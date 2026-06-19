@@ -3,6 +3,7 @@ autoload -U add-zsh-hook
 zmodload zsh/datetime
 zmodload -F zsh/stat b:zstat
 source ${0:A:h}/lib/git.zsh
+source ${0:A:h}/lib/title.zsh
 
 ZSH_THEME_SQUANCHY_RPROMPT_EMPTY="n/a"
 ZSH_THEME_SQUANCHY_ICON_NODE="\\ue718"
