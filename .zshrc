@@ -5,7 +5,7 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 # Oh My Zsh
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME=shell
+ZSH_THEME=git
 ZSH_THEME_RPROMPTS=(node ruby python)
 ZSH_COMPLETIONS=(docker glab npm pnpm)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
@@ -37,6 +37,7 @@ plugins=(
   npm
   pyenv
   rbenv
+  themes
   # From zsh-users
   zsh-autosuggestions
   zsh-completions

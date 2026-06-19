@@ -1,19 +1,10 @@
 autoload -U colors && colors
+autoload -U add-zsh-hook
+zmodload zsh/datetime
+zmodload -F zsh/stat b:zstat
+source ${0:A:h}/lib/git.zsh
 
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%}↑"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}↓"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}*"
-ZSH_THEME_GIT_PROMPT_DIRTY=""
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}*"
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_UNSTAGED=""
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}*"
 ZSH_THEME_SQUANCHY_RPROMPT_EMPTY="n/a"
-ZSH_THEME_SQUANCHY_ICON_BRANCH="\\ue727"
-ZSH_THEME_SQUANCHY_ICON_COMMIT="\\ue729"
-ZSH_THEME_SQUANCHY_ICON_GITHUB="\\uf09b"
 ZSH_THEME_SQUANCHY_ICON_NODE="\\ue718"
 ZSH_THEME_SQUANCHY_ICON_PHP="\\ue608"
 ZSH_THEME_SQUANCHY_ICON_PYTHON="\\ue606"
@@ -22,163 +13,162 @@ ZSH_THEME_SQUANCHY_ICON_UP="↑"
 ZSH_THEME_SQUANCHY_ICON_PIN="⚑"
 ZSH_THEME_SQUANCHY_ICON_PIN_ALT="⚐"
 
-function squanchy() {
-  if [[ -z "$ZSH_THEME_RPROMPTS" ]]; then 
-    ZSH_THEME_RPROMPTS=(node ruby python php)
+[[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
+
+typeset -g _SQUANCHY_NODE=${(g::)ZSH_THEME_SQUANCHY_ICON_NODE}
+typeset -g _SQUANCHY_PHP=${(g::)ZSH_THEME_SQUANCHY_ICON_PHP}
+typeset -g _SQUANCHY_PYTHON=${(g::)ZSH_THEME_SQUANCHY_ICON_PYTHON}
+typeset -g _SQUANCHY_RUBY=${(g::)ZSH_THEME_SQUANCHY_ICON_RUBY}
+
+typeset -g _SQUANCHY_CACHE_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/squanchy
+typeset -gi _SQUANCHY_LTS_TTL=86400
+
+typeset -g _SQUANCHY_RPROMPT=""
+typeset -gA _SQUANCHY_LOCAL
+typeset -g _SQUANCHY_LOCAL_PWD=""
+
+_squanchy_lts() {
+  emulate -L zsh
+  local lang=$1
+  local file=$_SQUANCHY_CACHE_DIR/lts-$lang
+  local cached=""
+  local -a st
+  local now=$EPOCHSECONDS
+
+  if [[ -r $file ]]; then
+    cached=$(<$file)
+    zstat -A st +mtime -- $file 2>/dev/null
+    if (( ${st[1]:-0} + _SQUANCHY_LTS_TTL > now )); then
+      print -r -- "$cached"
+      return 0
+    fi
   fi
 
-  ##
-  # Prints the version manager used for the specified language.
-  #
-  # @example `get_version_manager node # => nodenv`
-  # @example `get_version_manager python # => pyenv`
-  ##
-  local function get_version_manager() {
-    case $1 in
-      node) echo "nodenv" ;;
-      python) echo "pyenv" ;;
-      ruby) echo "rbenv" ;;
-      *) return 1 ;;
-    esac
-  }
+  if (( $+functions[lts] )); then
+    [[ -d $_SQUANCHY_CACHE_DIR ]] || command mkdir -p $_SQUANCHY_CACHE_DIR
+    ( lts $lang > $file ) &>/dev/null </dev/null &!
+  fi
 
-  ##
-  # Prints the current version of the specified language.
-  #
-  # @example `get_version node # => 16.0.0`
-  ##
-  local function get_version() {
-    local lang="$1"
-    [[ $lang == "python" ]] && flag="-V" || flag="-v"
-    ! $lang $flag &>/dev/null && echo "" && return 1
-    case $lang in
-      node) echo "${$(node -v)#v}";;
-      ruby) [[ "$(ruby -v)" =~ ([0-9].[0-9].[0-9]) ]] && echo $match;;
-      python) echo "${$(python -V)#Python }";;
-      php) echo "${$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)}";;
-    esac
-    echo ""
-    return 1
-  }
-
-  ##
-  # Prints the given language and version appending symbols to indicate the status.
-  #
-  # @example `version_prompt node@21.1.0 # => 21.1.0↑`
-  ##
-  local function version_prompt() {
-    local lang=$1
-    local version_manager=$(get_version_manager $lang)
-    local global_version="$($version_manager global 2>/dev/null)"
-    local local_version=""
-    local global_version_parts=(${(s/./)global_version})
-    local lts_version="$(lts "$lang")"
-    local lts_version_parts=(${(s/./)lts_version})
-    local has_update=false
-
-    if (( ${lts_version_parts[1]:-0} > ${global_version_parts[1]:-0} || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} > ${global_version_parts[2]:-0}) || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} == ${global_version_parts[2]:-0} && ${lts_version_parts[3]:-0} > ${global_version_parts[3]:-0}) )); then
-      has_update=true
-    fi
-
-    # Local version #
-    if [ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$HOME" ]; then
-      local local_version="$(cat "$(git rev-parse --show-toplevel 2>/dev/null)/.$lang-version" 2>/dev/null)"
-      if [ -n "$local_version" ]; then
-        if $version_manager versions | grep -q $local_version; then
-          echo "${local_version}$ZSH_THEME_SQUANCHY_ICON_PIN$([[ $has_update == true ]] && echo $ZSH_THEME_SQUANCHY_ICON_UP)"
-        else
-          echo "${local_version}$ZSH_THEME_SQUANCHY_ICON_PIN_ALT"
-        fi
-        return 0
-      fi
-    fi
-
-    ## Global version ##
-    
-    # Display the empty rprompt if global version is not set
-    if [ -z "$global_version" ]; then
-      echo $ZSH_THEME_SQUANCHY_RPROMPT_EMPTY
-      return 0
-    fi
-
-    # Show global version if lts is not installed
-    if ! command -v lts &>/dev/null; then
-      echo "$global_version"
-      return 0
-    fi
-
-    # Show global version with warning if global version is not the latest
-    local global_version_parts=(${(s/./)global_version})
-    local lts_version="$(lts "$lang")"
-    local lts_version_parts=(${(s/./)lts_version})
-
-    if (( ${lts_version_parts[1]:-0} > ${global_version_parts[1]:-0} || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} > ${global_version_parts[2]:-0}) || (${lts_version_parts[1]:-0} == ${global_version_parts[1]:-0} && ${lts_version_parts[2]:-0} == ${global_version_parts[2]:-0} && ${lts_version_parts[3]:-0} > ${global_version_parts[3]:-0}) )); then
-      echo "${global_version}↑"
-      return 0
-    fi
-
-    # Default to global version
-    echo $global_version
-  }
-
-  ## Git
-  local function git_prompt() {
-    # Return if the current path not in a git repository or ignored
-    if ! git rev-parse --is-inside-work-tree &>/dev/null || git check-ignore . &>/dev/null; then 
-      echo ""
-      return 0
-    fi
-    local git_prompt="%F{202}$ZSH_THEME_SQUANCHY_ICON_BRANCH$(git_prompt_info)%{$reset_color%}$(git_prompt_status)"
-    if git config --get remote.origin.url &>/dev/null; then
-      echo "$ZSH_THEME_SQUANCHY_ICON_GITHUB$ZSH_THEME_SQUANCHY_ICON_COMMIT$git_prompt "
-      return 0
-    fi
-    echo "$git_prompt "
-  }
-
-  ## Node.js
-  local function node_prompt() {
-    local version_prompt="$(version_prompt node)"
-    echo "%{$fg[green]%}$ZSH_THEME_SQUANCHY_ICON_NODE $version_prompt%{$reset_color%}"
-  }
-
-  ## Ruby
-  local function ruby_prompt() {
-    local version_prompt="$(version_prompt ruby)"
-    echo "%{$fg[red]%}$ZSH_THEME_SQUANCHY_ICON_RUBY $version_prompt%{$reset_color%}"
-  }
-
-  ## Python
-  local function python_prompt() {
-    local version_prompt="$(version_prompt python)"
-    echo "%{$fg[yellow]%}$ZSH_THEME_SQUANCHY_ICON_PYTHON $version_prompt%{$reset_color%}"
-  }
-
-  ## PHP
-  local function php_prompt() {
-    local php_version="$(php -v | tail -r | tail -n 1 | cut -d " " -f 2 | cut -c 1-3)"
-    echo "%{$fg[blue]%}$ZSH_THEME_SQUANCHY_ICON_PHP $php_version%{$reset_color%}"
-  }
-
-  # Left prompt
-  PROMPT='%(?:%{$fg_bold[green]%}✓:%{$fg_bold[red]%}✗)%{$reset_color%} ' # status
-  PROMPT+='%{$fg[cyan]%}%c%{$reset_color%} ' # current path
-  PROMPT+='$(git_prompt)' # git
-
-  # Right prompt
-  rprompts=()
-  [[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
-  for rprompt in $(tr ' ' '\n' <<< "${ZSH_THEME_RPROMPTS[@]}" | awk '!u[$0]++' | tr '\n' ' '); do
-    case $rprompt in
-      node) rprompts+='$(node_prompt)';;
-      ruby) rprompts+='$(ruby_prompt)';;
-      python) rprompts+='$(python_prompt)';;
-      php) rprompts+='$(php_prompt)';;
-      *) echo "${fg[red]}Unknown theme prompt: $rprompt$reset_color";;
-    esac
-  done
-  RPROMPT="${(j:  :)rprompts}"
-  unset rprompt rprompts
+  print -r -- "$cached"
 }
 
-squanchy
+_squanchy_has_update() {
+  emulate -L zsh
+  local -a l=(${(s/./)1}) c=(${(s/./)2})
+  (( ${l[1]:-0} > ${c[1]:-0} \
+    || (${l[1]:-0} == ${c[1]:-0} && ${l[2]:-0} > ${c[2]:-0}) \
+    || (${l[1]:-0} == ${c[1]:-0} && ${l[2]:-0} == ${c[2]:-0} && ${l[3]:-0} > ${c[3]:-0}) ))
+}
+
+_squanchy_resolve_local() {
+  emulate -L zsh
+  [[ $_SQUANCHY_LOCAL_PWD == $PWD ]] && return 0
+  _SQUANCHY_LOCAL_PWD=$PWD
+  _SQUANCHY_LOCAL=()
+
+  _git_in_repo || return 0
+  local toplevel=$_GIT_TOPLEVEL
+  [[ $toplevel == $HOME ]] && return 0
+
+  local lang file
+  for lang in node ruby python; do
+    file=$toplevel/.$lang-version
+    [[ -r $file ]] && _SQUANCHY_LOCAL[$lang]=$(<$file)
+  done
+}
+
+_squanchy_version() {
+  emulate -L zsh
+  local lang=$1
+  local local_version=${_SQUANCHY_LOCAL[$lang]}
+  local global_version=""
+  [[ -r $HOME/.$lang-version ]] && global_version=$(<$HOME/.$lang-version)
+  local lts_version=$(_squanchy_lts $lang)
+
+  if [[ -n $local_version ]]; then
+    if _squanchy_version_installed $lang $local_version; then
+      if _squanchy_has_update "$lts_version" "$local_version"; then
+        print -r -- "${local_version}${ZSH_THEME_SQUANCHY_ICON_PIN}${ZSH_THEME_SQUANCHY_ICON_UP}"
+      else
+        print -r -- "${local_version}${ZSH_THEME_SQUANCHY_ICON_PIN}"
+      fi
+    else
+      print -r -- "${local_version}${ZSH_THEME_SQUANCHY_ICON_PIN_ALT}"
+    fi
+    return 0
+  fi
+
+  if [[ -z $global_version ]]; then
+    print -r -- "$ZSH_THEME_SQUANCHY_RPROMPT_EMPTY"
+    return 0
+  fi
+
+  if [[ -z $lts_version ]]; then
+    print -r -- "$global_version"
+    return 0
+  fi
+
+  if _squanchy_has_update "$lts_version" "$global_version"; then
+    print -r -- "${global_version}${ZSH_THEME_SQUANCHY_ICON_UP}"
+    return 0
+  fi
+
+  print -r -- "$global_version"
+}
+
+_squanchy_version_installed() {
+  emulate -L zsh
+  local lang=$1 version=$2 root
+  case $lang in
+    node) root=${NODENV_ROOT:-$HOME/.nodenv} ;;
+    ruby) root=${RBENV_ROOT:-$HOME/.rbenv} ;;
+    python) root=${PYENV_ROOT:-$HOME/.pyenv} ;;
+    *) return 1 ;;
+  esac
+  [[ -d $root/versions/$version ]]
+}
+
+_squanchy_php() {
+  emulate -L zsh
+  (( $+commands[php] )) || { print -r -- ""; return 0 }
+  local first=${${(f)"$(php -v 2>/dev/null)"}[1]}
+  local -a parts=(${(s/ /)first})
+  print -r -- "${parts[2][1,3]}"
+}
+
+_squanchy_rprompt() {
+  emulate -L zsh
+  local -a seen segments
+  local r
+  [[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
+  for r in $ZSH_THEME_RPROMPTS; do
+    (( ${seen[(I)$r]} )) && continue
+    seen+=$r
+    case $r in
+      node) segments+="%{$fg[green]%}${_SQUANCHY_NODE} $(_squanchy_version node)%{$reset_color%}" ;;
+      ruby) segments+="%{$fg[red]%}${_SQUANCHY_RUBY} $(_squanchy_version ruby)%{$reset_color%}" ;;
+      python) segments+="%{$fg[yellow]%}${_SQUANCHY_PYTHON} $(_squanchy_version python)%{$reset_color%}" ;;
+      php) segments+="%{$fg[blue]%}${_SQUANCHY_PHP} $(_squanchy_php)%{$reset_color%}" ;;
+    esac
+  done
+  _SQUANCHY_RPROMPT="${(j:  :)segments}"
+}
+
+_squanchy_chpwd() {
+  _SQUANCHY_LOCAL_PWD=""
+  _squanchy_resolve_local
+}
+
+_squanchy_precmd() {
+  _squanchy_resolve_local
+  _git_segment
+  _squanchy_rprompt
+}
+
+add-zsh-hook chpwd _squanchy_chpwd
+add-zsh-hook precmd _squanchy_precmd
+
+PROMPT='%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)%{$reset_color%} '
+PROMPT+='%1~ '
+PROMPT+='${_GIT_SEGMENT}'
+RPROMPT='${_SQUANCHY_RPROMPT}'
