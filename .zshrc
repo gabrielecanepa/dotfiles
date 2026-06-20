@@ -5,8 +5,8 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 # Oh My Zsh
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME=git
-ZSH_THEME_RPROMPTS=(node ruby python)
+ZSH_THEME=node
+ZSH_THEME_SQUANCHY_RPROMPTS=(node python)
 ZSH_COMPLETIONS=(docker glab npm pnpm)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}

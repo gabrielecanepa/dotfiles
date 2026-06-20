@@ -14,7 +14,7 @@ ZSH_THEME_SQUANCHY_ICON_UP="↑"
 ZSH_THEME_SQUANCHY_ICON_PIN="⚑"
 ZSH_THEME_SQUANCHY_ICON_PIN_ALT="⚐"
 
-[[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
+[[ -z "$ZSH_THEME_SQUANCHY_RPROMPTS" ]] && ZSH_THEME_SQUANCHY_RPROMPTS=(node ruby python php)
 
 typeset -g _SQUANCHY_NODE=${(g::)ZSH_THEME_SQUANCHY_ICON_NODE}
 typeset -g _SQUANCHY_PHP=${(g::)ZSH_THEME_SQUANCHY_ICON_PHP}
@@ -141,8 +141,8 @@ _squanchy_rprompt() {
   emulate -L zsh
   local -a seen segments
   local r
-  [[ -z "$ZSH_THEME_RPROMPTS" ]] && ZSH_THEME_RPROMPTS=(node ruby python php)
-  for r in $ZSH_THEME_RPROMPTS; do
+  [[ -z "$ZSH_THEME_SQUANCHY_RPROMPTS" ]] && ZSH_THEME_SQUANCHY_RPROMPTS=(node ruby python php)
+  for r in $ZSH_THEME_SQUANCHY_RPROMPTS; do
     (( ${seen[(I)$r]} )) && continue
     seen+=$r
     case $r in
