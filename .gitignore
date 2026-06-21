@@ -8,7 +8,7 @@
 /.bundle/*/
 !/.claude/
 /.claude/*
-!/.claude/hooks/
+!/.claude/hooks
 !/.claude/rules/
 !/.claude/skills/
 !/.claude/CLAUDE.md

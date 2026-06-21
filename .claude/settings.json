@@ -20,28 +20,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/close-preview-tabs.sh",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/close-preview-tabs.sh",
-            "timeout": 10
-          }
-        ]
-      }
     ]
   },
   "worktree": {
