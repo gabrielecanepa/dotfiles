@@ -159,17 +159,10 @@ profile install
 
 #### Node.js
 
-Install the Node.js version in use with nodenv:
+Install the Node.js version in use with nodenv. A tracked install hook enables Corepack automatically, so pnpm follows the active Node version:
 
 ```sh
 nodenv install $(cat ~/.node-version) --skip-existing
-```
-
-Install the global npm dependencies listed in [`package.json`](/.npm/package.json) and enable Corepack:
-
-```sh
-npm -g install $(jq -r '.dependencies | keys | join(" ")' ~/.npm/package.json)
-corepack enable
 ```
 
 Link the local nodenv version to the tracked `.node-version` file:
@@ -179,21 +172,7 @@ nodenv global $(cat ~/.node-version)
 rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 ```
 
-Link the global pnpm and Bun files to the tracked ones:
-
-```sh
-# pnpm
-for file in package.json pnpm-lock.yaml; do
-  rm -f ~/.pnpm/5/$file
-  ln -sf ~/.pnpm/$file ~/.pnpm/5/$file
-done
-
-# Bun
-for file in bun.lockb package.json; do
-  rm -f $BUN_HOME/install/global/$file
-  ln -sf ~/.bun/$file $BUN_HOME/install/global/$file
-done
-```
+Command-line tooling (commitlint, oxfmt, shellcheck) ships through the Brewfile, so `brew bundle` above already installed it. pnpm comes from Corepack, and npm ships with Node, so neither needs a global install.
 
 #### Ruby
 

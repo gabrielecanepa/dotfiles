@@ -1,9 +1,6 @@
 /*
 
 !/.agents/
-!/.bun/
-/.bun/*
-!/.bun/package.json
 !/.bundle/
 /.bundle/*/
 !/.claude/
@@ -18,9 +15,6 @@
 /.codex/*
 !/.codex/skills
 !/.codex/AGENTS.md
-!/.copilot/
-/.copilot/*
-!/.copilot/instructions
 !/.config/
 /.config/*
 !/.config/gh/
@@ -30,19 +24,16 @@
 !/.config/glab-cli/
 !/.config/iterm2/
 /.config/iterm2/*
+!/.config/nodenv/
 !/.config/terminal/
+!/.copilot/
+/.copilot/*
+!/.copilot/instructions
 !/.github/
 !/.homebrew/
-!/.npm/
-/.npm/*
-!/.npm/package.json
-!/.npm/package-lock.json
-!/.pnpm/
-/.pnpm/*
-!/.pnpm/package.json
-!/.pnpm/pnpm-lock.yaml
 !/.vscode/
 /.vscode/*
+!/.vscode/agent-plugins/
 !/.vscode/user/
 !/.vscode/extensions.json
 !/.vscode/settings.json

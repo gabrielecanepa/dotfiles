@@ -46,7 +46,7 @@ The non-negotiable baseline for every task; the rule files expand these.
 
 ## Toolchains (version managers, NOT mise/asdf/nvm)
 
-- **Node:** `nodenv` (pinned in `.node-version`). **Default package manager: `pnpm`**: use it for all generated install/run/exec commands (`pn`=`pnpm`, `pnx`=`pnpx`). `bun`, `npm`, `deno` are also installed (and `corepack` ships with Node via the nodenv shim); only use them when a project's lockfile/config calls for it (`bun.lockb`→bun, `package-lock.json`→npm).
+- **Node:** `nodenv` (pinned in `.node-version`). **Default package manager: `pnpm`**, provided by Corepack (which ships with Node); use it for all generated install/run/exec commands (`pn`=`pnpm`, `pnx`=`pnpx`). A nodenv install hook runs `corepack enable` on every new Node version, so pnpm follows the active Node. `npm` comes with Node; `bun` and `deno` are installed via Homebrew (not as Node globals); only use them when a project's lockfile/config calls for it (`bun.lockb`→bun, `package-lock.json`→npm).
 - **Python:** `pyenv` (`.python-version`). **Ruby:** `rbenv` + `ruby-build` (`.ruby-version`).
 - Shims are on PATH; don't invoke system `python3`/`ruby`/`node` directly. Don't introduce `mise`/`asdf`/`nvm`/`volta` unless explicitly asked.
 

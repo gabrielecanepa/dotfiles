@@ -12,20 +12,21 @@ export HOMEBREW_NO_ENV_HINTS=1
 
 # Version managers (https://github.com/{nodenv,pyenv,rbenv})
 export NODENV_ROOT="$HOME/.nodenv"
+export NODENV_HOOK_PATH="$HOME/.config/nodenv/hooks"
 export PYENV_ROOT="$HOME/.pyenv"
 export RBENV_ROOT="$HOME/.rbenv"
 
 # Package managers (https://pnpm.io, https://bun.sh)
 export PNPM_HOME="$HOME/.pnpm/global"
-export BUN_HOME="$HOME/.bun"
+export BUN_INSTALL="$HOME/.bun"
 
-# Coding agents (https://github.com/copilot)
+# Agents (https://github.com/copilot)
 export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
 initialize_path() {
   path=(
     "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
-    "$BUN_HOME/bin" "$PNPM_HOME"
+    "$BUN_INSTALL/bin" "$PNPM_HOME"
     "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
     $path
   )

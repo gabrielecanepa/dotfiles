@@ -11,6 +11,8 @@ brew "aws-sam-cli"
 brew "awscli"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
+# Lint commit messages according to a commit convention
+brew "commitlint"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Suite of command-line tools for converting to and working with CSV
@@ -47,6 +49,8 @@ brew "mysql"
 brew "nginx"
 # Node.js version manager
 brew "nodenv"
+# High-performance formatting tool for JavaScript and TypeScript
+brew "oxfmt"
 # Object-relational database system
 brew "postgresql@16"
 # Python version management

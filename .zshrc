@@ -53,7 +53,6 @@ plugins=(
   local-bin
   lts
   node-version
-  npm-global
   path
   plugin
   profile
@@ -65,7 +64,7 @@ plugins=(
 initialize_path
 unset -f initialize_path
 
-# Git
+# Dotfiles
 dotfiles init
 
 # Aliases

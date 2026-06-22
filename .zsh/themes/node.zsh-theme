@@ -132,7 +132,7 @@ _node_pm_version() {
       fi
       ;;
     bun)
-      local bin=${BUN_INSTALL:-$HOME/.bun}/bin/bun
+      local bin=${commands[bun]:-${BUN_INSTALL:-$HOME/.bun}/bin/bun}
       if [[ -x $bin ]]; then
         local file=$_NODE_CACHE_DIR/bun-version
         local now=$EPOCHSECONDS ver=""
