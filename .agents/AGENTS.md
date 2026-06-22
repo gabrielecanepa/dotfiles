@@ -24,7 +24,7 @@ The non-negotiable baseline for every task; the rule files expand these.
 - **Feedback**: no agreement by default, no softening, no praise-padding; every critique carries a concrete next step.
 - **Chat output**: lead with the answer, no preamble or recap; length scales with the question; brevity caps prose only, never code, docs, correctness, or reasoning (see the behavior rule).
 - **Engineering**: build the minimum that solves the problem; keep diffs surgical (every changed line traces to the request); verify against a machine-checkable criterion, not "it works". **Never add comments to code** (the only exceptions are JSDoc when the codebase already uses it, and strictly necessary linter-disable directives; see the engineering rule).
-- **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output to the user. Rewrite around it with a period, comma, colon, or parentheses (see the writing rule).
+- **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output to the user. Rewrite around it with a period, comma, colon, hypen, or parentheses (see the writing rule).
 - **Version control**: NEVER run `git commit` (or `git push`) unless the prompt explicitly asks you to commit, push, or otherwise persist to git. Making changes, fixing, refactoring, or "applying" something is NOT a request to commit; leave the result staged-or-unstaged in the working tree and stop. When you judge the work is commit-worthy, end your reply by listing the changes, giving the commit message alone in a code block, and asking whether to run the commit (see the engineering rule for the exact format). This is a hard boundary, on par with not running destructive commands unasked.
 - **Skill routing (by intent, decided before you start; this is the trigger for Codex and for greenfield work, since the file-scoped rules won't have loaded yet):**
   - Building or restyling **any UI** → open the `design` rule; base is `frontend-design` plus one flavor (default `design-taste-frontend`).
@@ -35,17 +35,18 @@ The non-negotiable baseline for every task; the rule files expand these.
 ## Environment
 
 - **Machine:** macOS, Apple Silicon (arm64). Homebrew prefix `/opt/homebrew`.
-- **Editor:** VS Code (`EDITOR=code`, `GIT_EDITOR="code --wait"`). **Terminal:** Ghostty.
+- **Editor:** VS Code (`EDITOR=code`, `GIT_EDITOR="code --wait"`).
+- **Terminal:** Ghostty.
 - **Project workspace:** `$WORKING_DIR` = `~/Developer` (jump with `cdw`); real project code lives there. `$HOME` itself is a git repo (dotfiles); see the dotfiles rule when working under `~`.
 
 ## Shell
 
-- **zsh + oh-my-zsh** with a custom framework under `ZSH_CUSTOM=~/.zsh`. Many "commands" are custom functions/plugins, not binaries (`profile`, `plugin`, the `brew` wrapper, `lts`, `completions`, `deps`, etc.); check `.zsh/plugins/<name>/` before assuming a command is a system tool.
-- The `brew` command is **wrapped**: `brew dump` writes the Brewfile, `brew global` installs from it, `brew fresh` updates+upgrades+cleanup+dump+doctor.
+- **zsh + oh-my-zsh** with a custom framework under `ZSH_CUSTOM=~/.zsh`. Many "commands" are custom functions/plugins, not binaries (`profile`, `plugin`, the `brew`/`mas` wrapper, `lts`, `completions`, `deps`, `dotfiles`, etc.); check `.zsh/plugins/<name>/` before assuming a command is a system tool. The `dotfiles` plugin (`dotfiles init` to fix drift, `dotfiles doctor` to report it) re-links managed symlinks that apps clobber.
+- The `brew`/`mas` commands are **wrapped** (in the `brewfile` plugin): `brew dump` writes the Brewfile, `brew global` installs from it, `brew fresh` updates+upgrades+cleanup+dump+doctor.
 
 ## Toolchains (version managers, NOT mise/asdf/nvm)
 
-- **Node:** `nodenv` (pinned in `.node-version`). **Default package manager: `pnpm`**: use it for all generated install/run/exec commands (`pn`=`pnpm`, `pnx`=`pnpx`). `bun`, `npm`, `corepack`, `deno` are also installed; only use them when a project's lockfile/config calls for it (`bun.lockb`→bun, `package-lock.json`→npm).
+- **Node:** `nodenv` (pinned in `.node-version`). **Default package manager: `pnpm`**: use it for all generated install/run/exec commands (`pn`=`pnpm`, `pnx`=`pnpx`). `bun`, `npm`, `deno` are also installed (and `corepack` ships with Node via the nodenv shim); only use them when a project's lockfile/config calls for it (`bun.lockb`→bun, `package-lock.json`→npm).
 - **Python:** `pyenv` (`.python-version`). **Ruby:** `rbenv` + `ruby-build` (`.ruby-version`).
 - Shims are on PATH; don't invoke system `python3`/`ruby`/`node` directly. Don't introduce `mise`/`asdf`/`nvm`/`volta` unless explicitly asked.
 
@@ -53,13 +54,13 @@ The non-negotiable baseline for every task; the rule files expand these.
 
 - **Never commit or push unless the prompt explicitly asks for it** (see the Version control principle above). Default to leaving changes in the working tree and offering the command. The rules below describe HOW to commit once the user has asked, not permission to commit on your own.
 - **Commits are signed** via the 1Password SSH agent (`gpg.format=ssh`, `commit.gpgsign=true`, signer `op-ssh-sign`). Never disable signing or add `--no-gpg-sign`.
-- **No `Co-authored-by` / AI trailers** (`git.addAICoAuthor=off`). Single-line messages unless a `BREAKING CHANGE:` footer is needed.
+- **No `Co-authored-by` / AI trailers** (VS Code GitLens `git.addAICoAuthor` is `off` in `.vscode/user/settings.json`). Single-line messages unless a `BREAKING CHANGE:` footer is needed.
 - **Conventional commits, match the repo you're in.** Commit types are per-repo (the dotfiles repo uses a non-standard set; see its rule). `pull.rebase=true`, `push.autoSetupRemote=true`, `init.defaultBranch=main`.
 - **Rich git aliases exist, prefer them** (`.gitconfig`, also exposed as `g<alias>` shell aliases): `gst`, `gacm`, `gcm`, `gco`, `glg`, `gsweep`, `gfps`, `gpristine`, `gredo`, `gundo`. Run `git aliases` to list all.
 
 ## Formatting & linting (respect existing config; don't reformat to your own style)
 
-- **JS/TS/CSS/JSON:** `oxfmt` (`.oxfmtrc.json`): no semicolons, single quotes (double in CSS), `es5` trailing commas, avoid arrow parens; imports non-relative.
+- **JS/TS/CSS/JSON:** `oxfmt` (`.oxfmtrc.json`): no semicolons, single quotes (double in CSS), `es5` trailing commas, avoid arrow parens.
 - **Ruby:** `rubocop` (`.rubocop.yml`): double-quoted strings, line length 120, `NewCops: enable`.
 - **Shell:** `shellcheck` (`.shellcheckrc`).
 - **All files:** `.editorconfig`: UTF-8, LF, 2-space indent, final newline, trim trailing whitespace, max line 120.

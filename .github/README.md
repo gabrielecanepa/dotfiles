@@ -19,7 +19,7 @@
 
 #### Fast and powerful shell configuration
 
-Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with guided profile setup, runtime version switching and LTS installation, completions, and more. The custom `squanchy` theme displays active runtime versions and symbols for available LTS upgrades.
+Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with guided profile setup, runtime version switching and LTS installation, completions, and more. The custom `node` theme displays active runtime versions and symbols for available LTS upgrades.
 
 #### Pinned runtimes and dependencies
 
@@ -184,8 +184,8 @@ Link the global pnpm and Bun files to the tracked ones:
 ```sh
 # pnpm
 for file in package.json pnpm-lock.yaml; do
-  rm -f $PNPM_HOME/5/$file
-  ln -sf ~/.pnpm/$file $PNPM_HOME/5/$file
+  rm -f ~/.pnpm/5/$file
+  ln -sf ~/.pnpm/$file ~/.pnpm/5/$file
 done
 
 # Bun
@@ -227,6 +227,9 @@ for config in prompts snippets keybindings.json settings.json; do
   ln -sf ~/.vscode/user/$config $file
 done
 ```
+
+> [!NOTE]
+> VS Code rewrites `settings.json` in place on update or Settings Sync, replacing the symlink with a regular file. Running `dotfiles init` re-links it, and `dotfiles doctor` reports the drift.
 
 #### Keybindings
 

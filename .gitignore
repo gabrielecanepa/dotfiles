@@ -9,12 +9,14 @@
 !/.claude/
 /.claude/*
 !/.claude/hooks
-!/.claude/rules/
-!/.claude/skills/
+!/.claude/output-styles
+!/.claude/rules
+!/.claude/skills
 !/.claude/CLAUDE.md
 !/.claude/settings.json
 !/.codex/
 /.codex/*
+!/.codex/skills
 !/.codex/AGENTS.md
 !/.copilot/
 /.copilot/*
