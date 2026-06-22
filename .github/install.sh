@@ -184,7 +184,7 @@ if [ "$(uname)" = "Darwin" ]; then
   fi
 fi
 
-# 12. Git repository (new machine only)
+# 12. Git repository (new machine)
 if [ ! -d "$HOME/.git" ]; then
   info "Home directory is not a git repo, initialize it after adding your SSH key (see README §Git):"
   printf '  git -C ~ init -b main\n'

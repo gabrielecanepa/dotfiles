@@ -9,11 +9,8 @@
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
   "chat.instructionsFilesLocations": {
-    ".claude/rules": true,
-    ".copilot/instructions": true,
     ".github/instructions": true,
-    "~/.claude/rules": true,
-    "~/.copilot/instructions": true
+    ".claude/rules": false
   },
   "chat.mcp.discovery.enabled": {
     "claude-desktop": true
