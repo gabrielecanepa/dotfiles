@@ -33,7 +33,6 @@
 !/.homebrew/
 !/.vscode/
 /.vscode/*
-!/.vscode/agent-plugins/
 !/.vscode/user/
 !/.vscode/extensions.json
 !/.vscode/settings.json

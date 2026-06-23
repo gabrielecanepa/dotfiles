@@ -12,8 +12,8 @@
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
   "chat.instructionsFilesLocations": {
-    ".github/instructions": true,
     ".claude/rules": false,
+    ".github/instructions": true,
     "~/.claude/rules": false,
     "~/.copilot/instructions": false
   },
@@ -130,8 +130,12 @@
   "extensions.allowOpenInModalEditor": true,
   "files.associations": {
     "*.css": "tailwindcss",
-    ".commitlintrc": "jsonc",
+    "*.json.lock": "jsonl",
+    ".CFUserTextEncoding": "plaintext",
+    ".aliases": "shellscript",
+    ".commitlintrc": "json",
     ".env*": "dotenv",
+    ".gitprofile": "properties",
     ".vscode/**/settings.json": "jsonc",
     "NOTES": "markdown",
     "TODO": "markdown",
@@ -162,11 +166,7 @@
     "proc-receive": "shellscript",
     "push-to-checkout": "shellscript",
     "reference-transaction": "shellscript",
-    "sendemail-validate": "shellscript",
-    ".aliases": "shellscript",
-    ".CFUserTextEncoding": "plaintext",
-    ".gitprofile": "properties",
-    "*.json.lock": "jsonl"
+    "sendemail-validate": "shellscript"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
