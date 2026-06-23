@@ -50,7 +50,7 @@ brew() {
       # Membership test: 1 when $cmd is in dump_commands.
       # Skip the sync when the command only printed help.
       if (( ${dump_commands[(Ie)$cmd]} )) && (( exit == 0 )) &&
-        [[ "$1" != '-h' && "$1" != '--help' ]]; then
+        (( ! ${@[(Ie)-h]} )) && (( ! ${@[(Ie)--help]} )); then
         # Run the sync detached so the prompt returns immediately.
         _brewfile_sync &!
       fi

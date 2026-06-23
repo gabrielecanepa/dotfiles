@@ -89,7 +89,7 @@ _lts_get_latest_version() {
       return 1
     fi
     command curl -s https://nodejs.org/dist/index.json |
-      command jq -r 'map(select(.lts != false)) | .[0].version' |
+      command jq -r 'map(select(.lts != false)) | .[0].version // empty' |
       command sed 's/^v//'
     return $?
   fi
@@ -109,10 +109,11 @@ _lts_get_latest_version() {
 
   if [[ -n $prefix ]]; then
     # A full x.y.z prefix matches exactly; a partial prefix matches up to its next dot.
+    local re=${prefix//./\\.}
     if [[ $prefix == [0-9]##.[0-9]##.[0-9]## ]]; then
-      versions=$(print -r -- "$versions" | command grep "^$prefix")
+      versions=$(print -r -- "$versions" | command grep "^$re$")
     else
-      versions=$(print -r -- "$versions" | command grep "^$prefix\\.")
+      versions=$(print -r -- "$versions" | command grep "^$re\\.")
     fi
   fi
 

@@ -47,7 +47,22 @@ _squanchy_lts() {
 
   if (( $+functions[lts] )); then
     [[ -d $_SQUANCHY_CACHE_DIR ]] || command mkdir -p $_SQUANCHY_CACHE_DIR
-    ( lts $lang > $file ) &>/dev/null </dev/null &!
+    local lock=$file.lock
+    if [[ -d $lock ]]; then
+      zstat -A st +mtime -- $lock 2>/dev/null
+      (( ${st[1]:-0} + 60 < now )) && command rmdir $lock 2>/dev/null
+    fi
+    if command mkdir $lock 2>/dev/null; then
+      (
+        trap 'command rmdir $lock 2>/dev/null' EXIT
+        local tmp=$file.$sysparams[pid]
+        if lts $lang > $tmp 2>/dev/null && [[ -s $tmp ]]; then
+          command mv -f $tmp $file
+        else
+          command rm -f $tmp
+        fi
+      ) &>/dev/null </dev/null &!
+    fi
   fi
 
   print -r -- "$cached"
@@ -74,7 +89,7 @@ _squanchy_resolve_local() {
   local lang file
   for lang in node ruby python; do
     file=$toplevel/.$lang-version
-    [[ -r $file ]] && _SQUANCHY_LOCAL[$lang]=$(<$file)
+    [[ -r $file ]] && _SQUANCHY_LOCAL[$lang]=${"$(<$file)"//$'\r'/}
   done
 }
 
@@ -83,7 +98,7 @@ _squanchy_version() {
   local lang=$1
   local local_version=${_SQUANCHY_LOCAL[$lang]}
   local global_version=""
-  [[ -r $HOME/.$lang-version ]] && global_version=$(<$HOME/.$lang-version)
+  [[ -r $HOME/.$lang-version ]] && global_version=${"$(<$HOME/.$lang-version)"//$'\r'/}
   local lts_version=$(_squanchy_lts $lang)
 
   if [[ -n $local_version ]]; then
@@ -134,7 +149,8 @@ _squanchy_php() {
   (( $+commands[php] )) || { print -r -- ""; return 0 }
   local first=${${(f)"$(php -v 2>/dev/null)"}[1]}
   local -a parts=(${(s/ /)first})
-  print -r -- "${parts[2][1,3]}"
+  local ver=${parts[2][1,3]}
+  print -r -- "${ver:-$ZSH_THEME_SQUANCHY_RPROMPT_EMPTY}"
 }
 
 _squanchy_rprompt() {
@@ -157,7 +173,6 @@ _squanchy_rprompt() {
 
 _squanchy_chpwd() {
   _SQUANCHY_LOCAL_PWD=""
-  _squanchy_resolve_local
 }
 
 _squanchy_precmd() {

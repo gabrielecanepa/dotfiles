@@ -41,7 +41,7 @@ gatekeeper() {
           read -r choice
 
           if [[ "$choice" == [yY]* ]]; then
-            if ! command sudo spctl --master-disable >/dev/null 2>&1; then
+            if ! command sudo spctl --global-disable >/dev/null 2>&1; then
               print -r -- "$error An issue occurred, please check the logs" >&2
               return 1
             fi
@@ -99,12 +99,8 @@ gatekeeper() {
         return 0
       fi
 
-      if command sudo spctl --master-enable >/dev/null 2>&1; then
-        print -r -- "$success GateKeeper enabled globally 🔒"
-        return 0
-      fi
-
-      print -r -- "$error An issue occurred, please try again" >&2
+      print -r -- "$warn Re-enabling GateKeeper globally is no longer possible from the CLI on macOS 15+." >&2
+      print -r -- "$info Enable it in System Settings > Privacy & Security > Security." >&2
       return 1
       ;;
     help|-h|--help)

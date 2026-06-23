@@ -16,4 +16,4 @@ add-zsh-hook precmd _git_rprompt
 PROMPT='%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)%{$reset_color%} '
 PROMPT+='%1~ '
 PROMPT+='${_GIT_SEGMENT}'
-RPROMPT='%F{244}${_GIT_RPROMPT}%{$fg[default]%}'
+RPROMPT='%F{244}${_GIT_RPROMPT}%f'
