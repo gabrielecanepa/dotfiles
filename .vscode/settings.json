@@ -1,15 +1,22 @@
 {
+  "[instructions]": {
+    "editor.formatOnSave": false
+  },
+  "chat.instructionsFilesLocations": {
+    ".claude/rules": false,
+    ".github/instructions": true
+  },
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "files.associations": {
-    ".aliases": "shellscript",
+    "*.json.lock": "jsonl",
     ".CFUserTextEncoding": "plaintext",
-    ".commitlintrc": "json",
-    ".gitprofile": "properties",
-    ".vscode/**/settings.json": "jsonc",
-    "ignore": "ignore",
-    "pre-commit": "shellscript",
-    "pre-push": "shellscript"
+    ".aliases": "shellscript",
+    ".gitprofile": "properties"
   },
   "files.exclude": {
+    "*_history": true,
+    ".DS_Store": true,
+    ".Trash": true,
     "Applications": true,
     "Claude": true,
     "Desktop": true,
@@ -20,22 +27,17 @@
     "Movies": true,
     "Music": true,
     "Pictures": true,
-    "Public": true,
-    ".Trash": true,
-    ".DS_Store": true,
-    "*_history": true
-  },
-  "search.exclude": {
-    "**/.claude": true,
-    "**/.codex": true,
-    "**/bower_components": true,
-    "**/node_modules": true,
-    "**/*.code-search": true
+    "Public": true
   },
   "git.autoRepositoryDetection": false,
   "git.ignoredRepositories": [".oh-my-zsh"],
-  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "markdown.extension.toc.levels": "3..6",
   "oxc.enable.oxfmt": true,
-  "[instructions]": { "editor.formatOnSave": false },
-  "markdown.extension.toc.levels": "3..6"
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/.claude": true,
+    "**/.codex": true,
+    "**/bower_components": true,
+    "**/node_modules": true
+  }
 }
