@@ -36,6 +36,7 @@ completions() {
     return 0
   fi
 
+  local file
   for cli in "${clis[@]}"; do
     if (( ! ${+commands[$cli]} )); then
       print -ru2 -- "[completions] command not found: $cli"
@@ -54,7 +55,11 @@ completions() {
       continue
     fi
 
-    if ! print -r -- "$comp" > "$ZSH_COMPLETIONS_PATH/_$cli"; then
+    # Skip the write when the cache already matches the probed output.
+    file="$ZSH_COMPLETIONS_PATH/_$cli"
+    [[ -e "$file" && "$comp" == "$(<"$file")" ]] && continue
+
+    if ! print -r -- "$comp" > "$file"; then
       print -ru2 -- "[completions] failed to write completions for $cli"
       rc=1
       continue
@@ -64,8 +69,18 @@ completions() {
   return $rc
 }
 
-# At startup, generate any configured completion that is not cached yet.
-for cli in ${ZSH_COMPLETIONS:-}; do
-  [[ -e "$ZSH_COMPLETIONS_PATH/_$cli" ]] || completions "$cli"
-done
-unset cli
+# At startup, generate any missing completion inline to make it available in
+# the session, then re-probe the caches in a detached background job so stal
+# caches are refreshed for the next shell without blocking the current.
+() {
+  local cli
+  local -a cached
+  for cli in ${ZSH_COMPLETIONS:-}; do
+    if [[ -e "$ZSH_COMPLETIONS_PATH/_$cli" ]]; then
+      cached+=("$cli")
+    else
+      completions "$cli"
+    fi
+  done
+  (( ${#cached} )) && { completions "${cached[@]}" &> /dev/null &! }
+}
