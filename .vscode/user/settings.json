@@ -1,4 +1,7 @@
 {
+  "[shellscript]": {
+    "editor.defaultFormatter": "mkhl.shfmt"
+  },
   "application.shellEnvironmentResolutionTimeout": 20,
   "biome.requireConfiguration": true,
   "biome.suggestInstallingGlobally": false,
@@ -340,6 +343,8 @@
   "search.useIgnoreFiles": true,
   "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "shfmt.executableArgs": ["-i", "2", "-ci"],
+  "shfmt.formatIgnored": false,
   "svg.completion.emmet": true,
   "svg.completion.showAdvanced": true,
   "svg.preview.autoShow": true,

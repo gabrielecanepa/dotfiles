@@ -1,7 +1,10 @@
 {
   "recommendations": [
+    "analytic-signal.preview-pdf",
+    "anthropic.claude-code",
     "be5invis.vscode-custom-css",
     "bierner.markdown-preview-github-styles",
+    "bradlc.vscode-tailwindcss",
     "britesnow.vscode-toggle-quotes",
     "csstools.postcss",
     "dotenv.dotenv-vscode",
@@ -12,10 +15,17 @@
     "github.vscode-github-actions",
     "github.vscode-pull-request-github",
     "jock.svg",
-    "ms-vscode.atom-keybindings",
-    "oven.bun-vscode",
+    "lokalise.i18n-ally",
+    "mkhl.shfmt",
+    "oxc.oxc-vscode",
+    "prisma.prisma",
+    "richie5um2.vscode-sort-json",
+    "rust-lang.rust-analyzer",
     "tamasfe.even-better-toml",
     "timonwong.shellcheck",
-    "yzhang.markdown-all-in-one"
+    "typescriptteam.native-preview",
+    "tyriar.sort-lines",
+    "webpro.vscode-knip",
+    "yzhang.markdown-all-ins-one"
   ]
 }

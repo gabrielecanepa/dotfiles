@@ -7,8 +7,8 @@ if command -v gls >/dev/null; then
 fi
 
 # Sorts by size
-lss() { 
-  du -L --si -d 1 "$@" 2>/dev/null | sort -hr 
+lss() {
+  { command -v gdu >/dev/null && gdu -L --si -d 1 "$@" || du -L -h -d 1 "$@"; } 2>/dev/null | sort -hr
 }
 
 # Remove directories recursively
@@ -19,15 +19,13 @@ rmm() {
 }
 
 # Create a directory and switch to it
-mkdircd() { 
-  dir="$(mkdir -pv "$@")"
-  cd "$dir" || return 1
+mkdircd() {
+  mkdir -pv "$1" && cd "$1" || return 1
 }
 
 # Create a directory and open it in VS Code
 mkdircode() {
-  dir="$(mkdir -pv "$@")"
-  code "$dir" || return 1
+  mkdir -pv "$1" && code "$1" || return 1
 }
 
 # Directories

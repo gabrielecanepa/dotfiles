@@ -19,15 +19,19 @@ warn() {
 }
 
 backup() {
-  rel="$1"; current="$2"
+  rel="$1"
+  current="$2"
   mkdir -p "$BACKUP_DIR/$(dirname "$rel")"
   mv "$current" "$BACKUP_DIR/$rel"
 }
 
 confirm() {
-  { : < /dev/tty; } 2>/dev/null || { warn "No terminal to prompt on, skipping"; return 1; }
+  { : </dev/tty; } 2>/dev/null || {
+    warn "No terminal to prompt on, skipping"
+    return 1
+  }
   local reply=""
-  read -r -p "$1 [y/N] " reply < /dev/tty
+  read -r -p "$1 [y/N] " reply </dev/tty
   case "$reply" in
     [yY]*) return 0 ;;
     *) return 1 ;;
@@ -38,15 +42,24 @@ install_file() {
   rel="$1"
   src="$TMP_DIR/$rel"
   dest="$HOME/$rel"
-  mkdir -p "$(dirname "$dest")" || { FAILED+=("$rel"); return 0; }
+  mkdir -p "$(dirname "$dest")" || {
+    FAILED+=("$rel")
+    return 0
+  }
   if [ -e "$dest" ] || [ -L "$dest" ]; then
     if ! confirm "Overwrite $dest?"; then
       SKIPPED+=("$rel")
       return 0
     fi
-    backup "$rel" "$dest" || { FAILED+=("$rel"); return 0; }
+    backup "$rel" "$dest" || {
+      FAILED+=("$rel")
+      return 0
+    }
   fi
-  mv "$src" "$dest" || { FAILED+=("$rel"); return 0; }
+  mv "$src" "$dest" || {
+    FAILED+=("$rel")
+    return 0
+  }
 }
 
 # 1. Repository
@@ -61,7 +74,7 @@ while IFS= read -r -d '' file; do
   install_file "$file"
 done < <(git -C "$TMP_DIR" -c core.quotePath=false ls-files -z)
 if [ ${#SKIPPED[@]} -gt 0 ]; then info "Skipped ${#SKIPPED[@]} file(s), kept existing"; fi
-if [ ${#FAILED[@]} -gt 0 ];  then warn "Failed  ${#FAILED[@]} file(s): ${FAILED[*]}"; fi
+if [ ${#FAILED[@]} -gt 0 ]; then warn "Failed  ${#FAILED[@]} file(s): ${FAILED[*]}"; fi
 
 # 3. Homebrew
 if ! command -v brew >/dev/null 2>&1; then
@@ -73,18 +86,18 @@ fi
 # 4. Packages
 if [ -f "$BREWFILE" ]; then
   info "Installing packages from $BREWFILE"
-  brew bundle --file "$BREWFILE"
+  brew bundle --file "$BREWFILE" || FAILED+=("brew bundle")
 fi
 
 # 5. Oh My Zsh + plugins
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info "Installing Oh My Zsh"
-  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" || FAILED+=("oh-my-zsh")
 fi
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.zsh}"
 for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
   zsh_plugin="$ZSH_CUSTOM/plugins/$plugin"
-  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/zsh-users/$plugin.git" "$zsh_plugin"
+  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/zsh-users/$plugin.git" "$zsh_plugin" || FAILED+=("plugin:$plugin")
 done
 
 # 6. Shell profile
@@ -92,7 +105,8 @@ info "If this is a new profile, run 'profile install' in an interactive shell"
 
 # 7. Runtimes from .*-version
 install_runtime() {
-  manager="$1"; version_file="$2"
+  manager="$1"
+  version_file="$2"
   command -v "$manager" >/dev/null 2>&1 || return 0
   [ -f "$HOME/$version_file" ] || return 0
   version="$(cat "$HOME/$version_file")"
@@ -108,15 +122,17 @@ install_runtime rbenv .ruby-version
 if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
   info "Installing global npm dependencies"
   deps="$(jq -r '.dependencies // {} | keys | join(" ")' "$HOME/.npm/package.json")"
-  # shellcheck disable=SC2086
-  [ -n "$deps" ] && npm -g install $deps
+  if [ -n "$deps" ]; then
+    # shellcheck disable=SC2086
+    npm -g install $deps || FAILED+=("npm globals")
+  fi
   command -v corepack >/dev/null 2>&1 && corepack enable
 fi
 
 # 9. macOS defaults
 if [ "$(uname)" = "Darwin" ] && [ -x "$MACOS_DEFAULTS" ]; then
   info "Applying macOS defaults"
-  . "$MACOS_DEFAULTS"
+  "$MACOS_DEFAULTS" || warn "macOS defaults step failed"
 fi
 
 # 10. Visual Studio Code
@@ -139,7 +155,7 @@ if [ "$(uname)" = "Darwin" ]; then
     KEYBINDINGS_FILE="$KEYBINDINGS_DIR/DefaultKeyBinding.dict"
     if [ ! -f "$KEYBINDINGS_FILE" ] || confirm "Overwrite '$KEYBINDINGS_FILE' (Electron keyboard beep fix)?"; then
       mkdir -p "$KEYBINDINGS_DIR"
-      cat > "$KEYBINDINGS_FILE" << 'EOF'
+      cat >"$KEYBINDINGS_FILE" <<'EOF'
 {
   "^@\UF701" = "noop";
   "^@\UF702" = "noop";
@@ -165,15 +181,22 @@ if [ "$(uname)" = "Darwin" ]; then
           ln -sf /Applications "$HOME/Applications"
           ln -sf "$cloud_folder" /Applications/iCloud
           ;;
-        Developer|Pictures)
+        Developer | Pictures)
           confirm "Create ~/$folder/iCloud symlink pointing to iCloud Drive?" || continue
           mkdir -p "$cloud_folder"
           ln -sf "$cloud_folder" "$HOME/$folder/iCloud"
           ;;
-        Downloads|Movies|Music)
+        Downloads | Movies | Music)
           confirm "Replace ~/$folder with a symlink to iCloud Drive (existing files will be moved)?" || continue
           mkdir -p "$cloud_folder"
-          mv "$HOME/$folder"/* "$cloud_folder/" 2>/dev/null || true
+          shopt -s dotglob nullglob
+          entries=("$HOME/$folder"/*)
+          shopt -u dotglob nullglob
+          if [ ${#entries[@]} -gt 0 ] && ! mv "${entries[@]}" "$cloud_folder/"; then
+            warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
+            FAILED+=("$folder")
+            continue
+          fi
           rm -rf "$HOME/$folder"
           ln -sf "$cloud_folder" "$HOME/$folder"
           ;;

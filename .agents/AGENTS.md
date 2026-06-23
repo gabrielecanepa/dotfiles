@@ -62,6 +62,6 @@ The non-negotiable baseline for every task; the rule files expand these.
 
 - **JS/TS/CSS/JSON:** `oxfmt` (`.oxfmtrc.json`): no semicolons, single quotes (double in CSS), `es5` trailing commas, avoid arrow parens.
 - **Ruby:** `rubocop` (`.rubocop.yml`): double-quoted strings, line length 120, `NewCops: enable`.
-- **Shell:** `shellcheck` (`.shellcheckrc`).
+- **Shell:** `shfmt` (formats sh/bash; options live in `.editorconfig` `[[shell]]`/`[[bash]]` sections, zsh is excluded via `ignore` and never formatted) + `shellcheck` (`.shellcheckrc`).
 - **All files:** `.editorconfig`: UTF-8, LF, 2-space indent, final newline, trim trailing whitespace, max line 120.
 - **Prefer existing aliases/functions over raw commands**: `.aliases` and the git aliases are curated; use `gst`, `pn`, `cdw`, `brew fresh`, etc.

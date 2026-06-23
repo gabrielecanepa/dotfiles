@@ -1,9 +1,19 @@
 #!/bin/sh
 
+set -e
+
+case ":$PATH:" in
+  *:/opt/homebrew/bin:*) ;;
+  *) PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" ;;
+esac
+
 branch="$(git branch --show-current)"
 remote="$(git config "branch.$branch.remote" 2>/dev/null || echo origin)"
 upstream="$remote/$branch"
 
+shell_files="$(git ls-files '*.sh' '*.bash' '.aliases' '.profile' '.bashrc' '.bash_profile' '.macos' '.config/git/hooks/*')"
+
 git rev-parse --verify --quiet "$upstream" >/dev/null && commitlint --from "$upstream" --to HEAD --quiet
-shellcheck .config/git/hooks/* .aliases .bash_profile .bashrc .profile
+echo "$shell_files" | xargs shellcheck
+echo "$shell_files" | xargs shfmt -d
 oxfmt --check --no-error-on-unmatched-pattern
