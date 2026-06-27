@@ -12,6 +12,7 @@ Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their con
 - `engineering.instructions.md`: code-execution discipline (simplicity, surgical diffs, verification) for any repo. **Always-on.**
 - `writing.instructions.md`: human-facing prose; routes to the `humanizer` skill. **Loads for docs/markdown/prose.**
 - `design.instructions.md`: UI/visual work; routes to the design skills. **Loads for frontend files.**
+- `react.instructions.md`: React components must accept, merge, and spread their underlying element's props. **Loads for `.jsx`/`.tsx` files.**
 - `dotfiles.instructions.md`: conventions for the `$HOME` dotfiles repo. **Loads only when editing this machine's config** (shell, git, brew, git hooks, agent config).
 
 Claude and Copilot load these rule files automatically. **Codex does not**: when a task involves code, prose, UI, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
