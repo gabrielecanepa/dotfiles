@@ -26,6 +26,7 @@ The non-negotiable baseline for every task; the rule files expand these.
 - **Engineering**: build the minimum that solves the problem; keep diffs surgical (every changed line traces to the request); verify against a machine-checkable criterion, not "it works". **Never add comments to code** (the only exceptions are JSDoc when the codebase already uses it, and strictly necessary linter-disable directives; see the engineering rule).
 - **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output to the user. Rewrite around it with a period, comma, colon, hypen, or parentheses (see the writing rule).
 - **Version control**: NEVER run `git commit` (or `git push`) unless the prompt explicitly asks you to commit, push, or otherwise persist to git. Making changes, fixing, refactoring, or "applying" something is NOT a request to commit; leave the result staged-or-unstaged in the working tree and stop. When you judge the work is commit-worthy, end your reply by listing the changes, giving the commit message alone in a code block, and asking whether to run the commit (see the engineering rule for the exact format). This is a hard boundary, on par with not running destructive commands unasked.
+- **Generated files**: any file you generate during a session goes under the project's agentic folder, sorted into artifacts (reusable, keep) or tmp (throwaway, delete on exit). See the Generated files section below for the rules.
 - **Skill routing (by intent, decided before you start; this is the trigger for Codex and for greenfield work, since the file-scoped rules won't have loaded yet):**
   - Building or restyling **any UI** → open the `design` rule; base is `frontend-design` plus one flavor (default `design-taste-frontend`).
   - Writing **human-facing prose** longer than a few sentences (docs, README, release notes, marketing copy) → open the `writing` rule and run the `humanizer` skill.
@@ -57,6 +58,16 @@ The non-negotiable baseline for every task; the rule files expand these.
 - **No `Co-authored-by` / AI trailers** (VS Code GitLens `git.addAICoAuthor` is `off` in `.vscode/user/settings.json`). Single-line messages unless a `BREAKING CHANGE:` footer is needed.
 - **Conventional commits, match the repo you're in.** Commit types are per-repo (the dotfiles repo uses a non-standard set; see its rule). `pull.rebase=true`, `push.autoSetupRemote=true`, `init.defaultBranch=main`.
 - **Rich git aliases exist, prefer them** (`.gitconfig`, also exposed as `g<alias>` shell aliases): `gst`, `gacm`, `gcm`, `gco`, `glg`, `gsweep`, `gfps`, `gpristine`, `gredo`, `gundo`. Run `git aliases` to list all.
+
+## Generated files (artifacts vs tmp)
+
+Applies to **every** agent (Claude, Claude Code, Codex, Copilot) generating any file, **only in a project that already has an agentic folder** (`.agents/`, `.claude/`, `.codex/`, etc.). No agentic folder, leave this alone. The `$HOME` dotfiles repo has its own variant (see the dotfiles rule).
+
+- **Pick the folder.** Write to the agent's own non-symlinked folder if present (`.claude/`, `.codex/`), else `.agents/`. Call it `<agent-folder>`.
+- **Classify.** An **artifact** stays useful after the session (reusable scripts, audit/eval results, HTML previews, visual assets). A **tmp** file is throwaway (one-shot scripts, logs, scratch data).
+- **Name and place.** Artifacts go in `<agent-folder>/artifacts/` with a unique descriptive name. Tmp files go in `<agent-folder>/tmp/<session-id>/`, any name, one subdir per session.
+- **Ignore on first write.** When first creating either folder, git-ignore it (root `.gitignore` or `<agent-folder>/.gitignore`).
+- **Delete tmp on exit.** Remove your `<agent-folder>/tmp/<session-id>/` at the end of the session.
 
 ## Formatting & linting (respect existing config; don't reformat to your own style)
 

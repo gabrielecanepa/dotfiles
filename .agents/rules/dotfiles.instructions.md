@@ -37,6 +37,11 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
   ```
 - `.agents/hooks/` holds **Claude Code** hooks (not git hooks), wired in `.claude/settings.json` and reached via the `~/.claude/hooks` symlink: `guard-managed-files.sh` (PreToolUse, blocks writes to generated/symlinked managed files). Keep its behavior documented in the header comment of the script. Distinct from the git hooks in `.config/git/hooks/` covered below.
 
+## Generated files (artifacts vs tmp)
+
+- The machine-wide artifacts/tmp rule (AGENTS.md) applies here, but the location is **always `~/.agents/artifacts/` and `~/.agents/tmp/<session-id>/`, for every agent**, never a per-agent `.claude/` or `.codex/` folder.
+- No `.gitignore` change needed: the allowlist below leaves both untracked. Still delete `~/.agents/tmp/<session-id>/` at the end of the session.
+
 ## Allowlist `.gitignore`
 
 - `.gitignore` is an allowlist (`/*` then `!`-unignores). **A new file under `~` is NOT tracked unless you add a matching `!` rule to `.gitignore` in the same change.**
