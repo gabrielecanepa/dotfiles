@@ -1,6 +1,7 @@
 /*
 
 !/.agents/
+/.agents/prompts/
 !/.bundle/
 /.bundle/*/
 !/.claude/

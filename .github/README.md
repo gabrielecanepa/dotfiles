@@ -200,7 +200,7 @@ Use symlinks to backup keybindings, settings and snippets of Visual Studio Code.
 > The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.
 
 ```sh
-for config in prompts snippets keybindings.json settings.json; do
+for config in snippets keybindings.json settings.json; do
   file=~/Library/Application\ Support/Code/User/$config
   rm -rf $file
   ln -sf ~/.vscode/user/$config $file

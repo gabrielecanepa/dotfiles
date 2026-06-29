@@ -12,6 +12,7 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
 - Surface assumptions and tradeoffs in the plan phase. Ask questions there, not mid-implementation.
 - If multiple interpretations exist, present them; don't pick one silently.
 - If a simpler approach exists, say so and push back, with the cost of the complex path (maintenance, coupling, performance).
+- **Default to industry-standard patterns.** For the language/framework in use, follow the proven, widely-adopted, idiomatic pattern for structure, file organization, naming, and API shape, unless the user instructs otherwise or the repo's own conventions dictate (the precedence chain above still governs: user instruction > repo conventions > the standard pattern). When the idiomatic choice is genuinely unknown (a new pattern, an unfamiliar library, an explicit question about conventions), research it from reputable sources, official docs via `context7-mcp`, popular libraries, established community standards, before writing, instead of guessing. Fold the findings into the repo's existing conventions; replace wholesale only when the user asks. When a research finding drove a non-obvious choice, name the pattern and cite the source in the summary.
 - In autonomous runs with no one to ask, state the assumption, take the most defensible reading, proceed, and record the decision and its reversal cost in the summary. Hard-stop only for irreversible or destructive actions (data loss, prod writes, schema drops, secret rotation).
 
 ## 2. Simplicity first
