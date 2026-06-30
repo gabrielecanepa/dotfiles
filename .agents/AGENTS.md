@@ -12,7 +12,8 @@ Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their con
 - `engineering.instructions.md`: code-execution discipline (simplicity, surgical diffs, verification) for any repo. **Always-on.**
 - `writing.instructions.md`: human-facing prose; routes to the `humanizer` skill. **Loads for docs/markdown/prose.**
 - `design.instructions.md`: UI/visual work; routes to the design skills. **Loads for frontend files.**
-- `react.instructions.md`: React components must accept, merge, and spread their underlying element's props. **Loads for `.jsx`/`.tsx` files.**
+- `typescript.instructions.md`: language-level TS idioms (guard clauses, arrow functions, interface over type, inline type imports, alias imports) and the framework-docs-first rule. **Loads for `.ts`/`.tsx` files.**
+- `react.instructions.md`: prop forwarding, composition over boolean props, JSX idioms, the shared->features->app boundary, Next.js `app/` placement; routes to the React perf and composition skills. **Loads for `.jsx`/`.tsx` files.**
 - `dotfiles.instructions.md`: conventions for the `$HOME` dotfiles repo. **Loads only when editing this machine's config** (shell, git, brew, git hooks, agent config).
 
 Claude and Copilot load these rule files automatically. **Codex does not**: when a task involves code, prose, UI, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
@@ -30,6 +31,7 @@ The non-negotiable baseline for every task; the rule files expand these.
 - **Generated files**: any file you generate during a session goes under the project's agentic folder, sorted into artifacts (reusable, keep) or tmp (throwaway, delete on exit). See the Generated files section below for the rules.
 - **Skill routing (by intent, decided before you start; this is the trigger for Codex and for greenfield work, since the file-scoped rules won't have loaded yet):**
   - Building or restyling **any UI** → open the `design` rule; base is `frontend-design` plus one flavor (default `design-taste-frontend`).
+  - Writing or reviewing **React/Next.js code** → open the `react` rule; `vercel-react-best-practices` is the performance bar and `vercel-composition-patterns` drives component design.
   - Writing **human-facing prose** longer than a few sentences (docs, README, release notes, marketing copy) → open the `writing` rule and run the `humanizer` skill.
   - Library / API / framework questions → `context7-mcp`. Driving or QA-ing a real web UI → `agent-browser`.
   - Editing this machine's dotfiles → the `dotfiles` rule (Codex: read `.agents/rules/dotfiles.instructions.md` first).

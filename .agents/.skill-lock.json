@@ -128,6 +128,24 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "updatedAt": "2026-06-14T19:39:19.357Z"
+    },
+    "vercel-composition-patterns": {
+      "installedAt": "2026-06-30T08:07:22.000Z",
+      "skillFolderHash": "cd672e4826a9339f0b1a9fe83f46caf38d7dcd99",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "updatedAt": "2026-06-30T08:07:22.000Z"
+    },
+    "vercel-react-best-practices": {
+      "installedAt": "2026-06-30T08:07:22.000Z",
+      "skillFolderHash": "ce9223b5950d676769487ddce804d7c130ebf394",
+      "skillPath": "skills/vercel-react-best-practices/SKILL.md",
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "updatedAt": "2026-06-30T08:07:22.000Z"
     }
   },
   "dismissed": {

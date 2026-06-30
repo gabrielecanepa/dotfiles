@@ -1,7 +1,7 @@
 ---
 name: sync-docs
 description: >-
-  Audit and update all documentation in the current scope — agentic files
+  Audit and update all documentation in the current scope: agentic files
   (AGENTS.md, CLAUDE.md, .agents/, skills, tool entrypoints) and human-facing
   docs (README, CONTRIBUTING, docs/). Reviews the architecture of the agentic
   setup, validates files against any constraints AGENTS.md declares, and brings

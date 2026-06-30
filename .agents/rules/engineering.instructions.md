@@ -31,6 +31,7 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
 - Clean up only your own mess: remove imports/variables/functions YOUR change orphaned. Leave pre-existing dead code; flag it instead of deleting it unless asked.
 - Fix adjacent latent bugs, not adjacent style: dependency-array, server/client-boundary, and missing-`key` violations next to your change are bugs worth fixing; whitespace is not.
 - Never hand-edit generated files (UI component generators, route trees, ORM clients, OpenAPI/GraphQL codegen); regenerate them. No drive-by lockfile bumps or shared-dependency changes.
+- Keep docs in sync in the same change. When a change alters anything the repo's `AGENTS.md` or `README` documents (routes, components, packages, actions, types, architecture, conventions), update those docs in that same change. The `sync-docs` skill is for on-request audits; inline updates are the default.
 
 ## 4. Goal-driven execution
 
