@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Estimate token counts for documentation files.
 
-Used by the sync-docs skill to check agentic files against any token
+Used by the sync-agents skill to check agentic files against any token
 budgets declared in AGENTS.md. Counts are estimates: the public
 tokenizers approximate Claude's tokenizer closely enough for budgeting,
 not for billing.
