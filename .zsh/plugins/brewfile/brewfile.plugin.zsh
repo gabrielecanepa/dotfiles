@@ -28,8 +28,14 @@ brew() {
       command brew bundle dump --brews --casks --taps --mas --force --no-restart "$@"
       ;;
     fresh)
+      local -a upgrade_args=()
+      if (( ${@[(Ie)--no-casks]} )); then
+        upgrade_args=(--formula)
+      fi
+
       command brew update &&
-        command brew upgrade &&
+        command brew upgrade "${upgrade_args[@]}" &&
+        { (( ${@[(Ie)--no-mas]} )) || sudo command mas upgrade; } &&
         command brew cleanup --prune=all &&
         brew dump &&
         command brew doctor
