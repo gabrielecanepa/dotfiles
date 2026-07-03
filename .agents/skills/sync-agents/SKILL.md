@@ -128,6 +128,11 @@ both tokens and lines; the tokenizer is an estimate. Match the check to what the
 repo declared: for a token budget, pass `--budget N`; for a line cap (just as
 common), read the `LINES` column, since `--budget` only guards tokens.
 
+While inventorying, verify the wiring: every entrypoint symlink resolves to its
+source, every scoped rule carries the frontmatter keys each consuming tool needs
+(a missing `description` or glob key silently stops that tool from loading it),
+and no tool consumes the same physical rule file through two routes.
+
 Then extract **declared constraints**: read AGENTS.md and any `.agents/` config
 for stated rules (budgets, caps, structure, naming, voice, the thin-entrypoint
 convention, single-source rules). Record each as a checkable item for Phase 2.
@@ -226,8 +231,13 @@ skip this. Under `--check`, don't run it: just note that an update check is due.
 
 After editing, if AGENTS.md lists programmatic checks (lint, test, typecheck,
 build) that your changes could affect, run the relevant ones and fix failures
-your changes caused. Never commit or push automatically; the commit boundary is
-the user's.
+your changes caused. After substantive edits to rule files, run cold-agent bait
+scenarios: in home scope use
+[references/behavioral-baits.md](references/behavioral-baits.md) as written; in
+project scope derive equivalent baits from the rules actually edited (the
+reference shows the shape). A failed bait means an edit diluted a rule, so
+restore or strengthen it before closing. Never commit or push automatically;
+the commit boundary is the user's.
 
 ## Phase 4: recap
 
@@ -247,10 +257,30 @@ If everything was unambiguous and applied, the recap is just the verdict and the
 change list. No ceremony. When work is commit-worthy, offer a Conventional
 Commit message and leave the commit to the user.
 
+## Skill authoring standards
+
+Hold any skill you author or repair to these (engineering.instructions.md
+routes skill authoring here):
+
+- A skill is a standalone product: shareable, hostable, pickable as the best
+  skill for its goal. Deliberately narrow domain scoping is a design choice,
+  not a violation.
+- Within its claimed domain it is scalable and portable: a React skill handles
+  any React project, not one repo's setup.
+- Drive behavior off what the repo declares (lockfile, config, framework)
+  instead of hard-coding one toolchain, and degrade sensibly when an optional
+  dependency is absent.
+- No machine- or repo-specific assumption belongs in a skill body; gate an
+  unavoidable one behind a detected condition.
+- The trigger `description` must be crisp enough to fire on the intended use
+  anywhere in that domain.
+
 ## Bundled resources
 
 - [references/agentic-architecture.md](references/agentic-architecture.md): the
   agentic-file review rubric and the `agents.md` standard in brief. Loaded in
   Phase 2.
+- [references/behavioral-baits.md](references/behavioral-baits.md): cold-agent
+  regression scenarios for rule edits. Run in Phase 3 after substantive changes.
 - `scripts/count_tokens.py`: per-file token estimate, with `--budget` and
   `--json`. tiktoken if available, else a chars/4 estimate.
