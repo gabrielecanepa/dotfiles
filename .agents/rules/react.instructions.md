@@ -21,11 +21,11 @@ Every component, exported or not, must accept the props of the element it render
 
 ### The rule
 
-Type the props as `ComponentProps<...>` (via `import { type ComponentProps } from 'react'`, per the named-imports rule) intersected with the component's own props, destructure `className` and `...props`, merge `className` with `cn(...)`, and spread `...props` onto the underlying element.
+Type the props as `React.ComponentProps<...>` intersected with the component's own props, destructure `className` and `...props`, merge `className` with `cn(...)`, and spread `...props` onto the underlying element. React types are referenced through the global `React` namespace, never imported: no `import { type ComponentProps } from 'react'`, no `import * as React`, no default import. (The inline-type-imports idiom in `typescript.instructions.md` does not apply to React's own types.)
 
-- **DOM element** (`div`, `button`, ...) → `ComponentProps<'div'>`.
-- **Another component** → `ComponentProps<typeof Child>`, spread onto that child.
-- **Provider with `children` and no underlying element** → `PropsWithChildren<{ ... }>`, no merge/spread.
+- **DOM element** (`div`, `button`, ...) → `React.ComponentProps<'div'>`.
+- **Another component** → `React.ComponentProps<typeof Child>`, spread onto that child.
+- **Provider with `children` and no underlying element** → `React.PropsWithChildren<{ ... }>`, no merge/spread.
 
 The underlying element is whichever single element the rest props belong on: the root DOM node, or the one child component the wrapper exists to configure. A provider that only nests other providers has none.
 
@@ -40,7 +40,7 @@ const ChatFilters = ({
   type,
   unrepliedCount,
   ...props
-}: ComponentProps<'div'> & {
+}: React.ComponentProps<'div'> & {
   counts: Record<string, number>
   type: ChatType
   unrepliedCount: number
@@ -51,7 +51,7 @@ const ChatFilters = ({
 )
 ```
 
-A pure provider (only other providers, no DOM element) takes `React.PropsWithChildren`, no merge or spread. A wrapper around another component types as `ComponentProps<typeof Child>` and forwards the rest to that child; a wrapping provider with a DOM element under it still merges and spreads onto that element.
+A pure provider (only other providers, no DOM element) takes `React.PropsWithChildren`, no merge or spread. A wrapper around another component types as `React.ComponentProps<typeof Child>` and forwards the rest to that child; a wrapping provider with a DOM element under it still merges and spreads onto that element.
 
 ```tsx
 export const DashboardProvider = ({
@@ -59,7 +59,7 @@ export const DashboardProvider = ({
   children,
   sidebarOpen,
   user,
-}: PropsWithChildren<{
+}: React.PropsWithChildren<{
   advisors: Advisor[]
   sidebarOpen: boolean
   user: AuthInfo
@@ -75,7 +75,7 @@ export const DashboardProvider = ({
 ## Component design
 
 - **Compose, don't configure.** Build with composition (compound components, slots, context providers) over boolean-prop configuration. A **third boolean prop** is the signal to restructure into compound components. Run `vercel-composition-patterns` for any non-trivial design.
-- **JSX.** `{cond && <El />}` for one branch, a ternary for two; `<>...</>` over `<Fragment>`; named imports only (no default `React` import).
+- **JSX.** `{cond && <El />}` for one branch, a ternary for two; `<>...</>` over `<Fragment>`. Named imports for hooks and values (`useState`, `use`); never import `React` itself in any form, its types come from the global namespace (see the rule above).
 - **No manual memoization under React Compiler.** When React Compiler is enabled, do not hand-add `useMemo`, `useCallback`, or `React.memo`; the compiler memoizes. (Only when the compiler is on.)
 
 ## Layer boundaries
