@@ -90,8 +90,6 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Unpacks archive files
