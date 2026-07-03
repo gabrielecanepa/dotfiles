@@ -1,12 +1,34 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "effortLevel": "xhigh",
+  "alwaysThinkingEnabled": false,
+  "showThinkingSummaries": false,
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "remoteControlAtStartup": true,
+  "autoCompactEnabled": true,
+  "theme": "auto",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "includeCoAuthoredBy": false,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "includeCoAuthoredBy": false,
+  "worktree": {
+    "baseRef": "fresh"
+  },
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "ask": ["Bash(git commit:*)", "Bash(git push:*)"],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/.env.*.local)",
+      "Read(**/.env.production)",
+      "Write(**/.env)"
+    ]
   },
   "hooks": {
     "PreToolUse": [
@@ -20,15 +42,26 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/format-edited-file.sh",
+            "timeout": 15
+          }
+        ]
+      }
     ]
-  },
-  "worktree": {
-    "baseRef": "fresh"
   },
   "enabledPlugins": {
     "vercel@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true
+    "security-guidance@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -37,16 +70,5 @@
         "repo": "anthropics/claude-plugins-official"
       }
     }
-  },
-  "alwaysThinkingEnabled": false,
-  "effortLevel": "xhigh",
-  "showThinkingSummaries": false,
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "auto",
-  "autoCompactEnabled": true,
-  "remoteControlAtStartup": true,
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  }
 }
