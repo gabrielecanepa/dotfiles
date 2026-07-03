@@ -10,7 +10,12 @@ node-version() {
   local raw version
 
   case "$1" in
-    ''|-h|--help)
+    -h|--help)
+      print -r -- 'node-version [dump]'
+      print -r -- ''
+      print -r -- 'Print or dumps to .node-version the running Node.js version.'
+      ;;
+    '')
       (( $+commands[node] )) || { print -r -- 'node-version: node not found' >&2; return 1; }
       raw="$(command node -v)" || { print -r -- 'node-version: node -v failed' >&2; return 1; }
       # Strip the leading v from node -v output (v22.1.0 -> 22.1.0).
