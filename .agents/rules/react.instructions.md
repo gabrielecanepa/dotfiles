@@ -21,11 +21,11 @@ Every component, exported or not, must accept the props of the element it render
 
 ### The rule
 
-Type the props as `React.ComponentProps<...>` intersected with the component's own props, destructure `className` and `...props`, merge `className` with `cn(...)`, and spread `...props` onto the underlying element.
+Type the props as `ComponentProps<...>` (via `import { type ComponentProps } from 'react'`, per the named-imports rule) intersected with the component's own props, destructure `className` and `...props`, merge `className` with `cn(...)`, and spread `...props` onto the underlying element.
 
-- **DOM element** (`div`, `button`, ...) → `React.ComponentProps<'div'>`.
-- **Another component** → `React.ComponentProps<typeof Child>`, spread onto that child.
-- **Provider with `children` and no underlying element** → `React.PropsWithChildren<{ ... }>`, no merge/spread.
+- **DOM element** (`div`, `button`, ...) → `ComponentProps<'div'>`.
+- **Another component** → `ComponentProps<typeof Child>`, spread onto that child.
+- **Provider with `children` and no underlying element** → `PropsWithChildren<{ ... }>`, no merge/spread.
 
 The underlying element is whichever single element the rest props belong on: the root DOM node, or the one child component the wrapper exists to configure. A provider that only nests other providers has none.
 
@@ -40,7 +40,7 @@ const ChatFilters = ({
   type,
   unrepliedCount,
   ...props
-}: React.ComponentProps<'div'> & {
+}: ComponentProps<'div'> & {
   counts: Record<string, number>
   type: ChatType
   unrepliedCount: number
@@ -51,46 +51,7 @@ const ChatFilters = ({
 )
 ```
 
-Underlying child component: forward the rest to it.
-
-```tsx
-const ChatList = ({
-  chats,
-  type,
-  ...props
-}: React.ComponentProps<typeof ChatListContent> & {
-  chats: Chat[]
-  type: ChatType
-}) => (
-  <Search includeMatches items={chats}>
-    <ChatListContent type={type} {...props} />
-  </Search>
-)
-```
-
-A wrapping provider still has an underlying element underneath it.
-
-```tsx
-const ChatView = ({
-  chats,
-  className,
-  defaultChat,
-  type,
-  ...props
-}: React.ComponentProps<'div'> & {
-  chats: Chat[]
-  defaultChat?: { id: string; detail: ChatDetail | null }
-  type: ChatType
-}) => (
-  <ChatProvider chats={chats}>
-    <div className={cn('flex min-h-0 flex-1', className)} {...props}>
-      {/* ... */}
-    </div>
-  </ChatProvider>
-)
-```
-
-A pure provider (only other providers, no DOM element) takes `React.PropsWithChildren`, no merge or spread.
+A pure provider (only other providers, no DOM element) takes `React.PropsWithChildren`, no merge or spread. A wrapper around another component types as `ComponentProps<typeof Child>` and forwards the rest to that child; a wrapping provider with a DOM element under it still merges and spreads onto that element.
 
 ```tsx
 export const DashboardProvider = ({
@@ -98,7 +59,7 @@ export const DashboardProvider = ({
   children,
   sidebarOpen,
   user,
-}: React.PropsWithChildren<{
+}: PropsWithChildren<{
   advisors: Advisor[]
   sidebarOpen: boolean
   user: AuthInfo
@@ -114,8 +75,7 @@ export const DashboardProvider = ({
 ## Component design
 
 - **Compose, don't configure.** Build with composition (compound components, slots, context providers) over boolean-prop configuration. A **third boolean prop** is the signal to restructure into compound components. Run `vercel-composition-patterns` for any non-trivial design.
-- **Named imports only.** No default `React` import; import the hooks and types you use.
-- **JSX conditionals.** `{cond && <El />}` for one branch, a ternary for two; never `if`/`else` inside JSX. Use `<>...</>` over `<Fragment>`.
+- **JSX.** `{cond && <El />}` for one branch, a ternary for two; `<>...</>` over `<Fragment>`; named imports only (no default `React` import).
 - **No manual memoization under React Compiler.** When React Compiler is enabled, do not hand-add `useMemo`, `useCallback`, or `React.memo`; the compiler memoizes. (Only when the compiler is on.)
 
 ## Layer boundaries
@@ -126,11 +86,4 @@ Dependencies flow **shared -> features -> app**. Shared layers (`ui/`, `lib/`, `
 
 In a Next.js project, `src/app/` (or `app/`) holds **only** Next.js framework files. Every other module (catalog/view components, `params.ts`, hooks, helpers, types) lives in the matching shared layer (`@/components`, `@/lib`, `@/hooks`, ...), never colocated in `app/`. A `page.tsx` imports its slices; it does not sit beside ad-hoc `.tsx`/`.ts` modules.
 
-The framework files allowed in `app/` (Next.js 16, keep in sync with the installed version):
-
-- **Routing**: `page`, `layout`, `loading`, `error`, `global-error`, `not-found`, `forbidden`, `unauthorized`, `default`, `template`, `route`.
-- **Metadata routes**: `sitemap`, `robots`, `manifest`.
-- **Metadata images**: `favicon`, `icon`, `apple-icon`, `opengraph-image`, `twitter-image` (static asset or the dynamic `.tsx`/`.ts` generator).
-- **Styles**: `*.css`.
-
-Routing and metadata-route files use the framework extension (`.tsx`/`.jsx` for components, `.ts`/`.js` for `route`/`sitemap`/`robots`/`manifest`). Anything not on this list does not belong in `app/`.
+The framework files allowed in `app/` (Next.js 16): routing (`page`, `layout`, `loading`, `error`, `global-error`, `not-found`, `forbidden`, `unauthorized`, `default`, `template`, `route`), metadata routes (`sitemap`, `robots`, `manifest`), metadata images (`favicon`, `icon`, `apple-icon`, `opengraph-image`, `twitter-image`), and `*.css`. Anything not on this list does not belong in `app/`.

@@ -36,12 +36,11 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
     "~/.copilot/instructions": false
   }
   ```
-- `.agents/hooks/` holds **Claude Code** hooks (not git hooks), wired in `.claude/settings.json` and reached via the `~/.claude/hooks` symlink: `guard-managed-files.sh` (PreToolUse, blocks writes to generated/symlinked managed files). Keep its behavior documented in the header comment of the script. Distinct from the git hooks in `.config/git/hooks/` covered below.
+- `.agents/hooks/` holds **Claude Code** hooks (not git hooks), wired in `.claude/settings.json` and reached via the `~/.claude/hooks` symlink: `guard-managed-files.sh` (PreToolUse, blocks writes to generated/symlinked managed files) and `format-edited-file.sh` (PostToolUse, runs the repo's declared formatter on the edited file). Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
 
-## Generated files (artifacts vs tmp)
+## Generated files
 
-- The machine-wide artifacts/tmp rule (AGENTS.md) applies here, but the location is **always `~/.agents/artifacts/` and `~/.agents/tmp/<session-id>/`, for every agent**, never a per-agent `.claude/` or `.codex/` folder.
-- No `.gitignore` change needed: the allowlist below leaves both untracked. Still delete `~/.agents/tmp/<session-id>/` at the end of the session.
+- The machine-wide generated-files rule (AGENTS.md) applies here, but artifacts always go in **`~/.agents/artifacts/`, for every agent**, never a per-agent `.claude/` or `.codex/` folder. No `.gitignore` change needed: the allowlist below leaves it untracked.
 
 ## Allowlist `.gitignore`
 
@@ -56,12 +55,7 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 ## Shell startup & internals
 
-- Startup order: `.zshenv` (env, Homebrew + `*ENV_ROOT` vars, PATH defined by `initialize_path`) → `.zprofile` (**GENERATED** by the `profile` plugin; identity vars only, never hand-edit) → `.zshrc` (oh-my-zsh, plugins, re-runs `initialize_path` then unsets it, completions, then `dotfiles init` to self-heal machine-local state) → `.aliases`. Put new env/PATH in `.zshenv`.
-- Git hooks are native (no husky). There is **no** global `core.hooksPath` or `init.templateDir`, so per-repo hook managers (lefthook, etc.) own each repo's `.git/hooks` unimpeded; nothing is imposed machine-wide. The `~` dotfiles repo gets its own checks via a repo-local `core.hooksPath` of `.config/git/hooks`, re-asserted on startup by `dotfiles init` (commitlint on `commit-msg`; commitlint + shellcheck + shfmt + oxfmt on `pre-push`). The `dotfiles` plugin (`init` to fix drift, `doctor` to report it) also re-links the VS Code settings symlink that Code clobbers on update. Edit those hooks in `.config/git/hooks/`, not `.git/hooks/`.
+- Startup order: `.zshenv` (env, PATH; put new env/PATH here) → `.zprofile` (**GENERATED** by the `profile` plugin, never hand-edit) → `.zshrc` (oh-my-zsh, plugins, completions, then `dotfiles init` to self-heal machine-local state) → `.aliases`.
+- Git hooks are native (no husky, no global `core.hooksPath` or `init.templateDir`). The `~` repo uses a repo-local `core.hooksPath` of `.config/git/hooks` (commitlint on `commit-msg`; commitlint + shellcheck + shfmt + oxfmt on `pre-push`), re-asserted by `dotfiles init`. Edit hooks there, not in `.git/hooks/`.
 - Brewfile is at `.homebrew/Brewfile`.
-- No npm globals: command-line Node tooling (commitlint, oxfmt, shellcheck, shfmt) is installed via the Brewfile, and `pnpm` comes from Corepack, not a global install. A tracked nodenv install hook at `.config/nodenv/hooks/install/corepack.bash` (wired via `NODENV_HOOK_PATH` in `.zshenv`) runs `corepack enable` after every `nodenv install`, so pnpm follows the active Node version. Don't hand-install these as globals or reintroduce an npm-global wrapper.
-
-## New-machine bootstrap
-
-- `.github/install.sh` shallow-clones the repo over HTTPS into an auto-cleaned temp dir and installs each tracked file into `~`, prompting before overwriting an existing one. Replaced files are backed up (path-mirrored) to `${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup/<timestamp>/`. Restore one by copying it back.
-- After the script, `~` is not yet a git repo; initialize it with `git -C ~ init -b main && git -C ~ remote add origin git@github.com:gabrielecanepa/dotfiles.git && git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD` (see README §Git).
+- No npm globals: command-line Node tooling (commitlint, oxfmt, shellcheck, shfmt) comes from the Brewfile, and `pnpm` comes from Corepack via a tracked nodenv install hook. Don't hand-install these as globals or reintroduce an npm-global wrapper.

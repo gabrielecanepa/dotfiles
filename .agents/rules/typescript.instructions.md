@@ -20,13 +20,9 @@ Language-level idioms for any TypeScript file. React and JSX rules live in `reac
 - **No parent-relative imports** (`../**`). Use path aliases (`@/`, `~/`).
 - **kebab-case filenames.**
 - **Omit inferrable types**: no return-type or variable annotations the compiler infers.
-- `string[]`, not `Array<string>`.
 - `??` over `||` for default fallbacks.
-- Template literals over string concatenation.
 - `async`/`await` only; no `.then()` chains.
 - ESM only; no `require`/`module.exports`.
-- `const` over `let` for bindings that never reassign.
-- `===`/`!==`, never `==`/`!=`.
 
 ## Framework docs first
 

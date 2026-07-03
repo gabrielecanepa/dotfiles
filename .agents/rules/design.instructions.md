@@ -48,7 +48,7 @@ Plan before coding: a compact token system, palette (4 to 6 named hex), 2+ type 
 - Responsive down to mobile; visible keyboard focus; `prefers-reduced-motion` respected.
 - Semantic HTML over `div` soup; pass accessibility checks (axe).
 - Real content, not lorem; UI copy follows `writing.instructions.md` (active voice, plain verbs, sentence case, no filler).
-- **Verify visually**: screenshot via `agent-browser`/Playwright and critique your own work. Attach to the dev server and Chrome window the user already has open rather than spawning a new server or preview window (see `engineering.instructions.md`). A passing typecheck is not visual verification.
+- **Verify visually**: screenshot via `agent-browser`/Playwright and critique your own work, reusing the already-running dev server and Chrome window (verification and reuse rules in `engineering.instructions.md`).
 
 ## Stack integration
 

@@ -12,18 +12,20 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
 - Surface assumptions and tradeoffs in the plan phase. Ask questions there, not mid-implementation.
 - If multiple interpretations exist, present them; don't pick one silently.
 - If a simpler approach exists, say so and push back, with the cost of the complex path (maintenance, coupling, performance).
-- **Default to industry-standard patterns.** For the language/framework in use, follow the proven, widely-adopted, idiomatic pattern for structure, file organization, naming, and API shape, unless the user instructs otherwise or the repo's own conventions dictate (the precedence chain above still governs: user instruction > repo conventions > the standard pattern). When the idiomatic choice is genuinely unknown (a new pattern, an unfamiliar library, an explicit question about conventions), research it from reputable sources, official docs via `context7-mcp`, popular libraries, established community standards, before writing, instead of guessing. Fold the findings into the repo's existing conventions; replace wholesale only when the user asks. When a research finding drove a non-obvious choice, name the pattern and cite the source in the summary.
+- **Default to industry-standard patterns.** Follow the stack's proven, idiomatic pattern for structure, naming, and API shape (the precedence chain above still governs). When the idiomatic choice is genuinely unknown, research it (official docs via `context7-mcp`, established community standards) before writing instead of guessing; fold findings into the repo's existing conventions, and when one drove a non-obvious choice, name the pattern and cite the source in the summary.
 - In autonomous runs with no one to ask, state the assumption, take the most defensible reading, proceed, and record the decision and its reversal cost in the summary. Hard-stop only for irreversible or destructive actions (data loss, prod writes, schema drops, secret rotation).
 
 ## 2. Simplicity first
 
 - Build the minimum that solves the stated problem. No speculative features, abstractions, configurability, or props "for later". If 200 lines could be 50, rewrite before presenting. Test: would a senior engineer call this overcomplicated?
-- Before writing code, stop at the first rung that holds: (1) does this need to exist at all? (2) does the stdlib already do it? (3) does a native platform feature cover it? (4) does an already-installed dependency solve it? (5) can it be one line? (6) only then, the minimum code that works. When two stdlib approaches are the same size, pick the edge-case-correct one: lazy means less code, not the flimsier algorithm. None of this is licence to skip the real boundaries in the next bullet.
+- Before writing code, stop at the first rung that holds: needs to exist at all? stdlib does it? native platform feature? already-installed dependency? one line? only then, the minimum code that works. Between same-size approaches, pick the edge-case-correct one. None of this is licence to skip the real boundaries in the next bullet.
 - Inline single-use logic; don't wrap it in helpers or generics. But pull genuinely shared primitives, design tokens, and cross-cutting hooks into the shared layer on first reuse; duplicating a shared component is the costlier mistake.
-- Don't guard the impossible; do guard every real boundary. Skip defensive code for states unreachable by construction: enforce those with types, exhaustive matches (e.g. a `switch` with an `assertNever` default), and schema validation at the edges. But handle every real I/O and concurrency boundary: network/timeout/abort, hydration, races, third-party failure. Every async UI surface needs loading, empty, error, and error-boundary states.
-- **Never add comments to code.** Name things so the code reads without them; if a line needs a comment to be understood, rewrite the line. Exactly two exceptions: (a) a JSDoc block, and only when the surrounding code already uses JSDoc for similar symbols (match the existing convention, don't introduce it); (b) a linter-disable directive (`eslint-disable`, `# noqa`, `rubocop:disable`, etc.), and only when suppressing the rule is strictly necessary. Everything else (explanatory, sectioning, TODO, or commented-out code) is banned. This covers new comments; leaving existing ones is governed by the surgical-changes rule below.
-- **Authoring agentic files** (AGENTS.md, `*.instructions.md`, skills, any always-on context): the reader is a model and bloat lowers its success, so simplicity-first applies harder here. Before adding or editing, weigh three things: **length** (cut to the shortest form that still steers; rationale prose explaining WHY is the first to go); **performance** (always-on tokens are paid every session, most of which never use the rule, so prefer scoping a rule to where it fires over making it global); **compliance** (lead with the action, imperative and concrete, the structure that makes a model obey). Gate every add, change, or removal on two questions, and keep only what clears both: does it change the outcome for the better, and is this its most token-optimized form (would shortening, removing, or rewording steer the same or better)? If a line doesn't earn its tokens, cut it. When unsure a cut is safe, verify behaviorally: a cold agent given only the text should still do the right thing.
-- **Authoring a skill**: treat it as a standalone product meant to be shared, hosted, and picked as the best skill for its goal. A skill may deliberately target a narrow domain (a framework, a language, one task); that scoping is a design choice, not a violation. Within whatever domain it claims, make it **scalable and portable**, so it works across every project in that domain regardless of scope or size: a React skill must handle any React project, not one repo's setup. Drive behavior off what the repo declares (lockfile, config, framework) instead of hard-coding one toolchain, and degrade sensibly when an optional dependency is absent. No machine- or repo-specific assumption belongs in a skill body; if one is unavoidable, gate it behind a detected condition. The trigger `description` must be crisp enough to fire on the intended use anywhere in that domain.
+- Don't guard the impossible: skip defensive code for states unreachable by construction; enforce those with types, exhaustive matches (e.g. a `switch` with an `assertNever` default), and schema validation at the edges.
+- Guard every real I/O and concurrency boundary: network/timeout/abort, hydration, races, third-party failure. Every async UI surface needs loading, empty, error, and error-boundary states.
+- **Never add comments to code.** Name things so the code reads without them; if a line needs a comment to be understood, rewrite the line. Exactly three exceptions: (a) a JSDoc block, and only when the surrounding code already uses JSDoc for similar symbols (match the existing convention, don't introduce it); (b) a linter-disable directive (`eslint-disable`, `# noqa`, `rubocop:disable`, etc.), and only when suppressing the rule is strictly necessary; (c) a file-header doc block that a repo rule explicitly requires (e.g. the dotfiles hooks). Everything else (explanatory, sectioning, TODO, or commented-out code) is banned. This covers new comments; leaving existing ones is governed by the surgical-changes rule below.
+- **Authoring agentic files** (AGENTS.md, `*.instructions.md`, skills, any always-on context): the reader is a model and bloat lowers its success. Gate every add, change, or removal on two questions and keep only what clears both: does it change the outcome for the better, and is this its most token-optimized form?
+- When authoring rules: cut rationale prose first; prefer scoping a rule to where it fires over making it global; lead with the action, imperative and concrete. When unsure a cut is safe, verify behaviorally with the bait scenarios bundled in the `sync-agents` skill: a cold agent given only the text should still do the right thing.
+- **Authoring a skill**: follow the portability standards in the `sync-agents` skill (works across its whole claimed domain, detects the toolchain from the repo, no machine- or repo-specific assumptions, crisp trigger description).
 
 ## 3. Surgical changes
 
@@ -41,12 +43,22 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
   1. **Types**: the project's typecheck passes with zero errors (plus exhaustiveness where the language supports it).
   2. **Lint**: the project's linter passes with zero errors.
   3. **Tests**: unit/integration for logic changes; write the failing test first for bug fixes.
-  4. **Behavior**: flows via browser automation (`agent-browser`/Playwright); visual and animation work via screenshot plus `prefers-reduced-motion`; components via accessibility checks (axe). A passing typecheck is not visual verification. Reuse a running app before spawning one: attach to the dev server and Chrome window the user already has open (their existing session is what you need to test) instead of starting a fresh server or preview, which is resource-heavy; the existing window also holds the logged-in session a blank one lacks. Start your own only when none is running, and target the existing preview window, never a new Chrome window.
+  4. **Behavior**: flows via browser automation (`agent-browser`/Playwright); visual and animation work via screenshot plus `prefers-reduced-motion`; components via accessibility checks (axe). A passing typecheck is not visual verification.
+- Reuse a running app before spawning one: attach to the dev server and Chrome window the user already has open (it holds the logged-in session a blank window lacks). Start your own only when none is running, and target the existing preview window, never a new Chrome window.
 - The rungs above are illustrative; translate them to the project's stack, e.g. `mypy`/`pytest`, `rubocop`/`rspec`, `go vet`/`go test`, `cargo check`/`cargo test`.
 - Use the project's own scripts and package manager: detect it from the lockfile (`pnpm-lock.yaml` → pnpm, `package-lock.json` → npm, `bun.lockb` → bun) and run its declared scripts; never assume one. Likewise detect the test runner from the repo (`jest`/`vitest` config, `pytest.ini`/`pyproject`, `Gemfile`, `go test`) instead of assuming. For multi-step work, state a numbered plan with a verify step each, then loop until green and report which rungs ran and their results.
 - Never introduce secrets into code or commits (`.env` values, API keys, tokens); keep them in env vars or a secret store. The `security-guidance` plugin covers deeper checks.
 
-## 5. Never commit unless asked
+## 5. Delegate the token-heavy work, keep the judgment
+
+Delegation is an efficiency move, never a quality tradeoff: the delegated result must match or beat what you'd produce inline, or do it inline.
+
+- Keep frontier work yourself (architecture, prioritization, ambiguity resolution, risk, synthesis, final review); delegate bounded token-heavy work to parallel subagents (repo inventory, wide search, docs extraction, log reduction, verification passes, mechanical edits).
+- Delegate only independent slices; never point two agents at the same files; keep the immediate blocker inline.
+- Give each subagent a self-contained packet: repo path, objective, scope, return format, and stop conditions (stop and report on contradicting code, repeated verification failure, out-of-scope needs, or missing evidence).
+- Treat returns as evidence, not verdicts: reopen cited files, rerun the verification that matters, skim high-risk diffs; resolve disagreement at the orchestrator layer.
+
+## 6. Never commit unless asked
 
 - **Do not run `git commit`, `git push`, `git add` + commit, or any history-writing git command unless the prompt explicitly requests it** (words like "commit", "push", "land it", "open a PR"). A request to write, fix, refactor, apply, or update code is NOT a request to commit. Finish the work, leave it in the working tree, and stop. This holds even when the change is verified, green, and obviously commit-worthy, and even across a multi-turn task where you committed earlier with permission: each commit needs its own go-ahead unless the user said to keep committing.
 - When you believe the work is commit-worthy, do not commit and do not emit a `git` command to run. Instead close your reply with three parts: (1) a `### Changes` list, one bullet per changed file as a clickable link plus a **short single-sentence** description; (2) the commit message **alone** in a fenced code block (the message only, no `git add`/`git commit` wrapping), following the repo's commit conventions (in the dotfiles repo, the per-repo types in `dotfiles.instructions.md`); (3) a short question asking whether to run the commit. The shape:
@@ -65,19 +77,6 @@ Applies when writing, reviewing, or refactoring code; skip for trivial one-liner
   Want me to run the commit?
   ````
 
-  For multiple commits, give each its own message block and group the changes under it:
-
-  ```
-  ### Changes
-
-  **docs: drop the model-selection section**
-  - [AGENTS.md](AGENTS.md) - removed the stale model-selection paragraph.
-  - [README.md](README.md) - dropped the matching README entry.
-
-  **fix: handle empty input** (in `~/Developer/@scope/other-repo`)
-  - [src/app.ts](src/app.ts) - guarded against empty input.
-
-  Want me to run these commits?
-  ```
+  For multiple commits, give each its own message block with its changes grouped under it.
 
 - If a task legitimately needs intermediate commits to proceed (e.g. a rebase, a bisect, or the user said "commit as you go"), that standing instruction counts as explicit permission for the scope they described; do not extend it beyond that scope.

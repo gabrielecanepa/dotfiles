@@ -1,10 +1,28 @@
 # AGENTS.md
 
-Machine-wide instructions for all coding agents (Claude Code, Codex, Copilot). Applies in **every** project; it holds only what is true everywhere. Loaded globally via:
+Machine-wide instructions for all coding agents (Claude Code, Codex, Copilot). Applies in **every** project; it holds only what is true everywhere.
+
+## Working principles
+
+The full baseline lives in the always-on rules: `behavior.instructions.md` (reasoning, feedback, chat-output brevity) and `engineering.instructions.md` (simplicity, surgical diffs, verification, the commit workflow). Claude Code and Copilot auto-load both every session; Codex must read both before starting any task. Two hard boundaries bear restating:
+
+- **Version control**: NEVER run `git commit` or `git push` unless the prompt explicitly asks. Writing, fixing, or "applying" changes is NOT a request to commit; leave the result in the working tree and end with the `### Changes` list and commit-message offer (exact format in the engineering rule).
+- **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output. Rewrite with a period, comma, colon, hyphen, or parentheses (see the writing rule).
+- **Skill routing (by intent, decided before you start; this is the trigger for Codex and for greenfield work, since the file-scoped rules won't have loaded yet):**
+  - Building or restyling **any UI** → open the `design` rule; base is `frontend-design` plus one flavor (default `design-taste-frontend`).
+  - Writing or reviewing **React/Next.js code** → open the `react` rule; `vercel-react-best-practices` is the performance bar and `vercel-composition-patterns` drives component design.
+  - Writing **Node.js server-side code** (APIs, services, CLIs, scripts) → open the `node` rule.
+  - Writing **human-facing prose** longer than a few sentences (docs, README, release notes, marketing copy) → open the `writing` rule and run the `humanizer` skill.
+  - Library / API / framework questions → `context7-mcp`. Driving or QA-ing a real web UI → `agent-browser`.
+  - Editing this machine's dotfiles → the `dotfiles` rule (Codex: read `.agents/rules/dotfiles.instructions.md` first).
+
+## Rules & loading
+
+This file loads globally via:
 
 - **Claude Code**: `~/.claude/CLAUDE.md` symlinks here (user memory, every session).
 - **Codex**: `~/.codex/AGENTS.md` symlinks here (top of the global instruction chain).
-- **Copilot**: `COPILOT_CUSTOM_INSTRUCTIONS_DIRS=$HOME/.agents` (CLI loads this file); `~/.copilot/instructions/` loads the rules in VS Code + CLI.
+- **Copilot**: `COPILOT_CUSTOM_INSTRUCTIONS_DIRS=$HOME/.agents` (CLI loads this file and the rules); in VS Code the rules load through `.github/instructions` (see the dotfiles rule for why the `~/.copilot/instructions` default is disabled).
 
 Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their content here):
 
@@ -14,27 +32,10 @@ Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their con
 - `design.instructions.md`: UI/visual work; routes to the design skills. **Loads for frontend files.**
 - `typescript.instructions.md`: language-level TS idioms (guard clauses, arrow functions, interface over type, inline type imports, alias imports) and the framework-docs-first rule. **Loads for `.ts`/`.tsx` files.**
 - `react.instructions.md`: prop forwarding, composition over boolean props, JSX idioms, the shared->features->app boundary, Next.js `app/` placement; routes to the React perf and composition skills. **Loads for `.jsx`/`.tsx` files.**
+- `node.instructions.md`: Node.js runtime discipline (event loop, streams, errors and shutdown, diagnostics, packaging). **Loads for server-side JS/TS paths.**
 - `dotfiles.instructions.md`: conventions for the `$HOME` dotfiles repo. **Loads only when editing this machine's config** (shell, git, brew, git hooks, agent config).
 
-Claude and Copilot load these rule files automatically. **Codex does not**: when a task involves code, prose, UI, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
-
-## Working principles
-
-The non-negotiable baseline for every task; the rule files expand these.
-
-- **Reasoning**: challenge flawed premises; surface assumptions and tradeoffs up front; never fake certainty. In autonomous runs, decide and proceed, hard-stopping only for irreversible or destructive actions.
-- **Feedback**: no agreement by default, no softening, no praise-padding; every critique carries a concrete next step.
-- **Chat output**: lead with the answer, no preamble or recap; length scales with the question; brevity caps prose only, never code, docs, correctness, or reasoning (see the behavior rule).
-- **Engineering**: build the minimum that solves the problem; default to the industry-standard, idiomatic pattern for the stack (researching it when unknown) unless the user or the repo's conventions say otherwise; keep diffs surgical (every changed line traces to the request); verify against a machine-checkable criterion, not "it works". **Never add comments to code** (the only exceptions are JSDoc when the codebase already uses it, and strictly necessary linter-disable directives; see the engineering rule).
-- **Writing**: never use an em-dash or en-dash in any committed file, this repo's own docs included; the sole exception is live chat output to the user. Rewrite around it with a period, comma, colon, hypen, or parentheses (see the writing rule).
-- **Version control**: NEVER run `git commit` (or `git push`) unless the prompt explicitly asks you to commit, push, or otherwise persist to git. Making changes, fixing, refactoring, or "applying" something is NOT a request to commit; leave the result staged-or-unstaged in the working tree and stop. When you judge the work is commit-worthy, end your reply by listing the changes, giving the commit message alone in a code block, and asking whether to run the commit (see the engineering rule for the exact format). This is a hard boundary, on par with not running destructive commands unasked.
-- **Generated files**: any file you generate during a session goes under the project's agentic folder, sorted into artifacts (reusable, keep) or tmp (throwaway, delete on exit). See the Generated files section below for the rules.
-- **Skill routing (by intent, decided before you start; this is the trigger for Codex and for greenfield work, since the file-scoped rules won't have loaded yet):**
-  - Building or restyling **any UI** → open the `design` rule; base is `frontend-design` plus one flavor (default `design-taste-frontend`).
-  - Writing or reviewing **React/Next.js code** → open the `react` rule; `vercel-react-best-practices` is the performance bar and `vercel-composition-patterns` drives component design.
-  - Writing **human-facing prose** longer than a few sentences (docs, README, release notes, marketing copy) → open the `writing` rule and run the `humanizer` skill.
-  - Library / API / framework questions → `context7-mcp`. Driving or QA-ing a real web UI → `agent-browser`.
-  - Editing this machine's dotfiles → the `dotfiles` rule (Codex: read `.agents/rules/dotfiles.instructions.md` first).
+Claude Code and Copilot load these rule files automatically (Claude Code loads always-on ones every session and path-scoped ones when a touched file matches; Copilot scopes via `applyTo`). **Codex does not**: when a task involves code, prose, UI, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
 
 ## Environment
 
@@ -56,26 +57,20 @@ The non-negotiable baseline for every task; the rule files expand these.
 
 ## Git & commits
 
-- **Never commit or push unless the prompt explicitly asks for it** (see the Version control principle above). Default to leaving changes in the working tree and offering the command. The rules below describe HOW to commit once the user has asked, not permission to commit on your own.
+- **Committing requires an explicit ask** (the Version control principle above; exact offer format in the engineering rule). The rules below describe HOW to commit once the user has asked, not permission to commit on your own.
 - **Commits are signed** via the 1Password SSH agent (`gpg.format=ssh`, `commit.gpgsign=true`, signer `op-ssh-sign`). Never disable signing or add `--no-gpg-sign`.
 - **No `Co-authored-by` / AI trailers** (VS Code GitLens `git.addAICoAuthor` is `off` in `.vscode/user/settings.json`). Single-line messages unless a `BREAKING CHANGE:` footer is needed.
 - **Conventional commits, match the repo you're in.** Commit types are per-repo (the dotfiles repo uses a non-standard set; see its rule). `pull.rebase=true`, `push.autoSetupRemote=true`, `init.defaultBranch=main`.
-- **Rich git aliases exist, prefer them** (`.gitconfig`, also exposed as `g<alias>` shell aliases): `gst`, `gacm`, `gcm`, `gco`, `glg`, `gsweep`, `gfps`, `gpristine`, `gredo`, `gundo`. Run `git aliases` to list all.
 
-## Generated files (artifacts vs tmp)
+## Generated files
 
-Applies to **every** agent (Claude, Claude Code, Codex, Copilot) generating any file, **only in a project that already has an agentic folder** (`.agents/`, `.claude/`, `.codex/`, etc.). No agentic folder, leave this alone. The `$HOME` dotfiles repo has its own variant (see the dotfiles rule).
+Applies to **every** agent (Claude, Claude Code, Codex, Copilot) generating any file.
 
-- **Pick the folder.** Write to the agent's own non-symlinked folder if present (`.claude/`, `.codex/`), else `.agents/`. Call it `<agent-folder>`.
-- **Classify.** An **artifact** stays useful after the session (reusable scripts, audit/eval results, HTML previews, visual assets). A **tmp** file is throwaway (one-shot scripts, logs, scratch data).
-- **Name and place.** Artifacts go in `<agent-folder>/artifacts/` with a unique descriptive name. Tmp files go in `<agent-folder>/tmp/<session-id>/`, any name, one subdir per session.
-- **Ignore on first write.** When first creating either folder, git-ignore it (root `.gitignore` or `<agent-folder>/.gitignore`).
-- **Delete tmp on exit.** Remove your `<agent-folder>/tmp/<session-id>/` at the end of the session.
+- **Throwaway files** (one-shot scripts, logs, scratch data) go to the agent's session scratchpad or the system temp dir, **never into the repo**.
+- **Artifacts** stay useful after the session (reusable scripts, audit/eval results, HTML previews, visual assets). In a project that already has an agentic folder (`.agents/`, `.claude/`, `.codex/`, etc.), they go in `<agent-folder>/artifacts/` with a unique descriptive name; `<agent-folder>` is the agent's own non-symlinked folder if present, else `.agents/`. No agentic folder, don't create one; place the deliverable where the user or repo convention says. The `$HOME` dotfiles repo has its own variant (see the dotfiles rule).
+- **Ignore on first write.** When first creating `artifacts/`, git-ignore it (root `.gitignore` or `<agent-folder>/.gitignore`).
 
 ## Formatting & linting (respect existing config; don't reformat to your own style)
 
-- **JS/TS/CSS/JSON:** `oxfmt` (`.oxfmtrc.json`): no semicolons, single quotes (double in CSS), `es5` trailing commas, avoid arrow parens.
-- **Ruby:** `rubocop` (`.rubocop.yml`): double-quoted strings, line length 120, `NewCops: enable`.
-- **Shell:** `shfmt` (formats sh/bash; options live in `.editorconfig` `[[shell]]`/`[[bash]]` sections, zsh is excluded via `ignore` and never formatted) + `shellcheck` (`.shellcheckrc`).
-- **All files:** `.editorconfig`: UTF-8, LF, 2-space indent, final newline, trim trailing whitespace, max line 120.
-- **Prefer existing aliases/functions over raw commands**: `.aliases` and the git aliases are curated; use `gst`, `pn`, `cdw`, `brew fresh`, etc.
+- **JS/TS/CSS/JSON:** `oxfmt` (`.oxfmtrc.json`). **Ruby:** `rubocop` (`.rubocop.yml`). **Shell:** `shfmt` + `shellcheck` (`.shellcheckrc`); shfmt options live in `.editorconfig` `[[shell]]`/`[[bash]]`, zsh is excluded and never formatted. **All files:** `.editorconfig`.
+- Run the tool; the config files own the style values. Never hand-match style or reformat beyond your change. (In Claude Code the `format-edited-file` PostToolUse hook runs the right formatter automatically.)
