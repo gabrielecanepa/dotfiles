@@ -216,6 +216,14 @@ using the host's question mechanism. Keep
 resolving everything else while a decision waits; only block when applying the
 rest genuinely depends on the answer.
 
+**Refresh pinned skills.** If the repo pins installed skills through a
+lockfile-driven manager (a skill lockfile plus a documented install/update
+command in AGENTS.md or a rule), part of a sync is checking those skills are
+current: run the manager's own update command so it rewrites the lockfile, and
+fold any resulting lockfile change into this run. Use the command and scope the
+repo documents; never hand-edit the lockfile. If no such manager is declared,
+skip this. Under `--check`, don't run it: just note that an update check is due.
+
 After editing, if AGENTS.md lists programmatic checks (lint, test, typecheck,
 build) that your changes could affect, run the relevant ones and fix failures
 your changes caused. Never commit or push automatically; the commit boundary is
