@@ -1,34 +1,48 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "effortLevel": "xhigh",
+  "model": "fable",
+  "fallbackModel": ["opus", "default"],
+  "effortLevel": "high",
   "alwaysThinkingEnabled": false,
   "showThinkingSummaries": false,
-  "skipAutoPermissionPrompt": true,
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "remoteControlAtStartup": true,
-  "autoCompactEnabled": true,
-  "theme": "auto",
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "includeCoAuthoredBy": false,
+  "outputStyle": "Concise",
+  "includeGitInstructions": false,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "worktree": {
-    "baseRef": "fresh"
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.agents/statusline.sh",
+    "padding": 0,
+    "refreshInterval": 10
   },
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "remoteControlAtStartup": true,
+  "autoCompactEnabled": true,
+  "plansDirectory": ".agents/plans",
+  "cleanupPeriodDays": 60,
+  "worktree": {
+    "baseRef": "fresh",
+    "symlinkDirectories": ["node_modules"]
+  },
+  "sandbox": {
+    "enabled": true,
+    "network": {
+      "allowedDomains": ["registry.npmjs.org", "github.com", "*.github.com", "*.githubusercontent.com"],
+      "allowUnixSockets": ["~/Library/Group Containers/*.com.1password/t/agent.sock"]
+    }
+  },
+  "autoAllowBashIfSandboxed": true,
   "permissions": {
     "defaultMode": "auto",
-    "ask": ["Bash(git commit:*)", "Bash(git push:*)"],
-    "deny": [
-      "Read(**/.env)",
-      "Read(**/.env.local)",
-      "Read(**/.env.*.local)",
-      "Read(**/.env.production)",
-      "Write(**/.env)"
-    ]
+    "ask": ["Bash(git commit:*)", "Bash(git push:*)", "Read(**/.env)", "Read(**/.env.*)"],
+    "deny": ["Write(**/.env)", "Write(**/.env.*)"]
   },
   "hooks": {
     "PreToolUse": [
