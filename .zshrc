@@ -53,6 +53,7 @@ plugins=(
   local-bin
   lts
   node-version
+  npm-global
   path
   plugin
   profile

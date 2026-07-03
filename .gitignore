@@ -32,6 +32,9 @@
 !/.copilot/instructions
 !/.github/
 !/.homebrew/
+!/.npm/
+/.npm/*
+!/.npm/package.json
 !/.vscode/
 /.vscode/*
 !/.vscode/user/
