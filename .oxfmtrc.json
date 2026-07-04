@@ -6,15 +6,21 @@
   "trailingComma": "es5",
   "overrides": [
     {
-      "files": ["*.css"],
+      "files": [
+        "*.css"
+      ],
       "options": {
         "singleQuote": false
       }
     },
     {
-      "files": ["*.json", "*.jsonc"],
+      "files": [
+        "*.json",
+        "*.jsonc"
+      ],
       "options": {
-        "trailingComma": "none"
+        "trailingComma": "none",
+        "printWidth": 1
       }
     }
   ]

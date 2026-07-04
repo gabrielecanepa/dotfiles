@@ -343,7 +343,11 @@
   "search.useIgnoreFiles": true,
   "security.promptForLocalFileProtocolHandling": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "shfmt.executableArgs": ["-i", "2", "-ci"],
+  "shfmt.executableArgs": [
+    "-i",
+    "2",
+    "-ci"
+  ],
   "shfmt.formatIgnored": false,
   "svg.completion.emmet": true,
   "svg.completion.showAdvanced": true,
@@ -359,14 +363,23 @@
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.fontSize": 12.5,
   "terminal.integrated.gpuAcceleration": "off",
-  "terminal.integrated.ignoreProcessNames": ["bash", "zsh"],
+  "terminal.integrated.ignoreProcessNames": [
+    "bash",
+    "zsh"
+  ],
   "terminal.integrated.mouseWheelScrollSensitivity": 3,
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": ["\"", "'", "`"],
+  "togglequotes.chars": [
+    "\"",
+    "'",
+    "`"
+  ],
   "update.showReleaseNotes": false,
-  "vscode_custom_css.imports": ["file:///Users/gabrielecanepa/.vscode/user/styles.css"],
+  "vscode_custom_css.imports": [
+    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
+  ],
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",

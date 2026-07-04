@@ -30,7 +30,9 @@
     "Public": true
   },
   "git.autoRepositoryDetection": false,
-  "git.ignoredRepositories": [".oh-my-zsh"],
+  "git.ignoredRepositories": [
+    ".oh-my-zsh"
+  ],
   "markdown.extension.toc.levels": "3..6",
   "oxc.enable.oxfmt": true,
   "search.exclude": {

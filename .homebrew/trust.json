@@ -1,3 +1,7 @@
 {
-  "trustedtaps": ["github/gh", "oven-sh/bun", "tw93/tap"]
+  "trustedtaps": [
+    "github/gh",
+    "oven-sh/bun",
+    "tw93/tap"
+  ]
 }
