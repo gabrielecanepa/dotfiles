@@ -1,49 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "fable",
-  "fallbackModel": ["opus", "default"],
-  "effortLevel": "high",
-  "alwaysThinkingEnabled": false,
-  "showThinkingSummaries": false,
-  "outputStyle": "Concise",
-  "includeGitInstructions": false,
+  "cleanupPeriodDays": 60,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "skipAutoPermissionPrompt": true,
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "theme": "auto",
-  "statusLine": {
-    "type": "command",
-    "command": "$HOME/.agents/statusline.sh",
-    "padding": 0,
-    "refreshInterval": 10
-  },
-  "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "remoteControlAtStartup": true,
-  "autoCompactEnabled": true,
-  "plansDirectory": ".agents/plans",
-  "cleanupPeriodDays": 60,
-  "worktree": {
-    "baseRef": "fresh",
-    "symlinkDirectories": ["node_modules"]
-  },
-  "sandbox": {
-    "enabled": true,
-    "network": {
-      "allowedDomains": ["registry.npmjs.org", "github.com", "*.github.com", "*.githubusercontent.com"],
-      "allowUnixSockets": ["~/Library/Group Containers/*.com.1password/t/agent.sock"]
-    }
-  },
-  "autoAllowBashIfSandboxed": true,
+  "includeGitInstructions": false,
   "permissions": {
-    "defaultMode": "auto",
-    "ask": ["Bash(git commit:*)", "Bash(git push:*)", "Read(**/.env)", "Read(**/.env.*)"],
-    "deny": ["Write(**/.env)", "Write(**/.env.*)"]
+    "deny": [
+      "Write(**/.env)",
+      "Write(**/.env.*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)"
+    ],
+    "defaultMode": "auto"
   },
+  "fallbackModel": [
+    "opus",
+    "default"
+  ],
   "hooks": {
     "PreToolUse": [
       {
@@ -70,6 +49,17 @@
       }
     ]
   },
+  "worktree": {
+    "symlinkDirectories": [
+      "node_modules"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "ccstatusline",
+    "padding": 0,
+    "refreshInterval": 10
+  },
   "enabledPlugins": {
     "vercel@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
@@ -84,5 +74,35 @@
         "repo": "anthropics/claude-plugins-official"
       }
     }
-  }
+  },
+  "outputStyle": "Concise",
+  "sandbox": {
+    "enabled": false,
+    "network": {
+      "allowedDomains": [
+        "registry.npmjs.org",
+        "github.com",
+        "*.github.com",
+        "*.githubusercontent.com"
+      ],
+      "allowUnixSockets": [
+        "~/Library/Group Containers/*.com.1password/t/agent.sock"
+      ]
+    }
+  },
+  "feedbackSurveyRate": 0,
+  "spinnerTipsEnabled": false,
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "xhigh",
+  "plansDirectory": ".agents/plans",
+  "showThinkingSummaries": false,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "autoCompactEnabled": true,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "autoAllowBashIfSandboxed": true
 }
