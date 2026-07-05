@@ -1,6 +1,6 @@
 # Zsh Plugin `profile`
 
-The `plugin` CLI allows you to manage your Zsh profile to automize the setup of your development environment.
+The `profile` command lets you manage your Zsh profile to automate the setup of your development environment.
 
 It provides commands to install, reload, and check the profile configuration.
 
