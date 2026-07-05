@@ -1,0 +1,5 @@
+/artifacts/
+/plans/
+/skills/
+!/skills/sync-agents/
+!/skills/sync-docs/
