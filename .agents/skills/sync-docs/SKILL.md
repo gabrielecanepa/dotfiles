@@ -223,7 +223,7 @@ correctness, not polish. Handle it in this order:
   dash ban. Feed it the section, take back the cleaned prose, and slot it in.
 - **When `humanizer` is absent, apply the baseline inline.** Don't block on the
   skill. The one non-negotiable, load-bearing every time: **no em or en dashes**
-  (`—`, `–`), and no `--` or spaced ` - ` standing in for one. Replace each with
+  (`—`, `–`), and no `--` or a space-padded hyphen standing in for one. Replace each with
   a period, comma, colon, parentheses, or a rewrite. Before finishing any file
   you edited, scan it for `—` and `–`; any hit means it isn't done. The rest of
   the baseline (inflation, copula avoidance, rule-of-three, AI-vocabulary filler,
@@ -270,7 +270,7 @@ directly, matching the document's existing voice and structure:
   that a canonical one already covers).
 
 For a substantive prose rewrite (a whole section written in heavy AI voice, a
-README intro full of inflation), the *cleanup itself* is a clear win, but do it
+README intro full of inflation), the _cleanup itself_ is a clear win, but do it
 carefully: run it through `humanizer` if available, keep all the original's
 content and specifics, and match the document's voice. If a rewrite would change
 the doc's meaning or drop information you can't confirm is safe to drop, that's a
@@ -288,7 +288,7 @@ Don't narrate each edit as you go; account for them all in the recap.
   stale; content that might be load-bearing for a reader you can't see),
 - a rewrite that changes meaning, cuts information, or overrides an authorial
   choice you can't confirm is wrong,
-- a legal or license claim. Correcting the *mechanics* around it is fine (a
+- a legal or license claim. Correcting the _mechanics_ around it is fine (a
   broken link to a LICENSE that does exist, a typo). But changing which license
   is stated, or dropping a license claim because the LICENSE file is missing, is
   the author's call with legal weight: flag the mismatch (README says MIT, no
@@ -317,9 +317,9 @@ Close with a scannable record. Lead with a one-line verdict, then:
   `--check` audit).
 - **Changed**: what you applied, one line each with the why. Under `--check`,
   retitle this **Would change** and list the fixes you'd make instead.
-- **Decisions pending** *(if any)*: the questions you raised and their options,
+- **Decisions pending** _(if any)_: the questions you raised and their options,
   so an unanswered one stays visible.
-- **Follow-ups** *(if any)*: anything only the user can do or that belongs
+- **Follow-ups** _(if any)_: anything only the user can do or that belongs
   elsewhere (a `sync-agents` handoff for agent content found in the README, a
   generated doc that needs regenerating, a code-looks-wrong flag, an external
   link you couldn't verify).

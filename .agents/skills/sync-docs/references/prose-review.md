@@ -32,7 +32,7 @@ another, is a finding.
 - **CONTRIBUTING**: how to set up a dev environment, run tests, and submit
   changes. Its commands are the ones most likely to have drifted, because they
   track the toolchain.
-- **CHANGELOG**: version-scoped by nature. Diff-anchored writing is *correct*
+- **CHANGELOG**: version-scoped by nature. Diff-anchored writing is _correct_
   here (see the voice baseline). Check format consistency, not narrative voice.
 - **docs/ guides and tutorials**: task-oriented prose. Each should have a clear
   scope, working steps, and current snippets.
@@ -80,7 +80,7 @@ rather than trusting the prose:
   outdated architecture as a follow-up (you usually can't regenerate them).
 
 When prose and repo disagree, the repo is the source of truth and the prose is
-stale: fix the doc. The one exception is when the *code* looks wrong and the doc
+stale: fix the doc. The one exception is when the _code_ looks wrong and the doc
 looks right, which is a code bug, not a docs bug. Flag that as a follow-up for
 the user; never change code from a docs sync.
 
@@ -142,7 +142,7 @@ inline when `humanizer` is absent, and what to check for regardless.
 
 **The hard rule, enforced everywhere:**
 
-- **No em or en dashes** (`—`, `–`), and no `--` or spaced ` - ` used in their
+- **No em or en dashes** (`—`, `–`), and no `--` or a space-padded hyphen used in their
   place. Replace each, in rough order of preference: a period (new sentence), a
   comma (tight aside), a colon (introducing an explanation), parentheses (a true
   aside), or restructure. This is a hard constraint. Before finishing any file

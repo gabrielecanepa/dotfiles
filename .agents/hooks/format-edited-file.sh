@@ -21,7 +21,7 @@ root="$(git -C "$(dirname "$fp")" rev-parse --show-toplevel 2>/dev/null)"
 [ -n "$root" ] || exit 0
 
 case "$fp" in
-  *.ts | *.tsx | *.js | *.jsx | *.mjs | *.cjs | *.css | *.json)
+  *.ts | *.tsx | *.js | *.jsx | *.mjs | *.cjs | *.css | *.json | *.md | *.mdx)
     [ -f "$root/.oxfmtrc.json" ] && command -v oxfmt >/dev/null 2>&1 &&
       oxfmt "$fp" >/dev/null 2>&1
     ;;
