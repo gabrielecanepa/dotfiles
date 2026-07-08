@@ -1,6 +1,9 @@
-# Print the current profile, or configure, install, reload, and check it.
 #
+# profile: print the current profile, or configure, install, reload, and check it.
 # Usage: profile <command>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 profile() (
   emulate -L zsh
@@ -207,7 +210,7 @@ profile() (
     install|i)
       # Warn and require confirmation before overwriting an already-installed profile.
       if profile check >/dev/null 2>&1; then
-        print -r -- "${fg[yellow]}WARNING: you already have a profile installed for the user $USER${reset_color}"
+        _zsh::log warn profile "a profile is already installed for the user $USER"
         print -rn -- 'Do you want to override the current profile? (y/N) '
         local choice
         read -r choice
@@ -228,14 +231,14 @@ profile() (
 
     check)
       if [[ ! -f "$HOME/.zprofile" ]]; then
-        print -ru2 -- "${fg[red]}Missing profile for user $USER${reset_color}"
+        _zsh::log error profile "missing profile for user $USER"
         print -ru2 -- "Type $profile_install_cmd to install a new profile"
         return 1
       elif [[ -z "$NAME" || ! "$NAME" =~ $name_regex ]] \
         || [[ -z "$EMAIL" || ! "$EMAIL" =~ $email_regex ]] \
         || [[ -z "$WORKING_DIR" || ! -d "$WORKING_DIR" ]] \
         || [[ -z "$EDITOR" ]] || (( ! $+commands[$EDITOR] )); then
-        print -ru2 -- "⚠️  A profile is not installed for user $USER"
+        _zsh::log warn profile "a profile is not installed for user $USER"
         print -ru2 -- "Type $profile_install_cmd to add a new profile"
         return 1
       fi
@@ -256,7 +259,7 @@ profile() (
 
     *)
       if [[ -n "$1" ]]; then
-        print -ru2 -- "${fg[red]}Unknown command: $1${reset_color}"
+        _zsh::log error profile "unknown command: $1"
         profile help
         return 1
       fi

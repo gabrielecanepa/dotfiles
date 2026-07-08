@@ -1,6 +1,9 @@
-# Find and install the latest LTS release of Node.js, Python, or Ruby via their version managers.
 #
+# lts: find and install the latest LTS release of Node.js, Python, or Ruby via their version managers.
 # Usage: lts <command>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 typeset -ga _lts_langs=(node ruby python)
 
@@ -27,7 +30,7 @@ _lts_print_help() {
 
 _lts_error() {
   emulate -L zsh
-  print -P -- "%F{red}ERROR%f $*" >&2
+  _zsh::log error lts "$*"
 }
 
 _lts_validate_language() {
@@ -68,7 +71,7 @@ _lts_get_latest_version() {
 
   # Reject more than one @ or a trailing @ with no prefix.
   if (( ${#parts} > 2 )) || [[ $spec == *@* && -z ${parts[2]} ]]; then
-    _lts_error "Invalid version: $spec"
+    _lts_error "invalid version: $spec"
     return 1
   fi
 
@@ -78,14 +81,14 @@ _lts_get_latest_version() {
   vm=$(_lts_get_version_manager "$lang") || return 1
 
   if (( ! ${+commands[$vm]} )); then
-    _lts_error "Required tool not found: $vm"
+    _lts_error "required tool not found: $vm"
     return 1
   fi
 
   # Node LTS comes from the dist index rather than a version-manager list.
   if [[ $lang == node ]]; then
     if (( ! ${+commands[jq]} )); then
-      _lts_error 'Required tool not found: jq'
+      _lts_error 'required tool not found: jq'
       return 1
     fi
     command curl -s https://nodejs.org/dist/index.json |
@@ -128,7 +131,7 @@ _lts_get_active_version() {
   vm=$(_lts_get_version_manager "$1") || return 1
 
   if (( ! ${+commands[$vm]} )); then
-    _lts_error "Required tool not found: $vm"
+    _lts_error "required tool not found: $vm"
     return 1
   fi
 
@@ -181,7 +184,7 @@ _lts_check() {
   emulate -L zsh
 
   if (( $# > 1 )); then
-    _lts_error "Invalid arguments: $*"
+    _lts_error "invalid arguments: $*"
     return 1
   fi
 
@@ -194,7 +197,7 @@ _lts_check() {
   if (( $# == 1 )); then
     local lang=$1
     if ! _lts_validate_language "$lang"; then
-      _lts_error "Invalid argument: $lang"
+      _lts_error "invalid argument: $lang"
       return 1
     fi
 
@@ -244,7 +247,7 @@ _lts_install() {
     prefix=${parts[2]}
 
     if ! _lts_validate_language "$lang"; then
-      _lts_error "Invalid argument: $spec"
+      _lts_error "invalid argument: $spec"
       return 1
     fi
 
@@ -282,11 +285,11 @@ _lts_install() {
     fi
 
     if ! command "$vm" install "$new" --skip-existing; then
-      _lts_error "Failed to install $lang_name $new"
+      _lts_error "failed to install $lang_name $new"
       return 1
     fi
     if ! command "$vm" global "$new"; then
-      _lts_error "Failed to set $lang_name version to $new"
+      _lts_error "failed to set $lang_name version to $new"
       return 1
     fi
   done
@@ -301,7 +304,7 @@ _lts_query() {
   fi
 
   if (( $# > 1 )); then
-    _lts_error "Invalid arguments: $*"
+    _lts_error "invalid arguments: $*"
     return 1
   fi
 
@@ -309,7 +312,7 @@ _lts_query() {
   local lang=${parts[1]}
 
   if ! _lts_validate_language "$lang"; then
-    _lts_error "Invalid argument: $lang"
+    _lts_error "invalid argument: $lang"
     return 1
   fi
 

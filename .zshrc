@@ -42,12 +42,15 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
   zsh-syntax-highlighting
+  # Shared
+  logger
   # Custom
   brewfile
   colors256
   completions
   deps
   dotfiles
+  filesystem
   gatekeeper
   google
   local-bin
@@ -61,11 +64,8 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Path
+# Path and dotfiles
 initialize_path
-unset -f initialize_path
-
-# Dotfiles
 dotfiles init
 
 # Aliases

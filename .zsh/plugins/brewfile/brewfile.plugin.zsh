@@ -1,13 +1,16 @@
-# Wrap brew/mas so package-mutating commands sync the Brewfile in the background.
 #
+# brewfile: wrap brew/mas so package-mutating commands sync the Brewfile in the background.
 # Usage: brew <command>
 #        mas <command>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 _brewfile_sync() {
   emulate -L zsh
   if ! { command brew bundle dump --brews --casks --taps --mas --force --no-restart &&
     command brew bundle } &>/dev/null; then
-    print -r -- 'brewfile: background Brewfile sync failed' >&2
+    _zsh::log warn brewfile 'background Brewfile sync failed'
   fi
 }
 

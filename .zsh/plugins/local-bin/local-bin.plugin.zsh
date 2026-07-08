@@ -1,4 +1,6 @@
-# Put the current project's node_modules/.bin on PATH so local binaries run as bare commands inside the project.
+#
+# local-bin: add the current project's node_modules/.bin to PATH so local binaries run as bare commands inside the project.
+#
 
 _local_bin_update() {
   emulate -L zsh

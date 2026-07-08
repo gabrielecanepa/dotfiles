@@ -1,6 +1,9 @@
-# Load or reload a zsh plugin by name, preferring the custom override over the bundled copy.
 #
+# plugin: load or reload a zsh plugin by name, preferring the custom override over the bundled copy.
 # Usage: plugin <name>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 plugin() {
   emulate -L zsh
@@ -18,7 +21,7 @@ plugin() {
   [[ -f "$custom_path" ]] && zsh_path="$custom_path"
 
   if [[ ! -f "$zsh_path" ]]; then
-    print -r -- "Plugin not found: $name"
+    _zsh::log error plugin "not found: $name"
     return 1
   fi
 

@@ -1,7 +1,8 @@
-# Print PATH and FPATH entries one per line.
 #
+# path: print PATH and FPATH entries one per line.
 # Usage: path
 #        fpath
+#
 
 path() {
   emulate -L zsh

@@ -1,23 +1,21 @@
-# Toggle macOS GateKeeper globally or strip the quarantine attribute from specific apps/resources.
 #
+# gatekeeper: toggle macOS GateKeeper globally or strip quarantine from specific apps/resources.
 # Usage: gatekeeper <command>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 gatekeeper() {
   emulate -L zsh
 
-  local info="${fg[blue]:-}info${reset_color:-}"
-  local error="${fg[red]:-}error${reset_color:-}"
-  local success="${fg[green]:-}success${reset_color:-}"
-  local warn="${fg[yellow]:-}warn${reset_color:-}"
-
   case $1 in
     status)
       if command sudo spctl --status >/dev/null 2>&1; then
-        print -r -- "$info GateKeeper is enabled globally 🔒"
+        _zsh::log info gatekeeper 'GateKeeper is enabled globally 🔒'
         return 0
       fi
 
-      print -r -- "$warn GateKeeper is currently disabled 🔓"
+      _zsh::log warn gatekeeper 'GateKeeper is currently disabled 🔓'
       printf 'Do you want to enable it? (Y/n) '
       local choice
       read -r choice
@@ -29,24 +27,24 @@ gatekeeper() {
       ;;
     disable)
       if ! command sudo spctl --status >/dev/null 2>&1; then
-        print -r -- "$info GateKeeper is already disabled 🔓"
+        _zsh::log info gatekeeper 'GateKeeper is already disabled 🔓'
         return 0
       fi
 
       case $2 in
         "")
-          print -r -- "$warn This will disable GateKeeper globally" >&2
+          _zsh::log warn gatekeeper 'this will disable GateKeeper globally'
           printf 'Are you sure you want to continue? (y/N) '
           local choice
           read -r choice
 
           if [[ "$choice" == [yY]* ]]; then
             if ! command sudo spctl --global-disable >/dev/null 2>&1; then
-              print -r -- "$error An issue occurred, please check the logs" >&2
+              _zsh::log error gatekeeper 'an issue occurred, please check the logs'
               return 1
             fi
 
-            print -r -- "$success GateKeeper disabled globally 🔓"
+            _zsh::log success gatekeeper 'GateKeeper disabled globally 🔓'
             return 0
           fi
           return 0
@@ -55,7 +53,7 @@ gatekeeper() {
           local -a apps=("${@:3}")
 
           if (( $#apps == 0 )); then
-            print -r -- "$error No applications provided" >&2
+            _zsh::log error gatekeeper 'no applications provided'
             return 1
           fi
 
@@ -64,17 +62,16 @@ gatekeeper() {
             app_path="/Applications/$app.app"
 
             if [[ ! -d "$app_path" ]]; then
-              print -r -- "$error $app is not installed" >&2
+              _zsh::log error gatekeeper "$app is not installed"
               return 1
             fi
 
-            # Strip the quarantine flag so GateKeeper stops blocking it
             if ! command sudo xattr -r -d com.apple.quarantine "$app_path" 2>/dev/null; then
-              print -r -- "$error Can't disable GateKeeper for $app" >&2
+              _zsh::log error gatekeeper "can't disable GateKeeper for $app"
               return 1
             fi
 
-            print -r -- "$success GateKeeper disabled on $app 🔓"
+            _zsh::log success gatekeeper "GateKeeper disabled on $app 🔓"
           done
           return 0
           ;;
@@ -82,12 +79,11 @@ gatekeeper() {
           local resource
           for resource in "${@:2}"; do
             if ! command sudo xattr -r -d com.apple.quarantine "$resource" 2>/dev/null; then
-              # ${resource##*/} is the basename
-              print -r -- "$error Can't disable GateKeeper on ${resource##*/}" >&2
+              _zsh::log error gatekeeper "can't disable GateKeeper on ${resource:t}"
               return 1
             fi
 
-            print -r -- "$success GateKeeper disabled on ${resource##*/} 🔓"
+            _zsh::log success gatekeeper "GateKeeper disabled on ${resource:t} 🔓"
           done
           return 0
           ;;
@@ -95,12 +91,12 @@ gatekeeper() {
       ;;
     enable)
       if command sudo spctl --status >/dev/null 2>&1; then
-        print -r -- "$info GateKeeper is already enabled 🔒"
+        _zsh::log info gatekeeper 'GateKeeper is already enabled 🔒'
         return 0
       fi
 
-      print -r -- "$warn Re-enabling GateKeeper globally is no longer possible from the CLI on macOS 15+." >&2
-      print -r -- "$info Enable it in System Settings > Privacy & Security > Security." >&2
+      _zsh::log warn gatekeeper 're-enabling GateKeeper globally is no longer possible from the CLI on macOS 15+'
+      _zsh::log info gatekeeper 'enable it in System Settings > Privacy & Security > Security'
       return 1
       ;;
     help|-h|--help)
@@ -116,8 +112,8 @@ gatekeeper() {
       ;;
     *)
       if [[ -n "$1" ]]; then
-        print -r -- "$error Unknown command: $1" >&2
-        print -- "" >&2
+        _zsh::log error gatekeeper "unknown command: $1"
+        print -ru2 -- ''
         gatekeeper --help >&2
         return 1
       fi

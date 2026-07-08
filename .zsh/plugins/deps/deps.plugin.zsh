@@ -1,8 +1,11 @@
-# Print the dependencies declared in a project's package.json.
 #
+# deps: print the dependencies declared in a project's package.json.
 # Usage: deps [<dir>|<path/to/package.json>] [-L|--list] [--dev|--peer|--optional|--all]
+#
 
-# Resolve an input to the directory holding package.json: a dir, a package.json path, or empty for PWD. Return 1 otherwise.
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
+
+# Resolve an input to the dir holding package.json: a dir, a package.json path, or empty for PWD; else return 1.
 _deps_get_package_root() {
   emulate -L zsh
   local target=$1
@@ -15,9 +18,8 @@ _deps_get_package_root() {
 deps() {
   emulate -L zsh
 
-  # $+commands[jq] is the membership test for jq on PATH.
   if (( ! $+commands[jq] )); then
-    print -ru2 -- 'deps: jq is required but not installed'
+    _zsh::log error deps 'jq is required but not installed'
     return 1
   fi
 
@@ -37,7 +39,7 @@ deps() {
   for arg in "${args[@]}"; do
     # (Ie) yields the index of an exact match; zero means $arg is not a known option.
     if (( ! ${opts_allowed[(Ie)$arg]} )); then
-      print -ru2 -- "deps: invalid option: $arg"
+      _zsh::log error deps "invalid option: $arg"
       return 1
     fi
     case $arg in
@@ -48,7 +50,7 @@ deps() {
       --all)
         # --all is exclusive: reject it alongside any per-group flag.
         if (( ${args[(Ie)--dev]} || ${args[(Ie)--peer]} || ${args[(Ie)--optional]} )); then
-          print -ru2 -- "deps: can't specify --all with --dev, --peer or --optional"
+          _zsh::log error deps "can't specify --all with --dev, --peer or --optional"
           return 1
         fi
         groups=(dependencies devDependencies peerDependencies optionalDependencies)
@@ -57,8 +59,8 @@ deps() {
   done
 
   local root
-  root=$(_deps_get_package_root "$dir") || { print -ru2 -- "deps: invalid path: $dir"; return 1; }
-  [[ -f $root/package.json ]] || { print -ru2 -- 'deps: no package.json found'; return 1; }
+  root=$(_deps_get_package_root "$dir") || { _zsh::log error deps "invalid path: $dir"; return 1; }
+  [[ -f $root/package.json ]] || { _zsh::log error deps 'no package.json found'; return 1; }
 
   (( ${#groups} )) || groups=(dependencies)
 

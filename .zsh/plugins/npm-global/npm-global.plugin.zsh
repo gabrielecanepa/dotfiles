@@ -1,6 +1,9 @@
-# Track npm global packages in $NPM_GLOBAL/package.json and reinstall them on demand.
 #
+# npm-global: track npm global packages in $NPM_GLOBAL/package.json and reinstall them on demand.
 # Usage: npm <command>
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 : ${NPM_GLOBAL:=$HOME/.npm}
 export NPM_GLOBAL
@@ -38,8 +41,8 @@ npm() {
   case $1 in
     dump)
       if (( $# > 1 )); then
-        print -r -- "npm-global: unknown arguments: ${*:2}" >&2
-        print -r -- 'usage: npm dump' >&2
+        _zsh::log error npm-global "unknown arguments: ${*:2}"
+        print -ru2 -- 'usage: npm dump'
         return 1
       fi
       _npm_global_dump
@@ -47,8 +50,8 @@ npm() {
       ;;
     fresh)
       if (( $# > 1 )); then
-        print -r -- "npm-global: unknown arguments: ${*:2}" >&2
-        print -r -- 'usage: npm fresh' >&2
+        _zsh::log error npm-global "unknown arguments: ${*:2}"
+        print -ru2 -- 'usage: npm fresh'
         return 1
       fi
       command npm update --global && _npm_global_dump
@@ -112,7 +115,7 @@ npm() {
     local -a deps
     deps=(${(f)"$(_npm_global_saved_deps)"})
     if (( ! ${#deps} )); then
-      print -r -- "npm-global: no dependencies saved in $NPM_GLOBAL/package.json" >&2
+      _zsh::log error npm-global "no dependencies saved in $NPM_GLOBAL/package.json"
       return 1
     fi
     command npm install --global "${deps[@]}"
@@ -124,7 +127,7 @@ npm() {
 
   # Mutating global command succeeded: sync the tracked package.json before returning.
   if (( exit == 0 )) && (( ${dump_commands[(Ie)$cmd]} )); then
-    _npm_global_dump || print -r -- 'npm-global: package.json sync failed' >&2
+    _npm_global_dump || _zsh::log warn npm-global 'package.json sync failed'
   fi
 
   return $exit

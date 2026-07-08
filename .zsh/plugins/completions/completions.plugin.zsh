@@ -1,6 +1,9 @@
-# Generate and cache zsh completion files under $ZSH_COMPLETIONS_PATH.
 #
+# completions: generate and cache zsh completion files under $ZSH_COMPLETIONS_PATH.
 # Usage: completions <cli> [<cli> ...]
+#
+
+(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 [[ -z "${ZSH_COMPLETIONS_PATH:-}" ]] && export ZSH_COMPLETIONS_PATH="${ZSH_CUSTOM:-$HOME/.zsh}/completions"
 [[ -d "$ZSH_COMPLETIONS_PATH" ]] || mkdir -p "$ZSH_COMPLETIONS_PATH"
@@ -13,7 +16,7 @@ completions() {
   integer rc=0
 
   if (( ${#clis[@]} == 0 )); then
-    print -ru2 -- '[completions] usage: completions <cli> [<cli> ...]'
+    _zsh::log error completions 'usage: completions <cli> [<cli> ...]'
     return 1
   fi
 
@@ -24,12 +27,12 @@ completions() {
     IFS= read -rd '' comp
 
     if (( ${#clis[@]} > 1 )); then
-      print -ru2 -- '[completions] only one cli can be passed when using stdin'
+      _zsh::log error completions 'only one cli can be passed when using stdin'
       return 1
     fi
 
     if ! print -r -- "$comp" > "$ZSH_COMPLETIONS_PATH/_${clis[1]}"; then
-      print -ru2 -- "[completions] failed to write completions for ${clis[1]}"
+      _zsh::log error completions "failed to write completions for ${clis[1]}"
       return 1
     fi
 
@@ -39,7 +42,7 @@ completions() {
   local file
   for cli in "${clis[@]}"; do
     if (( ! ${+commands[$cli]} )); then
-      print -ru2 -- "[completions] command not found: $cli"
+      _zsh::log error completions "command not found: $cli"
       rc=1
       continue
     fi
@@ -50,7 +53,7 @@ completions() {
     [[ -n "$comp" ]] || comp="$(command "$cli" completion 2>/dev/null)"
 
     if [[ -z "$comp" ]]; then
-      print -ru2 -- "[completions] cannot generate completions for $cli"
+      _zsh::log error completions "cannot generate completions for $cli"
       rc=1
       continue
     fi
@@ -60,7 +63,7 @@ completions() {
     [[ -e "$file" && "$comp" == "$(<"$file")" ]] && continue
 
     if ! print -r -- "$comp" > "$file"; then
-      print -ru2 -- "[completions] failed to write completions for $cli"
+      _zsh::log error completions "failed to write completions for $cli"
       rc=1
       continue
     fi
