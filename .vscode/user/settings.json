@@ -9,6 +9,7 @@
   "chat.agent.thinking.collapsedTools": "withThinking",
   "chat.agent.thinkingStyle": "collapsed",
   "chat.checkpoints.showFileChanges": true,
+  "chat.defaultModel": "opus",
   "chat.editing.confirmEditRequestRemoval": false,
   "chat.editing.confirmEditRequestRetry": false,
   "chat.instructionsFilesLocations": {
@@ -228,6 +229,7 @@
   "github.copilot.chat.agent.autoFix": true,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
   "github.copilot.chat.claudeAgent.allowAutoPermissions": true,
+  "github.copilot.chat.cloudAgentBackend.version": "v2",
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -294,7 +296,7 @@
   "html.format.templating": true,
   "html.format.unformatted": "html,style",
   "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
-  "inlineChat.defaultModel": "Claude Haiku 4.5 (copilot)",
+  "inlineChat.defaultModel": "Auto (copilot)",
   "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
   "js/ts.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
