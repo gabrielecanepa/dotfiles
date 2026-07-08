@@ -13,7 +13,7 @@ The full baseline lives in the always-on rules: `behavior.instructions.md` (reas
   - Writing or reviewing **React/Next.js code** → open the `react` rule; `vercel-react-best-practices` is the performance bar and `vercel-composition-patterns` drives component design.
   - Writing **Node.js server-side code** (APIs, services, CLIs, scripts) → open the `node` rule.
   - Writing **human-facing prose** longer than a few sentences (docs, README, release notes, marketing copy) → open the `writing` rule and run the `humanizer` skill.
-  - Library / API / framework questions → `context7-mcp`. Driving or QA-ing a real web UI → `agent-browser`.
+  - Library / API / framework questions → `context7-mcp`. Driving or QA-ing a real web UI → open the `browser` rule (reuse the running dev-server port via `agent-browser`; never spawn an ad-hoc preview server).
   - Editing this machine's dotfiles → the `dotfiles` rule (Codex: read `.agents/rules/dotfiles.instructions.md` first).
 
 ## Rules & loading
@@ -28,6 +28,7 @@ Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their con
 
 - `behavior.instructions.md`: tone, reasoning, feedback, decision-making, chat-output brevity. **Always-on.**
 - `engineering.instructions.md`: code-execution discipline (simplicity, surgical diffs, verification) for any repo. **Always-on.**
+- `browser.instructions.md`: real-browser work; reuse the running dev-server port, drive it through `agent-browser`, clean up on completion. **Always-on** (browser work is an action, not a file edit). Routes to the `agent-browser` skill.
 - `writing.instructions.md`: human-facing prose; routes to the `humanizer` skill. **Loads for docs/markdown/prose.**
 - `design.instructions.md`: UI/visual work; routes to the design skills. **Loads for frontend files.**
 - `typescript.instructions.md`: language-level TS idioms (guard clauses, arrow functions, interface over type, inline type imports, alias imports) and the framework-docs-first rule. **Loads for `.ts`/`.tsx` files.**
@@ -35,7 +36,7 @@ Companion rules live in `.agents/rules/` (auto-loaded; don't duplicate their con
 - `node.instructions.md`: Node.js runtime discipline (event loop, streams, errors and shutdown, diagnostics, packaging). **Loads for server-side JS/TS paths.**
 - `dotfiles.instructions.md`: conventions for the `$HOME` dotfiles repo. **Loads only when editing this machine's config** (shell, git, brew, git hooks, agent config).
 
-Claude Code and Copilot load these rule files automatically (Claude Code loads always-on ones every session and path-scoped ones when a touched file matches; Copilot scopes via `applyTo`). **Codex does not**: when a task involves code, prose, UI, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
+Claude Code and Copilot load these rule files automatically (Claude Code loads always-on ones every session and path-scoped ones when a touched file matches; Copilot scopes via `applyTo`). **Codex does not**: when a task involves code, prose, UI, driving a browser, or this machine's dotfiles, read the relevant `.agents/rules/*.instructions.md` file before starting.
 
 ## Environment
 
