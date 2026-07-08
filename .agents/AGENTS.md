@@ -44,6 +44,11 @@ Claude Code and Copilot load these rule files automatically (Claude Code loads a
 - **Terminal:** Ghostty.
 - **Project workspace:** `$WORKING_DIR` = `~/Developer` (jump with `cdw`); real project code lives there. `$HOME` itself is a git repo (dotfiles); see the dotfiles rule when working under `~`.
 
+## Obsidian vaults
+
+- **Vaults live only in Obsidian's iCloud container** `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/`, one per top-level folder, synced across devices. Read vaults only from there; never `~/Documents`, `~/iCloud Drive`, or a hardcoded path.
+- The `obsidian-vaults` MCP server (`@modelcontextprotocol/server-filesystem`, user scope) grants read/write over specific vault paths for clients without native file access (mainly Claude Desktop); Claude Code uses its own file tools.
+
 ## Shell
 
 - **zsh + oh-my-zsh** with a custom framework under `ZSH_CUSTOM=~/.zsh`. Many "commands" are custom functions/plugins, not binaries (`profile`, `plugin`, the `brew`/`mas` wrapper, `lts`, `completions`, `deps`, `dotfiles`, etc.); check `.zsh/plugins/<name>/` before assuming a command is a system tool. The `dotfiles` plugin (`dotfiles init` to fix drift, `dotfiles doctor` to report it) re-links managed symlinks that apps clobber.
