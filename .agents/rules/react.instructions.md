@@ -14,6 +14,7 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 
 - **Any React/Next.js code** → `vercel-react-best-practices` is the performance bar. Apply it by priority (CRITICAL > HIGH > MEDIUM > LOW) and re-check against it before declaring component work done.
 - **Any non-trivial component design** → run `vercel-composition-patterns` first (compound components, slots, context providers, render props).
+- **Long lists** → the perf skill stops at `content-visibility`; past a few hundred rows that is not enough. Windowing (render only visible rows) is a hard requirement, via `@tanstack/react-virtual` or `react-window`.
 
 ## Component props
 
@@ -77,6 +78,8 @@ export const DashboardProvider = ({
 - **Compose, don't configure.** Build with composition (compound components, slots, context providers) over boolean-prop configuration. A **third boolean prop** is the signal to restructure into compound components. Run `vercel-composition-patterns` for any non-trivial design.
 - **JSX.** `{cond && <El />}` for one branch, a ternary for two; `<>...</>` over `<Fragment>`. Named imports for hooks and values (`useState`, `use`); never import `React` itself in any form, its types come from the global namespace (see the rule above).
 - **No manual memoization under React Compiler.** When React Compiler is enabled, do not hand-add `useMemo`, `useCallback`, or `React.memo`; the compiler memoizes. (Only when the compiler is on.)
+- **Cancel superseded requests.** For client fetches that fire on rapid input (search-as-you-type, filters, quick nav), pass an `AbortController` signal and abort the prior request so a slow earlier response can't overwrite a newer one. Prefer a data library that cancels for you (TanStack Query, `use`+RSC) over hand-rolled effects.
+- **Split context by change-frequency.** Every consumer of a context re-renders on any change to its value, whichever field it reads. Keep high-churn state out of a wide provider: split into narrow contexts, or back a hot store with an external store subscribed via `useSyncExternalStore`. The Compiler does not fix whole-value subscription.
 
 ## Layer boundaries
 

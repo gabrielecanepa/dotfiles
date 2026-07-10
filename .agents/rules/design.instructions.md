@@ -46,6 +46,7 @@ Plan before coding: a compact token system, palette (4 to 6 named hex), 2+ type 
 ## Production-quality floor (enforce regardless of skill)
 
 - Responsive down to mobile; visible keyboard focus; `prefers-reduced-motion` respected.
+- **Animate compositor properties only**: `transform` and `opacity` (GPU, no reflow). Never animate `width`/`height`/`top`/`left`/`margin`; those hit layout every frame. When measuring the DOM imperatively, batch reads before writes so a read-write-read pattern can't force synchronous reflows.
 - Semantic HTML over `div` soup; pass accessibility checks (axe).
 - Real content, not lorem; UI copy follows `writing.instructions.md` (active voice, plain verbs, sentence case, no filler).
 - **Verify visually**: screenshot via `agent-browser`/Playwright and critique your own work, reusing the already-running dev server and Chrome window (verification and reuse rules in `engineering.instructions.md`).
