@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "agent-browser": "0.31.1",
     "ccstatusline": "2.2.22",
     "corepack": "0.35.0",
     "npm": "11.17.0"
