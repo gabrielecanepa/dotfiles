@@ -17,6 +17,8 @@ brew "commitlint"
 brew "coreutils"
 # Suite of command-line tools for converting to and working with CSV
 brew "csvkit"
+# TIFF library and utilities
+brew "libtiff"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
 # Command-line tools for fly.io services
