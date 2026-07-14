@@ -1,47 +1,36 @@
 ---
-description: 'Use whenever a task drives a real browser: verifying a change in the running app, QA, dogfooding, form/flow automation, scraping, screenshots. Reuse the running dev server, drive it through agent-browser, and clean up on completion. Always-on: browser work is an action, not a file edit, so nothing path-scoped would trigger it.'
+description: 'Use whenever a task drives or verifies a real web UI. Reuse the running app, use agent-browser, preserve authenticated state, and clean up sessions.'
+applyTo: '**'
 ---
 
 # Real-browser work
 
-Route all real-browser work through the **`agent-browser`** skill (the CLI), authenticated pages included (section 3). Reach for `claude-in-chrome` (or `Control_Chrome`) ONLY if explicitly requested by the user (section 4). NEVER build a throwaway HTML file and serve it on an ad-hoc port to preview a feature: that bypasses the running app, its auth, and its real data. Drive the actual app.
+Use the `agent-browser` skill for browser driving, QA, screenshots, scraping, and authenticated flows. Test the running application with its real data. Never create a throwaway page, mock route, auth bypass, or ad-hoc preview server.
 
-## 1. One dev server, reuse its port
+## Flow
 
-- The user runs the dev server (`next dev`, `vite`, etc.). **Reuse the port it already serves on** (read the actual port: the terminal banner, `list_tabs`, or the project's dev script/config). That port holds the authenticated session and real state.
-- **Never spawn a per-launch server** (a random port like `8899`, a `.claude/launch.json` entry, `python -m http.server`) to preview or verify a feature. If no dev server is running, start the project's own (`pnpm dev` / the lockfile's package manager) on its configured port, or ask which port to use; do not invent one.
-- Detect the package manager from the lockfile (`pnpm-lock.yaml` → pnpm, `package-lock.json` → npm, `bun.lockb` → bun); never assume.
-
-## 2. The verify loop
-
-Canonical loop, scoped to an isolated session so parallel work never collides (name it after the worktree/branch):
+- Reuse the dev server and port already running. Read the terminal, open tabs, or project config. If none exists, start the project's own dev command with its lockfile-selected package manager and configured port.
+- Load the workflow with `agent-browser skills get core`. Use a session named for the worktree or task, act on snapshot refs, wait for real URL, text, or network signals, and capture evidence for the changed behavior.
+- Close the session when finished. Remove any tab group created for the task.
 
 ```bash
-agent-browser --session <worktree> open http://localhost:<port>/<route>
-agent-browser --session <worktree> snapshot -i      # act on @eN refs
-# ...drive the real flow: click, fill, wait, screenshot...
-agent-browser --session <worktree> close            # on completion, always
+agent-browser --session <task> open http://localhost:<port>/<route>
+agent-browser --session <task> snapshot -i
+agent-browser --session <task> close
 ```
 
-- Load the full workflow first: `agent-browser skills get core`. Wait on real signals (`wait --url`, `wait --text`, `wait --load networkidle`), not bare `wait 2000`.
-- **Close the session when the task is done** (`close`, or `close --all` for every session). Leaving a live session or dead tab behind is the failure to avoid. If you opened a tab group, delete it on completion; a completed group (green-check icon) must not be left in the window.
+## Authentication
 
-## 3. Authenticated pages
+The vault may fill credentials because the model never sees the secret. Use this order before reporting a block:
 
-When the route needs a logged-in session, seed it from the user's real Chrome profile instead of scripting a login. `--profile <name>` copies that profile to a read-only snapshot, so the agent inherits the live cookies without touching the real profile:
+1. Launch with the project's persistent `--session-name <profile>` so cookies and storage restore across runs.
+2. If the login page appears, run `agent-browser auth login <profile>`. The project instructions must name the profile and login URL.
+3. If `agent-browser auth list` lacks the profile, print the following command with project values filled in and stop for the user to enter the password:
 
-```bash
-agent-browser profiles                                          # list profiles by name
-agent-browser --profile "<Name>" --session <worktree> open http://localhost:<port>/<route>
-```
+   ```bash
+   read -rs PW && printf '%s' "$PW" | agent-browser auth save <profile> --url <login-url> --username <test-user> --password-stdin && unset PW
+   ```
 
-- The snapshot is taken at launch: if the session cookie expired in Chrome, the copy is stale, so re-run after logging in fresh.
-- To keep the login warm across runs, add `--session-name <key>` (auto-saves cookies/storage to `~/.agent-browser/sessions/` on close, restores next launch). Note the two look-alike flags: `--session` is an isolated browser instance (the verify-loop scope above), `--session-name` is the auth-persistence key.
-- Other paths, weaker: a scriptable username/password form → the credential vault (`auth save <name> --password-stdin` once, then `auth login <name>`; the LLM never sees the password). A login the vault can't script (SSO, magic link) → `state save ./auth.json` once, then `--state ./auth.json`. State files are plaintext tokens: gitignore them and set `AGENT_BROWSER_ENCRYPTION_KEY`. Never put a real password on the command line (shell-history leak).
+For SSO or magic links that the vault cannot script, have the user log in once, save state to a gitignored file, set `AGENT_BROWSER_ENCRYPTION_KEY`, and relaunch with `--state`. A read-only Chrome profile snapshot is the last fallback and goes stale with Chrome's session. Never put a password on the command line.
 
-## 4. Fallback: watch it live in the user's window
-
-Use **`claude-in-chrome`** (or `Control_Chrome`) instead of `agent-browser` ONLY when if user explicitly requests it. Then:
-
-- `list_connected_browsers` first. The user names their windows (e.g. **Work**, **<Company>x**); pick the one that matches the task. If it's ambiguous, none is open, or the windows are unnamed, **ask** rather than guessing.
-- Reuse the tab already on the running app; don't open a new window. Same cleanup rule: delete any tab group you created and marked completed.
+Use `claude-in-chrome` or `Control_Chrome` only when the user explicitly requests their visible browser. List connected browsers first, select an unambiguous named window, reuse its existing app tab, and clean up any group you create.
