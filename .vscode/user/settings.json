@@ -62,6 +62,12 @@
     "source.fixAll.shellcheck": "explicit"
   },
   "editor.colorDecorators": true,
+  "editor.definitionLinkOpensInPeek": false,
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "editor.gotoLocation.alternativeDefinitionCommand": "",
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
   "editor.guides.bracketPairsHorizontal": "active",
