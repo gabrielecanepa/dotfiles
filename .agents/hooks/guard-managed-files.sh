@@ -37,10 +37,10 @@ esac
 
 # 3. Agent config is single-source-of-truth in ~/.agents/; do not edit via symlinks.
 case "$abs" in
-  "$HOME"/.claude/CLAUDE.md | "$HOME"/.codex/AGENTS.md | "$HOME"/.codex/hooks.json)
+  "$HOME"/.claude/CLAUDE.md | "$HOME"/.codex/AGENTS.md | "$HOME"/.codex/hooks.json | "$HOME"/.github/copilot-instructions.md)
     deny "$abs is a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
-  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/hooks/* | "$HOME"/.codex/skills/* | "$HOME"/.codex/hooks/*)
+  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/hooks/* | "$HOME"/.claude/output-styles/* | "$HOME"/.codex/skills/* | "$HOME"/.codex/hooks/* | "$HOME"/.copilot/instructions/* | "$HOME"/.github/instructions/*)
     deny "$abs resolves through a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
 esac

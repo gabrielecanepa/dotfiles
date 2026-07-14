@@ -24,18 +24,33 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 ## Single source of truth for agent config
 
-- Edit `.agents/{AGENTS.md,rules,skills,hooks,hooks.json,output-styles}`. `~/.claude/*`, `~/.codex/{AGENTS.md,hooks,hooks.json,skills}`, `~/.copilot/instructions`, and `~/.github/*` resolve to `.agents` via tracked symlinks. Never edit symlink targets directly or duplicate content across agents. Both `~/.claude/skills` and `~/.codex/skills` point at `.agents/skills`, so Claude and Codex share one skill set. `~/.claude/output-styles` points at `.agents/output-styles` (a Claude Code feature; no Codex equivalent).
+- Edit `.agents/{AGENTS.md,rules,skills,hooks,hooks.json,output-styles}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills,output-styles}`, `~/.codex/{AGENTS.md,hooks,hooks.json,skills}`, `~/.copilot/instructions`, `~/.github/instructions`, and `~/.github/copilot-instructions.md` resolve to those sources. Never edit through a link or duplicate content across agents. Claude and Codex share `.agents/skills`; only Claude uses `.agents/output-styles`.
 - **Install skills globally with `npx skills add <owner/repo> --skill <name> --global --yes`** (the [skills.sh](https://skills.sh) CLI), run from `~`. `--global` is **required**: it writes the skill into `.agents/skills/` and pins the entry in **`.agents/.skill-lock.json`**, the single source of truth (without it the CLI writes a project-level `~/skills-lock.json`, which must not exist here). Drop `--skill <name>` to install every skill in the collection. The skills themselves are gitignored (`.agents/skills/.gitignore` is allowlist-style: `/*/` then `!`-unignore the few tracked ones); the tracked `.agents/.skill-lock.json` is what git carries. Update every global skill with `npx skills update --global --yes`. Never hand-copy a skill folder or hand-edit the lockfile; let the CLI write both.
-- **One source, one route per tool, no duplication.** `.agents/rules/*.instructions.md` is the single rule source. `~/.claude/rules`, `~/.github/instructions`, and `~/.copilot/instructions` are all symlinks to it, so the same physical files are reachable many ways. Each tool consumes them through exactly **one** location. The wiring: **Claude Code** reads `.claude/rules` natively (any `.md`; always-on without `paths:` frontmatter, else loaded when a touched file matches the globs); **Codex** reads only the always-on `~/.codex/AGENTS.md` and opens the relevant rule file by hand (it has no glob/`applyTo` mechanism); **Copilot** reads `.github/instructions` (honors `applyTo`). Each scoped rule file therefore carries **both** `applyTo` (Copilot) and `paths` (Claude) frontmatter pointing at the same globs; each tool reads its own key and ignores the other. Keep the `description` frontmatter current and non-empty on every rule; it states the trigger, and Copilot skips a file without it.
-- **VS Code `chat.instructionsFilesLocations`: disable every default root except `.github/instructions`.** VS Code has **four** hardcoded default `*.instructions.md` source folders, all enabled until set `false`: `.github/instructions`, `.claude/rules`, `~/.copilot/instructions`, `~/.claude/rules`. Because `$HOME` is the workspace, the two `~/`-prefixed user-profile roots resolve onto the home dir and re-find the same `.agents/rules` symlinks, so naming only `.claude/rules` leaves them active and the Customizations panel still shows three rows. Keep this exact block in `.vscode/user/settings.json` so only one root scans the dir:
+- **One source, one route per tool, no duplication.** `.agents/rules/*.instructions.md` is the single rule source. Claude Code consumes `.claude/rules` natively: files without `paths:` are always on, while scoped files load when a touched path matches. Codex loads `.codex/AGENTS.md` and must open relevant rule files by intent because it has no `paths` or `applyTo` loader. Copilot CLI and VS Code consume the rules through their configured route. Each scoped rule carries matching `applyTo` (Copilot) and `paths` (Claude) frontmatter. Keep every description current and non-empty.
+- **VS Code uses a user route plus a home-workspace override.** User settings enable `~/.copilot/instructions` so the machine-wide rules are discoverable in every project. The `$HOME` workspace would rediscover the same physical files through several default roots, so `.vscode/settings.json` disables the user route, `.claude/rules`, `AGENTS.md`, and `CLAUDE.md`, leaving only `.github/instructions` plus `.github/copilot-instructions.md`. Keep these exact blocks:
+
   ```jsonc
+  // .vscode/user/settings.json
   "chat.instructionsFilesLocations": {
-    ".github/instructions": true,
     ".claude/rules": false,
+    ".github/instructions": true,
     "~/.claude/rules": false,
-    "~/.copilot/instructions": false
+    "~/.copilot/instructions": true
   }
   ```
+
+  ```jsonc
+  // .vscode/settings.json
+  "chat.instructionsFilesLocations": {
+    ".claude/rules": false,
+    ".github/instructions": true,
+    "~/.claude/rules": false,
+    "~/.copilot/instructions": false
+  },
+  "chat.useAgentsMdFile": false,
+  "chat.useClaudeMdFile": false
+  ```
+
 - `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex uses `.agents/hooks.json` through the `~/.codex/hooks.json` symlink. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
 
 ## Generated files
