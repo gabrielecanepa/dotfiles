@@ -9,7 +9,7 @@ organized. Loaded in Phase 2 of sync-agents.
 - [File taxonomy](#file-taxonomy): what each file is for
 - [Architecture checks](#architecture-checks): the judgment calls
 - [Signal-density checks](#signal-density-checks-what-to-cut): what to cut
-- [Constraint compliance](#constraint-compliance)
+- [Constraint compliance](#constraint-compliance): budgets and local rules
 
 ## The `agents.md` standard in brief
 
@@ -51,10 +51,10 @@ Map every agentic file to a role. A file with no clear role is a finding.
   contains only an `@AGENTS.md` include (or the tool's equivalent). Multiple
   fat, drifting entrypoints are the exact problem AGENTS.md exists to solve.
 - **`.agents/**`**: the canonical home for agentic assets (rules, skills,
-commands, hooks, output styles, specs). Check it's organized by kind, each
-asset is reachable and referenced, and nothing is orphaned. If it holds a
-plans/specs backlog, check entries against any completion convention the repo
-declares: a plan for a shipped feature left in `plans/` is dead weight to flag,
+  commands, hooks, output styles, specs). Check it's organized by kind, each
+  asset is reachable and referenced, and nothing is orphaned. If it holds a
+  plans/specs backlog, check entries against any completion convention the repo
+  declares: a plan for a shipped feature left in `plans/` is dead weight to flag,
   not a delta to keep.
 - **Rules / instruction files** (`.agents/rules/*`, `.github/instructions/*`):
   scoped guidance that loads on a path glob. Check the scope is right (a rule
@@ -97,6 +97,12 @@ is the best one for an agent to work with.
   belongs, AGENTS.md prose only for what can't be a tool or skill? Are they used
   correctly (valid frontmatter, working includes, correct paths, forward-slash
   paths)?
+- **Loader graph.** For each tool, identify startup files, scoped files, manual
+  routes, includes, and symlink targets. Flag duplicate physical files loaded
+  through multiple routes and files that no configured route can discover.
+- **Skill catalog.** Measure the metadata exposed before a skill is selected.
+  Flag verbose descriptions, duplicate triggers, disabled or shadowed skills,
+  and lockfile entries that do not match installed folders.
 - **Coverage.** Is anything an agent needs missing: setup, non-obvious build
   steps, conventions, gotchas, the workflow the repo follows? Gaps are as much a
   finding as bloat.
@@ -126,12 +132,16 @@ The test for keeping a line: would an agent do worse without it? If not, cut it.
 
 ## Constraint compliance
 
-Whatever the docs declare is the standard to check against. Constraints are
-stated in no fixed format; infer them from the text and honor them as written:
+Use [context-budgets.md](context-budgets.md) as the default envelope even when
+the repository declares no limits. A stricter local budget overrides it. These
+are review thresholds, not a claim that one line count guarantees model quality.
+Measure lines, tokens, and bytes because any one of them can reveal a different
+failure mode.
 
-- **Token / length budgets**: measure with `scripts/count_tokens.py --budget N`.
+- **Token / length budgets**: measure every audit with
+  `scripts/count_tokens.py`, using the relevant profile or explicit limits.
   Flag files over budget and propose a split or trim rather than silently
-  blowing past it.
+  accepting the excess.
 - **Structure / naming conventions**: section order, file naming, folder layout
   the repo prescribes. For skills, the `agents.md`/Anthropic conventions apply:
   gerund or noun-phrase name, lowercase-hyphen only, max 64 chars, no reserved

@@ -1,286 +1,220 @@
 ---
 name: sync-agents
 description: >-
-  Audits and repairs a repository's agentic documentation: AGENTS.md and every
-  nested AGENTS.md, tool entrypoints (CLAUDE.md, .cursor/rules, GEMINI.md,
-  copilot-instructions), the .agents/ and .claude/ trees, skills, and rule
-  files. Checks architecture and constraint compliance, then fixes drift, bloat,
-  and dead weight, applying clear-cut fixes and asking only for real decisions.
-  Use
-  whenever the user runs `/sync-agents`, or mentions auditing, syncing,
-  reviewing, tightening, or cleaning up AGENTS.md, CLAUDE.md, agent
-  instructions, the .agents/ or .claude/ setup, skills, or rule files, even if
-  they don't say "sync-agents". Does not touch human docs (README, CONTRIBUTING,
-  docs/). Scopes to a path when one is given, else the whole agentic surface;
-  `--check` audits without editing.
+  Audits and repairs AGENTS.md, rules, skills, hooks, tool entrypoints, and other
+  agentic files. Use for `/sync-agents`, agent-setup reviews, or any agentic file
+  or skill creation or revision. Accepts a scope path; `--check` reports without
+  editing.
 ---
 
 # sync-agents
 
-Keep a repository's **agentic documentation** honest: current, dense, well
-architected for the agents that read it. This skill scans every agentic file in
-scope, reviews how the setup is organized, finds drift and dead weight, fixes
-what's unambiguous, and stops to ask only when a real decision is the user's.
+Audit and repair the complete agentic surface of a repository. Optimize four
+aspects together: instruction quality, discoverability, context efficiency, and
+maintainability. Never shrink context at the expense of a hard behavior.
 
-Human-facing docs (README, CONTRIBUTING, `docs/`) are explicitly out of scope.
-Do not read them for editing, do not touch them. The one exception is the
-README-vs-AGENTS.md boundary check in Phase 2, which is an agentic-architecture
-concern, not a human-doc edit.
+Human-facing docs such as README, CONTRIBUTING, CHANGELOG, and `docs/` are out of
+scope. Read one only to verify whether agent-only material is misplaced, and do
+not edit it. The `sync-docs` skill owns that surface.
 
 ## Arguments
 
-The invocation may carry two things, both optional. Parse them from the prompt
-before Phase 0.
+Parse two optional arguments before starting:
 
-- **A scope path or area** (e.g. `/sync-agents the skills folder`,
-  `/sync-agents .agents/rules`). Present → narrow the sweep to that subtree and
-  lead there, but still do a light baseline pass over the rest of the agentic
-  surface so nothing silently rots. Absent → audit **all** agentic docs in the
-  resolved root.
-- **`--check`** → audit only. Produce the findings and the recap, apply **no**
-  edits and remove nothing. This is the read-only inversion of the default.
+- **Scope path or area**: lead in that subtree, then run a light whole-surface
+  pass so global routing and contradictions remain visible. Without a scope,
+  inspect the entire agentic surface.
+- **`--check`**: audit and report only. Do not edit, remove, install, update, or
+  regenerate anything.
 
 ## Operating contract
 
-Hold these for the whole run.
+- Read and obey the effective instruction chain before acting.
+- Resolve symlinks and includes. Edit the canonical source, never a generated
+  entrypoint or alternate route.
+- Preserve unrelated user changes and the repository's formatting conventions.
+- Never commit or push unless the current prompt explicitly asks.
+- Prefer recoverable removals. Delete a tracked duplicate, stale plan, or orphan
+  only when ownership and replacement are clear; ask before ambiguous or
+  untracked removal.
+- Treat vendored or manager-owned skills as read-only. Repair them through their
+  declared manager, lockfile, or upstream source instead of local patching.
+- Ask only for a decision that materially changes the architecture or cannot be
+  inferred safely. Continue all independent work while it waits.
 
-- **Act on the clear wins; ask only for real decisions.** Apply every fix with a
-  single best answer: drift, obvious compliance fixes, removing dead
-  duplicates. Stop only where a genuine choice is the user's, and put it as
-  selectable options. Don't ask about the obvious; don't unilaterally settle the
-  genuinely ambiguous. Under `--check`, apply nothing: report both the clear
-  fixes you would make and the decisions you'd raise.
-- **Stay inside the resolved scope.** Read and write only within the root
-  resolved in Phase 0 (and within the scope path if one was given). Never cross
-  between a project and the home directory.
-- **AGENTS.md is the source of truth when it exists.** Everything else either
-  points to it (entrypoints like CLAUDE.md) or is subordinate to it; resolve
-  contradictions in its favor unless the content is plainly stale. If no
-  AGENTS.md exists in scope, don't invent one or point files at it: audit the
-  entrypoints and rules that do exist on their own terms, and treat consolidating
-  them into a new AGENTS.md as a decision to ask, never an auto-fix.
-- **Honor declared constraints; don't invent them.** Whatever the docs state,
-  token budgets, length caps, structure, naming, banned vocabulary, is the law.
-  Infer it from the text, apply it, flag violations. Do not impose preferences
-  the repo never asked for.
-- **Bias to signal density.** More words is not better. Context files that
-  restate what tool configs already enforce, or pad with generic advice,
-  measurably _lower_ agent success and cost tokens every session. Cut anything
-  that doesn't earn its place.
-- **Anchor to the standard.** Align to the `agents.md` open format (an open
-  standard under the Linux Foundation's Agentic AI Foundation) and proven
-  patterns. When current practice might have moved, research it (Phase 2) rather
-  than guessing.
-- **Write the human-facing output plainly.** The decision questions and the
-  final recap are read by a person: lead with the answer, cut filler, no dashes.
-  Route them through a `humanizer` skill if one is available, but don't depend on
-  it.
-- **Removals must be recoverable.** Auto-remove a file only when it's
-  git-tracked, using `git rm` so it stays recoverable. For untracked files or a
-  non-git (home) scope, treat removal as a decision and ask first, or back the
-  file up to a timestamped location before removing. Never a silent hard delete.
+## Phase 0: resolve the environment
 
-## Phase 0: resolve scope
+1. Resolve the repository root with Git when possible, otherwise use the current
+   directory.
+2. Read root and nearest nested `AGENTS.md` files plus any repository rule that
+   governs agent config, docs, generated files, formatting, or commits.
+3. Parse the scope and `--check` arguments.
+4. Read these references completely:
+   - [references/agentic-architecture.md](references/agentic-architecture.md)
+   - [references/context-budgets.md](references/context-budgets.md)
+5. If substantive rule edits are possible, also read
+   [references/behavioral-baits.md](references/behavioral-baits.md) and run the
+   applicable baits now to record a baseline.
+6. Identify the declared source of truth, managed files, generated files,
+   ignored paths, installed-skill manager, and tool-specific configuration.
 
-Decide which root you operate on, and say so before touching anything.
+Do not infer loader behavior from filenames alone. Inspect the configuration
+that makes each file discoverable.
 
-1. Get the current directory.
-2. Find a project root: run `git rev-parse --show-toplevel` from cwd. If it
-   returns a path that is **not** the home directory, that path is the project
-   root → **project scope**.
-3. No git? Walk up from cwd for a project marker (`AGENTS.md`, `.agents/`,
-   `package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `Gemfile`), stopping
-   **before**
-   `~`. First marker found → project root.
-4. If cwd is the home directory itself, or no project root is found above `~`,
-   use **home scope** with root `~`.
+## Phase 1: inventory and measure
 
-State the resolved scope and root in one line. If a scope path was given, state
-it too. Then proceed. If cwd is ambiguous (e.g. a bare clone directly under
-`~`), name the ambiguity and confirm before scanning.
+Use `rg --files`, targeted `find`, `readlink`, and Git status or ignore checks.
+Inventory at least:
 
-## Phase 1: inventory
+- every root and nested `AGENTS.md`;
+- `CLAUDE.md`, `GEMINI.md`, Copilot instructions, Cursor rules, commands, and
+  equivalent tool entrypoints;
+- `.agents/`, `.claude/`, `.codex/`, `.copilot/`, `.cursor/`, and `.github/`
+  agentic trees;
+- rule files, skills, hooks, output styles, agents, specs, plans, tasks, and
+  artifacts;
+- MCP configuration and settings that control instruction or skill discovery;
+- symlinks, includes, lockfiles, ignored files, and generated mirrors.
 
-Build a manifest of every in-scope agentic file. Read
-[references/agentic-architecture.md](references/agentic-architecture.md) for the
-full taxonomy; the short version:
+For each item, record its role, owner, loader, scope, physical target, tracked or
+ignored state, and whether another item duplicates it.
 
-- **`AGENTS.md`** at the root **and** every nested `AGENTS.md` in subdirectories.
-  Exclude two look-alikes that a bare `find` surfaces but that aren't nested
-  deltas: any `AGENTS.md` under a registered git worktree (run `git worktree
-list` and skip those roots; a worktree's file is a branch copy, and diffing it
-  against root manufactures phantom findings) and any under a vendored skill
-  body (`skills/<name>/`), which ships with third-party assets you don't audit.
-- **Tool entrypoints**: `CLAUDE.md`, `.cursor/rules/*`, `.cursorrules`,
-  `.github/copilot-instructions.md`, `.github/instructions/*`, `GEMINI.md`,
-  `.windsurfrules`, `.clinerules`, `.aider*`.
-- **MCP server config**: `.mcp.json`, plus tool variants (`.cursor/mcp.json`,
-  `.vscode/mcp.json`, and the `mcpServers` block in `.claude/settings.json`).
-- **`.agents/**`\*\*: the canonical agentic folder (rules, skills, commands,
-  hooks, output styles, specs).
-- **`.claude/**`\*\*: settings, commands, subagents, skills if present.
+### Build a loader graph
 
-For each file record: path and role. Count size only when AGENTS.md or an
-`.agents/` config declares a token budget or line cap, via
-`python scripts/count_tokens.py <manifest-paths>` (run from the skill directory,
-passing the in-scope files as arguments, never a directory). The script reports
-both tokens and lines; the tokenizer is an estimate. Match the check to what the
-repo declared: for a token budget, pass `--budget N`; for a line cap (just as
-common), read the `LINES` column, since `--budget` only guards tokens.
+Build a separate effective graph for every configured agent or editor:
 
-While inventorying, verify the wiring: every entrypoint symlink resolves to its
-source, every scoped rule carries the frontmatter keys each consuming tool needs
-(a missing `description` or glob key silently stops that tool from loading it),
-and no tool consumes the same physical rule file through two routes.
+1. startup and always-on files;
+2. conditionally loaded files and their path or intent trigger;
+3. manual routes, imports, includes, and symlink targets;
+4. the actual physical files reached;
+5. duplicate routes to one target;
+6. files no configured route can reach.
 
-Then extract **declared constraints**: read AGENTS.md and any `.agents/` config
-for stated rules (budgets, caps, structure, naming, voice, the thin-entrypoint
-convention, single-source rules). Record each as a checkable item for Phase 2.
+Compute the effective startup context from physical files. Keep duplicate routes
+as findings even if de-duplication makes the token sum look harmless.
 
-## Phase 2: analyze
+### Measure every audit
 
-Load the rubric now: **[references/agentic-architecture.md](references/agentic-architecture.md)**.
-It covers the `agents.md` standard, the file taxonomy, source-of-truth
-integrity, progressive disclosure, redundancy and dead files,
-grouping/splitting, tool fit, the signal-density checks, and constraint
-compliance. Judge every file on four axes:
+Run `scripts/count_tokens.py` over all in-scope agentic prose. Always record
+lines, UTF-8 bytes, and estimated tokens, even when the repository declares no
+budget. Apply the default profile from `context-budgets.md`; a stricter local
+limit wins. Measure the total effective always-on stack as well as each file.
 
-1. **Current**: does it match the actual code, stack, scripts, and structure?
-   Verify claims against the repo (package scripts, configs, exports, directory
-   layout, symlink targets), don't trust the prose. Drift is the most common and
-   most damaging failure. A stale build/test/lint command in AGENTS.md is worse
-   than none, because agents execute listed checks.
-2. **Concise**: no padding, no duplication of what tools already enforce, no
-   generic filler. Shorter when it loses nothing.
-3. **Exhaustive**: nothing an agent genuinely needs is missing. Conciseness
-   never wins by dropping load-bearing context (setup, non-obvious commands,
-   conventions, gotchas, the workflow the repo follows).
-4. **Compliant**: passes every constraint the docs declared.
+For the enabled skill catalog, record:
 
-One boundary check that spans into human docs but is an architecture concern:
-**does the README carry heavy agent-only instruction, or is agent context
-buried where humans land?** If so, flag it (move the agent content into
-AGENTS.md) as a finding. This is the only reason to open the README, and even
-then you propose the move, you don't rewrite the README's prose.
+- total description characters against the discovery budget;
+- descriptions over the soft limit;
+- exact and semantic duplicates, with one recommended winner;
+- enabled, disabled, shadowed, and unreachable entries;
+- installed folders that drift from the lockfile or manager state.
 
-**Research only on a real knowledge gap.** When a finding depends on an external
-fact you can't confirm from the repo (a tool's current config format, or whether
-the `agents.md` standard changed a rule you're about to enforce or propose),
-search current practice and fold proven approaches into the proposal. Don't
-open-endedly scan for newer patterns on a healthy sync. Keep suggestions anchored
-to established standards; flag anything experimental as such.
+Do not load every skill body to evaluate discovery. Start with metadata, then
+read a body only when its trigger, size, ownership, or overlap is a finding.
 
-Produce a synthesized findings list: each item is a concrete problem with its
-location and why it matters. Don't show a stream of consciousness.
+## Phase 2: evaluate
 
-## Phase 3: apply (default) or report (`--check`)
+Score each aspect from 0 to 10 and support it with concrete evidence:
 
-Work through the findings. For each, make one call: single best answer, or the
-user's to decide?
+1. **Instruction quality**: correctness, specificity, priority, completeness,
+   contradictions, and preservation of high-consequence behavior.
+2. **Discoverability**: loader coverage, trigger quality, path scopes, entrypoint
+   integrity, and absence of unreachable or shadowed assets.
+3. **Context efficiency**: effective startup size, duplication, signal density,
+   catalog cost, progressive disclosure, and task-specific loading.
+4. **Maintainability**: one source of truth, ownership, stable structure,
+   automated checks, stale-file control, and low drift risk.
 
-Under **`--check`**, apply nothing. List what you would auto-apply and what
-you'd raise as a decision, then jump to Phase 4. Everything below describes the
-default (apply) path.
+Use the architecture reference to check source-of-truth integrity, nearest-file
+inheritance, tool fit, scoped loading, stale commands, orphaned assets, generic
+advice, and content that belongs in executable config instead of prose.
 
-**Apply automatically** when the fix is unambiguous and low-risk. Make the edit
-directly, matching the repo's existing voice and conventions:
+Review specs, plans, and tasks by phase. Keep goals and acceptance criteria in a
+spec, architecture and verification in a plan, execution state in tasks, and
+subsystem detail in focused references. A large effort may exceed one file's
+budget; one phase should not silently become the entire project history.
 
-- factual drift (wrong command, dead link, renamed script, stale path or
-  symlink target),
-- compliance fixes with one obvious resolution (relocate misplaced content into
-  AGENTS.md, reduce a fat entrypoint to a thin pointer, split an over-budget
-  file). One caveat on thinning entrypoints: only tools whose format supports an
-  include can point (CLAUDE.md's `@AGENTS.md`, Cursor's MDC). Copilot's
-  `.github/copilot-instructions.md` has no include, so never convert it to a fake
-  `@` pointer Copilot would render as literal text,
-- removing a git-tracked file that is dead or a zero-delta duplicate, via
-  `git rm`, so it stays recoverable,
-- cutting clear bloat or toolchain-duplicated content,
-- rewriting a weak or non-triggering skill description when the skill's purpose
-  is clear from its name and body: that's a low-risk repair, not a decision.
-  Only when the whole skill is a content-less stub (no real body) does fix vs.
-  remove become the user's call.
+Classify findings by impact:
 
-Don't narrate each edit as you go; account for them all in the recap.
+- **Hard failure**: contradiction, broken route, unsafe instruction, or a
+  behavioral bait regression.
+- **High leverage**: duplicate always-on context, stale source, ambiguous skill
+  trigger, or missing source-of-truth guard.
+- **Maintenance**: minor metadata, naming, formatting, or organization drift.
 
-**Stop and ask**, as selectable options, when the call is genuinely the user's:
+## Phase 3: propose and apply
 
-- two or more reasonable solutions with real tradeoffs (consolidate vs. keep
-  split; which near-duplicate becomes canonical),
-- intent you can't verify (a zero-delta nested file someone may mean to fill in;
-  content that might be load-bearing),
-- a `.github/copilot-instructions.md` that duplicates AGENTS.md. Copilot loads
-  both together (AGENTS.md primary, copilot-instructions additional), so a
-  duplicate is not automatically dead weight: flag the overlap and ask whether to
-  remove it, recommending removal only when it adds nothing Copilot-specific.
-  Never auto-`git rm` it,
-- any removal that wouldn't be git-recoverable (untracked file, or home scope).
+Present the findings, current scores, and recommended changes before mutation
+when the user asked for approval first. Otherwise apply clear, in-scope fixes in
+this order:
 
-Pose each as a plain question with concrete options and a recommended default,
-using the host's question mechanism. Keep
-resolving everything else while a decision waits; only block when applying the
-rest genuinely depends on the answer.
+1. repair broken or duplicate discovery routes;
+2. resolve contradictions and preserve hard boundaries;
+3. remove recoverable duplicates, stale plans, and proven orphans;
+4. compress the always-on stack;
+5. move path-specific or procedural detail behind scopes and skills;
+6. split large skills, specs, and references by responsibility;
+7. tighten descriptions and choose one winner for duplicate skills;
+8. add measurement or guards that prevent the same drift.
 
-**Refresh pinned skills.** If the repo pins installed skills through a
-lockfile-driven manager (a skill lockfile plus a documented install/update
-command in AGENTS.md or a rule), part of a sync is checking those skills are
-current: run the manager's own update command so it rewrites the lockfile, and
-fold any resulting lockfile change into this run. Use the command and scope the
-repo documents; never hand-edit the lockfile. If no such manager is declared,
-skip this. Under `--check`, don't run it: just note that an update check is due.
+Under `--check`, replace every mutation with a precise proposed change.
 
-After editing, if AGENTS.md lists programmatic checks (lint, test, typecheck,
-build) that your changes could affect, run the relevant ones and fix failures
-your changes caused. After substantive edits to rule files, run cold-agent bait
-scenarios: in home scope use
-[references/behavioral-baits.md](references/behavioral-baits.md) as written; in
-project scope derive equivalent baits from the rules actually edited (the
-reference shows the shape). A failed bait means an edit diluted a rule, so
-restore or strengthen it before closing. Never commit or push automatically;
-the commit boundary is the user's.
+If a documented lockfile manager owns installed skills, use its declared update
+mechanism and never hand-edit the lockfile. Under `--check`, or when network or
+external authority is unavailable, report the drift without updating.
 
-## Phase 4: recap
+Use progressive disclosure, not hidden omission. Entrypoints carry universal
+high-consequence rules; scoped rules carry path behavior; skills carry
+procedures; references carry examples, tables, and research one link away.
 
-Close with a scannable record. Lead with a one-line verdict, then:
+## Phase 4: verify the candidate
 
-- **Scope**: the resolved root, the scope path if any, and mode (applied /
-  `--check` audit).
-- **Changed**: what you applied, one line each with the why. Under `--check`,
-  retitle this **Would change** and list the fixes you'd make instead.
-- **Decisions pending** _(if any)_: the questions you raised and their options,
-  so an unanswered one stays visible.
-- **Follow-ups** _(if any)_: anything only the user can do (fill in a nested
-  AGENTS.md they chose to keep, run a check outside your reach, a README move you
-  flagged).
+After editing:
 
-If everything was unambiguous and applied, the recap is just the verdict and the
-change list. No ceremony. When work is commit-worthy, offer a Conventional
-Commit message and leave the commit to the user.
+1. rerun line, byte, token, startup-stack, and catalog measurements;
+2. validate frontmatter, JSON, TOML, links, symlinks, hook syntax, executable
+   bits, and any repository checks affected by the change;
+3. inspect the diff for accidental churn, banned prose, and user changes;
+4. rerun the same behavioral baits with fresh subagents using the same model and
+   settings as the baseline;
+5. require every hard bait to pass and no aspect to regress;
+6. repeat only an ambiguous stochastic failure, otherwise restore or strengthen
+   the rule;
+7. rescore all four aspects and explain any remaining score below 8.
 
-## Skill authoring standards
+Do not claim equal success rate from file size alone. The evidence is a smaller
+effective context plus unchanged or improved behavior under the same tests.
 
-Hold any skill you author or repair to these (engineering.instructions.md
-routes skill authoring here):
+## Phase 5: recap
 
-- A skill is a standalone product: shareable, hostable, pickable as the best
-  skill for its goal. Deliberately narrow domain scoping is a design choice,
-  not a violation.
-- Within its claimed domain it is scalable and portable: a React skill handles
-  any React project, not one repo's setup.
-- Drive behavior off what the repo declares (lockfile, config, framework)
-  instead of hard-coding one toolchain, and degrade sensibly when an optional
-  dependency is absent.
-- No machine- or repo-specific assumption belongs in a skill body; gate an
-  unavoidable one behind a detected condition.
-- The trigger `description` must be crisp enough to fire on the intended use
-  anywhere in that domain.
+Lead with a one-line verdict, then report:
+
+- **Scope**: resolved root, narrowed scope if any, and applied or `--check` mode.
+- **Changed** or **Would change**: one line per fix with its reason.
+- **Metrics**: before and after startup context, largest files, and catalog size.
+- **Scores**: before and after for all four aspects.
+- **Decisions pending**: unresolved choices and the recommended option.
+- **Follow-ups**: only work that needs the user or an external system.
+
+When the result is commit-worthy, follow the repository's required handoff and
+offer a Conventional Commit message. Leave the commit to the user.
+
+## Skill authoring standard
+
+When repairing a skill, keep it portable within its claimed domain, driven by
+repository evidence rather than machine assumptions, and functional when an
+optional dependency is absent. Its description states what it does and when it
+should trigger; workflow detail belongs in the body or a one-level reference.
+Every created or modified skill receives the four aspect scores, its applicable
+context-budget checks, and representative behavior and trigger evals. Use
+`skill-creator` for the eval loop; `sync-agents` owns architecture and context
+criteria even when another skill initiated the work.
 
 ## Bundled resources
 
-- [references/agentic-architecture.md](references/agentic-architecture.md): the
-  agentic-file review rubric and the `agents.md` standard in brief. Loaded in
-  Phase 2.
-- [references/behavioral-baits.md](references/behavioral-baits.md): cold-agent
-  regression scenarios for rule edits. Run in Phase 3 after substantive changes.
-- `scripts/count_tokens.py`: per-file token estimate, with `--budget` and
-  `--json`. tiktoken if available, else a chars/4 estimate.
+- [references/agentic-architecture.md](references/agentic-architecture.md): file
+  taxonomy and architecture rubric.
+- [references/context-budgets.md](references/context-budgets.md): default line,
+  byte, token, startup, catalog, skill, spec, and reference envelopes.
+- [references/behavioral-baits.md](references/behavioral-baits.md): baseline and
+  candidate regression scenarios.
+- `scripts/count_tokens.py`: per-file, total-stack, profile, and catalog metrics.
