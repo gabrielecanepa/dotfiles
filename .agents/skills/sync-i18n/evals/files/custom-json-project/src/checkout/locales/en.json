@@ -1,0 +1,12 @@
+{
+  "checkout": {
+    "pay": "Pay now",
+    "title": "Checkout",
+    "total": "Total: {amount}",
+    "unused": "Old checkout"
+  },
+  "status": {
+    "idle": "Ready",
+    "processing": "Processing"
+  }
+}

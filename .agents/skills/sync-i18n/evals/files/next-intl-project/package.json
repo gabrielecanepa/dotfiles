@@ -1,0 +1,13 @@
+{
+  "name": "sync-i18n-next-intl-eval",
+  "private": true,
+  "scripts": {
+    "check:i18n": "node scripts/check-i18n.mjs"
+  },
+  "dependencies": {
+    "next": "16.1.0",
+    "next-intl": "4.12.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}

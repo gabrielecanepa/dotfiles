@@ -1,0 +1,48 @@
+{
+  "skill_name": "sync-i18n",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Run sync-i18n on this Next.js project. Review the complete next-intl setup, remove unused messages, correct the Italian copy, improve the architecture where the installed version's official docs support it, and verify the result.",
+      "expected_output": "Detects next-intl from configuration and runtime use, consults version-matched official docs, removes only the proven-unused key from every locale, corrects the Italian call-to-action without changing placeholders, evaluates namespace/loading architecture, runs available checks, and finishes with a concise score table.",
+      "files": [
+        "evals/files/next-intl-project"
+      ],
+      "expectations": [
+        "The run identifies next-intl and the configured locales from repository evidence.",
+        "The run removes the proven-unused message from every locale without deleting used or dynamic messages.",
+        "The run corrects the Italian save label and zero-item plural branch while preserving the count argument.",
+        "The run consults current official next-intl documentation and identifies the guidance used for architecture or configuration changes.",
+        "The final response is a concise table with an explicit evidence-backed score below 10/10 when any rubric check is blocked."
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Audit and update the custom i18n implementation under src/checkout only. It imports locale JSON directly, uses a small lookup helper, and has both literal and computed keys. Clean up translations and key organization without touching files outside that path.",
+      "expected_output": "Detects the custom JSON import pattern without requiring a framework dependency, respects the subpath edit boundary, removes the literal unused key, preserves the bounded computed key family, improves the target translations and organization only when call sites can be updated atomically, and returns the concise score table with any out-of-scope blocker.",
+      "files": [
+        "evals/files/custom-json-project"
+      ],
+      "expectations": [
+        "The run detects a custom i18n setup from the helper, imports, and catalogs.",
+        "The run edits only src/checkout while using root files as read-only context.",
+        "The run distinguishes the bounded computed key family from a proven-unused key.",
+        "The run preserves placeholders and catalog parity across locales.",
+        "The final response uses the required concise table and an evidence-backed score."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review all internationalization and translations in this project and bring the setup to 10/10.",
+      "expected_output": "Finds no decisive or corroborated i18n setup, makes no edits, and returns exactly the required no-setup message without a score table.",
+      "files": [
+        "evals/files/no-i18n-project"
+      ],
+      "expectations": [
+        "The run does not mistake ordinary JSON data or user-facing strings for an i18n setup.",
+        "The run makes no file changes.",
+        "The output is exactly the required no-i18n stop message."
+      ]
+    }
+  ]
+}

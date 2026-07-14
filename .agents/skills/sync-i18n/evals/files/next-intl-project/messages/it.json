@@ -1,0 +1,14 @@
+{
+  "Actions": {
+    "cancel": "Annulla",
+    "legacyLabel": "Azione precedente",
+    "save": "Conservare"
+  },
+  "Cart": {
+    "items": "{count, plural, =0 {Un articolo} one {# articoli} other {# articoli}}"
+  },
+  "Status": {
+    "paid": "Pagato",
+    "pending": "In attesa"
+  }
+}

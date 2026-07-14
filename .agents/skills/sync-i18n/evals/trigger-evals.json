@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Run /sync-i18n across this repository and clean up the locale catalogs without deleting dynamic keys.",
+    "should_trigger": true
+  },
+  {
+    "query": "Our Next.js app uses next-intl 4 and the Italian messages have drifted. Audit unused keys, ICU plurals, routing, and client message loading.",
+    "should_trigger": true
+  },
+  {
+    "query": "Please review the Django gettext setup under apps/billing, find stale msgids, and verify placeholder parity across every PO file.",
+    "should_trigger": true
+  },
+  {
+    "query": "Clean the Rails I18n YAML files, check fallbacks and locale coverage, and keep any keys that may be used dynamically.",
+    "should_trigger": true
+  },
+  {
+    "query": "Audit our custom src/checkout translation helper and its en/it JSON catalogs. Stay inside that path and report root-level fixes separately.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review the i18next namespaces and loading boundaries in this React app; we suspect every route ships the entire message catalog.",
+    "should_trigger": true
+  },
+  {
+    "query": "Check this Android project's localized string resources for missing entries, broken format arguments, and unsafe key organization.",
+    "should_trigger": true
+  },
+  {
+    "query": "Bring the localization architecture in our Swift app to a verified state, including string catalogs, plural branches, and fallback behavior.",
+    "should_trigger": true
+  },
+  {
+    "query": "Use --check to inspect the gettext catalogs and extraction commands without changing any project files.",
+    "should_trigger": true
+  },
+  {
+    "query": "We have direct JSON imports for French and English copy. Find unused translation keys and inconsistent placeholders across the codebase.",
+    "should_trigger": true
+  },
+  {
+    "query": "Translate this customer email into Italian and keep the tone friendly.",
+    "should_trigger": false
+  },
+  {
+    "query": "Rewrite these five English button labels so they sound less formal.",
+    "should_trigger": false
+  },
+  {
+    "query": "Add an Accept-Language header to this single fetch request.",
+    "should_trigger": false
+  },
+  {
+    "query": "Explain how Intl.DateTimeFormat formats a date in the browser.",
+    "should_trigger": false
+  },
+  {
+    "query": "Install next-intl in this brand-new Next.js app and create the initial locale routing from scratch.",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this English-only landing page for spelling and grammar.",
+    "should_trigger": false
+  },
+  {
+    "query": "Why does my React component hydrate twice when the browser locale is French? Diagnose the rendering bug only.",
+    "should_trigger": false
+  },
+  {
+    "query": "Synchronize the database schema with the production migration history.",
+    "should_trigger": false
+  },
+  {
+    "query": "Generate locale-aware currency output for one TypeScript function using Intl.NumberFormat.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare two translation vendors and recommend which contract we should buy.",
+    "should_trigger": false
+  }
+]

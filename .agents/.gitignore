@@ -1,5 +1,6 @@
 /artifacts/
 /plans/
-/skills/
+/skills/*
 !/skills/sync-agents/
 !/skills/sync-docs/
+!/skills/sync-i18n/

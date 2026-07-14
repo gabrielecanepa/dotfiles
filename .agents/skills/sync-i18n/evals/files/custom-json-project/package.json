@@ -1,0 +1,7 @@
+{
+  "name": "sync-i18n-custom-json-eval",
+  "private": true,
+  "scripts": {
+    "check:i18n": "node scripts/check-i18n.mjs"
+  }
+}

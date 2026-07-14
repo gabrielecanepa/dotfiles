@@ -1,0 +1,12 @@
+{
+  "checkout": {
+    "pay": "Pagare ora",
+    "title": "Cassa",
+    "total": "Totale: {amount}",
+    "unused": "Vecchio pagamento"
+  },
+  "status": {
+    "idle": "Pronto",
+    "processing": "Processando"
+  }
+}
