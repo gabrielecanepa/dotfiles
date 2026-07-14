@@ -4,8 +4,8 @@
 # auto-managed files under $HOME that would be silently overwritten, and redirect
 # edits made through the agent-config symlinks to their .agents/ source. Global
 # hook, so every pattern is anchored to an absolute $HOME path: it never matches
-# files in projects under ~/Developer. Exit 2 blocks (stderr shown to Claude);
-# any other path / missing jq fails open (exit 0). macOS; no-op without a file path.
+# files in projects under ~/Developer. Exit 2 blocks; any other path or missing
+# jq fails open (exit 0). macOS; no-op without a file path.
 
 case ":$PATH:" in
   *:/opt/homebrew/bin:*) ;;
@@ -37,10 +37,10 @@ esac
 
 # 3. Agent config is single-source-of-truth in ~/.agents/; do not edit via symlinks.
 case "$abs" in
-  "$HOME"/.claude/CLAUDE.md | "$HOME"/.codex/AGENTS.md)
+  "$HOME"/.claude/CLAUDE.md | "$HOME"/.codex/AGENTS.md | "$HOME"/.codex/hooks.json)
     deny "$abs is a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
-  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/hooks/* | "$HOME"/.codex/skills/*)
+  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/hooks/* | "$HOME"/.codex/skills/* | "$HOME"/.codex/hooks/*)
     deny "$abs resolves through a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
 esac

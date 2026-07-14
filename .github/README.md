@@ -27,7 +27,7 @@ Node, Ruby, and Python are pinned through nodenv, rbenv, and pyenv. The version 
 
 #### Single source of truth for AI agents
 
-The [`.agents`](/.agents) directory holds instructions, rules, and skills shared by Claude Code, Codex, and Copilot. Each tool's own config is a symlink into the folder, all three read the same source and never drift.
+The [`.agents`](/.agents) directory is the source for instructions, rules, skills, and hook scripts shared by Claude Code, Codex, and Copilot. Tracked tool entrypoints use relative symlinks back to that source, while tool-specific settings stay separate.
 
 #### Extended synchronization
 

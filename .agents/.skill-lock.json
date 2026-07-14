@@ -20,13 +20,13 @@
       "updatedAt": "2026-07-04T14:42:59.229Z"
     },
     "context7-mcp": {
-      "installedAt": "2026-06-14T19:38:09.137Z",
-      "skillFolderHash": "49e037db730a57e8c1f131a3f86845cb6eca72d9",
-      "skillPath": "skills/context7-mcp/SKILL.md",
       "source": "upstash/context7",
       "sourceType": "github",
       "sourceUrl": "https://github.com/upstash/context7.git",
-      "updatedAt": "2026-06-14T19:38:09.137Z"
+      "skillPath": "skills/context7-mcp/SKILL.md",
+      "skillFolderHash": "0969a2f77545a8ef5e3296b4fd25d63689331854",
+      "installedAt": "2026-06-14T19:38:09.137Z",
+      "updatedAt": "2026-07-14T00:26:40.071Z"
     },
     "design-taste-frontend": {
       "source": "leonxlnx/taste-skill",
@@ -42,9 +42,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-03-14T16:58:48.863Z",
-      "updatedAt": "2026-07-03T08:41:21.708Z"
+      "updatedAt": "2026-07-14T00:26:40.901Z"
     },
     "frontend-design": {
       "installedAt": "2026-06-15T07:28:14.190Z",
@@ -61,10 +61,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mattpocock/skills.git",
       "skillPath": "skills/productivity/grill-me/SKILL.md",
-      "skillFolderHash": "8320e7b87f7b208f50ce165b1dd43d1e93c8e801",
-      "pluginName": "mattpocock-skills",
+      "skillFolderHash": "c817f6f36acd483294144694a935a76d3e3eb101",
       "installedAt": "2026-07-03T08:55:25.205Z",
-      "updatedAt": "2026-07-03T08:55:25.205Z"
+      "updatedAt": "2026-07-14T00:26:42.116Z"
     },
     "high-end-visual-design": {
       "source": "leonxlnx/taste-skill",

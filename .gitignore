@@ -14,8 +14,10 @@
 !/.claude/settings.json
 !/.codex/
 /.codex/*
-!/.codex/skills
 !/.codex/AGENTS.md
+!/.codex/hooks
+!/.codex/hooks.json
+!/.codex/skills
 !/.config/
 /.config/*
 !/.config/gh/
