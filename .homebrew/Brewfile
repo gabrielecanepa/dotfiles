@@ -79,6 +79,8 @@ brew "typescript-language-server"
 brew "oven-sh/bun/bun"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
+cask "1password-cli"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
