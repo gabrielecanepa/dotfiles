@@ -16,7 +16,7 @@
     ".claude/rules": false,
     ".github/instructions": true,
     "~/.claude/rules": false,
-    "~/.copilot/instructions": false
+    "~/.copilot/instructions": true
   },
   "chat.mcp.discovery.enabled": {
     "claude-desktop": true

@@ -4,8 +4,12 @@
   },
   "chat.instructionsFilesLocations": {
     ".claude/rules": false,
-    ".github/instructions": true
+    ".github/instructions": true,
+    "~/.claude/rules": false,
+    "~/.copilot/instructions": false
   },
+  "chat.useAgentsMdFile": false,
+  "chat.useClaudeMdFile": false,
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "files.associations": {
     "*.json.lock": "jsonl",
