@@ -1,18 +1,10 @@
 ---
 name: sync-docs
 description: >-
-  Audits and repairs a repository's human-facing documentation: README,
-  CONTRIBUTING, CHANGELOG, docs/ trees, wikis, and any prose a person reads
-  (guides, tutorials, API prose, release notes). Checks that the docs are
-  current against the actual code, coherent, and written in clean human voice,
-  then fixes drift, dead links, stale commands, and AI-writing tells, applying
-  clear-cut fixes and asking only for real decisions. Use whenever the user runs
-  `/sync-docs`, or mentions auditing, syncing, reviewing, tightening, cleaning
-  up, or refreshing the README, CONTRIBUTING, CHANGELOG, docs, guides, or any
-  human-facing project documentation, even if they don't say "sync-docs". Does
-  not touch agentic docs (AGENTS.md, CLAUDE.md, .agents/, .claude/, rules,
-  skills). Scopes to a path when one is given, else every human doc in the repo;
-  `--check` audits without editing.
+  Audits and repairs human-facing repository docs against the code. Use for
+  `/sync-docs` or requests to review, refresh, or clean README, CONTRIBUTING,
+  CHANGELOG, guides, or docs. Excludes agentic files; accepts a scope path and
+  `--check` for read-only audits.
 ---
 
 # sync-docs
