@@ -1,5 +1,5 @@
 ---
-description: 'Use when writing or editing TypeScript (.ts/.tsx). Enforces the language-level idioms shared across projects: guard clauses, arrow functions, interface over type, inline type imports, alias imports, and the framework-docs-first research rule. React/JSX-specific rules live in react.instructions.md.'
+description: 'Use when writing or editing TypeScript (.ts/.tsx). Enforces the language-level idioms shared across projects: guard clauses, arrow functions, interface over type, inline type imports, alias imports, union exhaustiveness, typed catch, and the framework-docs-first research rule. React/JSX-specific rules live in react.instructions.md.'
 applyTo: '**/*.ts, **/*.tsx'
 paths:
   - '**/*.ts'
@@ -21,6 +21,8 @@ Language-level idioms for any TypeScript file. React and JSX rules live in `reac
 - **kebab-case filenames.**
 - **Omit inferrable types**: no return-type or variable annotations the compiler infers.
 - `??` over `||` for default fallbacks.
+- **Exhaustive unions.** A `switch` over a closed union ends with a `never` check in `default`; type lookup tables with `satisfies Record<Union, T>`. Adding a member must fail to compile, not silently fall through.
+- **`catch` holds `unknown`.** Narrow before use (`instanceof Error`, a guard); never `catch (e: any)`, an empty swallow, or throwing a non-`Error`.
 - `async`/`await` only; no `.then()` chains.
 - ESM only; no `require`/`module.exports`.
 

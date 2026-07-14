@@ -1,5 +1,5 @@
 ---
-description: 'Use when writing or editing React components (.jsx/.tsx). Enforces prop forwarding, composition over boolean props, JSX idioms, the shared->features->app layer boundary, and Next.js app/ placement. Routes to the React performance and composition skills. Language-level TS idioms live in typescript.instructions.md.'
+description: 'Use when writing or editing React components (.jsx/.tsx). Enforces prop forwarding, composition over boolean props, JSX, state, and key correctness idioms, the shared->features->app layer boundary, and Next.js app/ placement. Routes to the React performance and composition skills. Language-level TS idioms live in typescript.instructions.md.'
 applyTo: '**/*.jsx, **/*.tsx'
 paths:
   - '**/*.jsx'
@@ -15,6 +15,7 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 - **Any React/Next.js code** → `vercel-react-best-practices` is the performance bar. Apply it by priority (CRITICAL > HIGH > MEDIUM > LOW) and re-check against it before declaring component work done.
 - **Any non-trivial component design** → run `vercel-composition-patterns` first (compound components, slots, context providers, render props).
 - **Animation work** → `motion.instructions.md` owns the animation rules and skill routing.
+- Load only the relevant `rules/*.md` from Vercel skills. Do not load a compiled `AGENTS.md` unless the task genuinely needs the full corpus.
 - **Long lists** → the perf skill stops at `content-visibility`; past a few hundred rows that is not enough. Windowing (render only visible rows) is a hard requirement, via `@tanstack/react-virtual` or `react-window`.
 
 ## Component props
@@ -77,9 +78,15 @@ export const DashboardProvider = ({
 ## Component design
 
 - **Compose, don't configure.** Build with composition (compound components, slots, context providers) over boolean-prop configuration. A **third boolean prop** is the signal to restructure into compound components. Run `vercel-composition-patterns` for any non-trivial design.
-- **JSX.** `{cond && <El />}` for one branch, a ternary for two; `<>...</>` over `<Fragment>`. Named imports for hooks and values (`useState`, `use`); never import `React` itself in any form, its types come from the global namespace (see the rule above).
+- **JSX.** `{cond && <El />}` for one branch, a ternary for two; the left side of `&&` must be a real boolean (`items.length > 0 &&`), a number leaks a literal `0` into the output. `<>...</>` over `<Fragment>`. Named imports for hooks and values (`useState`, `use`); never import `React` itself in any form, its types come from the global namespace (see the rule above).
+- **Props are not initial state.** Read props directly; copy one into `useState` only to seed the first render, and name it `defaultX`/`initialX` so the intent is visible. Reset a subtree's state on identity change with `key={id}` at the call site, never with a syncing effect.
+- **Stable keys.** Key mapped elements by a stable id from the data. `key={index}` only for a static list that never reorders, inserts, or deletes; it corrupts per-item state and inputs the moment the list changes.
+- **Effects stay honest.** Effects synchronize external systems; interactions stay in handlers. Dependencies match every reactive value read; never suppress `exhaustive-deps`. Use `[]` only when none are read.
+- **Keep renders pure and updates immutable.** Never mutate props or state or read randomness, clocks, browser-only globals, or refs during render. Use immutable copies, `useId`, lazy state, handlers, or `useSyncExternalStore` with a server snapshot.
 - **No manual memoization under React Compiler.** When React Compiler is enabled, do not hand-add `useMemo`, `useCallback`, or `React.memo`; the compiler memoizes. (Only when the compiler is on.)
-- **Cancel superseded requests.** For client fetches that fire on rapid input (search-as-you-type, filters, quick nav), pass an `AbortController` signal and abort the prior request so a slow earlier response can't overwrite a newer one. Prefer a data library that cancels for you (TanStack Query, `use`+RSC) over hand-rolled effects.
+- **Cancel superseded requests.** For client fetches that fire on rapid input (search-as-you-type, filters, quick nav), pass an `AbortController` signal and abort the prior request so a slow earlier response can't overwrite a newer one. Prefer a data library that cancels for you (TanStack Query, `use`+RSC) over hand-rolled effects. Any effect that opens a listener, timer, subscription, or socket returns a cleanup that tears down exactly what it set up.
+- **Async actions own their state.** User-triggered promises expose pending and error UI, block duplicate submission while pending, and abort or guard continuations that may outlive the component.
+- **Respect trust boundaries.** Across the RSC boundary, pass serializable data or Server Actions and keep Client Components narrow. Sanitize dynamic HTML and allowlist schemes for dynamic `href` and `src` values.
 - **Split context by change-frequency.** Every consumer of a context re-renders on any change to its value, whichever field it reads. Keep high-churn state out of a wide provider: split into narrow contexts, or back a hot store with an external store subscribed via `useSyncExternalStore`. The Compiler does not fix whole-value subscription.
 
 ## Layer boundaries
