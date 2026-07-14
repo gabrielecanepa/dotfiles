@@ -46,6 +46,7 @@
     "https://ui.shadcn.com": true
   },
   "chat.useAgentSkills": true,
+  "chat.useClaudeHooks": true,
   "chat.useNestedAgentsMdFiles": true,
   "chat.viewSessions.orientation": "stacked",
   "css.format.newlineBetweenRules": false,
