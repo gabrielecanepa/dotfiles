@@ -174,6 +174,51 @@
       "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
       "installedAt": "2026-07-03T08:42:41.500Z",
       "updatedAt": "2026-07-03T08:42:41.500Z"
+    },
+    "animation-vocabulary": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/animation-vocabulary/SKILL.md",
+      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
+      "installedAt": "2026-07-14T17:03:05.870Z",
+      "updatedAt": "2026-07-14T17:03:05.870Z"
+    },
+    "apple-design": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/apple-design/SKILL.md",
+      "skillFolderHash": "e9f5b472dfb28d8cf29f64001b6c01ef94b8168b",
+      "installedAt": "2026-07-14T17:03:05.872Z",
+      "updatedAt": "2026-07-14T17:03:05.872Z"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "skillFolderHash": "0e6f8d7223a0abe73f81e890b3ec76257029a834",
+      "installedAt": "2026-07-14T17:03:05.873Z",
+      "updatedAt": "2026-07-14T17:03:05.873Z"
+    },
+    "improve-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/improve-animations/SKILL.md",
+      "skillFolderHash": "ec57cb65ea60a23af278d305d1425ce4f998f510",
+      "installedAt": "2026-07-14T17:03:05.874Z",
+      "updatedAt": "2026-07-14T17:03:05.874Z"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "skillFolderHash": "0012fc43a25cce5df019102ab28bb6a68ad9db3d",
+      "installedAt": "2026-07-14T17:03:05.874Z",
+      "updatedAt": "2026-07-14T17:03:05.874Z"
     }
   },
   "dismissed": {

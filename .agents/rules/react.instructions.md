@@ -14,6 +14,7 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 
 - **Any React/Next.js code** → `vercel-react-best-practices` is the performance bar. Apply it by priority (CRITICAL > HIGH > MEDIUM > LOW) and re-check against it before declaring component work done.
 - **Any non-trivial component design** → run `vercel-composition-patterns` first (compound components, slots, context providers, render props).
+- **Animation work** → `motion.instructions.md` owns the animation rules and skill routing.
 - **Long lists** → the perf skill stops at `content-visibility`; past a few hundred rows that is not enough. Windowing (render only visible rows) is a hard requirement, via `@tanstack/react-virtual` or `react-window`.
 
 ## Component props

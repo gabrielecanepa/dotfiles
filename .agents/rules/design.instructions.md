@@ -53,6 +53,7 @@ Plan before coding: a compact token system, palette (4 to 6 named hex), 2+ type 
 
 ## Stack integration
 
+- **Animation or motion work** → `motion.instructions.md` owns the animation layer: skill routing (`emil-design-eng`, `review-animations`), Motion for React API rules, and timing tokens.
 - **shadcn/ui or Tailwind** project → use the `vercel:shadcn` skill for component install, composition, and theming rather than hand-rolling primitives.
 - **Canonical Tailwind classes, never hardcoded arbitrary values.** When a value maps exactly to a scale token, write the token, not the bracket form: `gap-3.5` not `gap-[14px]`, `p-0.5` not `p-[2px]`. Only reach for an arbitrary value (`gap-[13px]`) when the design system has no exact token for it. This is what the Tailwind VS Code plugin (`suggestCanonicalClasses`) and the oxlint `enforce-canonical` rule flag; resolve those hints against the project's own `--spacing` scale, don't assume `1rem = 16px`.
 - After editing several React/TSX components → run the `vercel:react-best-practices` review (structure, hooks, a11y, performance).
