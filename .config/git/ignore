@@ -23,6 +23,8 @@
 #####################
 *.log
 *.sqlite
+*.db
+*.mdb
 *.backup
 *.bak
 
