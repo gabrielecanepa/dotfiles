@@ -8,11 +8,11 @@ The default output has the following format:
 
 ```sh
 $ profile
-user   | john.doe
-name   | John Doe
-email  | john@doe.com
-path   | ~/Developer
-editor | Visual Studio Code
+user    john.doe
+name    John Doe
+email   john@doe.com
+path    ~/Developer
+editor  Zed
 ```
 
 ## Usage
@@ -30,4 +30,4 @@ profile help, -h, --help   # Print help message
 
 ### Separator
 
-`PROFILE_SEPARATOR` sets a custom separator for the profile output.
+`ZSH_PROFILE_SEPARATOR` sets a custom separator for the profile output. It defaults to four spaces.
