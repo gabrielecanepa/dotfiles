@@ -90,13 +90,14 @@ Install Oh My Zsh and some useful plugins from [zsh-users](https://github.com/zs
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
 plugins=(
-  zsh-autosuggestions
-  zsh-completions
-  zsh-syntax-highlighting
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-completions
+  zsh-users/zsh-syntax-highlighting
+  wbingli/zsh-claudecode-completion
 )
 
 for plugin in ${plugins[@]}; do
-  git clone https://github.com/zsh-users/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
+  git clone https://github.com/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
 done
 
 # Restart

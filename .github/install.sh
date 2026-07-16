@@ -95,9 +95,9 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" || FAILED+=("oh-my-zsh")
 fi
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.zsh}"
-for plugin in zsh-autosuggestions zsh-completions zsh-syntax-highlighting; do
-  zsh_plugin="$ZSH_CUSTOM/plugins/$plugin"
-  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/zsh-users/$plugin.git" "$zsh_plugin" || FAILED+=("plugin:$plugin")
+for plugin in zsh-users/zsh-autosuggestions zsh-users/zsh-completions zsh-users/zsh-syntax-highlighting wbingli/zsh-claudecode-completion; do
+  zsh_plugin="$ZSH_CUSTOM/plugins/${plugin##*/}"
+  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/$plugin.git" "$zsh_plugin" || FAILED+=("plugin:${plugin##*/}")
 done
 
 # 6. Shell profile

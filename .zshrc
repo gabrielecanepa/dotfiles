@@ -38,8 +38,8 @@ plugins=(
   pyenv
   rbenv
   themes
-  # From zsh-users
   zsh-autosuggestions
+  zsh-claudecode-completion
   zsh-completions
   zsh-syntax-highlighting
   # Shared
