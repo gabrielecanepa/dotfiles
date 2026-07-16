@@ -173,7 +173,7 @@ nodenv global $(cat ~/.node-version)
 rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 ```
 
-Command-line tooling (commitlint, oxfmt, shellcheck) ships through the Brewfile, so `brew bundle` above already installed it. pnpm comes from Corepack, and npm ships with Node, so neither needs a global install.
+pnpm comes from Corepack, enabled by the tracked install hook. Node-based tooling (commitlint, oxfmt, TypeScript and its language server) and every other global npm package are tracked in [`.npm/package.json`](/.npm/package.json) by the custom `npm-global` plugin: the wrapped `npm` command re-dumps the manifest after every global install or removal, a second nodenv install hook restores it into every new Node version, and a bare `npm install -g` reinstalls it at any time. Native tooling (shellcheck, shfmt) still ships through the Brewfile.
 
 #### Ruby
 
