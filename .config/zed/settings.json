@@ -1,0 +1,279 @@
+{
+  "agent": {
+    "button": false,
+    "sidebar_side": "right"
+  },
+  "agent_ui_font_size": 16.5,
+  "auto_install_extensions": {
+    "dockerfile": true,
+    "env": true,
+    "git-firefly": true,
+    "github-theme": true,
+    "html": true,
+    "oxc": true,
+    "sql": true,
+    "symbols": true,
+    "toml": true
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 3000
+    }
+  },
+  "base_keymap": "Atom",
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 15.5,
+  "buffer_font_weight": 300.0,
+  "buffer_line_height": {
+    "custom": 1.5
+  },
+  "cli_default_open_behavior": "new_window",
+  "close_on_file_delete": true,
+  "collaboration_panel": {
+    "button": false
+  },
+  "colorize_brackets": true,
+  "debugger": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": true
+  },
+  "diff_view_style": "unified",
+  "edit_predictions": {
+    "allow_data_collection": "no",
+    "copilot": {
+      "enable_next_edit_suggestions": false
+    },
+    "mode": "eager",
+    "provider": "copilot"
+  },
+  "ensure_final_newline_on_save": true,
+  "file_finder": {
+    "include_ignored": "indexed"
+  },
+  "file_types": {
+    "Dockerfile": [
+      "Dockerfile.*"
+    ],
+    "env": [
+      ".env*"
+    ],
+    "Git Config": [
+      ".gitprofile"
+    ],
+    "Git Ignore": [
+      "ignore"
+    ],
+    "Markdown": [
+      "NOTES",
+      "TODO"
+    ],
+    "Shell Script": [
+      ".aliases",
+      "applypatch-msg",
+      "commit-msg",
+      "fsmonitor-watchman",
+      "p4-changelist",
+      "p4-post-changelist",
+      "p4-pre-submit",
+      "p4-prepare-changelist",
+      "post-applypatch",
+      "post-checkout",
+      "post-commit",
+      "post-index-change",
+      "post-merge",
+      "post-receive",
+      "post-rewrite",
+      "post-update",
+      "pre-applypatch",
+      "pre-auto-gc",
+      "pre-commit",
+      "pre-merge-commit",
+      "pre-push",
+      "pre-rebase",
+      "pre-receive",
+      "prepare-commit-msg",
+      "proc-receive",
+      "push-to-checkout",
+      "reference-transaction",
+      "sendemail-validate"
+    ]
+  },
+  "format_on_save": "on",
+  "formatter": "none",
+  "git": {
+    "blame": {
+      "show_avatar": true
+    },
+    "inline_blame": {
+      "delay_ms": 200,
+      "location": "status_bar",
+      "min_column": 0,
+      "padding": 4,
+      "show_commit_summary": false
+    }
+  },
+  "git_panel": {
+    "collapse_untracked_diff": false,
+    "dock": "left",
+    "entry_primary_click_action": "project_diff",
+    "group_by": "none",
+    "show_count_badge": true,
+    "status_style": "icon",
+    "tree_view": true
+  },
+  "global_lsp_settings": {
+    "button": true
+  },
+  "icon_theme": {
+    "dark": "Symbols Icon Theme",
+    "light": "Symbols Icon Theme",
+    "mode": "system"
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_background": false,
+    "show_other_hints": true,
+    "show_parameter_hints": true,
+    "show_type_hints": true
+  },
+  "inline_code_actions": false,
+  "languages": {
+    "Shell Script": {
+      "formatter": {
+        "external": {
+          "arguments": [
+            "--filename",
+            "{buffer_path}",
+            "--apply-ignore",
+            "-"
+          ],
+          "command": "shfmt"
+        }
+      }
+    }
+  },
+  "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true
+      }
+    },
+    "vtsls": {
+      "settings": {
+        "javascript": {
+          "inlayHints": false,
+          "preferences": {
+            "importModuleSpecifier": "non-relative",
+            "importModuleSpecifierEnding": "minimal",
+            "includeCompletionsForImportStatements": true,
+            "includeCompletionsForModuleExports": true
+          }
+        },
+        "typescript": {
+          "inlayHints": false,
+          "preferences": {
+            "importModuleSpecifier": "non-relative",
+            "importModuleSpecifierEnding": "minimal",
+            "includeCompletionsForImportStatements": true,
+            "includeCompletionsForModuleExports": true
+          }
+        }
+      }
+    }
+  },
+  "markdown_preview_font_size": 17.0,
+  "minimap": {
+    "show": "never"
+  },
+  "multi_cursor_modifier": "cmd_or_ctrl",
+  "outline_panel": {
+    "button": false
+  },
+  "preview_tabs": {
+    "enable_keep_preview_on_code_navigation": true
+  },
+  "project_panel": {
+    "auto_fold_dirs": false,
+    "auto_open": {
+      "on_drop": false
+    },
+    "bold_folder_labels": false,
+    "default_width": 240.0,
+    "diagnostic_badges": true,
+    "dock": "left",
+    "entry_spacing": "comfortable",
+    "git_status": true,
+    "git_status_indicator": true,
+    "hide_hidden": false,
+    "indent_size": 20.0
+  },
+  "search": {
+    "case_sensitive": true,
+    "center_on_match": false,
+    "include_ignored": false
+  },
+  "seed_search_query_from_cursor": "selection",
+  "show_edit_predictions": true,
+  "status_bar": {
+    "active_language_button": true,
+    "line_endings_button": false,
+    "show_active_file": false
+  },
+  "tab_bar": {
+    "show": true,
+    "show_pinned_tabs_in_separate_row": true,
+    "show_tab_bar_buttons": false
+  },
+  "tab_size": 2,
+  "tabs": {
+    "activate_on_close": "left_neighbour",
+    "file_icons": true,
+    "git_status": true
+  },
+  "terminal": {
+    "blinking": "on",
+    "copy_on_select": true,
+    "cursor_shape": "underline",
+    "font_family": "JetBrainsMono Nerd Font",
+    "font_size": 14.5,
+    "font_weight": 300.0,
+    "scroll_multiplier": 3.0,
+    "show_count_badge": true
+  },
+  "theme": {
+    "dark": "GitHub Dark",
+    "light": "GitHub Light",
+    "mode": "system"
+  },
+  "theme_overrides": {
+    "GitHub Dark": {
+      "version_control.ignored": "#7ee787"
+    },
+    "GitHub Light": {
+      "version_control.ignored": "#afb8c1"
+    }
+  },
+  "title_bar": {
+    "show_branch_name": true,
+    "show_branch_status_icon": true,
+    "show_menus": true,
+    "show_onboarding_banner": false,
+    "show_project_items": true,
+    "show_sign_in": false,
+    "show_user_menu": true,
+    "show_user_picture": true
+  },
+  "toolbar": {
+    "agent_review": false,
+    "breadcrumbs": true,
+    "code_actions": true,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "ui_font_family": ".ZedSans",
+  "ui_font_size": 17.0,
+  "use_smartcase_search": true,
+  "when_closing_with_no_tabs": "platform_default"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "label": "JSON: Sort keys",
+    "command": "jq --sort-keys . \"$ZED_FILE\" > \"$ZED_FILE\"",
+    "reveal": "never",
+    "hide": "on_success",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "JSON: Sort deeply",
+    "command": "jq --sort-keys 'walk(if type == \"array\" then sort else . end)' \"$ZED_FILE\" > \"$ZED_FILE\"",
+    "reveal": "never",
+    "hide": "on_success",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  }
+]

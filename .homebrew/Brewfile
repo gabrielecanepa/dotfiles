@@ -106,6 +106,8 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
+# Multiplayer code editor
+cask "zed"
 mas "1Password for Safari", id: 1569813296
 mas "Color Picker", id: 1545870783
 mas "Ethernet Status", id: 1186187538

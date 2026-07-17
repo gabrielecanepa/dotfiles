@@ -1,0 +1,55 @@
+{
+  "file_scan_exclusions": [
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "*_history",
+    ".Trash",
+    "Applications",
+    "Claude",
+    "Desktop",
+    "Developer",
+    "Documents",
+    "Downloads",
+    "Library*",
+    "Movies",
+    "Music",
+    "OrbStack",
+    "Pictures",
+    "Public"
+  ],
+  "languages": {
+    "JSON": {
+      "language_servers": [
+        "oxfmt",
+        "..."
+      ],
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "JSONC": {
+      "language_servers": [
+        "oxfmt",
+        "..."
+      ],
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "CSS": {
+      "language_servers": [
+        "oxfmt",
+        "..."
+      ],
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    }
+  }
+}

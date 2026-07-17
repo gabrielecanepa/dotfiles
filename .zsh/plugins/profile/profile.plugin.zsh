@@ -25,7 +25,7 @@ profile() (
   # _profile_git_editor <command>
   _profile_git_editor() {
     case "$1" in
-      atom|code|code-insiders) print -r -- "$1 --wait" ;;
+      atom|code|code-insiders|zed) print -r -- "$1 --wait" ;;
       mate) print -r -- 'mate -w' ;;
       subl) print -r -- 'subl -n -w' ;;
       *) print -r -- "$1" ;;
@@ -40,6 +40,7 @@ profile() (
       nano) print -r -- 'Nano' ;;
       subl) print -r -- 'Sublime Text' ;;
       vim) print -r -- 'Vim' ;;
+      zed) print -r -- 'Zed' ;;
       *) print -r -- "$1" ;;
     esac
   }

@@ -30,6 +30,11 @@
 /.config/iterm2/*
 !/.config/nodenv/
 !/.config/terminal/
+!/.config/zed/
+/.config/zed/*
+!/.config/zed/keymap.json
+!/.config/zed/settings.json
+!/.config/zed/tasks.json
 !/.copilot/
 /.copilot/*
 !/.copilot/instructions
@@ -43,6 +48,7 @@
 !/.vscode/user/
 !/.vscode/extensions.json
 !/.vscode/settings.json
+!/.zed/
 !/.zsh/
 /.zsh/completions/
 /.zsh/plugins/_*/

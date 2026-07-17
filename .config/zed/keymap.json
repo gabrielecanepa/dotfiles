@@ -1,0 +1,55 @@
+[
+  {
+    "bindings": {
+      "ctrl-cmd-left": "pane::SwapItemLeft",
+      "ctrl-cmd-right": "pane::SwapItemRight"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+      "cmd-shift-w": "pane::CloseAllItems",
+      "cmd-shift-r": "workspace::Reload"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-shift-backspace": "editor::DeleteLine",
+      "ctrl-cmd-g": "editor::SelectAllMatches",
+      "cmd-/": "editor::ToggleComments",
+      "ctrl-shift-up": "editor::AddSelectionAbove",
+      "ctrl-shift-down": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "alt-enter": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "Editor && (extension == json || extension == jsonc)",
+    "bindings": {
+      "cmd-k cmd-j": [
+        "task::Spawn",
+        {
+          "task_name": "JSON: Sort keys"
+        }
+      ],
+      "cmd-k cmd-shift-j": [
+        "task::Spawn",
+        {
+          "task_name": "JSON: Sort keys and arrays (deep)"
+        }
+      ]
+    }
+  }
+]
