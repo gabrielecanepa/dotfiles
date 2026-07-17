@@ -16,6 +16,8 @@
 !/.codex/AGENTS.md
 !/.codex/hooks
 !/.codex/hooks.json
+!/.codex/pets/
+/.codex/pets/**/validation.json
 !/.codex/skills
 !/.config/
 /.config/*
