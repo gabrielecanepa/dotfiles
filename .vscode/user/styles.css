@@ -239,19 +239,18 @@
 
 /* Git
    ========================================================================== */
-.show-file-icons .\.git-name-folder-icon::before {
+.show-file-icons .\.git-name-folder-icon::before,
+.show-file-icons .git-name-dir-icon.config-name-file-icon::before {
   font-family: devicons !important;
   content: "\e602" !important;
+}
+.show-file-icons .\.git-name-folder-icon::before {
   opacity: 0.5 !important;
 }
 .show-file-icons .\.git-name-folder-icon .label-name {
   color: var(--vscode-gitDecoration-ignoredResourceForeground) !important;
 }
-.show-file-icons .\.gitconfig\.local-name-file-icon::before,
-.show-file-icons .\.gitignore\.global-name-file-icon::before,
-.show-file-icons .\.gitprofile-name-file-icon::before {
-  font-family: devicons !important;
-  content: "\e602" !important;
+.show-file-icons .git-name-dir-icon.config-name-file-icon::before {
   color: var(--file-icons-red-dark) !important;
 }
 

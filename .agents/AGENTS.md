@@ -28,6 +28,7 @@ The canonical files live under `~/.agents/`. `~/.claude/CLAUDE.md`, `~/.codex/AG
 
 - macOS on Apple Silicon; Homebrew prefix `/opt/homebrew`; VS Code and Ghostty.
 - Project code lives under `~/Developer`; `$HOME` is the dotfiles git repository.
+- Personal, work, and per-client contexts are strictly separated: each has its own email account, macOS desktop, and Chrome window, and client projects live under `~/Developer/@<client>`. Target browser, email, and calendar automation at the active context's account and Chrome window only. Git identity and per-client overrides live in the untracked `~/.gitconfig`; never hardcode an email into tracked config.
 - Obsidian vaults live only under `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/`. Never substitute `~/Documents` or another guessed path.
 - zsh uses custom functions under `~/.zsh`. Check the matching plugin before treating commands such as `profile`, `plugin`, `brew`, `mas`, `lts`, `deps`, or `dotfiles` as binaries.
 - Node uses `nodenv`; Python uses `pyenv`; Ruby uses `rbenv`. Do not introduce mise, asdf, nvm, or Volta unless asked.

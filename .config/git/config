@@ -1,9 +1,6 @@
 [core]
   ignorecase = false
 	pager = less -FRSX
-[include]
-  path = ~/.gitprofile
-
 [init]
   defaultBranch = main
 [branch]

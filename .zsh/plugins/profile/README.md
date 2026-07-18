@@ -31,3 +31,7 @@ profile help, -h, --help   # Print help message
 ### Separator
 
 `ZSH_PROFILE_SEPARATOR` sets a custom separator for the profile output. It defaults to four spaces.
+
+### Git config file
+
+`ZSH_GIT_CONFIG` sets the git config file where the identity values (`user.name`, `user.email`, `core.editor`) are written. When unset, the plugin writes to the global git configuration (`git config --global`). Point it at an untracked file, such as the root `~/.gitconfig` when your tracked global config lives at `~/.config/git/config`, so identity never lands in a dotfiles repository.

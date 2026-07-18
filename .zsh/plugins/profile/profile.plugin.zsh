@@ -111,11 +111,11 @@ profile() (
 
   # Writes the identity exports into ~/.zprofile between the generated markers,
   # preserving any hand-added content outside the fence, and syncs the matching
-  # values into ~/.gitprofile (included by ~/.gitconfig).
+  # values into the global git config, or into $ZSH_GIT_CONFIG when set.
   # _profile_write
   _profile_write() {
     local zprofile="$HOME/.zprofile"
-    local -a lines block
+    local -a lines block git_config
     local key
 
     block=("$marker_begin")
@@ -142,9 +142,11 @@ profile() (
 
     print -rl -- "${block[@]}" "${lines[@]}" > "$zprofile"
 
-    command git config --file "$HOME/.gitprofile" user.name "$NAME"
-    command git config --file "$HOME/.gitprofile" user.email "$EMAIL"
-    command git config --file "$HOME/.gitprofile" core.editor "$(_profile_git_editor "$EDITOR")"
+    git_config=(git config --global)
+    [[ -n "$ZSH_GIT_CONFIG" ]] && git_config=(git config --file "$ZSH_GIT_CONFIG")
+    command "${git_config[@]}" user.name "$NAME"
+    command "${git_config[@]}" user.email "$EMAIL"
+    command "${git_config[@]}" core.editor "$(_profile_git_editor "$EDITOR")"
   }
 
   case "$1" in

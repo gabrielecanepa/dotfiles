@@ -60,7 +60,7 @@
       ".env*"
     ],
     "Git Config": [
-      ".gitprofile"
+      "**/.config/git/config"
     ],
     "Git Ignore": [
       "ignore"
