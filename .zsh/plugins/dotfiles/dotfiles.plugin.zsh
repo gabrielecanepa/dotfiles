@@ -21,6 +21,23 @@ _dotfiles_vscode_ok() {
   [[ "$live" -ef "$tracked" ]]
 }
 
+# Recommended ids from ~/.vscode/extensions.json with no ~/.vscode/extensions/<id>-* folder, one per line.
+# Globbing beats `code --list-extensions` here: no process spawn on every shell startup.
+_dotfiles_vscode_missing_extensions() {
+  emulate -L zsh
+  local file="$HOME/.vscode/extensions.json" dir="$HOME/.vscode/extensions"
+  [[ -f "$file" ]] || return 0
+  local -a ids hits
+  ids=(${(f)"$(command grep -oE '"[A-Za-z0-9-]+\.[A-Za-z0-9._-]+"' "$file")"})
+  ids=(${(L)ids//\"/})
+  local id
+  for id in $ids; do
+    hits=("$dir"/"$id"-*(N/))
+    (( $#hits )) || print -r -- "$id"
+  done
+  return 0
+}
+
 dotfiles() {
   emulate -L zsh
 
@@ -54,6 +71,23 @@ dotfiles() {
         rc=1
       fi
 
+      local -a missing_extensions
+      missing_extensions=(${(f)"$(_dotfiles_vscode_missing_extensions)"})
+      if (( $#missing_extensions == 0 )); then
+        (( verbose )) && _zsh::log info dotfiles "VS Code extensions in sync 🧩"
+      elif ! (( $+commands[code] )); then
+        _zsh::log warn dotfiles "code CLI not found, skipping $#missing_extensions missing extension(s)"
+      else
+        local extension
+        for extension in $missing_extensions; do
+          if command code --install-extension "$extension" >/dev/null 2>&1; then
+            _zsh::log success dotfiles "VS Code extension $extension installed 🧩"
+          else
+            _zsh::log warn dotfiles "failed to install VS Code extension $extension"
+          fi
+        done
+      fi
+
       return rc
       ;;
     doctor)
@@ -69,6 +103,14 @@ dotfiles() {
           _zsh::log success dotfiles "VS Code settings symlink OK"
         else
           _zsh::log error dotfiles "VS Code settings is not a symlink to the tracked file"
+          drift=1
+        fi
+        local -a missing_extensions
+        missing_extensions=(${(f)"$(_dotfiles_vscode_missing_extensions)"})
+        if (( $#missing_extensions == 0 )); then
+          _zsh::log success dotfiles "VS Code extensions OK"
+        else
+          _zsh::log error dotfiles "missing VS Code extensions: ${(j:, :)missing_extensions}"
           drift=1
         fi
       fi

@@ -67,6 +67,7 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 - **Allowed types (non-standard):** `agents`, `brew`, `chore`, `docs`, `editor`, `git`, `node`, `python`, `ruby`, `shell`. Allowed scopes (optional): `cask`, `formula`, `mas` (under `brew`), `vscode` and `zed` (under `editor`), `npm` (under `node`), `claude`, `codex`, `copilot` (under `agents`, only when a change is bound to one tool's non-shared config), `shell` and `zsh` (under `shell`). Do **NOT** use `feat`/`fix`/`refactor` here.
 - **Agent config** (`.agents/**`, `AGENTS.md`, the rules/skills/hooks, and the `.claude`/`.codex`/`.copilot`/`.github` symlinks) → commit with type `agents`.
 - **Editor config** → commit with type `editor`: VS Code (`.vscode/**`) under scope `vscode`, Zed (`.config/zed/**` and `.zed/**`) under scope `zed`. Zed reads `~/.config/zed/` directly, so its tracked files ARE the live config (no symlink or `dotfiles init` as VS Code's `settings.json`).
+- **VS Code extensions**: `dotfiles init` installs any id listed in the `.vscode/extensions.json` recommendations that has no folder in `~/.vscode/extensions` (cheap glob check, `code --install-extension` only when something is missing). Keep the recommendations list as the single wanted-set; only add marketplace-published ids, since unpublished ones fail the install with a warning on every new machine.
 
 ## Shell startup & internals
 
