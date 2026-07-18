@@ -43,6 +43,9 @@
 !/.npm/
 /.npm/*
 !/.npm/package.json
+!/.ssh/
+/.ssh/*
+!/.ssh/config
 !/.vscode/
 /.vscode/*
 !/.vscode/user/
