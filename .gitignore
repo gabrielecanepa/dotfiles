@@ -21,6 +21,7 @@
 !/.codex/skills
 !/.config/
 /.config/*
+!/.config/btop/
 !/.config/gh/
 !/.config/ghostty/
 !/.config/git/

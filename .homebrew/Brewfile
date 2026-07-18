@@ -9,6 +9,8 @@ brew "pydantic"
 brew "aws-sam-cli"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
