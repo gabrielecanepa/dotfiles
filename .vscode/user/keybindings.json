@@ -316,5 +316,10 @@
       "text": "\u001b\r"
     },
     "when": "terminalFocus"
+  },
+  {
+    "command": "editor.action.sortLinesAscending",
+    "key": "f9",
+    "when": "editorTextFocus && !editorReadonly"
   }
 ]
