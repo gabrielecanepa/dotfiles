@@ -31,7 +31,6 @@ plugins=(
   gh
   git-auto-fetch
   gitfast
-  last-working-dir
   nodenv
   npm
   pyenv
