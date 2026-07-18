@@ -8,8 +8,7 @@
 
 _brewfile_sync() {
   emulate -L zsh
-  if ! { command brew bundle dump --brews --casks --taps --mas --force --no-restart &&
-    command brew bundle } &>/dev/null; then
+  if ! command brew bundle dump --brews --casks --taps --mas --force --no-restart &>/dev/null; then
     _zsh::log warn brewfile 'background Brewfile sync failed'
   fi
 }

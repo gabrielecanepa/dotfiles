@@ -12,22 +12,21 @@
   "chat.useClaudeMdFile": false,
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "files.associations": {
-    "*.json.lock": "jsonl",
-    ".CFUserTextEncoding": "plaintext",
     ".aliases": "shellscript",
-    ".gitprofile": "properties"
+    ".commitlintrc": "json",
+    "*.json.lock": "jsonl"
   },
   "files.exclude": {
-    "*_history": true,
     ".DS_Store": true,
     ".Trash": true,
+    "*_history": true,
     "Applications": true,
     "Claude": true,
     "Desktop": true,
     "Developer": true,
     "Documents": true,
     "Downloads": true,
-    "Library*": true,
+    "Library": true,
     "Movies": true,
     "Music": true,
     "Pictures": true,
@@ -39,10 +38,11 @@
   ],
   "markdown.extension.toc.levels": "3..6",
   "oxc.enable.oxfmt": true,
+  "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
-    "**/*.code-search": true,
     "**/.claude": true,
     "**/.codex": true,
+    "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true
   }

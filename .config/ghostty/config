@@ -21,22 +21,22 @@ quit-after-last-window-closed = false
 initial-window = true
 
 # Font
-font-family = 
-font-family-bold = 
-font-family-italic = 
-font-family-bold-italic = 
+font-family =
+font-family-bold =
+font-family-italic =
+font-family-bold-italic =
 font-style = default
 font-style-bold = bold
 font-style-italic = italic
 font-style-bold-italic = bold-italic
 font-synthetic-style = bold,italic,bold-italic
-font-feature = 
+font-feature =
 font-size = 16.5
-font-variation = 
-font-variation-bold = 
-font-variation-italic = 
-font-variation-bold-italic = 
-font-codepoint-map = 
+font-variation =
+font-variation-bold =
+font-variation-italic =
+font-variation-bold-italic =
+font-codepoint-map =
 font-thicken = false
 font-thicken-strength = 255
 
@@ -83,10 +83,10 @@ macos-titlebar-proxy-icon = hidden
 macos-window-shadow = true
 macos-auto-secure-input = true
 macos-secure-input-indication = true
-macos-icon = custom-style
-macos-icon-frame = plastic
-macos-icon-ghost-color = #F9F9F9
-macos-icon-screen-color = #000000
+# macos-icon = custom-style
+# macos-icon-frame = plastic
+# macos-icon-ghost-color = #F9F9F9
+# macos-icon-screen-color = #000000
 macos-window-buttons = hidden
 
 # Keybindings

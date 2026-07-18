@@ -8,6 +8,12 @@
   opacity: 0.5 !important;
 }
 
+/* Toolbar
+   ========================================================================== */
+.monaco-action-bar .update-indicator {
+  display: none !important;
+}
+
 /* Status bar
    ========================================================================== */
 #be5invis\.vscode-custom-css {
@@ -48,10 +54,8 @@
   --file-icons-homebrew: #ffbd5d;
   --file-icons-nestjs: #e0234f;
   --file-icons-oxc: #20beb6;
-  --file-icons-prisma: #4ca194;
   --file-icons-supabase: #40cf8f;
   --file-icons-turborepo: #3f79d5;
-  --file-icons-vitest: #7b9a36;
 }
 
 .show-file-icons .folder-icon::before {
@@ -120,14 +124,6 @@
   content: "\f0c4" !important;
 }
 
-/* Bun
-   ========================================================================== */
-.show-file-icons .\.bun-name-folder-icon::before {
-  font-family: devicons !important;
-  content: "\e669" !important;
-  font-size: 112% !important;
-}
-
 /* Bundler
    ========================================================================== */
 .show-file-icons .\.bundle-name-folder-icon::before {
@@ -153,7 +149,8 @@
   content: "\e601" !important;
   font-size: 110% !important;
 }
-.show-file-icons .claude\.md-name-file-icon::before {
+.show-file-icons .claude\.md-name-file-icon::before,
+.show-file-icons .\.claude\.json-name-file-icon::before {
   color: var(--file-icons-orange) !important;
 }
 
@@ -503,7 +500,7 @@
 }
 .show-file-icons .prisma-lang-file-icon::before {
   font-size: 102% !important;
-  color: var(--file-icons-prisma) !important;
+  color: var(--file-icons-teal-dark) !important;
   background: none !important;
 }
 
@@ -721,7 +718,7 @@
 }
 .show-file-icons .vitest\.config\.js-name-file-icon::before,
 .show-file-icons .vitest\.config\.ts-name-file-icon::before {
-  color: var(--file-icons-vitest) !important;
+  color: var(--file-icons-green) !important;
 }
 
 /* VSCode

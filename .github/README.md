@@ -7,7 +7,7 @@
 
 #### Version-controlled home directory
 
-`~` is version-controlled. The [`.gitignore`](/.gitignore) acts as an allowlist, so files are tracked only once opted-in and nothing leaks in by accident. Git hooks run natively, with no extra tooling.
+The home directory is version-controlled. The [`.gitignore`](/.gitignore) acts as an allowlist, so files are tracked only once opted-in and nothing leaks in by accident. Git hooks run natively, with no extra tooling.
 
 #### Single script to install everywhere
 
@@ -23,7 +23,7 @@ Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins
 
 #### Pinned runtimes and dependencies
 
-Node, Ruby, and Python are pinned through nodenv, rbenv, and pyenv. The version managers read the tracked `.node-version`, `.ruby-version`, and `.python-version` files, so the machine and repos stay on the same versions.
+Node, Ruby, and Python are pinned through nodenv, rbenv, and pyenv. The version managers read the tracked [`.node-version`](/.node-version), [`.ruby-version`](/.ruby-version), and [`.python-version`](/.python-version) files, so the machine and repos stay on the same versions.
 
 #### Single source of truth for AI agents
 
@@ -31,7 +31,7 @@ The [`.agents`](/.agents) directory is the source for instructions, rules, skill
 
 #### Extended synchronization
 
-On macOS, VS Code keybindings, settings, and snippets are symlinked back into the repository, with `Downloads`, `Movies`, and `Music` being linked to iCloud Drive for continuous sync across machines.
+VS Code keybindings, settings, and snippets are symlinked back into the repository, with `Downloads`, `Movies`, and `Music` being linked to iCloud Drive for continuous synchronization across machines.
 
 ## Installation
 
@@ -59,9 +59,11 @@ The script runs the following main actions:
   - [Node.js](#nodejs)
   - [Ruby](#ruby)
   - [Python](#python)
-- [Visual Studio Code](#visual-studio-code)
-  - [Keybindings](#keybindings)
-- [iCloud](#icloud)
+- [Editors](#editors)
+  - [Visual Studio Code](#visual-studio-code)
+  - [Keybindings in Electron applications](#keybindings-in-electron-applications)
+- [Extended synchronization](#extended-synchronization-1)
+  - [iCloud Drive](#icloud-drive)
 
 ### SSH
 
@@ -76,7 +78,7 @@ Add the key to [GitHub](https://github.com/settings/ssh/new), [GitLab](https://g
 
 ### Homebrew
 
-Install Homebrew:
+Install [Homebrew](https://brew.sh):
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -84,7 +86,7 @@ Install Homebrew:
 
 ### Oh My Zsh
 
-Install Oh My Zsh and some useful plugins from [zsh-users](https://github.com/zsh-users):
+Install [Oh My Zsh](https://ohmyz.sh) and some useful community plugins:
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -106,18 +108,19 @@ zsh
 
 ### Dotfiles
 
-The `install.sh` script (see [Installation](#installation)) installs the configuration automatically by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory.
+The `install.sh` script (see [Installation](#installation)) installs the configuration automatically by shallow-cloning this repository into a temporary directory, removed automatically on exit, error or interrupt, and copying each managed file into the home directory.
 
 > [!NOTE]
-> Before overwriting an existing file the script asks for confirmation (default _no_), so it is safe to re-run. Every replaced file is moved into a timestamped backup folder in the default state directory.
-
-To restore a file, just copy it back from that folder:
-
-```sh
-backup="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup"
-ls "$backup"
-cp "$backup/<timestamp>/.zshrc" ~/.zshrc
-```
+> Before overwriting an existing file, the script asks for confirmation (default _no_).
+>
+> Every replaced file is moved into a timestamped backup folder in the default state directory.
+> To restore a file, just copy it back from that folder:
+>
+> ```sh
+> backup="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup"
+> ls "$backup"
+> cp "$backup/<timestamp>/.zshrc" ~/.zshrc
+> ```
 
 To clone the repository locally:
 
@@ -173,7 +176,11 @@ nodenv global $(cat ~/.node-version)
 rm -f $NODENV_ROOT/version && ln -sf ~/.node-version $NODENV_ROOT/version
 ```
 
-pnpm comes from Corepack, enabled by the tracked install hook. Node-based tooling (commitlint, oxfmt, TypeScript and its language server) and every other global npm package are tracked in [`.npm/package.json`](/.npm/package.json) by the custom `npm-global` plugin: the wrapped `npm` command re-dumps the manifest after every global install or removal, a second nodenv install hook restores it into every new Node version, and a bare `npm install -g` reinstalls it at any time. Native tooling (shellcheck, shfmt) still ships through the Brewfile.
+pnpm is installed by Corepack, enabled by the tracked install hook.
+
+Node-based tooling (Commitlint, Oxfmt, TypeScript and its language server) and every other global npm package are tracked in [`.npm/package.json`](/.npm/package.json) by the custom `npm-global` plugin: the wrapped `npm` command re-dumps the manifest after every global install or removal, a second nodenv install hook restores it into every new Node version, and a bare `npm install -g` reinstalls it at any time.
+
+Native tooling like ShellCheck still ships through the Brewfile.
 
 #### Ruby
 
@@ -193,7 +200,9 @@ pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### Visual Studio Code
+### Editors
+
+#### Visual Studio Code
 
 Use symlinks to backup keybindings, settings and snippets of Visual Studio Code.
 
@@ -208,10 +217,9 @@ for config in snippets keybindings.json settings.json; do
 done
 ```
 
-> [!NOTE]
-> VS Code rewrites `settings.json` in place on update or Settings Sync, replacing the symlink with a regular file. Running `dotfiles init` re-links it, and `dotfiles doctor` reports the drift.
+VS Code rewrites `settings.json` in place on update or Settings Sync, replacing the symlink with a regular file. Running `dotfiles init` re-links it, and `dotfiles doctor` reports the drift.
 
-#### Keybindings
+#### Keybindings in Electron applications
 
 To avoid emitting beeps in Electron-based applications when using the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘` (see [this issue](https://github.com/electron/electron/issues/2617)) create the keybinding settings file:
 
@@ -230,7 +238,9 @@ And populate it with the following content:
 }
 ```
 
-### iCloud
+### Extended synchronization
+
+#### iCloud Drive
 
 Use the following script to:
 

@@ -24,6 +24,7 @@
   "chat.mcp.gallery.enabled": true,
   "chat.permissions.default": "autoApprove",
   "chat.sessionSync.enabled": true,
+  "chat.titleBar.openInAgentsWindow.enabled": false,
   "chat.tools.urls.autoApprove": {
     "https://*.claude.com": true,
     "https://*.drizzle.team": true,
@@ -55,7 +56,6 @@
   "css.lint.duplicateProperties": "warning",
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
-  "dotenv.enableAutocloaking": false,
   "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.codeActionsOnSave": {
@@ -63,13 +63,13 @@
   },
   "editor.colorDecorators": true,
   "editor.definitionLinkOpensInPeek": false,
-  "editor.gotoLocation.multipleDefinitions": "goto",
-  "editor.gotoLocation.multipleTypeDefinitions": "goto",
-  "editor.gotoLocation.multipleDeclarations": "goto",
-  "editor.gotoLocation.multipleImplementations": "goto",
-  "editor.gotoLocation.alternativeDefinitionCommand": "",
   "editor.fontSize": 13,
   "editor.formatOnSave": true,
+  "editor.gotoLocation.alternativeDefinitionCommand": "",
+  "editor.gotoLocation.multipleDeclarations": "goto",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleImplementations": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveIndentation": "always",
   "editor.inlineSuggest.enabled": true,
@@ -137,13 +137,7 @@
   "explorer.confirmUndo": "light",
   "extensions.allowOpenInModalEditor": true,
   "files.associations": {
-    ".aliases": "shellscript",
-    ".CFUserTextEncoding": "plaintext",
-    ".commitlintrc": "json",
-    ".env*": "dotenv",
-    ".gitprofile": "properties",
-    ".vscode/**/settings.json": "jsonc",
-    "*.css": "tailwindcss",
+    ".env*": "properties",
     "*.json.lock": "jsonl",
     "applypatch-msg": "shellscript",
     "commit-msg": "shellscript",
@@ -304,6 +298,7 @@
   "html.format.unformatted": "html,style",
   "i18n-ally.translate.openai.apiModel": "gpt-4-32k-0613",
   "inlineChat.defaultModel": "Auto (copilot)",
+  "js/ts.experimental.useTsgo": true,
   "js/ts.preferences.importModuleSpecifier": "non-relative",
   "js/ts.preferences.importModuleSpecifierEnding": "minimal",
   "js/ts.preferences.includePackageJsonAutoImports": "on",
@@ -365,7 +360,7 @@
   "terminal.integrated.enableVisualBell": true,
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.fontSize": 12.5,
-  "terminal.integrated.gpuAcceleration": "off",
+  "terminal.integrated.gpuAcceleration": "auto",
   "terminal.integrated.ignoreProcessNames": [
     "bash",
     "zsh"
@@ -379,6 +374,7 @@
     "'",
     "`"
   ],
+  "update.mode": "none",
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": [
     "file:///Users/gabrielecanepa/.vscode/user/styles.css"
@@ -390,6 +386,7 @@
   "window.zoomLevel": 1,
   "workbench.activityBar.location": "bottom",
   "workbench.browser.enableChatTools": true,
+  "workbench.browser.showInTitleBar": false,
   "workbench.colorCustomizations": {
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
@@ -418,6 +415,7 @@
   },
   "workbench.fontAliasing": "auto",
   "workbench.iconTheme": "file-icons",
+  "workbench.navigationControl.enabled": false,
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light High Contrast",
