@@ -33,6 +33,8 @@ applyTo: '**'
 - Reproduce bugs before fixing them and add regression coverage when practical. Establish a green baseline before behavior-preserving refactors.
 - Detect and run the relevant repository checks, normally types, lint, tests, then behavior. Do not assume the package manager or runner.
 - Verify UI changes in the running app through browser automation and capture screenshot evidence. Typecheck cannot verify layout, interaction, animation, accessibility, or auth. Reuse the configured server and follow `browser.instructions.md`.
+- After multi-file or behavior-changing work, spawn a reviewer subagent on the diff with strict criteria: correctness, security, spec compliance, and repository conventions. Every finding must cite file:line and a concrete failure scenario.
+- Confirm each finding before fixing it, cap review at two rounds, and report unresolved findings in the handoff instead of iterating further.
 - Report exact commands and outcomes, separating change-caused failures from baseline noise.
 - Never put secrets in source, command args, logs, or commits.
 
