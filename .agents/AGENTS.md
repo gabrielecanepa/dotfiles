@@ -14,6 +14,7 @@ Claude Code and Copilot load the shared rules automatically. Codex must read `be
 
 - UI work: `design.instructions.md`, `frontend-design`, and one design flavor. Default to `design-taste-frontend`.
 - React or Next.js: `react.instructions.md`, `vercel-react-best-practices`, and `vercel-composition-patterns` for non-trivial component design.
+- TypeScript: `typescript.instructions.md`.
 - Animation or motion work: `motion.instructions.md`, which routes the `emilkowalski/skills` animation skills and pins the Motion docs sources.
 - Server-side Node.js: `node.instructions.md`.
 - Human-facing prose longer than a few sentences: `writing.instructions.md` and `humanizer`.

@@ -5,14 +5,21 @@
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
-# Whether the repo-local git hooks path points at the tracked hooks.
-_dotfiles_hooks_ok() {
+_dotfiles_encoding_ok() {
+  emulate -L zsh
+  [[ -e "$HOME/.CFUserTextEncoding" ]]
+}
+
+_dotfiles_hushlogin_ok() {
+  emulate -L zsh
+  [[ -e "$HOME/.hushlogin" ]]
+}
+
+_dotfiles_git_hooks_ok() {
   emulate -L zsh
   [[ "$(command git -C "$HOME" config --local --get core.hooksPath 2>/dev/null)" == ".config/git/hooks" ]]
 }
 
-# Whether the live VS Code settings ($1) is the tracked file ($2). -ef: same inode, i.e. symlink intact.
-# Non-Darwin and a missing live file both count as "nothing to repair".
 _dotfiles_vscode_ok() {
   emulate -L zsh
   local live="$1" tracked="$2"
@@ -21,9 +28,7 @@ _dotfiles_vscode_ok() {
   [[ "$live" -ef "$tracked" ]]
 }
 
-# Recommended ids from ~/.vscode/extensions.json with no ~/.vscode/extensions/<id>-* folder, one per line.
-# Globbing beats `code --list-extensions` here: no process spawn on every shell startup.
-_dotfiles_vscode_missing_extensions() {
+_dotfiles_vscode_extensions() {
   emulate -L zsh
   local file="$HOME/.vscode/extensions.json" dir="$HOME/.vscode/extensions"
   [[ -f "$file" ]] || return 0
@@ -49,13 +54,33 @@ dotfiles() {
       integer rc=0 verbose=0
       [[ "$2" == (-v|--verbose) ]] && verbose=1
 
-      if _dotfiles_hooks_ok; then
+      if _dotfiles_git_hooks_ok; then
         (( verbose )) && _zsh::log info dotfiles "git hooks path already set 🪝"
       elif command git -C "$HOME" config --local core.hooksPath .config/git/hooks; then
         (( verbose )) && _zsh::log success dotfiles "git hooks path set to .config/git/hooks 🪝"
       else
         _zsh::log error dotfiles "failed to set git hooks path"
         rc=1
+      fi
+
+      if _dotfiles_hushlogin_ok; then
+        (( verbose )) && _zsh::log info dotfiles "login banner already silenced 🤫"
+      elif command touch "$HOME/.hushlogin"; then
+        (( verbose )) && _zsh::log success dotfiles "login banner silenced via ~/.hushlogin 🤫"
+      else
+        _zsh::log error dotfiles "failed to create ~/.hushlogin"
+        rc=1
+      fi
+
+      if [[ $OSTYPE == darwin* ]]; then
+        if _dotfiles_encoding_ok; then
+          (( verbose )) && _zsh::log info dotfiles "user text encoding already pinned 🔤"
+        elif print -r -- '0x0:0x0' > "$HOME/.CFUserTextEncoding"; then
+          (( verbose )) && _zsh::log success dotfiles "user text encoding pinned via ~/.CFUserTextEncoding 🔤"
+        else
+          _zsh::log error dotfiles "failed to create ~/.CFUserTextEncoding"
+          rc=1
+        fi
       fi
 
       if [[ $OSTYPE != darwin* ]]; then
@@ -71,15 +96,15 @@ dotfiles() {
         rc=1
       fi
 
-      local -a missing_extensions
-      missing_extensions=(${(f)"$(_dotfiles_vscode_missing_extensions)"})
-      if (( $#missing_extensions == 0 )); then
+      local -a extensions
+      extensions=(${(f)"$(_dotfiles_vscode_extensions)"})
+      if (( $#extensions == 0 )); then
         (( verbose )) && _zsh::log info dotfiles "VS Code extensions in sync 🧩"
       elif ! (( $+commands[code] )); then
-        _zsh::log warn dotfiles "code CLI not found, skipping $#missing_extensions missing extension(s)"
+        _zsh::log warn dotfiles "code CLI not found, skipping $#extensions missing extension(s)"
       else
         local extension
-        for extension in $missing_extensions; do
+        for extension in $extensions; do
           if command code --install-extension "$extension" >/dev/null 2>&1; then
             _zsh::log success dotfiles "VS Code extension $extension installed 🧩"
           else
@@ -92,13 +117,25 @@ dotfiles() {
       ;;
     doctor)
       integer drift=0
-      if _dotfiles_hooks_ok; then
+      if _dotfiles_git_hooks_ok; then
         _zsh::log success dotfiles "git hooks path OK"
       else
-        _zsh::log error dotfiles "git hooks path NOT set to .config/git/hooks"
+        _zsh::log error dotfiles "git hooks path is NOT .config/git/hooks"
+        drift=1
+      fi
+      if _dotfiles_hushlogin_ok; then
+        _zsh::log success dotfiles "hushlogin OK"
+      else
+        _zsh::log error dotfiles "~/.hushlogin missing"
         drift=1
       fi
       if [[ $OSTYPE == darwin* ]]; then
+        if _dotfiles_encoding_ok; then
+          _zsh::log success dotfiles "text encoding OK"
+        else
+          _zsh::log error dotfiles "~/.CFUserTextEncoding missing"
+          drift=1
+        fi
         if _dotfiles_vscode_ok "$vscode_settings" "$vscode_tracked"; then
           _zsh::log success dotfiles "VS Code settings symlink OK"
         else
@@ -106,7 +143,7 @@ dotfiles() {
           drift=1
         fi
         local -a missing_extensions
-        missing_extensions=(${(f)"$(_dotfiles_vscode_missing_extensions)"})
+        missing_extensions=(${(f)"$(_dotfiles_vscode_extensions)"})
         if (( $#missing_extensions == 0 )); then
           _zsh::log success dotfiles "VS Code extensions OK"
         else

@@ -156,17 +156,20 @@ _squanchy_php() {
 _squanchy_rprompt() {
   emulate -L zsh
   local -a seen segments
-  local r
+  local r color icon version
   [[ -z "$ZSH_THEME_SQUANCHY_RPROMPTS" ]] && ZSH_THEME_SQUANCHY_RPROMPTS=(node ruby python php)
   for r in $ZSH_THEME_SQUANCHY_RPROMPTS; do
     (( ${seen[(I)$r]} )) && continue
     seen+=$r
     case $r in
-      node) segments+="%{$fg[green]%}${_SQUANCHY_NODE} $(_squanchy_version node)%{$reset_color%}" ;;
-      ruby) segments+="%{$fg[red]%}${_SQUANCHY_RUBY} $(_squanchy_version ruby)%{$reset_color%}" ;;
-      python) segments+="%{$fg[yellow]%}${_SQUANCHY_PYTHON} $(_squanchy_version python)%{$reset_color%}" ;;
-      php) segments+="%{$fg[blue]%}${_SQUANCHY_PHP} $(_squanchy_php)%{$reset_color%}" ;;
+      node) color=$fg[green]; icon=$_SQUANCHY_NODE; version=$(_squanchy_version node) ;;
+      ruby) color=$fg[red]; icon=$_SQUANCHY_RUBY; version=$(_squanchy_version ruby) ;;
+      python) color=$fg[yellow]; icon=$_SQUANCHY_PYTHON; version=$(_squanchy_version python) ;;
+      php) color=$fg[blue]; icon=$_SQUANCHY_PHP; version=$(_squanchy_php) ;;
+      *) continue ;;
     esac
+    [[ -z $version || $version == $ZSH_THEME_SQUANCHY_RPROMPT_EMPTY ]] && continue
+    segments+="%{$color%}${icon} ${version}%{$reset_color%}"
   done
   _SQUANCHY_RPROMPT="${(j:  :)segments}"
 }

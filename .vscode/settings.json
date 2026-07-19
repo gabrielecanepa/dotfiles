@@ -40,8 +40,10 @@
   "oxc.enable.oxfmt": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
-    "**/.claude": true,
-    "**/.codex": true,
+    ".claude": true,
+    ".codex": true,
+    ".copilot/instructions": true,
+    ".github/instructions": true,
     "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true

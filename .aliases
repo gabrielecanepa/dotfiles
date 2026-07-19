@@ -2,8 +2,8 @@
 
 # Directories
 wd="$WORKING_DIR"
-wdu="$WORKING_DIR/$USER"
-tmp="$WORKING_DIR/.tmp"
+wdu="$WORKING_DIR/@$USER"
+tmp="$WORKING_DIR/tmp"
 cloud="$HOME/Library/Mobile Documents"
 cloud_docs="$cloud/com~apple~CloudDocs"
 downloads="$cloud/Downloads"
