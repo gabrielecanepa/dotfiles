@@ -17,6 +17,7 @@ Claude Code and Copilot load the shared rules automatically. Codex must read `be
 - TypeScript: `typescript.instructions.md`.
 - Animation or motion work: `motion.instructions.md`, which routes the `emilkowalski/skills` animation skills and pins the Motion docs sources.
 - Server-side Node.js: `node.instructions.md`.
+- Shell scripts: `shell.instructions.md`.
 - Human-facing prose longer than a few sentences: `writing.instructions.md` and `humanizer`.
 - Agentic documentation or skills: `sync-agents`; add `skill-creator` when creating or modifying a skill.
 - Library, framework, or API questions: `context7-mcp`.
