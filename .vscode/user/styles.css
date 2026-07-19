@@ -697,12 +697,14 @@
 /* Vercel
    ========================================================================== */
 .show-file-icons .\.vercel-name-folder-icon::before,
-.show-file-icons .skills-lock\.json-name-file-icon::before {
+.show-file-icons .skills-lock\.json-name-file-icon::before,
+.show-file-icons .\.skill-lock\.json-name-file-icon::before {
   content: "\25b2" !important;
   font-size: 107% !important;
   font-family: fi !important;
 }
-.show-file-icons .skills-lock\.json-name-file-icon::before {
+.show-file-icons .skills-lock\.json-name-file-icon::before,
+.show-file-icons .\.skill-lock\.json-name-file-icon::before {
   color: var(--file-icons-gray) !important;
 }
 
