@@ -6,7 +6,7 @@
 !/.claude/
 /.claude/*
 !/.claude/hooks
-!/.claude/output-styles
+!/.claude/output-styles/
 !/.claude/rules
 !/.claude/skills
 !/.claude/CLAUDE.md
