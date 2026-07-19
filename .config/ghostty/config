@@ -41,7 +41,7 @@ font-thicken = false
 font-thicken-strength = 255
 
 # Appearance
-theme = light:github-light,dark:github-dark
+theme = light:ghostty-light,dark:ghostty-dark
 minimum-contrast = 1
 background-opacity = 0.98
 background-blur = 5
