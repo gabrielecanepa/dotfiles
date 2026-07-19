@@ -10,14 +10,32 @@
       "installedAt": "2026-06-14T20:27:03.606Z",
       "updatedAt": "2026-07-03T08:41:20.778Z"
     },
+    "animation-vocabulary": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/animation-vocabulary/SKILL.md",
+      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
+      "installedAt": "2026-07-19T14:55:09.092Z",
+      "updatedAt": "2026-07-19T14:55:09.092Z"
+    },
+    "apple-design": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/apple-design/SKILL.md",
+      "skillFolderHash": "e9f5b472dfb28d8cf29f64001b6c01ef94b8168b",
+      "installedAt": "2026-07-19T14:55:10.521Z",
+      "updatedAt": "2026-07-19T14:55:10.521Z"
+    },
     "brandkit": {
       "source": "leonxlnx/taste-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/brandkit/SKILL.md",
       "skillFolderHash": "d278ff748cafab01e4ae5dd7758fc0b53258621c",
-      "installedAt": "2026-07-04T14:42:34.359Z",
-      "updatedAt": "2026-07-04T14:42:59.229Z"
+      "installedAt": "2026-07-19T14:54:50.913Z",
+      "updatedAt": "2026-07-19T14:54:50.913Z"
     },
     "context7-mcp": {
       "source": "upstash/context7",
@@ -34,8 +52,17 @@
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/taste-skill/SKILL.md",
       "skillFolderHash": "a6d128e53b4ec0238baee751dde33bf707adb5ec",
-      "installedAt": "2026-07-04T14:42:34.367Z",
-      "updatedAt": "2026-07-04T14:42:51.304Z"
+      "installedAt": "2026-07-19T14:54:24.559Z",
+      "updatedAt": "2026-07-19T14:54:24.559Z"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "skillFolderHash": "0e6f8d7223a0abe73f81e890b3ec76257029a834",
+      "installedAt": "2026-07-14T17:03:05.873Z",
+      "updatedAt": "2026-07-14T17:03:05.873Z"
     },
     "find-skills": {
       "source": "vercel-labs/skills",
@@ -43,8 +70,8 @@
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
       "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
-      "installedAt": "2026-03-14T16:58:48.863Z",
-      "updatedAt": "2026-07-14T00:26:40.901Z"
+      "installedAt": "2026-07-19T14:55:24.333Z",
+      "updatedAt": "2026-07-19T14:55:24.333Z"
     },
     "frontend-design": {
       "installedAt": "2026-06-15T07:28:14.190Z",
@@ -56,23 +83,14 @@
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "updatedAt": "2026-06-15T07:28:14.190Z"
     },
-    "grill-me": {
-      "source": "mattpocock/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/mattpocock/skills.git",
-      "skillPath": "skills/productivity/grill-me/SKILL.md",
-      "skillFolderHash": "c817f6f36acd483294144694a935a76d3e3eb101",
-      "installedAt": "2026-07-03T08:55:25.205Z",
-      "updatedAt": "2026-07-14T00:26:42.116Z"
-    },
     "high-end-visual-design": {
       "source": "leonxlnx/taste-skill",
       "sourceType": "github",
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/soft-skill/SKILL.md",
       "skillFolderHash": "1b5943432ddd1b980206968c529a323cc992dbec",
-      "installedAt": "2026-07-04T14:42:34.366Z",
-      "updatedAt": "2026-07-04T14:42:53.207Z"
+      "installedAt": "2026-07-19T14:54:42.591Z",
+      "updatedAt": "2026-07-19T14:54:42.591Z"
     },
     "humanizer": {
       "source": "blader/humanizer",
@@ -89,8 +107,17 @@
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/image-to-code-skill/SKILL.md",
       "skillFolderHash": "701b3cb89c061fcf98a98f639e0b0b5c0b492479",
-      "installedAt": "2026-06-15T07:23:59.051Z",
-      "updatedAt": "2026-07-04T14:42:57.335Z"
+      "installedAt": "2026-07-19T14:54:48.863Z",
+      "updatedAt": "2026-07-19T14:54:48.863Z"
+    },
+    "improve-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/improve-animations/SKILL.md",
+      "skillFolderHash": "ec57cb65ea60a23af278d305d1425ce4f998f510",
+      "installedAt": "2026-07-19T14:55:12.077Z",
+      "updatedAt": "2026-07-19T14:55:12.077Z"
     },
     "industrial-brutalist-ui": {
       "source": "leonxlnx/taste-skill",
@@ -98,18 +125,8 @@
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/brutalist-skill/SKILL.md",
       "skillFolderHash": "f812ede7e5c34cf680f629911e9f9ac05e416cf4",
-      "installedAt": "2026-07-04T14:42:34.361Z",
-      "updatedAt": "2026-07-04T14:42:55.268Z"
-    },
-    "mcp-builder": {
-      "source": "anthropics/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/anthropics/skills.git",
-      "skillPath": "skills/mcp-builder/SKILL.md",
-      "skillFolderHash": "b866bcfb57b780c10b587c7b543e871a91661ce0",
-      "pluginName": "example-skills",
-      "installedAt": "2026-07-03T08:55:45.110Z",
-      "updatedAt": "2026-07-03T08:55:45.110Z"
+      "installedAt": "2026-07-19T14:54:46.983Z",
+      "updatedAt": "2026-07-19T14:54:46.983Z"
     },
     "minimalist-ui": {
       "source": "leonxlnx/taste-skill",
@@ -117,8 +134,8 @@
       "sourceUrl": "https://github.com/leonxlnx/taste-skill.git",
       "skillPath": "skills/minimalist-skill/SKILL.md",
       "skillFolderHash": "5509c012862cda27e2ed7efae89ed940ecc53add",
-      "installedAt": "2026-06-15T07:23:59.052Z",
-      "updatedAt": "2026-07-04T14:42:34.364Z"
+      "installedAt": "2026-07-19T14:54:44.536Z",
+      "updatedAt": "2026-07-19T14:54:44.536Z"
     },
     "redesign-existing-projects": {
       "source": "leonxlnx/taste-skill",
@@ -128,6 +145,15 @@
       "skillFolderHash": "d9cffe56d26d4af7687299e391a7be1cfaf46c1b",
       "installedAt": "2026-06-15T07:23:59.053Z",
       "updatedAt": "2026-07-04T14:42:34.365Z"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/emilkowalski/skills.git",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "skillFolderHash": "0012fc43a25cce5df019102ab28bb6a68ad9db3d",
+      "installedAt": "2026-07-19T14:55:13.780Z",
+      "updatedAt": "2026-07-19T14:55:13.780Z"
     },
     "skill-creator": {
       "installedAt": "2026-06-14T19:39:19.357Z",
@@ -163,8 +189,8 @@
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-view-transitions/SKILL.md",
       "skillFolderHash": "4d46c637057aae90b9ec5280190c25dc0d90ec28",
-      "installedAt": "2026-07-03T08:42:41.499Z",
-      "updatedAt": "2026-07-03T08:42:41.499Z"
+      "installedAt": "2026-07-19T14:55:23.174Z",
+      "updatedAt": "2026-07-19T14:55:23.174Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -174,51 +200,6 @@
       "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
       "installedAt": "2026-07-03T08:42:41.500Z",
       "updatedAt": "2026-07-03T08:42:41.500Z"
-    },
-    "animation-vocabulary": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/animation-vocabulary/SKILL.md",
-      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
-      "installedAt": "2026-07-14T17:03:05.870Z",
-      "updatedAt": "2026-07-14T17:03:05.870Z"
-    },
-    "apple-design": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/apple-design/SKILL.md",
-      "skillFolderHash": "e9f5b472dfb28d8cf29f64001b6c01ef94b8168b",
-      "installedAt": "2026-07-14T17:03:05.872Z",
-      "updatedAt": "2026-07-14T17:03:05.872Z"
-    },
-    "emil-design-eng": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/emil-design-eng/SKILL.md",
-      "skillFolderHash": "0e6f8d7223a0abe73f81e890b3ec76257029a834",
-      "installedAt": "2026-07-14T17:03:05.873Z",
-      "updatedAt": "2026-07-14T17:03:05.873Z"
-    },
-    "improve-animations": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/improve-animations/SKILL.md",
-      "skillFolderHash": "ec57cb65ea60a23af278d305d1425ce4f998f510",
-      "installedAt": "2026-07-14T17:03:05.874Z",
-      "updatedAt": "2026-07-14T17:03:05.874Z"
-    },
-    "review-animations": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/review-animations/SKILL.md",
-      "skillFolderHash": "0012fc43a25cce5df019102ab28bb6a68ad9db3d",
-      "installedAt": "2026-07-14T17:03:05.874Z",
-      "updatedAt": "2026-07-14T17:03:05.874Z"
     }
   },
   "dismissed": {
