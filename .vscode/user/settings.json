@@ -365,6 +365,7 @@
     "bash",
     "zsh"
   ],
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.mouseWheelScrollSensitivity": 3,
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,

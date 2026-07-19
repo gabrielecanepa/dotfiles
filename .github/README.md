@@ -1,7 +1,7 @@
 ![](banner.png)
 
 > [!WARNING]
-> Before using the following dotfiles, fork this repository, review the content and remove things you don’t want or need. **Don’t blindly use my settings** unless you know what you are doing. Use at your own risk.
+> Before using the following dotfiles, fork this repository, review the content and remove things you don't want or need. **Don't blindly use my settings** unless you know what you are doing. Use at your own risk.
 
 ## Features
 
@@ -11,11 +11,11 @@ The home directory is version-controlled. The [`.gitignore`](/.gitignore) acts a
 
 #### Single script to install everywhere
 
-[`install.sh`](/.github/install.sh) clones the repo, copies every managed file into the home, and sets up Homebrew, runtimes, packages, and all other managed tools. It confirms before overwriting and backs up whatever it replaces, so re-runs are safe.
+[`.install.sh`](/.install.sh) clones the repo, copies every managed file into the home, and sets up Homebrew, runtimes, packages, and all other managed tools. It confirms before overwriting and backs up whatever it replaces, so re-runs are safe.
 
 #### Synced Brewfile to manage all dependencies
 
-[`Brewfile`](/.homebrew/Brewfile) pins formulae, casks, App Store apps and VS Code extensions. The wrapped `brew` command keeps it always in sync, and `brew fresh` updates, upgrades, cleans, dumps, and runs health checks in one go.
+[`Brewfile`](/.homebrew/Brewfile) pins formulae, casks, and App Store apps. The wrapped `brew` command keeps it always in sync, and `brew fresh` updates, upgrades, cleans, dumps, and runs health checks in one go.
 
 #### Fast and powerful shell configuration
 
@@ -38,7 +38,7 @@ VS Code keybindings, settings, and snippets are symlinked back into the reposito
 Run the install script to bootstrap the configuration:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/gabrielecanepa/dotfiles/main/.github/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/gabrielecanepa/dotfiles/HEAD/.install.sh)"
 ```
 
 The script runs the following main actions:
@@ -89,7 +89,7 @@ Install [Homebrew](https://brew.sh):
 Install [Oh My Zsh](https://ohmyz.sh) and some useful community plugins:
 
 ```sh
-/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 
 plugins=(
   zsh-users/zsh-autosuggestions
@@ -108,7 +108,7 @@ zsh
 
 ### Dotfiles
 
-The `install.sh` script (see [Installation](#installation)) installs the configuration automatically by shallow-cloning this repository into a temporary directory, removed automatically on exit, error or interrupt, and copying each managed file into the home directory.
+The `.install.sh` script (see [Installation](#installation)) installs the configuration automatically.
 
 > [!NOTE]
 > Before overwriting an existing file, the script asks for confirmation (default _no_).
@@ -218,6 +218,8 @@ done
 ```
 
 VS Code rewrites `settings.json` in place on update or Settings Sync, replacing the symlink with a regular file. Running `dotfiles init` re-links it, and `dotfiles doctor` reports the drift.
+
+Extensions are tracked in [`.vscode/extensions.json`](/.vscode/extensions.json), and `dotfiles init` installs any listed extension that is missing from the machine.
 
 #### Keybindings in Electron applications
 

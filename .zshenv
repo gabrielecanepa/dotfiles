@@ -32,3 +32,5 @@ initialize_path() {
   )
 }
 initialize_path
+
+clear

@@ -2,7 +2,7 @@
 
 The `profile` command lets you manage your Zsh profile to automate the setup of your development environment.
 
-It provides commands to install, reload, and check the profile configuration.
+It provides commands to install, configure, reload, and check the profile configuration.
 
 The default output has the following format:
 
