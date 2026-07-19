@@ -52,6 +52,7 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
   ```
 
 - `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex uses `.agents/hooks.json` through the `~/.codex/hooks.json` symlink. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
+- Statusline scripts are self-contained entrypoints wired in `.claude/settings.json`: `.claude/statusline.sh` renders every bar style (`solid` by default, unknown falls back to it), and `.claude/subagent-statusline.sh` (a single style). The style comes from the `style` key of `.claude/statusline.json` (untracked runtime state), falling back to `$CLAUDE_STATUSLINE_STYLE` then `solid`. Add styles inside the script; switch live with the `/statusline-style` command, which runs `~/.local/bin/claude-statusline-style.sh` to write the key. Never switch by repointing the `statusLine` commands. Both entrypoints and the helper script are allowlisted and must be `chmod +x`.
 
 ## Generated files
 

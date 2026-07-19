@@ -5,12 +5,15 @@
 /.bundle/*/
 !/.claude/
 /.claude/*
+!/.claude/commands/
 !/.claude/hooks
 !/.claude/output-styles/
 !/.claude/rules
 !/.claude/skills
 !/.claude/CLAUDE.md
 !/.claude/settings.json
+!/.claude/statusline.sh
+!/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
 !/.codex/AGENTS.md
