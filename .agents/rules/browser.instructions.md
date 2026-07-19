@@ -1,6 +1,14 @@
 ---
 description: 'Use whenever a task drives or verifies a real web UI. Reuse the running app, use agent-browser, preserve authenticated state, and clean up sessions.'
-applyTo: '**'
+applyTo: '**/*.astro, **/*.css, **/*.html, **/*.jsx, **/*.svelte, **/*.tsx, **/*.vue'
+paths:
+  - '**/*.astro'
+  - '**/*.css'
+  - '**/*.html'
+  - '**/*.jsx'
+  - '**/*.svelte'
+  - '**/*.tsx'
+  - '**/*.vue'
 ---
 
 # Real-browser work
