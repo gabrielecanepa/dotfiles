@@ -1,7 +1,7 @@
 {
   "rules": {
     "type-enum": [2, "always", ["agents", "brew", "chore", "docs", "git", "gui", "node", "python", "ruby", "shell"]],
-    "scope-enum": [2, "always", ["cask", "claude", "codex", "copilot", "formula", "ghostty", "mas", "npm", "vscode", "zed", "zsh"]],
+    "scope-enum": [2, "always", ["bash", "cask", "claude", "codex", "copilot", "formula", "ghostty", "mas", "npm", "sh", "vscode", "zed", "zsh"]],
     "type-case": [2, "always", "lower-case"],
     "type-empty": [2, "never"],
     "scope-case": [2, "always", "lower-case"],
