@@ -52,6 +52,8 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
   ```
 
 - `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex uses `.agents/hooks.json` through the `~/.codex/hooks.json` symlink. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
+- Statusline scripts follow a dispatcher layout. `.claude/settings.json` points at the stable entrypoints `.claude/statusline.sh` and `.claude/subagent-statusline.sh`, which `exec` a variant from `.claude/statuslines/<name>.sh` chosen by `$CLAUDE_STATUSLINE` / `$CLAUDE_SUBAGENT_STATUSLINE` (default `agent` / `subagent`). Add a variant by dropping an executable `<name>.sh` in `.claude/statuslines/` and allowlisting it; switch by exporting the env var, never by editing `settings.json`. Both entrypoints and every variant are allowlisted (`!/.claude/statuslines/`) and must be `chmod +x`.
+- Harness-consumed scripts (statuslines and hooks) must degrade gracefully, so do **not** use `set -e`: a non-zero from a probe (`git` in a non-repo dir, an absent variant) must fall back, not abort and blank the output. Use `set -uo pipefail` plus explicit fallbacks instead.
 
 ## Generated files
 

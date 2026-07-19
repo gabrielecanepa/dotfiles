@@ -9,8 +9,11 @@
 !/.claude/output-styles/
 !/.claude/rules
 !/.claude/skills
+!/.claude/statuslines/
 !/.claude/CLAUDE.md
 !/.claude/settings.json
+!/.claude/statusline.sh
+!/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
 !/.codex/AGENTS.md
