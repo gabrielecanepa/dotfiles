@@ -139,6 +139,10 @@
   "files.associations": {
     ".env*": "properties",
     "*.json.lock": "jsonl",
+    "**/com.mitchellh.ghostty/config": "ghostty",
+    "**/com.mitchellh.ghostty/themes/*": "ghostty",
+    "**/ghostty/config": "ghostty",
+    "**/ghostty/themes/*": "ghostty",
     "applypatch-msg": "shellscript",
     "commit-msg": "shellscript",
     "fsmonitor-watchman": "shellscript",
