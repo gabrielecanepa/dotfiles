@@ -1,0 +1,2 @@
+PROMPT='zsh-${ZSH_VERSION}$ '
+RPROMPT=
