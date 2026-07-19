@@ -23,7 +23,7 @@ export BUN_INSTALL="$HOME/.bun"
 # Agents
 export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
-initialize_path() {
+initialize-path() {
   path=(
     "$HOME/.local/bin"
     "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
@@ -32,6 +32,4 @@ initialize_path() {
     $path
   )
 }
-initialize_path
-
-clear
+initialize-path

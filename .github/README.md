@@ -47,14 +47,14 @@ The script runs the following main actions:
 2. Backs up the replaced files into a timestamped backup folder in the default state directory
 3. Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Visual Studio Code, and iCloud symlinks
 
-## Manual Setup
+## Manual setup
 
 - [SSH](#ssh)
 - [Homebrew](#homebrew)
 - [Oh My Zsh](#oh-my-zsh)
 - [Dotfiles](#dotfiles)
 - [Git](#git)
-- [Shell Profile](#shell-profile)
+- [Shell profile](#shell-profile)
 - [Runtimes](#runtimes)
   - [Node.js](#nodejs)
   - [Ruby](#ruby)
@@ -151,7 +151,7 @@ git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD
 
 This repository wires its own checks with local [Git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) running Oxfmt, ShellCheck, commitlint and other code quality tools on commit and push.
 
-### Shell Profile
+### Shell profile
 
 Use the custom `profile` plugin to create your shell configuration with a guided prompt:
 

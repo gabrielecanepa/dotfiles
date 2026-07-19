@@ -13,8 +13,7 @@
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "files.associations": {
     ".aliases": "shellscript",
-    ".commitlintrc": "json",
-    "*.json.lock": "jsonl"
+    "**/.config/git/config": "properties"
   },
   "files.exclude": {
     ".DS_Store": true,
@@ -40,8 +39,13 @@
   "oxc.enable.oxfmt": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
-    ".claude": true,
-    ".codex": true,
+    ".claude/hooks": true,
+    ".claude/rules": true,
+    ".claude/skills": true,
+    ".codex/hooks": true,
+    ".codex/skills": true,
+    ".codex/AGENTS.md": true,
+    ".codex/hooks.json": true,
     ".copilot/instructions": true,
     ".github/instructions": true,
     "**/*.code-search": true,

@@ -137,6 +137,7 @@
   "explorer.confirmUndo": "light",
   "extensions.allowOpenInModalEditor": true,
   "files.associations": {
+    ".commitlintrc": "json",
     ".env*": "properties",
     "*.json.lock": "jsonl",
     "**/com.mitchellh.ghostty/config": "ghostty",
@@ -327,9 +328,6 @@
   "merge-conflict.codeLens.enabled": false,
   "oxc.fixKind": "safe_fix_or_suggestion",
   "oxc.unusedDisableDirectives": "deny",
-  "postman.mcp.notifications.postmanMCP": false,
-  "postman.settings.dotenv-detection-notification-visibility": false,
-  "postman.telemetry.enabled": false,
   "scm.diffDecorations": "gutter",
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
@@ -338,7 +336,6 @@
   "scss.lint.float": "warning",
   "search.exclude": {
     "**/.git": true,
-    "**/.private": true,
     "**/node_modules": true
   },
   "search.useGlobalIgnoreFiles": true,
@@ -351,9 +348,6 @@
     "-ci"
   ],
   "shfmt.formatIgnored": false,
-  "svg.completion.emmet": true,
-  "svg.completion.showAdvanced": true,
-  "svg.preview.autoShow": true,
   "terminal.external.osxExec": "Ghostty.app",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
@@ -374,16 +368,12 @@
   "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
   "terminal.integrated.suggest.showStatusBar": false,
   "terminal.integrated.tabs.location": "left",
-  "togglequotes.chars": [
-    "\"",
-    "'",
-    "`"
-  ],
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": [
     "file:///Users/gabrielecanepa/.vscode/user/styles.css"
   ],
+  "vscode_custom_css.statusbar": false,
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
