@@ -26,7 +26,7 @@ _npm_global_dump() {
   local json tmp
   json="$(command npm list --global --depth=0 --json 2>/dev/null \
     | command node -p \
-      'const d=JSON.parse(require("fs").readFileSync(0,"utf8")).dependencies||{};const o=Object.fromEntries(Object.entries(d).map(([k,v])=>[k,v.version]).sort(([a],[b])=>a<b?-1:a>b?1:0));Object.keys(o).length?JSON.stringify({dependencies:o},null,2)+"\n:process.exit(1)' \
+      'const d=JSON.parse(require("fs").readFileSync(0,"utf8")).dependencies||{};const o=Object.fromEntries(Object.entries(d).map(([k,v])=>[k,v.version]).sort(([a],[b])=>a<b?-1:a>b?1:0));Object.keys(o).length?JSON.stringify({dependencies:o},null,2)+"\n":process.exit(1)' \
       2>/dev/null)" || return 1
   mkdir -p "$NPM_GLOBAL" || return 1
   tmp="$(mktemp "$NPM_GLOBAL/package.json.XXXXXX")" || return 1
