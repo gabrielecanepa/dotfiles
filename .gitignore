@@ -41,6 +41,9 @@
 !/.copilot/instructions
 !/.github/
 !/.homebrew/
+!/.local/
+/.local/*
+!/.local/bin/
 !/.npm/
 /.npm/*
 !/.npm/package.json

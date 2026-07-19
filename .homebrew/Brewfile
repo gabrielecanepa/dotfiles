@@ -53,6 +53,8 @@ brew "mysql"
 brew "nginx"
 # Node.js version manager
 brew "nodenv"
+# PNG image optimizing utility
+brew "pngquant"
 # Object-relational database system
 brew "postgresql@16"
 # Python version management
