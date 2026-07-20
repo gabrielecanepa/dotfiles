@@ -24,6 +24,10 @@
     "opus",
     "default"
   ],
+  "enabledMcpjsonServers": [
+    "shadcn",
+    "vercel"
+  ],
   "hooks": {
     "PreToolUse": [
       {
@@ -53,7 +57,8 @@
   "worktree": {
     "symlinkDirectories": [
       "node_modules"
-    ]
+    ],
+    "bgIsolation": "none"
   },
   "statusLine": {
     "type": "command",
@@ -98,6 +103,7 @@
   "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": false,
   "effortLevel": "xhigh",
+  "fastMode": true,
   "plansDirectory": ".agents/plans",
   "showThinkingSummaries": false,
   "skipDangerousModePermissionPrompt": true,
