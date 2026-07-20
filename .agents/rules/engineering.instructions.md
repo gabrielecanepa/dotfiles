@@ -17,7 +17,7 @@ applyTo: '**'
 - Build only what the request needs. No speculative abstractions, options, props, compatibility layers, or duplicated single-use logic.
 - Model impossible states with types. Guard I/O and concurrency failures, timeouts, cancellation, hydration, and races. Async UI needs loading, empty, error, and boundary states.
 - **Do not add code comments.** Prefer clear names and structure. Exceptions: an existing local JSDoc convention, a necessary linter-disable directive, or a required file header. No explanatory, section, TODO, or commented-out code.
-- Keep agentic files concrete, scoped, and free of generic or formatter-enforced advice. Repository agentic docs must be self-contained, with no undeclared machine dependency.
+- Keep agentic files concrete, scoped, and free of generic or formatter-enforced advice. Repository agentic docs must be self-contained, with no undeclared machine dependency. Commands, skills, and other executable agentic files must inline their own logic rather than call a separate script or binary, unless inlining is genuinely impossible (interactive auth, a compiled tool, output too large to embed); when a dependency is unavoidable, declare it in the file.
 - Keep large features in separate `spec`, `plan`, and `tasks` artifacts, split by phase or subsystem at the context budget. Never load scratch plans globally.
 - Follow `sync-agents` when creating or repairing agentic files or skills.
 
