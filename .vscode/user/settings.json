@@ -374,6 +374,7 @@
     "file:///Users/gabrielecanepa/.vscode/user/styles.css"
   ],
   "vscode_custom_css.statusbar": false,
+  "vscodeTools.optimizeImages.app": "ImageOptim",
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
