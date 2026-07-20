@@ -49,10 +49,9 @@ plugins=(
   filesystem
   gatekeeper
   google
-  local-bin
 	logger
   lts
-  node-version
+  node
   npm-global
   path
   plugin
