@@ -1,10 +1,10 @@
 #
-# filesystem: list files, measure directory sizes, recursively remove directories, and make-and-enter new ones.
-# Usage: ls | ll | lss [<dir>...] | rmm <name>... | mkdircd <dir> | mkdircode <dir>
+# filesystem: utilities and wrappers to list files, see directory sizes, print PATH/FPATH, and recursively remove directories.
+# Usage: ls | ll | lss [<dir>...] | path | fpath | rmm <name>... | mkdircd <dir> | mkdircode <dir>
 #
 
 if (( $+commands[gls] )); then
-  # Ignore the macOS custom-folder-icon file (named "Icon" plus a carriage return) and Finder metadata.
+  # Ignore macOS Icon files and Finder metadata.
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 else
   alias ls="/bin/ls -GHhp"
@@ -21,6 +21,17 @@ lss() {
     du_cmd=(command du -L -h -d 1)
   fi
   "${du_cmd[@]}" "$@" 2>/dev/null | command sort -hr
+}
+
+path() {
+  emulate -L zsh
+  # (s/:/) splits the value on ":" into one element per directory
+  print -rl -- "${(s/:/)PATH}"
+}
+
+fpath() {
+  emulate -L zsh
+  print -rl -- "${(s/:/)FPATH}"
 }
 
 rmm() {

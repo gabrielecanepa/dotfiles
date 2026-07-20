@@ -53,7 +53,6 @@ plugins=(
   lts
   node
   npm-global
-  path
   plugin
   profile
 )
