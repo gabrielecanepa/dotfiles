@@ -116,9 +116,11 @@ fi
 
 model=$(echo "$input" | jq -r '.model.display_name // empty')
 effort=$(echo "$input" | jq -r '.effort.level // empty')
+fast_mode=$(echo "$input" | jq -r '.fast_mode // empty')
 
 line2=$(printf '\033[1;38;5;173m%s\033[0m' "$model")
 [[ -n "$effort" ]] && line2="${line2} ${effort}"
+[[ "$fast_mode" = "true" ]] && line2="${line2} $(printf '\033[1;38;5;39m⚡fast\033[0m')"
 
 five_hour_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 five_hour_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty')
