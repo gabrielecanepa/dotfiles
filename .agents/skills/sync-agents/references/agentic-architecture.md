@@ -7,6 +7,8 @@ organized. Loaded in Phase 2 of sync-agents.
 
 - [The `agents.md` standard in brief](#the-agentsmd-standard-in-brief)
 - [File taxonomy](#file-taxonomy): what each file is for
+- [Standard project wiring](#standard-project-wiring): the default layout to
+  scaffold and repair against
 - [Architecture checks](#architecture-checks): the judgment calls
 - [Signal-density checks](#signal-density-checks-what-to-cut): what to cut
 - [Constraint compliance](#constraint-compliance): budgets and local rules
@@ -47,9 +49,10 @@ Map every agentic file to a role. A file with no clear role is a finding.
 - **`AGENTS.md` (nested)**: only the deltas for a subproject. If a nested file
   largely repeats the root, that's redundancy to flag.
 - **`CLAUDE.md` / tool entrypoints**: thin pointers to AGENTS.md, not parallel
-  copies. The convention to enforce when the repo states it: `CLAUDE.md`
-  contains only an `@AGENTS.md` include (or the tool's equivalent). Multiple
-  fat, drifting entrypoints are the exact problem AGENTS.md exists to solve.
+  copies. The default to enforce (see
+  [Standard project wiring](#standard-project-wiring)): `CLAUDE.md` contains
+  only an `@AGENTS.md` include (or the tool's equivalent). Multiple fat,
+  drifting entrypoints are the exact problem AGENTS.md exists to solve.
 - **`.agents/**`**: the canonical home for agentic assets (rules, skills,
   commands, hooks, output styles, specs). Check it's organized by kind, each
   asset is reachable and referenced, and nothing is orphaned. If it holds a
@@ -73,6 +76,41 @@ Map every agentic file to a role. A file with no clear role is a finding.
   target is the real source: edit and audit the target, not the link. If a
   symlink's target resolves outside the resolved scope, treat it as read-only
   context and flag the crossing rather than editing across the boundary.
+
+## Standard project wiring
+
+The default layout to scaffold when a repository has no agentic wiring, and the
+baseline for repairing a partial one. A convention the repository itself
+declares wins over this default. The procedure that creates it lives in
+[project-scaffold.md](project-scaffold.md).
+
+- **`AGENTS.md`** at the root: the canonical file per the taxonomy above.
+- **`CLAUDE.md`** at the root containing exactly `@AGENTS.md`. Claude Code
+  reads `CLAUDE.md`, not `AGENTS.md`; the one-line import is its documented
+  bridge, preferred over a symlink because it survives Windows checkouts and
+  admits Claude-only additions below the import.
+- **`.agents/`**: the tool-neutral canonical tree (rules, skills, hooks,
+  specs). Hand-authored content is tracked by default; the only allowlist sits
+  at `.agents/skills/.gitignore` (`/*/`), because installed skills behave like
+  `node_modules` and reinstall from `skills-lock.json`. An `artifacts/`
+  directory is ignored when first created.
+- **`.claude/`**: a real directory for Claude-specific files
+  (`settings.json`, `commands/`, runtime state) with per-asset symlinks into
+  the canonical tree (`rules -> ../.agents/rules`,
+  `skills -> ../.agents/skills`, `hooks -> ../.agents/hooks`) created only
+  when the target exists. Its own `.claude/.gitignore` lists the runtime
+  entries (`settings.local.json`, `worktrees/`) so sessions never dirty the
+  repository and the root `.gitignore` stays untouched. Git tracks the
+  symlinks themselves, so clones keep the wiring.
+- **No other entrypoints.** Codex, Copilot, Cursor, and most other agents read
+  `AGENTS.md` natively. A scoped-rule route (`.github/instructions`) or any
+  tool directory is added only for a tool the repository actually uses, after
+  verifying the tool loads that route at project scope.
+
+Scaffolding and repair are the same operation: create only what is missing and
+never overwrite. Flag a conflicting but working layout (a fat `CLAUDE.md` that
+forks `AGENTS.md`, a whole-directory `.claude -> .agents` symlink from an
+older convention) as a finding to resolve, not something to silently migrate.
 
 ## Architecture checks
 

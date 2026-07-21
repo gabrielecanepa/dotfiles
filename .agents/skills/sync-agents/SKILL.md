@@ -1,10 +1,10 @@
 ---
 name: sync-agents
 description: >-
-  Audits and repairs AGENTS.md, rules, skills, hooks, tool entrypoints, and other
-  agentic files. Use for `/sync-agents`, agent-setup reviews, or any agentic file
-  or skill creation or revision. Accepts a scope path; `--check` reports without
-  editing.
+  Audits, repairs, and scaffolds a repository's agentic surface: AGENTS.md, tool
+  entrypoints, rules, skills, and hooks. Use for `/sync-agents`, agent-setup
+  reviews, bootstrapping agentic docs, or any agentic file or skill revision.
+  Accepts a scope path; `--check` reports without editing.
 ---
 
 # sync-agents
@@ -156,6 +156,12 @@ this order:
 7. tighten descriptions and choose one winner for duplicate skills;
 8. add measurement or guards that prevent the same drift.
 
+Treat missing wiring as repairable, not merely reportable. When the repository
+lacks part or all of the standard project wiring, read
+[references/project-scaffold.md](references/project-scaffold.md) completely and
+run its procedure: closed questions in interactive runs, stated defaults
+otherwise, creating only what is missing and never overwriting.
+
 Under `--check`, replace every mutation with a precise proposed change.
 
 If a documented lockfile manager owns installed skills, use its declared update
@@ -212,7 +218,9 @@ criteria even when another skill initiated the work.
 ## Bundled resources
 
 - [references/agentic-architecture.md](references/agentic-architecture.md): file
-  taxonomy and architecture rubric.
+  taxonomy, default project wiring, and architecture rubric.
+- [references/project-scaffold.md](references/project-scaffold.md): the
+  interactive bootstrap procedure for a repository without agentic docs.
 - [references/context-budgets.md](references/context-budgets.md): default line,
   byte, token, startup, catalog, skill, spec, and reference envelopes.
 - [references/behavioral-baits.md](references/behavioral-baits.md): baseline and
