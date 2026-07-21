@@ -1,6 +1,5 @@
 /*
 !/.agents/
-/.agents/prompts/
 !/.bundle/
 /.bundle/*/
 !/.claude/
@@ -16,15 +15,16 @@
 !/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
-!/.codex/AGENTS.md
 !/.codex/hooks
-!/.codex/hooks.json
 !/.codex/pets/
 /.codex/pets/**/validation.json
 !/.codex/skills
+!/.codex/AGENTS.md
+!/.codex/hooks.json
 !/.config/
 /.config/*
 !/.config/btop/
+!/.config/codex/
 !/.config/gh/
 !/.config/ghostty/
 !/.config/git/
