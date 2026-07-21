@@ -55,6 +55,7 @@
     ]
   },
   "worktree": {
+    "bgIsolation": "none",
     "symlinkDirectories": [
       "node_modules"
     ],
