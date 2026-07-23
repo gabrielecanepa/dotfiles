@@ -321,5 +321,10 @@
     "command": "editor.action.sortLinesAscending",
     "key": "f9",
     "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+cmd+enter",
+    "command": "workbench.action.moveModalEditorToMain",
+    "when": "!isSessionsWindow"
   }
 ]
