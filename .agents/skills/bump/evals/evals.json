@@ -1,0 +1,29 @@
+{
+  "skill_name": "bump",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "update all the dependencies in this project to the latest",
+      "expected_output": "Patch/minor bumps applied automatically without prompting (ms, typescript). No major bumps present, so no decision asked. Final checks (typecheck, test) pass. A markdown table reports each package with from/to/type. Versions match live-latest, not hardcoded.",
+      "files": [
+        "minor-npm"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "/bump",
+      "expected_output": "Node version pin updated to latest LTS (live), packageManager field bumped to latest pnpm (live). chalk 4.x->5.x is a major (ESM-only) -> the skill stops and asks the user with pros/cons + alternatives (stay on chalk 4 latest) rather than taking it silently. Patch/minor (ms, typescript) applied automatically. Report is a table.",
+      "files": [
+        "major-pnpm"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "bump the deps please",
+      "expected_output": "Detects there is no package.json (this is a Rust/Cargo project) and stops in Phase 0, stating plainly it only handles Node.js projects. Does NOT modify Cargo.toml or run any package manager.",
+      "files": [
+        "not-node"
+      ]
+    }
+  ]
+}
