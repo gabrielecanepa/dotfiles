@@ -1,7 +1,6 @@
 #
 # deps: print the dependencies declared in a project's package.json.
 # Usage: deps [<dir>|<path/to/package.json>] [-L|--list] [--dev|--peer|--optional|--all]
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

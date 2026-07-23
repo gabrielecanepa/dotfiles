@@ -1,6 +1,5 @@
 #
 # logger: shared leveled logger (_zsh::log) for the custom plugins. Load before its consumers.
-#
 
 # _zsh::log <error|warn|success|info> <plugin> <text>: prints to stderr, colored on a TTY.
 _zsh::log() {

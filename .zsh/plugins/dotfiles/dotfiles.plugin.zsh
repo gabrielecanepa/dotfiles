@@ -1,7 +1,6 @@
 #
 # dotfiles: re-assert machine-local state that drifts, like git config and clobbered symlinks.
 # Usage: dotfiles <init|doctor|help>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

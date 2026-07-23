@@ -1,7 +1,6 @@
 #
 # npm-global: track npm global packages in $NPM_GLOBAL/package.json and reinstall them on demand.
 # Usage: npm <command>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

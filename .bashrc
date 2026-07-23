@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if command -v zsh >/dev/null; then
   export SHELL=/bin/zsh

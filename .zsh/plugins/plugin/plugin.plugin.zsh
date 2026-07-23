@@ -1,7 +1,6 @@
 #
 # plugin: load or reload a zsh plugin by name, preferring the custom override over the bundled copy.
 # Usage: plugin <name>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

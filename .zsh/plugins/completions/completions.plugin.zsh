@@ -1,7 +1,6 @@
 #
 # completions: generate and cache zsh completion files under $ZSH_COMPLETIONS_PATH.
 # Usage: completions <cli> [<cli> ...]
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

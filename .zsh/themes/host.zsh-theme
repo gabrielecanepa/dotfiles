@@ -1,3 +1,6 @@
+# Plain user@host prompt with exit-status color and the current directory, no
+# right prompt; sourcing it clears the previous theme's hooks.
+
 autoload -U colors && colors
 source ${0:A:h}/lib/hooks.zsh
 

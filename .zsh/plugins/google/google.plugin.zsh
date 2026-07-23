@@ -1,7 +1,6 @@
 #
 # google: search Google in the default browser, or open google.com with no query.
 # Usage: google <query>
-#
 
 google() {
   emulate -L zsh

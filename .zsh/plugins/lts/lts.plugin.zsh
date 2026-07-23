@@ -1,7 +1,6 @@
 #
 # lts: find and install the latest LTS release of Node.js, Python, or Ruby via their version managers.
 # Usage: lts <command>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

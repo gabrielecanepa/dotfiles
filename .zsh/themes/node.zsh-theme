@@ -1,3 +1,10 @@
+# Status-colored prompt with the current directory and the shared git segment;
+# the right prompt shows the Node version and the project's package manager
+# (resolved from packageManager or lockfiles), with pin and update markers
+# refreshed from a background cache.
+# Set ZSH_THEME_NODE_ICON_* or ZSH_THEME_NODE_RPROMPT_EMPTY to override icons,
+# markers, and the empty placeholder.
+
 autoload -U colors && colors
 zmodload zsh/datetime
 zmodload -F zsh/stat b:zstat

@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # compress-png: lossily compress PNG files in place with pngquant.
 # Usage: compress-png.sh <file> [<file> ...]
 
-set -u
+set -euo pipefail
 
 case ":$PATH:" in
   *:/opt/homebrew/bin:*) ;;

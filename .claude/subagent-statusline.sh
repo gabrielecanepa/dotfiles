@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#
 # Claude Code subagent statusline.
 
 set -uo pipefail

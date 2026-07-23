@@ -1,7 +1,6 @@
 #
 # colors256: print the 256 xterm color codes, each on a swatch of its own color, 16 per row.
 # Usage: colors256
-#
 
 colors256() {
   emulate -L zsh

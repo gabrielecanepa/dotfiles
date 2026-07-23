@@ -2,7 +2,6 @@
 # brewfile: wrap brew/mas so package-mutating commands sync the Brewfile in the background.
 # Usage: brew <command>
 #        mas <command>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

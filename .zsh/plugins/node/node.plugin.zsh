@@ -1,7 +1,6 @@
 #
 # node: utilities to print/dump the running Node.js version and keep the current project's node_modules/.bin on PATH.
 # Usage: node-version [dump]
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

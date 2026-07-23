@@ -1,7 +1,6 @@
 #
 # filesystem: utilities and wrappers to list files, see directory sizes, print PATH/FPATH, and recursively remove directories.
 # Usage: ls | ll | lss [<dir>...] | path | fpath | rmm <name>... | mkdircd <dir> | mkdircode <dir>
-#
 
 if (( $+commands[gls] )); then
   # Ignore macOS Icon files and Finder metadata.

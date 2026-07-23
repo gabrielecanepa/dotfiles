@@ -1,11 +1,13 @@
 #!/bin/sh
-
+#
 # PreToolUse guardrail (Edit|Write|MultiEdit): block writes to generated or
 # auto-managed files under $HOME that would be silently overwritten, and redirect
 # edits made through the agent-config symlinks to their .agents/ source. Global
 # hook, so every pattern is anchored to an absolute $HOME path: it never matches
 # files in projects under ~/Developer. Exit 2 blocks; any other path or missing
 # jq fails open (exit 0). macOS; no-op without a file path.
+
+set -u
 
 case ":$PATH:" in
   *:/opt/homebrew/bin:*) ;;

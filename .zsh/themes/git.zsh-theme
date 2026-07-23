@@ -1,3 +1,7 @@
+# Status-colored prompt with the current directory and the shared git segment;
+# the right prompt shows a dimmed lowercase date and time refreshed on every
+# prompt. Git segment icons and flags follow ZSH_THEME_GIT_* from lib/git.zsh.
+
 zmodload zsh/datetime
 source ${0:A:h}/lib/hooks.zsh
 source ${0:A:h}/lib/git.zsh

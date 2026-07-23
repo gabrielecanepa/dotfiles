@@ -1,7 +1,6 @@
 #
 # gatekeeper: toggle macOS GateKeeper globally or strip quarantine from specific apps/resources.
 # Usage: gatekeeper <command>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -7,8 +7,9 @@ BREWFILE="$HOME/.homebrew/Brewfile"
 MACOS_DEFAULTS="$HOME/.macos"
 TIMESTAMP="$(date +%Y-%m-%d_%H-%M-%S)"
 BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup/$TIMESTAMP"
-SKIPPED=()
-FAILED=()
+
+skipped=()
+failed=()
 
 info() {
   printf '\033[1;34m==>\033[0m %s\n' "$1"
@@ -43,21 +44,21 @@ install_file() {
   src="$TMP_DIR/$rel"
   dest="$HOME/$rel"
   mkdir -p "$(dirname "$dest")" || {
-    FAILED+=("$rel")
+    failed+=("$rel")
     return 0
   }
   if [ -e "$dest" ] || [ -L "$dest" ]; then
     if ! confirm "Overwrite $dest?"; then
-      SKIPPED+=("$rel")
+      skipped+=("$rel")
       return 0
     fi
     backup "$rel" "$dest" || {
-      FAILED+=("$rel")
+      failed+=("$rel")
       return 0
     }
   fi
   mv "$src" "$dest" || {
-    FAILED+=("$rel")
+    failed+=("$rel")
     return 0
   }
 }
@@ -73,8 +74,8 @@ info "Installing dotfiles into $HOME"
 while IFS= read -r -d '' file; do
   install_file "$file"
 done < <(git -C "$TMP_DIR" -c core.quotePath=false ls-files -z)
-if [ ${#SKIPPED[@]} -gt 0 ]; then info "Skipped ${#SKIPPED[@]} file(s), kept existing"; fi
-if [ ${#FAILED[@]} -gt 0 ]; then warn "Failed  ${#FAILED[@]} file(s): ${FAILED[*]}"; fi
+if [ ${#skipped[@]} -gt 0 ]; then info "skipped ${#skipped[@]} file(s), kept existing"; fi
+if [ ${#failed[@]} -gt 0 ]; then warn "failed  ${#failed[@]} file(s): ${failed[*]}"; fi
 
 # 3. Homebrew
 if ! command -v brew >/dev/null 2>&1; then
@@ -86,18 +87,18 @@ fi
 # 4. Packages
 if [ -f "$BREWFILE" ]; then
   info "Installing packages from $BREWFILE"
-  brew bundle --file "$BREWFILE" || FAILED+=("brew bundle")
+  brew bundle --file "$BREWFILE" || failed+=("brew bundle")
 fi
 
 # 5. Oh My Zsh + plugins
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info "Installing Oh My Zsh"
-  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" || FAILED+=("oh-my-zsh")
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" || failed+=("oh-my-zsh")
 fi
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.zsh}"
 for plugin in zsh-users/zsh-autosuggestions zsh-users/zsh-completions zsh-users/zsh-syntax-highlighting wbingli/zsh-claudecode-completion; do
   zsh_plugin="$ZSH_CUSTOM/plugins/${plugin##*/}"
-  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/$plugin.git" "$zsh_plugin" || FAILED+=("plugin:${plugin##*/}")
+  [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/$plugin.git" "$zsh_plugin" || failed+=("plugin:${plugin##*/}")
 done
 
 # 6. Shell profile
@@ -124,7 +125,7 @@ if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
   deps="$(jq -r '.dependencies // {} | keys | join(" ")' "$HOME/.npm/package.json")"
   if [ -n "$deps" ]; then
     # shellcheck disable=SC2086
-    npm -g install $deps || FAILED+=("npm globals")
+    npm -g install $deps || failed+=("npm globals")
   fi
   command -v corepack >/dev/null 2>&1 && corepack enable
 fi
@@ -194,7 +195,7 @@ if [ "$(uname)" = "Darwin" ]; then
           shopt -u dotglob nullglob
           if [ ${#entries[@]} -gt 0 ] && ! mv "${entries[@]}" "$cloud_folder/"; then
             warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
-            FAILED+=("$folder")
+            failed+=("$folder")
             continue
           fi
           rm -rf "$HOME/$folder"
@@ -215,8 +216,8 @@ if [ ! -d "$HOME/.git" ]; then
   printf '  git -C ~ fetch --depth 1 origin main && git -C ~ reset --hard FETCH_HEAD\n'
 fi
 
-if [ ${#FAILED[@]} -gt 0 ]; then
-  warn "Installation finished with ${#FAILED[@]} error(s), review the warnings above."
+if [ ${#failed[@]} -gt 0 ]; then
+  warn "Installation finished with ${#failed[@]} error(s), review the warnings above."
 else
   info "Installation complete."
 fi

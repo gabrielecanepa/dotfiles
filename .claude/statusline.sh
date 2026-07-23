@@ -9,7 +9,6 @@
 #   effort   colored|raw|symbol; colored word, plain word, or the CLI model picker glyph
 #   context  inline|progress (default: inline); dim tokens on the model line, or a bar line
 # Segments: repo branch status model effort fast-mode context five_hour seven_day.
-#
 
 set -uo pipefail
 

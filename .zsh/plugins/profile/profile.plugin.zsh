@@ -1,7 +1,6 @@
 #
 # profile: print the current profile, or configure, install, reload, and check it.
 # Usage: profile <command>
-#
 
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 case ":$PATH:" in
   *:/opt/homebrew/bin:*) ;;
   *) PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" ;;
