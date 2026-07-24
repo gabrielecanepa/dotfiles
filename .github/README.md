@@ -29,9 +29,13 @@ Node, Ruby, and Python are pinned through nodenv, rbenv, and pyenv. The version 
 
 The [`.agents`](/.agents) directory is the source for instructions, rules, skills, and hook scripts shared by Claude Code, Codex, and Copilot. Tracked tool entrypoints use relative symlinks back to that source, while tool-specific settings stay separate.
 
-#### Extended synchronization
+#### Smart symbolic links
 
-VS Code keybindings, settings, and snippets are symlinked back into the repository, with `Downloads`, `Movies`, and `Music` being linked to iCloud Drive for continuous synchronization across machines.
+Managed files are linked into the locations each tool expects. When an application rewrites a linked file in place, `dotfiles init` restores the link and `dotfiles doctor` reports the drift.
+
+#### Extended iCloud synchronization
+
+The home `Downloads`, `Movies`, and `Music` folders are replaced with relative symbolic links to iCloud Drive, so their contents sync across devices while paths stay stable and portable.
 
 ## Installation
 
@@ -52,18 +56,17 @@ The script runs the following main actions:
 - [SSH](#ssh)
 - [Homebrew](#homebrew)
 - [Oh My Zsh](#oh-my-zsh)
-- [Dotfiles](#dotfiles)
+- [Configuration](#configuration)
 - [Git](#git)
 - [Shell profile](#shell-profile)
 - [Runtimes](#runtimes)
   - [Node.js](#nodejs)
   - [Ruby](#ruby)
   - [Python](#python)
-- [Editors](#editors)
+- [GUIs](#guis)
   - [Visual Studio Code](#visual-studio-code)
-  - [Keybindings in Electron applications](#keybindings-in-electron-applications)
-- [Extended synchronization](#extended-synchronization-1)
-  - [iCloud Drive](#icloud-drive)
+  - [Keybindings in Electron apps](#keybindings-in-electron-apps)
+- [iCloud synchronization](#icloud-synchronization)
 
 ### SSH
 
@@ -106,7 +109,7 @@ done
 zsh
 ```
 
-### Dotfiles
+### Configuration
 
 The `.install.sh` script (see [Installation](#installation)) installs the configuration automatically.
 
@@ -200,7 +203,7 @@ pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
 
-### Editors
+### GUIs
 
 #### Visual Studio Code
 
@@ -221,7 +224,7 @@ VS Code rewrites `settings.json` in place on update or Settings Sync, replacing 
 
 Extensions are tracked in [`.vscode/extensions.json`](/.vscode/extensions.json), and `dotfiles init` installs any listed extension that is missing from the machine.
 
-#### Keybindings in Electron applications
+#### Keybindings in Electron apps
 
 To avoid emitting beeps in Electron-based applications when using the keyboard combinations `^⌘←`, `^⌘↓` and `^⌘` (see [this issue](https://github.com/electron/electron/issues/2617)) create the keybinding settings file:
 
@@ -240,49 +243,33 @@ And populate it with the following content:
 }
 ```
 
-### Extended synchronization
+### iCloud synchronization
 
-#### iCloud Drive
-
-Use the following script to:
-
-- Replace the home `Downloads`, `Movies` and `Music` folders with a symbolic link to the corresponding (new or existing) folder on iCloud. This grants continuous synchronization between the cloud and your local machine.
-- Replace the home `Applications` folder with a symlink to the system applications folder.
-- Create a symlink named `iCloud`, pointing to the related cloud folder, in `Applications`, `Developer` and `Pictures`.
+Use the following snippet to replace the home `Downloads`, `Movies` and `Music` folders with symbolic links pointing at their corresponding (new or existing) folder on iCloud. This allows continuous synchronization between cloud and local machine.
 
 > [!WARNING]
-> The following operations will permanently replace some system folders with symbolic links to iCloud Drive. Make sure to back up your data before proceeding.
+> The following operations permanently replaces system folders with symbolic links to iCloud Drive. Make sure to back up your data before proceeding.
 
 <br>
 
 ```sh
 for folder in Applications Developer Downloads Movies Music Pictures; do
-  # Create folder in iCloud Drive
+  # create icloud drive folder
   cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
   [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
 
   case $folder in
-    # Replace with symlink to system folder
+    # symlink to system folder
     Applications)
       rm -rf ~/Applications
       ln -sf /Applications ~/Applications
       ln -sf $cloud_folder /Applications/iCloud
       ;;
-    # Create symlink
-    Developer|Pictures)
-      ln -sf $cloud_folder ~/$folder/iCloud
-      ;;
-    # Replace with symlink to cloud folder
+    # symlink to cloud folder
     Downloads|Movies|Music)
       [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
       rm -rf ~/$folder && ln -sf ${cloud_folder#$HOME/} ~/$folder
       ;;
   esac
 done
-```
-
-The icons of the generated symlink can be manually replaced with any of the available system icons:
-
-```sh
-open /System/Library/Extensions/IOStorageFamily.kext/Contents/Resources
 ```
