@@ -1,0 +1,123 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# Model and behavior
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+model_reasoning_summary = "concise"
+model_verbosity = "low"
+plan_mode_reasoning_effort = "xhigh"
+personality = "pragmatic"
+service_tier = "default"
+
+# Auth and approvals
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+sandbox_mode = "workspace-write"
+cli_auth_credentials_store = "keyring"
+
+# Features
+[features]
+js_repl = false
+memories = true
+prevent_idle_sleep = true
+[memories]
+generate_memories = true
+use_memories = true
+
+# Plugins
+[apps.connector_openai_codex_document_control]
+enabled = false
+[plugins."anthropic-skills@claude-cowork"]
+enabled = true
+[plugins."browser@openai-bundled"]
+enabled = true
+[plugins."computer-use@openai-bundled"]
+enabled = true
+[plugins."cowork-plugin-management@claude-cowork"]
+enabled = false
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+[plugins."feature-dev@claude-plugins-official"]
+enabled = true
+[plugins."hookify@claude-plugins-official"]
+enabled = true
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+[plugins."typescript-lsp@claude-plugins-official"]
+enabled = true
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+# CLI
+[tui]
+pet = "custom:squanchy-tui"
+show_tooltips = false
+status_line = ["model-with-reasoning", "context-used", "project-name", "git-branch", "branch-changes"]
+status_line_use_colors = false
+terminal_title = ["spinner", "thread"]
+session_picker_view = "comfortable"
+
+# Desktop
+[desktop]
+conversationDetailMode = "STEPS_PROSE"
+ambient-suggestions-enabled = true
+followUpQueueMode = "queue"
+dock-icon-preference = "app-default"
+mac-menu-bar-enabled = false
+defaultTerminalLocation = "bottom"
+preventSleepWhileRunning = true
+show-context-window-usage = true
+appearanceLightCodeThemeId = "github"
+appearanceDarkCodeThemeId = "github"
+sansFontSize = 15
+codeFontSize = 13
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+show-ultra-in-model-picker-slider = true
+git-pull-request-merge-method = "squash"
+git-commit-instructions = """
+Follow the target repository's AGENTS.md, CONTRIBUTING guide, commitlint configuration, hooks, and recent commit history. Repository-specific conventions override these defaults.
+Generate one concise Conventional Commit subject. Use `<type>(<scope>)?: <subject>` only when the repository supports scopes. Do not invent a scope. Use imperative mood, match the repository's casing, omit the trailing period, and keep the subject under 60 characters when practical. Use a single line unless a `BREAKING CHANGE:` footer is required. Never add `Co-authored-by`, AI attribution, or other trailers.
+For the `~/` dotfiles repository, use only these types: `agents`, `brew`, `chore`, `docs`, `editor`, `git`, `node`, `python`, `ruby`, `shell`. Do not use `feat`, `fix`, or `refactor`. Optional scopes are `cask`, `formula`, `mas`, `vscode`, `npm`, `claude`, `codex`, `copilot`, `shell`, and `zsh`, only with their documented parent type. Use `agents` for shared agent configuration and `editor(vscode)` for VS Code configuration. Keep the subject lower-case. Preserve signed-commit configuration and never bypass repository hooks."""
+git-pr-instructions = """
+Follow the target repository's AGENTS.md, pull request template, contribution guide, and CI requirements. Repository-specific conventions override these defaults.
+Write a concise pull request title that follows the repository's commit-message convention and describes one logical change. For the `~/` dotfiles repository, use its custom Conventional Commit types and scopes.
+Describe the resulting behavior, not the task transcript. For non-trivial pull requests, use `## Summary` and `## Verification`; add `## Notes` only when there are risks, migrations, breaking changes, screenshots, or follow-up work. Keep the summary to a few concrete bullets. Under verification, list the exact commands or checks performed and their results. If a relevant check was not run, state that and explain why. Never claim verification that did not happen.
+Do not include AI attribution, `Co-authored-by` trailers, filler, promotional language, em dashes, or en dashes. Keep the pull request as a draft until its intended scope and required checks are verified. Never merge without an explicit request."""
+keepRemoteControlAwakeWhilePluggedIn = true
+selected-avatar-id = "custom:squanchy"
+
+[desktop.appearanceLightChromeTheme]
+accent = "#0969da"
+contrast = 45
+ink = "#1f2328"
+opaqueWindows = false
+surface = "#ffffff"
+
+[desktop.appearanceLightChromeTheme.fonts]
+ui = "JetBrains Mono Nerd Font"
+
+[desktop.appearanceLightChromeTheme.semanticColors]
+diffAdded = "#1a7f37"
+diffRemoved = "#cf222e"
+skill = "#8250df"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#1f6feb"
+contrast = 60
+ink = "#e6edf3"
+opaqueWindows = false
+surface = "#0d1117"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#3fb950"
+diffRemoved = "#f85149"
+skill = "#bc8cff"
+
+[desktop.open-in-target-preferences]
+global = "zed"

@@ -1,8 +1,9 @@
 ---
 description: 'Use when editing the $HOME dotfiles repo: shell, git, brew, git hooks, or agent config. Repo-specific conventions: the single-source-of-truth layout, the allowlist .gitignore, non-standard commit types, shell startup internals, and new-machine bootstrap.'
-applyTo: '.agents/**,.config/git/**,.github/**,.homebrew/**,.zsh/**,.aliases,.bash_profile,.bashrc,.gitconfig,.macos,.profile,.zprofile,.zshenv,.zshrc'
+applyTo: '.agents/**,.codex/**,.config/git/**,.github/**,.homebrew/**,.zsh/**,.aliases,.bash_profile,.bashrc,.gitconfig,.gitignore,.install.sh,.macos,.profile,.zprofile,.zshenv,.zshrc'
 paths:
   - '.agents/**'
+  - '.codex/**'
   - '.config/git/**'
   - '.github/**'
   - '.homebrew/**'
@@ -11,6 +12,8 @@ paths:
   - '.bash_profile'
   - '.bashrc'
   - '.gitconfig'
+  - '.gitignore'
+  - '.install.sh'
   - '.macos'
   - '.profile'
   - '.zprofile'
@@ -24,7 +27,8 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 ## Single source of truth for agent config
 
-- Edit `.agents/{AGENTS.md,rules,skills,hooks,hooks.json,output-styles}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills,output-styles}`, `~/.codex/{AGENTS.md,hooks,hooks.json,skills}`, `~/.copilot/instructions`, `~/.github/instructions`, and `~/.github/copilot-instructions.md` resolve to those sources. Never edit through a link or duplicate content across agents. Claude and Codex share `.agents/skills`; only Claude uses `.agents/output-styles`.
+- Edit `.agents/{AGENTS.md,rules,skills,hooks}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills}`, `~/.codex/{AGENTS.md,hooks,skills}`, `~/.copilot/instructions`, `~/.github/instructions`, and `~/.github/copilot-instructions.md` resolve to those sources. Never edit through a link or duplicate content across agents. Tool-only assets are tracked in place, not linked: `.claude/{output-styles,commands}` and `.codex/hooks.json`.
+- Track portable Codex defaults in `.codex/system.toml`, linked at `/etc/codex/config.toml`. Keep `.codex/config.toml` ignore, it's used for secrets, machine state, and complete private MCP definitions. Never track it.
 - **Install skills globally with `npx skills add <owner/repo> --skill <name> --global --yes`** (the [skills.sh](https://skills.sh) CLI), run from `~`. `--global` is **required**: it writes the skill into `.agents/skills/` and pins the entry in **`.agents/.skill-lock.json`**, the single source of truth (without it the CLI writes a project-level `~/skills-lock.json`, which must not exist here). Drop `--skill <name>` to install every skill in the collection. The skills themselves are gitignored (`.agents/skills/.gitignore` is allowlist-style: `/*/` then `!`-unignore the few tracked ones); the tracked `.agents/.skill-lock.json` is what git carries. Update every global skill with `npx skills update --global --yes`. Never hand-copy a skill folder or hand-edit the lockfile; let the CLI write both.
 - **One source, one route per tool, no duplication.** `.agents/rules/*.instructions.md` is the single rule source. Claude Code consumes `.claude/rules` natively: files without `paths:` are always on, while scoped files load when a touched path matches. Codex loads `.codex/AGENTS.md` and must open relevant rule files by intent because it has no `paths` or `applyTo` loader. Copilot CLI and VS Code consume the rules through their configured route. Each scoped rule carries matching `applyTo` (Copilot) and `paths` (Claude) frontmatter. Keep every description current and non-empty.
 - **VS Code uses a user route plus a home-workspace override.** User settings enable `~/.copilot/instructions` so the machine-wide rules are discoverable in every project. The `$HOME` workspace would rediscover the same physical files through several default roots, so `.vscode/settings.json` disables the user route, `.claude/rules`, `AGENTS.md`, and `CLAUDE.md`, leaving only `.github/instructions` plus `.github/copilot-instructions.md`. Keep these exact blocks:
@@ -51,8 +55,8 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
   "chat.useClaudeMdFile": false
   ```
 
-- `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex uses `.agents/hooks.json` through the `~/.codex/hooks.json` symlink. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
-- Statusline scripts are self-contained entrypoints wired in `.claude/settings.json`: `.claude/statusline.sh` renders every bar style (`solid` by default, unknown falls back to it), and `.claude/subagent-statusline.sh` (a single style). The style comes from the `style` key of `.claude/statusline.json` (untracked runtime state), falling back to `$CLAUDE_STATUSLINE_STYLE` then `solid`. Add styles inside the script; switch live with the `/statusline-style` command, which runs `~/.local/bin/claude-statusline-style.sh` to write the key. Never switch by repointing the `statusLine` commands. Both entrypoints and the helper script are allowlisted and must be `chmod +x`.
+- `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex wires them in the tracked `.codex/hooks.json`. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
+- Statusline scripts are self-contained entrypoints wired in `.claude/settings.json`: `.claude/statusline.sh` renders the main statusline, and `.claude/subagent-statusline.sh` renders one compact line per background task (label, context bar, percent, tokens). `statusline.sh` reads every setting (`style`, `layout`, `theme`, `pacman`, `effort`, `context`) from `.claude/statusline.json`, untracked runtime state; `$CLAUDE_STATUSLINE_CONFIG` is the only env var it reads and points at an alternate config file. The script's header comment is the single reference for valid values, defaults, and layout segments: update it with every behavior change instead of restating values here. Switch styles live with `/statusline-style`, whose command file inlines its own validate-and-write shell (it sets only the `style` key; edit other keys by hand). Never switch by repointing the `statusLine` commands. Keep both scripts bash 3.2 compatible (no associative arrays; expand possibly-empty arrays as `${arr[@]+"${arr[@]}"}`); error mode follows the shell rule. Both entrypoints are allowlisted and must be `chmod +x`.
 
 ## Generated files
 

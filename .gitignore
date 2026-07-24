@@ -15,7 +15,6 @@
 !/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
-!/.codex/config.toml
 !/.codex/hooks
 /.codex/local.toml
 !/.codex/pets/
@@ -23,6 +22,7 @@
 !/.codex/skills
 !/.codex/AGENTS.md
 !/.codex/hooks.json
+!/.codex/system.toml
 !/.config/
 /.config/*
 !/.config/btop/

@@ -5,6 +5,9 @@ set -euo pipefail
 REPO="gabrielecanepa/dotfiles"
 BREWFILE="$HOME/.homebrew/Brewfile"
 MACOS_DEFAULTS="$HOME/.macos"
+CODEX_CONFIG="$HOME/.codex/config.toml"
+CODEX_SYSTEM_CONFIG="/etc/codex/config.toml"
+CODEX_SHARED_CONFIG="$HOME/.codex/system.toml"
 TIMESTAMP="$(date +%Y-%m-%d_%H-%M-%S)"
 BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup/$TIMESTAMP"
 
@@ -83,14 +86,12 @@ if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 [ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# 4. Packages
 if [ -f "$BREWFILE" ]; then
   info "Installing packages from $BREWFILE"
   brew bundle --file "$BREWFILE" || failed+=("brew bundle")
 fi
 
-# 5. Oh My Zsh + plugins
+# 4. Oh My Zsh + plugins
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info "Installing Oh My Zsh"
   RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)" || failed+=("oh-my-zsh")
@@ -101,10 +102,10 @@ for plugin in zsh-users/zsh-autosuggestions zsh-users/zsh-completions zsh-users/
   [ -d "$zsh_plugin" ] || git clone --depth=1 "https://github.com/$plugin.git" "$zsh_plugin" || failed+=("plugin:${plugin##*/}")
 done
 
-# 6. Shell profile
+# 5. Shell profile
 info "If this is a new profile, run 'profile install' in an interactive shell"
 
-# 7. Runtimes from .*-version
+# 6. Runtimes from .*-version
 install_runtime() {
   manager="$1"
   version_file="$2"
@@ -119,7 +120,7 @@ install_runtime nodenv .node-version
 install_runtime pyenv .python-version
 install_runtime rbenv .ruby-version
 
-# 8. npm + corepack
+# 7. npm + corepack
 if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
   info "Installing global npm dependencies"
   deps="$(jq -r '.dependencies // {} | keys | join(" ")' "$HOME/.npm/package.json")"
@@ -130,10 +131,28 @@ if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
   command -v corepack >/dev/null 2>&1 && corepack enable
 fi
 
-# 9. macOS defaults
+# 8. macOS defaults
 if [ "$(uname)" = "Darwin" ] && [ -x "$MACOS_DEFAULTS" ]; then
   info "Applying macOS defaults"
   "$MACOS_DEFAULTS" || warn "macOS defaults step failed"
+fi
+
+# 9. Codex
+if [ -f "$CODEX_SHARED_CONFIG" ]; then
+  info "Setting up Codex configuration"
+  if ! touch "$CODEX_CONFIG" || ! chmod 600 "$CODEX_CONFIG"; then
+    warn "Failed to prepare private Codex config at $CODEX_CONFIG"
+    failed+=("Codex private config")
+  elif [ -L "$CODEX_SYSTEM_CONFIG" ] && [ "$(readlink "$CODEX_SYSTEM_CONFIG")" = "$CODEX_SHARED_CONFIG" ]; then
+    info "Codex system config already linked"
+  elif { [ ! -e "$CODEX_SYSTEM_CONFIG" ] && [ ! -L "$CODEX_SYSTEM_CONFIG" ]; } || confirm "Replace '$CODEX_SYSTEM_CONFIG' with a symlink?"; then
+    if ! sudo mkdir -p "$(dirname "$CODEX_SYSTEM_CONFIG")" || ! sudo ln -sfn "$CODEX_SHARED_CONFIG" "$CODEX_SYSTEM_CONFIG"; then
+      warn "Failed to link Codex system config"
+      failed+=("Codex system config")
+    fi
+  else
+    skipped+=("Codex system config")
+  fi
 fi
 
 # 10. Visual Studio Code

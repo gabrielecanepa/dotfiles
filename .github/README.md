@@ -49,7 +49,7 @@ The script runs the following main actions:
 
 1. Installs the configuration by shallow-cloning this repository into a temporary directory (removed automatically on exit, error or interrupt) and copying each managed file into the home directory
 2. Backs up the replaced files into a timestamped backup folder in the default state directory
-3. Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Visual Studio Code, and iCloud symlinks
+3. Sets up Homebrew, packages, Oh My Zsh, runtimes, global dependencies, macOS defaults, Codex, Visual Studio Code, and iCloud symlinks
 
 ## Manual setup
 
@@ -63,6 +63,8 @@ The script runs the following main actions:
   - [Node.js](#nodejs)
   - [Ruby](#ruby)
   - [Python](#python)
+- [Agents](#agents)
+  - [Codex](#codex)
 - [GUIs](#guis)
   - [Visual Studio Code](#visual-studio-code)
   - [Keybindings in Electron apps](#keybindings-in-electron-apps)
@@ -202,6 +204,20 @@ Install and link the Python version in use with pyenv:
 pyenv install $(cat ~/.python-version) --skip-existing
 rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 ```
+
+### Agents
+
+#### Codex
+
+[`.codex/system.toml`](/.codex/system.toml) is the portable, shared system configuration linked to `/etc/codex/config.toml`. Create the symlink with:
+
+```sh
+# Needs root privileges
+sudo mkdir -p /etc/codex
+sudo ln -sfn "$HOME/.codex/system.toml" /etc/codex/config.toml
+```
+
+Codex may add project trust, hook state, and other machine-specific values to the private user configuration. Keep these definitions entirely in that file.
 
 ### GUIs
 
