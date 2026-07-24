@@ -7,11 +7,13 @@ tmp="$WORKING_DIR/tmp"
 cloud="$HOME/Library/Mobile Documents"
 cloud_docs="$cloud/com~apple~CloudDocs"
 downloads="$cloud/Downloads"
+vault="$cloud/iCloud~md~obsidian/Documents/vault"
 alias cdw="cd '$wd'"
 alias cdwu="cd '$wdu'"
 alias tmp="cd '$tmp'"
 alias cdc="cd '$cloud_docs'"
 alias cdd="cd '$downloads'"
+alias cdv="cd '$vault'"
 
 # Shortcuts
 alias hide="chflags hidden"

@@ -15,7 +15,9 @@
 !/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
+!/.codex/config.toml
 !/.codex/hooks
+/.codex/local.toml
 !/.codex/pets/
 /.codex/pets/**/validation.json
 !/.codex/skills
@@ -24,7 +26,6 @@
 !/.config/
 /.config/*
 !/.config/btop/
-!/.config/codex/
 !/.config/gh/
 !/.config/ghostty/
 !/.config/git/
@@ -82,6 +83,7 @@
 !/.rubocop.yml
 !/.ruby-version
 !/.shellcheckrc
+!/.vault
 !/.vimrc
 !/.zshenv
 !/.zshrc

@@ -60,10 +60,11 @@ plugins=(
 . "$ZSH/oh-my-zsh.sh"
 
 # Path and dotfiles
-initialize_path
+initialize-path
 dotfiles init
 
 # Aliases
 . $HOME/.aliases
+hash -d vault="$vault"
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _git_aliases
