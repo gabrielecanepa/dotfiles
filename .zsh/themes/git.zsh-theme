@@ -1,4 +1,5 @@
 zmodload zsh/datetime
+source ${0:A:h}/lib/hooks.zsh
 source ${0:A:h}/lib/git.zsh
 source ${0:A:h}/lib/title.zsh
 
@@ -10,8 +11,8 @@ _git_rprompt() {
   _GIT_RPROMPT=${(L)_GIT_RPROMPT}
 }
 
-add-zsh-hook precmd _git_segment
-add-zsh-hook precmd _git_rprompt
+_theme_hook precmd _git_segment
+_theme_hook precmd _git_rprompt
 
 PROMPT='%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)%{$reset_color%} '
 PROMPT+='%1~ '

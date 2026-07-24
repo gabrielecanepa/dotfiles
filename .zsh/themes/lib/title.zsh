@@ -1,4 +1,7 @@
+# Terminal tab and window titles from precmd, preexec, and chpwd.
+
 autoload -U add-zsh-hook
+(( $+functions[_theme_hook] )) || _theme_hook() { add-zsh-hook "$@" }
 
 _title_emit() {
   emulate -L zsh
@@ -21,6 +24,6 @@ _title_chpwd() {
   _title_emit "${(%):-%1~}"
 }
 
-add-zsh-hook precmd _title_precmd
-add-zsh-hook preexec _title_preexec
-add-zsh-hook chpwd _title_chpwd
+_theme_hook precmd _title_precmd
+_theme_hook preexec _title_preexec
+_theme_hook chpwd _title_chpwd

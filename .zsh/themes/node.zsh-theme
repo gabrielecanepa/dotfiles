@@ -1,7 +1,7 @@
 autoload -U colors && colors
-autoload -U add-zsh-hook
 zmodload zsh/datetime
 zmodload -F zsh/stat b:zstat
+source ${0:A:h}/lib/hooks.zsh
 source ${0:A:h}/lib/git.zsh
 source ${0:A:h}/lib/title.zsh
 
@@ -150,14 +150,14 @@ _node_pm_version() {
         [[ -d $_NODE_CACHE_DIR ]] || command mkdir -p $_NODE_CACHE_DIR
         if [[ -d $lock ]]; then
           zstat -A sl +mtime -- $lock 2>/dev/null
-          (( ${sl[1]:-0} + _NODE_LATEST_TTL < now )) && command rmdir $lock 2>/dev/null
+          (( ${sl[1]:-0} + 60 < now )) && command rmdir $lock 2>/dev/null
         fi
         if command mkdir $lock 2>/dev/null; then
           (
+            trap 'command rmdir $lock 2>/dev/null' EXIT
             local tmp=$file.$sysparams[pid]
             if command $bin --version > $tmp 2>/dev/null && [[ -s $tmp ]]; then
               command mv -f $tmp $file
-              command rmdir $lock 2>/dev/null
             else
               command rm -f $tmp
             fi
@@ -343,8 +343,8 @@ _node_precmd() {
   _node_rprompt
 }
 
-add-zsh-hook chpwd _node_chpwd
-add-zsh-hook precmd _node_precmd
+_theme_hook chpwd _node_chpwd
+_theme_hook precmd _node_precmd
 
 PROMPT='%(?:%{$fg_bold[green]%}$:%{$fg_bold[red]%}$)%{$reset_color%} '
 PROMPT+='%1~ '
