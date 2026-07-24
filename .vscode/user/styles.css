@@ -624,7 +624,8 @@
 
 /* Todo
    ========================================================================== */
-.show-file-icons .todo-name-file-icon::before {
+.show-file-icons .todo-name-file-icon::before,
+.show-file-icons .todo\.md-name-file-icon::before {
   font-family: "fa" !important;
   content: "\f046" !important;
   color: var(--file-icons-yellow) !important;
