@@ -42,6 +42,7 @@ plugins=(
   zsh-syntax-highlighting
   # Custom
   brewfile
+  code-workspace
   colors256
   completions
   deps
