@@ -1,16 +1,14 @@
 {
   "recommendations": [
     "ms-vscode.atom-keybindings",
-    "tamasfe.even-better-toml",
     "file-icons.file-icons",
     "github.vscode-github-actions",
-    "GitHub.vscode-pull-request-github",
-    "GitHub.github-vscode-theme",
+    "gitHub.vscode-pull-request-github",
+    "gitHub.github-vscode-theme",
     "eamodio.gitlens",
     "lokalise.i18n-ally",
     "webpro.vscode-knip",
     "yzhang.markdown-all-in-one",
-    "bierner.markdown-preview-github-styles",
     "oxc.oxc-vscode",
     "rust-lang.rust-analyzer",
     "timonwong.shellcheck",
