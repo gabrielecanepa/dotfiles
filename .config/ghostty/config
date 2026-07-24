@@ -29,9 +29,9 @@ font-style = default
 font-style-bold = bold
 font-style-italic = italic
 font-style-bold-italic = bold-italic
-font-synthetic-style = bold,italic,bold-italic
+font-synthetic-style = true
 font-feature =
-font-size = 16.5
+font-size = 16
 font-variation =
 font-variation-bold =
 font-variation-italic =
@@ -78,7 +78,7 @@ clipboard-paste-bracketed-safe = true
 copy-on-select = clipboard
 
 # MacOS
-# macos-titlebar-style = tabs
+macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 macos-window-shadow = true
 macos-auto-secure-input = true
@@ -94,6 +94,8 @@ keybind = super+alt+left=previous_tab
 keybind = super+alt+right=next_tab
 keybind = super+ctrl+left=move_tab:-1
 keybind = super+ctrl+right=move_tab:1
+keybind = super+alt+down=goto_split:next
+keybind = super+alt+up=goto_split:previous
 # keybind = super+page_up=scroll_page_up
 # keybind = super+ctrl+equal=equalize_splits
 # keybind = super+physical:four=goto_tab:4
