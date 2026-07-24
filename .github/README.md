@@ -275,7 +275,7 @@ for folder in Applications Developer Downloads Movies Music Pictures; do
     # Replace with symlink to cloud folder
     Downloads|Movies|Music)
       [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
-      rm -rf ~/$folder && ln -sf $cloud_folder ~/$folder
+      rm -rf ~/$folder && ln -sf ${cloud_folder#$HOME/} ~/$folder
       ;;
   esac
 done

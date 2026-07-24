@@ -188,6 +188,8 @@ if [ "$(uname)" = "Darwin" ]; then
           ln -sf "$cloud_folder" "$HOME/$folder/iCloud"
           ;;
         Downloads | Movies | Music)
+          relative_folder="${cloud_folder#"$HOME"/}"
+          [ "$(readlink "$HOME/$folder")" = "$relative_folder" ] && continue
           confirm "Replace ~/$folder with a symlink to iCloud Drive (existing files will be moved)?" || continue
           mkdir -p "$cloud_folder"
           shopt -s dotglob nullglob
@@ -199,7 +201,7 @@ if [ "$(uname)" = "Darwin" ]; then
             continue
           fi
           rm -rf "$HOME/$folder"
-          ln -sf "$cloud_folder" "$HOME/$folder"
+          ln -sf "$relative_folder" "$HOME/$folder"
           ;;
       esac
     done
