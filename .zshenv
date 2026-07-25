@@ -1,4 +1,6 @@
-typeset -aU path fpath
+typeset -aU path fpath manpath
+typeset -T INFOPATH infopath
+typeset -U infopath
 
 export LANG="en_US.UTF-8"
 
@@ -13,6 +15,8 @@ export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 export HOMEBREW_BUNDLE_FILE="$HOME/.homebrew/Brewfile"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+infopath=("$HOMEBREW_PREFIX/share/info" $infopath)
 
 # Version managers
 export NODENV_ROOT="$HOME/.nodenv"
@@ -35,5 +39,6 @@ initialize-path() {
     "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
     $path
   )
+  manpath=("$HOMEBREW_PREFIX/share/man" $manpath)
 }
 initialize-path

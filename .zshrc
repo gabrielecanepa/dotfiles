@@ -1,28 +1,24 @@
-export FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
-export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
-
-# Oh My Zsh
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME=squanchy
 ZSH_COMPLETIONS=(docker glab pnpm)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
-CASE_SENSITIVE=0
-COMPLETION_WAITING_DOTS=""
+CASE_SENSITIVE=false
+COMPLETION_WAITING_DOTS=false
 DISABLE_AUTO_TITLE=true
-DISABLE_AUTO_UPDATE=1
-DISABLE_LS_COLORS=0
-DISABLE_UNTRACKED_FILES_DIRTY=0
-ENABLE_CORRECTION=0
+DISABLE_LS_COLORS=false
+DISABLE_UNTRACKED_FILES_DIRTY=false
+ENABLE_CORRECTION=false
 HIST_STAMPS="yyyy-mm-dd"
-HYPHEN_INSENSITIVE=0
-UPDATE_ZSH_DAYS=7
+HYPHEN_INSENSITIVE=false
+
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 zstyle ':completion:*' list-dirs-first true
 zstyle ':omz:alpha:lib:git' async-prompt false
+zstyle ':omz:update' frequency 7
 zstyle ':omz:update' mode auto
+
 zle_highlight+=(paste:none)
 
 plugins=(
@@ -41,6 +37,7 @@ plugins=(
   zsh-completions
   zsh-syntax-highlighting
   # Custom
+  logger
   brewfile
   code-workspace
   colors256
@@ -50,7 +47,6 @@ plugins=(
   filesystem
   gatekeeper
   google
-	logger
   lts
   node
   npm-global
@@ -60,12 +56,7 @@ plugins=(
 
 . "$ZSH/oh-my-zsh.sh"
 
-# Path and dotfiles
+# Path, dotfiles, and aliases
 initialize-path
 dotfiles init
-
-# Aliases
-. $HOME/.aliases
-hash -d vault="$vault"
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _git_aliases
+. "$HOME/.aliases"

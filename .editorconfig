@@ -15,7 +15,7 @@ switch_case_indent = true
 [[bash]]
 switch_case_indent = true
 
-[{*.zsh,*.zsh-theme,.zshenv,.zshrc,.zprofile}]
+[{*.zsh,*.zsh-theme,.aliases,.zprofile,.zshenv,.zshrc}]
 ignore = true
 
 [.zsh/**]

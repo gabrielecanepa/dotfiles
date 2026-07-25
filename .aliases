@@ -1,21 +1,23 @@
 #!/usr/bin/env zsh
 
-# Directories
-wd="$WORKING_DIR"
-wdu="$WORKING_DIR/@$USER"
+# Paths
+icloud="$HOME/Library/Mobile Documents"
+drive="$icloud/com~apple~CloudDocs"
+downloads="$drive/Downloads"
+vault="$icloud/iCloud~md~obsidian/Documents/vault"
 tmp="$WORKING_DIR/tmp"
-cloud="$HOME/Library/Mobile Documents"
-cloud_docs="$cloud/com~apple~CloudDocs"
-downloads="$cloud/Downloads"
-vault="$cloud/iCloud~md~obsidian/Documents/vault"
-alias cdw="cd '$wd'"
-alias cdwu="cd '$wdu'"
+
+hash -d icloud="$icloud"
+hash -d drive="$drive"
+hash -d vault="$vault"
+
+alias cdw="cd '$WORKING_DIR'"
 alias tmp="cd '$tmp'"
-alias cdc="cd '$cloud_docs'"
+alias cdc="cd '$drive'"
 alias cdd="cd '$downloads'"
 alias cdv="cd '$vault'"
 
-# Shortcuts
+# Helpers
 alias hide="chflags hidden"
 alias unhide="chflags nohidden"
 alias rehistory="history >/dev/null"
@@ -27,17 +29,20 @@ alias pn="pnpm"
 alias pnx="pnpx"
 
 # Editors
-alias home="$EDITOR $HOME"
+alias home="$EDITOR '$HOME'"
 alias te="open -a TextEdit"
 
 # Git
 _git_aliases() {
-  for git_alias in $(git aliases | sed 's/ .*//'); do
+  local git_alias workspace
+  for git_alias in ${(f)"$(git aliases | sed 's/ .*//')"}; do
     command -v "g$git_alias" >/dev/null || alias "g${git_alias}"="git $git_alias"
   done
-  for workspace in $(find ~/.vscode -name "*.code-workspace" -not -path "*/extensions/*" 2>/dev/null); do
-    alias "code-$(basename "$workspace" .code-workspace)"="code $workspace"
+  for workspace in ${(f)"$(find ~/.vscode -name '*.code-workspace' -not -path '*/extensions/*' 2>/dev/null)"}; do
+    alias "code-$(basename "$workspace" .code-workspace)"="code '$workspace'"
   done
   add-zsh-hook -d precmd _git_aliases
   unfunction _git_aliases
 }
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _git_aliases
