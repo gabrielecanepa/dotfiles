@@ -3,7 +3,11 @@ typeset -aU path fpath
 export LANG="en_US.UTF-8"
 
 # Homebrew
-export HOMEBREW_PREFIX="/opt/homebrew"
+if [[ $CPUTYPE == arm64 ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+else
+  export HOMEBREW_PREFIX="/usr/local"
+fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 export HOMEBREW_BUNDLE_FILE="$HOME/.homebrew/Brewfile"
