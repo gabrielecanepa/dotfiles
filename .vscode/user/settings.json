@@ -138,6 +138,7 @@
     ".commitlintrc": "json",
     ".env*": "properties",
     "*.json.lock": "jsonl",
+    "*.todo": "markdown",
     "**/com.mitchellh.ghostty/config": "ghostty",
     "**/com.mitchellh.ghostty/themes/*": "ghostty",
     "**/ghostty/config": "ghostty",
