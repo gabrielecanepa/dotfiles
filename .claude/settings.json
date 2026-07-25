@@ -8,8 +8,8 @@
   "includeGitInstructions": false,
   "permissions": {
     "deny": [
-      "Write(**/.env)",
-      "Write(**/.env.*)"
+      "Edit(**/.env)",
+      "Edit(**/.env.*)"
     ],
     "ask": [
       "Bash(git commit:*)",
@@ -19,7 +19,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "fallbackModel": [
     "opus",
     "default"
@@ -55,7 +55,6 @@
     ]
   },
   "worktree": {
-    "bgIsolation": "none",
     "symlinkDirectories": [
       "node_modules"
     ],
@@ -102,9 +101,8 @@
   },
   "feedbackSurveyRate": 0,
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": false,
+  "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
-  "fastMode": true,
   "plansDirectory": ".agents/plans",
   "showThinkingSummaries": false,
   "skipDangerousModePermissionPrompt": true,
