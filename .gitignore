@@ -32,6 +32,7 @@
 !/.config/ghostty/
 !/.config/git/
 /.config/git/allowed_signers
+!/.config/launchd/
 !/.config/nodenv/
 !/.config/zed/
 /.config/zed/*

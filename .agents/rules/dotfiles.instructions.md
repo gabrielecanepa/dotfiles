@@ -57,6 +57,13 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 - **Editor config** → commit with type `editor`: VS Code (`.vscode/**`) under scope `vscode`, Zed (`.config/zed/**` and `.zed/**`) under scope `zed`. Zed reads `~/.config/zed/` directly, so its tracked files ARE the live config (no symlink or `dotfiles init` as VS Code's `settings.json`).
 - **VS Code extensions**: `dotfiles init` installs any id listed in the `.vscode/extensions.json` recommendations that has no folder in `~/.vscode/extensions` (cheap glob check, `code --install-extension` only when something is missing). Keep the recommendations list as the single wanted-set; only add marketplace-published ids, since unpublished ones fail the install with a warning on every new machine.
 
+## Launch agents
+
+- Every `.config/launchd/*.plist` is a tracked template written with literal `$HOME` and `$HOMEBREW_PREFIX`. `dotfiles init` renders them all into `~/Library/LaunchAgents/` and reloads whatever changed; `dotfiles doctor` reports drift. Edit the template, never the generated file. Init never deletes anything, since a generated agent is indistinguishable from a third-party one, so retiring an agent means `launchctl bootout gui/$UID/<label>` and removing the generated plist by hand.
+- The filename stem is the `Label`, so `claude-rc.plist` must declare `claude-rc`.
+- `Disabled` is the on/off switch, so active agents carry `<false/>`. Setting it to `<true/>` makes the next `dotfiles init` unload the agent and delete its generated plist, which is safe because the template names the file. Never set it through `launchctl enable/disable`: launchd keeps that state externally and it silently outranks the template.
+- launchd expands nothing at runtime, so every path in a rendered plist must be absolute: a `~` or a bare binary name both fail with `EX_CONFIG` (78). Never set `ProcessType` to `Background`, which pins the job and all its children to efficiency cores (~3.5x slower); omit the key.
+
 ## Shell startup & internals
 
 - Startup order: `.zshenv` (env, PATH; put new env/PATH here) → `.zprofile` (**GENERATED** by the `profile` plugin, never hand-edit) → `.zshrc` (oh-my-zsh, plugins, completions, then `dotfiles init` to self-heal machine-local state) → `.aliases`.

@@ -27,6 +27,57 @@ _dotfiles_vscode_ok() {
   [[ "$live" -ef "$tracked" ]]
 }
 
+_dotfiles_launchd_disabled() {
+  emulate -L zsh
+  setopt local_options extended_glob
+  [[ "$(<"$1")" == *'<key>Disabled</key>'[[:space:]]#'<true/>'* ]]
+}
+
+_dotfiles_launchd_render() {
+  emulate -L zsh
+  [[ -f "$1" ]] || return 1
+  REPLY="$(<"$1")"
+  REPLY="${REPLY//\$HOMEBREW_PREFIX/${HOMEBREW_PREFIX:-/opt/homebrew}}"
+  REPLY="${REPLY//\$HOME/$HOME}"
+}
+
+_dotfiles_launchd_unload() {
+  emulate -L zsh
+  command launchctl bootout "gui/$UID/$1" 2>/dev/null
+  local tries=0
+  while (( tries++ < 30 )) && command launchctl print "gui/$UID/$1" &>/dev/null; do
+    command sleep 0.1
+  done
+}
+
+_dotfiles_launchd_stale() {
+  emulate -L zsh
+  local dir="$HOME/.config/launchd" agents="$HOME/Library/LaunchAgents"
+  [[ $OSTYPE == darwin* && -d "$dir" ]] || return 0
+  local template target REPLY
+  for template in "$dir"/*.plist(N); do
+    _dotfiles_launchd_disabled "$template" && continue
+    target="$agents/${template:t}"
+    [[ -f "$target" ]] && _dotfiles_launchd_render "$template" &&
+      [[ "$REPLY" == "$(<"$target")" ]] &&
+      command launchctl list "${template:t:r}" &>/dev/null && continue
+    print -r -- "$template"
+  done
+  return 0
+}
+
+_dotfiles_launchd_retired() {
+  emulate -L zsh
+  local dir="$HOME/.config/launchd" agents="$HOME/Library/LaunchAgents"
+  [[ $OSTYPE == darwin* && -d "$dir" ]] || return 0
+  local template
+  for template in "$dir"/*.plist(N); do
+    _dotfiles_launchd_disabled "$template" || continue
+    [[ -f "$agents/${template:t}" ]] && print -r -- "$agents/${template:t}"
+  done
+  return 0
+}
+
 _dotfiles_vscode_extensions() {
   emulate -L zsh
   local file="$HOME/.vscode/extensions.json" dir="$HOME/.vscode/extensions"
@@ -95,6 +146,46 @@ dotfiles() {
         rc=1
       fi
 
+      local -a stale
+      stale=(${(f)"$(_dotfiles_launchd_stale)"})
+      if (( $#stale == 0 )); then
+        (( verbose )) && _zsh::log info dotfiles "launch agents generated 🚀"
+      elif ! command mkdir -p "$HOME/Library/LaunchAgents"; then
+        _zsh::log error dotfiles "failed to create ~/Library/LaunchAgents"
+        rc=1
+      else
+        local template target label REPLY
+        for template in $stale; do
+          target="$HOME/Library/LaunchAgents/${template:t}"
+          label="${template:t:r}"
+          command rm -f -- "$target"
+          if ! { _dotfiles_launchd_render "$template" && print -r -- "$REPLY" > "$target" }; then
+            _zsh::log error dotfiles "failed to generate launch agent $label"
+            rc=1
+            continue
+          fi
+          _dotfiles_launchd_unload "$label"
+          if command launchctl bootstrap "gui/$UID" "$target" 2>/dev/null; then
+            _zsh::log success dotfiles "launch agent $label generated 🚀"
+          else
+            _zsh::log warn dotfiles "launch agent $label generated but not loaded"
+          fi
+        done
+      fi
+
+      local -a retired
+      retired=(${(f)"$(_dotfiles_launchd_retired)"})
+      local agent
+      for agent in $retired; do
+        _dotfiles_launchd_unload "${agent:t:r}"
+        if command rm -f -- "$agent"; then
+          _zsh::log success dotfiles "launch agent ${agent:t:r} disabled 🚫"
+        else
+          _zsh::log error dotfiles "failed to disable launch agent ${agent:t:r}"
+          rc=1
+        fi
+      done
+
       local -a extensions
       extensions=(${(f)"$(_dotfiles_vscode_extensions)"})
       if (( $#extensions == 0 )); then
@@ -139,6 +230,20 @@ dotfiles() {
           _zsh::log success dotfiles "VS Code settings symlink OK"
         else
           _zsh::log error dotfiles "VS Code settings is not a symlink to the tracked file"
+          drift=1
+        fi
+        local -a stale_agents retired_agents
+        stale_agents=(${(f)"$(_dotfiles_launchd_stale)"})
+        retired_agents=(${(f)"$(_dotfiles_launchd_retired)"})
+        if (( $#stale_agents == 0 && $#retired_agents == 0 )); then
+          _zsh::log success dotfiles "launch agents OK"
+        fi
+        if (( $#stale_agents )); then
+          _zsh::log error dotfiles "launch agents out of sync: ${(j:, :)${(@)stale_agents:t:r}}"
+          drift=1
+        fi
+        if (( $#retired_agents )); then
+          _zsh::log error dotfiles "disabled launch agents still installed: ${(j:, :)${(@)retired_agents:t:r}}"
           drift=1
         fi
         local -a missing_extensions
