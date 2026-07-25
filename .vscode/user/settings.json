@@ -369,7 +369,7 @@
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": [
-    "file:///Users/gabrielecanepa/.vscode/user/styles.css"
+    "file://${userHome}/.vscode/user/styles.css"
   ],
   "vscode_custom_css.statusbar": false,
   "vscodeTools.optimizeImages.app": "ImageOptim",
