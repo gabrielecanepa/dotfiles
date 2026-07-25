@@ -27,34 +27,11 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 ## Single source of truth for agent config
 
-- Edit `.agents/{AGENTS.md,rules,skills,hooks}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills}`, `~/.codex/{AGENTS.md,hooks,skills}`, `~/.copilot/instructions`, `~/.github/instructions`, and `~/.github/copilot-instructions.md` resolve to those sources. Never edit through a link or duplicate content across agents. Tool-only assets are tracked in place, not linked: `.claude/{output-styles,commands}` and `.codex/hooks.json`.
+- Edit `.agents/{AGENTS.md,rules,skills,hooks}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills}`, `~/.codex/{AGENTS.md,hooks,skills}`, and `~/.copilot/{copilot-instructions.md,instructions}` resolve to those sources. Never edit through a link or duplicate content across agents. Tool-only assets are tracked in place, not linked: `.claude/{output-styles,commands}` and `.codex/hooks.json`.
 - Track portable Codex defaults in `.codex/system.toml`, linked at `/etc/codex/config.toml`. Keep `.codex/config.toml` ignore, it's used for secrets, machine state, and complete private MCP definitions. Never track it.
 - **Install skills globally with `npx skills add <owner/repo> --skill <name> --global --yes`** (the [skills.sh](https://skills.sh) CLI), run from `~`. `--global` is **required**: it writes the skill into `.agents/skills/` and pins the entry in **`.agents/.skill-lock.json`**, the single source of truth (without it the CLI writes a project-level `~/skills-lock.json`, which must not exist here). Drop `--skill <name>` to install every skill in the collection. The skills themselves are gitignored (`.agents/skills/.gitignore` is allowlist-style: `/*/` then `!`-unignore the few tracked ones); the tracked `.agents/.skill-lock.json` is what git carries. Update every global skill with `npx skills update --global --yes`. Never hand-copy a skill folder or hand-edit the lockfile; let the CLI write both.
-- **One source, one route per tool, no duplication.** `.agents/rules/*.instructions.md` is the single rule source. Claude Code consumes `.claude/rules` natively: files without `paths:` are always on, while scoped files load when a touched path matches. Codex loads `.codex/AGENTS.md` and must open relevant rule files by intent because it has no `paths` or `applyTo` loader. Copilot CLI and VS Code consume the rules through their configured route. Each scoped rule carries matching `applyTo` (Copilot) and `paths` (Claude) frontmatter. Keep every description current and non-empty.
-- **VS Code uses a user route plus a home-workspace override.** User settings enable `~/.copilot/instructions` so the machine-wide rules are discoverable in every project. The `$HOME` workspace would rediscover the same physical files through several default roots, so `.vscode/settings.json` disables the user route, `.claude/rules`, `AGENTS.md`, and `CLAUDE.md`, leaving only `.github/instructions` plus `.github/copilot-instructions.md`. Keep these exact blocks:
-
-  ```jsonc
-  // .vscode/user/settings.json
-  "chat.instructionsFilesLocations": {
-    ".claude/rules": false,
-    ".github/instructions": true,
-    "~/.claude/rules": false,
-    "~/.copilot/instructions": true
-  }
-  ```
-
-  ```jsonc
-  // .vscode/settings.json
-  "chat.instructionsFilesLocations": {
-    ".claude/rules": false,
-    ".github/instructions": true,
-    "~/.claude/rules": false,
-    "~/.copilot/instructions": false
-  },
-  "chat.useAgentsMdFile": false,
-  "chat.useClaudeMdFile": false
-  ```
-
+- **One source, one route per tool, no duplication.** `.agents/rules/*.instructions.md` is the single rule source, and every scoped file carries matching `paths` (Claude) and `applyTo` (Copilot) frontmatter plus a current, non-empty description. Claude Code consumes `.claude/rules` natively: files without `paths:` are always on, while scoped files load when a touched path matches. Codex loads `.codex/AGENTS.md` and must open relevant rule files by intent because it has no `paths` or `applyTo` loader. Copilot hardcodes both of its home paths with no setting to move them, so those two links are required; never restore `~/.github/instructions` or `~/.github/copilot-instructions.md`, which made Copilot load every rule twice inside `$HOME`.
+- **VS Code: only the `false` entries in `chat.instructionsFilesLocations` carry weight.** `.github/instructions`, `.claude/rules`, `~/.copilot/instructions`, and `~/.claude/rules` are built-in roots, on unless disabled, so the machine-wide rules reach every project with no user setting and a `true` entry for one is a no-op. `.vscode/user/settings.json` therefore carries only the two Claude-root disables that stop those rules loading twice. Inside `$HOME` several roots collide on one physical `.agents/rules`, and VS Code deduplicates symlinked `AGENTS.md`, `CLAUDE.md`, and `copilot-instructions.md` by real path but never `*.instructions.md`, so `.vscode/settings.json` names `.agents/rules` and turns off every other root along with `chat.useAgentsMdFile` and `chat.useClaudeMdFile`.
 - `.agents/hooks/` holds shared Claude Code and Codex hooks (not git hooks): `guard-managed-files.sh` blocks writes to generated or symlinked managed files, and `format-edited-file.sh` runs the repo's declared formatter after edits. Claude Code wires them in `.claude/settings.json`; Codex wires them in the tracked `.codex/hooks.json`. Both tools reach the scripts through relative `hooks` symlinks. Keep each hook's behavior documented in its header comment and executable (`chmod +x`). Distinct from the git hooks in `.config/git/hooks/` covered below.
 - Statusline scripts are self-contained entrypoints wired in `.claude/settings.json`: `.claude/statusline.sh` renders the main statusline, and `.claude/subagent-statusline.sh` renders one compact line per background task (label, context bar, percent, tokens). `statusline.sh` reads every setting (`style`, `layout`, `theme`, `pacman`, `effort`, `context`) from `.claude/statusline.json`, untracked runtime state; `$CLAUDE_STATUSLINE_CONFIG` is the only env var it reads and points at an alternate config file. The script's header comment is the single reference for valid values, defaults, and layout segments: update it with every behavior change instead of restating values here. Switch styles live with `/statusline-style`, whose command file inlines its own validate-and-write shell (it sets only the `style` key; edit other keys by hand). Never switch by repointing the `statusLine` commands. Keep both scripts bash 3.2 compatible (no associative arrays; expand possibly-empty arrays as `${arr[@]+"${arr[@]}"}`); error mode follows the shell rule. Both entrypoints are allowlisted and must be `chmod +x`.
 
@@ -70,7 +47,7 @@ These conventions apply **only** when working in the `$HOME` dotfiles git repo (
 
 - Enforced by commitlint via the `commit-msg` hook in `.config/git/hooks`, re-checked on `pre-push` (which also runs `shellcheck` and `shfmt -d` on the shell dotfiles and `oxfmt --check`). Every message must pass `.commitlintrc`: `<type>(<scope>)?: <subject>`: type + subject required, lower-case, no empty subject.
 - **Allowed types (non-standard):** `agents`, `brew`, `chore`, `docs`, `editor`, `git`, `node`, `python`, `ruby`, `shell`. Allowed scopes (optional): `cask`, `formula`, `mas` (under `brew`), `vscode` and `zed` (under `editor`), `npm` (under `node`), `claude`, `codex`, `copilot` (under `agents`, only when a change is bound to one tool's non-shared config), `shell` and `zsh` (under `shell`). Do **NOT** use `feat`/`fix`/`refactor` here.
-- **Agent config** (`.agents/**`, `AGENTS.md`, the rules/skills/hooks, and the `.claude`/`.codex`/`.copilot`/`.github` symlinks) → commit with type `agents`.
+- **Agent config** (`.agents/**`, `AGENTS.md`, the rules/skills/hooks, and the `.claude`/`.codex`/`.copilot` symlinks) → commit with type `agents`.
 - **Editor config** → commit with type `editor`: VS Code (`.vscode/**`) under scope `vscode`, Zed (`.config/zed/**` and `.zed/**`) under scope `zed`. Zed reads `~/.config/zed/` directly, so its tracked files ARE the live config (no symlink or `dotfiles init` as VS Code's `settings.json`).
 - **VS Code extensions**: `dotfiles init` installs any id listed in the `.vscode/extensions.json` recommendations that has no folder in `~/.vscode/extensions` (cheap glob check, `code --install-extension` only when something is missing). Keep the recommendations list as the single wanted-set; only add marketplace-published ids, since unpublished ones fail the install with a warning on every new machine.
 

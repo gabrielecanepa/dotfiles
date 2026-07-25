@@ -14,9 +14,7 @@
   "chat.editing.confirmEditRequestRetry": false,
   "chat.instructionsFilesLocations": {
     ".claude/rules": false,
-    ".github/instructions": true,
-    "~/.claude/rules": false,
-    "~/.copilot/instructions": true
+    "~/.claude/rules": false
   },
   "chat.mcp.discovery.enabled": {
     "claude-desktop": true

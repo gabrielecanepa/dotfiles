@@ -3,8 +3,9 @@
     "editor.formatOnSave": false
   },
   "chat.instructionsFilesLocations": {
+    ".agents/rules": true,
     ".claude/rules": false,
-    ".github/instructions": true,
+    ".github/instructions": false,
     "~/.claude/rules": false,
     "~/.copilot/instructions": false
   },
@@ -42,12 +43,12 @@
     ".claude/hooks": true,
     ".claude/rules": true,
     ".claude/skills": true,
-    ".codex/hooks": true,
-    ".codex/skills": true,
     ".codex/AGENTS.md": true,
+    ".codex/hooks": true,
     ".codex/hooks.json": true,
+    ".codex/skills": true,
+    ".copilot/copilot-instructions.md": true,
     ".copilot/instructions": true,
-    ".github/instructions": true,
     "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true
