@@ -6,6 +6,7 @@ Machine-wide guidance for Claude Code, Codex, and Copilot. More specific project
 
 - **Version control:** Never run `git commit`, `git push`, or another history-writing command unless the current prompt explicitly asks. A request to write, fix, apply, or update is not permission. Leave changes in the working tree and use the handoff format in `engineering.instructions.md`.
 - **Committed writing:** Never use an em dash or en dash in a committed file. Live chat is the only exception. Rewrite with a period, comma, colon, hyphen, or parentheses.
+- **Portable paths:** Never write a machine-specific absolute path or identifier (`/Users/<name>`, hostname, serial, personal email) into a file. Use `$HOME`, `~`, `$HOMEBREW_PREFIX`, `$XDG_*`, or a repo-relative path. Hardcode one only when the current prompt explicitly asks, or after the user approves it.
 - **Scope:** Preserve unrelated changes. Do not broaden scope for adjacent work.
 
 ## Rule routing

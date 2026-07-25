@@ -17,3 +17,8 @@ git rev-parse --verify --quiet "$upstream" >/dev/null && commitlint --from "$ups
 echo "$shell_files" | xargs shellcheck
 echo "$shell_files" | xargs shfmt -d
 oxfmt --check --no-error-on-unmatched-pattern
+
+if git ls-files -z | xargs -0 grep -nIE -d skip '/Users/[A-Za-z0-9._-]+'; then
+  echo "pre-push: tracked files must be portable, replace the paths with \$HOME, ~, or a repo-relative path" >&2
+  exit 1
+fi

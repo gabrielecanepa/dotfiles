@@ -25,6 +25,12 @@ paths:
 
 These conventions apply **only** when working in the `$HOME` dotfiles git repo (branch `main`). `$HOME` itself is the repo. Editing any file under `~` may be a tracked change; treat it like a repo edit, not a throwaway.
 
+## Portability
+
+- Every tracked file must clone onto a fresh machine and stay shareable, so nothing here may carry a path or identifier that only resolves on this machine: no `/Users/<name>`, hostname, serial, or personal email. Write `$HOME`, `~`, `$HOMEBREW_PREFIX`, `$XDG_*`, or a repo-relative path instead, and leave identity and machine state in the untracked files that already own it (`~/.gitconfig`, `.codex/config.toml`, `.claude/statusline.json`). Standard system paths (`/bin/sh`, `/etc`, `/usr/bin/env`) are not machine-specific and stay as they are.
+- Two approved literals, both load-bearing: the `/opt/homebrew` and `/usr/local` PATH pair that bootstraps a script before `$HOMEBREW_PREFIX` exists. Adding others needs the user's explicit approval.
+- `pre-push` fails the push when a tracked file contains a `/Users/<name>` path.
+
 ## Single source of truth for agent config
 
 - Edit `.agents/{AGENTS.md,rules,skills,hooks}`. The tracked links at `~/.claude/{CLAUDE.md,hooks,rules,skills}`, `~/.codex/{AGENTS.md,hooks,skills}`, and `~/.copilot/{copilot-instructions.md,instructions}` resolve to those sources. Never edit through a link or duplicate content across agents. Tool-only assets are tracked in place, not linked: `.claude/{output-styles,commands}` and `.codex/hooks.json`.
