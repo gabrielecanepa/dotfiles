@@ -27,14 +27,12 @@
 /.config/*
 !/.config/btop/
 !/.config/gh/
+/.config/gh/*
+!/.config/gh/config.yml
 !/.config/ghostty/
 !/.config/git/
 /.config/git/allowed_signers
-!/.config/glab-cli/
-!/.config/iterm2/
-/.config/iterm2/*
 !/.config/nodenv/
-!/.config/terminal/
 !/.config/zed/
 /.config/zed/*
 !/.config/zed/keymap.json
