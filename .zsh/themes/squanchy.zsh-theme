@@ -3,9 +3,10 @@
 # php) and the Node package manager, with pin and update markers refreshed
 # from a background cache.
 # Set ZSH_THEME_SQUANCHY_RPROMPTS to pick the fallback runtimes outside a
-# project (default: node python ruby php), and ZSH_THEME_SQUANCHY_ICON_* or
-# ZSH_THEME_SQUANCHY_RPROMPT_EMPTY to override icons, markers, and the empty
-# placeholder.
+# project (default: node python ruby php), ZSH_THEME_SQUANCHY_ICON_* and
+# ZSH_THEME_SQUANCHY_EMPTY to override icons, markers, and placeholders.
+# ZSH_THEME_SQUANCHY_GAP (default 4) is the minimum number of blank columns
+# between the left and right prompt.
 
 autoload -U colors && colors
 zmodload zsh/datetime
@@ -14,7 +15,8 @@ source ${0:A:h}/lib/hooks.zsh
 source ${0:A:h}/lib/git.zsh
 source ${0:A:h}/lib/title.zsh
 
-ZSH_THEME_SQUANCHY_RPROMPT_EMPTY="n/a"
+ZSH_THEME_SQUANCHY_GAP=4
+ZSH_THEME_SQUANCHY_EMPTY="n/a"
 ZSH_THEME_SQUANCHY_ICON_NODE="\\ue718"
 ZSH_THEME_SQUANCHY_ICON_NPM="\\ue71e"
 ZSH_THEME_SQUANCHY_ICON_PNPM="\\ue865"
@@ -246,7 +248,7 @@ _squanchy_version() {
       out=${local_version}${ZSH_THEME_SQUANCHY_ICON_PIN_ALT}
     fi
   elif [[ -z $global_version ]]; then
-    out=$ZSH_THEME_SQUANCHY_RPROMPT_EMPTY
+    out=$ZSH_THEME_SQUANCHY_EMPTY
   else
     out=$global_version
     _squanchy_has_update "$lts_version" "$global_version" && out+=$ZSH_THEME_SQUANCHY_ICON_UP
@@ -427,7 +429,7 @@ _squanchy_rprompt() {
       php) color=$fg[blue]; icon=$_SQUANCHY_PHP; _squanchy_php version ;;
       *) continue ;;
     esac
-    [[ -z $version || $version == $ZSH_THEME_SQUANCHY_RPROMPT_EMPTY ]] && continue
+    [[ -z $version || $version == $ZSH_THEME_SQUANCHY_EMPTY ]] && continue
     segments+="%{$color%}${icon} ${version}%{$reset_color%}"
 
     manager=${_SQUANCHY_LOCAL[manager]}
@@ -438,6 +440,10 @@ _squanchy_rprompt() {
     fi
   done
   _SQUANCHY_RPROMPT="${(j:  :)segments}"
+
+  local -i gap=$(( ZSH_THEME_SQUANCHY_GAP > 0 ? ZSH_THEME_SQUANCHY_GAP : 0 ))
+  [[ -n $_SQUANCHY_RPROMPT ]] && (( gap )) \
+    && _SQUANCHY_RPROMPT="${(l:gap:: :)}${_SQUANCHY_RPROMPT}"
 }
 
 _squanchy_chpwd() {
