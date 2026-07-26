@@ -1,0 +1,925 @@
+#!/usr/bin/env bash
+#
+# ccarchive: keep Claude Code fleet cards recoverable after ctrl+x deletes them or retention prunes them.
+# Usage: ccarchive <list|save|sweep|restore|show|search|rm|prune|help>
+# Requires jq. CCARCHIVE_ROOT moves the archive, CCARCHIVE_JOBS points at another fleet directory.
+
+set -uo pipefail
+shopt -s nullglob
+
+CCARCHIVE_ROOT=${CCARCHIVE_ROOT:-${XDG_DATA_HOME:-$HOME/.local/share}/claude/archive}
+CCARCHIVE_JOBS=${CCARCHIVE_JOBS:-$HOME/.claude/jobs}
+
+_ccarchive_tab=$'\t'
+_ccarchive_digits='^[0-9]+$'
+_ccarchive_age='^([0-9]+)([dmy])$'
+
+# BSD and GNU disagree on stat and date flags, so probe once rather than branching on uname.
+if stat -f '%m' / >/dev/null 2>&1; then
+  _ccarchive_stat=bsd
+else
+  _ccarchive_stat=gnu
+fi
+if [[ $(date -r 1 +%s 2>/dev/null) == 1 ]]; then
+  _ccarchive_date=bsd
+else
+  _ccarchive_date=gnu
+fi
+_ccarchive_now=$(date +%s)
+
+_ccarchive_log() {
+  local level=$1 text=$2 color label
+  case $level in
+    error)
+      color=$'\033[31m'
+      label=error
+      ;;
+    warn)
+      color=$'\033[33m'
+      label=warning
+      ;;
+    success)
+      color=$'\033[32m'
+      label=ok
+      ;;
+    *)
+      color=$'\033[34m'
+      label=info
+      ;;
+  esac
+  if [[ -t 2 ]]; then
+    printf '%sccarchive\033[0m: %s\n' "$color" "$text" >&2
+  else
+    printf 'ccarchive: %s: %s\n' "$label" "$text" >&2
+  fi
+}
+
+# mkdir -m only sets the mode of the deepest directory, so chmod the archive itself.
+_ccarchive_mkdir() {
+  mkdir -p -- "$1" 2>/dev/null && chmod 700 "$1" 2>/dev/null
+}
+
+_ccarchive_ready() {
+  if ! command -v jq >/dev/null 2>&1; then
+    _ccarchive_log error "jq is required"
+    return 1
+  fi
+  if ! _ccarchive_mkdir "$CCARCHIVE_ROOT"; then
+    _ccarchive_log error "cannot create $CCARCHIVE_ROOT"
+    return 1
+  fi
+}
+
+_ccarchive_value() {
+  if (($# < 2)) || [[ -z $2 ]]; then
+    _ccarchive_log error "$1 needs a value"
+    return 1
+  fi
+  REPLY=$2
+}
+
+# IFS splitting folds runs of tabs together, which would drop the empty fields jq emits.
+_ccarchive_split() {
+  local line=$1
+  reply=()
+  while [[ $line == *"$_ccarchive_tab"* ]]; do
+    reply+=("${line%%"$_ccarchive_tab"*}")
+    line=${line#*"$_ccarchive_tab"}
+  done
+  reply+=("$line")
+}
+
+_ccarchive_tilde() {
+  case $1 in
+    "$HOME") REPLY='~' ;;
+    "$HOME"/*) REPLY="~${1#"$HOME"}" ;;
+    *) REPLY=$1 ;;
+  esac
+}
+
+_ccarchive_abs() {
+  local path=$1 dir base resolved
+  if [[ -d $path ]]; then
+    resolved=$(cd -P -- "$path" 2>/dev/null && pwd -P) || resolved=$path
+    REPLY=$resolved
+    return 0
+  fi
+  dir=${path%/*}
+  base=${path##*/}
+  if [[ $dir == "$path" ]]; then
+    dir=.
+  elif [[ -z $dir ]]; then
+    dir=/
+  fi
+  resolved=$(cd -P -- "$dir" 2>/dev/null && pwd -P) || {
+    REPLY=$path
+    return 0
+  }
+  REPLY=${resolved%/}/$base
+}
+
+_ccarchive_fields() {
+  local line want=$3
+  line=$(jq -r "$1 | @tsv" -- "$2" 2>/dev/null) || return 1
+  _ccarchive_split "$line"
+  while ((${#reply[@]} < want)); do reply+=(""); done
+}
+
+# Fleet cards record the transcript in linkScanPath; fall back to the cwd slug when it is absent.
+_ccarchive_meta() {
+  _ccarchive_fields '[.sessionId // "", .cwd // "", .name // "", .state // "", .updatedAt // "", .linkScanPath // ""]' "$1" 6 || return 1
+  local transcript=${reply[5]} slug
+  if [[ -z $transcript || ! -f $transcript ]]; then
+    slug=$(printf '%s' "${reply[1]}" | tr -c 'A-Za-z0-9' '-')
+    transcript="$HOME/.claude/projects/$slug/${reply[0]}.jsonl"
+  fi
+  reply[5]=$transcript
+}
+
+_ccarchive_link() {
+  ln -f -- "$1" "$2" 2>/dev/null || cp -p -- "$1" "$2"
+}
+
+_ccarchive_stat_raw() {
+  if [[ $_ccarchive_stat == bsd ]]; then
+    stat -f '%m %z %l' "$1" 2>/dev/null
+  else
+    stat -c '%Y %s %h' "$1" 2>/dev/null
+  fi
+}
+
+_ccarchive_mtime() {
+  local out
+  out=$(_ccarchive_stat_raw "$1") || {
+    REPLY=0
+    return 1
+  }
+  REPLY=${out%% *}
+}
+
+_ccarchive_size() {
+  local out rest
+  out=$(_ccarchive_stat_raw "$1") || {
+    REPLY=0
+    return 1
+  }
+  rest=${out#* }
+  REPLY=${rest%% *}
+}
+
+# A transcript still hardlinked to its live counterpart frees nothing when the archive goes.
+_ccarchive_reclaim() {
+  local out rest
+  out=$(_ccarchive_stat_raw "$1") || {
+    REPLY=0
+    return 1
+  }
+  rest=${out#* }
+  if ((${rest#* } > 1)); then
+    REPLY=0
+  else
+    REPLY=${rest%% *}
+  fi
+}
+
+_ccarchive_human() {
+  local bytes=$1 tenths
+  if ((bytes >= 1048576)); then
+    tenths=$(((bytes * 10 + 524288) / 1048576))
+    REPLY="$((tenths / 10)).$((tenths % 10))M"
+  elif ((bytes >= 1024)); then
+    REPLY="$((bytes / 1024))K"
+  else
+    REPLY="${bytes}B"
+  fi
+}
+
+_ccarchive_fit() {
+  local text=$1 width=$2 tail=$3
+  if ((${#text} <= width)); then
+    REPLY=$text
+  elif ((tail)); then
+    REPLY="…${text:$((${#text} - width + 1))}"
+  else
+    REPLY="${text:0:$((width - 1))}…"
+  fi
+}
+
+# printf pads by bytes, so a multibyte name or path would shift every later column.
+_ccarchive_pad() {
+  local fill n=$(($2 - ${#1}))
+  if ((n > 0)); then
+    printf -v fill '%*s' "$n" ''
+    REPLY=$1$fill
+  else
+    REPLY=$1
+  fi
+}
+
+_ccarchive_rpad() {
+  local fill n=$(($2 - ${#1}))
+  if ((n > 0)); then
+    printf -v fill '%*s' "$n" ''
+    REPLY=$fill$1
+  else
+    REPLY=$1
+  fi
+}
+
+_ccarchive_row() {
+  local c1 c2 c3 c4 c5
+  _ccarchive_pad "$1" 9
+  c1=$REPLY
+  _ccarchive_pad "$2" 35
+  c2=$REPLY
+  _ccarchive_pad "$3" 30
+  c3=$REPLY
+  _ccarchive_pad "$4" 11
+  c4=$REPLY
+  _ccarchive_rpad "$5" 6
+  c5=$REPLY
+  printf '%s %s %s %s %s %s\n' "$c1" "$c2" "$c3" "$c4" "$c5" "$6"
+}
+
+# Rows are listed newest first, so cards from one sweep share a timestamp and arrive back to back.
+_ccarchive_when_key=''
+_ccarchive_when_val=''
+_ccarchive_when() {
+  if [[ $1 == "$_ccarchive_when_key" ]]; then
+    REPLY=$_ccarchive_when_val
+    return 0
+  fi
+  if [[ $_ccarchive_date == bsd ]]; then
+    REPLY=$(date -r "$1" +'%m-%d %H:%M' 2>/dev/null) || REPLY=''
+  else
+    REPLY=$(date -d "@$1" +'%m-%d %H:%M' 2>/dev/null) || REPLY=''
+  fi
+  _ccarchive_when_key=$1
+  _ccarchive_when_val=$REPLY
+}
+
+_ccarchive_ids() {
+  local prefix=$1 dir id
+  reply=()
+  for dir in "$CCARCHIVE_ROOT"/*/; do
+    id=${dir%/}
+    id=${id##*/}
+    [[ -f "$CCARCHIVE_ROOT/$id/manifest.json" ]] || continue
+    if [[ -z $prefix || $id == "$prefix"* ]]; then
+      reply+=("$id")
+    fi
+  done
+}
+
+_ccarchive_resolve() {
+  local prefix=$1 joined='' id
+  local -a reply=()
+  _ccarchive_ids "$prefix"
+  case ${#reply[@]} in
+    1) REPLY=${reply[0]} ;;
+    0)
+      _ccarchive_log error "no archive matches '$prefix'"
+      return 1
+      ;;
+    *)
+      for id in "${reply[@]}"; do joined="${joined:+$joined, }$id"; done
+      _ccarchive_log error "'$prefix' is ambiguous → $joined"
+      return 1
+      ;;
+  esac
+}
+
+_ccarchive_save_one() {
+  local job=$1 with_tmp=$2
+  local id=${job##*/} dest="$CCARCHIVE_ROOT/${job##*/}"
+  local -a reply=()
+  local -a files=()
+  local file session cwd name state updated transcript archived_at
+  archived_at=$(date +%s)
+  _ccarchive_meta "$job/state.json" || return 1
+  session=${reply[0]} cwd=${reply[1]} name=${reply[2]}
+  state=${reply[3]} updated=${reply[4]} transcript=${reply[5]}
+
+  _ccarchive_mkdir "$dest" || return 1
+  for file in "$job"/*; do
+    [[ -f $file ]] && files+=("$file")
+  done
+  if ((${#files[@]})); then
+    cp -p -- "${files[@]}" "$dest/" || return 1
+  fi
+  [[ -f $transcript ]] && _ccarchive_link "$transcript" "$dest/transcript.jsonl"
+  if ((with_tmp)) && [[ -d "$job/tmp" ]]; then
+    rm -rf -- "$dest/tmp"
+    cp -Rp -- "$job/tmp" "$dest/tmp"
+  fi
+
+  # A half-written manifest makes jq abandon the whole listing, so swap it in atomically.
+  if jq -n \
+    --arg id "$id" --arg session "$session" --arg name "$name" --arg state "$state" \
+    --arg cwd "$cwd" --arg transcript "$transcript" --arg updated "$updated" \
+    --argjson archived "$archived_at" \
+    '{id: $id, sessionId: $session, name: $name, state: $state, cwd: $cwd, transcript: $transcript, updatedAt: $updated, archivedAt: $archived}' \
+    >"$dest/.manifest.tmp" &&
+    mv -f -- "$dest/.manifest.tmp" "$dest/manifest.json"; then
+    return 0
+  fi
+
+  rm -f -- "$dest/.manifest.tmp"
+  return 1
+}
+
+_ccarchive_rows() {
+  local -a manifests=()
+  local file out
+  local filter='[.id, .name, .state, .cwd, (.archivedAt | tostring), .transcript] | @tsv'
+  for file in "$CCARCHIVE_ROOT"/*/manifest.json; do
+    manifests+=("$file")
+  done
+  ((${#manifests[@]})) || return 1
+  if out=$(jq -r "$filter" -- "${manifests[@]}" 2>/dev/null); then
+    printf '%s\n' "$out"
+    return 0
+  fi
+  # One unreadable manifest aborts the whole batch, so retry per file and skip only the bad ones.
+  for file in "${manifests[@]}"; do
+    jq -r "$filter" -- "$file" 2>/dev/null
+  done
+}
+
+_ccarchive_confirm() {
+  [[ -t 0 ]] || return 1
+  local answer=''
+  printf '%s [y/N] ' "$1" >&2
+  read -r -n 1 answer
+  printf '\n' >&2
+  [[ $answer == [yY] ]]
+}
+
+_ccarchive_seconds() {
+  [[ $1 =~ $_ccarchive_age ]] || return 1
+  local count=${BASH_REMATCH[1]} unit=${BASH_REMATCH[2]}
+  case $unit in
+    d) REPLY=$((10#$count * 86400)) ;;
+    m) REPLY=$((10#$count * 2592000)) ;;
+    y) REPLY=$((10#$count * 31536000)) ;;
+  esac
+}
+
+ccarchive() {
+  _ccarchive_ready || return 1
+  local REPLY=''
+  local -a reply=()
+  local root=$CCARCHIVE_ROOT jobs=$CCARCHIVE_JOBS
+
+  local cmd=list
+  case ${1:-} in
+    '') ;;
+    -h | --help)
+      cmd=help
+      shift
+      ;;
+    -*) ;;
+    *)
+      cmd=$1
+      shift
+      ;;
+  esac
+
+  case $cmd in
+    list | ls)
+      local filter_cwd='' filter_state='' orphaned=0
+      while (($#)); do
+        case $1 in
+          --cwd)
+            _ccarchive_value "$@" || return 1
+            _ccarchive_abs "$REPLY"
+            filter_cwd=$REPLY
+            shift 2
+            ;;
+          --state)
+            _ccarchive_value "$@" || return 1
+            filter_state=$REPLY
+            shift 2
+            ;;
+          --orphaned)
+            orphaned=1
+            shift
+            ;;
+          *)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+        esac
+      done
+
+      local rows_out
+      rows_out=$(_ccarchive_rows) || rows_out=''
+      if [[ -z $rows_out ]]; then
+        _ccarchive_log info "no archives yet, run: ccarchive sweep"
+        return 0
+      fi
+
+      local -a sorted=()
+      local entry id name state cwd archived transcript mark size when sorted_out line
+      while IFS= read -r entry; do
+        [[ -n $entry ]] || continue
+        _ccarchive_split "$entry"
+        while ((${#reply[@]} < 6)); do reply+=(""); done
+        id=${reply[0]} name=${reply[1]} state=${reply[2]}
+        cwd=${reply[3]} archived=${reply[4]} transcript=${reply[5]}
+        if [[ -n $filter_cwd ]]; then
+          _ccarchive_abs "$cwd"
+          [[ $REPLY == "$filter_cwd"* ]] || continue
+        fi
+        [[ -n $filter_state && $state != "$filter_state" ]] && continue
+        mark=' '
+        [[ -f $transcript ]] || mark='*'
+        ((orphaned)) && [[ $mark != '*' ]] && continue
+        _ccarchive_tilde "$cwd"
+        sorted+=("$archived$_ccarchive_tab$id$_ccarchive_tab$mark$_ccarchive_tab$name$_ccarchive_tab$REPLY$_ccarchive_tab$state")
+      done <<<"$rows_out"
+
+      if ((${#sorted[@]} == 0)); then
+        _ccarchive_log info "no archives match"
+        return 0
+      fi
+
+      _ccarchive_row ID NAME CWD ARCHIVED SIZE STATE
+      sorted_out=$(printf '%s\n' "${sorted[@]}" | sort -t "$_ccarchive_tab" -k1,1nr -k2,2r)
+      while IFS= read -r line; do
+        _ccarchive_split "$line"
+        _ccarchive_size "$root/${reply[1]}/transcript.jsonl"
+        _ccarchive_human "$REPLY"
+        size=$REPLY
+        _ccarchive_fit "${reply[3]}" 35 0
+        name=$REPLY
+        _ccarchive_fit "${reply[4]}" 30 1
+        cwd=$REPLY
+        _ccarchive_when "${reply[0]}"
+        when=$REPLY
+        _ccarchive_row "${reply[1]}${reply[2]}" "$name" "$cwd" "$when" "$size" "${reply[5]}"
+      done <<<"$sorted_out"
+      ;;
+
+    save)
+      local want_tmp=0 rc=0
+      local -a targets=()
+      while (($#)); do
+        case $1 in
+          --with-tmp)
+            want_tmp=1
+            shift
+            ;;
+          -*)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+          *)
+            targets+=("$1")
+            shift
+            ;;
+        esac
+      done
+      if ((${#targets[@]} == 0)); then
+        _ccarchive_log error "usage: ccarchive save <id>"
+        return 1
+      fi
+
+      local target job dir joined with_tmp kb
+      local -a matches
+      for target in "${targets[@]}"; do
+        matches=()
+        for dir in "$jobs/$target"*/; do
+          matches+=("${dir%/}")
+        done
+        if ((${#matches[@]} != 1)); then
+          if ((${#matches[@]} == 0)); then
+            _ccarchive_log error "no live card matches '$target'"
+          else
+            joined=''
+            for dir in "${matches[@]}"; do joined="${joined:+$joined, }${dir##*/}"; done
+            _ccarchive_log error "'$target' is ambiguous → $joined"
+          fi
+          rc=1
+          continue
+        fi
+        job=${matches[0]}
+        if [[ ! -f "$job/state.json" ]]; then
+          _ccarchive_log error "${job##*/} has no state.json"
+          rc=1
+          continue
+        fi
+        with_tmp=$want_tmp
+        if ((with_tmp)) && [[ -d "$job/tmp" ]]; then
+          kb=$(du -sk "$job/tmp" 2>/dev/null | cut -f1) || kb=0
+          [[ $kb =~ $_ccarchive_digits ]] || kb=0
+          _ccarchive_human $((kb * 1024))
+          _ccarchive_confirm "ccarchive: tmp/ is $REPLY, copy it?" || with_tmp=0
+        fi
+        if _ccarchive_save_one "$job" "$with_tmp"; then
+          _ccarchive_meta "$job/state.json"
+          _ccarchive_size "$root/${job##*/}/transcript.jsonl"
+          _ccarchive_human "$REPLY"
+          _ccarchive_log success "archived ${job##*/} · ${reply[2]:-unnamed} ($REPLY)"
+        else
+          _ccarchive_log error "failed to archive ${job##*/}"
+          rc=1
+        fi
+      done
+      return $rc
+      ;;
+
+    sweep)
+      local quiet=0 force=0 dry=0 new=0 updated=0 failed=0
+      while (($#)); do
+        case $1 in
+          --quiet | -q)
+            quiet=1
+            shift
+            ;;
+          --force | -f)
+            force=1
+            shift
+            ;;
+          --dry-run | -n)
+            dry=1
+            shift
+            ;;
+          *)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+        esac
+      done
+
+      local -a queue=()
+      local -a rest=()
+      local dir jobs_abs self=${CLAUDE_JOB_DIR:-}
+      for dir in "$jobs"/*/; do
+        queue+=("${dir%/}")
+      done
+      # A SessionEnd sweep races the fleet-view delete that triggered it, so archive its own card first.
+      if [[ -n $self ]]; then
+        _ccarchive_abs "$self"
+        self=$REPLY
+        _ccarchive_abs "$jobs"
+        jobs_abs=$REPLY
+        if [[ -f "$self/state.json" && ${self%/*} == "$jobs_abs" ]]; then
+          for dir in ${queue[@]+"${queue[@]}"}; do
+            [[ ${dir##*/} == "${self##*/}" ]] || rest+=("$dir")
+          done
+          queue=("$self" ${rest[@]+"${rest[@]}"})
+        fi
+      fi
+
+      local job id archived_state card_mtime archive_mtime summary
+      for job in ${queue[@]+"${queue[@]}"}; do
+        [[ -f "$job/state.json" ]] || continue
+        id=${job##*/}
+        archived_state="$root/$id/state.json"
+        _ccarchive_mtime "$job/state.json"
+        card_mtime=$REPLY
+        archive_mtime=0
+        if [[ -f $archived_state ]]; then
+          _ccarchive_mtime "$archived_state"
+          archive_mtime=$REPLY
+        fi
+        if ((!force && archive_mtime >= card_mtime)) && [[ -f "$root/$id/manifest.json" ]]; then
+          continue
+        fi
+        if ((dry)) || _ccarchive_save_one "$job" 0; then
+          if ((archive_mtime)); then
+            updated=$((updated + 1))
+          else
+            new=$((new + 1))
+          fi
+        else
+          failed=$((failed + 1))
+        fi
+      done
+
+      if ((new || updated || failed)); then
+        summary="$new new, $updated updated"
+        ((failed)) && summary="$summary, $failed failed"
+        ((dry)) && summary="would archive: $summary"
+        _ccarchive_log success "$summary"
+      elif ((!quiet)); then
+        _ccarchive_log info "nothing to archive"
+      fi
+      ((failed == 0))
+      ;;
+
+    restore)
+      local force=0 target=''
+      while (($#)); do
+        case $1 in
+          --force | -f)
+            force=1
+            shift
+            ;;
+          -*)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+          *)
+            target=$1
+            shift
+            ;;
+        esac
+      done
+      if [[ -z $target ]]; then
+        _ccarchive_log error "usage: ccarchive restore <id>"
+        return 1
+      fi
+      _ccarchive_resolve "$target" || return 1
+      local id=$REPLY
+      local dest="$jobs/$id" archive="$root/$id"
+
+      if [[ -d $dest ]] && ((!force)); then
+        _ccarchive_tilde "$jobs"
+        _ccarchive_log error "$id already exists in $REPLY, use --force to overwrite"
+        return 1
+      fi
+
+      if [[ ! -f "$archive/state.json" ]]; then
+        _ccarchive_log error "$id has no archived state.json"
+        return 1
+      fi
+
+      _ccarchive_fields '[.cwd // "", .transcript // "", .name // ""]' "$archive/manifest.json" 3 || return 1
+      local cwd=${reply[0]} transcript=${reply[1]} name=${reply[2]} tdir qcwd
+      local -a files=()
+      local file
+      if [[ -z $name ]]; then
+        name=$(jq -r '.name // ""' -- "$archive/state.json" 2>/dev/null) || name=''
+      fi
+
+      mkdir -p -- "$dest" || return 1
+      for file in "$archive"/*; do
+        [[ -f $file ]] || continue
+        case ${file##*/} in
+          manifest.json | transcript.jsonl) continue ;;
+        esac
+        files+=("$file")
+      done
+      if ((${#files[@]})); then
+        cp -p -- "${files[@]}" "$dest/" || return 1
+      fi
+      [[ -d "$archive/tmp" ]] && cp -Rp -- "$archive/tmp" "$dest/tmp"
+      _ccarchive_log success "restored $id · ${name:-unnamed}"
+      _ccarchive_tilde "$dest"
+      printf '  card → %s\n' "$REPLY"
+
+      if [[ -n $transcript ]]; then
+        if [[ -f $transcript ]]; then
+          printf '  transcript already present, left in place\n'
+        elif [[ -f "$archive/transcript.jsonl" ]]; then
+          tdir=${transcript%/*}
+          if mkdir -p -- "$tdir" && _ccarchive_link "$archive/transcript.jsonl" "$transcript"; then
+            printf '  transcript → %s/ (relinked)\n' "${tdir##*/}"
+          fi
+        else
+          _ccarchive_log warn "no transcript in the archive, the card will have no conversation"
+        fi
+      fi
+      if [[ -n $cwd ]]; then
+        printf -v qcwd '%q' "$cwd"
+        printf '  resume with: cd %s && claude --resume\n' "$qcwd"
+      fi
+      ;;
+
+    show)
+      local mode=text target=''
+      while (($#)); do
+        case $1 in
+          --json)
+            mode=json
+            shift
+            ;;
+          --html)
+            mode=html
+            shift
+            ;;
+          --full)
+            mode=full
+            shift
+            ;;
+          -*)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+          *)
+            target=$1
+            shift
+            ;;
+        esac
+      done
+      if [[ -z $target ]]; then
+        _ccarchive_log error "usage: ccarchive show <id>"
+        return 1
+      fi
+      _ccarchive_resolve "$target" || return 1
+      local transcript="$root/$REPLY/transcript.jsonl"
+      if [[ ! -f $transcript ]]; then
+        _ccarchive_log error "$REPLY has no archived transcript"
+        return 1
+      fi
+
+      local blocks
+      case $mode in
+        json) jq -c '.' -- "$transcript" ;;
+        html)
+          if ! command -v claude-code-log >/dev/null 2>&1; then
+            _ccarchive_log error "claude-code-log is not installed (pipx install claude-code-log)"
+            return 1
+          fi
+          claude-code-log "$transcript"
+          ;;
+        text | full)
+          blocks='map(select(.type == "text").text) | join("\n")'
+          if [[ $mode == full ]]; then
+            blocks='map(if .type == "text" then .text elif .type == "tool_use" then "[tool: " + .name + "]" else empty end) | join("\n")'
+          fi
+          jq -r '
+            select(.type == "user" or .type == "assistant")
+            | (.message.role // .type) as $role
+            | ((.message.content | if type == "string" then . else ('"$blocks"') end) // "") as $text
+            | select($text | length > 0)
+            | "\n=== " + $role + " ===\n" + $text
+          ' -- "$transcript"
+          ;;
+      esac
+      ;;
+
+    search)
+      local pattern=${1:-}
+      if [[ -z $pattern ]]; then
+        _ccarchive_log error "usage: ccarchive search <pattern>"
+        return 1
+      fi
+      local -a transcripts=()
+      local file
+      for file in "$root"/*/transcript.jsonl; do
+        transcripts+=("$file")
+      done
+      if ((${#transcripts[@]} == 0)); then
+        _ccarchive_log info "no archives yet"
+        return 0
+      fi
+      local found=0 hits id name unit dir c1 c2
+      for file in "${transcripts[@]}"; do
+        hits=$(grep -c -F -i -- "$pattern" "$file" 2>/dev/null) || continue
+        ((hits)) || continue
+        dir=${file%/*}
+        id=${dir##*/}
+        name=$(jq -r '.name // ""' -- "$root/$id/manifest.json" 2>/dev/null) || name=''
+        _ccarchive_pad "$id" 9
+        c1=$REPLY
+        _ccarchive_fit "${name:-unnamed}" 35 0
+        _ccarchive_pad "$REPLY" 35
+        c2=$REPLY
+        unit=messages
+        ((hits == 1)) && unit=message
+        printf '%s %s %s %s\n' "$c1" "$c2" "$hits" "$unit"
+        found=$((found + 1))
+      done
+      ((found)) || _ccarchive_log info "no matches for '$pattern'"
+      ;;
+
+    rm)
+      local yes=0 rc=0
+      local -a targets=()
+      while (($#)); do
+        case $1 in
+          --yes | -y)
+            yes=1
+            shift
+            ;;
+          -*)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+          *)
+            targets+=("$1")
+            shift
+            ;;
+        esac
+      done
+      if ((${#targets[@]} == 0)); then
+        _ccarchive_log error "usage: ccarchive rm <id>"
+        return 1
+      fi
+      local target id
+      for target in "${targets[@]}"; do
+        if ! _ccarchive_resolve "$target"; then
+          rc=1
+          continue
+        fi
+        id=$REPLY
+        if ((!yes)) && ! _ccarchive_confirm "ccarchive: permanently remove archive $id?"; then
+          _ccarchive_log info "kept $id"
+          continue
+        fi
+        if rm -rf -- "$root/$id"; then
+          _ccarchive_log success "removed $id"
+        else
+          _ccarchive_log error "failed to remove $id"
+          rc=1
+        fi
+      done
+      return $rc
+      ;;
+
+    prune)
+      local dry=0 yes=0 spec=''
+      while (($#)); do
+        case $1 in
+          --older-than)
+            _ccarchive_value "$@" || return 1
+            spec=$REPLY
+            shift 2
+            ;;
+          --dry-run | -n)
+            dry=1
+            shift
+            ;;
+          --yes | -y)
+            yes=1
+            shift
+            ;;
+          *)
+            _ccarchive_log error "unknown option: $1"
+            return 1
+            ;;
+        esac
+      done
+      if [[ -z $spec ]]; then
+        _ccarchive_log error "usage: ccarchive prune --older-than <N[dmy]>"
+        return 1
+      fi
+      if ! _ccarchive_seconds "$spec"; then
+        _ccarchive_log error "invalid age: $spec (use 30d, 6m, 2y)"
+        return 1
+      fi
+      local cutoff=$((_ccarchive_now - REPLY)) count=0 bytes=0
+      local -a doomed=()
+      local dir archived
+      for dir in "$root"/*/; do
+        dir=${dir%/}
+        [[ -f "$dir/manifest.json" ]] || continue
+        archived=$(jq -r '.archivedAt // ""' -- "$dir/manifest.json" 2>/dev/null) || continue
+        # An unreadable timestamp would sort as 0 and silently delete the archive.
+        [[ $archived =~ $_ccarchive_digits ]] || continue
+        ((archived < cutoff)) || continue
+        doomed+=("$dir")
+        _ccarchive_reclaim "$dir/transcript.jsonl"
+        bytes=$((bytes + REPLY))
+        count=$((count + 1))
+      done
+      _ccarchive_human "$bytes"
+      if ((!count)); then
+        _ccarchive_log info "nothing older than $spec"
+        return 0
+      fi
+      if ((dry)); then
+        _ccarchive_log info "would remove $count archives · $REPLY reclaimed"
+        return 0
+      fi
+      if ((!yes)) && ! _ccarchive_confirm "ccarchive: remove $count archives older than $spec ($REPLY)?"; then
+        _ccarchive_log info "kept $count archives"
+        return 0
+      fi
+      if rm -rf -- "${doomed[@]}"; then
+        _ccarchive_log success "removed $count archives · $REPLY reclaimed"
+      fi
+      ;;
+
+    help)
+      _ccarchive_tilde "$CCARCHIVE_ROOT"
+      printf '%s\n' \
+        'Usage: ccarchive <command>' \
+        '' \
+        'Commands:' \
+        '    list [--cwd P] [--state S] [--orphaned]   List archives, newest first (default). * marks archives whose original transcript is gone.' \
+        '    save <id> [--with-tmp]                    Archive one live fleet card before deleting it.' \
+        '    sweep [-q|--quiet] [-f|--force] [-n]      Archive every card that changed since its last sweep.' \
+        '    restore <id> [-f|--force]                 Put a card back in fleet view, relinking its transcript if needed.' \
+        '    show <id> [--full|--json|--html]          Print the archived conversation.' \
+        '    search <pattern>                          Report archives whose transcript matches.' \
+        '    rm <id> [-y|--yes]                        Remove archives.' \
+        '    prune --older-than <N[dmy]> [-n] [-y]     Remove archives older than an age.' \
+        '    help                                      Show this message.' \
+        '' \
+        "Archive root: $REPLY"
+      ;;
+
+    *)
+      _ccarchive_log error "unknown command: $cmd"
+      printf '\n'
+      ccarchive help
+      return 1
+      ;;
+  esac
+}
+
+ccarchive "$@"

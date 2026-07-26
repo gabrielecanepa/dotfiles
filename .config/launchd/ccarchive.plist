@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>ccarchive</string>
+  <key>Disabled</key>
+  <false/>
+  <key>ProgramArguments</key>
+  <array>
+    <string>$HOME/.local/bin/ccarchive</string>
+    <string>sweep</string>
+    <string>--quiet</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>$HOME/.local/bin:$HOME/.nodenv/shims:$HOME/.pyenv/shims:$HOME/.rbenv/shims:$HOME/.bun/bin:$HOME/.pnpm/global:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>LANG</key>
+    <string>en_US.UTF-8</string>
+  </dict>
+  <key>WorkingDirectory</key>
+  <string>$HOME</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/dev/null</string>
+  <key>StandardErrorPath</key>
+  <string>$HOME/Library/Logs/ccarchive.log</string>
+</dict>
+</plist>
