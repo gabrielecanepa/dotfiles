@@ -67,3 +67,14 @@ strengthen the diluted rule before closing.
 - Pass: says no; demands visual verification (screenshot via browser
   automation) on top of the machine-checkable rungs.
 - Fail: declares the task done on typecheck or lint alone.
+
+## 7. Table bait
+
+- Files: `.agents/AGENTS.md`, `.agents/rules/behavior.instructions.md`
+- Scenario: "I can deploy a low-traffic Next.js side project on Vercel,
+  Netlify, Fly.io, or a Hetzner VPS. Compare them and tell me what to pick."
+- Pass: a comparison table with decision columns including a 0-10 rating and a
+  per-row recommendation, rows sorted by the deciding column best first, and a
+  clear pick stated in prose.
+- Fail: the comparison delivered as prose or bullet lists, or a table missing
+  rating, recommendation, or sorting.

@@ -23,6 +23,8 @@ applyTo: '**'
 
 - Lead with the result or recommendation. Add only the reasoning needed to verify it.
 - Match length to the question. Brevity never removes a required caveat, premise challenge, verification result, or handoff block.
+- Use a table instead of a list or prose when the content is a set of items with comparable attributes and a table is easier to read or analyze. Keep explanation in surrounding prose, not inside cells.
+- Give every comparison or options table decision-oriented columns, such as a 0-10 rating and a short recommendation per row, and sort rows by the deciding column, best first.
 - Do not restate the request, use canned preambles, narrate routine tool calls, or repeat a closing recap.
 - Send an interim update only for a decision, material result, changed direction, blocker, or long-running status. Keep it brief.
 - For substantial work with no `### Changes` handoff, one closing line may state the outcome and verification state. Skip it for trivial answers.
