@@ -20,17 +20,17 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 
 ## Component props
 
-Every component, exported or not, must accept the props of the element it renders, merge them, and spread them. A component that hardcodes `className` and drops the rest is unstylable and unextendable by its callers.
+Every component forwards the props of the element it renders.
 
 ### The rule
 
-Type the props as `React.ComponentProps<...>` intersected with the component's own props, destructure `className` and `...props`, merge `className` with `cn(...)`, and spread `...props` onto the underlying element. React types are referenced through the global `React` namespace, never imported: no `import { type ComponentProps } from 'react'`, no `import * as React`, no default import. (The inline-type-imports idiom in `typescript.instructions.md` does not apply to React's own types.)
+Type props as `React.ComponentProps<...>` intersected with the component's own props. Destructure `className` and `...props`, merge with `cn(...)`, and spread onto the underlying element. Reference React types through the global `React` namespace; never import React or its types.
 
 - **DOM element** (`div`, `button`, ...) → `React.ComponentProps<'div'>`.
 - **Another component** → `React.ComponentProps<typeof Child>`, spread onto that child.
 - **Provider with `children` and no underlying element** → `React.PropsWithChildren<{ ... }>`, no merge/spread.
 
-The underlying element is whichever single element the rest props belong on: the root DOM node, or the one child component the wrapper exists to configure. A provider that only nests other providers has none.
+Spread rest props onto the root element or child component they configure; a pure provider has neither.
 
 ### Examples
 
@@ -54,7 +54,7 @@ const ChatFilters = ({
 )
 ```
 
-A pure provider (only other providers, no DOM element) takes `React.PropsWithChildren`, no merge or spread. A wrapper around another component types as `React.ComponentProps<typeof Child>` and forwards the rest to that child; a wrapping provider with a DOM element under it still merges and spreads onto that element.
+A pure provider takes `React.PropsWithChildren`; it has no element to receive merged props.
 
 ```tsx
 export const DashboardProvider = ({
@@ -77,16 +77,16 @@ export const DashboardProvider = ({
 
 ## Component design
 
-- **Compose, don't configure.** Build with composition (compound components, slots, context providers) over boolean-prop configuration. A **third boolean prop** is the signal to restructure into compound components. Run `vercel-composition-patterns` for any non-trivial design.
+- **Choose composition by pressure.** Start with props and local state. Use slots or compound components when structural options proliferate or allow invalid combinations; intrinsic flags and finite visual variants stay props. Add context only for deep or non-contiguous consumers, or when a subtree must swap state or data sources. A third structural boolean triggers API review, not an automatic rewrite.
 - **JSX.** `{cond && <El />}` for one branch, a ternary for two; the left side of `&&` must be a real boolean (`items.length > 0 &&`), a number leaks a literal `0` into the output. `<>...</>` over `<Fragment>`. Named imports for hooks and values (`useState`, `use`); never import `React` itself in any form, its types come from the global namespace (see the rule above).
-- **Props are not initial state.** Read props directly; copy one into `useState` only to seed the first render, and name it `defaultX`/`initialX` so the intent is visible. Reset a subtree's state on identity change with `key={id}` at the call site, never with a syncing effect.
+- **Props are not initial state.** Read props directly; copy one into state only to seed the first render and name it `defaultX`/`initialX`. Use `key={id}` only when a new identity must reset every descendant. When one value belongs to a route or entity, store that owner identity and derive whether it remains active; do not remount or sync it in an Effect.
 - **Stable keys.** Key mapped elements by a stable id from the data. `key={index}` only for a static list that never reorders, inserts, or deletes; it corrupts per-item state and inputs the moment the list changes.
 - **Effects stay honest.** Effects synchronize external systems; interactions stay in handlers. Dependencies match every reactive value read; never suppress `exhaustive-deps`. Use `[]` only when none are read.
 - **Keep renders pure and updates immutable.** Never mutate props or state or read randomness, clocks, browser-only globals, or refs during render. Use immutable copies, `useId`, lazy state, handlers, or `useSyncExternalStore` with a server snapshot.
 - **No manual memoization under React Compiler.** When React Compiler is enabled, do not hand-add `useMemo`, `useCallback`, or `React.memo`; the compiler memoizes. (Only when the compiler is on.)
 - **Cancel superseded requests.** For client fetches that fire on rapid input (search-as-you-type, filters, quick nav), pass an `AbortController` signal and abort the prior request so a slow earlier response can't overwrite a newer one. Prefer a data library that cancels for you (TanStack Query, `use`+RSC) over hand-rolled effects. Any effect that opens a listener, timer, subscription, or socket returns a cleanup that tears down exactly what it set up.
 - **Async actions own their state.** User-triggered promises expose pending and error UI, block duplicate submission while pending, and abort or guard continuations that may outlive the component.
-- **Respect trust boundaries.** Across the RSC boundary, pass serializable data or Server Actions and keep Client Components narrow. Sanitize dynamic HTML and allowlist schemes for dynamic `href` and `src` values.
+- **Respect RSC boundaries.** Pass only minimal, serializable, non-sensitive data or Server Actions and keep Client Components narrow. Data passed from an RSC into client context is a snapshot, not live server state: name its initial role and define freshness through navigation, invalidation, refresh, or a supported client source. Sanitize dynamic HTML and allowlist schemes for dynamic `href` and `src`.
 - **Split context by change-frequency.** Every consumer of a context re-renders on any change to its value, whichever field it reads. Keep high-churn state out of a wide provider: split into narrow contexts, or back a hot store with an external store subscribed via `useSyncExternalStore`. The Compiler does not fix whole-value subscription.
 
 ## Layer boundaries
