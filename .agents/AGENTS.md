@@ -47,7 +47,6 @@ The canonical files live under `~/.agents/`. `~/.claude/CLAUDE.md`, `~/.codex/AG
 
 - Put one-shot scripts, logs, and scratch data in the session scratchpad or system temp directory, never in a repository.
 - Put reusable agent artifacts under an existing agentic folder's `artifacts/` directory. Prefer the agent's non-symlinked folder, else `.agents/`. If no such folder exists, follow the repository or user-specified destination instead of creating one.
-- Ignore an `artifacts/` directory when first creating it.
 
 ## Formatting
 

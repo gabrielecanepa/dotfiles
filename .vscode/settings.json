@@ -29,6 +29,7 @@
     "Library": true,
     "Movies": true,
     "Music": true,
+    "OrbStack": true,
     "Pictures": true,
     "Public": true
   },
@@ -52,5 +53,8 @@
     "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true
+  },
+  "shellcheck.ignorePatterns": {
+    ".aliases": true
   }
 }

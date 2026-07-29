@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # compress-png: lossily compress PNG files in place with pngquant.
-# Usage: compress-png.sh <file> [<file> ...]
+# Usage: compress-png <file> [<file> ...]
 
 set -euo pipefail
 
@@ -10,10 +10,22 @@ case ":$PATH:" in
   *) PATH="/opt/homebrew/bin:$PATH" ;;
 esac
 
+notify() {
+  local msg=$1
+  if [ -t 1 ]; then
+    echo "$msg"
+  else
+    osascript -e "display notification \"$msg\" with title \"Compress PNG\"" >/dev/null
+  fi
+}
+
 for f in "$@"; do
   case "$f" in
     *.png | *.PNG) ;;
-    *) continue ;;
+    *)
+      notify "$(basename "$f"): skipped, not a PNG"
+      continue
+      ;;
   esac
 
   before=$(stat -f%z "$f")
@@ -24,9 +36,5 @@ for f in "$@"; do
     msg="$(basename "$f"): skipped, no smaller result"
   fi
 
-  if [ -t 1 ]; then
-    echo "$msg"
-  else
-    osascript -e "display notification \"$msg\" with title \"Compress PNG\"" >/dev/null
-  fi
+  notify "$msg"
 done

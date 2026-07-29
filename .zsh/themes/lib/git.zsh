@@ -66,7 +66,7 @@ _git_remote_icon() {
         (( in_remote )) && [[ $line == *url\ =* ]] || continue
         case $line in
           *github*) : ${(P)1::=$_GIT_GITHUB}; return 0 ;;
-          *gitlab*) : ${(P)1::="%F{208}${_GIT_GITLAB}%f"}; return 0 ;;
+          *gitlab*) : ${(P)1::="%F{209}${_GIT_GITLAB}%f"}; return 0 ;;
         esac
         ;;
     esac
@@ -114,7 +114,7 @@ _git_segment() {
   flags+="${deleted}${modified}${untracked}"
   [[ -n $flags ]] && flags+="%{$reset_color%}"
 
-  local segment="%F{208}${_GIT_BRANCH}${ref}%f${flags}"
+  local segment="%F{209}${_GIT_BRANCH}${ref}%f${flags}"
   local icon
   _git_remote_icon icon
   if [[ -n $icon ]]; then

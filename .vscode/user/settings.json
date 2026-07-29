@@ -204,7 +204,7 @@
   "git.addAICoAuthor": "off",
   "git.allowForcePush": true,
   "git.autofetch": true,
-  "git.autofetchPeriod": 180,
+  "git.autofetchPeriod": 60,
   "git.autoRepositoryDetection": "openEditors",
   "git.autoStash": true,
   "git.closeDiffOnOperation": true,
@@ -226,7 +226,6 @@
     ".pnpm-store",
     ".pnpm",
     ".vscode-server",
-    "Library",
     "node_modules"
   ],
   "git.scanRepositories": [],

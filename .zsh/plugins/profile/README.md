@@ -12,7 +12,7 @@ user    john.doe
 name    John Doe
 email   john@doe.com
 path    ~/Developer
-editor  Zed
+editor  Visual Studio Code
 ```
 
 ## Usage

@@ -38,8 +38,8 @@ _git_aliases() {
   for git_alias in ${(f)"$(git aliases | sed 's/ .*//')"}; do
     command -v "g$git_alias" >/dev/null || alias "g${git_alias}"="git $git_alias"
   done
-  for workspace in ${(f)"$(find ~/.vscode -name '*.code-workspace' -not -path '*/extensions/*' 2>/dev/null)"}; do
-    alias "code-$(basename "$workspace" .code-workspace)"="code '$workspace'"
+  for workspace in "${VSCODE_WORKSPACES_PATH:-$HOME/.vscode/workspaces}"/*.code-workspace(.N); do
+    alias "code-${workspace:t:r}"="code '$workspace'"
   done
   add-zsh-hook -d precmd _git_aliases
   unfunction _git_aliases
