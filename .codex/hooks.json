@@ -6,6 +6,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "$HOME/.codex/hooks/guard-committed-writing.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "$HOME/.codex/hooks/guard-managed-files.sh",
             "timeout": 5
           }

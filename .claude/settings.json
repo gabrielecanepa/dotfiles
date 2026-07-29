@@ -35,6 +35,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "$HOME/.claude/hooks/guard-committed-writing.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": "$HOME/.claude/hooks/guard-managed-files.sh",
             "timeout": 5
           }
