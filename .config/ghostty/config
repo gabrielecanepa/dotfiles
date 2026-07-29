@@ -96,6 +96,13 @@ keybind = super+ctrl+left=move_tab:-1
 keybind = super+ctrl+right=move_tab:1
 keybind = super+alt+down=goto_split:next
 keybind = super+alt+up=goto_split:previous
+keybind = alt+d=new_split:right
+keybind = chain=resize_split:right,400
+keybind = chain=goto_split:left
+keybind = ctrl+alt+left=resize_split:left,10
+keybind = ctrl+alt+right=resize_split:right,10
+keybind = ctrl+alt+up=resize_split:up,10
+keybind = ctrl+alt+down=resize_split:down,10
 # keybind = super+page_up=scroll_page_up
 # keybind = super+ctrl+equal=equalize_splits
 # keybind = super+physical:four=goto_tab:4
