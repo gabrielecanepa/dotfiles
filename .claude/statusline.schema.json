@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claude Code statusline",
+  "description": "Settings for .claude/statusline.sh, validated and set by /statusline-config. Every key is optional and falls back to its default.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Path to this schema, for editor validation and completion."
+    },
+    "theme": {
+      "type": "string",
+      "description": "Color treatment of the whole statusline.",
+      "default": "default",
+      "oneOf": [
+        {
+          "const": "default",
+          "description": "Full color."
+        },
+        {
+          "const": "mono",
+          "description": "No colors, dim and bold only."
+        }
+      ]
+    },
+    "layout": {
+      "type": "array",
+      "description": "Segments to render, one group per statusline line. Unknown names are dropped, and a layout left with no segment falls back to the default. Setting context.style to progress moves context onto its own line in the default layout.",
+      "default": [
+        [
+          "repo",
+          "branch",
+          "status"
+        ],
+        [
+          "model",
+          "effort",
+          "fast-mode",
+          "context"
+        ],
+        [
+          "five-hour"
+        ],
+        [
+          "seven-day"
+        ]
+      ],
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "oneOf": [
+            {
+              "const": "repo",
+              "description": "Repository owner/name linked to its host, or the current directory."
+            },
+            {
+              "const": "branch",
+              "description": "Current git branch."
+            },
+            {
+              "const": "status",
+              "description": "Counts of staged, modified and deleted files."
+            },
+            {
+              "const": "model",
+              "description": "Model display name."
+            },
+            {
+              "const": "effort",
+              "description": "Reasoning effort level."
+            },
+            {
+              "const": "fast-mode",
+              "description": "Bolt shown only while fast mode is on."
+            },
+            {
+              "const": "context",
+              "description": "Context window usage."
+            },
+            {
+              "const": "five-hour",
+              "description": "Five-hour rate limit usage and reset time."
+            },
+            {
+              "const": "seven-day",
+              "description": "Weekly rate limit usage and reset time."
+            }
+          ]
+        }
+      }
+    },
+    "bar": {
+      "type": "object",
+      "description": "Usage bars drawn for the context, five-hour and weekly segments.",
+      "additionalProperties": false,
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "Bar fill.",
+          "default": "solid",
+          "oneOf": [
+            {
+              "const": "solid",
+              "description": "Shaded blocks."
+            },
+            {
+              "const": "dotted",
+              "description": "Braille blocks in the accent color."
+            },
+            {
+              "const": "dots",
+              "description": "Round dots in the accent color."
+            },
+            {
+              "const": "gradient",
+              "description": "Shaded blocks ramped from yellow to red."
+            },
+            {
+              "const": "pacman",
+              "description": "Pacman eating pellets."
+            }
+          ]
+        },
+        "trail": {
+          "type": "boolean",
+          "description": "Leave small dots behind the pacman head instead of spaces. Pacman style only.",
+          "default": false
+        }
+      }
+    },
+    "effort": {
+      "type": "object",
+      "description": "Reasoning effort segment.",
+      "additionalProperties": false,
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "How the effort level is drawn.",
+          "default": "colored",
+          "oneOf": [
+            {
+              "const": "colored",
+              "description": "Level word tinted like the CLI effort picker."
+            },
+            {
+              "const": "raw",
+              "description": "Level word with no color."
+            },
+            {
+              "const": "symbol",
+              "description": "Model picker glyph in the Claude orange."
+            }
+          ]
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "description": "Context window segment.",
+      "additionalProperties": false,
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "Where and how the context usage is drawn.",
+          "default": "inline",
+          "oneOf": [
+            {
+              "const": "inline",
+              "description": "Token count next to the model."
+            },
+            {
+              "const": "progress",
+              "description": "Labeled bar on its own line."
+            }
+          ]
+        },
+        "warn": {
+          "type": "string",
+          "description": "How a filling context window is flagged.",
+          "default": "none",
+          "oneOf": [
+            {
+              "const": "none",
+              "description": "No warning, the token count stays dim."
+            },
+            {
+              "const": "color",
+              "description": "Tint the token count yellow, orange, then red as it fills up."
+            },
+            {
+              "const": "icon",
+              "description": "Append the icon in that same yellow, orange, then red."
+            },
+            {
+              "const": "both",
+              "description": "Tint the token count and append the icon."
+            }
+          ]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon appended when warn is icon or both.",
+          "default": "⚠︎",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

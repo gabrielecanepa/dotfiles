@@ -11,6 +11,7 @@
 !/.claude/skills
 !/.claude/CLAUDE.md
 !/.claude/settings.json
+!/.claude/statusline.schema.json
 !/.claude/statusline.sh
 !/.claude/subagent-statusline.sh
 !/.codex/

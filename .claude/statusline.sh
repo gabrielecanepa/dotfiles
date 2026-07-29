@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
 #
 # Claude Code statusline, configured by CLAUDE_STATUSLINE_CONFIG (default: ~/.claude/statusline.json).
-# Keys, all optional:
-#   style    solid|dotted|dots|gradient|pacman (default: solid), set live with /statusline-style
-#   layout   space-separated segment names with "|" as a line break, e.g. "repo branch | model effort | context"
-#   theme    default|mono; mono strips all colors but keeps dim
-#   pacman   default|trailing; trailing leaves small dots behind the pacman instead of spaces
-#   effort   colored|raw|symbol; colored word, plain word, or the CLI model picker glyph
-#   context  inline|progress (default: inline); dim tokens on the model line, or a bar line
-# Segments: repo branch status model effort fast-mode context five_hour seven_day.
+# Every key is optional and an invalid value falls back to its default; /statusline-config validates
+# and sets them, and statusline.schema.json describes the same shape for editors:
+#   theme          default|mono; mono strips all colors but keeps dim
+#   layout         array of lines, each an array of segment names, e.g. [["repo","branch"],["model"]]
+#   bar.style      solid|dotted|dots|gradient|pacman (default: solid)
+#   bar.trail      true leaves small dots behind the pacman head instead of spaces (pacman only)
+#   effort.style   colored|raw|symbol; colored word, plain word, or the CLI model picker glyph
+#   context.style  inline|progress (default: inline); dim tokens on the model line, or a bar line
+#   context.warn   none|color|icon|both (default: none); as the window fills up, color tints
+#                  the token count yellow/orange/red and icon appends context.icon in that color
+#   context.icon   icon appended when warn is icon or both (default: ⚠)
+# Segments: repo branch status model effort fast-mode context five-hour seven-day.
 
 set -uo pipefail
 
 # Colors
-COLOR_BLUE="38;2;91;104;238"
+COLOR_ACCENT="38;2;10;145;178"
 COLOR_PACMAN="38;2;230;170;20"
 COLOR_MODEL="1;38;5;173"
 COLOR_ADDED="32"
@@ -27,13 +31,14 @@ DIM="2"
 RESET="0"
 
 # Glyphs
-GLYPH_FILL_SHADE="\xe2\x96\x93"       # ▓ U+2593
-GLYPH_EMPTY_SHADE="\xe2\x96\x91"      # ░ U+2591
-GLYPH_BRAILLE_FULL="\xe2\xa3\xbf"     # ⣿ U+28FF
-GLYPH_DOT="\xe2\x80\xa2"              # • U+2022
-GLYPH_MIDDLE_DOT="\xc2\xb7"           # · U+00B7
-GLYPH_PACMAN="\xe1\x97\xa7"           # ᗧ U+15E7
-GLYPH_BOLT="\xe2\x9a\xa1\xef\xb8\x8e" # ⚡ U+26A1 + U+FE0E
+GLYPH_FILL_SHADE="\xe2\x96\x93"             # ▓ U+2593
+GLYPH_EMPTY_SHADE="\xe2\x96\x91"            # ░ U+2591
+GLYPH_BRAILLE_FULL="\xe2\xa3\xbf"           # ⣿ U+28FF
+GLYPH_DOT="\xe2\x80\xa2"                    # • U+2022
+GLYPH_MIDDLE_DOT="\xc2\xb7"                 # · U+00B7
+GLYPH_PACMAN="\xe1\x97\xa7"                 # ᗧ U+15E7
+GLYPH_BOLT="\xe2\x9a\xa1\xef\xb8\x8e"       # ⚡ U+26A1 + U+FE0E
+GLYPH_WARN_ICON=$'\xe2\x9a\xa0\xef\xb8\x8e' # ⚠ U+26A0 + U+FE0E
 
 # Effort colors
 COLOR_EFFORT_LOW="33"         # yellow
@@ -48,69 +53,105 @@ GLYPH_EFFORT_HIGH="\xe2\x97\x8f"   # ● U+25CF
 GLYPH_EFFORT_XHIGH="\xe2\x97\x89"  # ◉ U+25C9
 GLYPH_EFFORT_MAX="\xe2\x97\x88"    # ◈ U+25C8
 
+# Context thresholds
+CONTEXT_WARN_TOKENS=100000
+CONTEXT_HIGH_TOKENS=150000
+CONTEXT_CRIT_TOKENS=250000
+CONTEXT_WARN_PCT=50
+CONTEXT_HIGH_PCT=70
+CONTEXT_CRIT_PCT=85
+
+# Context colors
+COLOR_CONTEXT_WARN="33"       # yellow
+COLOR_CONTEXT_HIGH="38;5;208" # orange
+COLOR_CONTEXT_CRIT="31"       # red
+
 # Defaults
 BAR_WIDTH=10
 CACHE_TTL=5
 
 # Settings
-# Read from CLAUDE_STATUSLINE_CONFIG, missing or unknown values fall back to defaults.
+# Read from CLAUDE_STATUSLINE_CONFIG. A missing file, malformed JSON, a wrongly typed value or
+# an unknown name leave the variable empty and falls back to its default.
 CONFIG_FILE="${CLAUDE_STATUSLINE_CONFIG:-$HOME/.claude/statusline.json}"
-style="" layout="" theme="" pacman_mode="" effort_display="" context_mode=""
+theme="" layout="" bar_style="" bar_trail="" effort_style="" context_style="" context_warn="" context_icon=""
 if [[ -r "$CONFIG_FILE" ]]; then
   {
-    IFS= read -r style
-    IFS= read -r layout
     IFS= read -r theme
-    IFS= read -r pacman_mode
-    IFS= read -r effort_display
-    IFS= read -r context_mode
+    IFS= read -r layout
+    IFS= read -r bar_style
+    IFS= read -r bar_trail
+    IFS= read -r effort_style
+    IFS= read -r context_style
+    IFS= read -r context_warn
+    IFS= read -r context_icon
   } < <(jq -r '
-    def s(f): f | if type == "string" then gsub("[\r\n\t]"; " ") else "" end;
-    s(.style), s(.layout), s(.theme), s(.pacman), s(.effort), s(.context)
+    def obj(f): (f | if type == "object" then . else {} end);
+    def str(f): (f | if type == "string" then gsub("[\r\n\t]"; " ") else "" end);
+    def flag(f): (f | if type == "boolean" then tostring else "" end);
+    def lines(f): (f | if type == "array" then
+        [.[] | if type == "array" then [.[] | strings] | join(" ") else empty end] | join(" / ")
+      else "" end);
+    str(.theme),
+    lines(.layout),
+    str(obj(.bar) | .style),
+    flag(obj(.bar) | .trail),
+    str(obj(.effort) | .style),
+    str(obj(.context) | .style),
+    str(obj(.context) | .warn),
+    str(obj(.context) | .icon)
   ' "$CONFIG_FILE" 2>/dev/null)
 fi
-style="${style:-solid}"
 theme="${theme:-default}"
-pacman_mode="${pacman_mode:-default}"
-effort_display="${effort_display:-colored}"
-context_mode="${context_mode:-inline}"
+bar_style="${bar_style:-solid}"
+bar_trail="${bar_trail:-false}"
+effort_style="${effort_style:-colored}"
+context_style="${context_style:-inline}"
+context_icon="${context_icon:-$GLYPH_WARN_ICON}"
+case "$context_warn" in
+  color | icon | both) ;;
+  *) context_warn="none" ;;
+esac
 
 # Layout
-# Which segments to show and in what order, "|" starts a new line.
+# Which segments to show and in what order, / starts a new line.
 # Override with the "layout" key in the config file, unknown names are dropped and a
 # layout with no remaining segment falls back to the default.
-STATUSLINE_LAYOUT=(repo branch status "|" model effort fast-mode context "|" five_hour "|" seven_day)
-[[ "$context_mode" = "progress" ]] &&
-  STATUSLINE_LAYOUT=(repo branch status "|" model effort fast-mode "|" context "|" five_hour "|" seven_day)
+STATUSLINE_LAYOUT=(repo branch status / model effort fast-mode context / five-hour / seven-day)
+[[ "$context_style" = "progress" ]] && STATUSLINE_LAYOUT=(repo branch status / model effort fast-mode / context / five-hour / seven-day)
 if [[ -n "$layout" ]]; then
   read -r -a layout_tokens <<<"$layout"
   custom_layout=()
   has_segment=false
-  for tok in ${layout_tokens[@]+"${layout_tokens[@]}"}; do
-    case "$tok" in
-      repo | branch | status | model | effort | fast-mode | context | five_hour | seven_day | "|")
-        custom_layout+=("$tok")
-        [[ "$tok" != "|" ]] && has_segment=true
+  for token in ${layout_tokens[@]+"${layout_tokens[@]}"}; do
+    case "$token" in
+      repo | branch | status | model | effort | fast-mode | context | five-hour | seven-day | /)
+        custom_layout+=("$token")
+        [[ "$token" != / ]] && has_segment=true
         ;;
     esac
   done
   [[ "$has_segment" = true ]] && STATUSLINE_LAYOUT=("${custom_layout[@]}")
 fi
 
-# Mono theme: strip colors, keep dim and bold.
+# Theme
+# Strip colors in mono theme, keep dim and bold.
 if [[ "$theme" = "mono" ]]; then
-  COLOR_BLUE=""
+  COLOR_ACCENT=""
   COLOR_PACMAN=""
   COLOR_MODEL="1"
   COLOR_ADDED=""
   COLOR_MODIFIED=""
   COLOR_DELETED=""
+  COLOR_CONTEXT_WARN=""
+  COLOR_CONTEXT_HIGH=""
+  COLOR_CONTEXT_CRIT=""
 fi
 
+# Settings
+# Parse every field in one jq call. Percentages/tokens default to 0, rate-limit
+# fields are empty so the segments can hide.
 input=$(cat)
-
-# Parse every field in one jq call.
-# Percentages/tokens default to 0, rate-limit fields are empty so the segments can hide.
 {
   IFS= read -r session_id
   IFS= read -r cwd
@@ -145,6 +186,7 @@ input=$(cat)
   (.rate_limits.seven_day.resets_at // "" | tostring)
 ')
 
+# Print a color along the gradient from GRADIENT_FROM_RGB to GRADIENT_TO_RGB for step i of 10 (0-based).
 gradient_color() {
   local i=$1
   local r1 g1 b1 r2 g2 b2
@@ -199,7 +241,7 @@ render_pacman_bar() {
   local head="\033[${COLOR_PACMAN}m${GLYPH_PACMAN}\033[${RESET}m"
   local pellet="\033[${RESET}m\033[${DIM}m${GLYPH_DOT}\033[${RESET}m"
   local trail=" "
-  [[ "$pacman_mode" = "trailing" ]] &&
+  [[ "$bar_trail" = "true" ]] &&
     trail="\033[${RESET}m\033[${DIM}m${GLYPH_MIDDLE_DOT}\033[${RESET}m"
   local bar=""
   local i=0
@@ -222,15 +264,15 @@ render_bar() {
   local width=$BAR_WIDTH
   local filled=$(((pct * width + 50) / 100))
   [[ "$filled" -gt "$width" ]] && filled=$width
-  if [[ "$style" = "pacman" ]]; then
+  if [[ "$bar_style" = "pacman" ]]; then
     render_pacman_bar "$width" "$filled"
     return
   fi
   local fill_char="$GLYPH_FILL_SHADE" empty_char="$GLYPH_EMPTY_SHADE"
-  if [[ "$style" = "dotted" ]]; then
+  if [[ "$bar_style" = "dotted" ]]; then
     fill_char="$GLYPH_BRAILLE_FULL"
     empty_char="$GLYPH_BRAILLE_FULL"
-  elif [[ "$style" = "dots" ]]; then
+  elif [[ "$bar_style" = "dots" ]]; then
     fill_char="$GLYPH_DOT"
     empty_char="$GLYPH_DOT"
   fi
@@ -238,15 +280,15 @@ render_bar() {
   local i=0
   while [[ "$i" -lt "$width" ]]; do
     if [[ "$i" -lt "$filled" ]]; then
-      if [[ "$style" = "gradient" ]] && [[ "$theme" != "mono" ]]; then
+      if [[ "$bar_style" = "gradient" ]] && [[ "$theme" != "mono" ]]; then
         bar="${bar}\033[38;2;$(gradient_color "$i")m${fill_char}"
-      elif [[ "$style" = "dotted" || "$style" = "dots" ]]; then
-        bar="${bar}\033[${COLOR_BLUE}m${fill_char}"
+      elif [[ "$bar_style" = "dotted" || "$bar_style" = "dots" ]]; then
+        bar="${bar}\033[${COLOR_ACCENT}m${fill_char}"
       else
         bar="${bar}${fill_char}"
       fi
     else
-      if [[ "$style" = "dotted" || "$style" = "dots" ]]; then
+      if [[ "$bar_style" = "dotted" || "$bar_style" = "dots" ]]; then
         bar="${bar}\033[${RESET}m\033[${DIM}m${empty_char}"
       else
         bar="${bar}\033[${RESET}m${empty_char}"
@@ -288,6 +330,34 @@ format_tokens() {
   fi
 }
 
+context_threshold() {
+  local tokens=$1 pct=$2
+  local scaled=$((context_size * pct / 100))
+  if [[ "$context_size" -gt 0 ]] && [[ "$scaled" -lt "$tokens" ]]; then
+    printf '%s' "$scaled"
+  else
+    printf '%s' "$tokens"
+  fi
+}
+
+context_level() {
+  if [[ "$context_tokens" -ge "$(context_threshold "$CONTEXT_CRIT_TOKENS" "$CONTEXT_CRIT_PCT")" ]]; then
+    printf 'crit'
+  elif [[ "$context_tokens" -ge "$(context_threshold "$CONTEXT_HIGH_TOKENS" "$CONTEXT_HIGH_PCT")" ]]; then
+    printf 'high'
+  elif [[ "$context_tokens" -ge "$(context_threshold "$CONTEXT_WARN_TOKENS" "$CONTEXT_WARN_PCT")" ]]; then
+    printf 'warn'
+  fi
+}
+
+context_color() {
+  case "$1" in
+    crit) printf '%s' "$COLOR_CONTEXT_CRIT" ;;
+    high) printf '%s' "$COLOR_CONTEXT_HIGH" ;;
+    warn) printf '%s' "$COLOR_CONTEXT_WARN" ;;
+  esac
+}
+
 format_remaining() {
   local resets_at=$1
   local now
@@ -308,11 +378,11 @@ format_remaining() {
 }
 
 render_usage_line() {
-  local label=$1 pct=$2 detail=$3
+  local label=$1 pct=$2 detail=$3 color=${4:-$DIM}
   local bar fmt
   bar=$(render_bar "${pct%.*}")
   fmt=$(format_pct "$pct")
-  printf '%-7s %b %s \033[%sm%s\033[%sm' "$label" "$bar" "$fmt" "$DIM" "$detail" "$RESET"
+  printf '%-7s %b %s \033[%sm%s\033[%sm' "$label" "$bar" "$fmt" "$color" "$detail" "$RESET"
 }
 
 CACHE_FILE="/tmp/statusline-git-cache-${session_id}"
@@ -345,21 +415,26 @@ staged=${staged:-0}
 modified=${modified:-0}
 deleted=${deleted:-0}
 
-# Strip a trailing parenthetical from the model name, e.g. "Opus 4.8 (1M context)" -> "Opus 4.8".
+# Strip a parenthesized suffix from the model name, e.g. Opus 4.8 (1M context) -> Opus 4.8.
 model=${model% (*)}
 
 # Segments: each prints its rendered content (including its own left separator) or nothing.
 segment_repo() {
+  local text="" link=""
   if [[ -n "$owner" ]] && [[ -n "$name" ]]; then
-    if [[ -n "$host" ]]; then
-      # OSC 8 hyperlink: ESC]8;;<URL>BEL<TEXT>ESC]8;;BEL
-      printf '\033]8;;https://%s/%s/%s\a%s/%s\033]8;;\a' "$host" "$owner" "$name" "$owner" "$name"
-    else
-      printf '%s/%s' "$owner" "$name"
-    fi
+    text="$owner/$name"
+    [[ -n "$host" ]] && link="https://$host/$owner/$name"
   elif [[ -n "$cwd" ]]; then
-    basename "$cwd"
+    text=$(basename "$cwd")
   fi
+  [[ -z "$text" ]] && return
+  [[ -n "$COLOR_ACCENT" ]] && printf '\033[%sm' "$COLOR_ACCENT"
+  # OSC 8 hyperlink: ESC]8;;<URL>BEL<TEXT>ESC]8;;BEL
+  [[ -n "$link" ]] && printf '\033]8;;%s\a' "$link"
+  printf '%s' "$text"
+  [[ -n "$link" ]] && printf '\033]8;;\a'
+  [[ -n "$COLOR_ACCENT" ]] && printf '\033[%sm' "$RESET"
+  return 0
 }
 
 segment_branch() {
@@ -382,7 +457,7 @@ segment_model() {
 # plain, "symbol" prints the CLI model picker glyph in the Claude orange.
 segment_effort() {
   [[ -z "$effort" ]] && return
-  if [[ "$effort_display" = "symbol" ]]; then
+  if [[ "$effort_style" = "symbol" ]]; then
     local glyph
     case "$effort" in
       low) glyph="$GLYPH_EFFORT_LOW" ;;
@@ -399,7 +474,7 @@ segment_effort() {
     fi
     return
   fi
-  if [[ "$effort_display" = "raw" ]] || [[ "$theme" = "mono" ]]; then
+  if [[ "$effort_style" = "raw" ]] || [[ "$theme" = "mono" ]]; then
     printf ' %s' "$effort"
     return
   fi
@@ -423,15 +498,23 @@ segment_fast_mode() {
 }
 
 segment_context() {
-  local detail
+  local detail color icon="" level=""
   detail=$(format_tokens "$context_tokens")
   [[ -z "$detail" ]] && return
   [[ "$context_size" -gt 0 ]] 2>/dev/null && detail="${detail}/$(format_tokens "$context_size")"
-  if [[ "$context_mode" = "progress" ]]; then
-    render_usage_line "context" "$context_pct" "$detail"
-  else
-    printf ' \033[%sm%s\033[%sm' "$DIM" "$detail" "$RESET"
+  [[ "$context_warn" != "none" ]] && level=$(context_level)
+  color=$(context_color "$level")
+  if [[ -n "$level" ]] && [[ "$context_warn" = "icon" || "$context_warn" = "both" ]]; then
+    icon=$(printf ' \033[%sm%s\033[%sm' "${color:-$RESET}" "$context_icon" "$RESET")
   fi
+  [[ "$context_warn" = "color" || "$context_warn" = "both" ]] || color=""
+  color=${color:-$DIM}
+  if [[ "$context_style" = "progress" ]]; then
+    render_usage_line "context" "$context_pct" "$detail" "$color"
+  else
+    printf ' \033[%sm%s\033[%sm' "$color" "$detail" "$RESET"
+  fi
+  printf '%s' "$icon"
 }
 
 segment_five_hour() {
@@ -444,11 +527,13 @@ segment_seven_day() {
     render_usage_line "weekly" "$seven_day_pct" "$(format_remaining "$seven_day_resets")"
 }
 
-# Walk STATUSLINE_LAYOUT: concatenate segments per line, "|" breaks lines, drop empty lines.
+# Walk STATUSLINE_LAYOUT: concatenate segments per line, / breaks lines, drop empty lines.
+# Segments carry their own left separator, so the one opening a line has it stripped.
 render_statusline() {
-  local out="" line="" seg rendered has_line=false first_line=true
+  local out="" line="" seg rendered has_line=false first_line=true dot
+  dot=$(printf '\033[%sm%b\033[%sm' "$DIM" "$GLYPH_MIDDLE_DOT" "$RESET")
   for seg in "${STATUSLINE_LAYOUT[@]}"; do
-    if [[ "$seg" = "|" ]]; then
+    if [[ "$seg" = / ]]; then
       if [[ "$has_line" = true ]]; then
         [[ "$first_line" = false ]] && out="${out}\n"
         out="${out}${line}"
@@ -460,6 +545,10 @@ render_statusline() {
     fi
     rendered=$("segment_${seg//-/_}" 2>/dev/null)
     [[ -z "$rendered" ]] && continue
+    if [[ -z "$line" ]]; then
+      rendered="${rendered# }"
+      rendered="${rendered#"$dot"}"
+    fi
     line="${line}${rendered}"
     has_line=true
   done
