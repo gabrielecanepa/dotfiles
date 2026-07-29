@@ -6,8 +6,8 @@ REPO="gabrielecanepa/dotfiles"
 BREWFILE="$HOME/.homebrew/Brewfile"
 MACOS_DEFAULTS="$HOME/.macos"
 CODEX_CONFIG="$HOME/.codex/config.toml"
-CODEX_SYSTEM_CONFIG="/etc/codex/config.toml"
-CODEX_SHARED_CONFIG="$HOME/.codex/system.toml"
+CODEX_CONFIG="/etc/codex/config.toml"
+CODEX_CONFIG_SHARED="$HOME/.codex/settings.toml"
 TIMESTAMP="$(date +%Y-%m-%d_%H-%M-%S)"
 BACKUP_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup/$TIMESTAMP"
 
@@ -138,15 +138,15 @@ if [ "$(uname)" = "Darwin" ] && [ -x "$MACOS_DEFAULTS" ]; then
 fi
 
 # 9. Codex
-if [ -f "$CODEX_SHARED_CONFIG" ]; then
+if [ -f "$CODEX_CONFIG_SHARED" ]; then
   info "Setting up Codex configuration"
   if ! touch "$CODEX_CONFIG" || ! chmod 600 "$CODEX_CONFIG"; then
     warn "Failed to prepare private Codex config at $CODEX_CONFIG"
     failed+=("Codex private config")
-  elif [ -L "$CODEX_SYSTEM_CONFIG" ] && [ "$(readlink "$CODEX_SYSTEM_CONFIG")" = "$CODEX_SHARED_CONFIG" ]; then
+  elif [ -L "$CODEX_CONFIG" ] && [ "$(readlink "$CODEX_CONFIG")" = "$CODEX_CONFIG_SHARED" ]; then
     info "Codex system config already linked"
-  elif { [ ! -e "$CODEX_SYSTEM_CONFIG" ] && [ ! -L "$CODEX_SYSTEM_CONFIG" ]; } || confirm "Replace '$CODEX_SYSTEM_CONFIG' with a symlink?"; then
-    if ! sudo mkdir -p "$(dirname "$CODEX_SYSTEM_CONFIG")" || ! sudo ln -sfn "$CODEX_SHARED_CONFIG" "$CODEX_SYSTEM_CONFIG"; then
+  elif { [ ! -e "$CODEX_CONFIG" ] && [ ! -L "$CODEX_CONFIG" ]; } || confirm "Replace '$CODEX_CONFIG' with a symlink?"; then
+    if ! sudo mkdir -p "$(dirname "$CODEX_CONFIG")" || ! sudo ln -sfn "$CODEX_CONFIG_SHARED" "$CODEX_CONFIG"; then
       warn "Failed to link Codex system config"
       failed+=("Codex system config")
     fi

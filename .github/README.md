@@ -209,12 +209,12 @@ rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 
 #### Codex
 
-[`.codex/system.toml`](/.codex/system.toml) is the portable, shared system configuration linked to `/etc/codex/config.toml`. Create the symlink with:
+[`.codex/settings.toml`](/.codex/settings.toml) is the portable, shared system configuration linked to `/etc/codex/config.toml`. Create the symlink with:
 
 ```sh
 # Needs root privileges
 sudo mkdir -p /etc/codex
-sudo ln -sfn "$HOME/.codex/system.toml" /etc/codex/config.toml
+sudo ln -sfn "$HOME/.codex/settings.toml" /etc/codex/config.toml
 ```
 
 Codex may add project trust, hook state, and other machine-specific values to the private user configuration. Keep these definitions entirely in that file.

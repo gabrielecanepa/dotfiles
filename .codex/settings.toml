@@ -20,6 +20,7 @@ cli_auth_credentials_store = "keyring"
 js_repl = false
 memories = true
 prevent_idle_sleep = true
+
 [memories]
 generate_memories = true
 use_memories = true
@@ -118,6 +119,3 @@ surface = "#0d1117"
 diffAdded = "#3fb950"
 diffRemoved = "#f85149"
 skill = "#bc8cff"
-
-[desktop.open-in-target-preferences]
-global = "zed"
