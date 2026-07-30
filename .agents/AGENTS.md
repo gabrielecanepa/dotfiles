@@ -4,19 +4,19 @@ Machine-wide guidance for Claude Code, Codex, and Copilot. More specific project
 
 ## Hard boundaries
 
-- **Version control:** Never run `git commit`, `git push`, or another history-writing command unless the current prompt explicitly asks. A request to write, fix, apply, or update is not permission. Leave changes in the working tree and use the handoff format in `engineering.instructions.md`.
-- **Committed writing:** Never use an em dash or en dash in a committed file. Live chat is the only exception. Rewrite with a period, comma, colon, hyphen, or parentheses.
-- **Portable paths:** Never write a machine-specific absolute path or identifier (`/Users/<name>`, hostname, serial, personal email) into a file. Use `$HOME`, `~`, `$HOMEBREW_PREFIX`, `$XDG_*`, or a repo-relative path. Hardcode one only when the current prompt explicitly asks, or after the user approves it.
+- **Version control:** Never run `git commit`, `git push`, or another history-writing command unless the current prompt explicitly asks. Full boundary and handoff format: `engineering.instructions.md`.
+- **Committed writing:** Never use an em dash or en dash in a committed file; live chat is the only exception. Full prose rules: `writing.instructions.md`.
+- **Portable paths:** Never write a machine-specific absolute path or identifier (`/Users/<name>`, hostname, serial, personal email) into a file; use `$HOME`, `~`, `$HOMEBREW_PREFIX`, `$XDG_*`, or a repo-relative path. Hardcoding one requires an explicit ask or user approval.
 - **Scope:** Preserve unrelated changes. Do not broaden scope for adjacent work.
 
 ## Rule routing
 
 Claude Code and Copilot load the shared rules automatically. Codex must read `behavior.instructions.md` and `engineering.instructions.md` before any task, then read every rule relevant to the work:
 
-- UI work: `design.instructions.md`, `frontend-design`, and one design flavor. Default to `design-taste-frontend`.
+- UI work: `design.instructions.md` carries the design discipline and the aesthetic flavors inline.
 - React or Next.js: `react.instructions.md`, `vercel-react-best-practices`, and `vercel-composition-patterns` for non-trivial component design.
 - TypeScript: `typescript.instructions.md`.
-- Animation or motion work: `motion.instructions.md`, which routes the `emilkowalski/skills` animation skills and pins the Motion docs sources.
+- Animation or motion work: `motion.instructions.md` for easing, duration, and spring values, routes the animation review skills, and pins the Motion docs sources.
 - Server-side Node.js: `node.instructions.md`.
 - Shell scripts: `shell.instructions.md`.
 - Human-facing prose longer than a few sentences: `writing.instructions.md` and `humanizer`.

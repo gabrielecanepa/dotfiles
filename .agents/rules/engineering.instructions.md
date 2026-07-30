@@ -11,10 +11,12 @@ applyTo: '**'
 - Use the simplest viable rung: no change, standard library, native feature, installed dependency, then new code. Check official docs for uncertain APIs.
 - Choose the safest reversible interpretation and record it. Stop for destructive, irreversible, production, or secret-changing actions.
 - Delegate only bounded, independent, authorized work with the root, scope, expected return, and stop conditions. Retain architecture, risk, synthesis, and final verification.
+- Size every delegated agent and workflow stage explicitly instead of inheriting the session model: haiku at low effort for mechanical sweeps, searches, and formatting; sonnet at medium for bounded routine implementation; the session model at full effort only for design, hard debugging, adversarial verification, and synthesis.
 
 ## Minimum correct code
 
 - Build only what the request needs. No speculative abstractions, options, props, compatibility layers, or duplicated single-use logic.
+- **Search the repository's shared layers before writing a helper, constant, hook, or token.** Import the existing match; when the only copy is local to another feature, promote it to the shared layer and repoint that call site in the same change. A second consumer is the only promotion trigger. Re-typed constants, re-implemented handler sets, and re-copied multi-step flows are duplicates too; no lint or type check reports a second implementation, so this search is manual.
 - Model impossible states with types. Guard I/O and concurrency failures, timeouts, cancellation, hydration, and races. Async UI needs loading, empty, error, and boundary states.
 - **Do not add code comments.** Prefer clear names and structure. Exceptions: an existing local JSDoc convention, a necessary linter-disable directive, or a required file header. No explanatory, section, TODO, or commented-out code.
 - Keep agentic files concrete, scoped, and free of generic or formatter-enforced advice. Repository agentic docs must be self-contained, with no undeclared machine dependency. Commands, skills, and other executable agentic files must inline their own logic rather than call a separate script or binary, unless inlining is genuinely impossible (interactive auth, a compiled tool, output too large to embed); when a dependency is unavoidable, declare it in the file.

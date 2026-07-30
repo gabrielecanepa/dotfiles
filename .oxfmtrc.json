@@ -1,6 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxfmt/configuration_schema.json",
   "arrowParens": "avoid",
+  "ignorePatterns": [
+    ".agents/.skill-lock.json"
+  ],
   "semi": false,
   "singleQuote": true,
   "trailingComma": "es5",

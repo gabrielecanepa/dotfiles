@@ -28,23 +28,17 @@ use_memories = true
 # Plugins
 [apps.connector_openai_codex_document_control]
 enabled = false
-[plugins."anthropic-skills@claude-cowork"]
-enabled = true
 [plugins."browser@openai-bundled"]
 enabled = true
 [plugins."computer-use@openai-bundled"]
 enabled = true
-[plugins."cowork-plugin-management@claude-cowork"]
-enabled = false
 [plugins."documents@openai-primary-runtime"]
-enabled = true
-[plugins."feature-dev@claude-plugins-official"]
-enabled = true
-[plugins."hookify@claude-plugins-official"]
 enabled = true
 [plugins."pdf@openai-primary-runtime"]
 enabled = true
 [plugins."presentations@openai-primary-runtime"]
+enabled = true
+[plugins."security-guidance@claude-plugins-official"]
 enabled = true
 [plugins."spreadsheets@openai-primary-runtime"]
 enabled = true
