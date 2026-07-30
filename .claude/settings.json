@@ -70,11 +70,6 @@
             "type": "command",
             "command": "$HOME/.local/bin/ccarchive sweep --quiet",
             "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "$HOME/.agents/hooks/cleanup-agent-browser.sh",
-            "timeout": 20
           }
         ]
       }

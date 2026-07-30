@@ -28,17 +28,6 @@
           }
         ]
       }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.agents/hooks/cleanup-agent-browser.sh",
-            "timeout": 3
-          }
-        ]
-      }
     ]
   }
 }
