@@ -6,12 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.codex/hooks/guard-committed-writing.sh",
+            "command": "$HOME/.agents/hooks/guard-committed-writing.sh",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "$HOME/.codex/hooks/guard-managed-files.sh",
+            "command": "$HOME/.agents/hooks/guard-managed-files.sh",
             "timeout": 5
           }
         ]
@@ -23,8 +23,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.codex/hooks/format-edited-file.sh",
+            "command": "$HOME/.agents/hooks/format-edited-file.sh",
             "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/cleanup-agent-browser.sh",
+            "timeout": 3
           }
         ]
       }

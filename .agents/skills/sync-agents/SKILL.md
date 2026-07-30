@@ -1,10 +1,9 @@
 ---
 name: sync-agents
 description: >-
-  Audits, repairs, and scaffolds a repository's agentic surface: AGENTS.md, tool
-  entrypoints, rules, skills, and hooks. Use for `/sync-agents`, agent-setup
-  reviews, bootstrapping agentic docs, or any agentic file or skill revision.
-  Accepts a scope path; `--check` reports without editing.
+  Audit, repair, or scaffold a repository's agentic surface: AGENTS.md, tool
+  entrypoints, rules, skills, and hooks. Use for /sync-agents, agent setup, or
+  agentic-file reviews; accepts a scope path and --check.
 ---
 
 # sync-agents

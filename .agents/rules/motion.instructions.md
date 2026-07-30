@@ -1,5 +1,5 @@
 ---
-description: 'Use when writing, reviewing, or auditing UI animations: Motion for React (motion.dev), CSS transitions and keyframes, springs, gestures, layout or shared-element transitions, scroll-linked effects. Owns easing, duration, and spring values, routes the animation review skills, pins current Motion docs sources, and enforces Motion API correctness.'
+description: 'Use for UI animation: Motion for React, CSS transitions and keyframes, springs, gestures, layout transitions, and scroll effects. Owns values, API correctness, performance, and animation skill routing.'
 applyTo: '**/*.jsx, **/*.tsx, **/*.css'
 paths:
   - '**/*.jsx'
@@ -9,7 +9,7 @@ paths:
 
 # Motion and animation
 
-Engage when the task involves animation: Motion for React, CSS transitions or keyframes, springs, gestures, layout or shared-element transitions, scroll-linked effects. The production floor in `design.instructions.md` (compositor-only properties, `prefers-reduced-motion`) still applies; this file owns everything animation-specific on top of it. For the React View Transition API with no library (`<ViewTransition>`, `addTransitionType`, view-transition pseudo-elements), verify against current React docs through Context7 before writing it; training data predates the stable API.
+The production floor in `design.instructions.md` still applies. For React View Transitions without a library (`<ViewTransition>`, `addTransitionType`, and view-transition pseudo-elements), verify current React docs through Context7.
 
 ## Skills
 
@@ -17,7 +17,7 @@ Engage when the task involves animation: Motion for React, CSS transitions or ke
 - **Codebase-wide "improve the animations" requests** -> `improve-animations` (read-only; produces a prioritized plan).
 - **Naming an effect from a vague description** -> `animation-vocabulary`.
 
-Authoring values live inline below, distilled from `emilkowalski/skills` (`emil-design-eng`, `apple-design`; both retired as skills). The gate for every animation you add: does it have a purpose, which easing, which duration. Keyboard-initiated actions and 100+ times-a-day interactions get no animation.
+Every animation needs a purpose, easing, and duration. Keyboard-initiated actions and interactions repeated 100 or more times daily get no animation.
 
 ## Easing and duration
 
@@ -40,7 +40,7 @@ Authoring values live inline below, distilled from `emilkowalski/skills` (`emil-
 
 ## Current docs, not training data
 
-The framer-motion to motion rebrand outdated training data. Verify any non-trivial API against current docs before writing it:
+Verify non-trivial APIs against current docs:
 
 - Context7 library ID `/websites/motion_dev` (current and complete). Avoid the legacy `/grx7/framer-motion` index.
 - Full page index: https://motion.dev/llms.txt (no `llms-full.txt` or per-page `.md` variants exist).
@@ -59,9 +59,7 @@ The framer-motion to motion rebrand outdated training data. Verify any non-trivi
 
 ## Enterprise timing
 
-On top of the easing and duration values above:
-
-- When the product needs a motion token system, adopt IBM Carbon's split (https://carbondesignsystem.com/elements/motion/overview/): productive motion for task flows at 70-240ms, expressive motion for brand or celebratory moments at 250-700ms, used sparingly. Scale duration with distance and element size; past 400ms a standard transition reads as slow.
+- For a motion token system, follow IBM Carbon's split (https://carbondesignsystem.com/elements/motion/overview/): productive task motion at 70-240ms and sparse expressive motion at 250-700ms. Scale duration with distance and size; ordinary transitions over 400ms read as slow.
 - Keep ease-out on exits. Material and Carbon accelerate exits; follow their curves only when the project's design system explicitly adopts those tokens.
 - Stagger 30-80ms between items, and cap the choreography so the last item still lands within the duration bar above.
 - Theme switches never transition. Looping animations pause when offscreen. Frequent, low-novelty actions get no extra animation. (https://interfaces.rauno.me)

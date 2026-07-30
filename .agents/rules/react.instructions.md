@@ -20,7 +20,7 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 
 ## Component props
 
-Every component forwards the props of the element it renders.
+Components that transparently render a DOM element or child component forward that target's props.
 
 ### The rule
 

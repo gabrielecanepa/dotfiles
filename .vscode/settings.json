@@ -41,11 +41,9 @@
   "oxc.enable.oxfmt": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
-    ".claude/hooks": true,
     ".claude/rules": true,
     ".claude/skills": true,
     ".codex/AGENTS.md": true,
-    ".codex/hooks": true,
     ".codex/hooks.json": true,
     ".codex/skills": true,
     ".copilot/copilot-instructions.md": true,

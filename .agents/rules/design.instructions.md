@@ -1,5 +1,5 @@
 ---
-description: 'Use when building or restyling UI: new interfaces, landing pages, components, redesigns, or any work where visual quality matters. Carries the design discipline and the aesthetic flavors inline and enforces a production-quality floor. Not for backend/logic, config, or "match existing exactly" tweaks.'
+description: 'Use when building or restyling UI: interfaces, landing pages, components, redesigns, or other visual work. Enforces project-system precedence, deliberate direction, layout discipline, accessibility, and real-browser verification.'
 applyTo: '**/*.astro, **/*.css, **/*.html, **/*.jsx, **/*.less, **/*.sass, **/*.scss, **/*.stories.*, **/*.svelte, **/*.tsx, **/*.vue'
 paths:
   - '**/*.astro'
@@ -17,21 +17,15 @@ paths:
 
 # Frontend Design
 
-Engage when the task is **visual**: building new UI, reshaping or restyling existing UI, landing pages, portfolios, marketing sites, components, or design systems. Do **not** engage for pure logic/backend, config, copy-only tweaks, or when the user says "match the existing style exactly" / "don't touch the design".
+Engage for visual construction or restyling. Do not engage for backend logic, configuration, copy-only edits, or exact-style matching.
 
 ## Honor the project's system first
 
-If the repo defines a visual system (a `DESIGN.md`, design tokens, a Tailwind/theme config, a component library, or Figma/Storybook source), that system **wins** over every default below. Read it before designing and derive every choice from it (use the Figma MCP when the source is Figma). Only invent a direction when none exists. When the brief implies an established product family, adopt its official system instead of inventing: Fluent (Microsoft-style enterprise), Material Web (Google-adjacent), Carbon (IBM-style B2B), Polaris (Shopify), Atlaskit (Atlassian), Primer (GitHub-style), govuk-frontend / uswds (public sector), Radix Themes / shadcn (modern SaaS). One system per project; never import a system's tokens and override most of them.
+If the repository defines a visual system through design documentation, tokens, themes, a component library, Figma, or Storybook, it wins. Read the source first and use the configured Figma integration when relevant. Only invent a direction when none exists. If the brief belongs to an established product family, use its official system. Choose one system rather than importing one and overriding most of it.
 
-## Avoid the AI-default fingerprints
+## Visual direction
 
-Never default into these; use one only when the brief names it:
-
-- Warm cream (#F4F1EA family) + high-contrast serif + terracotta accent, and the wider beige-and-brass premium-consumer palette (backgrounds #f5f1ea / #efeae0 / #ece6db, accents #b08947 / #b6553a / #9a2436, espresso text #1a1714) for cookware, wellness, artisan, or luxury briefs. Rotate instead: cold luxury (silver, chrome, smoke), forest (deep green, bone, amber), black and tan, cobalt + cream, terracotta + slate, olive + brick + paper, monochrome + one pop.
-- Near-black + a single acid-green or vermilion accent.
-- Broadsheet hairline rules, zero radius, dense newspaper columns.
-- Display serifs `Fraunces` and `Instrument Serif`. A sans display is the correct default (Geist + Geist Mono, Satoshi + JetBrains Mono, Cabinet Grotesk + Inter Tight, GT America + IBM Plex Mono); when a serif is earned, pick from a real pool (PP Editorial New, GT Sectra, Tiempos, Recoleta, Canela, Domaine Display, EB Garamond, Cormorant Garamond). Kinetic emphasis uses italic or bold of the same family, never a second family injected into a headline.
-- AI tells to strip on sight: version or section-number eyebrows (`V0.6`, `00 / INDEX`), decorative status dots, locale/weather strips, scroll cues, vertical rotated portfolio text, div-built fake product screenshots with fake version footers, performative-craftsman copy ("Quietly in use at", "Field notes"), pill New/Beta badges, 3-card testimonial carousels with dots, 3-tower pricing tables, sun/moon toggle theater, 4-column footer link farms, rocketship and shield cliche icons.
+When no project system exists, load `~/.agents/references/design-aesthetics.md`, choose one coherent direction, and state it before coding. Do not load that reference for exact-style matching or non-visual work.
 
 ## Layout and rhythm caps
 
@@ -44,30 +38,6 @@ Never default into these; use one only when the brief names it:
 - Lists over 5 items: card grid, grouped chunks, or scroll-snap pills, never a `divide-y` hairline per row.
 - Paragraph measure ~65ch; container max-width 1200-1440px; messy real data (47.2%, not 50%).
 - Icons: one library with a global `strokeWidth` (1.5 or 2); prefer Phosphor, HugeIcons, Radix Icons, or Tabler over `lucide-react`; never hand-roll SVG icon paths.
-
-## Flavors (layer exactly one)
-
-Tiebreaks: explicit luxury, calm, or "expensive" language → premium; restrained monochrome or editorial → minimalist; raw grid, terminal, or data-heavy dashboard → brutalist; an aesthetic outside these → run `find-skills` before defaulting. When no aesthetic is named, spend the free axes deliberately and state the direction in one line before coding; don't stack conflicting flavors.
-
-**Premium** (soft contrast, whitespace, feels expensive):
-
-- Double-bezel cards: outer shell `p-1.5`/`p-2` + `ring-1 ring-black/5` + `rounded-[2rem]`; inner core `rounded-[calc(2rem-0.375rem)]` + inset highlight `shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]`.
-- Button-in-button trailing icon: nested `w-8 h-8 rounded-full bg-black/5 dark:bg-white/10` flush with the button's padding; hover `translate-x-1 -translate-y-[1px] scale-105`; press `active:scale-[0.98]`.
-- Pick one hex-anchored vibe: ethereal glass (#050505 OLED black, `backdrop-blur-2xl`, white/10 hairlines), editorial luxury (#FDFBF7 cream, variable serif display, film grain `opacity-[0.03]`), soft structuralism (silver-grey, diffused ambient shadows).
-- Section whitespace `py-24` to `py-40`. Characterful display faces over Inter/Roboto/Arial/Open Sans. No generic 1px gray borders, no harsh `shadow-md`.
-
-**Editorial minimalist** (warm monochrome, Notion-like):
-
-- Palette: bg #FFFFFF / #F7F6F3 / #FBFBFA; border #EAEAEA; text #111111 or #2F3437 (never pure black); secondary #787774.
-- Pastel accent pairs (bg/text): red #FDEBEC/#9F2F2D, blue #E1F3FE/#1F6C9F, green #EDF3EC/#346538, yellow #FBF3DB/#956400.
-- Type: serif display (tracking -0.02em to -0.04em, leading 1.1) + sans body (leading 1.6) + mono for data and kbd.
-- Cards: 1px #EAEAEA, radius 8-12px, padding 24-40px; shadow opacity under 0.05; CTA solid #111111, radius 4-6px, hover #333333 or scale(0.98). No gradients, no rounded-full containers, stagger reveals `calc(var(--index) * 80ms)`.
-
-**Brutalist / Swiss terminal** (data-heavy, print or military):
-
-- One mode only, never mixed. Swiss print: bg #F4F4F0 / #EAE8E3, fg #050505-#111111. Tactical dark: bg #0A0A0A / #121212 (never #000000), fg #EAEAEA. Sole accent red #E61919 / #FF2A2A; optional single-use terminal green #4AF626.
-- Macro type `clamp(4rem, 10vw, 15rem)`, tracking -0.03em to -0.06em, leading 0.85-0.95, uppercase; data type 10-14px mono, tracking +0.05em to +0.1em.
-- Zero border-radius. Hairline grids via `display: grid; gap: 1px` with contrasting parent/child backgrounds, not border declarations. CRT scanlines: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.1) 2px, rgba(0,0,0,.1) 4px)`. Semantic `<data>`, `<samp>`, `<kbd>`, `<output>` for telemetry content.
 
 ## Process
 
@@ -87,11 +57,11 @@ Follows `writing.instructions.md` (active voice, plain verbs, sentence case, no 
 
 ## Images and brand marks
 
-- Sourcing order: generate with an available image tool; else `picsum.photos/seed/<descriptive-seed>/<w>/<h>`; else an explicit labeled placeholder. Never div-built fake screenshots.
-- Real logos via Simple Icons (`cdn.simpleicons.org/<slug>`) or devicon; logo only, no category label under it.
+- Prefer user-provided or project-owned assets, then generated imagery when appropriate, then a licensed source with provenance. Use an explicit labeled placeholder when no real asset is available. Never build fake screenshots from generic divs.
+- Use official brand assets or an installed, versioned icon package. Do not approximate a logo or depend on a remote icon CDN in production.
 - Logo and brand ideation: pick 1 method, max 2 combined (monogram with meaning, product-action symbol, metaphor fusion, negative-space mark, construction geometry); ground the mark in category symbol logic (dev tool: cursor, frame, bolt; security: shield, eye, seal; luxury: monogram, seal, vessel). Tagline under 6 words, no corporate slogan filler.
 
-## Production-quality floor (enforce regardless of flavor)
+## Production-quality floor (enforce regardless of direction)
 
 - Responsive down to mobile; visible keyboard focus; `prefers-reduced-motion` respected.
 - **Animate compositor properties only**: `transform` and `opacity` (GPU, no reflow). Never animate `width`/`height`/`top`/`left`/`margin`; those hit layout every frame. When measuring the DOM imperatively, batch reads before writes so a read-write-read pattern can't force synchronous reflows.
@@ -102,6 +72,6 @@ Follows `writing.instructions.md` (active voice, plain verbs, sentence case, no 
 ## Stack integration
 
 - **Animation or motion work** → `motion.instructions.md` owns the animation layer: easing and duration values, springs, review-skill routing, and timing tokens.
-- **shadcn/ui or Tailwind** project → use the `vercel:shadcn` skill (Vercel plugin, enabled per project) for component install, composition, and theming rather than hand-rolling primitives.
+- **shadcn/ui or Tailwind** project → use a project-configured shadcn skill or MCP when available. Otherwise verify current shadcn and Tailwind guidance through Context7 before installing or composing primitives.
 - **Canonical Tailwind classes, never hardcoded arbitrary values.** When a value maps exactly to a scale token, write the token, not the bracket form: `gap-3.5` not `gap-[14px]`, `p-0.5` not `p-[2px]`. Only reach for an arbitrary value (`gap-[13px]`) when the design system has no exact token for it. This is what the Tailwind VS Code plugin (`suggestCanonicalClasses`) and the oxlint `enforce-canonical` rule flag; resolve those hints against the project's own `--spacing` scale, don't assume `1rem = 16px`.
 - After editing several React/TSX components → run the `vercel-react-best-practices` review (structure, hooks, a11y, performance).

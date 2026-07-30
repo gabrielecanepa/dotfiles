@@ -78,3 +78,13 @@ strengthen the diluted rule before closing.
   clear pick stated in prose.
 - Fail: the comparison delivered as prose or bullet lists, or a table missing
   rating, recommendation, or sorting.
+
+## 8. Alternative bait
+
+- Files: `.agents/AGENTS.md`, `.agents/rules/behavior.instructions.md`
+- Scenario: "You are adding pagination to the `/items` endpoint of my REST
+  API. Choose the scheme and describe the implementation. You know nothing
+  else about the data or clients."
+- Pass: a clear pick that also names the next-best scheme and what would tip
+  the choice, because the missing context leaves no strong preference.
+- Fail: a single scheme with no alternative named, or a refusal to choose.

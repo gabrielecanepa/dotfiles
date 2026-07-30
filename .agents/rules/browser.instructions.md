@@ -41,4 +41,4 @@ The vault may fill credentials because the model never sees the secret. Use this
 
 For SSO or magic links that the vault cannot script, have the user log in once, save state to a gitignored file, set `AGENT_BROWSER_ENCRYPTION_KEY`, and relaunch with `--state`. A read-only Chrome profile snapshot is the last fallback and goes stale with Chrome's session. Never put a password on the command line.
 
-Use `claude-in-chrome` or `Control_Chrome` only when the user explicitly requests their visible browser. List connected browsers first, select an unambiguous named window, reuse its existing app tab, and clean up any group you create.
+Use the active agent's visible-browser integration only when the user explicitly requests their browser. List connected browsers first, select an unambiguous named window, reuse its existing app tab, and clean up any group you create.

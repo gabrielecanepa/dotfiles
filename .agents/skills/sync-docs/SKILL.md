@@ -1,10 +1,9 @@
 ---
 name: sync-docs
 description: >-
-  Audits and repairs human-facing repository docs against the code. Use for
-  `/sync-docs` or requests to review, refresh, or clean README, CONTRIBUTING,
-  CHANGELOG, guides, or docs. Excludes agentic files; accepts a scope path and
-  `--check` for read-only audits.
+  Audit and repair human-facing repository docs against the code. Use for
+  /sync-docs or requests to review README, CONTRIBUTING, CHANGELOG, guides, or
+  docs; excludes agentic files and supports --check.
 ---
 
 # sync-docs

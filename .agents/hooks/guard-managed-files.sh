@@ -42,7 +42,7 @@ case "$abs" in
   "$HOME"/.claude/CLAUDE.md | "$HOME"/.codex/AGENTS.md | "$HOME"/.copilot/copilot-instructions.md)
     deny "$abs is a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
-  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/hooks/* | "$HOME"/.claude/output-styles/* | "$HOME"/.codex/skills/* | "$HOME"/.codex/hooks/* | "$HOME"/.copilot/instructions/*)
+  "$HOME"/.claude/rules/* | "$HOME"/.claude/skills/* | "$HOME"/.claude/output-styles/* | "$HOME"/.codex/skills/* | "$HOME"/.copilot/instructions/*)
     deny "$abs resolves through a symlink to ~/.agents/. Edit the source under ~/.agents/ instead."
     ;;
 esac

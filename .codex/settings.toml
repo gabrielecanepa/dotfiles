@@ -22,7 +22,6 @@ max_concurrent_threads_per_session = 3
 
 # Features
 [features]
-js_repl = false
 memories = true
 prevent_idle_sleep = true
 
@@ -83,7 +82,7 @@ git-pull-request-merge-method = "squash"
 git-commit-instructions = """
 Follow the target repository's AGENTS.md, CONTRIBUTING guide, commitlint configuration, hooks, and recent commit history. Repository-specific conventions override these defaults.
 Generate one concise Conventional Commit subject. Use `<type>(<scope>)?: <subject>` only when the repository supports scopes. Do not invent a scope. Use imperative mood, match the repository's casing, omit the trailing period, and keep the subject under 60 characters when practical. Use a single line unless a `BREAKING CHANGE:` footer is required. Never add `Co-authored-by`, AI attribution, or other trailers.
-For the `~/` dotfiles repository, use only these types: `agents`, `brew`, `chore`, `docs`, `editor`, `git`, `node`, `python`, `ruby`, `shell`. Do not use `feat`, `fix`, or `refactor`. Optional scopes are `cask`, `formula`, `mas`, `vscode`, `npm`, `claude`, `codex`, `copilot`, `shell`, and `zsh`, only with their documented parent type. Use `agents` for shared agent configuration and `editor(vscode)` for VS Code configuration. Keep the subject lower-case. Preserve signed-commit configuration and never bypass repository hooks."""
+For the `~/` dotfiles repository, use only these types: `agents`, `brew`, `chore`, `docs`, `git`, `gui`, `node`, `python`, `ruby`, `shell`. Do not use `feat`, `fix`, or `refactor`. Optional scopes are `bash`, `cask`, `claude`, `codex`, `copilot`, `formula`, `ghostty`, `mas`, `npm`, `sh`, `vscode`, `zed`, and `zsh`, only with their documented parent type. Use `agents` for shared agent configuration and `gui(vscode)` for VS Code configuration. Keep the subject lower-case. Preserve signed-commit configuration and never bypass repository hooks."""
 git-pr-instructions = """
 Follow the target repository's AGENTS.md, pull request template, contribution guide, and CI requirements. Repository-specific conventions override these defaults.
 Write a concise pull request title that follows the repository's commit-message convention and describes one logical change. For the `~/` dotfiles repository, use its custom Conventional Commit types and scopes.

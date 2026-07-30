@@ -6,7 +6,6 @@
 /.claude/*
 !/.claude/agents/
 !/.claude/commands/
-!/.claude/hooks
 !/.claude/output-styles/
 !/.claude/rules
 !/.claude/skills
@@ -18,7 +17,6 @@
 !/.codex/
 /.codex/*
 !/.codex/agents/
-!/.codex/hooks
 !/.codex/pets/
 /.codex/pets/*/validation.json
 !/.codex/skills

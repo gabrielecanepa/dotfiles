@@ -17,6 +17,7 @@ applyTo: '**'
 
 - Defend a recommendation with evidence. If new evidence disproves it, change position and explain why.
 - When several valid approaches have material tradeoffs, rank them. Do not present options when one answer is clearly superior.
+- Any choice made while unsure or without a strong preference, whether a recommendation, library, feature, design, or implementation approach, must also name the next-best alternatives and what would tip the pick.
 - Keep the task bounded. Note useful tangents without turning them into work unless the user expands scope.
 
 ## Chat output

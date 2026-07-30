@@ -1,10 +1,9 @@
 ---
 name: bump
 description: >-
-  Upgrade a Node.js project to its latest toolchain and dependencies (Node LTS,
-  package manager, every package) and keep the repo's checks green after code
-  migration. Use for /bump or any request to update, upgrade, or bump
-  dependencies, Node, or the package manager. Not for Python, Ruby, Rust, or Go.
+  Upgrade a Node.js project's toolchain and dependencies, including Node LTS and
+  its package manager. Use for /bump or requests to upgrade dependencies, Node,
+  or the package manager; excludes Python, Ruby, Rust, and Go.
 ---
 
 # bump

@@ -1,5 +1,5 @@
 ---
-description: 'Use when writing or editing shell scripts (.sh/.bash/.zsh). Machine-wide script conventions: shebang choice, file header comment format, and fail-fast vs degrade-gracefully error handling. Dotfiles-repo shell internals live in dotfiles.instructions.md.'
+description: 'Use when writing or editing shell scripts (.sh/.bash/.zsh). Machine-wide conventions for shebangs, headers, and fail-fast versus fail-open behavior. Dotfiles startup and package internals live in shell-dotfiles.instructions.md.'
 applyTo: '**/*.sh, **/*.bash, **/*.zsh'
 paths:
   - '**/*.sh'

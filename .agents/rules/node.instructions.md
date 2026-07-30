@@ -18,8 +18,8 @@ Runtime rules for Node server-side work (APIs, services, CLIs, scripts, workers)
 
 ## Event loop and concurrency
 
-- Never run CPU-heavy or sync work on the event loop; use the async crypto/fs APIs and offload computation to a worker pool (`piscina`).
-- Bound concurrency with `p-limit`/`p-map`; unbounded `Promise.all` over large inputs exhausts memory and connections.
+- Never run CPU-heavy or synchronous work on the event loop. Use asynchronous built-ins and `node:worker_threads`; use the project's existing worker pool, or justify a new pool dependency for sustained workloads.
+- Bound concurrency with the project's existing utility or a small worker loop. Add `p-limit` or `p-map` only when their semantics justify a dependency; never use unbounded `Promise.all` over large inputs.
 - `Promise.allSettled` when partial failure is acceptable; `Promise.all` only for all-or-nothing independent work.
 - Cancel long-running operations with `AbortController`; build timeouts from `AbortSignal.timeout()`.
 - Never make constructors async; use a static async factory instead.
@@ -34,14 +34,14 @@ Runtime rules for Node server-side work (APIs, services, CLIs, scripts, workers)
 ## Errors and shutdown
 
 - Check errors by `code` property, not by class; preserve chains with `new Error(msg, { cause })`; never swallow errors in empty catches.
-- Don't hand-roll `unhandledRejection`/`uncaughtException` handlers; route them into graceful shutdown (`close-with-grace`).
+- Route fatal process errors into the application's existing graceful-shutdown path. Add a lifecycle package such as `close-with-grace` only when the project lacks one and the service needs it.
 - Shut down gracefully: flag shutdown, fail health checks, drain in-flight requests, close resources in reverse-init order, force-exit after a timeout.
 
 ## Performance, caching, logging
 
-- Cache with `lru-cache` (max size plus TTL, never unbounded); `async-cache-dedupe` when concurrent calls share a key.
+- Bound every cache by size and expiry. Prefer the project's cache; add `lru-cache` or `async-cache-dedupe` only when their eviction or request-coalescing behavior is required.
 - Pool database connections with explicit `max` and timeout settings.
-- Log structured JSON with `pino`: child loggers for request context, `redact` for secrets, level from env. Never log credentials or tokens.
+- Use the project's structured logger with request context, secret redaction, and an environment-controlled level. If a new logger is justified, prefer `pino`. Never log credentials or tokens.
 
 ## Config and env
 

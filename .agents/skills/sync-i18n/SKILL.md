@@ -1,10 +1,9 @@
 ---
 name: sync-i18n
 description: >-
-  Audits and repairs a codebase's i18n setup: catalogs, key usage, translations,
-  loading, and framework configuration. Use for `/sync-i18n` or requests to
-  review, sync, clean, or improve project localization; accepts a scope path and
-  `--check`.
+  Audit and repair a codebase's i18n catalogs, key usage, translations, loading,
+  and configuration. Use for /sync-i18n or localization reviews; accepts a scope
+  path and --check.
 compatibility: Any coding agent with filesystem search, shell access, and official documentation lookup.
 ---
 
