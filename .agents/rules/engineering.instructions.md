@@ -10,8 +10,8 @@ applyTo: '**'
 - Apply precedence: user request, repository conventions, this rule, then existing style. Define observable success and assumptions or tradeoffs that change it.
 - Use the simplest viable rung: no change, standard library, native feature, installed dependency, then new code. Check official docs for uncertain APIs.
 - Choose the safest reversible interpretation and record it. Stop for destructive, irreversible, production, or secret-changing actions.
-- Delegate only bounded, independent, authorized work with the root, scope, expected return, and stop conditions. Retain architecture, risk, synthesis, and final verification.
-- Size every delegated agent and workflow stage explicitly instead of inheriting the session model: haiku at low effort for mechanical sweeps, searches, and formatting; sonnet at medium for bounded routine implementation; the session model at full effort only for design, hard debugging, adversarial verification, and synthesis.
+- Delegate bounded independent tasks or required reviews. Default to read-only, no nesting, and at most three concurrent agents. The primary owns writes, architecture, synthesis, and verification. Parallel writers require permission, isolated worktrees, and disjoint files.
+- Give agents root, scope, evidence, and stop conditions; wait before synthesis. Use native configured explorers and reviewers. Keep provider, model, effort, and sandbox choices in their definitions.
 
 ## Minimum correct code
 

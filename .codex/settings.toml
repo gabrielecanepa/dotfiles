@@ -15,6 +15,11 @@ approvals_reviewer = "auto_review"
 sandbox_mode = "workspace-write"
 cli_auth_credentials_store = "keyring"
 
+# Subagents
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3
+
 # Features
 [features]
 js_repl = false

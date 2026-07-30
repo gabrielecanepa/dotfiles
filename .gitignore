@@ -4,6 +4,7 @@
 /.bundle/*/
 !/.claude/
 /.claude/*
+!/.claude/agents/
 !/.claude/commands/
 !/.claude/hooks
 !/.claude/output-styles/
@@ -16,6 +17,7 @@
 !/.claude/subagent-statusline.sh
 !/.codex/
 /.codex/*
+!/.codex/agents/
 !/.codex/hooks
 !/.codex/pets/
 /.codex/pets/*/validation.json
