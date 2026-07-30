@@ -207,6 +207,7 @@
   "git.autofetchPeriod": 60,
   "git.autoRepositoryDetection": "openEditors",
   "git.autoStash": true,
+  "git.blame.editorDecoration.enabled": true,
   "git.closeDiffOnOperation": true,
   "git.confirmForcePush": false,
   "git.confirmSync": false,
@@ -346,6 +347,7 @@
     "[GitHub Dark Default]": {
       "activityBar.activeBorder": "#238636",
       "activityBarBadge.background": "#f85149",
+      "git.blame.editorDecorationForeground": "#4f545f",
       "statusBar.background": "#090c10",
       "statusBar.foreground": "#ffffff",
       "statusBarItem.remoteBackground": "#2f81f7",
@@ -354,6 +356,7 @@
     "[GitHub Light]": {
       "activityBar.activeBorder": "#159739",
       "activityBarBadge.background": "#cf222e",
+      "git.blame.editorDecorationForeground": "#b1b1b1",
       "statusBar.background": "#0969da",
       "statusBar.border": "#0969da",
       "statusBar.foreground": "#ffffff",
