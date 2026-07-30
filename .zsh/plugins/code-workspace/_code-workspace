@@ -3,8 +3,6 @@
 # Completion for the `code-workspace` command: workspace names under $VSCODE_WORKSPACES_PATH.
 
 _code-workspace() {
-  emulate -L zsh
-
   local dir="${VSCODE_WORKSPACES_PATH:-$HOME/.vscode/workspaces}"
   # -U keeps names deduplicated.
   local -aU names

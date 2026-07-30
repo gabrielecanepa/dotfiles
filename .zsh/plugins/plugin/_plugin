@@ -3,8 +3,6 @@
 # Completion for the `plugin` command: custom plugin directory names with a matching .plugin.zsh.
 
 _plugin() {
-  emulate -L zsh
-
   # -U keeps names deduplicated.
   local -aU names
   local name

@@ -1,8 +1,6 @@
 #compdef lts
 
 _lts() {
-  emulate -L zsh
-
   if (( CURRENT == 2 )); then
     _alternative \
       'commands:command:((check\:"compare the active version against the latest LTS" install\:"install the latest LTS of one or more languages" i\:"alias for install"))' \
