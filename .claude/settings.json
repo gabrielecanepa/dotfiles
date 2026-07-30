@@ -29,6 +29,7 @@
     "default"
   ],
   "enabledMcpjsonServers": [
+    "cloudflare",
     "shadcn",
     "vercel"
   ],
@@ -83,6 +84,7 @@
     "symlinkDirectories": [
       "node_modules"
     ],
+    "baseRef": "fresh",
     "bgIsolation": "none"
   },
   "workflowSizeGuideline": "small",
@@ -124,13 +126,25 @@
   },
   "feedbackSurveyRate": 0,
   "spinnerTipsEnabled": false,
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": [
+      "Squanching",
+      "Claudiando",
+      "Personally asking Dario Amodei",
+      "Asking GPT"
+    ]
+  },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "askUserQuestionTimeout": "never",
   "plansDirectory": ".agents/plans",
+  "tui": "fullscreen",
   "showThinkingSummaries": false,
   "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
   "theme": "auto",
+  "editorMode": "normal",
+  "preferredNotifChannel": "auto",
   "autoCompactEnabled": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
