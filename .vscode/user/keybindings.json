@@ -10,8 +10,30 @@
     "when": "editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible"
   },
   {
+    "command": "-markdown.extension.checkTaskList",
+    "key": "alt+c",
+    "when": "false"
+  },
+  {
     "command": "workbench.action.openGlobalKeybindings",
     "key": "alt+cmd+[Comma]"
+  },
+  {
+    "command": "agentSessions.showAgentSessionsSidebar",
+    "key": "alt+cmd+[Equal]"
+  },
+  {
+    "command": "agentSessions.hideAgentSessionsSidebar",
+    "key": "alt+cmd+[Equal]"
+  },
+  {
+    "command": "-workbench.action.toggleAuxiliaryBar",
+    "key": "alt+cmd+b"
+  },
+  {
+    "key": "alt+cmd+enter",
+    "command": "workbench.action.moveModalEditorToMain",
+    "when": "!isSessionsWindow"
   },
   {
     "command": "-workbench.action.terminal.focusPreviousPane",
@@ -39,6 +61,16 @@
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
   },
   {
+    "key": "alt+s",
+    "command": "markdown.extension.editing.toggleStrikethrough",
+    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+  },
+  {
+    "key": "alt+s",
+    "command": "-markdown.extension.editing.toggleStrikethrough",
+    "when": "false"
+  },
+  {
     "command": "-extension.htmlTagWrap",
     "key": "alt+w",
     "when": "editorTextFocus"
@@ -46,6 +78,10 @@
   {
     "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup",
     "key": "alt+w"
+  },
+  {
+    "command": "workbench.action.toggleAuxiliaryBar",
+    "key": "cmd+[Equal]"
   },
   {
     "command": "-workbench.action.splitEditor",
@@ -62,6 +98,11 @@
   {
     "command": "workbench.action.removeRootFolder",
     "key": "cmd+backspace"
+  },
+  {
+    "command": "markdown.extension.checkTaskList",
+    "key": "cmd+k",
+    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
   },
   {
     "command": "-git.stageSelectedRanges",
@@ -105,6 +146,11 @@
     "when": "activeEditorIsPinned"
   },
   {
+    "command": "-workbench.action.openChat",
+    "key": "cmd+n",
+    "when": "chatIsEnabled && inChat && inChatEditor"
+  },
+  {
     "command": "-workbench.action.gotoSymbol",
     "key": "cmd+r"
   },
@@ -128,11 +174,6 @@
   {
     "command": "-workbench.action.reloadWindow",
     "key": "ctrl+alt+cmd+l"
-  },
-  {
-    "command": "workbench.action.editor.changeLanguageMode",
-    "key": "ctrl+shift+l",
-    "when": "!notebookEditorFocused"
   },
   {
     "command": "git.push",
@@ -165,11 +206,6 @@
     "key": "ctrl+cmd+right"
   },
   {
-    "command": "workbench.action.createTerminalEditor",
-    "key": "ctrl+shift+t",
-    "when": "terminalProcessSupported"
-  },
-  {
     "command": "workbench.action.files.saveWithoutFormatting",
     "key": "ctrl+s"
   },
@@ -197,6 +233,15 @@
     "key": "ctrl+shift+cmd+up"
   },
   {
+    "command": "workbench.action.openChat",
+    "key": "ctrl+shift+i"
+  },
+  {
+    "command": "workbench.action.editor.changeLanguageMode",
+    "key": "ctrl+shift+l",
+    "when": "!notebookEditorFocused"
+  },
+  {
     "command": "-workbench.action.editor.changeLanguageMode",
     "key": "ctrl+shift+l",
     "when": "!notebookEditorFocused"
@@ -212,9 +257,28 @@
     "when": "editorTextFocus"
   },
   {
+    "command": "workbench.action.toggleStatusbarVisibility",
+    "key": "ctrl+shift+s"
+  },
+  {
+    "command": "workbench.action.createTerminalEditor",
+    "key": "ctrl+shift+t",
+    "when": "terminalProcessSupported"
+  },
+  {
     "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
     "key": "ctrl+shift+tab",
     "when": "!activeEditorGroupEmpty"
+  },
+  {
+    "command": "workbench.action.terminal.new",
+    "key": "ctrl+t",
+    "when": "terminalFocus"
+  },
+  {
+    "command": "editor.action.sortLinesAscending",
+    "key": "f9",
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
     "command": "workbench.action.openGlobalKeybindingsFile",
@@ -261,55 +325,6 @@
     "key": "shift+cmd+w"
   },
   {
-    "command": "-markdown.extension.onTabKey",
-    "key": "tab",
-    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'markdown'"
-  },
-  {
-    "command": "workbench.action.toggleStatusbarVisibility",
-    "key": "ctrl+shift+s"
-  },
-  {
-    "command": "workbench.action.openChat",
-    "key": "ctrl+shift+i"
-  },
-  {
-    "command": "-workbench.action.openChat",
-    "key": "cmd+n",
-    "when": "chatIsEnabled && inChat && inChatEditor"
-  },
-  {
-    "command": "workbench.action.terminal.new",
-    "key": "ctrl+t",
-    "when": "terminalFocus"
-  },
-  {
-    "command": "workbench.action.toggleAuxiliaryBar",
-    "key": "cmd+[Equal]"
-  },
-  {
-    "command": "-workbench.action.toggleAuxiliaryBar",
-    "key": "alt+cmd+b"
-  },
-  {
-    "command": "agentSessions.showAgentSessionsSidebar",
-    "key": "alt+cmd+[Equal]"
-  },
-  {
-    "command": "agentSessions.hideAgentSessionsSidebar",
-    "key": "alt+cmd+[Equal]"
-  },
-  {
-    "command": "markdown.extension.checkTaskList",
-    "key": "cmd+k",
-    "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
-  },
-  {
-    "command": "-markdown.extension.checkTaskList",
-    "key": "alt+c",
-    "when": "false"
-  },
-  {
     "key": "shift+enter",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
@@ -318,13 +333,8 @@
     "when": "terminalFocus"
   },
   {
-    "command": "editor.action.sortLinesAscending",
-    "key": "f9",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "alt+cmd+enter",
-    "command": "workbench.action.moveModalEditorToMain",
-    "when": "!isSessionsWindow"
+    "command": "-markdown.extension.onTabKey",
+    "key": "tab",
+    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && !hasOtherSuggestions && !hasSnippetCompletions && !inSnippetMode && !suggestWidgetVisible && editorLangId == 'markdown'"
   }
 ]
