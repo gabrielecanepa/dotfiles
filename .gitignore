@@ -46,6 +46,8 @@
 !/.copilot/settings.json
 !/.github/
 !/.homebrew/
+/.homebrew/*
+!/.homebrew/Brewfile
 !/.local/
 /.local/*
 !/.local/bin/
