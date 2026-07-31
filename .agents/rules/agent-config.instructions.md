@@ -25,7 +25,15 @@ These rules apply only when `$HOME` is the active repository.
 - Copilot loads `.copilot/copilot-instructions.md` and `.copilot/instructions`. Do not restore duplicate `.github` home routes.
 - In VS Code's `chat.instructionsFilesLocations`, only `false` entries carry weight; built-in roots are on by default, so a `true` entry is a no-op. VS Code dedupes symlinked `AGENTS.md`, `CLAUDE.md`, and `copilot-instructions.md` by real path but never `*.instructions.md`, so `.vscode/settings.json` names `.agents/rules` and disables every colliding root plus `chat.useAgentsMdFile` and `chat.useClaudeMdFile`, while `.vscode/user/settings.json` keeps only the two Claude-root disables.
 - Additional agents should use native `~/.agents/AGENTS.md` and `~/.agents/skills` discovery when available. Add a thin provider adapter only for unsupported surfaces, and keep provider schemas out of shared prose.
-- Tool-native assets remain in place because their formats differ: `.claude/{agents,commands,output-styles}`, `.codex/agents`, `.codex/hooks.json`, and `.copilot/settings.json`.
+- Tool-native assets remain in place because their formats differ: `.claude/{agents,commands,output-styles}`, `.codex/agents`, `.codex/hooks.json`, and `.copilot/{lsp-config.json,mcp-config.json,settings.json}`.
+
+## Copilot native configuration
+
+- `.copilot` is not CLI-only: VS Code bundles the same `@github/copilot` engine, reads that directory, and treats `.copilot/instructions` as one of its built-in roots. Skills are discovered from `.agents/skills`, never duplicate them in `.copilot/skills`.
+- Track portable defaults and inline hooks in `.copilot/settings.json` and language servers in `.copilot/lsp-config.json`, preserving the user's model, effort, and interface choices. Unknown keys are dropped without warning, so check against `copilot help config`. Keep MCP servers, credentials, permissions, plugins, and session state ignored and CLI-managed.
+- Register hooks inline with standard PascalCase event names and avoid Copilot-specific syntax: `tool_name` as `Write`, `Edit`, or `Bash`, never the native `create` or `str_replace`, and the fields are `path`, `file_text`, `old_str`, and `new_str`, so a shared hook must read both spellings. A pre-tool error blocks the write, while a timeout falls through to normal permissions.
+- Write matchers cover `Edit` and `Write` only, so a `Bash` redirect reaches disk unchecked, and `pre-push` re-checks portability but never dashes. Treat the guards as best effort and reread committed prose before pushing.
+- Bound delegation with `subagents.maxConcurrency` 3 and `subagents.maxDepth` 1 to match the shared limits, because Copilot bills every subagent.
 
 ## Configuration and hooks
 

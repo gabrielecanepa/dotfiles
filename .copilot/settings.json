@@ -1,4 +1,61 @@
 {
-  "showReasoning": true,
-  "experimental": true
+  "beep": true,
+  "effortLevel": "high",
+  "experimental": true,
+  "footer": {
+    "showAgent": false,
+    "showAiUsed": true,
+    "showBranch": true,
+    "showCodeChanges": true,
+    "showContextWindow": true,
+    "showCustom": true,
+    "showDirectory": true,
+    "showModelEffort": true,
+    "showQuota": true,
+    "showSandbox": true,
+    "showUsername": false,
+    "showYolo": false
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "bash": "$HOME/.agents/hooks/format-edited-file.sh",
+        "matcher": "Edit|Write|MultiEdit",
+        "timeoutSec": 15,
+        "type": "command"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "bash": "$HOME/.agents/hooks/guard-committed-writing.sh",
+        "matcher": "Edit|Write|MultiEdit",
+        "timeoutSec": 5,
+        "type": "command"
+      },
+      {
+        "bash": "$HOME/.agents/hooks/guard-managed-files.sh",
+        "matcher": "Edit|Write|MultiEdit",
+        "timeoutSec": 5,
+        "type": "command"
+      }
+    ]
+  },
+  "includeCoAuthoredBy": false,
+  "keepAlive": "busy",
+  "mergeStrategy": "rebase",
+  "scrollbar": false,
+  "showTipsOnStartup": false,
+  "subagents": {
+    "maxConcurrency": 3,
+    "maxDepth": 1
+  },
+  "tabs": {
+    "sort": [
+      "copilot",
+      "agents",
+      "pull-requests",
+      "issues",
+      "gists"
+    ]
+  }
 }

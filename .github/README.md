@@ -65,6 +65,7 @@ The script runs the following main actions:
   - [Python](#python)
 - [Agents](#agents)
   - [Codex](#codex)
+  - [Copilot](#copilot)
 - [GUIs](#guis)
   - [Visual Studio Code](#visual-studio-code)
   - [Keybindings in Electron apps](#keybindings-in-electron-apps)
@@ -217,7 +218,17 @@ sudo mkdir -p /etc/codex
 sudo ln -sfn "$HOME/.codex/settings.toml" /etc/codex/config.toml
 ```
 
-Codex may add project trust, hook state, and other machine-specific values to the private user configuration. Keep these definitions entirely in that file.
+Codex automatically adds project trust, hook state, and other machine-specific values to `~/.codex/config.toml`, keep those definitions there and untracked.
+
+#### Copilot
+
+[`.copilot/settings.json`](/.copilot/settings.json) specifies the portable defaults and the shared write hooks. Instructions are linked back to `.agents` and skills are discovered without any extra configuration. Visual Studio Code bundles the same Copilot engine and reads the same `.copilot` directory.
+
+Authenticate via VS Code or with:
+
+```sh
+copilot login
+```
 
 ### GUIs
 

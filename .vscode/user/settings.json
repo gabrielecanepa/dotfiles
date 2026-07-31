@@ -238,7 +238,7 @@
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Generate a single-line conventional commit message in the format `<type>: <description>`. Rules: use imperative mood, sentence case, no period at the end. Never include a scope. Never include a body or footer unless the change is a breaking change — in that case, add a `BREAKING CHANGE:` footer. Never include `Co-authored-by` or any other trailer. Keep the description concise (under 50 characters when possible). Allowed types: feat, fix, refactor, chore, docs, style, test, perf, ci, build, revert. Examples: `feat: Add date range filter to search`, `fix: Prevent duplicate API calls on mount`, `refactor: Simplify auth token refresh logic`, `chore: Update dependencies`."
+      "text": "Generate a single-line conventional commit message in the format `<type>: <description>`. Rules: use imperative mood, sentence case, no period at the end. Never include a scope. Never include a body or footer unless the change is a breaking change, which adds a `BREAKING CHANGE:` footer. Never include `Co-authored-by` or any other trailer. Keep the description concise (under 50 characters when possible). Allowed types: feat, fix, refactor, chore, docs, style, test, perf, ci, build, revert. Examples: `feat: Add date range filter to search`, `fix: Prevent duplicate API calls on mount`, `refactor: Simplify auth token refresh logic`, `chore: Update dependencies`."
     }
   ],
   "github.copilot.chat.githubMcpServer.enabled": true,

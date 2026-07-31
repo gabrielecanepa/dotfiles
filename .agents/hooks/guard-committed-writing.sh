@@ -30,13 +30,13 @@ while [ ! -d "$dir" ] && [ "$dir" != "/" ]; do dir="$(dirname "$dir")"; done
 git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 git -C "$dir" check-ignore -q "$abs" 2>/dev/null && exit 0
 
-content="$(printf '%s' "$input" | jq -r '.tool_input.content // empty' 2>/dev/null)"
+content="$(printf '%s' "$input" | jq -r '.tool_input.content // .tool_input.file_text // empty' 2>/dev/null)"
 if [ -n "$content" ]; then
   new="$content"
   old="$(cat "$abs" 2>/dev/null || true)"
 else
-  new="$(printf '%s' "$input" | jq -r '(.tool_input.new_string // empty), ((.tool_input.edits // [])[].new_string // empty)' 2>/dev/null)"
-  old="$(printf '%s' "$input" | jq -r '(.tool_input.old_string // empty), ((.tool_input.edits // [])[].old_string // empty)' 2>/dev/null)"
+  new="$(printf '%s' "$input" | jq -r '(.tool_input.new_string // .tool_input.new_str // empty), ((.tool_input.edits // [])[].new_string // empty)' 2>/dev/null)"
+  old="$(printf '%s' "$input" | jq -r '(.tool_input.old_string // .tool_input.old_str // empty), ((.tool_input.edits // [])[].old_string // empty)' 2>/dev/null)"
 fi
 [ -n "$new" ] || exit 0
 

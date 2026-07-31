@@ -43,6 +43,7 @@
 /.copilot/*
 !/.copilot/copilot-instructions.md
 !/.copilot/instructions
+!/.copilot/lsp-config.json
 !/.copilot/settings.json
 !/.github/
 !/.homebrew/

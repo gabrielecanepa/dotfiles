@@ -16,7 +16,7 @@ case ":$PATH:" in
 esac
 
 input="$(cat)"
-fp="$(printf '%s' "$input" | jq -r '.tool_input.file_path // empty' 2>/dev/null)"
+fp="$(printf '%s' "$input" | jq -r '.tool_input.file_path // .tool_input.path // empty' 2>/dev/null)"
 [ -f "$fp" ] || exit 0
 
 root="$(git -C "$(dirname "$fp")" rev-parse --show-toplevel 2>/dev/null)"
