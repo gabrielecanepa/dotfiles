@@ -64,6 +64,7 @@ The script runs the following main actions:
   - [Ruby](#ruby)
   - [Python](#python)
 - [Agents](#agents)
+  - [Claude](#claude)
   - [Codex](#codex)
   - [Copilot](#copilot)
 - [GUIs](#guis)
@@ -108,7 +109,7 @@ for plugin in ${plugins[@]}; do
   git clone https://github.com/${plugin}.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/${plugin}
 done
 
-# Restart
+# restart
 zsh
 ```
 
@@ -208,17 +209,27 @@ rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 
 ### Agents
 
-#### Codex
+#### Claude
 
-[`.codex/settings.toml`](/.codex/settings.toml) is the portable, shared system configuration linked to `/etc/codex/config.toml`. Create the symlink with:
+[`.claude/settings.json`](/.claude/settings.json) specifies the portable defaults for Claude Code: permissions, hooks, subagent limits, and the custom status lines in [`.claude/statusline.sh`](/.claude/statusline.sh). Instructions, rules, and skills are symlinks back to `.agents`.
+
+Sign in on the first run:
 
 ```sh
-# Needs root privileges
+claude
+```
+
+#### Codex
+
+[`.codex/settings.toml`](/.codex/settings.toml) is the portable, shared configuration linked to the default system config in `/etc/codex/config.toml`. Project trust, hook state, and other machine-specific values are managed by Codex and stored in `~/.codex/config.toml`.
+
+Create the symlink with:
+
+```sh
+# needs root privileges
 sudo mkdir -p /etc/codex
 sudo ln -sfn "$HOME/.codex/settings.toml" /etc/codex/config.toml
 ```
-
-Codex automatically adds project trust, hook state, and other machine-specific values to `~/.codex/config.toml`, keep those definitions there and untracked.
 
 #### Copilot
 
@@ -234,7 +245,7 @@ copilot login
 
 #### Visual Studio Code
 
-Use symlinks to backup keybindings, settings and snippets of Visual Studio Code.
+Use symlinks to back up the keybindings, settings and snippets of Visual Studio Code.
 
 > [!WARNING]
 > The following operations will permanently replace some system folders with symlinks to the corresponding files in the repository. Make sure to back up your data before proceeding.
