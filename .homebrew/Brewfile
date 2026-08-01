@@ -1,6 +1,3 @@
-tap "github/gh", trusted: true
-tap "oven-sh/bun", trusted: true
-tap "tw93/tap", trusted: true
 # YAML Parser
 brew "libyaml"
 # Data validation using Python type hints
@@ -11,6 +8,8 @@ brew "aws-sam-cli"
 brew "awscli"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
+# Incredibly fast JavaScript runtime, bundler, test runner, and package manager
+brew "bun"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
 # GNU File, Shell, and Text utilities
@@ -75,8 +74,6 @@ brew "shellcheck"
 brew "shfmt"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
-brew "oven-sh/bun/bun"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
