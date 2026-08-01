@@ -199,38 +199,22 @@ if [ "$(uname)" = "Darwin" ]; then
   ICLOUD_DRIVE="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   if [ -d "$ICLOUD_DRIVE" ]; then
     info "Setting up iCloud Drive symlinks"
-    for folder in Applications Developer Downloads Movies Music Pictures; do
+    for folder in Downloads Movies Music; do
       cloud_folder="$ICLOUD_DRIVE/$folder"
-      case "$folder" in
-        Applications)
-          confirm "Replace ~/Applications with a symlink to /Applications and link iCloud Drive?" || continue
-          mkdir -p "$cloud_folder"
-          rm -rf "$HOME/Applications"
-          ln -sf /Applications "$HOME/Applications"
-          ln -sf "$cloud_folder" /Applications/iCloud
-          ;;
-        Developer | Pictures)
-          confirm "Create ~/$folder/iCloud symlink pointing to iCloud Drive?" || continue
-          mkdir -p "$cloud_folder"
-          ln -sf "$cloud_folder" "$HOME/$folder/iCloud"
-          ;;
-        Downloads | Movies | Music)
-          relative_folder="${cloud_folder#"$HOME"/}"
-          [ "$(readlink "$HOME/$folder")" = "$relative_folder" ] && continue
-          confirm "Replace ~/$folder with a symlink to iCloud Drive (existing files will be moved)?" || continue
-          mkdir -p "$cloud_folder"
-          shopt -s dotglob nullglob
-          entries=("$HOME/$folder"/*)
-          shopt -u dotglob nullglob
-          if [ ${#entries[@]} -gt 0 ] && ! mv "${entries[@]}" "$cloud_folder/"; then
-            warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
-            failed+=("$folder")
-            continue
-          fi
-          rm -rf "$HOME/$folder"
-          ln -sf "$relative_folder" "$HOME/$folder"
-          ;;
-      esac
+      relative_folder="${cloud_folder#"$HOME"/}"
+      [ "$(readlink "$HOME/$folder")" = "$relative_folder" ] && continue
+      confirm "Replace ~/$folder with a symlink to iCloud Drive (existing files will be moved)?" || continue
+      mkdir -p "$cloud_folder"
+      shopt -s dotglob nullglob
+      entries=("$HOME/$folder"/*)
+      shopt -u dotglob nullglob
+      if [ ${#entries[@]} -gt 0 ] && ! mv "${entries[@]}" "$cloud_folder/"; then
+        warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
+        failed+=("$folder")
+        continue
+      fi
+      rm -rf "$HOME/$folder"
+      ln -sf "$relative_folder" "$HOME/$folder"
     done
   else
     warn "iCloud Drive not found, skipping setup"

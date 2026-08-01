@@ -272,31 +272,16 @@ And populate it with the following content:
 
 ### iCloud synchronization
 
-Use the following snippet to replace the home `Downloads`, `Movies` and `Music` folders with symbolic links pointing at their corresponding (new or existing) folder on iCloud. This allows continuous synchronization between cloud and local machine.
+Use the following snippet to point the home `Downloads`, `Movies` and `Music` folders at iCloud Drive and sync their contents across devices.
 
 > [!WARNING]
-> The following operations permanently replaces system folders with symbolic links to iCloud Drive. Make sure to back up your data before proceeding.
-
-<br>
+> The following operations permanently replace system folders with symbolic links to iCloud Drive. Make sure to back up your data before proceeding.
 
 ```sh
-for folder in Applications Developer Downloads Movies Music Pictures; do
-  # create icloud drive folder
+for folder in Downloads Movies Music; do
   cloud_folder=~/Library/Mobile\ Documents/com~apple~CloudDocs/$folder
   [[ ! -d $cloud_folder ]] && mkdir $cloud_folder
-
-  case $folder in
-    # symlink to system folder
-    Applications)
-      rm -rf ~/Applications
-      ln -sf /Applications ~/Applications
-      ln -sf $cloud_folder /Applications/iCloud
-      ;;
-    # symlink to cloud folder
-    Downloads|Movies|Music)
-      [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
-      rm -rf ~/$folder && ln -sf ${cloud_folder#$HOME/} ~/$folder
-      ;;
-  esac
+  [[ -d ~/$folder ]] && mv ~/$folder/* $cloud_folder 2>/dev/null
+  rm -rf ~/$folder && ln -sf ${cloud_folder#$HOME/} ~/$folder
 done
 ```
