@@ -13,14 +13,23 @@
   "includeGitInstructions": false,
   "permissions": {
     "deny": [
-      "Edit(**/.env)",
-      "Edit(**/.env.*)"
+      "Read(//**/*.key)",
+      "Read(//**/*.p12)",
+      "Read(//**/*.pem)",
+      "Read(//**/*.pfx)",
+      "Read(//**/id_ed25519)",
+      "Read(//**/id_rsa)",
+      "Read(~/.aws/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Read(~/.ssh/id_*)",
+      "Read(~/Library/Group Containers/*.com.1password/**)",
+      "Read(~/Library/Keychains/**)"
     ],
     "ask": [
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Read(**/.env)",
-      "Read(**/.env.*)"
+      "Read(//**/.env)",
+      "Read(//**/.env.*)"
     ],
     "defaultMode": "auto"
   },
@@ -46,6 +55,16 @@
           {
             "type": "command",
             "command": "$HOME/.agents/hooks/guard-managed-files.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/guard-remote-execution.sh",
             "timeout": 5
           }
         ]
@@ -82,6 +101,7 @@
     "command": "~/.claude/subagent-statusline.sh"
   },
   "enabledPlugins": {
+    "claude-security@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
@@ -120,7 +140,7 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "askUserQuestionTimeout": "never",
   "plansDirectory": ".agents/plans",
   "tui": "fullscreen",

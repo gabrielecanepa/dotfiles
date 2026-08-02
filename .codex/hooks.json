@@ -15,6 +15,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/guard-remote-execution.sh",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [

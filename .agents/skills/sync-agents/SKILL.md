@@ -105,7 +105,11 @@ For the enabled skill catalog, record:
 - descriptions over the soft limit;
 - exact and semantic duplicates, with one recommended winner;
 - enabled, disabled, shadowed, and unreachable entries;
-- installed folders that drift from the lockfile or manager state.
+- installed folders that drift from the lockfile or manager state;
+- provenance for every third-party entry: source repository, whether the
+  lockfile pins a tag or revision, and the reviewed revision. A source that
+  floats on a default branch is a finding on its own, because the next update
+  pulls whatever that branch holds into files that steer the agent.
 
 Do not load every skill body to evaluate discovery. Start with metadata, then
 read a body only when its trigger, size, ownership, or overlap is a finding.
@@ -137,7 +141,7 @@ Classify findings by impact:
 - **Hard failure**: contradiction, broken route, unsafe instruction, or a
   behavioral bait regression.
 - **High leverage**: duplicate always-on context, stale source, ambiguous skill
-  trigger, or missing source-of-truth guard.
+  trigger, unpinned third-party skill source, or missing source-of-truth guard.
 - **Maintenance**: minor metadata, naming, formatting, or organization drift.
 
 ## Phase 3: propose and apply
@@ -166,6 +170,12 @@ Under `--check`, replace every mutation with a precise proposed change.
 If a documented lockfile manager owns installed skills, use its declared update
 mechanism and never hand-edit the lockfile. Under `--check`, or when network or
 external authority is unavailable, report the drift without updating.
+
+Pin third-party skills to a tag or revision where the manager supports it. Where
+it does not, record the reviewed revision in the audit and read the diff of the
+installed bodies before accepting the next update. A skill body runs with the
+user's privileges and rewrites how the agent behaves, so an update is a code
+change and gets reviewed as one, never waved through as a docs refresh.
 
 Use progressive disclosure, not hidden omission. Entrypoints carry universal
 high-consequence rules; scoped rules carry path behavior; skills carry

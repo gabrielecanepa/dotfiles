@@ -37,6 +37,12 @@
         "matcher": "Edit|Write|MultiEdit",
         "timeoutSec": 5,
         "type": "command"
+      },
+      {
+        "bash": "$HOME/.agents/hooks/guard-remote-execution.sh",
+        "matcher": "Bash",
+        "timeoutSec": 5,
+        "type": "command"
       }
     ]
   },
