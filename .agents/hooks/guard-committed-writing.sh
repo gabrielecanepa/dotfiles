@@ -7,6 +7,7 @@
 # "committed file" scope; scratch and generated paths are ignored, so they
 # pass). Pre-existing occurrences are allowed: only a net increase over the
 # replaced text (Edit/MultiEdit) or the current file content (Write) blocks.
+# /Users/Shared is a standard macOS path and never blocks.
 # Exit 2 blocks; missing jq/git or any probe failure fails open (exit 0).
 
 set -u
@@ -49,7 +50,7 @@ em="$(printf '\342\200\224')"
 en="$(printf '\342\200\223')"
 
 count_dashes() { printf '%s' "$1" | grep -o -F -e "$em" -e "$en" 2>/dev/null | wc -l | tr -d ' '; }
-count_users_paths() { printf '%s' "$1" | grep -oE '/Users/[A-Za-z0-9._-]+' 2>/dev/null | wc -l | tr -d ' '; }
+count_users_paths() { printf '%s' "$1" | grep -oE '/Users/[A-Za-z0-9._-]+' 2>/dev/null | grep -cv '^/Users/Shared$'; }
 
 [ "$(count_dashes "$new")" -gt "$(count_dashes "$old")" ] &&
   deny "this edit adds an em or en dash to a committed file (AGENTS.md hard boundary). Rewrite with a period, comma, colon, hyphen, or parentheses."

@@ -10,15 +10,21 @@ esac
 branch="$(git branch --show-current)"
 remote="$(git config "branch.$branch.remote" 2>/dev/null || echo origin)"
 upstream="$remote/$branch"
+files="$(git ls-files '*.sh' '*.bash' '.profile' '.bashrc' '.bash_profile' '.macos' '.config/git/hooks/*')"
 
-shell_files="$(git ls-files '*.sh' '*.bash' '.profile' '.bashrc' '.bash_profile' '.macos' '.config/git/hooks/*')"
+red=""
+reset=""
+if [ -t 2 ]; then
+  red="\033[31m"
+  reset="\033[0m"
+fi
 
 git rev-parse --verify --quiet "$upstream" >/dev/null && commitlint --from "$upstream" --to HEAD --quiet
-echo "$shell_files" | xargs shellcheck
-echo "$shell_files" | xargs shfmt -d
+echo "$files" | xargs shellcheck
+echo "$files" | xargs shfmt -d
 oxfmt --check --no-error-on-unmatched-pattern
 
-if git ls-files -z | xargs -0 grep -nIE -d skip '/Users/[A-Za-z0-9._-]+'; then
-  echo "pre-push: tracked files must be portable, replace the paths with \$HOME, ~, or a repo-relative path" >&2
+if git ls-files -z | xargs -0 grep -nIoE -d skip '/Users/[A-Za-z0-9._-]+' | grep -v ':/Users/Shared$'; then
+  printf '%b%s%b\n' "$red" "pre-push: tracked files must be portable, replace the paths with \$HOME, ~, or a repo-relative path" "$reset" >&2
   exit 1
 fi

@@ -47,7 +47,7 @@ These rules apply only when `$HOME` is the active repository. Treat every file u
 ## Portability and tracking
 
 - Every tracked file must work on a fresh machine. Use `$HOME`, `~`, `$HOMEBREW_PREFIX`, `$XDG_*`, or repository-relative paths instead of a user path, hostname, serial, personal email, or other machine identity. Keep identity and private state in their existing ignored owners.
-- The `/opt/homebrew` and `/usr/local` PATH pair is the only approved machine-location exception because bootstrap code runs before `$HOMEBREW_PREFIX` exists. Other exceptions require explicit approval. Standard system paths such as `/bin/sh`, `/etc`, and `/usr/bin/env` are portable.
+- The `/opt/homebrew` and `/usr/local` PATH pair is the only approved machine-location exception because bootstrap code runs before `$HOMEBREW_PREFIX` exists. Other exceptions require explicit approval. Standard system paths such as `/bin/sh`, `/etc`, `/Users/Shared`, and `/usr/bin/env` are portable.
 - `.gitignore` is an allowlist that starts with `/*`. Add a matching `!` rule with every new tracked path. The managed-file hook blocks edits through linked or generated routes, and the writing hook plus `pre-push` reject committed user paths.
 
 ## Commit convention
