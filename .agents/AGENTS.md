@@ -19,6 +19,7 @@ Claude Code and Copilot load matching shared rules automatically. Agents without
 - Animation or motion: `motion.instructions.md` and its routed skills.
 - Node.js: `node.instructions.md`.
 - Shell scripts: `shell.instructions.md`.
+- Bugs, crashes, regressions, or failing tests: `find-root-cause`.
 - Human prose beyond a few sentences: `writing.instructions.md` and `humanizer`.
 - Agentic docs or skills: `sync-agents`; add `skill-creator` when creating or changing a skill.
 - Library, framework, or API questions: `context7-mcp`.
