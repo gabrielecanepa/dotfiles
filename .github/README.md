@@ -1,5 +1,7 @@
 ![](banner.png)
 
+Portable, version-controlled macOS setup including custom tools for Zsh, Homebrew, SSH, Node.js, AI agents, and more.
+
 > [!WARNING]
 > Before using the following dotfiles, fork this repository, review the content and remove things you don't want or need. **Don't blindly use my settings** unless you know what you are doing. Use at your own risk.
 
@@ -19,7 +21,7 @@ The home directory is version-controlled. The [`.gitignore`](/.gitignore) acts a
 
 #### Fast and powerful shell configuration
 
-Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with guided profile setup, runtime version switching and LTS installation, completions, and more. The custom `node` theme displays active runtime versions and symbols for available LTS upgrades.
+Oh My Zsh runs alongside local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with guided profile setup, runtime version switching and LTS installation, completions, and more. The custom themes display active runtime and package manager versions and indicators for available upgrades.
 
 #### Pinned runtimes and dependencies
 
@@ -125,7 +127,6 @@ The `.install.sh` script (see [Installation](#installation)) installs the config
 >
 > ```sh
 > backup="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/backup"
-> ls "$backup"
 > cp "$backup/<timestamp>/.zshrc" ~/.zshrc
 > ```
 
