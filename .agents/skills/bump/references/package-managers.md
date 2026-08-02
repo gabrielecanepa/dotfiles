@@ -1,21 +1,10 @@
 # Package manager command reference
 
-Exact commands per manager for the three operations bump needs: **survey
-outdated**, **apply upgrades** (split by semver target), and **install**. Read
-only the section for the manager you detected in Phase 1.
+Exact commands per manager for the three operations bump needs: **survey outdated**, **apply upgrades** (split by semver target), and **install**. Read only the section for the manager you detected in Phase 1.
 
-`ncu` (npm-check-updates) is the cross-manager workhorse for surveying and
-selectively upgrading: it edits `package.json` version ranges and works with
-any manager. After `ncu -u` you always run the manager's own `install` to update
-the lockfile. The manager-native commands below are the alternative when you'd
-rather not depend on `ncu`.
+`ncu` (npm-check-updates) is the cross-manager workhorse for surveying and selectively upgrading: it edits `package.json` version ranges and works with any manager. After `ncu -u` you always run the manager's own `install` to update the lockfile. The manager-native commands below are the alternative when you'd rather not depend on `ncu`.
 
-A note on "latest" vs ranges: `<pm> update` respects the semver ranges already
-in `package.json` (so `^5.2.0` won't cross to `6.x`). To cross majors you must
-rewrite the range; that's what `ncu -u` does, or the manager's explicit
-"latest" flag where it has one. bump deliberately separates patch/minor (range-
-respecting, safe) from majors (range-rewriting, gated by user approval), so the
-two paths below matter.
+A note on "latest" vs ranges: `<pm> update` respects the semver ranges already in `package.json` (so `^5.2.0` won't cross to `6.x`). To cross majors you must rewrite the range; that's what `ncu -u` does, or the manager's explicit "latest" flag where it has one. bump deliberately separates patch/minor (range- respecting, safe) from majors (range-rewriting, gated by user approval), so the two paths below matter.
 
 ## Resolving "latest" live
 
@@ -46,14 +35,11 @@ ncu -u --filter <pkg>        # write just one package (used per-major in Phase 4
 ncu -u                       # write ALL to latest, including majors (avoid blanket use)
 ```
 
-Monorepo / workspaces: add `--workspaces --root` to cover every workspace plus
-the root, or `--deep` to recurse into all `package.json` files found.
+Monorepo / workspaces: add `--workspaces --root` to cover every workspace plus the root, or `--deep` to recurse into all `package.json` files found.
 
-`--peer` makes ncu respect peer-dependency constraints when picking targets,
-useful to avoid proposing a bump that immediately breaks peers.
+`--peer` makes ncu respect peer-dependency constraints when picking targets, useful to avoid proposing a bump that immediately breaks peers.
 
-Always follow an `ncu -u` with the manager's install (next sections) to sync the
-lockfile and `node_modules`.
+Always follow an `ncu -u` with the manager's install (next sections) to sync the lockfile and `node_modules`.
 
 ## npm
 
@@ -65,9 +51,7 @@ npm install <pkg>@latest     # cross a major for one package explicitly
 npm ci                       # clean install strictly from lock (use to verify lock is valid)
 ```
 
-npm has no built-in "upgrade everything across majors"; use `ncu -u` then
-`npm install`. `npm outdated` exits non-zero when anything is outdated; that's
-informational, not an error.
+npm has no built-in "upgrade everything across majors"; use `ncu -u` then `npm install`. `npm outdated` exits non-zero when anything is outdated; that's informational, not an error.
 
 Workspaces: `npm update --workspaces`, `npm install --workspaces`.
 
@@ -82,13 +66,9 @@ pnpm update <pkg> --latest   # one package to latest across majors
 pnpm install                 # install from manifest, refresh lock + node_modules
 ```
 
-`pnpm update --latest` (or `-L`) is the native equivalent of `ncu -u && install`
-in one step, but it crosses majors, so only use it once majors are approved, or
-scope it to specific packages. For the safe patch/minor pass, plain
-`pnpm update` is correct.
+`pnpm update --latest` (or `-L`) is the native equivalent of `ncu -u && install` in one step, but it crosses majors, so only use it once majors are approved, or scope it to specific packages. For the safe patch/minor pass, plain `pnpm update` is correct.
 
-Monorepo: add `-r` / `--recursive` to run across all workspace packages
-(`pnpm -r update`).
+Monorepo: add `-r` / `--recursive` to run across all workspace packages (`pnpm -r update`).
 
 ## yarn
 
@@ -112,8 +92,7 @@ yarn up '*'                  # upgrade all to latest within ranges
 yarn install
 ```
 
-For Berry, `ncu -u` + `yarn install` is the most reliable non-interactive path
-since `upgrade-interactive` needs a TTY.
+For Berry, `ncu -u` + `yarn install` is the most reliable non-interactive path since `upgrade-interactive` needs a TTY.
 
 ## bun
 
@@ -125,18 +104,12 @@ bun update <pkg> --latest    # one package to latest
 bun install                  # install from bun.lockb
 ```
 
-`bun update --latest` crosses majors like pnpm's; gate it behind major
-approval or scope it per-package. Plain `bun update` is the safe patch/minor
-pass.
+`bun update --latest` crosses majors like pnpm's; gate it behind major approval or scope it per-package. Plain `bun update` is the safe patch/minor pass.
 
 ## After upgrading: verifying a clean install
 
 Whatever manager, the final install must be clean. Watch the install output for:
 
-- **peer dependency conflicts**: npm prints `ERESOLVE`; pnpm and others warn.
-  A bump that forces `--force`/`--legacy-peer-deps` to install is a red flag,
-  not a fix. Surface it as a decision.
-- **deprecation warnings** for a package you just bumped (the new version may
-  deprecate something you rely on).
-- **lockfile churn** that doesn't match what you intended; re-run the survey to
-  confirm the resulting versions are what you approved.
+- **peer dependency conflicts**: npm prints `ERESOLVE`; pnpm and others warn. A bump that forces `--force`/`--legacy-peer-deps` to install is a red flag, not a fix. Surface it as a decision.
+- **deprecation warnings** for a package you just bumped (the new version may deprecate something you rely on).
+- **lockfile churn** that doesn't match what you intended; re-run the survey to confirm the resulting versions are what you approved.

@@ -25,6 +25,7 @@ The skill's loop is **draft → audit ("what still makes this read as AI?") → 
 ## Baseline rules (apply even without invoking the skill)
 
 - **No em or en dashes** in any committed file, these rule and config docs included. Replace with a period, comma, colon, hyphen, parentheses, or a rewrite. This is a hard constraint, not a "use sparingly". The one exception is the agent's live chat output to the user, which is ephemeral and not a committed artifact; the instant text lands in a file, the ban applies.
+- **No hard column wrap** in committed markdown, these rule and config docs included: write each paragraph and list item as one physical line and let editors soft-wrap. Fixed-width wrapping costs tokens and hides phrases from line-oriented search. Follow a project's own declared wrap convention only where one exists. Documents only: code, scripts, and their comments and docstrings keep the language's own wrapping conventions.
 - **No significance/promotional inflation**: drop "stands as a testament", "pivotal moment", "rich tapestry", "vibrant", "nestled in the heart of", "showcases", "underscores".
 - **Prefer `is`/`are`/`has`** over copula avoidance ("serves as", "boasts", "represents a").
 - **No rule-of-three padding**, no false ranges ("from X to Y"), no synonym cycling, no negative parallelisms ("not just X, it's Y") or tailing negations ("…, no guessing").

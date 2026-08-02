@@ -2,7 +2,9 @@
 """Measure agentic documentation context and discovery metadata.
 
 Counts are estimates for context budgeting, not billing. The script prefers
-tiktoken and falls back to a chars-per-token estimate.
+tiktoken and falls back to a chars-per-token estimate. Budgets and over-limit
+checks use token counts only; the reported lines and bytes are informational.
+Hard-wrapped prose in measured documents is flagged as a finding.
 
 Usage:
     python count_tokens.py FILE [FILE ...]
@@ -23,15 +25,17 @@ from typing import Callable
 
 DOC_GLOBS = ("AGENTS.md", "CLAUDE.md", "*.md", "*.mdc", "*.markdown", "*.txt")
 PROFILES = {
-    "global": {"lines": 120, "tokens": 1500, "bytes": 6144},
-    "root-agents": {"lines": 150, "tokens": 2000},
-    "nested-agents": {"lines": 80, "tokens": 1000},
-    "always-rule": {"lines": 60, "tokens": 1000},
-    "scoped-rule": {"lines": 200, "tokens": 2000},
-    "skill": {"lines": 300, "tokens": 4000},
-    "spec": {"lines": 500, "tokens": 10000},
-    "reference": {"lines": 500, "tokens": 8000},
+    "global": {"tokens": 1500},
+    "root-agents": {"tokens": 2000},
+    "nested-agents": {"tokens": 1000},
+    "always-rule": {"tokens": 1000},
+    "scoped-rule": {"tokens": 2000},
+    "skill": {"tokens": 4000},
+    "spec": {"tokens": 10000},
+    "reference": {"tokens": 8000},
 }
+LIST_ITEM = re.compile(r"^\s*([-*+]|\d+\.)\s")
+NON_PROSE = re.compile(r"^\s*(#|\||```|~~~|---\s*$)")
 
 
 def collect(paths: list[str]) -> list[Path]:
@@ -107,24 +111,52 @@ def frontmatter(text: str) -> dict[str, str]:
 
 
 def limits_for(args: argparse.Namespace) -> dict[str, int | None]:
-    limits: dict[str, int | None] = {"tokens": None, "lines": None, "bytes": None}
+    limits: dict[str, int | None] = {"tokens": None}
     if args.profile:
         limits.update(PROFILES[args.profile])
     if args.budget is not None:
         limits["tokens"] = args.budget
-    if args.line_budget is not None:
-        limits["lines"] = args.line_budget
-    if args.byte_budget is not None:
-        limits["bytes"] = args.byte_budget
     return limits
 
 
 def over_reasons(row: dict[str, int | str], limits: dict[str, int | None]) -> list[str]:
-    return [
+    reasons = [
         f"{metric}>{limit}"
         for metric, limit in limits.items()
         if limit is not None and int(row[metric]) > limit
     ]
+    if int(row["wrapped_prose"]) > 0:
+        reasons.append(f"wrapped-prose:{row['wrapped_prose']}")
+    return reasons
+
+
+def wrapped_prose(text: str) -> int:
+    """Heuristic count of hard column wraps: physical line breaks inside a
+    prose paragraph or list item, outside frontmatter and fences.
+    """
+    lines = text.splitlines()
+    start = 0
+    if lines and lines[0].strip() == "---":
+        for index in range(1, len(lines)):
+            if lines[index].strip() == "---":
+                start = index + 1
+                break
+    count = 0
+    in_fence = False
+    prev_prose = False
+    for line in lines[start:]:
+        stripped = line.strip()
+        if stripped.startswith(("```", "~~~")):
+            in_fence = not in_fence
+            prev_prose = False
+            continue
+        if in_fence or not stripped or NON_PROSE.match(line):
+            prev_prose = False
+            continue
+        if prev_prose and not LIST_ITEM.match(line):
+            count += 1
+        prev_prose = True
+    return count
 
 
 def catalog_report(files: list[Path]) -> dict[str, object]:
@@ -164,14 +196,12 @@ def catalog_report(files: list[Path]) -> dict[str, object]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Measure lines, bytes, tokens, and skill discovery metadata."
+        description="Measure token budgets, wrapped prose, and skill discovery metadata."
     )
     parser.add_argument("paths", nargs="+", help="files or directories")
     parser.add_argument("--json", action="store_true", help="emit JSON")
     parser.add_argument("--profile", choices=sorted(PROFILES), help="apply default limits")
     parser.add_argument("--budget", type=int, help="per-file token limit")
-    parser.add_argument("--line-budget", type=int, help="per-file line limit")
-    parser.add_argument("--byte-budget", type=int, help="per-file UTF-8 byte limit")
     parser.add_argument("--total-budget", type=int, help="combined token limit")
     parser.add_argument("--catalog", action="store_true", help="audit SKILL.md metadata")
     return parser.parse_args()
@@ -194,6 +224,7 @@ def main() -> int:
             "tokens": count(text),
             "lines": max(1, len(text.splitlines())),
             "bytes": len(text.encode("utf-8")),
+            "wrapped_prose": wrapped_prose(text),
         }
         row["over"] = over_reasons(row, limits)
         rows.append(row)
