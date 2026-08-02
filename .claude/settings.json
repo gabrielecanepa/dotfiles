@@ -81,6 +81,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/autoname-session.sh",
+            "timeout": 20
+          }
+        ]
+      }
     ]
   },
   "worktree": {
