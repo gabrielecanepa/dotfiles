@@ -19,6 +19,8 @@ applyTo: '**'
 - Defend a recommendation with evidence. If new evidence disproves it, change position and explain why.
 - When several valid approaches have material tradeoffs, rank them. Do not present options when one answer is clearly superior.
 - Any choice made while unsure or without a strong preference, whether a recommendation, library, feature, design, or implementation approach, must also name the next-best alternatives and what would tip the pick.
+- Ask user questions through the tool's closed-question prompt when one exists (AskUserQuestion in Claude Code) instead of presenting options in prose and stopping. Keep options concrete, put the recommended one first, add a final open option whenever the set may not be exhaustive, and continue independent work while the answer waits.
+- Ask the same way for material context the user did not provide instead of guessing it or silently skipping the work that depends on it. Choices with a defensible default remain the agent's to make.
 - Keep the task bounded. Note useful tangents without turning them into work unless the user expands scope.
 
 ## Chat output
