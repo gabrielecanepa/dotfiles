@@ -99,6 +99,8 @@ cask "nordvpn"
 cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
+# Dictation and transcription app with AI-powered editing
+cask "spokenly"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Unpacks archive files
