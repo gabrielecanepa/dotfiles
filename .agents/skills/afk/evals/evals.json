@@ -1,0 +1,61 @@
+{
+  "skill_name": "afk",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "afk mode is on. In the wordcount project (a scratch copy of evals/files/wordcount), fix the bug where running the script on an empty file crashes, then report back following the afk contract.",
+      "expected_output": "The bug is fixed, the test passes, and the closing update follows the afk output contract for a project with no UI.",
+      "files": [
+        "evals/files/wordcount/wordcount.py",
+        "evals/files/wordcount/test_wordcount.py"
+      ],
+      "expectations": [
+        "The update leads with the outcome in one or two sentences",
+        "The update states in a single line that the project renders no UI so there is no preview URL, with no retry loop around tailscale",
+        "The update reports the verification command and its pass or fail result",
+        "The diff summary lists each changed file as path:line with the resulting behavior, not the mechanics of the edit",
+        "The update ends with a closed question offering likely next actions",
+        "No part of the update points to a file path or command output as the answer"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "afk mode is on and this prompt arrived by voice dictation: \"ok so the read me still says the install command is npm install dash g but we moved to pnpm cash the docs are wrong fix the get hub badge too its pointing at the old workflow\". The project is a scratch copy of evals/files/readme-project.",
+      "expected_output": "The README install command is corrected to pnpm, the stale badge is fixed, and the reply notes how the garbled dictation was interpreted.",
+      "files": [
+        "evals/files/readme-project/README.md"
+      ],
+      "expectations": [
+        "The reply maps the dictation artifacts to real intent, for example reading \"get hub\" as GitHub, without asking for clarification",
+        "The reply notes the interpretation in passing so a wrong guess is caught at a glance",
+        "The README install instructions are changed from npm -g to the pnpm equivalent",
+        "The stale workflow badge is updated to the current workflow path",
+        "The closing update follows the afk contract: outcome first, verification, diff summary, closed question"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Attended run only, it starts a dev server and tailscale serve listeners. /afk in a Vite or Next.js project checkout: run the preview bootstrap and reply with the live URL and a one-line ready message.",
+      "expected_output": "A reachable tailnet HTTPS URL pointing at this checkout's dev server, obtained via CertDomains, with listeners reused or created per the skill and torn down on /afk off.",
+      "files": [],
+      "expectations": [
+        "The hostname comes from tailscale status --json CertDomains, falling back to Self.DNSName plus --http only when CertDomains is empty",
+        "An existing serve mapping to the right port is reused and mappings this session did not create are never repointed",
+        "The URL is labeled with the branch or worktree name when more than one checkout is live",
+        "On /afk off only listeners this session added are turned off and the dev server is left running"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Attended run only, it commits and pushes. With afk mode on in a scratch repository with a remote and uncommitted work, the user sends: \"ship\".",
+      "expected_output": "Exactly commit, push, and open request, then a link with a one-line summary; nothing beyond those three steps.",
+      "files": [],
+      "expectations": [
+        "The commit follows the repository's commit convention",
+        "The push and request use the CLI matching the origin remote, with the compare URL fallback when neither gh nor glab is installed",
+        "No merge, no force push, and no action beyond commit, push, and open request",
+        "The reply is the link plus a one-line summary"
+      ]
+    }
+  ]
+}

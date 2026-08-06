@@ -1,0 +1,82 @@
+[
+  {
+    "query": "/afk",
+    "should_trigger": true
+  },
+  {
+    "query": "/afk fix the flaky auth test in the api repo, it fails maybe one run in five",
+    "should_trigger": true
+  },
+  {
+    "query": "heading out, I'll be on my phone for the next couple hours. keep working on the retry logic in ~/Developer/mailer and send me updates I can read here",
+    "should_trigger": true
+  },
+  {
+    "query": "im on my phone now so just send screenshots of the dashboard changes",
+    "should_trigger": true
+  },
+  {
+    "query": "leaving my desk now. finish the navbar fix in the storefront repo and give me a link i can tap to check it",
+    "should_trigger": true
+  },
+  {
+    "query": "on mobile rn, cant open files here. whats the status of the migration script?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm away from the computer this afternoon, continue the i18n cleanup and message me results I can review from my phone",
+    "should_trigger": true
+  },
+  {
+    "query": "afk mode on please, then bump the deps in the blog repo",
+    "should_trigger": true
+  },
+  {
+    "query": "commuting home, only have my phone. review your last diff and describe what changed in plain text",
+    "should_trigger": true
+  },
+  {
+    "query": "walking the dog, phone only. if the tests pass get everything ready and wait for my go",
+    "should_trigger": true
+  },
+  {
+    "query": "my phone won't connect to the dev server running on my mac, can you debug the vite config?",
+    "should_trigger": false
+  },
+  {
+    "query": "make the marketing page responsive so it looks good on a phone",
+    "should_trigger": false
+  },
+  {
+    "query": "take a screenshot of the login page at desktop width and check the header alignment",
+    "should_trigger": false
+  },
+  {
+    "query": "set up tailscale serve so my teammate can preview the app from their laptop",
+    "should_trigger": false
+  },
+  {
+    "query": "ship the release notes into the changelog file and update the version header",
+    "should_trigger": false
+  },
+  {
+    "query": "add a mobile breakpoint to the dashboard grid and test it with the iphone viewport in devtools",
+    "should_trigger": false
+  },
+  {
+    "query": "send the summary of yesterday's standup to my email so I can read it on my phone later",
+    "should_trigger": false
+  },
+  {
+    "query": "why does my app's push notification not arrive when the phone is locked?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you make the CLI output more scannable? short lines, lead with the outcome",
+    "should_trigger": false
+  },
+  {
+    "query": "generate a QR code so I can open the local dev server on my phone for manual testing",
+    "should_trigger": false
+  }
+]

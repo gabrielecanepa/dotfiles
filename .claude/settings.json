@@ -151,7 +151,7 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "askUserQuestionTimeout": "never",
   "plansDirectory": ".agents/plans",
   "tui": "fullscreen",
