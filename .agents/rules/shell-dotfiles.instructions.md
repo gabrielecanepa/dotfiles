@@ -39,7 +39,7 @@ These rules apply only when `$HOME` is the active repository.
 ## Git
 
 - The `$HOME` repository uses its local `.config/git/hooks`: `commit-msg` runs commitlint; `pre-push` reruns commitlint plus shellcheck, shfmt, oxfmt, and portability checks. Do not introduce Husky, a global `core.hooksPath`, or `init.templateDir`.
-- Shared Git settings live in tracked `.config/git/config`. Ignored `~/.gitconfig` wins later and owns identity, signing key, 1Password agent path, editor, and client overrides. Never track an email, key, or machine path.
+- Shared Git settings live in tracked `.config/git/config`. Ignored `~/.gitconfig` wins later and owns identity, signing key, editor, and client overrides. Never track an email, key, or machine path.
 
 ## Package ownership
 

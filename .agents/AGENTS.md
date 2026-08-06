@@ -40,7 +40,7 @@ Shared sources are under `~/.agents/`; provider entrypoints link there and are n
 
 ## Git
 
-- Commits are signed through the 1Password SSH agent. Never disable signing or use `--no-gpg-sign`.
+- Commits are signed with the local SSH key through git's default `ssh-keygen` signer. Never disable signing or use `--no-gpg-sign`.
 - Follow the target repository's commit conventions. Do not add AI attribution or `Co-authored-by` trailers.
 - `$HOME` types and scopes are in `dotfiles.instructions.md`.
 
