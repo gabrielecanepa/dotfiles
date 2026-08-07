@@ -1,5 +1,5 @@
 ---
-description: 'Use when writing or editing React components (.jsx/.tsx). Enforces prop forwarding, composition over boolean props, JSX, state, and key correctness idioms, the shared->features->app layer boundary, and Next.js app/ placement. Routes to the React performance and composition skills. Language-level TS idioms live in typescript.instructions.md.'
+description: 'Use when writing or editing React components (.jsx/.tsx). Enforces prop forwarding, composition over boolean props, JSX, state, and key correctness idioms, the shared->features->app layer boundary, Next.js app/ placement, and 16.3+ APIs. Routes to the React performance and composition skills. Language-level TS idioms live in typescript.instructions.md.'
 applyTo: '**/*.jsx, **/*.tsx'
 paths:
   - '**/*.jsx'
@@ -17,6 +17,8 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 - **Animation work** → `motion.instructions.md` owns the animation rules and skill routing.
 - Load only the relevant `rules/*.md` from Vercel skills. Do not load a compiled `AGENTS.md` unless the task genuinely needs the full corpus.
 - **Long lists** → the perf skill stops at `content-visibility`; past a few hundred rows that is not enough. Windowing (render only visible rows) is a hard requirement, via `@tanstack/react-virtual` or `react-window`.
+- **Dense rows** → render hover-only controls on hover or focus; keep each row's first and last focusable controls mounted so keyboard and screen-reader users can still reach the row.
+- **Perf claims** → measure before and after (React DevTools Profiler or equivalent) before calling a change an optimization; an unmeasured one is a refactor, not a win.
 
 ## Component props
 
@@ -87,7 +89,17 @@ export const DashboardProvider = ({
 - **Cancel superseded requests.** For client fetches that fire on rapid input (search-as-you-type, filters, quick nav), pass an `AbortController` signal and abort the prior request so a slow earlier response can't overwrite a newer one. Prefer a data library that cancels for you (TanStack Query, `use`+RSC) over hand-rolled effects. Any effect that opens a listener, timer, subscription, or socket returns a cleanup that tears down exactly what it set up.
 - **Async actions own their state.** User-triggered promises expose pending and error UI, block duplicate submission while pending, and abort or guard continuations that may outlive the component.
 - **Respect RSC boundaries.** Pass only minimal, serializable, non-sensitive data or Server Actions and keep Client Components narrow. Data passed from an RSC into client context is a snapshot, not live server state: name its initial role and define freshness through navigation, invalidation, refresh, or a supported client source. Sanitize dynamic HTML and allowlist schemes for dynamic `href` and `src`.
-- **Split context by change-frequency.** Every consumer of a context re-renders on any change to its value, whichever field it reads. Keep high-churn state out of a wide provider: split into narrow contexts, or back a hot store with an external store subscribed via `useSyncExternalStore`. The Compiler does not fix whole-value subscription.
+
+## State management
+
+Place state at the lowest level that works and escalate one step at a time, only under real pressure: measured re-renders, prop drilling through 3+ levels, or interdependent state.
+
+1. **Local state.** `useState`/`useReducer` in the component that renders it. Derive during render instead of mirroring one state into another; never sync copies in an Effect.
+2. **Lift to the nearest common owner** and pass props; reach for composition before context (the pressure rule above).
+3. **Server state stays in the data layer.** Fetched data belongs to TanStack Query, SWR, or RSC props; a client store holding a copy is a second source of truth.
+4. **Providers are not parents.** A stateful provider renders `{children}` it did not create, so its own state changes reuse the same child elements and skip subtree reconciliation (the `DashboardProvider` example above follows this shape). Never hold hot state in a component that also creates the subtree it renders.
+5. **Split context by change-frequency and by state versus actions.** Every consumer of a context re-renders on any change to its value, whichever field it reads. Keep high-churn state out of a wide provider: split into narrow contexts, and expose actions through their own context or hook with stable identity (functional `setState`, `useEffectEvent`, or the perf skill's `advanced-event-handler-refs` pattern) so action-only consumers never re-render. This overrides the composition skill's single `{ state, actions, meta }` context shape once hot state or action-only consumers appear. The Compiler does not fix whole-value subscription or unstable action identity.
+6. **Selector-backed store last.** When many consumers read different slices of one hot object, subscribe through `useSyncExternalStore` with selectors, or the store library the project already uses. Adding a state library to a project that has none is an architecture decision to flag, not a default.
 
 ## Layer boundaries
 
@@ -98,3 +110,8 @@ Dependencies flow **shared -> features -> app**. Shared layers (`ui/`, `lib/`, `
 In a Next.js project, `src/app/` (or `app/`) holds **only** Next.js framework files. Every other module (catalog/view components, `params.ts`, hooks, helpers, types) lives in the matching shared layer (`@/components`, `@/lib`, `@/hooks`, ...), never colocated in `app/`. A `page.tsx` imports its slices; it does not sit beside ad-hoc `.tsx`/`.ts` modules.
 
 The framework files allowed in `app/` (Next.js 16): routing (`page`, `layout`, `loading`, `error`, `global-error`, `not-found`, `forbidden`, `unauthorized`, `default`, `template`, `route`), metadata routes (`sitemap`, `robots`, `manifest`), metadata images (`favicon`, `icon`, `apple-icon`, `opengraph-image`, `twitter-image`), and `*.css`. Anything not on this list does not belong in `app/`.
+
+## Next.js APIs (16.3+)
+
+- **Root params.** Read root-level dynamic params (`[lang]`) through the async getters of `next/root-params` (`await lang()`) in Server Components only; Client Components get them as props from a server parent.
+- **Error boundaries.** Use `catchError` from `next/error` for custom boundaries (the fallback is a Client Component): it passes `notFound`/`redirect` through and its `retry()` re-fetches the boundary's children.
