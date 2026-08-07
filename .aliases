@@ -4,7 +4,7 @@
 icloud="$HOME/Library/Mobile Documents"
 drive="$icloud/com~apple~CloudDocs"
 downloads="$drive/Downloads"
-vault="$icloud/iCloud~md~obsidian/Documents/vault"
+vault="$HOME/.vault"
 tmp="$WORKING_DIR/tmp"
 
 hash -d icloud="$icloud"
