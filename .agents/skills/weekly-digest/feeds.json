@@ -1,0 +1,108 @@
+{
+  "sources": [
+    {
+      "name": "Simon Willison",
+      "type": "rss",
+      "url": "https://simonwillison.net/atom/everything/",
+      "coverage": "agentic tooling, LLM practice"
+    },
+    {
+      "name": "Latent Space",
+      "type": "rss",
+      "url": "https://www.latent.space/feed",
+      "coverage": "AI engineering"
+    },
+    {
+      "name": "smol.ai AI News",
+      "type": "rss",
+      "url": "https://news.smol.ai/rss.xml",
+      "coverage": "daily AI digest",
+      "skim": true
+    },
+    {
+      "name": "Anthropic news",
+      "type": "page",
+      "url": "https://www.anthropic.com/news",
+      "coverage": "Claude models and products"
+    },
+    {
+      "name": "Claude Code releases",
+      "type": "rss",
+      "url": "https://github.com/anthropics/claude-code/releases.atom",
+      "coverage": "harness features"
+    },
+    {
+      "name": "OpenAI news",
+      "type": "rss",
+      "url": "https://openai.com/news/rss.xml",
+      "coverage": "Codex and OpenAI models"
+    },
+    {
+      "name": "GitHub blog",
+      "type": "rss",
+      "url": "https://github.blog/feed/",
+      "coverage": "Copilot, Actions, platform",
+      "skim": true
+    },
+    {
+      "name": "GitHub changelog",
+      "type": "rss",
+      "url": "https://github.blog/changelog/feed/",
+      "coverage": "feature releases"
+    },
+    {
+      "name": "JavaScript Weekly",
+      "type": "rss",
+      "url": "https://cprss.s3.amazonaws.com/javascriptweekly.com.xml",
+      "coverage": "JS ecosystem"
+    },
+    {
+      "name": "Node Weekly",
+      "type": "rss",
+      "url": "https://cprss.s3.amazonaws.com/nodeweekly.com.xml",
+      "coverage": "Node runtime and tooling"
+    },
+    {
+      "name": "This Week In React",
+      "type": "rss",
+      "url": "https://thisweekinreact.com/newsletter/rss.xml",
+      "coverage": "React and React Native"
+    },
+    {
+      "name": "Next.js Weekly",
+      "type": "page",
+      "url": "https://nextjsweekly.com",
+      "coverage": "Next.js"
+    },
+    {
+      "name": "Bytes",
+      "type": "page",
+      "url": "https://bytes.dev/archives",
+      "coverage": "JS ecosystem commentary"
+    },
+    {
+      "name": "Frontend Focus",
+      "type": "rss",
+      "url": "https://cprss.s3.amazonaws.com/frontendfoc.us.xml",
+      "coverage": "HTML, CSS, web platform"
+    },
+    {
+      "name": "web.dev",
+      "type": "rss",
+      "url": "https://web.dev/feed.xml",
+      "coverage": "web platform, Chrome"
+    },
+    {
+      "name": "Console.dev",
+      "type": "rss",
+      "url": "https://console.dev/rss.xml",
+      "coverage": "developer tool discovery"
+    },
+    {
+      "name": "Changelog News",
+      "type": "rss",
+      "url": "https://changelog.com/news/feed",
+      "coverage": "general dev news"
+    }
+  ]
+}

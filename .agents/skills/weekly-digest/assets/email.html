@@ -1,0 +1,71 @@
+<!--
+  weekly-digest email template. Fill rules:
+  - Replace every {{...}} token; repeat the blocks marked "repeat" once per item.
+  - Keep the section order and the fallback lines identical to the markdown report.
+  - Dates are ISO (YYYY-MM-DD). {{ISSUE}} is the run's issue number, shared between subject, title, and header.
+  - Score badge colors: high #15803d, medium #b45309, low #52525b.
+  - {{PREVIEW_TEXT}} is the summary's first sentence (inbox preview line).
+  - {{SELECTION_EXAMPLE}} uses the run's real leading proposal numbers, e.g. 1,2.
+  - HTML-escape &, < and > inside diff content.
+  - Delete every template comment before sending.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly digest #{{ISSUE}}, {{START_DATE}} to {{END_DATE}}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;">
+<div style="display:none;max-height:0;overflow:hidden;">{{PREVIEW_TEXT}}</div>
+<div style="max-width:640px;margin:0 auto;padding:32px 16px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#18181b;">
+
+  <div style="background-color:#18181b;border-radius:12px 12px 0 0;padding:28px 32px;">
+    <div style="font-size:26px;font-weight:700;color:#fafafa;letter-spacing:-0.5px;">Weekly digest #{{ISSUE}}</div>
+    <div style="font-size:13px;color:#a1a1aa;margin-top:4px;">{{START_DATE}} to {{END_DATE}}</div>
+  </div>
+
+  <div style="background-color:#ffffff;border:1px solid #e4e4e7;border-top:none;border-radius:0 0 12px 12px;padding:28px 32px;">
+
+    <p style="font-size:15px;line-height:1.6;margin:0;">{{SUMMARY}}</p>
+
+    <h2 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#71717a;border-top:1px solid #e4e4e7;padding-top:24px;margin:28px 0 14px;">Proposals</h2>
+    <!-- repeat per proposal; on an empty week replace the block with the fallback line in a plain <p> -->
+    <div style="border:1px solid #e4e4e7;border-radius:10px;padding:18px 20px;margin:0 0 14px;">
+      <div style="font-size:15px;font-weight:600;line-height:1.4;">{{NUMBER}}. {{TITLE}}&nbsp;<span style="display:inline-block;font-size:11px;font-weight:600;color:#ffffff;background-color:{{SCORE_COLOR}};border-radius:99px;padding:2px 9px;vertical-align:2px;">{{SCORE}}</span></div>
+      <div style="font-size:13px;color:#71717a;margin:6px 0 12px;"><a href="{{SOURCE_URL}}" style="color:#71717a;">{{SOURCE}}</a></div>
+      <p style="font-size:14px;line-height:1.6;margin:0 0 8px;">{{WHAT}}</p>
+      <p style="font-size:14px;line-height:1.6;color:#52525b;margin:0 0 14px;">{{WHY_IT_FITS}}</p>
+      <div style="font-size:12px;font-family:ui-monospace,Menlo,monospace;color:#71717a;margin:0 0 6px;">{{TARGET_FILE}}</div>
+      <pre style="background-color:#18181b;color:#e4e4e7;font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.55;border-radius:8px;padding:14px 16px;margin:0;overflow-x:auto;">{{DIFF}}</pre>
+    </div>
+    <!-- end repeat -->
+
+    <h2 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#71717a;border-top:1px solid #e4e4e7;padding-top:24px;margin:28px 0 14px;">Radar</h2>
+    <ul style="font-size:14px;line-height:1.8;padding-left:20px;margin:0;">
+      <!-- repeat per radar entry -->
+      <li><a href="{{URL}}" style="color:#2563eb;">{{NAME}}</a>: {{NOTE}}</li>
+    </ul>
+
+    <h2 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#71717a;border-top:1px solid #e4e4e7;padding-top:24px;margin:28px 0 14px;">Noted, no action</h2>
+    <ul style="font-size:13px;line-height:1.8;color:#52525b;padding-left:20px;margin:0;">
+      <!-- repeat per note -->
+      <li>{{NOTE}}</li>
+    </ul>
+
+    <h2 style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#71717a;border-top:1px solid #e4e4e7;padding-top:24px;margin:28px 0 14px;">Source health</h2>
+    <p style="font-size:13px;line-height:1.7;color:#52525b;margin:0;">{{SOURCE_HEALTH}}</p>
+
+  </div>
+
+  <div style="background-color:#ffffff;border:1px solid #e4e4e7;border-radius:12px;margin-top:16px;padding:22px 24px;">
+    <div style="font-size:14px;font-weight:600;margin:0 0 10px;">Apply proposals from your terminal</div>
+    <pre style="background-color:#f4f4f5;color:#18181b;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.5;border-radius:8px;padding:12px 14px;margin:0;overflow-x:auto;">claude "/weekly-digest apply {{END_DATE}} {{SELECTION_EXAMPLE}}"</pre>
+    <div style="font-size:12px;color:#71717a;margin:12px 0 6px;">Or reopen this run with its full context:</div>
+    <pre style="background-color:#f4f4f5;color:#18181b;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.5;border-radius:8px;padding:12px 14px;margin:0;overflow-x:auto;">claude --teleport</pre>
+  </div>
+
+  <p style="font-size:11px;color:#a1a1aa;text-align:center;margin:18px 0 0;">Sent by the weekly-digest routine.</p>
+</div>
+</body>
+</html>
