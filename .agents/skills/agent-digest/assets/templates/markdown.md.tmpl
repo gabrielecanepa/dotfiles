@@ -1,0 +1,51 @@
+{{! The chat report. Fixed layout, never an email choice, and .md.tmpl so no markdown formatter reflows the tags. }}
+# Newsletter review, {{start_date}} to {{end_date}}
+{{#issue}}
+
+Issue #{{issue}}.
+{{/issue}}
+
+## Summary
+
+{{summary}}
+
+## Proposals
+
+{{#proposals}}
+### {{number}}. {{title}} ({{score}})
+
+- Source: {{source}}{{#source_url}} ({{source_url}}){{/source_url}}
+- What: {{what}}
+- Why it fits: {{why}}
+- Proposed change: `{{file}}`
+
+```diff
+{{diff}}
+```
+
+{{/proposals}}
+{{^proposals}}
+Nothing actionable this week.
+
+{{/proposals}}
+## Radar
+
+{{#radar}}
+- {{#url}}[{{name}}]({{url}}){{/url}}{{^url}}{{name}}{{/url}}: {{note}}
+{{/radar}}
+{{^radar}}
+Nothing notable this week.
+{{/radar}}
+
+## Noted, no action
+
+{{#noted}}
+- {{.}}
+{{/noted}}
+{{^noted}}
+Nothing else surfaced.
+{{/noted}}
+
+## Source health
+
+{{health}}

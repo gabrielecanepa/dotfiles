@@ -1,0 +1,73 @@
+{{! GitHub notification look: light, bordered rows, muted labels, monospace accents. }}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>{{title}}, {{dates}}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#ffffff;">
+<div style="display:none;max-height:0;overflow:hidden;">{{preview_text}}</div>
+<div style="max-width:600px;margin:0 auto;padding:24px 16px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;color:#1f2328;">
+
+  <div style="border-bottom:1px solid #d1d9e0;padding-bottom:14px;margin-bottom:20px;">
+    <div style="font-size:12px;color:#59636e;font-family:ui-monospace,Menlo,monospace;">agent-digest / {{dates}}</div>
+    <div style="font-size:20px;font-weight:600;margin-top:6px;">{{title}}</div>
+  </div>
+
+  <p style="margin:0 0 24px;">{{summary}}</p>
+
+  <div style="font-size:12px;font-weight:600;color:#59636e;text-transform:uppercase;letter-spacing:0.6px;margin:0 0 10px;">Proposals</div>
+{{#proposals}}
+  <div style="border:1px solid #d1d9e0;border-radius:6px;margin:0 0 12px;">
+    <div style="background-color:#f6f8fa;border-bottom:1px solid #d1d9e0;border-radius:6px 6px 0 0;padding:10px 14px;">
+      <span style="font-weight:600;">{{number}}. {{title}}</span>
+      <span style="display:inline-block;font-size:11px;font-weight:600;color:{{score_text}};background-color:{{score_background}};border:1px solid #d1d9e0;border-radius:99px;padding:1px 8px;margin-left:6px;">{{score}}</span>
+    </div>
+    <div style="padding:14px;">
+      <p style="margin:0 0 8px;">{{what}}</p>
+      <p style="margin:0 0 12px;color:#59636e;">{{why}}</p>
+      <div style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#59636e;background-color:#f6f8fa;border:1px solid #d1d9e0;border-radius:6px 6px 0 0;border-bottom:none;padding:6px 12px;">{{file}}</div>
+      <pre style="font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.45;color:#1f2328;background-color:#ffffff;border:1px solid #d1d9e0;border-radius:0 0 6px 6px;padding:12px;margin:0 0 12px;white-space:pre-wrap;word-break:break-word;">{{diff}}</pre>
+      <div style="font-size:12px;color:#59636e;">{{#source_url}}<a href="{{source_url}}" style="color:#0969da;text-decoration:none;">{{source}}</a>{{/source_url}}{{^source_url}}{{source}}{{/source_url}}</div>
+    </div>
+  </div>
+{{/proposals}}
+{{^proposals}}
+  <p style="margin:0;color:#59636e;">Nothing actionable this week.</p>
+{{/proposals}}
+
+  <div style="font-size:12px;font-weight:600;color:#59636e;text-transform:uppercase;letter-spacing:0.6px;margin:28px 0 10px;padding-top:20px;border-top:1px solid #d1d9e0;">Radar</div>
+{{#radar}}
+  <div style="border-top:1px solid #d1d9e0;padding:10px 0;">{{#url}}<a href="{{url}}" style="color:#0969da;text-decoration:none;font-weight:600;">{{name}}</a>{{/url}}{{^url}}<strong>{{name}}</strong>{{/url}}<span style="color:#59636e;">: {{note}}</span></div>
+{{/radar}}
+{{^radar}}
+  <p style="margin:0;color:#59636e;">Nothing notable this week.</p>
+{{/radar}}
+
+  <div style="font-size:12px;font-weight:600;color:#59636e;text-transform:uppercase;letter-spacing:0.6px;margin:28px 0 10px;padding-top:20px;border-top:1px solid #d1d9e0;">Noted, no action</div>
+{{#noted}}
+  <div style="font-size:13px;color:#59636e;padding:4px 0 4px 16px;text-indent:-16px;">&bull;&nbsp;{{.}}</div>
+{{/noted}}
+{{^noted}}
+  <p style="margin:0;color:#59636e;">Nothing else surfaced.</p>
+{{/noted}}
+
+  <div style="font-size:12px;font-weight:600;color:#59636e;text-transform:uppercase;letter-spacing:0.6px;margin:28px 0 10px;padding-top:20px;border-top:1px solid #d1d9e0;">Source health</div>
+  <p style="margin:0;font-size:13px;color:#59636e;">{{health}}</p>
+
+  <div style="background-color:#f6f8fa;border:1px solid #d1d9e0;border-radius:6px;margin-top:28px;padding:16px;">
+{{#has_proposals}}
+    <div style="font-weight:600;margin:0 0 10px;">Apply proposals from your terminal</div>
+    <pre style="font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.45;background-color:#ffffff;border:1px solid #d1d9e0;border-radius:6px;padding:10px 12px;margin:0 0 10px;white-space:pre-wrap;word-break:break-word;">{{apply_command}}</pre>
+{{/has_proposals}}
+    <div style="font-size:12px;color:#59636e;margin:0 0 6px;">Reopen this run with its full context:</div>
+    <pre style="font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.45;background-color:#ffffff;border:1px solid #d1d9e0;border-radius:6px;padding:10px 12px;margin:0;">claude --teleport</pre>
+  </div>
+
+  <p style="font-size:12px;color:#59636e;border-top:1px solid #d1d9e0;margin:24px 0 0;padding-top:14px;">Sent by the agent-digest routine.</p>
+</div>
+</body>
+</html>

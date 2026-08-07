@@ -45,11 +45,12 @@ Thumbs.db
 private/
 tmp/
 
-# Node.js
-##########
+# Runtime data
+###############
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+__pycache__/
 
 # Agents
 #########
