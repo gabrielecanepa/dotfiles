@@ -40,9 +40,10 @@ effective_of() {
   [ -n "$_v" ] || _v=$(default_of "${1}")
   printf "%s" "$_v"
 }
-keys=$(jq -r "[.properties | to_entries[] | select(.key != \"\$schema\") | . as \$e |
-    if \$e.value.type == \"object\" then (\$e.value.properties | keys_unsorted[] | \$e.key + \".\" + .) else \$e.key end]
-    | join(\" \")" "$schema_file" 2>/dev/null)
+keys=$(jq -r "def leaves(\$p): to_entries[] | select(.key != \"\$schema\") |
+    (if \$p == \"\" then .key else \$p + \".\" + .key end) as \$k |
+    if .value.type == \"object\" and (.value.properties | type) == \"object\" then (.value.properties | leaves(\$k)) else \$k end;
+    [.properties | leaves(\"\")] | join(\" \")" "$schema_file" 2>/dev/null)
 args="${1:-}"
 key=${args%% *}
 value=${args#"$key"}
