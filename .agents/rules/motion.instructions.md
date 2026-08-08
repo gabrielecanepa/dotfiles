@@ -13,7 +13,7 @@ The production floor in `design.instructions.md` still applies. For React View T
 
 ## Skills
 
-- **Reviewing animation code** -> `review-animations` with its bundled `STANDARDS.md`. Keep it to motion findings; `web-design-guidelines` owns the general UI audit, so do not report the same file through both.
+- **Reviewing animation code** -> `review-animations` with its bundled `STANDARDS.md`. The skill ships `disable-model-invocation`, so outside a user `/review-animations` call read both files from `~/.agents/skills/review-animations/` instead of invoking it. Keep it to motion findings; `web-design-guidelines` owns the general UI audit, do not report the same file through both.
 - **Codebase-wide "improve the animations" requests** -> `improve-animations` (read-only; produces a prioritized plan).
 - **Naming an effect from a vague description** -> `animation-vocabulary`.
 

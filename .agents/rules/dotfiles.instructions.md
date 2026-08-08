@@ -54,8 +54,9 @@ These rules apply only when `$HOME` is the active repository. Treat every file u
 
 - `.commitlintrc` and `.config/git/hooks/commit-msg` enforce an allowlisted lower-case type, an optional allowlisted lower-case scope, and a non-empty subject. Do not use `feat`, `fix`, or `refactor`.
 - Allowed types: `agents`, `brew`, `chore`, `docs`, `git`, `gui`, `node`, `python`, `ruby`, `shell`.
-- Repository convention keeps the subject lower-case with no trailing period. Scope parents are also conventional: `agents` uses `claude`, `codex`, or `copilot`; `brew` uses `cask`, `formula`, or `mas`; `gui` uses `ghostty`, `vscode`, or `zed`; `node` uses `npm`; `shell` uses `bash`, `sh`, or `zsh`.
+- Repository convention keeps the subject lower-case with no trailing period. Scope parents are also conventional: `agents` uses `claude`, `codex`, or `copilot`; `brew` uses `cask` or `mas`; `gui` uses `ghostty`, `vscode`, or `zed`; `node` uses `npm`; `shell` uses `bash`, `sh`, or `zsh`.
 - Use `agents` for shared agent configuration. Use a tool scope only for its native, non-shared configuration.
+- The type and scope lists are mirrored in the `git-commit-instructions` of `.codex/settings.toml` and the VS Code commit prompt in `.vscode/settings.json`; update both whenever `.commitlintrc` changes.
 
 ## Scoped rules
 

@@ -71,7 +71,7 @@ Load the rubric now: **[references/prose-review.md](references/prose-review.md)*
 3. **Complete**: is anything a reader genuinely needs missing (install, quick start, the actual usage, config reference, a link to deeper docs)? Gaps are as much a finding as bloat. Conciseness never wins by dropping load-bearing how-to.
 4. **Clean voice + compliant**: is it free of AI-writing tells, does it pass the dash ban, and does it honor every style convention the repo declared?
 
-**Verifying currency** is the load-bearing work and the reference spells out how per claim type. The short version: run or resolve what the doc asserts. Install and build commands → check they exist in the manifest (`package.json` scripts, `Makefile` targets, `pyproject.toml`) and, where cheap and safe, that they run. Links → resolve internal links to real files and anchors; check external links are not obviously dead (flag, don't over-fetch). Code snippets → check APIs and imports they show still exist. Badges → check the target still matches. Versions and supported-runtime claims → check against the lockfile, CI matrix, or engines field.
+**Verifying currency** is the load-bearing work: run or resolve what the doc asserts against the repo, claim by claim, exactly as the reference's currency checks spell out.
 
 **One boundary check that touches an agentic file** but is a human-docs concern: **does the README carry heavy agent-only instruction** (a wall of "instructions for Claude/Cursor" that belongs in AGENTS.md)? If so, flag it as a finding and propose moving it into the agentic surface (a `sync-agents` follow-up). This is the only reason to look at AGENTS.md, and you propose the move, you don't perform the agentic edit here.
 
