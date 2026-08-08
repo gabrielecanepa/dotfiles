@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Claude Code statusline",
-  "description": "Settings for .claude/statusline.sh, validated and set by /statusline-config. Every key is optional and falls back to its default.",
+  "description": "Settings for .claude/statusline.sh and .claude/subagent-statusline.sh, validated and set by /statusline-config. Every key is optional and falls back to its default.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -204,6 +204,79 @@
           "description": "Icon appended when warn is icon or both.",
           "default": "⚠︎",
           "minLength": 1
+        }
+      }
+    },
+    "subagent": {
+      "type": "object",
+      "description": "Subagent task rows, read by .claude/subagent-statusline.sh.",
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "type": "array",
+          "description": "Segments to render, one group per separator-joined block. Unknown names are dropped, and a layout left with no segment falls back to the default.",
+          "default": [
+            [
+              "title"
+            ],
+            [
+              "model",
+              "effort",
+              "context"
+            ]
+          ],
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "title",
+                  "description": "Subagent name or label."
+                },
+                {
+                  "const": "model",
+                  "description": "Short model name."
+                },
+                {
+                  "const": "effort",
+                  "description": "Reasoning effort level."
+                },
+                {
+                  "const": "context",
+                  "description": "Token count with its symbol, bar and percentage."
+                }
+              ]
+            }
+          }
+        },
+        "separator": {
+          "type": "string",
+          "description": "Symbol joining the layout groups. An empty or blank value joins them with a single space.",
+          "default": "·"
+        },
+        "context": {
+          "type": "object",
+          "description": "Context segment of the subagent layout.",
+          "additionalProperties": false,
+          "properties": {
+            "symbol": {
+              "type": "string",
+              "description": "Character displayed before the token count.",
+              "default": "↓",
+              "minLength": 1
+            },
+            "progressbar": {
+              "type": "boolean",
+              "description": "Draw an eight-step usage bar at the beginning of the context.",
+              "default": false
+            },
+            "percentage": {
+              "type": "boolean",
+              "description": "Append the used percentage in parentheses after the token count.",
+              "default": true
+            }
+          }
         }
       }
     }
