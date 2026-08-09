@@ -33,7 +33,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
   "fallbackModel": [
     "default"
   ],
@@ -151,7 +150,6 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
   "askUserQuestionTimeout": "never",
   "plansDirectory": ".agents/plans",
   "tui": "fullscreen",
