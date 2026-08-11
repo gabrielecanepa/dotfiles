@@ -308,6 +308,7 @@
     "-ci"
   ],
   "shfmt.formatIgnored": false,
+  "staple.optimizeImages.app": "ImageOptim",
   "terminal.external.osxExec": "Ghostty.app",
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
   "terminal.integrated.copyOnSelection": true,
@@ -334,7 +335,6 @@
     "file://${userHome}/.vscode/user/styles.css"
   ],
   "vscode_custom_css.statusbar": false,
-  "vscodeTools.optimizeImages.app": "ImageOptim",
   "window.autoDetectColorScheme": true,
   "window.dialogStyle": "native",
   "window.newWindowDimensions": "maximized",
