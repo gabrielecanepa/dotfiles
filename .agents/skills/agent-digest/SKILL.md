@@ -1,11 +1,10 @@
 ---
 name: agent-digest
 description: >-
-  Fetch the week's developer and AI newsletter issues from a curated feed list,
-  evaluate them against a target repository's agentic configuration and stack,
-  and report proposed diffs plus notable libraries and tools. Use for
-  /agent-digest, the weekly newsletter routine, or applying a previous report's
-  numbered proposals.
+  Fetch the week's newsletter issues from a curated feed list, evaluate them
+  against a target repository's agentic configuration and stack, and report
+  proposed diffs and notable tools. Use for /agent-digest, the weekly
+  newsletter routine, or applying a previous report's numbered proposals.
 ---
 
 # agent-digest

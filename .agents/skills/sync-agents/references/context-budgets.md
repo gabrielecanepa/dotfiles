@@ -35,6 +35,8 @@ The total always-on budget includes every physical file a tool injects at startu
 - Treat 8,000 catalog characters as the maximum. Disable redundant entries, shorten triggers, or narrow discovery before crossing it.
 - Description text states what the skill does and when to use it. Workflow details belong in `SKILL.md`, not metadata.
 - Semantically duplicate skill names or triggers require one clear winner.
+- Claude Code truncates each listing entry (the combined `description` and `when_to_use` text) at 1,536 characters; the Agent Skills spec caps `description` itself at 1,024.
+- A skill with `disable-model-invocation: true` keeps its description out of the model-facing catalog entirely, so manual-only workflows cost no discovery budget.
 
 Catalog size is preselection cost. It matters even when no skill is invoked.
 
@@ -48,6 +50,14 @@ A single product effort may need far more than one phase budget. Split it by lif
 4. Subsystem references: detailed contracts, schemas, or research loaded only by the phase that needs them.
 
 Keep one phase below 6,000 tokens when practical. At 10,000 tokens, split it unless the document is a cohesive machine-consumed artifact whose integrity would be harmed.
+
+## Compaction survival
+
+What survives context compaction differs by surface, so budget with the reload path in mind:
+
+- The project-root entrypoint is re-injected in full after compaction.
+- Path-scoped rules and nested entrypoints are not re-injected; they reload on the next matching file read.
+- Invoked skills are re-attached as the most recent invocation of each, keeping the first 5,000 tokens per skill under a 25,000-token shared budget, most recent first; older skills can drop entirely.
 
 ## Progressive disclosure
 

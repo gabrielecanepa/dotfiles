@@ -2,6 +2,8 @@
 name: sweep-macos
 description: >-
   Audit macOS for leftover data from uninstalled applications and stage reversible wipes. Use for /sweep-macos or questions about orphaned app data, leftovers from deleted apps, app residue, or reclaiming disk space from old caches and preferences.
+disable-model-invocation: true
+allowed-tools: Bash(~/.agents/skills/sweep-macos/scripts/sweep-macos.sh *)
 ---
 
 # sweep-macos
@@ -26,7 +28,7 @@ Parse optional arguments from the user request:
 Run the bundled script with a generous timeout (a full scan walks most of `~/Library` and takes minutes):
 
 ```bash
-scripts/sweep-macos.sh audit [flags]
+~/.agents/skills/sweep-macos/scripts/sweep-macos.sh audit [flags]
 ```
 
 The script is read-only, prints progress to stderr, and prints the run directory on stdout. It writes `report.md`, `report.tsv`, `report.json`, and the `live-*` set files into that directory under `${XDG_STATE_HOME:-~/.local/state}/sweep-macos/`.
@@ -48,7 +50,7 @@ Write every approved VERIFY and CACHES path, exactly as shown in the report's Pa
 ### 4. Apply
 
 ```bash
-scripts/sweep-macos.sh apply --run RUN_DIR [--approved FILE]
+~/.agents/skills/sweep-macos/scripts/sweep-macos.sh apply --run RUN_DIR [--approved FILE]
 ```
 
 Moves are never deletions: user paths go to `~/.Trash/sweep-macos-<run>/`, system paths move via `sudo mv` into `staged-system/` inside the run directory, and every move is appended to `manifest.tsv`. If system rows are selected and the session has no TTY for the sudo prompt, do not let apply die mid-run: run apply for user paths first (approve only user paths), then hand the user the full command to run themselves with the `!` prefix.
@@ -60,7 +62,7 @@ State items moved, space staged, the manifest path, and the restore command. Not
 ### 6. Restore
 
 ```bash
-scripts/sweep-macos.sh restore --run RUN_DIR [PATH...]
+~/.agents/skills/sweep-macos/scripts/sweep-macos.sh restore --run RUN_DIR [PATH...]
 ```
 
 Replays the manifest in reverse, everything or only the given original paths. Offer it whenever the user reports something broke after a wipe.

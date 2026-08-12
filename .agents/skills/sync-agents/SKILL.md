@@ -51,7 +51,8 @@ Use `rg --files`, targeted `find`, `readlink`, and Git status or ignore checks. 
 - `.agents/`, `.claude/`, `.codex/`, `.copilot/`, `.cursor/`, and `.github/` agentic trees;
 - rule files, skills, hooks, output styles, agents, specs, plans, tasks, and artifacts;
 - MCP configuration and settings that control instruction or skill discovery;
-- symlinks, includes, lockfiles, ignored files, and generated mirrors.
+- symlinks, includes, lockfiles, ignored files, and generated mirrors;
+- tool-written memory that loads at startup, such as Claude auto memory (`~/.claude/projects/<project>/memory/MEMORY.md`): measure the loaded index, flag stale entries, and promote rule-worthy learnings into the tracked instruction stack.
 
 For each item, record its role, owner, loader, scope, physical target, tracked or ignored state, and whether another item duplicates it.
 
