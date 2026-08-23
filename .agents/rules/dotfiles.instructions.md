@@ -1,6 +1,6 @@
 ---
 description: 'Use only in the $HOME dotfiles repository. Owns portability, allowlist tracking, and the repository commit convention; routes agent configuration, shell internals, and launchd to scoped companion rules.'
-applyTo: '.agents/**,.claude/**,.codex/**,.config/**,.copilot/**,.github/**,.homebrew/**,.local/**,.npm/**,.vscode/**,.zed/**,.zsh/**,.aliases,.bash_profile,.bashrc,.commitlintrc,.editorconfig,.gemrc,.gitconfig,.gitignore,.install.sh,.irbrc,.macos,.node-version,.npmrc,.oxfmtrc.json,.profile,.python-version,.rubocop.yml,.ruby-version,.shellcheckrc,.vault,.vimrc,.zprofile,.zshenv,.zshrc'
+applyTo: '.agents/**,.claude/**,.codex/**,.config/**,.copilot/**,.github/**,.homebrew/**,.local/**,.npm/**,.vscode/**,.zed/**,.zsh/**,.aliases,.bash_profile,.bashrc,.commitlintrc.json,.editorconfig,.gemrc,.gitconfig,.gitignore,.install.sh,.irbrc,.macos,.node-version,.npmrc,.oxfmtrc.json,.profile,.python-version,.rubocop.yml,.ruby-version,.shellcheckrc,.vault,.vimrc,.zprofile,.zshenv,.zshrc'
 paths:
   - '.agents/**'
   - '.claude/**'
@@ -9,7 +9,6 @@ paths:
   - '.copilot/**'
   - '.github/**'
   - '.homebrew/**'
-  - '.local/**'
   - '.npm/**'
   - '.vscode/**'
   - '.zed/**'
@@ -17,7 +16,7 @@ paths:
   - '.aliases'
   - '.bash_profile'
   - '.bashrc'
-  - '.commitlintrc'
+  - '.commitlintrc.json'
   - '.editorconfig'
   - '.gemrc'
   - '.gitconfig'

@@ -49,9 +49,6 @@
 !/.homebrew/
 /.homebrew/*
 !/.homebrew/Brewfile
-!/.local/
-/.local/*
-!/.local/bin/
 !/.npm/
 /.npm/*
 !/.npm/package.json
