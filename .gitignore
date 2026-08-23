@@ -55,6 +55,9 @@
 !/.npm/
 /.npm/*
 !/.npm/package.json
+!/.orbstack/
+/.orbstack/*
+!/.orbstack/vmconfig.json
 !/.ssh/
 /.ssh/*
 !/.ssh/config

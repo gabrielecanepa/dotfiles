@@ -1,0 +1,5 @@
+{
+  "cpu": 6,
+  "memory_mib": 3072,
+  "mount_hide_shared": true
+}
