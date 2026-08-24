@@ -1,16 +1,15 @@
 #!/bin/sh
 
-set -eu
+set -euf
+
+SCRIPT_PATHSPEC="*.sh *.bash .profile .bashrc .bash_profile .macos .config/git/hooks/*"
+NPM_BINS="commitlint oxfmt"
+HOMEBREW_BINS="shellcheck shfmt"
 
 case ":$PATH:" in
   *:/opt/homebrew/bin:*) ;;
   *) PATH="/opt/homebrew/bin:/usr/local/bin:$PATH" ;;
 esac
-
-branch="$(git branch --show-current)"
-remote="$(git config "branch.$branch.remote" 2>/dev/null || echo origin)"
-upstream="$remote/$branch"
-files="$(git ls-files '*.sh' '*.bash' '.profile' '.bashrc' '.bash_profile' '.macos' '.config/git/hooks/*')"
 
 red=""
 reset=""
@@ -19,12 +18,40 @@ if [ -t 2 ]; then
   reset="\033[0m"
 fi
 
-git rev-parse --verify --quiet "$upstream" >/dev/null && commitlint --from "$upstream" --to HEAD --quiet
-echo "$files" | xargs shellcheck
-echo "$files" | xargs shfmt -d
-oxfmt --check --no-error-on-unmatched-pattern
-
-if git ls-files -z | xargs -0 grep -nIoE -d skip '/Users/[A-Za-z0-9._-]+' | grep -v ':/Users/Shared$'; then
-  printf '%b%s%b\n' "$red" "pre-push: tracked files must be portable, replace the paths with \$HOME, ~, or a repo-relative path" "$reset" >&2
+fail() {
+  printf '%b%s%b\n' "$red" "pre-push: $1" "$reset" >&2
   exit 1
+}
+
+scripts() {
+  # shellcheck disable=SC2086
+  git ls-files -z -- $SCRIPT_PATHSPEC
+}
+
+for bin in $NPM_BINS; do
+  command -v "$bin" >/dev/null 2>&1 || fail "missing $bin binary, run 'npm install -g' to install"
+done
+
+for bin in $HOMEBREW_BINS; do
+  command -v "$bin" >/dev/null 2>&1 || fail "missing $bin binary, run 'brew bundle install' to install"
+done
+
+if [ -z "$(scripts | tr -d '\0')" ]; then
+  fail "no shell scripts matched"
 fi
+
+if git ls-files -z | xargs -0 grep -nIoE -d skip '/Users/[A-Za-z0-9._-]+' | grep -v ':/Users/Shared$' >&2; then
+  fail "tracked files must be portable, replace absolute paths with \$HOME, ~, or repo-relative ones"
+fi
+
+branch="$(git branch --show-current)"
+remote="$(git config "branch.$branch.remote" 2>/dev/null || echo origin)"
+upstream="$remote/$branch"
+
+if git rev-parse --verify --quiet "$upstream" >/dev/null; then
+  commitlint --from "$upstream" --to HEAD
+fi
+
+scripts | xargs -0 shellcheck
+scripts | xargs -0 shfmt -d
+oxfmt --check --no-error-on-unmatched-pattern
