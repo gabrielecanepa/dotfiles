@@ -1,8 +1,3 @@
-#
-# brewfile: wrap brew/mas so package-mutating commands sync the Brewfile in the background.
-# Usage: brew <command>
-#        mas <command>
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 _brewfile_sync() {
@@ -15,7 +10,6 @@ _brewfile_sync() {
 brew() {
   emulate -L zsh
 
-  # Subcommands that mutate installed packages, so a sync follows.
   local -a dump_commands=(
     install uninstall remove reinstall upgrade cleanup
     link unlink pin unpin tap untap
@@ -54,11 +48,8 @@ brew() {
       command brew "$cmd" "$@"
       local exit=$?
 
-      # Membership test: 1 when $cmd is in dump_commands.
-      # Skip the sync when the command only printed help.
       if (( ${dump_commands[(Ie)$cmd]} )) && (( exit == 0 )) &&
         (( ! ${@[(Ie)-h]} )) && (( ! ${@[(Ie)--help]} )); then
-        # Run the sync detached so the prompt returns immediately.
         _brewfile_sync &!
       fi
 
@@ -89,7 +80,6 @@ mas() {
   return $exit
 }
 
-# Register completion only when compdef and functions exist.
 if (( $+functions[compdef] )); then
   (( $+functions[_brew] )) && compdef _brew brew
   (( $+functions[_mas] )) && compdef _mas mas

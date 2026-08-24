@@ -1,7 +1,3 @@
-#
-# dotfiles: re-assert machine-local state that drifts, like git config and clobbered symlinks.
-# Usage: dotfiles <init|doctor|help>
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 _dotfiles_encoding_ok() {
@@ -105,18 +101,18 @@ dotfiles() {
       [[ "$2" == (-v|--verbose) ]] && verbose=1
 
       if _dotfiles_git_hooks_ok; then
-        (( verbose )) && _zsh::log info dotfiles "git hooks path already set 🪝"
+        (( verbose )) && _zsh::log info dotfiles "git hooks path already set"
       elif command git -C "$HOME" config --local core.hooksPath .config/git/hooks; then
-        (( verbose )) && _zsh::log success dotfiles "git hooks path set to .config/git/hooks 🪝"
+        (( verbose )) && _zsh::log success dotfiles "git hooks path set to .config/git/hooks"
       else
         _zsh::log error dotfiles "failed to set git hooks path"
         rc=1
       fi
 
       if _dotfiles_hushlogin_ok; then
-        (( verbose )) && _zsh::log info dotfiles "login banner already silenced 🤫"
+        (( verbose )) && _zsh::log info dotfiles "login banner already silenced"
       elif command touch "$HOME/.hushlogin"; then
-        (( verbose )) && _zsh::log success dotfiles "login banner silenced via ~/.hushlogin 🤫"
+        (( verbose )) && _zsh::log success dotfiles "login banner silenced via ~/.hushlogin"
       else
         _zsh::log error dotfiles "failed to create ~/.hushlogin"
         rc=1
@@ -124,9 +120,9 @@ dotfiles() {
 
       if [[ $OSTYPE == darwin* ]]; then
         if _dotfiles_encoding_ok; then
-          (( verbose )) && _zsh::log info dotfiles "user text encoding already pinned 🔤"
+          (( verbose )) && _zsh::log info dotfiles "text encoding already pinned"
         elif print -r -- '0x0:0x0' > "$HOME/.CFUserTextEncoding"; then
-          (( verbose )) && _zsh::log success dotfiles "user text encoding pinned via ~/.CFUserTextEncoding 🔤"
+          (( verbose )) && _zsh::log success dotfiles "text encoding pinned via ~/.CFUserTextEncoding"
         else
           _zsh::log error dotfiles "failed to create ~/.CFUserTextEncoding"
           rc=1
@@ -136,20 +132,36 @@ dotfiles() {
       if [[ $OSTYPE != darwin* ]]; then
         return rc
       elif _dotfiles_vscode_ok "$vscode_settings" "$vscode_tracked"; then
-        (( verbose )) && _zsh::log info dotfiles "VS Code settings symlink intact 🔗"
+        (( verbose )) && _zsh::log info dotfiles "VS Code settings symlink intact"
       elif [[ ! -e "$vscode_tracked" ]]; then
         _zsh::log warn dotfiles "tracked VS Code settings missing at $vscode_tracked"
       elif command ln -sf "$vscode_tracked" "$vscode_settings"; then
-        (( verbose )) && _zsh::log success dotfiles "VS Code settings re-linked 🔗"
+        (( verbose )) && _zsh::log success dotfiles "VS Code settings re-linked"
       else
         _zsh::log error dotfiles "failed to re-link VS Code settings"
         rc=1
       fi
 
+      if [[ -n "$OBSIDIAN_VAULT" ]]; then
+        local vault_target="$(_dotfiles_vault_target)"
+        if [[ -z "$vault_target" ]]; then
+          _zsh::log warn dotfiles "can't find an Obsidian vault named $OBSIDIAN_VAULT"
+        elif [[ "$vault" -ef "$vault_target" ]]; then
+          (( verbose )) && _zsh::log info dotfiles "~/.vault symlink intact"
+        elif [[ -e "$vault" && ! -L "$vault" ]]; then
+          _zsh::log warn dotfiles "~/.vault already exists and is not a symlink"
+        elif command ln -sfn "$vault_target" "$vault"; then
+          _zsh::log success dotfiles "~/.vault linked to $fg[cyan]$OBSIDIAN_VAULT$reset_color"
+        else
+          _zsh::log error dotfiles "failed to link ~/.vault to $fg[cyan]$OBSIDIAN_VAULT$reset_color"
+          rc=1
+        fi
+      fi
+
       local -a stale
       stale=(${(f)"$(_dotfiles_launchd_stale)"})
       if (( $#stale == 0 )); then
-        (( verbose )) && _zsh::log info dotfiles "launch agents generated 🚀"
+        (( verbose )) && _zsh::log info dotfiles "launch agents generated"
       elif ! command mkdir -p "$HOME/Library/LaunchAgents"; then
         _zsh::log error dotfiles "failed to create ~/Library/LaunchAgents"
         rc=1
@@ -166,9 +178,9 @@ dotfiles() {
           fi
           _dotfiles_launchd_unload "$label"
           if command launchctl bootstrap "gui/$UID" "$target" 2>/dev/null; then
-            _zsh::log success dotfiles "launch agent $label generated 🚀"
+            _zsh::log success dotfiles "launch agent $label generated"
           else
-            _zsh::log warn dotfiles "launch agent $label generated but not loaded"
+            _zsh::log warn dotfiles "launch agent $label generated but unloaded"
           fi
         done
       fi
@@ -179,7 +191,7 @@ dotfiles() {
       for agent in $retired; do
         _dotfiles_launchd_unload "${agent:t:r}"
         if command rm -f -- "$agent"; then
-          _zsh::log success dotfiles "launch agent ${agent:t:r} disabled 🚫"
+          _zsh::log success dotfiles "launch agent ${agent:t:r} disabled"
         else
           _zsh::log error dotfiles "failed to disable launch agent ${agent:t:r}"
           rc=1
@@ -189,18 +201,42 @@ dotfiles() {
       local -a extensions
       extensions=(${(f)"$(_dotfiles_vscode_extensions)"})
       if (( $#extensions == 0 )); then
-        (( verbose )) && _zsh::log info dotfiles "VS Code extensions in sync 🧩"
+        (( verbose )) && _zsh::log info dotfiles "VS Code extensions synced"
       elif ! (( $+commands[code] )); then
         _zsh::log warn dotfiles "code CLI not found, skipping $#extensions missing extension(s)"
       else
         local extension
         for extension in $extensions; do
           if command code --install-extension "$extension" >/dev/null 2>&1; then
-            _zsh::log success dotfiles "VS Code extension $extension installed 🧩"
+            _zsh::log success dotfiles "VS Code extension $extension installed"
           else
             _zsh::log warn dotfiles "failed to install VS Code extension $extension"
           fi
         done
+      fi
+
+      if (( $+functions[_npm_global_drift] )); then
+        local -a npm_drift npm_missing npm_drifted npm_untracked
+        npm_drift=(${(f)"$(_npm_global_drift)"})
+        npm_missing=(${${(M)npm_drift:#missing *}#missing })
+        npm_drifted=(${${(M)npm_drift:#drifted *}#drifted })
+        npm_untracked=(${${(M)npm_drift:#untracked *}#untracked })
+        if (( $#npm_drift == 0 )); then
+          (( verbose )) && _zsh::log info dotfiles "npm globals synced"
+        else
+          if (( $#npm_missing )); then
+            if command npm install --global "${npm_missing[@]}" >/dev/null 2>&1; then
+              _zsh::log success dotfiles "npm globals installed ${(j:, :)npm_missing}"
+            else
+              _zsh::log error dotfiles "failed to install npm globals ${(j:, :)npm_missing}"
+              rc=1
+            fi
+          fi
+          (( $#npm_drifted )) &&
+            _zsh::log warn dotfiles "npm globals drifted, run 'npm dump' to capture: ${(j:, :)npm_drifted}"
+          (( $#npm_untracked )) &&
+            _zsh::log warn dotfiles "untracked npm globals, run 'npm dump' to track: ${(j:, :)npm_untracked}"
+        fi
       fi
 
       return rc
@@ -255,7 +291,17 @@ dotfiles() {
           drift=1
         fi
       fi
-      (( drift == 0 )) && _zsh::log info dotfiles "no drift detected ✨"
+      if (( $+functions[_npm_global_drift] )); then
+        local -a npm_drift
+        npm_drift=(${(f)"$(_npm_global_drift)"})
+        if (( $#npm_drift == 0 )); then
+          _zsh::log success dotfiles "npm globals OK"
+        else
+          _zsh::log error dotfiles "npm globals out of sync: ${(j:, :)npm_drift}"
+          drift=1
+        fi
+      fi
+      (( drift == 0 )) && _zsh::log info dotfiles "no drift detected"
       return drift
       ;;
     help|-h|--help)

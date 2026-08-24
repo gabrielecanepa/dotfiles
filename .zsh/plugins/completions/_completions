@@ -1,0 +1,7 @@
+#compdef completions
+
+_completions() {
+  _arguments '*:command:_command_names -e'
+}
+
+_completions "$@"

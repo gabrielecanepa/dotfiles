@@ -1,0 +1,7 @@
+#compdef node-version
+
+_node-version() {
+  _arguments '1::command:((dump\:"write the running version to .node-version"))'
+}
+
+_node-version "$@"

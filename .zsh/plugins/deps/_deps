@@ -1,0 +1,13 @@
+#compdef deps
+
+_deps() {
+  _arguments \
+    '(-L --list)'{-L,--list}'[print the dependencies on a single line]' \
+    '(--all)--dev[include devDependencies]' \
+    '(--all)--peer[include peerDependencies]' \
+    '(--all)--optional[include optionalDependencies]' \
+    '(--dev --peer --optional)--all[include every dependency group]' \
+    '1::package:_alternative "directories:directory:_directories" "files:package.json:_files -g package.json"'
+}
+
+_deps "$@"

@@ -1,10 +1,6 @@
-#
-# code-workspace: open a VS Code workspace from ~/.vscode/workspaces by name.
-# Usage: code-workspace <name>
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
-[[ -z "${VSCODE_WORKSPACES_PATH:-}" ]] && export VSCODE_WORKSPACES_PATH="$HOME/.vscode/workspaces"
+[[ -z "${VSCODE_WORKSPACES_DIR:-}" ]] && export VSCODE_WORKSPACES_DIR="$HOME/.vscode/workspaces"
 
 code-workspace() {
   emulate -L zsh
@@ -16,7 +12,7 @@ code-workspace() {
     return 0
   fi
 
-  local file="$VSCODE_WORKSPACES_PATH/$name.code-workspace"
+  local file="$VSCODE_WORKSPACES_DIR/$name.code-workspace"
   if [[ ! -f "$file" ]]; then
     _zsh::log error code-workspace "not found: $name"
     return 1

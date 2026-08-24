@@ -1,7 +1,5 @@
 #compdef gatekeeper
 
-# Completion for the `gatekeeper` plugin command: the subcommand, then per-command arguments.
-
 _gatekeeper() {
   local curcontext="$curcontext" state line
   local -a commands
