@@ -3,10 +3,12 @@
 	pager = less -FRSX
 [init]
   defaultBranch = main
+
 [branch]
 	sort = -committerdate
 [branch "main"]
   mergeoptions = --no-edit
+
 [fetch]
 	prune = true
 	writeCommitGraph = true
@@ -17,6 +19,7 @@
 [push]
 	autoSetupRemote = true
 	followTags = true
+
 [commit]
   gpgsign = true
 	verbose = true
@@ -26,8 +29,7 @@
   format = ssh
 [gpg "ssh"]
   allowedSignersFile = ~/.config/git/allowed_signers
-[column]
-	ui = auto
+
 [merge]
 	conflictstyle = zdiff3
 [rebase]
@@ -36,9 +38,12 @@
 	updateRefs = true
 [rerere]
 	enabled = true
+
 [diff]
 	algorithm = histogram
 	colorMoved = dimmed-zebra
+[column]
+	ui = auto
 [color]
   branch = auto
   diff = auto
@@ -48,6 +53,7 @@
 [color "branch"]
   current = green
   remote = yellow
+
 [advice]
   skippedCherryPicks = false
 [help]
