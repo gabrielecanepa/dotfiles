@@ -90,7 +90,6 @@
 !/.rubocop.yml
 !/.ruby-version
 !/.shellcheckrc
-!/.vault
 !/.vimrc
 !/.zshenv
 !/.zshrc

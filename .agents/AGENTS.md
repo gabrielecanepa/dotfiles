@@ -30,7 +30,7 @@ Shared sources are in `~/.agents/`; provider entrypoints are links, never edit t
 - macOS on Apple Silicon; Homebrew at `/opt/homebrew`; VS Code and Ghostty.
 - Project code is under `~/Developer`; `$HOME` is the dotfiles git repository.
 - Keep personal, work, and client contexts separate: browser, email, and calendar work targets only the active context's accounts. Client projects live under `~/Developer/@<client>`; identity overrides are in the untracked `~/.gitconfig`.
-- The only Obsidian vault is `~/.vault`, a tracked symlink into its iCloud container; reference must be only through `~/.vault`, never the resolved path.
+- The only Obsidian vault is `~/.vault`; reference it only through that path, never the iCloud folder it resolves to.
 - Zsh uses custom plugins and themes under `~/.zsh`; check the matching plugin before treating commands like `profile`, `plugin`, `brew`, `mas`, `lts`, `deps`, or `dotfiles` as binaries.
 - Runtimes: `nodenv` (Node), `pyenv` (Python), `rbenv` (Ruby); introduce no other runtime or version manager unless asked. Use the shims, not system runtimes.
 - The default Node package manager is pnpm through Corepack; the project's lockfile always wins.

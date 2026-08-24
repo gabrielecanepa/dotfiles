@@ -23,6 +23,17 @@ _dotfiles_vscode_ok() {
   [[ "$live" -ef "$tracked" ]]
 }
 
+_dotfiles_vault_target() {
+  emulate -L zsh
+  local dir="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents" entry
+  for entry in "$dir"/*(N/); do
+    [[ "${entry:t}" == "$OBSIDIAN_VAULT" ]] || continue
+    print -r -- "$entry"
+    return 0
+  done
+  return 1
+}
+
 _dotfiles_launchd_disabled() {
   emulate -L zsh
   setopt local_options extended_glob
@@ -94,6 +105,7 @@ dotfiles() {
 
   local vscode_settings="$HOME/Library/Application Support/Code/User/settings.json"
   local vscode_tracked="$HOME/.vscode/user/settings.json"
+  local vault="$HOME/.vault"
 
   case "$1" in
     init|"")
@@ -267,6 +279,18 @@ dotfiles() {
         else
           _zsh::log error dotfiles "VS Code settings is not a symlink to the tracked file"
           drift=1
+        fi
+        if [[ -n "$OBSIDIAN_VAULT" ]]; then
+          local vault_target="$(_dotfiles_vault_target)"
+          if [[ -z "$vault_target" ]]; then
+            _zsh::log error dotfiles "no Obsidian vault named $OBSIDIAN_VAULT"
+            drift=1
+          elif [[ "$vault" -ef "$vault_target" ]]; then
+            _zsh::log success dotfiles "vault symlink OK"
+          else
+            _zsh::log error dotfiles "~/.vault does not point to the $OBSIDIAN_VAULT vault"
+            drift=1
+          fi
         fi
         local -a stale_agents retired_agents
         stale_agents=(${(f)"$(_dotfiles_launchd_stale)"})
