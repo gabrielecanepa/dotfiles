@@ -34,7 +34,7 @@ export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 initialize-path() {
   path=(
     "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
-    "$BUN_INSTALL/bin" "$PNPM_HOME"
+    "$BUN_INSTALL/bin" "$PNPM_HOME/bin"
     "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
     $path
   )
