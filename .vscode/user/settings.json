@@ -135,7 +135,6 @@
   "explorer.confirmUndo": "light",
   "extensions.allowOpenInModalEditor": true,
   "files.associations": {
-    ".commitlintrc": "json",
     ".env*": "properties",
     "*.json.lock": "jsonl",
     "*.todo": "markdown",
