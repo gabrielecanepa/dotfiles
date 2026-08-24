@@ -12,14 +12,6 @@ brew "btop"
 brew "bun"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Suite of command-line tools for converting to and working with CSV
-brew "csvkit"
-# TIFF library and utilities
-brew "libtiff"
-# Secure runtime for JavaScript and TypeScript
-brew "deno"
-# Command-line tools for fly.io services
-brew "flyctl"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
@@ -36,10 +28,6 @@ brew "oniguruma"
 brew "jq"
 # Network authentication protocol
 brew "krb5"
-# Simple terminal UI for git commands
-brew "lazygit"
-# Postgres C API library
-brew "libpq", link: true
 # Mac App Store command-line interface
 brew "mas"
 # Deep clean and optimize your Mac
@@ -50,36 +38,24 @@ brew "mysql"
 brew "nginx"
 # Node.js version manager
 brew "nodenv"
-# PNG image optimizing utility
-brew "pngquant"
 # Object-relational database system
 brew "postgresql@16"
 # Python version management
 brew "pyenv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
 brew "redis"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
-# OpenAI's official ChatGPT desktop app
-cask "chatgpt"
-# Anthropic's official Claude AI desktop app
-cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
@@ -99,8 +75,6 @@ cask "nordvpn"
 cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
-# Dictation and transcription app with AI-powered editing
-cask "spokenly"
 # Mesh VPN based on WireGuard
 cask "tailscale-app"
 # Unpacks archive files
@@ -111,6 +85,4 @@ cask "transmission"
 cask "visual-studio-code"
 # Native desktop client for WhatsApp
 cask "whatsapp"
-# Multiplayer code editor
-cask "zed"
 mas "Toggl Track", id: 1291898086
