@@ -12,16 +12,23 @@
   "chat.useAgentsMdFile": false,
   "chat.useClaudeMdFile": false,
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "explorer.autoRevealExclude": {
+    "**/.vault": true,
+    "**/bower_components": true,
+    "**/node_modules": true
+  },
   "files.associations": {
     ".aliases": "shellscript",
     "**/.config/git/config": "properties"
   },
   "files.exclude": {
-    ".DS_Store": true,
-    ".Trash": true,
-    "*_history": true,
+    ".CFUserTextEncoding": true,
+    ".hushlogin": true,
+    "**/.DS_Store": true,
+    "**/.trash": true,
+    "**/.Trash": true,
+    "**/*_history": true,
     "Applications": true,
-    "Claude": true,
     "Desktop": true,
     "Developer": true,
     "Documents": true,
@@ -33,9 +40,12 @@
     "Pictures": true,
     "Public": true
   },
-  "git.autoRepositoryDetection": false,
+  "git.autoRepositoryDetection": "subFolders",
   "git.ignoredRepositories": [
     ".oh-my-zsh"
+  ],
+  "git.scanRepositories": [
+    ".vault"
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -46,13 +56,13 @@
   "oxc.enable.oxfmt": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
-    ".claude/rules": true,
-    ".claude/skills": true,
-    ".codex/AGENTS.md": true,
-    ".codex/hooks.json": true,
-    ".codex/skills": true,
-    ".copilot/copilot-instructions.md": true,
-    ".copilot/instructions": true,
+    "**/.claude/rules": true,
+    "**/.claude/skills": true,
+    "**/.codex/AGENTS.md": true,
+    "**/.codex/hooks.json": true,
+    "**/.codex/skills": true,
+    "**/.copilot/copilot-instructions.md": true,
+    "**/.copilot/instructions": true,
     "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true
