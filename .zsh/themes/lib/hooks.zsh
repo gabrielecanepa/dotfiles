@@ -1,5 +1,5 @@
-# Theme hook registry: sourcing deregisters the previous theme's hooks so the
-# oh-my-zsh `theme` command switches cleanly in a live shell, then themes
+# Theme hooks: sourcing unregisters the previous theme's hooks so the
+# oh-my-zsh `theme` command switches cleanly in a live shell. Themes
 # register their own hooks with _theme_hook.
 
 autoload -U add-zsh-hook

@@ -1,12 +1,7 @@
-# Status-colored prompt with the current directory and the shared git segment;
-# the right prompt shows project-aware runtime versions (node, python, ruby,
-# php) and the Node package manager, with pin and update markers refreshed
+# Status-colored prompt with the current directory and the shared git segment.
+# The right prompt shows project-aware runtime versions (Node.js, Python, Ruby,
+# PHP) and the Node.js package manager, with pin and update markers refreshed
 # from a background cache.
-# Set ZSH_THEME_SQUANCHY_RPROMPTS to pick the fallback runtimes outside a
-# project (default: node python ruby php), ZSH_THEME_SQUANCHY_ICON_* and
-# ZSH_THEME_SQUANCHY_EMPTY to override icons, markers, and placeholders.
-# ZSH_THEME_SQUANCHY_GAP (default 4) is the minimum number of blank columns
-# between the left and right prompt.
 
 autoload -U colors && colors
 zmodload zsh/datetime

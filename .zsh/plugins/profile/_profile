@@ -1,7 +1,5 @@
 #compdef profile
 
-# Completion for the `profile` plugin command.
-
 _profile() {
   local -a subcommands
   subcommands=(

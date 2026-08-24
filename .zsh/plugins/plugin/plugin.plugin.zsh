@@ -1,7 +1,3 @@
-#
-# plugin: load or reload a zsh plugin by name, preferring the custom override over the bundled copy.
-# Usage: plugin <name>
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 plugin() {
@@ -16,7 +12,6 @@ plugin() {
 
   local zsh_path="$ZSH/plugins/$name/$name.plugin.zsh"
   local custom_path="$ZSH_CUSTOM/plugins/$name/$name.plugin.zsh"
-  # A plugin under ZSH_CUSTOM shadows the bundled one of the same name.
   [[ -f "$custom_path" ]] && zsh_path="$custom_path"
 
   if [[ ! -f "$zsh_path" ]]; then

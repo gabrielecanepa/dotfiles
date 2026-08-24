@@ -1,0 +1,21 @@
+#compdef dotfiles
+
+_dotfiles() {
+  local -a commands
+  commands=(
+    'init:Fix any drifted state (default)'
+    'doctor:Report drift without changing anything'
+    'help:Show the help message'
+  )
+
+  if (( CURRENT == 2 )); then
+    _describe -t commands 'dotfiles command' commands
+    return
+  fi
+
+  case $words[2] in
+    init) _arguments '(-v --verbose)'{-v,--verbose}'[log every check]' ;;
+  esac
+}
+
+_dotfiles "$@"

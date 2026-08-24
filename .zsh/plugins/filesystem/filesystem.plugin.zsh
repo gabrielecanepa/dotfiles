@@ -1,9 +1,5 @@
-#
-# filesystem: utilities and wrappers to list files, see directory sizes, print PATH/FPATH, and recursively remove directories.
-# Usage: ls | ll | lss [<dir>...] | path | fpath | rmm <name>... | mkdircd <dir> | mkdircode <dir>
-
 if (( $+commands[gls] )); then
-  # Ignore macOS Icon files and Finder metadata.
+  # Ignore icon files and Finder metadata.
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 else
   alias ls="/bin/ls -GHhp"
@@ -24,7 +20,6 @@ lss() {
 
 path() {
   emulate -L zsh
-  # (s/:/) splits the value on ":" into one element per directory
   print -rl -- "${(s/:/)PATH}"
 }
 

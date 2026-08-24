@@ -1,9 +1,6 @@
-# Status-colored prompt with the current directory and the shared git segment;
-# the right prompt shows runtime versions with pin and update markers refreshed
+# Status-colored prompt with the current directory and the shared git segment.
+# The right prompt shows runtime versions with pin and update markers refreshed
 # from a background cache.
-# Set ZSH_THEME_RUNTIMES_RPROMPTS to pick the runtimes (default: node python
-# ruby php), and ZSH_THEME_RUNTIMES_ICON_* or ZSH_THEME_RUNTIMES_RPROMPT_EMPTY
-# to override icons, markers, and the empty placeholder.
 
 autoload -U colors && colors
 zmodload zsh/datetime

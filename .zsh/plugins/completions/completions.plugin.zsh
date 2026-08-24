@@ -1,7 +1,3 @@
-#
-# completions: generate and cache zsh completion files under $ZSH_COMPLETIONS_PATH.
-# Usage: completions <cli> [<cli> ...]
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 [[ -z "${ZSH_COMPLETIONS_PATH:-}" ]] && export ZSH_COMPLETIONS_PATH="${ZSH_CUSTOM:-$HOME/.zsh}/completions"
@@ -19,9 +15,7 @@ completions() {
     return 1
   fi
 
-  # Read piped/redirected completion text only when stdin is a pipe or regular
-  # file; this skips the no-redirect and /dev/null cases so the startup loop
-  # below never blocks on read.
+  # Read completion text only when stdin is a pipe or regular file, so the startup loop never blocks on read.
   if [[ -p /dev/stdin || -f /dev/stdin ]]; then
     IFS= read -rd '' comp
 
@@ -46,7 +40,6 @@ completions() {
       continue
     fi
 
-    # Probe the common completion-subcommand spellings, get first non-empty.
     comp="$(command "$cli" completion zsh 2>/dev/null)"
     [[ -n "$comp" ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
     [[ -n "$comp" ]] || comp="$(command "$cli" completion 2>/dev/null)"
@@ -57,7 +50,6 @@ completions() {
       continue
     fi
 
-    # Skip the write when the cache already matches the probed output.
     file="$ZSH_COMPLETIONS_PATH/_$cli"
     [[ -e "$file" && "$comp" == "$(<"$file")" ]] && continue
 
@@ -71,9 +63,7 @@ completions() {
   return $rc
 }
 
-# At startup, generate any missing completion inline to make it available in
-# the session, then re-probe the caches in a detached background job so stal
-# caches are refreshed for the next shell without blocking the current.
+# Generate missing completions and refresh existing caches in the background.
 () {
   local cli
   local -a cached

@@ -1,7 +1,3 @@
-#
-# lts: find and install the latest LTS release of Node.js, Python, or Ruby via their version managers.
-# Usage: lts <command>
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
 typeset -ga _lts_langs=(node ruby python)
@@ -35,7 +31,6 @@ _lts_error() {
 _lts_validate_language() {
   emulate -L zsh
   local lang=$1
-  # (Ie) returns the index of $lang in the array, 0 (false) when absent.
   [[ -n $lang ]] && (( ${_lts_langs[(Ie)$lang]} ))
 }
 
@@ -59,16 +54,13 @@ _lts_get_language_name() {
   esac
 }
 
-# Resolve the latest LTS version for a language@prefix spec.
 _lts_get_latest_version() {
   emulate -L zsh
   setopt local_options pipefail extended_glob
 
   local spec=$1
-  # Split the spec on @ into language and optional version prefix.
   local -a parts=(${(s/@/)spec})
 
-  # Reject more than one @ or a trailing @ with no prefix.
   if (( ${#parts} > 2 )) || [[ $spec == *@* && -z ${parts[2]} ]]; then
     _lts_error "invalid version: $spec"
     return 1
@@ -84,7 +76,6 @@ _lts_get_latest_version() {
     return 1
   fi
 
-  # Node LTS comes from the dist index rather than a version-manager list.
   if [[ $lang == node ]]; then
     if (( ! ${+commands[jq]} )); then
       _lts_error 'required tool not found: jq'
@@ -104,13 +95,13 @@ _lts_get_latest_version() {
   esac
 
   local versions
-  # Drop any line carrying letters (named/dev builds) and trim surrounding whitespace.
+  # Drop any line with letters (dev builds) and trim whitespaces.
   versions=$(command "$vm" install "$opt" |
     command grep -vi '[A-Za-z\-]' |
     command sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//') || return 1
 
   if [[ -n $prefix ]]; then
-    # A full x.y.z prefix matches exactly; a partial prefix matches up to its next dot.
+    # Full x.y.z prefixes match exactly, partial prefixes match up to the next dot.
     local re=${prefix//./\\.}
     if [[ $prefix == [0-9]##.[0-9]##.[0-9]## ]]; then
       versions=$(print -r -- "$versions" | command grep "^$re$")
@@ -119,11 +110,10 @@ _lts_get_latest_version() {
     fi
   fi
 
-  # Versions are sorted ascending, so the last line is the newest match.
+  # Versions are sorted ascending, the last line is the newest match.
   print -r -- "$versions" | command tail -1
 }
 
-# Resolve the active version (local file takes precedence over global) for a language.
 _lts_get_active_version() {
   emulate -L zsh
   local vm
@@ -137,9 +127,6 @@ _lts_get_active_version() {
   command "$vm" version-name
 }
 
-# Return $text wrapped in a foreground color when $_lts_use_color is set,
-# otherwise plain. The flag is decided once by the caller against the real
-# stdout, since [[ -t 1 ]] inside a $(...) capture would always read false.
 _lts_colorize() {
   emulate -L zsh
   local color=$1 text=$2
@@ -150,10 +137,6 @@ _lts_colorize() {
   fi
 }
 
-# Print the version comparison for one language. With $2 set, prefix the line
-# with the language name for the aggregate `lts check` listing. Exposes the
-# resolved latest version to the caller through $_lts_check_latest.
-# Returns 0 when up to date, 1 when outdated, 2 on error.
 _lts_check_language() {
   emulate -L zsh
   local lang=$1 labelled=$2 lang_name active latest
@@ -187,12 +170,10 @@ _lts_check() {
     return 1
   fi
 
-  # Decide color once against the real stdout; _lts_colorize reads this flag.
   local _lts_use_color=0
   [[ -t 1 ]] && _lts_use_color=1
   local _lts_check_latest
 
-  # Single language: print the comparison and the upgrade hint when behind.
   if (( $# == 1 )); then
     local lang=$1
     if ! _lts_validate_language "$lang"; then
@@ -209,7 +190,6 @@ _lts_check() {
     return 0
   fi
 
-  # No language: list every supported language and a single summary footer.
   local lang any_outdated=0
   for lang in "${_lts_langs[@]}"; do
     _lts_check_language "$lang" labelled
@@ -257,15 +237,13 @@ _lts_install() {
     new=$(_lts_get_latest_version "$spec") || return 1
 
     if [[ $old == "$new" ]]; then
-      # The active version already matches the prefixed latest; check whether it is also the global latest.
+      # The prefixed latest is already active, check if it's also the global latest.
       if [[ $(_lts_get_latest_version "$lang") == "$new" ]]; then
         print -r -- "Already on latest $lang_name version"
         continue
       fi
 
       prefix_parts=(${(s/./)prefix})
-
-      # A full x.y.z prefix pins one release, so there is nothing newer to move to.
       if (( ${#prefix_parts} > 2 )); then
         print -r -- "$lang_name $new is already installed"
         continue
@@ -275,7 +253,6 @@ _lts_install() {
       continue
     fi
 
-    # Already built but not active: offer to switch, defaulting to yes.
     if command "$vm" versions | command grep -q "$new"; then
       print -rn -- "$lang_name $new is already installed. Do you want to switch to it? [Y/n] "
       read -k1 -r choice

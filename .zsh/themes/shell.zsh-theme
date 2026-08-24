@@ -1,5 +1,4 @@
-# Bare zsh-<version> prompt with no segments or hooks, for debugging the shell
-# without prompt machinery; sourcing it clears the previous theme's hooks.
+# Bare zsh-<version> prompt with no segments or hooks.
 
 source ${0:A:h}/lib/hooks.zsh
 

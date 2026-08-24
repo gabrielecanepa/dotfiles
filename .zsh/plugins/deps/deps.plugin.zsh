@@ -1,10 +1,5 @@
-#
-# deps: print the dependencies declared in a project's package.json.
-# Usage: deps [<dir>|<path/to/package.json>] [-L|--list] [--dev|--peer|--optional|--all]
-
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
-# Resolve an input to the dir holding package.json: a dir, a package.json path, or empty for PWD; else return 1.
 _deps_get_package_root() {
   emulate -L zsh
   local target=$1
@@ -28,7 +23,6 @@ deps() {
   local -a groups
   local list=0
 
-  # First positional may be a path; if so, take it as the root and drop it from the options.
   if [[ -f $1 || -d $1 ]]; then
     dir=${1:A}
     args=("${@:2}")
@@ -36,7 +30,6 @@ deps() {
 
   local arg
   for arg in "${args[@]}"; do
-    # (Ie) yields the index of an exact match; zero means $arg is not a known option.
     if (( ! ${opts_allowed[(Ie)$arg]} )); then
       _zsh::log error deps "invalid option: $arg"
       return 1
@@ -47,7 +40,6 @@ deps() {
       --peer) (( ${groups[(Ie)peerDependencies]} )) || groups+=(peerDependencies) ;;
       --optional) (( ${groups[(Ie)optionalDependencies]} )) || groups+=(optionalDependencies) ;;
       --all)
-        # --all is exclusive: reject it alongside any per-group flag.
         if (( ${args[(Ie)--dev]} || ${args[(Ie)--peer]} || ${args[(Ie)--optional]} )); then
           _zsh::log error deps "can't specify --all with --dev, --peer or --optional"
           return 1
@@ -66,7 +58,6 @@ deps() {
   local -a out
   local group name
   for group in "${groups[@]}"; do
-    # (f) splits jq's output on newlines, one dependency name per element.
     for name in ${(f)"$(command jq -r "(.${group} // {}) | keys[]" "$root/package.json" 2>/dev/null)"}; do
       out+=("$name")
     done
