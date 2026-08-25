@@ -44,7 +44,7 @@ printf '%s' "$input" | jq -c --argjson sub "$subagent" '
   ($ctx.percentage != false) as $percentage |
   ((.effort | objects | .level) // null) as $session_effort |
   .tasks[] |
-  ([.name, .label, .type, "task"] | map(select(. != null and . != "")) | first) as $title |
+  ([.name, .description, .label, .type, "task"] | map(select(. != null and . != "")) | first) as $title |
   (.tokenCount // null) as $tokens |
   (.contextWindowSize // null) as $size |
   (.model // null) as $model_id |

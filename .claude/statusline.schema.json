@@ -232,7 +232,7 @@
               "oneOf": [
                 {
                   "const": "title",
-                  "description": "Subagent name or label."
+                  "description": "Subagent name, task title or current action."
                 },
                 {
                   "const": "model",
