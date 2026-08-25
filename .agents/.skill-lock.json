@@ -100,6 +100,15 @@
       "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
       "installedAt": "2026-07-03T08:42:41.500Z",
       "updatedAt": "2026-07-03T08:42:41.500Z"
+    },
+    "vercel-react-view-transitions": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-view-transitions/SKILL.md",
+      "skillFolderHash": "d5c0250898ec0dd3fe06cd46a396cd500ebf5bd5",
+      "installedAt": "2026-08-24T11:07:34.916Z",
+      "updatedAt": "2026-08-24T11:07:34.916Z"
     }
   },
   "dismissed": {

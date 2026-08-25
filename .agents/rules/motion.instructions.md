@@ -9,7 +9,7 @@ paths:
 
 # Motion and animation
 
-The production floor in `design.instructions.md` still applies. For React View Transitions without a library (`<ViewTransition>`, `addTransitionType`, and view-transition pseudo-elements), verify current React docs through Context7.
+The production floor in `design.instructions.md` still applies. For React View Transitions without a library (`<ViewTransition>`, `addTransitionType`, and view-transition pseudo-elements), follow the `vercel-react-view-transitions` skill and its references; fall back to current React docs through Context7 only where the skill is silent.
 
 ## Skills
 
