@@ -28,4 +28,4 @@ Language-level idioms for any TypeScript file. React and JSX rules live in `reac
 
 ## Framework docs first
 
-Before framework work (Next.js, React, an ORM, any library), read the installed version's docs over training-data memory, which lags the installed version: prefer bundled docs when present (e.g. `node_modules/<pkg>/dist/docs/`), else the `context7-mcp` skill (see AGENTS.md skill routing). Next.js 16.3+ maintains a version-matched AGENTS.md docs block via `next dev`; treat it as the bundled docs. State the version you targeted when a docs finding drove a non-obvious choice.
+Before framework work (Next.js, React, an ORM, any library), read the installed version's docs over training-data memory, which lags the installed version: prefer bundled docs when present (e.g. `node_modules/<pkg>/dist/docs/`), else the `context7` MCP. Next.js 16.3+ maintains a version-matched AGENTS.md docs block via `next dev`; treat it as the bundled docs. State the version you targeted when a docs finding drove a non-obvious choice.

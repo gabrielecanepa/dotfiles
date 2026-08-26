@@ -4,6 +4,7 @@ description: >-
   Upgrade a Node.js project's toolchain and dependencies, including Node LTS and
   its package manager. Use for /bump or requests to upgrade dependencies, Node,
   or the package manager; excludes Python, Ruby, Rust, and Go.
+disable-model-invocation: true
 ---
 
 # bump

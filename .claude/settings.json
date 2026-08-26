@@ -41,6 +41,10 @@
     "shadcn",
     "vercel"
   ],
+  "skillOverrides": {
+    "review-animations": "user-invocable-only",
+    "vercel-react-view-transitions": "user-invocable-only"
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -111,7 +115,7 @@
     "command": "~/.claude/subagent-statusline.sh"
   },
   "enabledPlugins": {
-    "claude-security@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": false,
     "security-guidance@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },

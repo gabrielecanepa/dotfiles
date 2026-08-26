@@ -10,33 +10,6 @@
       "installedAt": "2026-06-14T20:27:03.606Z",
       "updatedAt": "2026-07-03T08:41:20.778Z"
     },
-    "animation-vocabulary": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/animation-vocabulary/SKILL.md",
-      "skillFolderHash": "e6dc24ca1ff1e70c9677df9a1d2d1c80415cbb3c",
-      "installedAt": "2026-07-19T14:55:09.092Z",
-      "updatedAt": "2026-07-19T14:55:09.092Z"
-    },
-    "context7-mcp": {
-      "source": "upstash/context7",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/upstash/context7.git",
-      "skillPath": "skills/context7-mcp/SKILL.md",
-      "skillFolderHash": "0969a2f77545a8ef5e3296b4fd25d63689331854",
-      "installedAt": "2026-06-14T19:38:09.137Z",
-      "updatedAt": "2026-07-14T00:26:40.071Z"
-    },
-    "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/skills.git",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
-      "installedAt": "2026-07-19T14:55:24.333Z",
-      "updatedAt": "2026-07-19T14:55:24.333Z"
-    },
     "humanizer": {
       "source": "blader/humanizer",
       "sourceType": "github",
@@ -73,33 +46,6 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "updatedAt": "2026-06-14T19:39:19.357Z"
-    },
-    "vercel-composition-patterns": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/composition-patterns/SKILL.md",
-      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
-      "installedAt": "2026-06-30T08:07:22.000Z",
-      "updatedAt": "2026-07-03T08:42:41.497Z"
-    },
-    "vercel-react-best-practices": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "343db72180d05814949fef7d46be96b5c6ee86b3",
-      "installedAt": "2026-07-03T08:42:41.498Z",
-      "updatedAt": "2026-07-03T08:42:41.498Z"
-    },
-    "web-design-guidelines": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
-      "installedAt": "2026-07-03T08:42:41.500Z",
-      "updatedAt": "2026-07-03T08:42:41.500Z"
     },
     "vercel-react-view-transitions": {
       "source": "vercel-labs/agent-skills",

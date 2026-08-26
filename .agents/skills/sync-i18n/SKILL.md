@@ -5,6 +5,7 @@ description: >-
   and configuration. Use for /sync-i18n or localization reviews; accepts a scope
   path and --check.
 compatibility: Any coding agent with filesystem search, shell access, and official documentation lookup.
+disable-model-invocation: true
 ---
 
 # sync-i18n
@@ -24,7 +25,7 @@ Resolve the project root from version control first. If that fails, walk upward 
 - Detect the implementation from evidence. Do not assume a JavaScript stack, a particular catalog format, or one framework's conventions.
 - Treat the configured source or default locale as authoritative. If the source locale or intended meaning is ambiguous, apply only changes that remain correct under either interpretation and surface the decision.
 - Preserve placeholders, ICU arguments, plural/select branches, rich-text tags, escaping, and catalog data shapes. A translation that reads better but breaks interpolation is a regression.
-- Consult current official documentation whenever a framework or library is in use. Use the available documentation lookup capability, preferring `context7-mcp` when installed and official web documentation otherwise. Match documentation to the installed version. If lookup is unavailable, continue with framework-neutral fixes and report the blocker. Do not install a connector or dependency solely for documentation access, and do not guess at framework configuration or loading behavior.
+- Consult current official documentation whenever a framework or library is in use. Use the available documentation lookup capability, preferring the `context7` MCP when available and official web documentation otherwise. Match documentation to the installed version. If lookup is unavailable, continue with framework-neutral fixes and report the blocker. Do not install a connector or dependency solely for documentation access, and do not guess at framework configuration or loading behavior.
 - Remove a key only when repository-wide evidence proves it unused. Dynamic, generated, indirect, CMS-driven, or externally consumed keys are not unused merely because a literal search misses them.
 - Keep edits recoverable and surgical. Never edit generated catalogs directly; update their source and regenerate them through the project's existing tool.
 - Never install or update dependencies unless the user explicitly asks. Use already-installed tools and report checks that cannot run.

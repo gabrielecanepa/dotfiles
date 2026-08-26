@@ -68,10 +68,11 @@ Follows `writing.instructions.md` (active voice, plain verbs, sentence case, no 
 - Semantic HTML over `div` soup; pass accessibility checks (axe).
 - Watch type-selector vs element-selector rules canceling each other on section padding and margin (silent specificity bugs).
 - **Verify visually**: screenshot via `agent-browser`/Playwright and critique your own work, reusing the already-running dev server and Chrome window (verification and reuse rules in `engineering.instructions.md`).
+- **General UI audits** ("review my UI", accessibility or best-practice checks): fetch the current Web Interface Guidelines from `https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md` and report findings as `file:line`.
 
 ## Stack integration
 
 - **Animation or motion work** → `motion.instructions.md` owns the animation layer: easing and duration values, springs, review-skill routing, and timing tokens.
 - **shadcn/ui or Tailwind** project → use a project-configured shadcn skill or MCP when available. Otherwise verify current shadcn and Tailwind guidance through Context7 before installing or composing primitives.
 - **Canonical Tailwind classes, never hardcoded arbitrary values.** When a value maps exactly to a scale token, write the token, not the bracket form: `gap-3.5` not `gap-[14px]`, `p-0.5` not `p-[2px]`. Only reach for an arbitrary value (`gap-[13px]`) when the design system has no exact token for it. This is what the Tailwind VS Code plugin (`suggestCanonicalClasses`) and the oxlint `enforce-canonical` rule flag; resolve those hints against the project's own `--spacing` scale, don't assume `1rem = 16px`.
-- After editing several React/TSX components → run the `vercel-react-best-practices` review (structure, hooks, a11y, performance).
+- After editing several React/TSX components → run the project-installed `vercel-react-best-practices` review (structure, hooks, a11y, performance).

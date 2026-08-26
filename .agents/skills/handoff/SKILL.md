@@ -4,6 +4,7 @@ description: >-
   Produce a self-contained handoff note of the current session's work state,
   ready to paste into a fresh agent session. Use only on an explicit /handoff
   invocation, never spontaneously.
+disable-model-invocation: true
 ---
 
 # handoff

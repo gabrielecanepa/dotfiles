@@ -13,15 +13,11 @@ Machine-wide guidance for coding agents. More specific project instructions over
 
 Claude Code and Copilot load matching rules automatically. Other agents read `behavior.instructions.md` and `engineering.instructions.md` before every task, then the applicable rules:
 
-- Shell scripts: `shell.instructions.md`.
-- TypeScript: `typescript.instructions.md`
-- Node.js: `node.instructions.md`.
-- React or Next.js: `react.instructions.md`.
-- UI: `design.instructions.md` and `motion.instructions.md` for animation or motion.
-- Browser work or real UI verification: `browser.instructions.md`.
-- Human prose beyond a few sentences: `writing.instructions.md`.
-- `$HOME` dotfiles: `dotfiles.instructions.md`.
-- Skills: `find-root-cause` (bugs, regressions, failing tests), `context7-mcp` (library, framework, or API questions), `sync-agents` and `skill-creator` (agentic docs and skills).
+- Shell scripts: `shell.instructions.md`. TypeScript: `typescript.instructions.md`. Node.js: `node.instructions.md`. React or Next.js: `react.instructions.md`.
+- UI: `design.instructions.md` + `motion.instructions.md` for animation or motion. Browser work or real UI verification: `browser.instructions.md`.
+- Human prose beyond a few sentences: `writing.instructions.md`. `$HOME` dotfiles: `dotfiles.instructions.md`.
+- Skills: `find-root-cause` (bugs, regressions, failing tests), `sync-agents` and `skill-creator` (agentic docs and skills).
+- Library, framework, or API questions: query the `context7` MCP, resolving the library ID once and querying one concept per `query-docs` call.
 
 Shared sources are in `~/.agents/`; provider entrypoints are links, never edit targets. Do not duplicate these instructions.
 
@@ -30,9 +26,9 @@ Shared sources are in `~/.agents/`; provider entrypoints are links, never edit t
 - macOS on Apple Silicon; Homebrew at `/opt/homebrew`; VS Code and Ghostty.
 - Project code is under `~/Developer`; `$HOME` is the dotfiles git repository.
 - Keep personal, work, and client contexts separate: browser, email, and calendar work targets only the active context's accounts. Client projects live under `~/Developer/@<client>`; identity overrides are in the untracked `~/.gitconfig`.
-- The only Obsidian vault is `~/.vault`; reference it only through that path, never the iCloud folder it resolves to.
+- The only Obsidian vault is `~/.vault`; never reference the iCloud folder it resolves to.
 - Zsh uses custom plugins and themes under `~/.zsh`; check the matching plugin before treating commands like `profile`, `plugin`, `brew`, `mas`, `lts`, `deps`, or `dotfiles` as binaries.
-- Runtimes: `nodenv` (Node), `pyenv` (Python), `rbenv` (Ruby); introduce no other runtime or version manager unless asked. Use the shims, not system runtimes.
+- Runtimes come only from the `nodenv`, `pyenv`, and `rbenv` shims, never system runtimes; introduce no other runtime or version manager unless asked.
 - The default Node package manager is pnpm through Corepack; the project's lockfile always wins.
 - Repository config owns formatting: oxfmt for JS, TS, CSS, JSON; shfmt and shellcheck for shell; `.editorconfig` otherwise. Always run the configured formatter.
 - Scratch scripts, logs, and data go in the session scratchpad or system temp directory, never a repository.
