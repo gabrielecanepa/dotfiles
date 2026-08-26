@@ -143,6 +143,7 @@
     }
   },
   "feedbackSurveyRate": 0,
+  "feedbackDrafts": "notify",
   "spinnerTipsEnabled": false,
   "spinnerVerbs": {
     "mode": "append",
@@ -153,7 +154,6 @@
       "Asking GPT"
     ]
   },
-  "alwaysThinkingEnabled": true,
   "askUserQuestionTimeout": "never",
   "plansDirectory": ".agents/plans",
   "tui": "fullscreen",
@@ -161,8 +161,14 @@
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
   "editorMode": "normal",
+  "verbose": false,
   "preferredNotifChannel": "auto",
   "autoCompactEnabled": true,
+  "switchModelsOnFlag": true,
+  "autoContinueAtUsageLimit": true,
+  "autoScrollEnabled": true,
+  "fileCheckpointingEnabled": true,
+  "showTurnDuration": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
