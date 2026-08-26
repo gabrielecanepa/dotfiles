@@ -112,6 +112,14 @@ dotfiles() {
       integer rc=0 verbose=0
       [[ "$2" == (-v|--verbose) ]] && verbose=1
 
+      if (( $+functions[initialize-path] )); then
+        initialize-path
+        (( verbose )) && _zsh::log info dotfiles "path reinitialized"
+      else
+        _zsh::log error dotfiles "initialize-path is not defined"
+        rc=1
+      fi
+
       if _dotfiles_git_hooks_ok; then
         (( verbose )) && _zsh::log info dotfiles "git hooks path already set"
       elif command git -C "$HOME" config --local core.hooksPath .config/git/hooks; then
@@ -139,6 +147,14 @@ dotfiles() {
           _zsh::log error dotfiles "failed to create ~/.CFUserTextEncoding"
           rc=1
         fi
+      fi
+
+      local aliases_file="${ZSH_ALIASES:-$HOME/.aliases}"
+      if [[ -r "$aliases_file" ]]; then
+        builtin source "$aliases_file"
+        (( verbose )) && _zsh::log info dotfiles "aliases sourced"
+      else
+        _zsh::log warn dotfiles "aliases file missing at ${aliases_file/#$HOME/~}"
       fi
 
       if [[ $OSTYPE != darwin* ]]; then
@@ -255,6 +271,12 @@ dotfiles() {
       ;;
     doctor)
       integer drift=0
+      if (( $+functions[initialize-path] )); then
+        _zsh::log success dotfiles "initialize-path OK"
+      else
+        _zsh::log error dotfiles "initialize-path is not defined"
+        drift=1
+      fi
       if _dotfiles_git_hooks_ok; then
         _zsh::log success dotfiles "git hooks path OK"
       else
@@ -265,6 +287,13 @@ dotfiles() {
         _zsh::log success dotfiles "hushlogin OK"
       else
         _zsh::log error dotfiles "~/.hushlogin missing"
+        drift=1
+      fi
+      local aliases_file="${ZSH_ALIASES:-$HOME/.aliases}"
+      if [[ -r "$aliases_file" ]]; then
+        _zsh::log success dotfiles "aliases file OK"
+      else
+        _zsh::log error dotfiles "aliases file missing at ${aliases_file/#$HOME/~}"
         drift=1
       fi
       if [[ $OSTYPE == darwin* ]]; then

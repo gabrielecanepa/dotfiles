@@ -32,9 +32,9 @@ These rules apply only when `$HOME` is the active repository.
 
 ## Startup and plugins
 
-- Startup order is `.zshenv` for environment and PATH, generated `.zprofile`, `.zshrc` for Oh My Zsh, plugins, completions, and `dotfiles init`, then `.aliases`. The `profile` plugin owns `.zprofile`; never edit it directly.
+- Startup order is `.zshenv` for environment and PATH, generated `.zprofile`, then `.zshrc` for Oh My Zsh, plugins, completions, and `dotfiles init`, which reruns `initialize-path` and sources the aliases file. The `profile` plugin owns `.zprofile`; never edit it directly.
 - zsh plugins log through `_zsh::log <error|warn|success|info> <plugin> <text>` from the first-loaded `logger` plugin. Consumers retain the small fallback needed to work standalone; do not emit diagnostics with raw `print` or `echo`.
-- `dotfiles init` reconciles user-owned machine state without deleting third-party state. Keep it idempotent. `.install.sh` owns first-machine bootstrap and may prompt or use `sudo` only for explicit system setup.
+- `dotfiles init` finishes shell startup and reconciles user-owned machine state without deleting third-party state. Keep it idempotent. `.install.sh` owns first-machine bootstrap and may prompt or use `sudo` for explicit system setup.
 - `dotfiles init` owns the untracked `~/.vault` symlink: it links to the iCloud Obsidian folder whose name matches `$OBSIDIAN_VAULT`, reports a missing folder or a real `~/.vault` directory, and does nothing when the variable is unset. Its resolver holds the only copy of the container path.
 
 ## Plugin and theme format
