@@ -1,21 +1,11 @@
 #!/usr/bin/env zsh
 
 # Paths
-icloud="$HOME/Library/Mobile Documents"
-drive="$icloud/com~apple~CloudDocs"
-downloads="$drive/Downloads"
-vault="$HOME/.vault"
-tmp="$WORKING_DIR/tmp"
+hash -d cloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+hash -d vault="$HOME/.vault"
 
-hash -d icloud="$icloud"
-hash -d drive="$drive"
-hash -d vault="$vault"
-
+# Directories
 alias cdw="cd '$WORKING_DIR'"
-alias tmp="cd '$tmp'"
-alias cdc="cd '$drive'"
-alias cdd="cd '$downloads'"
-alias cdv="cd '$vault'"
 
 # Helpers
 alias hide="chflags hidden"
@@ -31,18 +21,3 @@ alias pnx="pnpx"
 # Editors
 alias home="$EDITOR '$HOME'"
 alias te="open -a TextEdit"
-
-# Git
-_git_aliases() {
-  local git_alias workspace
-  for git_alias in ${(f)"$(git aliases | sed 's/ .*//')"}; do
-    command -v "g$git_alias" >/dev/null || alias "g${git_alias}"="git $git_alias"
-  done
-  for workspace in "${VSCODE_WORKSPACES_PATH:-$HOME/.vscode/workspaces}"/*.code-workspace(.N); do
-    alias "code-${workspace:t:r}"="code '$workspace'"
-  done
-  add-zsh-hook -d precmd _git_aliases
-  unfunction _git_aliases
-}
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _git_aliases
