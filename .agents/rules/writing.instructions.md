@@ -22,6 +22,8 @@ Run the **`humanizer`** skill (source: `blader/humanizer`) on any prose longer t
 
 The skill's loop is **draft → audit ("what still makes this read as AI?") → final**. Before returning the final text, scan it for `—` and `–`; any hit means it isn't done.
 
+To audit or realign a repository's existing human docs (README, CONTRIBUTING, CHANGELOG, guides) run `/sync-docs`: it applies these rules across its whole documentation set.
+
 ## Baseline rules (apply even without invoking the skill)
 
 - **No em or en dashes** in any committed file, these rule and config docs included. Replace with a period, comma, colon, hyphen, parentheses, or a rewrite. This is a hard constraint, not a "use sparingly". The one exception is the agent's live chat output to the user, which is ephemeral and not a committed artifact; the instant text lands in a file, the ban applies.

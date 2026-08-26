@@ -15,6 +15,7 @@ For `.tsx` files, `typescript.instructions.md` also loads; it owns the language-
 - **Any React/Next.js code** → `vercel-react-best-practices` is the performance bar. Apply it by priority (CRITICAL > HIGH > MEDIUM > LOW) and re-check against it before declaring component work done.
 - **Any non-trivial component design** → run `vercel-composition-patterns` first (compound components, slots, context providers, render props).
 - **Animation work** → `motion.instructions.md` owns the animation rules and skill routing.
+- Both Vercel skills are project-level installs; when a React project lacks them, ask to add them from its root (`npx skills add vercel-labs/agent-skills --skill <name> --yes`).
 - Load only the relevant `rules/*.md` from Vercel skills. Do not load a compiled `AGENTS.md` unless the task genuinely needs the full corpus.
 - **Long lists** → the perf skill stops at `content-visibility`; past a few hundred rows that is not enough. Windowing (render only visible rows) is a hard requirement, via `@tanstack/react-virtual` or `react-window`.
 - **Dense rows** → render hover-only controls on hover or focus; keep each row's first and last focusable controls mounted so keyboard and screen-reader users can still reach the row.

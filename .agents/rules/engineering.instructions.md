@@ -18,7 +18,7 @@ applyTo: '**'
 - Build only what is required. Avoid speculative abstractions, options, compatibility layers, and duplicated logic.
 - Search shared layers before adding helpers, constants, hooks, or tokens. Import matches; promote only for a second consumer and update the first. Retyped constants, handlers, and flows are duplicates.
 - Use types for impossible states. Guard I/O, concurrency, timeouts, cancellation, hydration, and races. Async UI includes loading, empty, error, and boundary states.
-- Leave no explanatories, sections, TODOs, or dead comments; clarity must come from names and structure, never comments. Use JSDoc only where adjacent code establishes a convention or if explicitly requested. Needed linter directives and required headers must stay.
+- Leave no explanatories, sections, TODOs, or dead comments; clarity comes from names and structure, never comments. Use JSDoc only where adjacent code establishes a convention or when explicitly requested; needed linter directives and required headers stay.
 - Keep agentic files concrete, scoped, and self-contained. Inline logic unless auth, compiled tooling, or output size prevents it; always declare dependencies.
 
 ## Surgical diffs
@@ -39,7 +39,7 @@ applyTo: '**'
 
 ## Commit handoff
 
-For commit-worthy uncommitted work, propose the action that matches the real intent of the changes. Read the unpushed history first (`git log --oneline @{upstream}..`, the whole branch when no upstream exists) and check how the changes relate to it.
+For commit-worthy uncommitted work, propose the action that matches the real intent of the changes, following the repository's commit convention. Read the unpushed history first (`git log --oneline @{upstream}..`, the whole branch when no upstream exists) and check how the changes relate to it.
 
 - Standalone change, feature, or fix: propose a new commit.
 - Continuation of unpushed commits of the same work, such as the rest of a feature, a fix on top of it, or review follow-ups: propose amending or squashing into them, naming each target's short hash and subject.
@@ -73,5 +73,3 @@ For an amend or squash, keep the change list and adapt only the proposal lines: 
 For a split, keep one `### Changes` block, divided by a `####` subheader per commit with a short imperative title ("Refactor chat header") and its own change list, and one closing question to end the block ("Want me to run both?"). When the changes span repositories, the subheaders name the repositories instead, and a repository with several commits nests its commit subheaders one level down.
 
 Render the block itself, never a description of it, even when the prompt asks what you would do.
-
-Follow the repository's commit convention.

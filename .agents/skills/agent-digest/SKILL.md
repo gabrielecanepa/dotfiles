@@ -6,6 +6,7 @@ description: >-
   and report proposed diffs plus notable libraries and tools. Use for
   /agent-digest, the weekly newsletter routine, or applying a previous report's
   numbered proposals.
+disable-model-invocation: true
 ---
 
 # agent-digest
