@@ -68,6 +68,7 @@
     "**/node_modules": true
   },
   "shellcheck.ignorePatterns": {
-    ".aliases": true
+    "**/.aliases": true,
+    "**/.zsh/plugins/*/_*": true
   }
 }
