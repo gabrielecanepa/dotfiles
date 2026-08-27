@@ -13,12 +13,16 @@
   "includeGitInstructions": false,
   "permissions": {
     "deny": [
+      "Bash(rm -rf:*)",
+      "Read(//**/.env)",
+      "Read(//**/.env.*)",
       "Read(//**/*.key)",
       "Read(//**/*.p12)",
       "Read(//**/*.pem)",
       "Read(//**/*.pfx)",
       "Read(//**/id_ed25519)",
       "Read(//**/id_rsa)",
+      "Read(//**/secrets/**)",
       "Read(~/.aws/**)",
       "Read(~/.claude/.credentials.json)",
       "Read(~/.ssh/id_*)",
@@ -27,9 +31,7 @@
     ],
     "ask": [
       "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Read(//**/.env)",
-      "Read(//**/.env.*)"
+      "Bash(git push:*)"
     ],
     "defaultMode": "auto"
   },
