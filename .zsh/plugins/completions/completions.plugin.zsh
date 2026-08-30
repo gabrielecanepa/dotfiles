@@ -41,11 +41,12 @@ completions() {
     fi
 
     comp="$(command "$cli" completion zsh 2>/dev/null)"
-    [[ -n "$comp" ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
-    [[ -n "$comp" ]] || comp="$(command "$cli" completion 2>/dev/null)"
+    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
+    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion -s zsh 2>/dev/null)"
+    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion 2>/dev/null)"
 
-    if [[ -z "$comp" ]]; then
-      _zsh::log error completions "cannot generate completions for $cli"
+    if [[ "$comp" != '#compdef '* ]]; then
+      _zsh::log error completions "cannot generate zsh completions for $cli"
       rc=1
       continue
     fi
