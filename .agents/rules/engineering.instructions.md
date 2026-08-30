@@ -68,6 +68,8 @@ Want me to run it?
 
 Write the whole message unwrapped; never hard-wrap at a fixed column or trim wording to fit one unless the repository declares a convention or sets commitlint's `body-max-line-length`.
 
+Include a body only when the subject cannot explain the full intent. Write it as imperative prose paragraphs that explain why the change was made and how behavior differs from before. Switch to bullets only for genuinely independent enumerable changes: hyphen, single space, short imperative fragments with no terminal period, one style for the whole body. Never end the subject with a period.
+
 For an amend or squash, keep the change list and adapt only the proposal lines: name the target's short hash and subject, include the resulting message in the fenced block only when it changes, and end with the matching question ("Want me to run the squash?").
 
 For a split, keep one `### Changes` block, divided by a `####` subheader per commit with a short imperative title ("Refactor chat header") and its own change list, and one closing question to end the block ("Want me to run both?"). When the changes span repositories, the subheaders name the repositories instead, and a repository with several commits nests its commit subheaders one level down.

@@ -51,6 +51,15 @@
     "subject-empty": [
       2,
       "never"
+    ],
+    "subject-full-stop": [
+      2,
+      "never",
+      "."
+    ],
+    "body-leading-blank": [
+      2,
+      "always"
     ]
   }
 }
