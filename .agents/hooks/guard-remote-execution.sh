@@ -82,54 +82,60 @@ function cmdword(s,   a, m, i, w) {
   }
   return ""
 }
-function opens(k) { ns++; seg[ns] = ""; sep[ns] = k; par[ns] = curpar }
+function opens(k) { nseg++; seg[nseg] = ""; sep[nseg] = k; parent[nseg] = cur_parent }
 BEGIN { DQ = sprintf("%c", 34); SQ = sprintf("%c", 39); BT = sprintf("%c", 96) }
 { if (NR > 1) all = all "\n"; all = all $0 }
 END {
-  n = length(all); ns = 0; seg[0] = ""; sep[0] = ""; par[0] = -1
-  curpar = -1; dq = 0; sq = 0; bt = 0; pd = 0; i = 1
+  n = length(all); nseg = 0; seg[0] = ""; sep[0] = ""; parent[0] = -1
+  cur_parent = -1; dq = 0; sq = 0; bt = 0; pdepth = 0; i = 1
   while (i <= n) {
     c = substr(all, i, 1); d = substr(all, i + 1, 1)
-    if (sq) { if (c == SQ) sq = 0; else seg[ns] = seg[ns] c; i++; continue }
-    if (c == "\\") { seg[ns] = seg[ns] " "; i += 2; continue }
+    if (sq) { if (c == SQ) sq = 0; else seg[nseg] = seg[nseg] c; i++; continue }
+    if (c == "\\") { seg[nseg] = seg[nseg] " "; i += 2; continue }
     if (c == SQ && !dq) { sq = 1; i++; continue }
     if (c == DQ) { dq = 1 - dq; i++; continue }
     if (c == "$" && d == "(") {
-      pk[++pd] = "s"; pp[pd] = curpar; pq[pd] = dq
-      curpar = ns; dq = 0; opens("$("); i += 2; continue
+      paren_kind[++pdepth] = "s"; paren_parent[pdepth] = cur_parent; paren_dq[pdepth] = dq
+      cur_parent = nseg; dq = 0; opens("$("); i += 2; continue
     }
     if (c == BT) {
-      if (bt) { bt = 0; curpar = btpar; dq = btdq; opens(")") }
-      else { bt = 1; btpar = curpar; btdq = dq; curpar = ns; dq = 0; opens("$(") }
+      if (bt) { bt = 0; cur_parent = bt_parent; dq = bt_dq; opens(")") }
+      else { bt = 1; bt_parent = cur_parent; bt_dq = dq; cur_parent = nseg; dq = 0; opens("$(") }
       i++; continue
     }
-    if (dq) { seg[ns] = seg[ns] c; i++; continue }
+    if (dq) { seg[nseg] = seg[nseg] c; i++; continue }
     if ((c == "<" || c == ">") && d == "(") {
-      pk[++pd] = "s"; pp[pd] = curpar; pq[pd] = dq
-      curpar = ns; opens("<("); i += 2; continue
+      paren_kind[++pdepth] = "s"; paren_parent[pdepth] = cur_parent; paren_dq[pdepth] = dq
+      cur_parent = nseg; opens("<("); i += 2; continue
     }
-    if (c == "(") { pk[++pd] = "g"; pp[pd] = curpar; pq[pd] = dq; opens("("); i++; continue }
+    if (c == "(") {
+      paren_kind[++pdepth] = "g"; paren_parent[pdepth] = cur_parent; paren_dq[pdepth] = dq
+      opens("("); i++; continue
+    }
     if (c == ")") {
-      if (pd > 0) { if (pk[pd] == "s") curpar = pp[pd]; dq = pq[pd]; pd-- }
+      if (pdepth > 0) {
+        if (paren_kind[pdepth] == "s") cur_parent = paren_parent[pdepth]
+        dq = paren_dq[pdepth]; pdepth--
+      }
       opens(")"); i++; continue
     }
     if (c == "|") { if (d == "|") { opens("||"); i += 2 } else { opens("|"); i++ } continue }
     if (c == "&") { if (d == "&") { opens("&&"); i += 2 } else { opens("&"); i++ } continue }
     if (c == ";" || c == "\n") { opens(";"); i++; continue }
     if (c == "{") {
-      if (seg[ns] !~ /[^ \t\n]/ && (d == " " || d == "\t" || d == "\n")) { opens("{"); i++; continue }
-      seg[ns] = seg[ns] c; i++; continue
+      if (seg[nseg] !~ /[^ \t\n]/ && (d == " " || d == "\t" || d == "\n")) { opens("{"); i++; continue }
+      seg[nseg] = seg[nseg] c; i++; continue
     }
     if (c == "}") {
-      if (seg[ns] !~ /[^ \t\n]/) { opens("{"); i++; continue }
-      seg[ns] = seg[ns] c; i++; continue
+      if (seg[nseg] !~ /[^ \t\n]/) { opens("{"); i++; continue }
+      seg[nseg] = seg[nseg] c; i++; continue
     }
-    seg[ns] = seg[ns] c; i++
+    seg[nseg] = seg[nseg] c; i++
   }
 
-  for (k = 0; k <= ns; k++) cw[k] = cmdword(seg[k])
+  for (k = 0; k <= nseg; k++) cw[k] = cmdword(seg[k])
 
-  for (k = 0; k <= ns; k++) {
+  for (k = 0; k <= nseg; k++) {
     if (sep[k] != "|") continue
     if (!isshell(cw[k]) && !stdinexec(seg[k])) continue
     for (j = k - 1; j >= 0; j--) {
@@ -140,10 +146,10 @@ END {
           sep[j] == "&" || sep[j] == "{") break
     }
   }
-  for (k = 0; k <= ns; k++) {
-    if (!isdownloader(cw[k]) || par[k] < 0) continue
-    if (isshell(cw[par[k]])) {
-      printf "a remote download is substituted into %s", cw[par[k]]; exit
+  for (k = 0; k <= nseg; k++) {
+    if (!isdownloader(cw[k]) || parent[k] < 0) continue
+    if (isshell(cw[parent[k]])) {
+      printf "a remote download is substituted into %s", cw[parent[k]]; exit
     }
   }
 }

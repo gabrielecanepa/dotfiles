@@ -3,10 +3,10 @@
 # Close every agent-browser session and reap daemons leaked by earlier sessions.
 # Run manually only when no other browser work is active: the daemon detaches to
 # parent 1 even while healthy, so the reap cannot tell a leak from a live session
-# owned by another agent. A dead session leaves an orphaned daemon holding
-# roughly 900 MB of Chrome processes that close --all can no longer reach, so
-# that process is killed directly. nodenv installs the CLI per Node version and a version link
-# can dangle into a removed project or worktree, so a working binary is probed
+# owned by another agent. A dead session leaves an orphaned daemon holding Chrome
+# processes that close --all can no longer reach, so that process is killed
+# directly. nodenv installs the CLI per Node version and a version link can
+# dangle into a removed project or worktree, so a working binary is probed
 # newest-first. A watchdog bounds the close call. Fails open: a missing CLI or
 # state directory skips that step. macOS.
 
