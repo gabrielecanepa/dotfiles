@@ -271,6 +271,21 @@
     "when": "!activeEditorGroupEmpty"
   },
   {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.openWorkspaceSettingsFile"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "editor.action.inlineSuggest.snooze",
+    "args": 5,
+    "when": "!inlineCompletions.snoozed"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "editor.action.inlineSuggest.cancelSnooze",
+    "when": "inlineCompletions.snoozed"
+  },
+  {
     "key": "ctrl+t",
     "command": "workbench.action.terminal.new",
     "when": "terminalFocus"
