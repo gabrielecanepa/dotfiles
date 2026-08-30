@@ -255,6 +255,7 @@
     "plaintext": true,
     "scminput": false
   },
+  "github.copilot.nextEditSuggestions.eagerness": "low",
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
   "html.autoCreateQuotes": true,
