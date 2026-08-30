@@ -121,6 +121,7 @@
   },
   "emmet.triggerExpansionOnTab": true,
   "explorer.autoOpenDroppedFile": false,
+  "explorer.autoReveal": "focusNoScroll",
   "explorer.autoRevealExclude": {
     "**/.git": true,
     "**/.private": true,
