@@ -1,5 +1,5 @@
 ---
-description: 'Use for UI animation: Motion for React, CSS transitions and keyframes, springs, gestures, layout transitions, and scroll effects. Owns values, API correctness, performance, and animation skill routing.'
+description: 'Use for UI animation: Motion for React, CSS transitions and keyframes, React View Transitions, springs, gestures, layout transitions, and scroll effects. Owns values, API correctness, performance, and animation review.'
 applyTo: '**/*.jsx, **/*.tsx, **/*.css'
 paths:
   - '**/*.jsx'
@@ -9,14 +9,15 @@ paths:
 
 # Motion and animation
 
-The production floor in `design.instructions.md` still applies. For React View Transitions without a library (`<ViewTransition>`, `addTransitionType`, and view-transition pseudo-elements), follow the `vercel-react-view-transitions` skill and its references; fall back to current React docs through Context7 only where the skill is silent.
+The production floor in `design.instructions.md` still applies. Every animation needs a purpose, easing, and duration. Keyboard-initiated actions and interactions repeated 100 or more times daily get no animation.
 
-## Skills
+## Review and audit
 
-- **Reviewing animation code** -> `review-animations` with the bundled `STANDARDS.md`. The skill uses `disable-model-invocation`, so outside a user `/review-animations` call read both files from `~/.agents/skills/review-animations/` instead of invoking it. Keep only motion findings, the Web Interface Guidelines audit in `design.instructions.md` owns the general UI pass, do not report the same file through both.
-- **Codebase-wide "improve the animations" requests** -> `improve-animations` (read-only; produces a prioritized plan).
-
-Every animation needs a purpose, easing, and duration. Keyboard-initiated actions and interactions repeated 100 or more times daily get no animation.
+- Review animation diffs against this file and keep only motion findings; the Web Interface Guidelines audit in `design.instructions.md` owns the general UI pass, so never report one file through both.
+- Every rule violation in this file is a finding; feel-breaking ones block: `ease-in`, `scale(0)`, `transition: all`, animation on keyboard or 100+/day actions, keyframes on rapidly triggered UI, unjustified UI durations over 300ms, ungated hover, and non-GPU properties with an easy GPU fix.
+- Fix in this order: delete, reduce, fix the easing, fix the origin, make it interruptible, move it to the GPU, split deliberate and response timing, polish (blur, stagger, spring), then reduced-motion and hover gating.
+- Report one Before / After / Why table with `file:line`, remaining notes ordered by impact, and a closing Block or Approve. When feel cannot be judged from code, ask for a slow-motion or frame-by-frame check instead of guessing.
+- A codebase-wide "improve the animations" request is read-only: map the stack, motion tokens, and a frequency map first; audit purpose and frequency, easing and duration, physicality and origin, interruptibility, performance, accessibility, cohesion and tokens, and missed opportunities; re-read every cited line; order findings by impact over effort; write self-contained plans (exact file, current code, target values, verification) only for the findings the user selects.
 
 ## Easing and duration
 
@@ -24,6 +25,7 @@ Every animation needs a purpose, easing, and duration. Keyboard-initiated action
 - By kind: enter and exit -> ease-out; on-screen move or morph -> ease-in-out; hover and color -> ease; constant motion (marquee, progress) -> linear. Never ease-in for UI; it delays the moment being watched most.
 - By element: button press 100-160ms; tooltip and small popover 125-200ms; dropdown and select 150-250ms; modal and drawer 200-500ms; marketing pages may go longer. Exits faster than entrances.
 - Never animate from `scale(0)`; start at `scale(0.9)` or higher with opacity. Popovers take `transform-origin` from the trigger (`var(--radix-popover-content-transform-origin)`); modals stay centered.
+- Transitions retarget mid-flight and keyframes restart from zero: toasts, toggles, and anything triggered rapidly use transitions or springs, with `@starting-style` for entry without JS. CSS and WAAPI for predetermined motion, springs for gesture-driven motion.
 - Press/release asymmetry: slow and linear while the user decides (hold-to-delete: 2s linear), fast ease-out on release (~200ms).
 - A crossfade that still looks off after easing and duration tuning: bridge it with `filter: blur(2px)` (keep well under 20px; blur is costly in Safari).
 
@@ -34,7 +36,7 @@ Every animation needs a purpose, easing, and duration. Keyboard-initiated action
 - Momentum projection (Apple's decay form, not the v^2/2a textbook form): project(v, d = 0.998) = (v / 1000) * d / (1 - d); d = 0.99 for snappier decay; snap target = nearest snap point to position + projection.
 - Rubber-banding at boundaries: f(overshoot, dim, k = 0.55) = (overshoot * dim * k) / (dim + k * |overshoot|).
 - Interruption: animate from the live presentation value, never the target, and blend velocity through re-targets instead of hard-cutting. Decompose 2D drag into independent X and Y springs. Commit to a drag direction only after ~10px of movement.
-- Reduced motion is three independent signals: `prefers-reduced-motion` (crossfade, drop overshoot), `prefers-reduced-transparency` (raise opacity, drop blur), `prefers-contrast: more` (solid background, defined border). Avoid loops near 0.2Hz (one cycle per 5s).
+- Reduced motion is three independent signals: `prefers-reduced-motion` (crossfade, drop overshoot), `prefers-reduced-transparency` (raise opacity, drop blur), `prefers-contrast: more` (solid background, defined border). Gate hover motion behind `@media (hover: hover) and (pointer: fine)`; touch fires false hovers on tap. Avoid loops near 0.2Hz (one cycle per 5s).
 - Materials: never stack translucent on translucent; heavier material reads as structural, lighter as interactive.
 
 ## Current docs, not training data
@@ -56,6 +58,12 @@ Verify non-trivial APIs against current docs:
 - Bundle size: content and marketing pages use `LazyMotion` with the `m` component (`motion/react-m`), cutting the 34 KB `motion` component to under 5 KB on first render; imperative-only needs can use the mini `useAnimate`.
 - Reach for Motion only where CSS cannot express the result: springs, gestures, layout and shared-element transitions, orchestration, scroll-linked values. Simple hover, fade, and accordion states stay CSS.
 
+## React View Transitions
+
+- `<ViewTransition>` (React canary; the Next.js App Router bundles it, so never install `react@canary` there) fires only inside `startTransition`, `useDeferredValue`, or Suspense, and only when it sits before any DOM node: a wrapping `div` silently disables enter and exit.
+- `default="none"` on named and type-keyed boundaries stops Suspense reveals and revalidations from cross-fading, but it also turns off `update` and `share`: keep keyed list items and displaced siblings bare, and give a named pair an explicit `share` or it never morphs.
+- Directional slides through `addTransitionType` maps belong to hierarchical or ordered navigation only; `router.back()` and the browser back button carry no types, so every map needs a `default`. Verify the API against current React docs through Context7.
+
 ## Enterprise timing
 
 - For a motion token system, follow IBM Carbon's split (https://carbondesignsystem.com/elements/motion/overview/): productive task motion at 70-240ms and sparse expressive motion at 250-700ms. Scale duration with distance and size; ordinary transitions over 400ms read as slow.
@@ -66,7 +74,7 @@ Verify non-trivial APIs against current docs:
 ## Performance
 
 - Rank properties by Motion's render-pipeline tier list (https://motion.dev/magazine/web-animation-performance-tier-list): `transform`, `opacity`, `filter`, and `clip-path` composite; animating CSS variables repaints every frame; size and position changes go through Motion's `layout` FLIP, never direct `width`/`height` animation.
-- `will-change` surgically and only while the element animates.
+- Never `transition: all`; list the animated properties. `will-change` surgically and only while the element animates.
 - Motion's `x`/`y`/`scale` shorthands run on the main thread (rAF loop), not the compositor; animate the full `transform` string when hardware acceleration matters.
 
 ## Prebuilt components

@@ -6,36 +6,19 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-browser.git",
       "skillPath": "skills/agent-browser/SKILL.md",
-      "skillFolderHash": "9b31e495b887e4ca123960415eca69fc7e1bba28",
+      "skillFolderHash": "82def67855a0d2aad7794207951820fa5422fdb0",
       "installedAt": "2026-06-14T20:27:03.606Z",
-      "updatedAt": "2026-07-03T08:41:20.778Z"
+      "updatedAt": "2026-08-29T23:59:04.225Z"
     },
     "humanizer": {
       "source": "blader/humanizer",
       "sourceType": "github",
       "sourceUrl": "https://github.com/blader/humanizer.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "1b48564898e999219882660237fde01bf4843a0f",
+      "skillFolderHash": "e2e92e7b4b8229253ed5c8e81dc65463fdeddda5",
+      "pluginName": "humanizer",
       "installedAt": "2026-06-15T07:25:49.304Z",
-      "updatedAt": "2026-07-03T08:41:22.824Z"
-    },
-    "improve-animations": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/improve-animations/SKILL.md",
-      "skillFolderHash": "ec57cb65ea60a23af278d305d1425ce4f998f510",
-      "installedAt": "2026-07-19T14:55:12.077Z",
-      "updatedAt": "2026-07-19T14:55:12.077Z"
-    },
-    "review-animations": {
-      "source": "emilkowalski/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/emilkowalski/skills.git",
-      "skillPath": "skills/review-animations/SKILL.md",
-      "skillFolderHash": "0012fc43a25cce5df019102ab28bb6a68ad9db3d",
-      "installedAt": "2026-07-19T14:55:13.780Z",
-      "updatedAt": "2026-07-19T14:55:13.780Z"
+      "updatedAt": "2026-08-29T23:59:05.587Z"
     },
     "skill-creator": {
       "installedAt": "2026-06-14T19:39:19.357Z",
@@ -46,15 +29,6 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/anthropics/skills.git",
       "updatedAt": "2026-06-14T19:39:19.357Z"
-    },
-    "vercel-react-view-transitions": {
-      "source": "vercel-labs/agent-skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
-      "skillPath": "skills/react-view-transitions/SKILL.md",
-      "skillFolderHash": "d5c0250898ec0dd3fe06cd46a396cd500ebf5bd5",
-      "installedAt": "2026-08-24T11:07:34.916Z",
-      "updatedAt": "2026-08-24T11:07:34.916Z"
     }
   },
   "dismissed": {

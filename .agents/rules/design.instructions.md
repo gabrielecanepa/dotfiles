@@ -72,7 +72,7 @@ Follows `writing.instructions.md` (active voice, plain verbs, sentence case, no 
 
 ## Stack integration
 
-- **Animation or motion work** → `motion.instructions.md` owns the animation layer: easing and duration values, springs, review-skill routing, and timing tokens.
+- **Animation or motion work** → `motion.instructions.md` owns the animation layer: easing and duration values, springs, review criteria, and timing tokens.
 - **shadcn/ui or Tailwind** project → use a project-configured shadcn skill or MCP when available. Otherwise verify current shadcn and Tailwind guidance through Context7 before installing or composing primitives.
 - **Canonical Tailwind classes, never hardcoded arbitrary values.** When a value maps exactly to a scale token, write the token, not the bracket form: `gap-3.5` not `gap-[14px]`, `p-0.5` not `p-[2px]`. Only reach for an arbitrary value (`gap-[13px]`) when the design system has no exact token for it. This is what the Tailwind VS Code plugin (`suggestCanonicalClasses`) and the oxlint `enforce-canonical` rule flag; resolve those hints against the project's own `--spacing` scale, don't assume `1rem = 16px`.
 - After editing several React/TSX components → run the project-installed `vercel-react-best-practices` review (structure, hooks, a11y, performance).

@@ -43,10 +43,6 @@
     "shadcn",
     "vercel"
   ],
-  "skillOverrides": {
-    "review-animations": "user-invocable-only",
-    "vercel-react-view-transitions": "user-invocable-only"
-  },
   "hooks": {
     "PreToolUse": [
       {
