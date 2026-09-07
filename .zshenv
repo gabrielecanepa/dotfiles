@@ -28,6 +28,9 @@ export RBENV_ROOT="$HOME/.rbenv"
 export PNPM_HOME="$HOME/.pnpm/global"
 export BUN_INSTALL="$HOME/.bun"
 
+# Containers
+[[ -S "$HOME/.orbstack/run/docker.sock" ]] && export DOCKER_HOST="unix://$HOME/.orbstack/run/docker.sock"
+
 # Agents
 export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
