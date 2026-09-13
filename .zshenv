@@ -18,12 +18,6 @@ export HOMEBREW_NO_ENV_HINTS=1
 fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 infopath=("$HOMEBREW_PREFIX/share/info" $infopath)
 
-# Version managers
-export NODENV_ROOT="$HOME/.nodenv"
-export NODENV_HOOK_PATH="$HOME/.config/nodenv/hooks"
-export PYENV_ROOT="$HOME/.pyenv"
-export RBENV_ROOT="$HOME/.rbenv"
-
 # Package managers
 export PNPM_HOME="$HOME/.pnpm/global"
 export BUN_INSTALL="$HOME/.bun"
@@ -36,7 +30,7 @@ export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
 initialize-path() {
   path=(
-    "$NODENV_ROOT/shims" "$PYENV_ROOT/shims" "$RBENV_ROOT/shims"
+    "$HOME/.nodenv/shims" "$HOME/.pyenv/shims" "$HOME/.rbenv/shims"
     "$BUN_INSTALL/bin" "$PNPM_HOME/bin"
     "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
     $path

@@ -114,7 +114,6 @@ install_runtime() {
   version="$(cat "$HOME/$version_file")"
   info "$manager install $version"
   "$manager" install "$version" --skip-existing
-  "$manager" global "$version"
 }
 install_runtime nodenv .node-version
 install_runtime pyenv .python-version
