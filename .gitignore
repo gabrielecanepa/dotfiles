@@ -73,7 +73,6 @@
 !/.ssh/config
 !/.vscode/
 /.vscode/*
-!/.vscode/user/
 !/.vscode/extensions.json
 !/.vscode/settings.json
 !/.zed/
@@ -83,6 +82,17 @@
 /.zsh/plugins/zsh-*/
 !/Library/
 /Library/*
+!/Library/Application Support/
+/Library/Application Support/*
+!/Library/Application Support/Code/
+/Library/Application Support/Code/*
+!/Library/Application Support/Code/User/
+/Library/Application Support/Code/User/*
+!/Library/Application Support/Code/User/snippets/
+!/Library/Application Support/Code/User/keybindings.json
+!/Library/Application Support/Code/User/settings.json
+!/Library/Application Support/Code/User/styles.css
+!/Library/KeyBindings/
 !/Library/LaunchAgents/
 /Library/LaunchAgents/*
 !/Library/LaunchAgents/local.*.plist

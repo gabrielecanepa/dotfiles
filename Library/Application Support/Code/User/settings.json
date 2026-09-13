@@ -1,7 +1,4 @@
 {
-  "[markdown]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt"
   },
@@ -64,7 +61,7 @@
   },
   "editor.colorDecorators": true,
   "editor.definitionLinkOpensInPeek": false,
-  "editor.fontSize": 13,
+  "editor.fontSize": 12.8,
   "editor.formatOnSave": true,
   "editor.gotoLocation.alternativeDefinitionCommand": "",
   "editor.gotoLocation.multipleDeclarations": "goto",
@@ -127,9 +124,7 @@
   "explorer.autoReveal": "focusNoScroll",
   "explorer.autoRevealExclude": {
     "**/.git": true,
-    "**/.private": true,
     "**/node_modules": true,
-    "**/private": true,
     "**/tmp": true
   },
   "explorer.compactFolders": false,
@@ -236,8 +231,6 @@
   "git.useEditorAsCommitInput": false,
   "github.copilot.chat.agent.autoFix": true,
   "github.copilot.chat.anthropic.tools.websearch.enabled": true,
-  "github.copilot.chat.claudeAgent.allowAutoPermissions": true,
-  "github.copilot.chat.cloudAgentBackend.version": "v2",
   "github.copilot.chat.codesearch.enabled": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -336,7 +329,7 @@
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "vscode_custom_css.imports": [
-    "file://${userHome}/.vscode/user/styles.css"
+    "file://${userHome}/Library/Application Support/Code/User/styles.css"
   ],
   "vscode_custom_css.statusbar": false,
   "window.autoDetectColorScheme": true,
