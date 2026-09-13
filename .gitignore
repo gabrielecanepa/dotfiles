@@ -104,6 +104,7 @@
 !/.gemrc
 !/.gitattributes
 !/.gitignore
+!/.hushlogin
 !/.install.sh
 !/.irbrc
 !/.macos
