@@ -81,6 +81,11 @@
 /.zsh/completions/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
+!/Library/
+/Library/*
+!/Library/LaunchAgents/
+/Library/LaunchAgents/*
+!/Library/LaunchAgents/local.*.plist
 !/.aliases
 !/.bash_profile
 !/.bashrc
