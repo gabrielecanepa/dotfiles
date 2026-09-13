@@ -83,19 +83,19 @@ macos-titlebar-proxy-icon = hidden
 macos-window-shadow = true
 macos-auto-secure-input = true
 macos-secure-input-indication = true
-# macos-icon = custom-style
-# macos-icon-frame = plastic
-# macos-icon-ghost-color = #F9F9F9
-# macos-icon-screen-color = #000000
 macos-window-buttons = hidden
 
 # Keybindings
 keybind = super+alt+left=previous_tab
+keybind = super+alt+down=goto_split:next
+keybind = super+alt+up=goto_split:previous
 keybind = super+alt+right=next_tab
 keybind = super+ctrl+left=move_tab:-1
 keybind = super+ctrl+right=move_tab:1
-keybind = super+alt+down=goto_split:next
-keybind = super+alt+up=goto_split:previous
+keybind = super+bracket_right=goto_split:next
+keybind = super+bracket_left=goto_split:previous
+keybind = super+shift+bracket_left=previous_tab
+keybind = super+shift+bracket_right=next_tab
 keybind = alt+d=new_split:right
 keybind = chain=resize_split:right,400
 keybind = chain=goto_split:left
