@@ -1,17 +1,14 @@
 {
   "recommendations": [
-    "ms-vscode.atom-keybindings",
-    "file-icons.file-icons",
     "github.vscode-github-actions",
     "gitHub.vscode-pull-request-github",
     "gitHub.github-vscode-theme",
     "lokalise.i18n-ally",
     "webpro.vscode-knip",
-    "yzhang.markdown-all-in-one",
     "oxc.oxc-vscode",
+    "csstools.postcss",
     "rust-lang.rust-analyzer",
     "timonwong.shellcheck",
-    "mkhl.shfmt",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
   ]
 }
