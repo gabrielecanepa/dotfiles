@@ -1,7 +1,7 @@
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME=squanchy
-ZSH_COMPLETIONS=(codex docker glab pnpm)
+ZSH_COMPLETIONS=(codex docker glab orb pnpm)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
 ZSH_GIT_ALIASES_MAX_LENGTH=3
