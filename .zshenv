@@ -17,8 +17,7 @@ fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 infopath=("$HOMEBREW_PREFIX/share/info" $infopath)
 
 # Package managers
-export PNPM_HOME="$HOME/.pnpm/global"
-export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="$HOME/.pnpm"
 
 # Containers
 [[ -S "$HOME/.orbstack/run/docker.sock" ]] && export DOCKER_HOST="unix://$HOME/.orbstack/run/docker.sock"
