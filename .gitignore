@@ -37,6 +37,7 @@
 !/.config/glab-cli/aliases.yml
 !/.config/launchd/
 !/.config/nodenv/
+!/.config/nvim/
 !/.config/zed/
 /.config/zed/*
 !/.config/zed/keymap.json

@@ -3,7 +3,8 @@
   "arrowParens": "avoid",
   "ignorePatterns": [
     ".agents/.skill-lock.json",
-    ".agents/**/*.html"
+    ".agents/**/*.html",
+    ".config/nvim/lazy-lock.json"
   ],
   "semi": false,
   "singleQuote": true,

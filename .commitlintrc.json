@@ -13,7 +13,8 @@
         "node",
         "python",
         "ruby",
-        "shell"
+        "shell",
+        "tui"
       ]
     ],
     "scope-enum": [
@@ -27,6 +28,7 @@
         "copilot",
         "ghostty",
         "mas",
+        "neovim",
         "npm",
         "sh",
         "vscode",

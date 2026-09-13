@@ -34,6 +34,8 @@ brew "mas"
 brew "mole"
 # Open source relational database management system
 brew "mysql"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Node.js version manager
