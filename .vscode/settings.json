@@ -1,51 +1,24 @@
 {
-  "[instructions]": {
-    "editor.formatOnSave": false
-  },
-  "chat.instructionsFilesLocations": {
-    ".agents/rules": true,
-    ".claude/rules": false,
-    ".github/instructions": false,
-    "~/.claude/rules": false,
-    "~/.copilot/instructions": false
-  },
+  "chat.customizations.locationsMigration.enabled": true,
   "chat.useAgentsMdFile": false,
   "chat.useClaudeMdFile": false,
+  "editor.formatOnSave": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "explorer.autoRevealExclude": {
-    "**/.vault": true,
-    "**/bower_components": true,
-    "**/node_modules": true
-  },
   "files.associations": {
     ".aliases": "shellscript",
-    "**/.config/git/config": "properties"
+    ".config/git/config": "properties"
   },
   "files.exclude": {
     ".CFUserTextEncoding": true,
-    ".hushlogin": true,
-    "**/.DS_Store": true,
-    "**/.trash": true,
-    "**/.Trash": true,
-    "**/*_history": true,
-    "Applications": true,
-    "Desktop": true,
-    "Developer": true,
-    "Documents": true,
-    "Downloads": true,
-    "Library": true,
-    "Movies": true,
-    "Music": true,
-    "OrbStack": true,
-    "Pictures": true,
-    "Public": true
+    ".Trash": true,
+    ".zcompdump-*": true,
+    ".zsh_sessions": true,
+    "*_history": true,
+    "**/.localized": true,
+    "OrbStack": true
   },
-  "git.autoRepositoryDetection": "subFolders",
   "git.ignoredRepositories": [
     ".oh-my-zsh"
-  ],
-  "git.scanRepositories": [
-    ".vault"
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -56,6 +29,7 @@
   "oxc.enable.oxfmt": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
+    "**/.claude/CLAUDE.md": true,
     "**/.claude/rules": true,
     "**/.claude/skills": true,
     "**/.codex/AGENTS.md": true,
@@ -68,7 +42,8 @@
     "**/node_modules": true
   },
   "shellcheck.ignorePatterns": {
-    "**/.aliases": true,
-    "**/.zsh/plugins/*/_*": true
+    ".aliases": true,
+    ".hushlogin": true,
+    ".zsh/plugins/*/_*": true
   }
 }
