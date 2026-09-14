@@ -13,7 +13,6 @@ _npm_global_saved_deps() {
     "$NPM_GLOBAL/package.json" 2>/dev/null
 }
 
-# Dump into a temp file and move into place so a failure never corrupts the manifest.
 _npm_global_dump() {
   emulate -L zsh
   local json tmp
@@ -24,6 +23,12 @@ _npm_global_dump() {
   print -r -- "$json" > "$tmp" && command mv -f "$tmp" "$NPM_GLOBAL/package.json" && return 0
   rm -f "$tmp"
   return 1
+}
+
+_npm_global_rehash() {
+  emulate -L zsh
+  (( $+commands[nodenv] )) || return 0
+  command nodenv rehash
 }
 
 _npm_global_drift() {
@@ -47,12 +52,23 @@ npm() {
       return $?
       ;;
     fresh)
+      local -i interactive=0
       if (( $# > 1 )); then
-        _zsh::log error npm-global "unknown arguments: ${*:2}"
-        print -ru2 -- 'usage: npm fresh'
-        return 1
+        if (( $# == 2 )) && [[ $2 == -i || $2 == --interactive ]]; then
+          interactive=1
+        else
+          _zsh::log error npm-global "unknown arguments: ${*:2}"
+          print -ru2 -- 'usage: npm fresh [-i]'
+          return 1
+        fi
       fi
-      command npm update --global && _npm_global_dump
+      if (( interactive )); then
+        command npx taze major -g -I -i || return $?
+      else
+        command npm update --global || return $?
+      fi
+      _npm_global_rehash
+      _npm_global_dump
       return $?
       ;;
   esac
@@ -107,14 +123,16 @@ npm() {
       _zsh::log error npm-global "no dependencies saved in $NPM_GLOBAL/package.json"
       return 1
     fi
-    command npm install --global "${deps[@]}"
-    return $?
+    command npm install --global "${deps[@]}" || return $?
+    _npm_global_rehash
+    return 0
   fi
 
   command npm "$@"
   local exit=$?
 
   if (( exit == 0 )) && (( ${dump_commands[(Ie)$cmd]} )); then
+    _npm_global_rehash
     _npm_global_dump || _zsh::log warn npm-global 'package.json sync failed'
   fi
 

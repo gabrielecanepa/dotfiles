@@ -14,11 +14,12 @@ plugins=(... npm-global)
 | ---------------------- | -------------------------------------------------------------------- |
 | `npm dump`             | Rewrite the manifest from the installed globals (offline and atomic) |
 | `npm fresh`            | Update every global package, then dump                               |
+| `npm fresh -i`         | Pick updates interactively with `npx taze`, then dump                |
 | `npm install --global` | With no package named, reinstall everything tracked in the manifest  |
 
-Any other `npm` command is passed through unchanged. After a successful global `install`, `uninstall`, or `update` (any spelling npm accepts) the manifest is re-dumped automatically.
+Any other `npm` command is passed through unchanged. After a successful global `install`, `uninstall`, or `update` (any spelling npm accepts) the nodenv shims are rehashed and the manifest is re-dumped automatically, so a newly installed binary is on `PATH` right away.
 
-The manifest comparison is exposed as `_npm_global_drift`, which reports `missing`, `drifted`, and `untracked` packages without invoking npm.
+`npm fresh -i` runs [taze](https://github.com/antfu-collective/taze) through `npx` and dumps the manifest after the interactive update is complete.
 
 ## Settings
 
