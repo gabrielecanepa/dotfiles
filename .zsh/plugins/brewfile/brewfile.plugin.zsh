@@ -1,8 +1,23 @@
 (( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
 
+_brewfile_dump() {
+  emulate -L zsh
+  local file=${HOMEBREW_BUNDLE_FILE:-Brewfile} tmp mode
+  file=${file:a}
+  tmp=$(command mktemp "$file.XXXXXX") || return 1
+  mode=$(command stat -f '%Lp' "$file" 2>/dev/null)
+  command chmod "${mode:-644}" "$tmp"
+  if command brew bundle dump --brews --casks --taps --mas --force --no-restart --file="$tmp" && [[ -s $tmp ]]; then
+    command mv -f "$tmp" "$file"
+    return $?
+  fi
+  command rm -f "$tmp"
+  return 1
+}
+
 _brewfile_sync() {
   emulate -L zsh
-  if ! command brew bundle dump --brews --casks --taps --mas --force --no-restart &>/dev/null; then
+  if ! _brewfile_dump &>/dev/null; then
     _zsh::log warn brewfile 'background Brewfile sync failed'
   fi
 }
@@ -11,8 +26,8 @@ brew() {
   emulate -L zsh
 
   local -a dump_commands=(
-    install uninstall remove reinstall upgrade cleanup
-    link unlink pin unpin tap untap
+    install uninstall remove reinstall upgrade
+		cleanup link unlink pin unpin tap untap
   )
 
   local cmd=$1
@@ -20,7 +35,11 @@ brew() {
 
   case $cmd in
     dump)
-      command brew bundle dump --brews --casks --taps --mas --force --no-restart "$@"
+      if (( $# )); then
+        command brew bundle dump --brews --casks --taps --mas --force --no-restart "$@"
+      else
+        _brewfile_dump
+      fi
       ;;
     fresh)
       local -a upgrade_args=()
