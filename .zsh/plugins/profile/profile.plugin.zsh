@@ -123,7 +123,7 @@ _profile_write() {
   print -rl -- "${block[@]}" "${lines[@]}" > "$zprofile"
 
   git_config=(git config --global)
-  [[ -n "$ZSH_GIT_CONFIG" ]] && git_config=(git config --file "$ZSH_GIT_CONFIG")
+  [[ -n "$ZSH_PROFILE_GIT_CONFIG" ]] && git_config=(git config --file "$ZSH_PROFILE_GIT_CONFIG")
   command "${git_config[@]}" user.name "$NAME"
   command "${git_config[@]}" user.email "$EMAIL"
   command "${git_config[@]}" core.editor "$GIT_EDITOR"
@@ -137,6 +137,7 @@ profile() {
   local profile_cmd="${fg_bold[green]}profile${reset_color}"
   local profile_config_cmd="${profile_cmd}${fg_bold[green]} config${reset_color}"
   local profile_install_cmd="${profile_cmd}${fg_bold[green]} install${reset_color}"
+  local profile_reload_cmd="${profile_cmd}${fg_bold[green]} reload${reset_color}"
   local working_dir_name="${WORKING_DIR/$HOME\//}"
   local separator="${ZSH_PROFILE_SEPARATOR:-    }"
 
@@ -149,6 +150,7 @@ profile() {
 
       local name_msg="Name ($( (( is_installation )) && print -n 'no accent or special characters' || print -rn -- "$NAME"))"
       local email_msg="Email ($( (( is_installation )) && print -n 'to sign your commits' || print -rn -- "$EMAIL"))"
+      local editor_msg="Editor ($( (( is_installation )) && print -n 'shell command, e.g. code, nano, vim' || print -rn -- "$EDITOR"))"
       local working_dir_msg="Working directory ($( (( is_installation )) && print -n "relative to $HOME, e.g. Developer" || print -rn -- "$working_dir_name"))"
       local editor_msg="Editor ($( (( is_installation )) && print -n 'shell command, e.g. code, nano, vim' || print -rn -- "$EDITOR"))"
 
@@ -162,7 +164,7 @@ profile() {
         print
 
         local key tmp_key msg_var
-        for key in NAME EMAIL WORKING_DIR EDITOR; do
+        for key in NAME EMAIL EDITOR WORKING_DIR; do
           tmp_key="${(L)key}"
           msg_var="${tmp_key}_msg"
 
@@ -233,8 +235,8 @@ profile() {
         return 1
       elif [[ -z "$NAME" || ! "$NAME" =~ $_profile_name_regex ]] \
         || [[ -z "$EMAIL" || ! "$EMAIL" =~ $_profile_email_regex ]] \
-        || [[ -z "$WORKING_DIR" || ! -d "$WORKING_DIR" ]] \
-        || [[ -z "$EDITOR" ]] || (( ! $+commands[$EDITOR] )); then
+        || [[ -z "$EDITOR" ]] || (( ! $+commands[$EDITOR] )) \
+        || [[ -z "$WORKING_DIR" || ! -d "$WORKING_DIR" ]]; then
         _zsh::log warn profile "a profile is not installed for user $USER"
         print -ru2 -- "Type $profile_install_cmd to add a new profile"
         return 1
@@ -271,8 +273,8 @@ profile() {
       print -P "%Buser  %b${separator}$USER"
       print -P "%Bname  %b${separator}$NAME"
       print -P "%Bemail %b${separator}$EMAIL"
-      print -P "%Bpath  %b${separator}~/$working_dir_name"
       print -P "%Beditor%b${separator}$editor"
+      print -P "%Bpath  %b${separator}~/$working_dir_name"
       return 0
       ;;
   esac

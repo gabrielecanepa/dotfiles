@@ -1,6 +1,6 @@
 # profile plugin
 
-Manages the shell profile (name, email, working directory, editor): install, configure, store it in `~/.zprofile`, and sync into the Git config.
+Manages the shell profile (name, email, editor, working directory): install, configure, store it in `~/.zprofile`, and sync into the Git config.
 
 To use it, add `profile` to the plugins array in your zshrc file:
 
@@ -26,13 +26,13 @@ $ profile
 user    john.doe
 name    John Doe
 email   john@doe.com
-path    ~/Developer
 editor  Visual Studio Code
+path    ~/Developer
 ```
 
-The exported variables are written between `# BEGIN PROFILE` and `# END PROFILE` markers in `~/.zprofile`; content outside the block is preserved.
+The exported variables are written between `# BEGIN PROFILE` and `# END PROFILE` markers in `~/.zprofile`. Content outside the block is preserved.
 
 ## Settings
 
 - `ZSH_PROFILE_SEPARATOR`: separator for the profile output. Defaults to four spaces.
-- `ZSH_GIT_CONFIG`: Git config file where the identity values (`user.name`, `user.email`, `core.editor`) are written. When unset, the plugin writes to the global Git configuration.
+- `ZSH_PROFILE_GIT_CONFIG`: Git configuration file where to write the identity values (`user.name`, `user.email`, `core.editor`). When unset, the plugin writes to the global Git configuration.
