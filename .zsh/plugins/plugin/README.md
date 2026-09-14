@@ -1,6 +1,6 @@
 # plugin plugin
 
-Loads or reloads a zsh plugin by name, preferring the custom plugin over a default one with the same name.
+Loads, reloads, and updates zsh plugins.
 
 To use it, add `plugin` to the plugins array in your zshrc file:
 
@@ -11,7 +11,12 @@ plugins=(... plugin)
 ## Usage
 
 ```zsh
-plugin <name>
+plugin load <name...>
+plugin update [name...]
 ```
 
-Sources `$ZSH_CUSTOM/plugins/<name>/<name>.plugin.zsh` when it exists, falling back to `$ZSH/plugins/<name>/<name>.plugin.zsh`. Plugin names are autocompleted.
+`load` sources `$ZSH_CUSTOM/plugins/<name>/<name>.plugin.zsh` for each name, falling back to `$ZSH/plugins/<name>/<name>.plugin.zsh`.
+
+`update` fetches the latest commit for each custom plugin containing a `.git` directory.
+
+Commands and plugin names are autocompleted.

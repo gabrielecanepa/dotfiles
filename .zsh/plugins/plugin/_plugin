@@ -1,12 +1,40 @@
 #compdef plugin
 
 _plugin() {
-  local -aU names
-  local name
-  for name in "$ZSH_CUSTOM/plugins"/*(/N:t); do
-    [[ -f "$ZSH_CUSTOM/plugins/$name/$name.plugin.zsh" ]] && names+=("$name")
-  done
-  _describe -t plugins 'plugin' names
+  local -a subcommands
+  subcommands=(
+    'load:Load one or more plugins'
+    'update:Update custom plugins with a remote'
+    'help:Print the help message'
+  )
+
+  _arguments -C \
+    '1: :->command' \
+    '*:: :->args'
+
+  case $state in
+    command)
+      _describe -t commands 'plugin command' subcommands
+      ;;
+    args)
+      local -aU names
+      local name
+      case ${line[1]} in
+        load)
+          for name in "$ZSH_CUSTOM/plugins"/*(/N:t) "$ZSH/plugins"/*(/N:t); do
+            [[ -f "$ZSH_CUSTOM/plugins/$name/$name.plugin.zsh" || -f "$ZSH/plugins/$name/$name.plugin.zsh" ]] && names+=("$name")
+          done
+          _describe -t plugins 'plugin' names
+          ;;
+        update)
+          for name in "$ZSH_CUSTOM/plugins"/*(/N:t); do
+            [[ -d "$ZSH_CUSTOM/plugins/$name/.git" ]] && names+=("$name")
+          done
+          _describe -t plugins 'plugin' names
+          ;;
+      esac
+      ;;
+  esac
 }
 
 _plugin "$@"
