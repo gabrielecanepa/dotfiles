@@ -20,8 +20,6 @@ brew "gh"
 brew "git"
 # Open-source GitLab command-line tool
 brew "glab"
-# GNU implementation of the famous stream editor
-brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Regular expressions library
@@ -64,8 +62,6 @@ cask "1password-cli"
 cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
-# Brings the power of Copilot coding agent directly to your terminal
-cask "copilot-cli"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
@@ -75,8 +71,6 @@ cask "google-chrome"
 cask "imageoptim"
 # VPN client for secure internet access and private browsing
 cask "nordvpn"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Mesh VPN based on WireGuard
