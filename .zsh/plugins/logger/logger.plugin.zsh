@@ -9,8 +9,8 @@ _zsh::log() {
     info | *) color='%F{blue}' label='info' ;;
   esac
   if [[ -t 2 ]]; then
-    print -Pru2 -- "${color}${plugin}%f: ${text//\%/%%}"
+    print -Pru2 -- "${color}[${plugin}]%f ${text//\%/%%}"
   else
-    print -ru2 -- "${plugin}: ${label}: ${text}"
+    print -ru2 -- "[${plugin}] ${label}: ${text}"
   fi
 }
