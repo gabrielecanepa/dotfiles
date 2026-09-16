@@ -29,6 +29,7 @@
       "description": "Segments to render, one group per statusline line. Unknown names are dropped, and a layout left with no segment falls back to the default. Setting context.style to progress moves context onto its own line in the default layout.",
       "default": [
         [
+          "logo",
           "repo",
           "branch",
           "status"
@@ -52,16 +53,20 @@
           "type": "string",
           "oneOf": [
             {
+              "const": "logo",
+              "description": "Remote host logo (GitHub, GitLab, Bitbucket) in its brand color, linked to the repo page when git.links is on."
+            },
+            {
               "const": "repo",
-              "description": "Repository owner/name linked to its host, or the current directory."
+              "description": "Repository label per git.style, linked to its remote page when git.links is on."
             },
             {
               "const": "branch",
-              "description": "Current git branch."
+              "description": "Current git branch, linked to its remote page when git.links is on."
             },
             {
               "const": "status",
-              "description": "Counts of staged, modified and deleted files."
+              "description": "Counts of staged, modified and deleted files, linked to the compare page against main when git.links is on."
             },
             {
               "const": "model",
@@ -81,19 +86,27 @@
             },
             {
               "const": "five-hour",
-              "description": "Five-hour rate limit usage and reset time."
+              "description": "Five-hour rate limit usage and reset time, linked to the claude.ai usage page when usage.links is on."
             },
             {
               "const": "seven-day",
-              "description": "Weekly rate limit usage and reset time."
+              "description": "Weekly rate limit usage and reset time, linked to the claude.ai usage page when usage.links is on."
+            },
+            {
+              "const": "five-hour-burn",
+              "description": "Five-hour burn index: used percentage over elapsed percentage of the window, hidden in its first tenth."
+            },
+            {
+              "const": "seven-day-burn",
+              "description": "Weekly burn index: used percentage over elapsed percentage of the window, hidden in its first tenth."
             }
           ]
         }
       }
     },
-    "bar": {
+    "usage": {
       "type": "object",
-      "description": "Usage bars drawn for the context, five-hour and weekly segments.",
+      "description": "Five-hour and weekly usage segments. The bar style also draws the context bar.",
       "additionalProperties": false,
       "properties": {
         "style": {
@@ -127,6 +140,11 @@
           "type": "boolean",
           "description": "Leave small dots behind the pacman head instead of spaces. Pacman style only.",
           "default": false
+        },
+        "links": {
+          "type": "boolean",
+          "description": "Link the five-hour and weekly segments to the claude.ai usage settings page.",
+          "default": true
         }
       }
     },
@@ -153,6 +171,41 @@
               "description": "Model picker glyph in the Claude orange."
             }
           ]
+        }
+      }
+    },
+    "git": {
+      "type": "object",
+      "description": "Git segments: logo, repo, branch and status.",
+      "additionalProperties": false,
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "What the repository segment shows.",
+          "default": "auto",
+          "oneOf": [
+            {
+              "const": "auto",
+              "description": "Owner and name from the remote, including GitLab groups, or the directory name without a remote."
+            },
+            {
+              "const": "repo",
+              "description": "Repository name only, or the directory name without a remote."
+            },
+            {
+              "const": "path",
+              "description": "Current directory with ~ for the home folder."
+            },
+            {
+              "const": "folder",
+              "description": "Current directory name, which may differ from the repository name."
+            }
+          ]
+        },
+        "links": {
+          "type": "boolean",
+          "description": "Link the logo, repo, branch and status segments to the remote: the repo page, the branch page (main links the repo page), and the compare page of the branch against main.",
+          "default": true
         }
       }
     },
