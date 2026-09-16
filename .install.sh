@@ -136,7 +136,13 @@ if [ "$(uname)" = "Darwin" ] && [ -x "$MACOS_DEFAULTS" ]; then
   "$MACOS_DEFAULTS" || warn "macOS defaults step failed"
 fi
 
-# 9. Codex
+# 9. Agents
+if ! command -v claude >/dev/null 2>&1; then
+  warn "Claude Code is not installed, install it manually: curl -fsSL https://claude.ai/install.sh | bash -s latest"
+fi
+if ! command -v codex >/dev/null 2>&1; then
+  warn "Codex is not installed, install it manually: curl -fsSL https://chatgpt.com/codex/install.sh | sh"
+fi
 if [ -f "$CODEX_CONFIG_SHARED" ]; then
   info "Setting up Codex configuration"
   if [ -L "$CODEX_CONFIG" ] || { [ -e "$CODEX_CONFIG" ] && [ ! -f "$CODEX_CONFIG" ]; }; then

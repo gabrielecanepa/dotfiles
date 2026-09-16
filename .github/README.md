@@ -212,6 +212,15 @@ rm -f $PYENV_ROOT/version && ln -sf ~/.python-version $PYENV_ROOT/version
 
 ### Agents
 
+Claude Code and Codex are installed manually, as the Homebrew versions lack some CLI features. Install both with their official installers:
+
+```sh
+curl -fsSL https://claude.ai/install.sh | bash -s latest
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+The CLIs are both downloaded to `~/.local/bin` and available in the PATH.
+
 #### Claude
 
 [`.claude/settings.json`](/.claude/settings.json) specifies the portable defaults for Claude Code: permissions, hooks, subagent limits, and the custom status lines in [`.claude/statusline.sh`](/.claude/statusline.sh). Instructions, rules, and skills are symlinks back to `.agents`.
