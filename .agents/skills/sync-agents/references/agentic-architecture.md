@@ -4,81 +4,132 @@ The rubric for reviewing how a repository's agentic files are designed and organ
 
 ## Contents
 
-- [The `agents.md` standard in brief](#the-agentsmd-standard-in-brief)
+- [The agents.md standard](#the-agentsmd-standard): the rules that bind a review
 - [File taxonomy](#file-taxonomy): what each file is for
-- [Standard project wiring](#standard-project-wiring): the default layout to scaffold and repair against
+- [Standard project wiring](#standard-project-wiring): the layout to scaffold and repair against
 - [Architecture checks](#architecture-checks): the judgment calls
-- [Signal-density checks](#signal-density-checks-what-to-cut): what to cut
+- [Instruction style](#instruction-style): the shape of every line
+- [Signal-density checks](#signal-density-checks): what to cut
+- [Skill provenance](#skill-provenance): third-party sources and pinning
 - [Constraint compliance](#constraint-compliance): budgets and local rules
 
-## The `agents.md` standard in brief
+## The agents.md standard
 
-`AGENTS.md` is an open, plain-Markdown format, "a README for agents." It has no required fields, no mandated sections, no frontmatter requirement; projects use whatever headings carry the most signal. It is stewarded as an open standard (under the Linux Foundation's Agentic AI Foundation) and read by most major coding agents, so treat it as the portable, tool-neutral source of truth rather than tying instructions to one vendor's file.
+Treat `AGENTS.md` as the portable, tool-neutral source of truth: plain Markdown, no required fields, no mandated sections, no frontmatter requirement.
 
-Rules that matter for review:
-
-- **Nearest wins.** In a monorepo or any nested layout, the `AGENTS.md` closest to the file being edited applies. So nested `AGENTS.md` files are legitimate and often correct: each subproject ships tailored instructions. Review them as a hierarchy: the root holds what's true everywhere, nested files hold only what differs.
-- **Explicit prompts override files.** Documentation steers; it never overrides a direct instruction. Don't write docs that try to.
-- **Listed checks get run.** If AGENTS.md names build/test/lint commands, agents will execute and try to pass them. So those commands must be correct and current: a stale command here is worse than none.
-- **Complements the README, doesn't replace it.** README is for humans; AGENTS.md carries the agent-specific context that would clutter a README. This skill audits only the agentic side, but the split is the reason a README-carrying-agent-instructions finding matters.
+- When a layout nests, the `AGENTS.md` nearest the edited file applies, so review root and nested files as one hierarchy.
+- When a file claims to override an explicit prompt, flag it; documentation steers and never overrides a direct instruction.
+- When `AGENTS.md` names a build, test, or lint command, verify it still runs, because agents execute the checks a file lists.
+- When the README carries agent-only instructions, flag the misplacement and leave the README itself to the `sync-docs` skill.
 
 ## File taxonomy
 
 Map every agentic file to a role. A file with no clear role is a finding.
 
-- **`AGENTS.md` (root)**: the source of truth. High-signal, project-specific context an agent can't infer from the repo itself: architecture, conventions, the spec-first workflow, non-obvious commands, hard constraints.
-- **`AGENTS.md` (nested)**: only the deltas for a subproject. If a nested file largely repeats the root, that's redundancy to flag.
-- **`CLAUDE.md` / tool entrypoints**: thin pointers to AGENTS.md, not parallel copies. The default to enforce (see [Standard project wiring](#standard-project-wiring)): `CLAUDE.md` contains only an `@AGENTS.md` include (or the tool's equivalent). Multiple fat, drifting entrypoints are the exact problem AGENTS.md exists to solve.
-- **`.agents/**`**: the canonical home for agentic assets (rules, skills, commands, hooks, output styles, specs). Check it's organized by kind, each asset is reachable and referenced, and nothing is orphaned. If it holds a plans/specs backlog, check entries against any completion convention the repo declares: a plan for a shipped feature left in `plans/` is dead weight to flag, not a delta to keep.
-- **Rules / instruction files** (`.agents/rules/*`, `.github/instructions/*`): scoped guidance that loads on a path glob. Check the scope is right (a rule that should be always-on vs. path-gated), the frontmatter is valid for every tool that reads it, and the same physical file isn't consumed twice by one tool.
-- **MCP config** (`.mcp.json` and tool variants): declares the MCP servers agents get. Each server's command, args, path, and referenced env vars must resolve, and the set should match any MCP servers AGENTS.md documents (documented-but-unconfigured, or configured-but-undocumented, is a finding).
-- **Skills**: each `SKILL.md` should have a crisp description (the trigger), stay lean in the body, and push detail to references. Check skills are well-formed and that their descriptions actually trigger on the intended use.
-- **`.claude/**`\*\*: settings, commands, subagents, skills. Check it's consistent with AGENTS.md and not duplicating it. Watch for symlinked configs whose target is the real source: edit and audit the target, not the link. If a symlink's target resolves outside the resolved scope, treat it as read-only context and flag the crossing rather than editing across the boundary.
+### Entrypoints
+
+- Root `AGENTS.md` holds context an agent cannot infer from the repository: architecture, conventions, workflow, non-obvious commands, hard constraints.
+- Nested `AGENTS.md` holds only a subproject's deltas; when it largely repeats the root, flag the redundancy.
+- `CLAUDE.md` and other tool entrypoints stay thin pointers to `AGENTS.md`; when one forks it, flag the fat entrypoint.
+- When a rule file (`.agents/rules/*`, `.github/instructions/*`) is path-gated, check the scope and the frontmatter validity for every tool that reads it.
+- When one physical rule file is consumed twice by a single tool, flag the duplicate route.
+
+### Trees and configuration
+
+- `.agents/**` is the canonical home for rules, skills, commands, hooks, output styles, and specs; check it is organized by kind and nothing is orphaned.
+- When `.agents/**` holds a plans or specs backlog, check each entry against the repository's completion convention and flag a plan for a shipped feature.
+- When `.mcp.json` or a tool variant declares MCP servers, verify every command, arg, path, and env var resolves.
+- When `AGENTS.md` and the MCP config disagree, flag documented-but-unconfigured and configured-but-undocumented servers.
+- Each `SKILL.md` carries a crisp triggering description and a lean body with detail in references; check the description triggers on the intended use.
+- `.claude/**` holds settings, commands, subagents, and skills; check it stays consistent with `AGENTS.md` instead of duplicating it.
+- When a `.claude/commands/*.md` file outgrows one file, record a migration finding, because new procedures belong in a skill folder.
+- When a config is a symlink, edit and audit the target; when the target resolves outside the scope, treat it as read-only context and flag the crossing.
 
 ## Standard project wiring
 
-The default layout to scaffold when a repository has no agentic wiring, and the baseline for repairing a partial one. A convention the repository itself declares wins over this default. The procedure that creates it lives in [project-scaffold.md](project-scaffold.md).
+The default layout to scaffold when a repository has no agentic wiring, and the baseline for repairing a partial one.
 
-- **`AGENTS.md`** at the root: the canonical file per the taxonomy above.
-- **`CLAUDE.md`** at the root containing exactly `@AGENTS.md`. Claude Code reads `CLAUDE.md`, not `AGENTS.md`; the one-line import is its documented bridge, preferred over a symlink because it survives Windows checkouts and admits Claude-only additions below the import.
-- **`.agents/`**: the tool-neutral canonical tree (rules, skills, hooks, specs). Hand-authored content is tracked by default; the only allowlist sits at `.agents/skills/.gitignore` (`/*/`), because installed skills behave like `node_modules` and reinstall from `skills-lock.json`. An `artifacts/` directory is ignored when first created.
-- **`.claude/`**: a real directory for Claude-specific files (`settings.json`, `commands/`, runtime state) with per-asset symlinks into the canonical tree (`rules -> ../.agents/rules`, `skills -> ../.agents/skills`, `hooks -> ../.agents/hooks`) created only when the target exists. Its own `.claude/.gitignore` lists the runtime entries (`settings.local.json`, `worktrees/`) so sessions never dirty the repository and the root `.gitignore` stays untouched. Git tracks the symlinks themselves, so clones keep the wiring.
-- **No other entrypoints.** Codex, Copilot, Cursor, and most other agents read `AGENTS.md` natively. A scoped-rule route (`.github/instructions`) or any tool directory is added only for a tool the repository actually uses, after verifying the tool loads that route at project scope.
+A convention the repository declares wins over this default. The procedure that creates it lives in [project-scaffold.md](project-scaffold.md).
 
-Scaffolding and repair are the same operation: create only what is missing and never overwrite. Flag a conflicting but working layout (a fat `CLAUDE.md` that forks `AGENTS.md`, a whole-directory `.claude -> .agents` symlink from an older convention) as a finding to resolve, not something to silently migrate.
+- `AGENTS.md` at the root, per the taxonomy above.
+- `CLAUDE.md` at the root containing exactly `@AGENTS.md`, never a symlink, with Claude-only additions allowed below the import.
+- `.agents/` as the tool-neutral canonical tree for rules, skills, hooks, and specs, with hand-authored content tracked by default.
+- `.agents/skills/.gitignore` containing `/*/` as the only allowlist, plus an ignored `artifacts/` directory when one is first created.
+- `.claude/` as a real directory for Claude-specific files, with per-asset symlinks created only when the target exists.
+- Those symlinks are `rules -> ../.agents/rules`, `skills -> ../.agents/skills`, and `hooks -> ../.agents/hooks`.
+- `.claude/.gitignore` listing the runtime entries `settings.local.json` and `worktrees/`, leaving the root `.gitignore` untouched.
+- No other entrypoint: add a route such as `.github/instructions`, or a tool directory, only after verifying that tool loads it at project scope.
+
+### Repair rules
+
+1. Create only what is missing and never overwrite; scaffolding and repair are the same operation.
+2. Track the symlinks themselves so clones keep the wiring.
+3. For a conflicting but working layout, such as a fat `CLAUDE.md` or a whole-directory `.claude -> .agents` symlink, flag it rather than migrate silently.
 
 ## Architecture checks
 
-The judgment calls. For each, the question is whether the _current_ arrangement is the best one for an agent to work with.
+For each check, ask whether the current arrangement is the best one for an agent to work with.
 
-- **Source-of-truth integrity.** Is AGENTS.md genuinely authoritative? Do entrypoints point to it rather than fork it? Any contradictions between files?
-- **Does each file earn its place?** Purpose, audience, and unique content. A file that duplicates another, or that no one reads, or that a tool config already covers, is a candidate for merge or deletion.
-- **Grouping and splitting.** Is related guidance together and unrelated guidance apart? Is anything so long it should split (progressive disclosure: lean entry file, detail in references)? Is anything so fragmented it should merge? In monorepos, is the root/nested division clean?
-- **Progressive disclosure.** The entry files (AGENTS.md, each SKILL.md) should be scannable; depth belongs in referenced files loaded on demand. Flag entry files that try to hold everything. Keep references one level deep from the entry file so agents read complete files instead of previewing nested ones.
-- **Tool fit.** Are the right mechanisms used for each job: a skill where a skill belongs, a command where a command belongs, a scoped rule where a rule belongs, AGENTS.md prose only for what can't be a tool or skill? Are they used correctly (valid frontmatter, working includes, correct paths, forward-slash paths)?
-- **Loader graph.** For each tool, identify startup files, scoped files, manual routes, includes, and symlink targets. Flag duplicate physical files loaded through multiple routes and files that no configured route can discover.
-- **Skill catalog.** Measure the metadata exposed before a skill is selected. Flag verbose descriptions, duplicate triggers, disabled or shadowed skills, and lockfile entries that do not match installed folders.
-- **Coverage.** Is anything an agent needs missing: setup, non-obvious build steps, conventions, gotchas, the workflow the repo follows? Gaps are as much a finding as bloat.
+- Source-of-truth integrity: is `AGENTS.md` authoritative, do entrypoints point to it rather than fork it, and do any files contradict each other?
+- Earned place: does each file have a distinct purpose, audience, and content, or does a tool config already cover it?
+- Grouping and splitting: is related guidance together, is anything long enough to split or fragmented enough to merge, and is the root/nested division clean?
+- Progressive disclosure: are entry files scannable with depth in references kept one level deep, so agents read complete files?
+- Tool fit: is each job done by the right mechanism (skill, command, scoped rule, prose) with valid frontmatter, working includes, and forward-slash paths?
+- Loader graph: for each tool, identify startup, scoped, manual, include, and symlink routes, then flag duplicate physical files and files no route can reach.
+- Skill catalog: measure metadata exposed before selection; flag verbose descriptions, duplicate triggers, disabled or shadowed skills, and lockfile drift.
+- Coverage: is anything an agent needs missing, such as setup, non-obvious build steps, conventions, or the repository's workflow?
 
-## Signal-density checks (what to cut)
+For loader evidence in Claude Code, when a route is disputed, prefer an `InstructionsLoaded` hook log over inference.
 
-Bloated and generically-written context files measurably reduce agent success and raise cost. Every always-on token is paid each session, most of which never use the rule, so prefer scoping a rule to where it fires over making it global. Bias toward cutting:
+## Instruction style
 
-- **Toolchain duplication.** If a linter, formatter, type checker, or CI config already enforces a rule, AGENTS.md should not restate it: it should point to the tool. Describe only behavioral rules no tool can express.
-- **Generic advice.** "Write clean code," "follow best practices," restated language docs: zero signal. Cut or replace with the specific, local rule.
-- **Obvious-from-the-repo content.** The stack and structure an agent can read off `package.json` and the directory tree don't need narrating unless there's a non-obvious twist.
-- **Stale scaffolding.** Placeholder sections, TODOs that never resolved, instructions for tools no longer used.
-- **Committed scratch or build output.** Session `tmp/` dirs, logs, or generated folders (`node_modules/`, `dist/`, `.next/`) tracked under `.agents/`/`.claude/`: flag as dead weight and confirm they're git-ignored, not committed.
+The shape that raises adherence. Apply it to every hand-written agentic file: entrypoints, rules, skill bodies, references, and agent definitions.
 
-The test for keeping a line: would an agent do worse without it? If not, cut it.
+### Line shape
+
+- Write one directive per line. A list item that carries a second directive splits into two items.
+- Put the trigger first, as "When X, do Y". A rule without a trigger reads as always-on and dilutes the rest.
+- Keep a list item under 160 characters and at most two sentences; the second sentence is the reason, kept only when it changes the decision.
+- Name the exact path, symbol, flag, command, or number instead of describing it.
+- Avoid bold lead-ins, arrow chains, nested clauses, and rationale paragraphs.
+
+### Structure and placement
+
+- Name the scope in a header. A section holds at most eight items; more means a split or a reference.
+- Use a list for independent rules and numbered steps for a sequence an agent executes. Use a short paragraph only for context that no line can carry alone.
+- Move examples to a reference loaded on demand and cite it by relative path from the entry file.
+- Cut history, comparisons, and justification, or move them to a reference; they are not instructions.
+- Scope a rule to the paths where it fires instead of keeping it always on.
+
+## Signal-density checks
+
+Every always-on token is paid each session, so scope a rule to where it fires instead of making it global.
+
+The test for keeping a line: would an agent do worse without it?
+
+- When a linter, formatter, type checker, or CI config already enforces a rule, point to the tool instead of restating the rule.
+- When a line is generic advice such as "write clean code" or restated language documentation, cut it or replace it with the specific local rule.
+- When content is readable off `package.json` or the directory tree, cut it unless it carries a non-obvious twist.
+- When a placeholder section, an unresolved TODO, or an instruction for an unused tool remains, cut it as stale scaffolding.
+- When build or scratch output (`tmp/`, logs, `node_modules/`, `dist/`, `.next/`) sits under `.agents/` or `.claude/`, flag it unless git-ignored.
+
+## Skill provenance
+
+- Record for every third-party skill its source repository, whether the lockfile pins a tag or revision, and the revision reviewed.
+- When a source floats on a default branch, flag it on its own, because the next update pulls whatever that branch holds into files that steer the agent.
+- Pin a third-party skill to a tag or revision where the manager supports it; where it does not, record the reviewed revision in the audit.
+- Read the diff of the installed bodies before accepting an update, and review it as a code change rather than a docs refresh.
 
 ## Constraint compliance
 
-Use [context-budgets.md](context-budgets.md) as the default envelope even when the repository declares no limits. A stricter local budget overrides it. These are review thresholds, not a claim that a token count guarantees model quality. Budgets and optimization decisions use estimated tokens only; the lines and bytes in the report are informational.
+Use [context-budgets.md](context-budgets.md) as the default envelope even when the repository declares no limits; a stricter local budget overrides it.
 
-- **Token budgets**: measure every audit with `scripts/count_tokens.py`, using the relevant profile or explicit limits. Flag files over budget, and files with hard-wrapped prose, and propose a split, trim, or unwrap rather than silently accepting the excess.
-- **Structure / naming conventions**: section order, file naming, folder layout the repo prescribes. For skills, the `agents.md`/Anthropic conventions apply: gerund or noun-phrase name, lowercase-hyphen only, max 64 chars, no reserved words; description in third person, what plus when, max 1024 chars.
-- **Voice and vocabulary rules**: tone, banned words, formatting conventions.
-- **Project-specific conventions**: e.g. a thin-CLAUDE.md rule, a single-source rule, a spec-first workflow. Check files conform.
+Report compliance as concrete pass/fail items so the proposal shows what is off and what fixing it costs.
 
-Report compliance as concrete pass/fail items so the proposal can show exactly what's off and what fixing it costs.
+- Measure every audit with `scripts/count_tokens.py`, using the relevant profile or explicit limits.
+- Flag files over budget and files with hard-wrapped prose, then propose a split, a trim, or an unwrap instead of accepting the excess.
+- Check the structure and naming the repository prescribes: section order, file naming, folder layout.
+- Name a skill with a gerund or noun phrase, lowercase and hyphenated only, at most 64 characters, with no reserved word.
+- Write a skill description in third person stating what plus when, at most 1024 characters.
+- Check voice and vocabulary rules: tone, banned words, formatting conventions.
+- Check project-specific conventions such as a thin-`CLAUDE.md` rule, a single-source rule, or a spec-first workflow.

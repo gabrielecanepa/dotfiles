@@ -19,3 +19,7 @@ plugins=(... brewfile)
 | `brew reset`  | Run `brew update-reset`                                                                          |
 
 Any other `brew` or `mas` subcommand is passed through unchanged. After a successful mutating command (`install`, `uninstall`, `upgrade`, `tap`, and friends) the Brewfile is re-dumped in a detached background job, so the prompt returns immediately. `mas install`, `mas uninstall`, and `mas upgrade` must run under `sudo`.
+
+## Drift
+
+`_brewfile_drift` reports Brewfile entries that are not installed, which `dotfiles doctor` surfaces. It shells out to `brew bundle check`, which is far too slow for shell startup, so the plugin defines no `_brewfile_reconcile` and `dotfiles init` skips it. Apply the fix with `brew global install`.

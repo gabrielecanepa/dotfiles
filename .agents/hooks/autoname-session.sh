@@ -117,7 +117,7 @@ fi
 
 name="$(
   printf '%s\n\n<request>\n%s\n</request>\n' "$SESSION_NAME_PROMPT" "$prompt" |
-    (cd "$scratch" && CLAUDE_CODE_SAFE_MODE=1 \
+    (cd "$scratch" && CLAUDE_CODE_SAFE_MODE=1 CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 \
       "$@" -p --model "$SESSION_NAME_MODEL" --output-format text 2>/dev/null) |
     awk 'NF {print; exit}' | tr '[:upper:]' '[:lower:]' |
     sed 's/^[^a-z0-9]*//; s/[^a-z0-9]*$//' | cut -d- -f1-4

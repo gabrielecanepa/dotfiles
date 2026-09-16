@@ -1,0 +1,5 @@
+interface:
+  display_name: "Questions For"
+  short_description: "Write a discovery questionnaire for the person who holds the answers"
+policy:
+  allow_implicit_invocation: false

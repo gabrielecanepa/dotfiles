@@ -5,7 +5,7 @@ export NPM_GLOBAL
 
 typeset -g _npm_global_dir="${0:A:h}"
 
-_npm_global_saved_deps() {
+_npm_global_deps() {
   emulate -L zsh
   [[ -f $NPM_GLOBAL/package.json ]] || return 0
   command node -p \
@@ -118,7 +118,7 @@ npm() {
 
   if (( npkgs == 0 )) && (( ${install_commands[(Ie)$cmd]} )); then
     local -a deps
-    deps=(${(f)"$(_npm_global_saved_deps)"})
+    deps=(${(f)"$(_npm_global_deps)"})
     if (( ! ${#deps} )); then
       _zsh::log error npm-global "no dependencies saved in $NPM_GLOBAL/package.json"
       return 1

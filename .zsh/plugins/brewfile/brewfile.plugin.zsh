@@ -22,6 +22,25 @@ _brewfile_sync() {
   fi
 }
 
+_brewfile_drift() {
+  emulate -L zsh
+  (( $+commands[brew] )) || return 0
+  local file=${HOMEBREW_BUNDLE_FILE:-Brewfile}
+  file=${file:a}
+  [[ -f $file ]] || return 0
+  local -a lines
+  lines=(${(f)"$(HOMEBREW_NO_AUTO_UPDATE=1 command brew bundle check --verbose --file="$file" 2>&1)"})
+  local line kind name
+  for line in $lines; do
+    [[ $line == '→ '* ]] || continue
+    line=${line#'→ '}
+    kind=${line%% *}
+    name=${${line#* }%% *}
+    print -r -- "${(L)kind} $name"
+  done
+  return 0
+}
+
 brew() {
   emulate -L zsh
 

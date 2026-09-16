@@ -1,0 +1,5 @@
+interface:
+  display_name: "Compact Memory"
+  short_description: "Compact the Claude Code auto-memory index"
+policy:
+  allow_implicit_invocation: false

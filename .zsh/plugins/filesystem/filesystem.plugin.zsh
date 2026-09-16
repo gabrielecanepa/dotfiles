@@ -1,5 +1,4 @@
 if (( $+commands[gls] )); then
-  # Ignore icon files and Finder metadata.
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
 else
   alias ls="/bin/ls -GHhp"
@@ -32,7 +31,6 @@ rmm() {
   emulate -L zsh
   local folder
   for folder in "$@"; do
-    # -prune stops find from descending into the match before rm removes it.
     command find . -type d -name "$folder" -prune -exec rm -rf {} +
   done
 }

@@ -2,9 +2,9 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 180,
   "env": {
-    "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "3",
+    "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "4",
     "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION": "12",
-    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1"
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "2"
   },
   "attribution": {
     "commit": "",
@@ -35,8 +35,9 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus",
   "fallbackModel": [
-    "default"
+    "sonnet"
   ],
   "enabledMcpjsonServers": [
     "cloudflare",
@@ -79,6 +80,11 @@
             "type": "command",
             "command": "$HOME/.agents/hooks/format-edited-file.sh",
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/guard-context-budgets.sh",
+            "timeout": 10
           }
         ]
       }
@@ -90,6 +96,12 @@
             "type": "command",
             "command": "$HOME/.agents/hooks/autoname-session.sh",
             "timeout": 20
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/route-request.sh",
+            "timeout": 25,
+            "statusMessage": "Routing request"
           }
         ]
       }
@@ -128,6 +140,7 @@
   "outputStyle": "Concise",
   "sandbox": {
     "enabled": false,
+    "autoAllowBashIfSandboxed": true,
     "network": {
       "allowedDomains": [
         "registry.npmjs.org",
@@ -152,24 +165,58 @@
       "Asking GPT"
     ]
   },
+  "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "autoCompactWindow": 250000,
+  "fastModePerSessionOptIn": true,
   "askUserQuestionTimeout": "never",
+  "autoUpdatesChannel": "latest",
   "plansDirectory": ".agents/plans",
   "tui": "fullscreen",
+  "autoMemoryEnabled": true,
   "showThinkingSummaries": false,
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "editorMode": "normal",
-  "verbose": false,
-  "preferredNotifChannel": "auto",
   "autoCompactEnabled": true,
   "switchModelsOnFlag": true,
   "autoContinueAtUsageLimit": true,
-  "autoScrollEnabled": true,
   "fileCheckpointingEnabled": true,
-  "showTurnDuration": true,
   "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
-  "autoAllowBashIfSandboxed": true
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured; a personal machine with separate personal, work, and per-client contexts",
+      "**Cloud provider(s)**: AWS credentials exist at ~/.aws (Read-denied in permissions; treat as sensitive and never read or share them); no cloud deploy targets configured",
+      "**Repository visibility**: PUBLIC; $HOME is the tracked dotfiles repo gabrielecanepa/dotfiles (github.com:gabrielecanepa/dotfiles.git), and this settings file itself is tracked there, so tracked files never receive secrets or machine-specific identifiers",
+      "**Internal sharing / snippet hosting**: None configured; treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: 1Password (app plus SSH agent socket); its group containers, the macOS Keychain, and ~/.claude/.credentials.json are sensitive and never read",
+      "**Default / protected branches**: dotfiles default branch is `main`; ruleset `Default` (active) blocks branch deletion only, so force pushes are not blocked server-side",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured; assume Claude Code runs on an ordinary developer machine with open internet",
+      "**Source control**: each repository's own origin remote is its trusted remote; the dotfiles repo receives only its own work; client repos live under ~/Developer/@<client> with per-client git identities",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: ~/.vault (personal vault symlink; docs/ is confidential; its contents never enter a repository, paste service, prompt, or any external request), ~/.ssh, ~/.aws, ~/Library/Keychains, 1Password group containers, ~/.claude/.credentials.json; any file or store holding personal data, confidential business data, credentials, or regulated data; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured; fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development across the dotfiles repo ($HOME), personal projects under ~/Developer, and client work under ~/Developer/@<client>; personal posture in the dotfiles repo, client posture in client repos",
+      "**Trusted repo**: the working directory's own repository and its origin; for $HOME that is gabrielecanepa/dotfiles (public), so only this repo's own work is pushed there and public visibility never clears sensitive data into it",
+      "**Org-specific CLIs**: None configured; local tooling in routine use: nvim, ghostty, brew, claude, codex, gh, mas, mole, oxfmt, biome",
+      "**Context separation**: personal, work, and client contexts stay separate; browser, email, and calendar actions target only the active context's accounts",
+      "routine dotfiles-maintenance operations (formatting, git status/log, brew, editor and terminal config edits) under $HOME are considered routine"
+    ]
+  }
 }

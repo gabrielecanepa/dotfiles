@@ -4,6 +4,8 @@ ZSH_THEME=squanchy
 ZSH_COMPLETIONS=(codex docker glab orb pnpm)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
+ZSH_DISABLE_COMPFIX=true
+ZSH_DOTFILES_RECONCILERS=(launchd vscode npm-global brewfile)
 ZSH_GIT_ALIASES_MAX_LENGTH=3
 CASE_SENSITIVE=false
 COMPLETION_WAITING_DOTS=false
@@ -50,7 +52,8 @@ plugins=(
   git-aliases
   google
   lts
-  node
+  node-bin
+  node-version
   npm-global
   plugin
   profile

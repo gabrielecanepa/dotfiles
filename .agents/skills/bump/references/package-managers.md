@@ -1,10 +1,14 @@
 # Package manager command reference
 
-Exact commands per manager for the three operations bump needs: **survey outdated**, **apply upgrades** (split by semver target), and **install**. Read only the section for the manager you detected in Phase 1.
+Exact commands per manager for the three operations bump needs: survey outdated, apply upgrades by semver target, and install.
 
-`ncu` (npm-check-updates) is the cross-manager workhorse for surveying and selectively upgrading: it edits `package.json` version ranges and works with any manager. After `ncu -u` you always run the manager's own `install` to update the lockfile. The manager-native commands below are the alternative when you'd rather not depend on `ncu`.
-
-A note on "latest" vs ranges: `<pm> update` respects the semver ranges already in `package.json` (so `^5.2.0` won't cross to `6.x`). To cross majors you must rewrite the range; that's what `ncu -u` does, or the manager's explicit "latest" flag where it has one. bump deliberately separates patch/minor (range- respecting, safe) from majors (range-rewriting, gated by user approval), so the two paths below matter.
+- Read only the section for the manager detected in phase 1.
+- `ncu` (npm-check-updates) is the cross-manager workhorse: it edits `package.json` version ranges and works with any manager.
+- After `ncu -u`, always run the manager's own `install` to update the lockfile.
+- Use the manager-native commands below when you would rather not depend on `ncu`.
+- `<pm> update` respects the semver ranges already in `package.json`, so `^5.2.0` will not cross to `6.x`.
+- Crossing a major means rewriting the range: `ncu -u` does that, as does a manager's explicit "latest" flag where it has one.
+- bump separates patch and minor (range-respecting, safe) from majors (range-rewriting, gated by user approval), so both paths matter.
 
 ## Resolving "latest" live
 
@@ -51,7 +55,8 @@ npm install <pkg>@latest     # cross a major for one package explicitly
 npm ci                       # clean install strictly from lock (use to verify lock is valid)
 ```
 
-npm has no built-in "upgrade everything across majors"; use `ncu -u` then `npm install`. `npm outdated` exits non-zero when anything is outdated; that's informational, not an error.
+- npm has no built-in "upgrade everything across majors": use `ncu -u` then `npm install`.
+- `npm outdated` exits non-zero when anything is outdated; that is informational, not an error.
 
 Workspaces: `npm update --workspaces`, `npm install --workspaces`.
 
@@ -66,7 +71,8 @@ pnpm update <pkg> --latest   # one package to latest across majors
 pnpm install                 # install from manifest, refresh lock + node_modules
 ```
 
-`pnpm update --latest` (or `-L`) is the native equivalent of `ncu -u && install` in one step, but it crosses majors, so only use it once majors are approved, or scope it to specific packages. For the safe patch/minor pass, plain `pnpm update` is correct.
+- `pnpm update --latest` (or `-L`) is the native equivalent of `ncu -u && install` in one step, but it crosses majors.
+- Use it only once majors are approved, or scope it to specific packages; plain `pnpm update` is the safe patch and minor pass.
 
 Monorepo: add `-r` / `--recursive` to run across all workspace packages (`pnpm -r update`).
 
@@ -110,6 +116,7 @@ bun install                  # install from bun.lockb
 
 Whatever manager, the final install must be clean. Watch the install output for:
 
-- **peer dependency conflicts**: npm prints `ERESOLVE`; pnpm and others warn. A bump that forces `--force`/`--legacy-peer-deps` to install is a red flag, not a fix. Surface it as a decision.
+- Peer dependency conflicts: npm prints `ERESOLVE`, and pnpm and others warn.
+- A bump that needs `--force` or `--legacy-peer-deps` to install is a red flag, not a fix; surface it as a decision.
 - **deprecation warnings** for a package you just bumped (the new version may deprecate something you rely on).
 - **lockfile churn** that doesn't match what you intended; re-run the survey to confirm the resulting versions are what you approved.

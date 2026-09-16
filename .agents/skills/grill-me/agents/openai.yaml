@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Interview the user in rounds until a plan has no open branch"
+policy:
+  allow_implicit_invocation: false

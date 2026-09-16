@@ -23,6 +23,12 @@
         "matcher": "Edit|Write|MultiEdit",
         "timeoutSec": 15,
         "type": "command"
+      },
+      {
+        "bash": "$HOME/.agents/hooks/guard-context-budgets.sh",
+        "matcher": "Edit|Write|MultiEdit",
+        "timeoutSec": 10,
+        "type": "command"
       }
     ],
     "PreToolUse": [
@@ -49,6 +55,7 @@
   "includeCoAuthoredBy": false,
   "keepAlive": "busy",
   "mergeStrategy": "rebase",
+  "model": "auto",
   "scrollbar": false,
   "showTipsOnStartup": false,
   "subagents": {

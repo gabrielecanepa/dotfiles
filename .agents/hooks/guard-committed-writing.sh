@@ -5,9 +5,14 @@
 # tool call that ADDS an em or en dash, or a machine-specific /Users/<name>
 # path, to a file inside a git work tree that is not gitignored (the
 # "committed file" scope; scratch and generated paths are ignored, so they
-# pass). Pre-existing occurrences are allowed: only a net increase over the
-# replaced text (Edit/MultiEdit) or the current file content (Write) blocks.
-# /Users/Shared is a standard macOS path and never blocks.
+# pass). In any work tree other than the $HOME dotfiles repository it also
+# blocks adding a home-anchored reference to the user's agent tree or
+# projects (~/.agents, ~/.claude, ~/.codex, ~/.copilot, ~/Developer, with ~
+# spelled as ~, $HOME, or ${HOME}): a repository file must not depend on one
+# machine's dotfiles or user-level skills. Pre-existing occurrences are
+# allowed: only a net increase over the replaced text (Edit/MultiEdit) or the
+# current file content (Write) blocks. /Users/Shared is a standard macOS path
+# and never blocks.
 # Exit 2 blocks; missing jq/git or any probe failure fails open (exit 0).
 
 set -u
@@ -30,6 +35,7 @@ dir="$(dirname "$abs")"
 while [ ! -d "$dir" ] && [ "$dir" != "/" ]; do dir="$(dirname "$dir")"; done
 git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 git -C "$dir" check-ignore -q "$abs" 2>/dev/null && exit 0
+top="$(git -C "$dir" rev-parse --show-toplevel 2>/dev/null || true)"
 
 content="$(printf '%s' "$input" | jq -r '.tool_input.content // .tool_input.file_text // empty' 2>/dev/null)"
 if [ -n "$content" ]; then
@@ -51,11 +57,16 @@ en="$(printf '\342\200\223')"
 
 count_dashes() { printf '%s' "$1" | grep -o -F -e "$em" -e "$en" 2>/dev/null | wc -l | tr -d ' '; }
 count_users_paths() { printf '%s' "$1" | grep -oE '/Users/[A-Za-z0-9._-]+' 2>/dev/null | grep -cv '^/Users/Shared$'; }
+# shellcheck disable=SC2016
+count_home_refs() { printf '%s' "$1" | grep -oE '(~|\$HOME|\$\{HOME\})/(\.agents|\.claude|\.codex|\.copilot|Developer)(/|[^A-Za-z0-9_.-]|$)' 2>/dev/null | wc -l | tr -d ' '; }
 
 [ "$(count_dashes "$new")" -gt "$(count_dashes "$old")" ] &&
   deny "this edit adds an em or en dash to a committed file (AGENTS.md hard boundary). Rewrite with a period, comma, colon, hyphen, or parentheses."
 
 [ "$(count_users_paths "$new")" -gt "$(count_users_paths "$old")" ] &&
   deny "this edit adds a machine-specific /Users/<name> path to a committed file (AGENTS.md hard boundary). Use \$HOME, ~, \$HOMEBREW_PREFIX, \$XDG_*, or a repo-relative path."
+
+[ -n "$top" ] && [ "$top" != "$HOME" ] && [ "$(count_home_refs "$new")" -gt "$(count_home_refs "$old")" ] &&
+  deny "this edit adds a reference to the user's agent tree or projects (~/.agents, ~/.claude, ~/.codex, ~/.copilot, ~/Developer) to a file in a project repository (AGENTS.md hard boundary). A repository depends only on what it contains; name a user-level procedure by its skill or command, never by path."
 
 exit 0

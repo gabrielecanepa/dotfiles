@@ -168,65 +168,71 @@ if [ -f "$CODEX_CONFIG_SHARED" ]; then
   fi
 fi
 
-# 10. Visual Studio Code
-if [ "$(uname)" = "Darwin" ]; then
-  VSCODE_USER="$HOME/Library/Application Support/Code/User"
-  if [ -d "$VSCODE_USER" ]; then
-    info "Setting up Visual Studio Code"
-    # First-time symlink; `dotfiles init` re-asserts settings.json if Code clobbers it later.
-    for config in prompts snippets keybindings.json settings.json; do
-      if [ -e "$HOME/.vscode/user/$config" ]; then
-        if [ -e "$VSCODE_USER/$config" ] || [ -L "$VSCODE_USER/$config" ]; then
-          confirm "Replace '$VSCODE_USER/$config' with a symlink?" || continue
-          rm -rf "$VSCODE_USER/$config"
-        fi
-        ln -sf "$HOME/.vscode/user/$config" "$VSCODE_USER/$config"
-      fi
-    done
-    # Electron beep fix
-    KEYBINDINGS_DIR="$HOME/Library/KeyBindings"
-    KEYBINDINGS_FILE="$KEYBINDINGS_DIR/DefaultKeyBinding.dict"
-    if [ ! -f "$KEYBINDINGS_FILE" ] || confirm "Overwrite '$KEYBINDINGS_FILE' (Electron keyboard beep fix)?"; then
-      mkdir -p "$KEYBINDINGS_DIR"
-      cat >"$KEYBINDINGS_FILE" <<'EOF'
-{
-  "^@\UF701" = "noop";
-  "^@\UF702" = "noop";
-  "^@\UF703" = "noop";
-}
-EOF
-    fi
-  fi
-fi
-
-# 11. iCloud
+# 10. iCloud
 if [ "$(uname)" = "Darwin" ]; then
   ICLOUD_DRIVE="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
   if [ -d "$ICLOUD_DRIVE" ]; then
     info "Setting up iCloud Drive symlinks"
-    for folder in Downloads Movies Music; do
+    linked=0
+    for folder in Downloads Movies Music Pictures; do
+      case "$folder" in
+        Movies) library_folder="$HOME/Library/Movies" ;;
+        Music) library_folder="$HOME/Library/Music" ;;
+        Pictures) library_folder="$HOME/Library/Photos" ;;
+        *) library_folder="" ;;
+      esac
       cloud_folder="$ICLOUD_DRIVE/$folder"
       relative_folder="${cloud_folder#"$HOME"/}"
       [ "$(readlink "$HOME/$folder")" = "$relative_folder" ] && continue
       confirm "Replace ~/$folder with a symlink to iCloud Drive (existing files will be moved)?" || continue
-      mkdir -p "$cloud_folder"
-      shopt -s dotglob nullglob
-      entries=("$HOME/$folder"/*)
-      shopt -u dotglob nullglob
-      if [ ${#entries[@]} -gt 0 ] && ! mv "${entries[@]}" "$cloud_folder/"; then
-        warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
+      if ! mkdir -p "$cloud_folder" "${library_folder:-$cloud_folder}"; then
+        warn "Failed to create $cloud_folder"
         failed+=("$folder")
         continue
       fi
-      rm -rf "$HOME/$folder"
-      ln -sf "$relative_folder" "$HOME/$folder"
+      if [ -d "$HOME/$folder" ] && [ ! -L "$HOME/$folder" ]; then
+        shopt -s dotglob nullglob
+        entries=("$HOME/$folder"/*)
+        shopt -u dotglob nullglob
+        libraries=()
+        contents=()
+        for entry in ${entries[@]+"${entries[@]}"}; do
+          case "$entry" in
+            *.photoslibrary | *.musiclibrary | *.tvlibrary | */"Photo Booth Library" | */Media.localized | */TV | */"Automatically Add to "* | */".Media Preferences.plist")
+              if [ -n "$library_folder" ]; then libraries+=("$entry"); else contents+=("$entry"); fi
+              ;;
+            *) contents+=("$entry") ;;
+          esac
+        done
+        if [ ${#libraries[@]} -gt 0 ] && ! mv "${libraries[@]}" "$library_folder/"; then
+          warn "Failed to move libraries out of ~/$folder"
+          failed+=("$folder")
+          continue
+        fi
+        if [ ${#contents[@]} -gt 0 ] && ! mv "${contents[@]}" "$cloud_folder/"; then
+          warn "Failed to move ~/$folder contents to iCloud, leaving it untouched"
+          failed+=("$folder")
+          continue
+        fi
+        chmod -N "$HOME/$folder"
+        if ! rmdir "$HOME/$folder"; then
+          warn "Failed to remove ~/$folder, grant the terminal Full Disk Access and run the script again"
+          failed+=("$folder")
+          continue
+        fi
+      fi
+      ln -sfn "$relative_folder" "$HOME/$folder"
+      linked=1
     done
+    if [ "$linked" -eq 1 ]; then
+      info "Open Photos, Music and TV holding Option, then select or create their library under ~/Library"
+    fi
   else
     warn "iCloud Drive not found, skipping setup"
   fi
 fi
 
-# 12. Git repository (new machine)
+# 11. Git repository (new machine)
 if [ ! -d "$HOME/.git" ]; then
   info "Home directory is not a git repo, initialize it after adding your SSH key (see README §Git):"
   printf '  git -C ~ init -b main\n'

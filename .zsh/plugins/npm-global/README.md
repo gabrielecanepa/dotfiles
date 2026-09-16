@@ -21,6 +21,10 @@ Any other `npm` command is passed through unchanged. After a successful global `
 
 `npm fresh -i` runs [taze](https://github.com/antfu-collective/taze) through `npx` and dumps the manifest after the interactive update is complete.
 
+## Drift
+
+`_npm_global_drift` reports globals that are missing, drifted, or untracked against the manifest. It is report-only: comparing the manifest against the installed set needs a `node` process, which is too slow for shell startup, so `dotfiles doctor` surfaces the drift and `npm install --global` or `npm dump` applies it.
+
 ## Settings
 
 - `NPM_GLOBAL`: directory holding the tracked `package.json`. Defaults to `~/.npm`.

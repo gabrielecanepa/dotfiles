@@ -19,6 +19,8 @@ typeset -g _GIT_GITHUB=${(g::)ZSH_THEME_GIT_ICON_GITHUB}
 typeset -g _GIT_GITLAB=${(g::)ZSH_THEME_GIT_ICON_GITLAB}
 typeset -g _GIT_SEGMENT=""
 typeset -g _GIT_TOPLEVEL=""
+typeset -g _GIT_IGNORED_PWD=""
+typeset -gi _GIT_IGNORED=0
 
 _git_in_repo() {
   emulate -L zsh
@@ -33,6 +35,16 @@ _git_in_repo() {
   done
   _GIT_TOPLEVEL=""
   return 1
+}
+
+_git_ignored() {
+  emulate -L zsh
+  if [[ $_GIT_IGNORED_PWD != $PWD ]]; then
+    command git check-ignore -q . 2>/dev/null
+    _GIT_IGNORED=$(( $? == 0 ))
+    _GIT_IGNORED_PWD=$PWD
+  fi
+  (( _GIT_IGNORED ))
 }
 
 _git_dir() {
@@ -78,7 +90,7 @@ _git_segment() {
   emulate -L zsh
   _GIT_SEGMENT=""
   _git_in_repo || return 0
-  command git check-ignore -q . 2>/dev/null && return 0
+  _git_ignored && return 0
 
   local -a lines
   lines=(${(f)"$(command git status --porcelain -b 2>/dev/null)"})

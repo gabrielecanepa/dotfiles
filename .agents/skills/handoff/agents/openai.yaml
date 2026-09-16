@@ -1,0 +1,5 @@
+interface:
+  display_name: "Handoff"
+  short_description: "Write a handoff note for a fresh agent session"
+policy:
+  allow_implicit_invocation: false

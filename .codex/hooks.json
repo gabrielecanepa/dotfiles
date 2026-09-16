@@ -35,6 +35,22 @@
             "type": "command",
             "command": "$HOME/.agents/hooks/format-edited-file.sh",
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/guard-context-budgets.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.agents/hooks/route-request.sh",
+            "timeout": 25
           }
         ]
       }

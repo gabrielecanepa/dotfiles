@@ -61,10 +61,6 @@
 [help]
   autocorrect = 1
 
-[filter "claude-runtime"]
-  clean = jq 'del(.model, .modelSettings, .effortLevel, .fastMode)'
-  required = false
-  smudge = cat
 [filter "lfs"]
   clean = git-lfs clean -- %f
   process = git-lfs filter-process
