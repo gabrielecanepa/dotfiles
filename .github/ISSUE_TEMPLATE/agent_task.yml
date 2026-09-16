@@ -1,0 +1,74 @@
+name: Agent task
+description: A self-contained spec ready for a coding agent to implement
+labels:
+  - agent
+body:
+  - type: markdown
+    attributes:
+      value: 'Use this for work you intend to hand to a coding agent. Fill every required field so the issue is self-contained: the agent acts on it cold, with no memory of any prior conversation.'
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: Sets the commit type the agent should use. Prefix the title above to match.
+      options:
+        - agents
+        - brew
+        - chore
+        - docs
+        - git
+        - gui
+        - node
+        - python
+        - ruby
+        - shell
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One or two sentences. What should be true when this is done, in plain terms.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why this is needed and anything non-obvious the agent cannot derive from the repository, git history, or the instruction files. Link related issues.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Machine-checkable outcomes. Each item should be something the agent can verify against (a passing check, an observed behavior on a fresh shell).
+      placeholder: |
+        - [ ] First criterion
+        - [ ] shellcheck and shfmt pass on the touched scripts
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Affected files
+      description: Best-guess entry points so the agent does not have to rediscover them.
+      placeholder: |
+        - .zsh/plugins/dotfiles/dotfiles.plugin.zsh
+        - .agents/rules/shell.md
+    validations:
+      required: false
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of scope
+      description: Explicitly list anything the agent should NOT touch, to keep the diff surgical.
+    validations:
+      required: false
+  - type: checkboxes
+    id: ready
+    attributes:
+      label: Readiness
+      options:
+        - label: This issue is self-contained and ready for a coding agent to implement without further clarification.
+          required: true

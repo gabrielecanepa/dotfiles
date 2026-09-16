@@ -1,0 +1,36 @@
+name: Maintenance
+description: Upkeep work such as tool updates, refactoring, or configuration debt
+labels:
+  - maintenance
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Brief description of the maintenance task.
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: Changes needed
+      description: The concrete steps or items to address.
+      placeholder: |
+        - [ ] First change
+        - [ ] Second change
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why this is necessary (drifted state, deprecated tool, portability, performance).
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Migration notes, breaking changes, or risks to be aware of.
+    validations:
+      required: false
