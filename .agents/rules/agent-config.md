@@ -1,10 +1,11 @@
 ---
-description: 'Use for agent configuration in the $HOME dotfiles: shared instructions, native Claude, Codex, and Copilot assets, skills, hooks, statuslines, loader routes, and private config.'
-applyTo: '.agents/**,.claude/**,.codex/**,.copilot/**,.vscode/settings.json,Library/Application Support/Code/User/settings.json,.gitignore,.install.sh,.oxfmtrc.json'
+description: 'Use for agent configuration in the $HOME dotfiles: shared instructions, native Claude, Codex, Copilot, and OpenCode assets, skills, hooks, statuslines, loader routes, and private config.'
+applyTo: '.agents/**,.claude/**,.codex/**,.config/opencode/**,.copilot/**,.vscode/settings.json,Library/Application Support/Code/User/settings.json,.gitignore,.install.sh,.oxfmtrc.json'
 paths:
   - '.agents/**'
   - '.claude/**'
   - '.codex/**'
+  - '.config/opencode/**'
   - '.copilot/**'
   - '.vscode/settings.json'
   - 'Library/Application Support/Code/User/settings.json'
@@ -24,9 +25,11 @@ These rules apply only when `$HOME` is the active repository. Loader, hook, and 
 - Claude loads `.claude/CLAUDE.md`, rules through `.claude/rules`, and skills through `.claude/skills`; a rule without `paths` is always on.
 - A scoped rule carries matching `paths` and `applyTo` metadata.
 - Codex loads `.codex/AGENTS.md` and `.codex/skills` and has no scoped rule loader, so `AGENTS.md` routes rules by intent.
+- OpenCode loads `.config/opencode/AGENTS.md` plus every `AGENTS.md` toward the workspace; V2 ignores `instructions[]` and `CLAUDE.md`.
 - Copilot loads `.copilot/copilot-instructions.md` and `.copilot/instructions`, a real directory of `<rule>.instructions.md` links to `.agents/rules/<rule>.md`.
 - When adding a rule, add its link in `.copilot/instructions`; `~/.copilot/instructions` stays the only enabled instructions root in `.vscode/settings.json`.
-- Keep tool-native assets in place: `.claude/{agents,commands,output-styles}`, `.codex/agents`, `.codex/hooks.json`, `.copilot/*.json`.
+- OpenCode discovers skills from `.claude/skills` and `.agents/skills` with no extra wiring; never copy a skill into `.config/opencode/skills`.
+- Keep tool-native assets in place: `.claude/{agents,commands,output-styles}`, `.codex/agents`, `.codex/hooks.json`, `.copilot/*.json`, `.config/opencode/{agents,commands}`, and `opencode.jsonc`.
 
 ## Provider configuration
 
@@ -34,6 +37,7 @@ These rules apply only when `$HOME` is the active repository. Loader, hook, and 
 - Keep the user's Copilot model, effort, and interface choices; check every key against `copilot help config`.
 - Keep MCP servers, credentials, permissions, plugins, and session state ignored and CLI-managed; never duplicate skills into `.copilot/skills`.
 - Track portable Codex defaults in `.codex/settings.toml`; keep the ignored `.codex/config.toml` a regular file with mode `600` for private state and secrets.
+- Track portable OpenCode defaults in `.config/opencode/opencode.jsonc`; keep secrets in `{env:NAME}` references, never plaintext.
 - Ongoing shell startup may repair user-owned state but never invokes `sudo`.
 
 ## Hooks, memory, and statuslines
@@ -60,4 +64,4 @@ These rules apply only when `$HOME` is the active repository. Loader, hook, and 
 - Treat `.agents/skills/.system` as tool-owned: disable unwanted bundled skills through provider configuration and never move, track, or delete them.
 - Keep Codex skill-path overrides in the single private `.codex/config.toml`, never split across public and private layers.
 - Before installing a skill, check the catalog for a same-name skill and keep its description within the discovery budget.
-- Keep native subagents narrow and read-only by default: Claude in `.claude/agents/*.md`, Codex in `.codex/agents/*.toml`, roles aligned.
+- Keep native subagents narrow and read-only by default: Claude in `.claude/agents/*.md`, Codex in `.codex/agents/*.toml`, OpenCode in `.config/opencode/agents/*.md`, roles aligned.

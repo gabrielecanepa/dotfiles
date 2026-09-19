@@ -1,3 +1,4 @@
+tap "anomalyco/tap"
 # Browser automation CLI for AI agents
 brew "agent-browser"
 # YAML Parser
@@ -56,6 +57,8 @@ brew "shellcheck"
 brew "shfmt"
 # Official tldr client written in Rust
 brew "tlrc"
+# OpenCode V2 - the AI coding agent for the terminal
+brew "anomalyco/tap/opencode-v2", trusted: true
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password

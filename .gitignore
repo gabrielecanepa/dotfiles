@@ -37,6 +37,13 @@
 !/.config/glab-cli/aliases.yml
 !/.config/launchd/
 !/.config/nvim/
+!/.config/opencode/
+/.config/opencode/*
+!/.config/opencode/AGENTS.md
+!/.config/opencode/agents/
+!/.config/opencode/cli.json
+!/.config/opencode/commands/
+!/.config/opencode/opencode.jsonc
 !/.config/zed/
 /.config/zed/*
 !/.config/zed/keymap.json

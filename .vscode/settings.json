@@ -22,7 +22,7 @@
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Generate a single-line conventional commit message in the format `<type>(<scope>): <subject>`. Use the imperative mood, keep the subject lower-case with no trailing period, and omit the scope when no listed scope fits. Allowed types: agents, brew, chore, docs, git, gui, node, python, ruby, shell, tui. Allowed scopes: bash, cask, claude, codex, copilot, ghostty, mas, neovim, npm, sh, vscode, zed, zsh. Never use feat, fix, or refactor. Never add a body, footer, `Co-authored-by`, or any other trailer."
+      "text": "Generate a single-line conventional commit message in the format `<type>(<scope>): <subject>`. Use the imperative mood, keep the subject lower-case with no trailing period, and omit the scope when no listed scope fits. Allowed types: agents, brew, chore, docs, git, gui, node, python, ruby, shell, tui. Allowed scopes: bash, cask, claude, codex, copilot, ghostty, mas, neovim, npm, opencode, sh, vscode, zed, zsh. Never use feat, fix, or refactor. Never add a body, footer, `Co-authored-by`, or any other trailer."
     }
   ],
   "markdown.extension.toc.levels": "3..6",
