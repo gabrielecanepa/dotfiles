@@ -1,7 +1,7 @@
 ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="$HOME/.zsh"
 ZSH_THEME=squanchy
-ZSH_COMPLETIONS=(codex docker glab orb pnpm)
+ZSH_COMPLETIONS=(codex docker gh glab op opencode orb pnpm tailscale)
 ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
 [[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
 ZSH_DISABLE_COMPFIX=true

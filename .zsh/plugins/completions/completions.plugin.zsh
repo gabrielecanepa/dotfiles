@@ -2,6 +2,20 @@
 
 [[ -z "${ZSH_COMPLETIONS_PATH:-}" ]] && export ZSH_COMPLETIONS_PATH="${ZSH_CUSTOM:-$HOME/.zsh}/completions"
 [[ -d "$ZSH_COMPLETIONS_PATH" ]] || mkdir -p "$ZSH_COMPLETIONS_PATH"
+(( ${fpath[(Ie)$ZSH_COMPLETIONS_PATH]} )) || fpath=("$ZSH_COMPLETIONS_PATH" $fpath)
+
+_completions::load() {
+  emulate -L zsh
+  local cli="$1" comp="$2"
+  local -a words
+  (( $+functions[compdef] )) || return 0
+  [[ "$comp" == '#compdef '* ]] || return 0
+  words=(${=comp%%$'\n'*})
+  shift words
+  (( ${#words} )) || return 0
+  autoload -U "_$cli" 2>/dev/null || return 0
+  compdef "_$cli" "${words[@]}" 2>/dev/null
+}
 
 completions() {
   emulate -L zsh
@@ -29,6 +43,7 @@ completions() {
       return 1
     fi
 
+    _completions::load "${clis[1]}" "$comp"
     return 0
   fi
 
@@ -44,6 +59,7 @@ completions() {
     [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
     [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion -s zsh 2>/dev/null)"
     [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion 2>/dev/null)"
+    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" --completions zsh 2>/dev/null)"
 
     if [[ "$comp" != '#compdef '* ]]; then
       _zsh::log error completions "cannot generate zsh completions for $cli"
@@ -59,6 +75,8 @@ completions() {
       rc=1
       continue
     fi
+
+    _completions::load "$cli" "$comp"
   done
 
   return $rc

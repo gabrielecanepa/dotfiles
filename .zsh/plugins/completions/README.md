@@ -1,6 +1,6 @@
 # completions plugin
 
-Generates and caches zsh completion files for CLIs that can emit their own. Each CLI is probed with `completion zsh`, `completion --zsh`, `completion -s zsh`, and `completion`, keeping the first output that starts with `#compdef` so a CLI defaulting to bash is never cached as a zsh completion.
+Generates and caches zsh completion files for CLIs that can emit their own. Each CLI is probed with `completion zsh`, `completion --zsh`, `completion -s zsh`, `completion`, and `--completions zsh`, keeping the first output that starts with `#compdef` so a CLI defaulting to bash is never cached as a zsh completion.
 
 To use it, add `completions` to the plugins array in your zshrc file:
 
