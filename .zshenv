@@ -1,6 +1,8 @@
 typeset -aU path fpath
 typeset -T INFOPATH infopath
 typeset -U infopath
+typeset -ga ZSH_RUNTIME_MANAGERS
+(($#ZSH_RUNTIME_MANAGERS)) || ZSH_RUNTIME_MANAGERS=(nodenv pyenv rbenv)
 
 export LANG="en_US.UTF-8"
 
@@ -26,11 +28,21 @@ export PNPM_HOME="$HOME/.pnpm"
 export COPILOT_CUSTOM_INSTRUCTIONS_DIRS="$HOME/.agents"
 
 initialize-path() {
+  local manager root
+  local -a runtime_shims
+
+  for manager in $ZSH_RUNTIME_MANAGERS; do
+    root=${(P)${:-${(U)manager}_ROOT}:-$HOME/.$manager}
+    runtime_shims+=("$root/shims")
+  done
+
   path=(
-    "$HOME/.nodenv/shims" "$HOME/.pyenv/shims" "$HOME/.rbenv/shims"
+    $runtime_shims
     "$BUN_INSTALL/bin" "$PNPM_HOME/bin"
     "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin"
+    "$HOME/.local/bin"
     $path
   )
+  export PATH
 }
 initialize-path

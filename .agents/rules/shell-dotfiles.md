@@ -1,6 +1,6 @@
 ---
 description: 'Use for shell and package internals in the $HOME dotfiles: startup order, zsh plugins and themes, Git hooks and config, Homebrew, npm globals, VS Code extensions, and runtimes.'
-applyTo: '.config/git/**,.nodenv/nodenv.d/**,.homebrew/**,.npm/**,.vscode/extensions.json,.zsh/**,.aliases,.bash_profile,.bashrc,.gemrc,.gitconfig,.install.sh,.macos,.node-version,.npmrc,.profile,.python-version,.ruby-version,.shellcheckrc,.zprofile,.zshenv,.zshrc'
+applyTo: '.config/git/**,.nodenv/nodenv.d/**,.homebrew/**,.npm/**,.vscode/extensions.json,.zsh/**,.aliases,.bash_profile,.bashrc,.gemrc,.gitconfig,.install.sh,.npmrc,.profile,.shellcheckrc,.zprofile,.zshenv,.zshrc'
 paths:
   - '.config/git/**'
   - '.nodenv/nodenv.d/**'
@@ -15,11 +15,8 @@ paths:
   - '.gitconfig'
   - '.install.sh'
   - '.macos'
-  - '.node-version'
   - '.npmrc'
   - '.profile'
-  - '.python-version'
-  - '.ruby-version'
   - '.shellcheckrc'
   - '.zprofile'
   - '.zshenv'
@@ -48,6 +45,7 @@ These rules apply only when `$HOME` is the active repository.
 
 - Log from a plugin through `_zsh::log <error|warn|success|info> <plugin> <text>` of the `logger` plugin, never raw `print` or `echo`.
 - Keep the small fallback a consumer needs to work standalone.
+- Never shell out on the startup path to build static text; `runtimes` defines the nodenv, pyenv, and rbenv wrappers itself.
 - A plugin in `.zsh/plugins/<name>/` mirrors the oh-my-zsh layout: `<name>.plugin.zsh`, `README.md`, and a `_<command>` completion file per completable command.
 - Resolve supporting scripts through `${0:A:h}`; extract logic into one only when it pays off in performance or code quality.
 - Plugin and completion files carry no header or comments beyond the required `#compdef` line, except a rare concise note on a non-obvious line.
@@ -73,4 +71,4 @@ These rules apply only when `$HOME` is the active repository.
 - `dotfiles init` installs recommendations that are missing locally through the `vscode` reconciler.
 - `brewfile` is report-only: `brew bundle check` is too slow for startup, so `dotfiles doctor` reports Brewfile drift and `brew global install` applies it.
 - nodenv, pyenv, and rbenv own their runtimes through their shims; never add another version manager.
-- `.node-version`, `.python-version`, and `.ruby-version` are the single source; each manager's global `version` file is a tracked relative symlink to it.
+- Each manager's global `version` file is machine-local and untracked; `lts install` writes it and no repository file pins a runtime.

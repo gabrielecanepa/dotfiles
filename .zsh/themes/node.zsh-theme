@@ -124,8 +124,8 @@ _node_pm_version() {
   esac
 
   local nv=${_NODE_LOCAL[node]}
-  [[ -z $nv && -r $HOME/.node-version ]] && { read -r nv < $HOME/.node-version; nv=${nv//$'\r'/} }
   local root=${NODENV_ROOT:-$HOME/.nodenv}
+  [[ -z $nv && -r $root/version ]] && { read -r nv < $root/version; nv=${nv//$'\r'/} }
 
   case $pm in
     npm|pnpm|yarn)
@@ -225,8 +225,8 @@ _node_version_installed() {
 _node_node_segment() {
   emulate -L zsh
   local local_version=${_NODE_LOCAL[node]}
-  local global_version=""
-  [[ -r $HOME/.node-version ]] && { read -r global_version < $HOME/.node-version; global_version=${global_version//$'\r'/} }
+  local global_version="" root=${NODENV_ROOT:-$HOME/.nodenv}
+  [[ -r $root/version ]] && { read -r global_version < $root/version; global_version=${global_version//$'\r'/} }
   local lts_version=""
   _node_lts lts_version
 

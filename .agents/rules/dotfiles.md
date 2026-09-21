@@ -1,6 +1,6 @@
 ---
 description: 'Use only in the $HOME dotfiles repository: portability, allowlist tracking, and the commit convention; routes agent config, shell internals, and launch agents to companion rules.'
-applyTo: '.agents/**,.claude/**,.codex/**,.config/**,.copilot/**,.github/**,.homebrew/**,.local/**,.npm/**,.vscode/**,.zed/**,.zsh/**,Library/**,.CFUserTextEncoding,.aliases,.bash_profile,.bashrc,.commitlintrc.json,.editorconfig,.gemrc,.gitconfig,.gitignore,.hushlogin,.install.sh,.irbrc,.macos,.node-version,.npmrc,.oxfmtrc.json,.profile,.python-version,.rubocop.yml,.ruby-version,.shellcheckrc,.vimrc,.zprofile,.zshenv,.zshrc'
+applyTo: '.agents/**,.claude/**,.codex/**,.config/**,.copilot/**,.github/**,.homebrew/**,.local/**,.npm/**,.vscode/**,.zed/**,.zsh/**,Library/**,.CFUserTextEncoding,.aliases,.bash_profile,.bashrc,.commitlintrc.json,.editorconfig,.gemrc,.gitconfig,.gitignore,.hushlogin,.install.sh,.irbrc,.npmrc,.oxfmtrc.json,.profile,.rubocop.yml,.shellcheckrc,.vimrc,.zprofile,.zshenv,.zshrc'
 paths:
   - '.agents/**'
   - '.claude/**'
@@ -26,14 +26,10 @@ paths:
   - '.hushlogin'
   - '.install.sh'
   - '.irbrc'
-  - '.macos'
-  - '.node-version'
   - '.npmrc'
   - '.oxfmtrc.json'
   - '.profile'
-  - '.python-version'
   - '.rubocop.yml'
-  - '.ruby-version'
   - '.shellcheckrc'
   - '.vimrc'
   - '.zprofile'
@@ -57,7 +53,7 @@ These rules apply only when `$HOME` is the active repository. Treat every file u
 ## Tracking
 
 - `.gitignore` is an allowlist that starts with `/*`; add a matching `!` rule with every new tracked path.
-- Track a machine file with fixed content in place, never generated or linked: `.hushlogin`, `.CFUserTextEncoding`, and the manager `version` symlinks.
+- Track a machine file with fixed content in place, never generated or linked: `.hushlogin` and `.CFUserTextEncoding`.
 - Plain-text files under `~/Library` follow the same rule: `KeyBindings/DefaultKeyBinding.dict`, the VS Code user files, and the launch agents.
 
 ## Commit convention

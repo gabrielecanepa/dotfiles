@@ -30,10 +30,7 @@ plugins=(
   gh
   git-auto-fetch
   gitfast
-  nodenv
   npm
-  pyenv
-  rbenv
   themes
   zsh-autosuggestions
   zsh-claudecode-completion
@@ -57,6 +54,7 @@ plugins=(
   npm-global
   plugin
   profile
+  runtimes
 )
 
 . "$ZSH/oh-my-zsh.sh"

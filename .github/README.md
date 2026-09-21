@@ -25,9 +25,9 @@ The home directory is version-controlled. The [`.gitignore`](/.gitignore) acts a
 
 Oh My Zsh runs with local plugins and themes under [`.zsh`](/.zsh). Plugins extend the shell with profile management, runtime version switching and installation, completions, and more. The custom themes display active runtime and package manager versions and indicators for available upgrades.
 
-#### Pinned runtimes and dependencies
+#### Managed runtimes and dependencies
 
-Node, Python, and Ruby are managed with nodenv, pyenv, and rbenv. Version managers read the tracked version files ([`.node-version`](/.node-version), [`.python-version`](/.python-version), [`.ruby-version`](/.ruby-version)) so all machines stay on the same versions.
+Node, Python, and Ruby are managed with nodenv, pyenv, and rbenv. The [`lts`](/.zsh/plugins/lts/lts.plugin.zsh) plugin installs and manages the latest LTS release of each runtime.
 
 #### Single source of truth for AI agents
 
@@ -67,9 +67,7 @@ The script does the following:
 - [Git](#git)
 - [Shell profile](#shell-profile)
 - [Runtimes](#runtimes)
-  - [Node.js](#nodejs)
-  - [Ruby](#ruby)
-  - [Python](#python)
+- [Node.js and package managers](#nodejs-and-package-managers)
 - [Agents](#agents)
   - [Claude](#claude)
   - [Codex](#codex)
@@ -174,35 +172,19 @@ profile install
 
 ### Runtimes
 
-#### Node.js
-
-Install the Node.js version in use with nodenv:
+Install the latest stable Node.js, Python, and Ruby versions using the `lts` plugin:
 
 ```sh
-nodenv install $(cat ~/.node-version) --skip-existing
+lts install
 ```
+
+### Node.js and package managers
 
 pnpm and the other package managers are installed by Corepack, which is enabled automatically by the nodenv install hook [`corepack.bash`](/.nodenv/nodenv.d/install/corepack.bash).
 
-Global npm packages are tracked in [`.npm/package.json`](/.npm/package.json) using the custom Zsh plugin [`npm-global`](/.zsh/plugins/npm-global/npm-global.plugin.zsh): the wrapped `npm` command re-dumps the manifest after every global install or removal, the nodenv hook restores it into every new Node version, and a bare `npm install -g` reinstalls it at any time.
+Global npm packages are tracked in [`.npm/package.json`](/.npm/package.json) using the custom Zsh plugin [`npm-global`](/.zsh/plugins/npm-global/npm-global.plugin.zsh): the wrapped `npm` command re-dumps the manifest after every global install or removal, the nodenv hook restores it into every new Node version, and `npm install -g` reinstalls it at any time.
 
-Native tooling like ShellCheck ships through Homebrew.
-
-#### Ruby
-
-Install the Ruby version in use with rbenv:
-
-```sh
-rbenv install $(cat ~/.ruby-version) --skip-existing
-```
-
-#### Python
-
-Install the Python version in use with pyenv:
-
-```sh
-pyenv install $(cat ~/.python-version) --skip-existing
-```
+Native tools like ShellCheck ship through Homebrew.
 
 ### Agents
 

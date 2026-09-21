@@ -105,22 +105,14 @@ done
 # 5. Shell profile
 info "If this is a new profile, run 'profile install' in an interactive shell"
 
-# 6. Runtimes from .*-version
-install_runtime() {
-  manager="$1"
-  version_file="$2"
-  command -v "$manager" >/dev/null 2>&1 || return 0
-  [ -f "$HOME/$version_file" ] || return 0
-  version="$(cat "$HOME/$version_file")"
-  info "$manager install $version"
-  "$manager" install "$version" --skip-existing
-}
-install_runtime nodenv .node-version
-install_runtime pyenv .python-version
-install_runtime rbenv .ruby-version
+# 6. Runtimes
+if command -v lts >/dev/null; then
+  info "Installing runtimes"
+  lts install || failed+=("runtimes")
+fi
 
 # 7. npm + corepack
-if command -v npm >/dev/null 2>&1 && [ -f "$HOME/.npm/package.json" ]; then
+if command -v npm >/dev/null && [ -f "$HOME/.npm/package.json" ]; then
   info "Installing global npm dependencies"
   deps="$(jq -r '.dependencies // {} | keys | join(" ")' "$HOME/.npm/package.json")"
   if [ -n "$deps" ]; then
