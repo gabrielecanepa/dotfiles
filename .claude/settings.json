@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 180,
   "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
     "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "4",
     "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION": "12",
     "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "2"
@@ -35,7 +36,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "fallbackModel": [
     "sonnet"
   ],
@@ -165,10 +166,16 @@
       "Asking GPT"
     ]
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "modelSettings": {
     "claude-sonnet-5": {
-      "effortLevel": "medium"
+      "effortLevel": "high"
+    },
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "high"
     }
   },
   "autoCompactWindow": 250000,
@@ -206,7 +213,7 @@
       "**Trusted cloud buckets**: None configured",
       "**Key internal services**: None configured",
       "**Internal package registry**: None configured",
-      "**Sensitive data locations & audiences**: ~/.vault (personal vault symlink; docs/ is confidential; its contents never enter a repository, paste service, prompt, or any external request), ~/.ssh, ~/.aws, ~/Library/Keychains, 1Password group containers, ~/.claude/.credentials.json; any file or store holding personal data, confidential business data, credentials, or regulated data; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Sensitive data locations & audiences**: ~/.ssh, ~/.aws, ~/Library/Keychains, 1Password group containers, ~/.claude/.credentials.json; any file or store holding personal data, confidential business data, credentials, or regulated data; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
       "**Data retention / declassification**: None configured",
       "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
       "**Protected deployment namespaces / environments**: None configured; fall back to the Sensitive remote targets heuristic",
