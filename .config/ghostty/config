@@ -86,20 +86,23 @@ macos-secure-input-indication = true
 macos-window-buttons = hidden
 
 # Keybindings
+keybind = super++=unbind
+keybind = alt+backspace=text:\x1b\x7f
 keybind = super+alt+left=previous_tab
-keybind = super+alt+down=goto_split:next
-keybind = super+alt+up=goto_split:previous
+keybind = super+shift+bracket_left=previous_tab
 keybind = super+alt+right=next_tab
-keybind = super+ctrl+left=move_tab:-1
-keybind = super+ctrl+right=move_tab:1
+keybind = super+shift+bracket_right=next_tab
 keybind = super+bracket_right=goto_split:next
 keybind = super+bracket_left=goto_split:previous
-keybind = super+shift+bracket_left=previous_tab
-keybind = super+shift+bracket_right=next_tab
+keybind = super+ctrl+left=move_tab:-1
+keybind = super+ctrl+right=move_tab:1
 keybind = alt+d=new_split:right
 keybind = chain=resize_split:right,400
 keybind = chain=goto_split:left
-keybind = ctrl+alt+left=resize_split:left,10
-keybind = ctrl+alt+right=resize_split:right,10
-keybind = ctrl+alt+up=resize_split:up,10
-keybind = ctrl+alt+down=resize_split:down,10
+keybind = ctrl+alt+left=resize_split:left,20
+keybind = ctrl+alt+right=resize_split:right,20
+keybind = ctrl+alt+up=resize_split:up,20
+keybind = ctrl+alt+down=resize_split:down,20
+keybind = ctrl+-=decrease_font_size:1
+keybind = ctrl++=increase_font_size:1
+keybind = ctrl+0=reset_font_size
