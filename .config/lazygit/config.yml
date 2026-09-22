@@ -1,0 +1,18 @@
+os:
+  editPreset: nvim
+
+gui:
+  splitDiff: always
+  nerdFontsVersion: '3'
+  filterMode: fuzzy
+  showDivergenceFromBaseBranch: arrowAndNumber
+  showNumstatInFilesView: true
+
+git:
+  diffRenderers:
+    - name: delta (side by side)
+      command: delta --dark --paging=never --side-by-side --width={{columnWidth}}
+    - name: delta
+      command: delta --dark --paging=never
+    - type: rawGit
+      name: git
