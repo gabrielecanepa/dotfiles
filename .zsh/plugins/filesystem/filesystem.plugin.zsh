@@ -1,10 +1,6 @@
 if (( $+commands[gls] )); then
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
-else
-  alias ls="/bin/ls -GHhp"
 fi
-
-alias ll="ls -la"
 
 lss() {
   emulate -L zsh
@@ -44,3 +40,5 @@ mkdircode() {
   emulate -L zsh
   mkdir -pv "$1" && command code "$1"
 }
+
+hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
