@@ -70,7 +70,7 @@
       "TODO"
     ],
     "Shell Script": [
-      ".aliases",
+      "aliases.zsh",
       "applypatch-msg",
       "commit-msg",
       "fsmonitor-watchman",

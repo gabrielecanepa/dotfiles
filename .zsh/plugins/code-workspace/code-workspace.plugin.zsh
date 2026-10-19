@@ -1,22 +1,20 @@
-(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
-
-[[ -z "${VSCODE_WORKSPACES_DIR:-}" ]] && export VSCODE_WORKSPACES_DIR="$HOME/.vscode/workspaces"
+: ${VSCODE_WORKSPACES_DIR:=~/.vscode/workspaces}
 
 code-workspace() {
   emulate -L zsh
 
-  local name="$1"
+  local name=$1
 
-  if [[ -z "$name" || "$name" == "-h" || "$name" == "--help" ]]; then
+  if [[ -z $name || $name == -h || $name == --help ]]; then
     print -r -- 'Usage: code-workspace <name>'
     return 0
   fi
 
-  local file="$VSCODE_WORKSPACES_DIR/$name.code-workspace"
-  if [[ ! -f "$file" ]]; then
-    _zsh::log error code-workspace "not found: $name"
+  local file=$VSCODE_WORKSPACES_DIR/$name.code-workspace
+  if [[ ! -f $file ]]; then
+    print -ru2 -- "code-workspace: not found: $name"
     return 1
   fi
 
-  command code "$file"
+  command code $file
 }

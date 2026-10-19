@@ -1,7 +1,9 @@
 #compdef node-version
 
 _node-version() {
-  _arguments '1::command:((dump\:"write the running version to .node-version"))'
+  _arguments \
+    '1::command:((pin\:"write a Node.js version to .node-version"))' \
+    '2::version (X.Y.Z):'
 }
 
 _node-version "$@"

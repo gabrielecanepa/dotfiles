@@ -1,0 +1,11 @@
+/*
+!/extensions/
+!/skills/
+!/.gitignore
+!/AGENTS.md
+!/keybindings.json
+!/mcp.json
+!/models.json
+!/settings.json
+node_modules/
+.DS_Store

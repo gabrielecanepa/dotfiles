@@ -2,7 +2,10 @@
 
 set -euf
 
-SCRIPT_PATHSPEC="*.sh *.bash .profile .bashrc .bash_profile .macos .config/git/hooks/*"
+SCRIPT_PATHSPEC="*.sh *.bash .profile .bashrc .bash_profile .config/git/hooks/* :(exclude).config/macos/defaults.sh"
+BASH_CONFIG=".config/macos/defaults.sh"
+ZSH_STARTUP_PATHSPEC=".zshenv .zprofile .zshrc"
+ZSH_PATHSPEC=".zshenv .zprofile .zshrc *.zsh *.zsh-theme .zsh/plugins/*/_*"
 NPM_BINS="commitlint oxfmt"
 HOMEBREW_BINS="shellcheck shfmt"
 
@@ -26,6 +29,16 @@ fail() {
 scripts() {
   # shellcheck disable=SC2086
   git ls-files -z -- $SCRIPT_PATHSPEC
+}
+
+zsh_startup() {
+  # shellcheck disable=SC2086
+  git ls-files -z -- $ZSH_STARTUP_PATHSPEC
+}
+
+zsh_scripts() {
+  # shellcheck disable=SC2086
+  git ls-files -z -- $ZSH_PATHSPEC
 }
 
 for bin in $NPM_BINS; do
@@ -53,5 +66,9 @@ if git rev-parse --verify --quiet "$upstream" >/dev/null; then
 fi
 
 scripts | xargs -0 shellcheck
+shellcheck -s bash "$BASH_CONFIG"
 scripts | xargs -0 shfmt -d
+shfmt -d -ln bash "$BASH_CONFIG"
+zsh_startup | xargs -0 shfmt -d
+zsh_scripts | xargs -0 -n 1 zsh -n
 oxfmt --check --no-error-on-unmatched-pattern

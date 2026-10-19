@@ -1,6 +1,6 @@
 # code-workspace plugin
 
-Opens a [VS Code workspace](https://code.visualstudio.com/docs/editor/workspaces) by name from the workspaces directory.
+Autocompletes and opens [VS Code workspaces](https://code.visualstudio.com/docs/editor/workspaces) by name from the given workspaces directory.
 
 To use it, add `code-workspace` to the plugins array in your zshrc file:
 
@@ -14,8 +14,8 @@ plugins=(... code-workspace)
 code-workspace <name>
 ```
 
-Opens `<name>.code-workspace` from the workspaces directory. Workspace names are completed.
+Opens `<name>.code-workspace` from the workspaces directory.
 
 ## Settings
 
-- `VSCODE_WORKSPACES_DIR`: directory holding the `.code-workspace` files. Defaults to `~/.vscode/workspaces`.
+- `VSCODE_WORKSPACES_DIR`: directory storing the `.code-workspace` files. Defaults to `$HOME/.vscode/workspaces`.

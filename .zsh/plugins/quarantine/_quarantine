@@ -1,0 +1,46 @@
+#compdef quarantine
+
+_quarantine() {
+  local curcontext=$curcontext state line
+  local -a commands
+
+  commands=(
+    'status:Print the quarantine status'
+    'remove:Remove and save the quarantine attributes'
+    'restore:Restore saved quarantine attributes'
+    'set:Set a quarantine attribute'
+    'help:Show the help message'
+  )
+
+  _arguments -C \
+    '1:command:->command' \
+    '*::arguments:->arguments' &&
+    return 0
+
+  case $state in
+    command)
+      _describe -t commands 'quarantine command' commands
+      ;;
+    arguments)
+      case ${line[1]} in
+        status)
+          _arguments \
+            '(-v --verbose)'{-v,--verbose}'[Print the raw attribute value]' \
+            '*:path:_files'
+          ;;
+        remove | restore)
+          _arguments \
+            '(-r --recursive)'{-r,--recursive}'[Process directory contents recursively]' \
+            '*:path:_files'
+          ;;
+        set)
+          _arguments \
+            '1:raw attribute value:' \
+            '2:path:_files'
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_quarantine "$@"

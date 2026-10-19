@@ -1,5 +1,50 @@
 {
   "rules": {
+    "body-leading-blank": [
+      2,
+      "always"
+    ],
+    "scope-case": [
+      2,
+      "always",
+      "lower-case"
+    ],
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "claude",
+        "codex",
+        "pi",
+        "cask",
+        "mas",
+        "ghostty",
+        "vscode",
+        "npm",
+        "bash",
+        "zsh",
+        "nvim",
+        "vim"
+      ]
+    ],
+    "subject-empty": [
+      2,
+      "never"
+    ],
+    "subject-full-stop": [
+      2,
+      "never",
+      "."
+    ],
+    "type-case": [
+      2,
+      "always",
+      "lower-case"
+    ],
+    "type-empty": [
+      2,
+      "never"
+    ],
     "type-enum": [
       2,
       "always",
@@ -16,53 +61,6 @@
         "shell",
         "tui"
       ]
-    ],
-    "scope-enum": [
-      2,
-      "always",
-      [
-        "bash",
-        "cask",
-        "claude",
-        "codex",
-        "copilot",
-        "ghostty",
-        "mas",
-        "neovim",
-        "npm",
-        "opencode",
-        "sh",
-        "vscode",
-        "zed",
-        "zsh"
-      ]
-    ],
-    "type-case": [
-      2,
-      "always",
-      "lower-case"
-    ],
-    "type-empty": [
-      2,
-      "never"
-    ],
-    "scope-case": [
-      2,
-      "always",
-      "lower-case"
-    ],
-    "subject-empty": [
-      2,
-      "never"
-    ],
-    "subject-full-stop": [
-      2,
-      "never",
-      "."
-    ],
-    "body-leading-blank": [
-      2,
-      "always"
     ]
   }
 }

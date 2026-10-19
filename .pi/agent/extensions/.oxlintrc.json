@@ -1,0 +1,144 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "node_modules/**"
+  ],
+  "plugins": [
+    "eslint",
+    "import",
+    "node",
+    "oxc",
+    "promise",
+    "typescript",
+    "unicorn"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "curly": "off",
+    "func-style": [
+      "error",
+      "expression"
+    ],
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "eqeqeq": "error",
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "info",
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-else-return": "error",
+    "no-extend-native": "error",
+    "no-label-var": "error",
+    "no-new-func": "error",
+    "no-param-reassign": "warn",
+    "no-proto": "error",
+    "no-script-url": "error",
+    "no-self-compare": "error",
+    "no-throw-literal": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_",
+        "fix": {
+          "imports": "safe-fix"
+        },
+        "ignoreRestSiblings": true,
+        "vars": "all",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-useless-concat": "error",
+    "no-useless-constructor": "error",
+    "no-var": "error",
+    "operator-assignment": "error",
+    "prefer-const": "error",
+    "prefer-promise-reject-errors": "warn",
+    "prefer-template": "error",
+    "radix": "error",
+    "require-await": "error",
+    "symbol-description": "warn",
+    "eslint/curly": "off",
+    "eslint/prefer-template": "off",
+    "import/no-absolute-path": "error",
+    "import/no-commonjs": "error",
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
+    "import/no-self-import": "error",
+    "oxc/no-accumulating-spread": "warn",
+    "promise/always-return": "error",
+    "promise/catch-or-return": "error",
+    "promise/no-nesting": "warn",
+    "promise/prefer-await-to-then": "error",
+    "typescript/array-type": [
+      "error",
+      {
+        "default": "array"
+      }
+    ],
+    "typescript/ban-ts-comment": [
+      "error",
+      {
+        "ts-check": false,
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": true,
+        "ts-nocheck": true
+      }
+    ],
+    "typescript/consistent-type-definitions": [
+      "error",
+      "interface"
+    ],
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "disallowTypeAnnotations": false,
+        "fixStyle": "inline-type-imports",
+        "prefer": "type-imports"
+      }
+    ],
+    "typescript/no-empty-interface": "warn",
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-inferrable-types": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/no-shadow": "error",
+    "typescript/no-unnecessary-type-assertion": "warn",
+    "typescript/prefer-nullish-coalescing": "warn",
+    "typescript/prefer-optional-chain": "warn",
+    "unicorn/error-message": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "unicorn/new-for-builtins": "error",
+    "unicorn/no-array-for-each": "error",
+    "unicorn/no-instanceof-array": "error",
+    "unicorn/no-negated-condition": "warn",
+    "unicorn/no-unnecessary-await": "warn",
+    "unicorn/no-useless-promise-resolve-reject": "warn",
+    "unicorn/prefer-array-flat-map": "warn",
+    "unicorn/prefer-array-flat": "warn",
+    "unicorn/prefer-includes": "warn",
+    "unicorn/prefer-number-properties": "warn",
+    "unicorn/prefer-optional-catch-binding": "warn",
+    "unicorn/prefer-prototype-methods": "warn",
+    "unicorn/prefer-spread": "warn",
+    "unicorn/prefer-string-trim-start-end": "warn",
+    "unicorn/prefer-structured-clone": "warn",
+    "unicorn/prefer-type-error": "warn",
+    "unicorn/throw-new-error": "error"
+  }
+}

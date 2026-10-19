@@ -9,6 +9,7 @@
 # here: no hook can change them, and the claudio zsh plugin sets them at launch.
 # Registered in .claude/settings.json and .codex/hooks.json; Codex sends no
 # transcript, so its requests are classified without recent turns. Skips
+# Claude Code children of pi (PI_CODING_AGENT), whose workflow pi owns,
 # slash, bash, and memorize prompts, subagent prompts, short prompts, short
 # questions, and prompts that open with an acknowledgement such as yes, ok,
 # or continue, since the rubric would answer direct for all of them and the
@@ -47,6 +48,7 @@ esac
 
 command -v jq >/dev/null 2>&1 || exit 0
 command -v claude >/dev/null 2>&1 || exit 0
+[ -n "${PI_CODING_AGENT:-}" ] && exit 0
 
 input="$(cat)"
 printf '%s' "$input" | jq -e '.agent_id // empty | length > 0' >/dev/null 2>&1 && exit 0

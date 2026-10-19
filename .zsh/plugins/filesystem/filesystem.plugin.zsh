@@ -1,11 +1,20 @@
-if (( $+commands[gls] )); then
+if (($+commands[gls])); then
   alias ls="gls -Hh --color --group-directories-first -I 'Icon'$'\r' -I .DS_Store -I .localized"
+else
+  alias ls='/bin/ls -GHhp'
+fi
+
+alias ll='ls -la'
+
+if [[ -d "$HOME/Library/Mobile Documents/com~apple~CloudDocs" ]]; then
+  hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 fi
 
 lss() {
   emulate -L zsh
+  setopt pipefail
   local -a du_cmd
-  if (( $+commands[gdu] )); then
+  if (($+commands[gdu])); then
     du_cmd=(command gdu -L --si -d 1)
   else
     du_cmd=(command du -L -h -d 1)
@@ -35,10 +44,3 @@ mkdircd() {
   emulate -L zsh
   mkdir -pv "$1" && cd "$1"
 }
-
-mkdircode() {
-  emulate -L zsh
-  mkdir -pv "$1" && command code "$1"
-}
-
-hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"

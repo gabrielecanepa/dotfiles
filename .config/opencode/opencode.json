@@ -1,0 +1,143 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openai/gpt-6.1-sol",
+  "default_agent": "build",
+  "layout": "stretch",
+  "autoupdate": true,
+  "compaction": {
+    "auto": true
+  },
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "git push *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git commit *",
+      "effect": "ask"
+    },
+    {
+      "action": "shell",
+      "resource": "rm -rf *",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.env",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.env.*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.env.example",
+      "effect": "allow"
+    },
+    {
+      "action": "read",
+      "resource": "*.key",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.p12",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.pem",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "*.pfx",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "**/id_ed25519",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "**/id_rsa",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "**/secrets/**",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/.aws/**",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/.claude/.credentials.json",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/.ssh/id_*",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/Library/Keychains/**",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/Library/Group Containers/*.com.1password/**",
+      "effect": "deny"
+    },
+    {
+      "action": "read",
+      "resource": "~/.zshrc.local",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.key",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.p12",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.pem",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "*.pfx",
+      "effect": "deny"
+    },
+    {
+      "action": "edit",
+      "resource": "**/secrets/**",
+      "effect": "deny"
+    }
+  ],
+  "formatter": true,
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "oauth": false,
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
+    }
+  }
+}

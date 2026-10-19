@@ -7,7 +7,7 @@ description: >-
 disable-model-invocation: true
 ---
 
-# bump
+# Bumping Node.js Projects
 
 Take a Node.js project to current Node LTS, package manager, and dependencies, with the code migrated to the new APIs and the repository's own checks green.
 

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "keybinds": {
+    "session.message.previous": "<leader>h",
+    "session.message.next": "<leader>l"
+  },
+  "theme": {
+    "name": "ghostty",
+    "mode": "system"
+  },
+  "animations": true,
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "hide",
+    "markdown": "rendered",
+    "image_preview": true,
+    "permissions": "autoaccept"
+  },
+  "tabs": {
+    "layout": "vertical",
+    "indicators": "status",
+    "scope": "global",
+    "enabled": true,
+    "mode": "auto"
+  },
+  "diffs": {
+    "view": "auto"
+  },
+  "attention": {
+    "notifications": false,
+    "sound": true,
+    "volume": 1
+  },
+  "terminal": {
+    "title": true,
+    "copy": "select"
+  },
+  "debug": {
+    "devtools": true
+  },
+  "scroll": {
+    "speed": 1,
+    "acceleration": true
+  },
+  "mouse": true,
+  "plugins": [],
+  "mini": {
+    "thinking": "hide",
+    "tools": "hide",
+    "shell_output": "hide",
+    "turn_summary": "hide",
+    "footer": "hide",
+    "mono": false,
+    "work_spinner": "density-wave"
+  },
+  "prompt": {
+    "image_preview": true
+  }
+}

@@ -14,3 +14,10 @@ switch_case_indent = true
 
 [[bash]]
 switch_case_indent = true
+
+[{.zshenv,.zprofile,.zshrc}]
+shell_variant = zsh
+switch_case_indent = true
+
+[.zsh/{plugins,themes}/**]
+ignore = true

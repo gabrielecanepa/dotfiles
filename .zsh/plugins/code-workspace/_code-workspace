@@ -1,9 +1,9 @@
 #compdef code-workspace
 
 _code-workspace() {
-  local dir="${VSCODE_WORKSPACES_DIR:-$HOME/.vscode/workspaces}"
+  local dir=${VSCODE_WORKSPACES_DIR:-~/.vscode/workspaces}
   local -aU names
-  names=("$dir"/*.code-workspace(.N:t:r))
+  names=($dir/*.code-workspace(.N:t:r))
   _describe -t workspaces 'workspace' names
 }
 

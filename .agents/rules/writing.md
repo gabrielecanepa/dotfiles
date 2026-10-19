@@ -1,15 +1,15 @@
 ---
-description: 'Use when producing human-facing prose: docs, READMEs, essays, marketing or UI copy, release notes, PR and issue descriptions, emails. Enforces the humanizer skill and bans AI-writing tells.'
-applyTo: '**/*.markdown,**/*.md,**/*.mdc,**/*.mdx,**/*.rst,**/*.txt,**/README*,**/docs/**'
+description: "Use when producing human-facing prose: docs, READMEs, essays, marketing or UI copy, release notes, PR and issue descriptions, emails. Enforces the humanizer skill and bans AI-writing tells."
+applyTo: "**/*.markdown,**/*.md,**/*.mdc,**/*.mdx,**/*.rst,**/*.txt,**/README*,**/docs/**"
 paths:
-  - '**/*.markdown'
-  - '**/*.md'
-  - '**/*.mdc'
-  - '**/*.mdx'
-  - '**/*.rst'
-  - '**/*.txt'
-  - '**/README*'
-  - '**/docs/**'
+  - "**/*.markdown"
+  - "**/*.md"
+  - "**/*.mdc"
+  - "**/*.mdx"
+  - "**/*.rst"
+  - "**/*.txt"
+  - "**/README*"
+  - "**/docs/**"
 ---
 
 # Writing and prose
@@ -28,7 +28,8 @@ Applies to substantial human-facing prose in files, chat, PR, issue, and release
 - That covers docs, READMEs, essays, marketing copy, announcements, release notes, and long PR descriptions.
 - For shorter prose, apply the baseline below inline without the full skill loop.
 - The skill loop is draft, then audit ("what still makes this read as AI?"), then final.
-- Before returning the final text, scan it for em and en dashes; any hit means it is not done.
+- Before returning file content, scan it for em and en dashes; any hit means it is not done.
+- The humanizer's voice-matching guidance never overrides committed-file restrictions.
 - To audit a repository's existing human docs (README, CONTRIBUTING, CHANGELOG, guides), run `/sync-docs`.
 
 ## Baseline rules

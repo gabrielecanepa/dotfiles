@@ -5,7 +5,7 @@ labels:
 body:
   - type: markdown
     attributes:
-      value: 'Use this for work you intend to hand to a coding agent. Fill every required field so the issue is self-contained: the agent acts on it cold, with no memory of any prior conversation.'
+      value: "Use this for work you intend to hand to a coding agent. Fill every required field so the issue is self-contained: the agent acts on it cold, with no memory of any prior conversation."
   - type: dropdown
     id: type
     attributes:

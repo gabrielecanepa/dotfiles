@@ -1,6 +1,14 @@
 # Commit handoff format
 
-The rendering contract for the commit-handoff proposal required by `engineering.md`.
+The commit safety and proposal format routed from `../AGENTS.md`. Read this file completely before a commit-worthy handoff or an authorized commit.
+
+## Commit safety
+
+- Commits are signed via Git's `ssh-keygen` signer; never disable signing or pass `--no-gpg-sign`.
+- Follow the repository's commit convention; a `Claude-Session: <url>` trailer may close a commit or pull request body.
+- In the `$HOME` repository, use the commit types and scopes in `../rules/dotfiles.md`.
+
+## Proposal format
 
 Choose between a new commit, an amend or squash, and a split per the "Commit decision" section of `verification.md`.
 
@@ -8,7 +16,7 @@ Render the block itself, never a description of it, even when the prompt asks wh
 
 Render this block with the structure unchanged. Fill the change list from the actual diff, one entry per change in the shape shown.
 
-Adapt only the proposal part, using Conventional Commits and inferring the type and optional scope from the changes:
+Adapt only the proposal part, using the repository's commit convention and inferring the type and optional scope from the changes:
 
 ````markdown
 ### Changes

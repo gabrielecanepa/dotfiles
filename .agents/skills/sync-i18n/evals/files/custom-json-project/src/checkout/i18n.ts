@@ -8,7 +8,9 @@ const lookup = (value: object, key: string) =>
     .split('.')
     .reduce<unknown>(
       (current, segment) =>
-        typeof current === 'object' && current !== null ? (current as Record<string, unknown>)[segment] : undefined,
+        typeof current === 'object' && current !== null
+          ? (current as Record<string, unknown>)[segment]
+          : undefined,
       value
     )
 

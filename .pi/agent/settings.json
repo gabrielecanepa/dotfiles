@@ -1,0 +1,61 @@
+{
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
+  "lastChangelogVersion": "1.3.0",
+  "theme": "light/dark",
+  "defaultTools": [],
+  "defaultProvider": "claude-bridge",
+  "defaultModel": "claude-opus-5-5",
+  "defaultThinkingLevel": "high",
+  "modelThinkingLevels": {},
+  "enabledModels": [
+    "claude-bridge/claude-opus-5-5",
+    "claude-bridge/claude-sonnet-5-5",
+    "claude-bridge/claude-haiku-5-5",
+    "openai/gpt-6-astra",
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-luna",
+    "github-copilot/kimi-k3",
+    "github-copilot/grok-4.7",
+    "github-copilot/gemini-3.8-flash",
+    "github-copilot/claude-sonnet-5.5",
+    "github-copilot/claude-haiku-5.5",
+    "github-copilot/gpt-6-luna",
+    "openrouter/openrouter/auto",
+    "openrouter/openrouter/free",
+    "openrouter/openrouter/fusion"
+  ],
+  "externalEditor": "code --wait",
+  "editorPaddingX": 0,
+  "outputPad": 0,
+  "hideThinkingBlock": true,
+  "terminal": {
+    "showTerminalProgress": true,
+    "imageWidthCells": 80
+  },
+  "enableInstallTelemetry": false,
+  "defaultProjectTrust": "ask",
+  "doubleEscapeAction": "tree",
+  "treeFilterMode": "no-tools",
+  "tuiMode": "fullscreen",
+  "fullscreenScrollbar": "auto",
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 32768,
+    "keepRecentTokens": 32000
+  },
+  "packages": [
+    "npm:pi-claude-bridge@^0.9.3",
+    "npm:pi-claude-code-ui@^1.0.90",
+    "npm:pi-web-search@^1.7.0"
+  ],
+  "cacheWarming": "streaming",
+  "showCacheMissNotices": true,
+  "collapseChangelog": true,
+  "quietStartup": "header",
+  "warnings": {
+    "anthropicExtraUsage": true
+  },
+  "fullscreenExitOutput": "resume-hint",
+  "deviceId": "e9231bcd-f9b2-4b87-8677-093cccbc1fd5",
+  "fullscreenWheelScrollLines": "auto"
+}

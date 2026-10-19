@@ -1,62 +1,58 @@
-ZSH="$HOME/.oh-my-zsh"
-ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME=squanchy
-ZSH_COMPLETIONS=(codex docker gh glab op opencode orb pnpm tailscale)
-ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION"
-[[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
-ZSH_DISABLE_COMPFIX=true
-ZSH_DOTFILES_RECONCILERS=(launchd vscode npm-global brewfile)
-ZSH_GIT_ALIASES_MAX_LENGTH=3
-CASE_SENSITIVE=false
-COMPLETION_WAITING_DOTS=false
-DISABLE_AUTO_TITLE=true
-DISABLE_LS_COLORS=false
-DISABLE_UNTRACKED_FILES_DIRTY=false
-ENABLE_CORRECTION=false
-HIST_STAMPS="yyyy-mm-dd"
-HYPHEN_INSENSITIVE=false
+typeset -aU fpath
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
+ZSH=~/.oh-my-zsh
+ZSH_CUSTOM=~/.zsh
+ZSH_THEME=squanchy
+ZSH_COMPDUMP=${XDG_CACHE_HOME:-~/.cache}/zsh/zcompdump-$ZSH_VERSION
+[[ -d ${ZSH_COMPDUMP:h} ]] || mkdir -p ${ZSH_COMPDUMP:h}
+
+HIST_STAMPS=yyyy-mm-dd
+zle_highlight+=(paste:none)
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 zstyle ':completion:*' list-dirs-first true
 zstyle ':omz:alpha:lib:git' async-prompt false
 zstyle ':omz:update' frequency 7
 zstyle ':omz:update' mode auto
 
-zle_highlight+=(paste:none)
-
 plugins=(
   colored-man-pages
   colorize
-  gh
   git-auto-fetch
   gitfast
-  npm
   themes
-  zsh-autosuggestions
-  zsh-claudecode-completion
-  zsh-completions
-  zsh-syntax-highlighting
   # Custom
-  logger
   brewfile
   code-workspace
-  colors256
   completions
-  deps
-  dotfiles
+  defaults
   filesystem
-  gatekeeper
-  git-aliases
+  git-shortcuts
   google
+  launchd
   lts
-  node-bin
+  node-modules-bin
   node-version
   npm-global
   plugin
-  profile
-  runtimes
+  quarantine
+  # From zsh-users
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
-. "$ZSH/oh-my-zsh.sh"
+completions=(
+  codex
+  docker
+  gh
+  glab
+  mole
+  op
+  orb
+  pnpm
+  tailscale
+)
 
-dotfiles init
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+source $ZSH/oh-my-zsh.sh

@@ -1,6 +1,6 @@
 # google plugin
 
-Searches Google in the default browser, or opens the homepage with no query.
+Searches Google using the default browser.
 
 To use it, add `google` to the plugins array in your zshrc file:
 

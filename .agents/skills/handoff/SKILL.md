@@ -5,7 +5,7 @@ description: >-
   ready to paste into a fresh agent session. Use only on an explicit /handoff
   invocation, never spontaneously.
 disable-model-invocation: true
-argument-hint: '[in <dir> [as <name>.md]] [instruction]'
+argument-hint: "[in <dir> [as <name>.md]] [instruction]"
 ---
 
 # handoff

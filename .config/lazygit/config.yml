@@ -3,7 +3,7 @@ os:
 
 gui:
   splitDiff: always
-  nerdFontsVersion: '3'
+  nerdFontsVersion: 3
   filterMode: fuzzy
   showDivergenceFromBaseBranch: arrowAndNumber
   showNumstatInFilesView: true

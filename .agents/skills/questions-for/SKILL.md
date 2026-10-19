@@ -4,7 +4,7 @@ description: >-
   Turn a decision the user cannot settle alone into a markdown questionnaire for the person who holds the missing knowledge.
   Use only on an explicit /questions-for invocation, never spontaneously.
 disable-model-invocation: true
-argument-hint: '[recipient] [about <topic>] [in <dir>]'
+argument-hint: "[recipient] [about <topic>] [in <dir>]"
 ---
 
 # questions-for

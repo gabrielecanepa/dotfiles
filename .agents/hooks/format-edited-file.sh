@@ -1,12 +1,11 @@
 #!/bin/sh
 #
-# PostToolUse (Edit|Write|MultiEdit): run the repo's own formatter on the edited
-# file so style compliance is deterministic instead of prompt-enforced. Fires only
-# when the repo declares the matching config (oxfmt -> .oxfmtrc.json at the git
-# root, rubocop -> .rubocop.yml, shfmt -> .editorconfig); shfmt covers sh/bash
-# only and --apply-ignore honors the .editorconfig ignore sections, so zsh is
-# never formatted. Fails open: missing jq, file, git root, config, or binary is
-# a no-op.
+# PostToolUse (Edit|Write|MultiEdit): run the repository formatters on the
+# edited files, only when the repository has a  matching config (oxfmt ->
+# .oxfmtrc.json, rubocop -> .rubocop.yml, shfmt -> .editorconfig).
+# shfmt covers sh and bash only and `--apply-ignore` follows the .editorconfig
+# ignore sections.
+# Fails open: missing jq, file, git root, config, or binary is a no-op.
 
 set -u
 

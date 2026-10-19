@@ -27,16 +27,16 @@
       "Read(~/.aws/**)",
       "Read(~/.claude/.credentials.json)",
       "Read(~/.ssh/id_*)",
+      "Read(~/.zshrc.local)",
       "Read(~/Library/Group Containers/*.com.1password/**)",
       "Read(~/Library/Keychains/**)"
     ],
     "ask": [
-      "Bash(git commit:*)",
       "Bash(git push:*)"
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "fallbackModel": [
     "sonnet"
   ],
@@ -161,9 +161,16 @@
     "mode": "append",
     "verbs": [
       "Squanching",
-      "Claudiando",
       "Personally asking Dario Amodei",
-      "Asking GPT"
+      "Asking ChatGPT",
+      "Panicking",
+      "Tripping balls in the neural network",
+      "Claudiando",
+      "Fammici pensare un pochetto",
+      "Prosciugando le risorse idriche del Congo",
+      "Cercando il nocciolo della questione",
+      "Cercando il bandolo della matassa",
+      "Disbelinandomi"
     ]
   },
   "effortLevel": "high",
@@ -176,9 +183,12 @@
     },
     "claude-fable-5-1": {
       "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
     }
   },
-  "autoCompactWindow": 250000,
+  "autoCompactWindow": 400000,
   "fastModePerSessionOptIn": true,
   "askUserQuestionTimeout": "never",
   "autoUpdatesChannel": "latest",

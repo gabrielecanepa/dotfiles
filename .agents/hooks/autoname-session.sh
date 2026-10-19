@@ -10,7 +10,9 @@
 # field is the probe. Generation is a nested headless call in safe mode, which
 # disables hooks and cannot recurse, run from a scratch cwd so it leaves no
 # transcript in the real project. A reply longer than four words is trimmed to
-# its first four. Fails open: a missing dependency, a kebab-case title, a title
+# its first four. Skips Claude Code children of pi (PI_CODING_AGENT), unless
+# called with --pi by pi's session-naming extension. Fails open: a missing
+# dependency, a kebab-case title, a title
 # typed with /rename, a command-style prompt (slash, bash, or memorize), or a
 # reply that is not a 2-4 word kebab slug is a no-op.
 #
@@ -43,6 +45,7 @@ esac
 
 command -v jq >/dev/null 2>&1 || exit 0
 command -v claude >/dev/null 2>&1 || exit 0
+[ -n "${PI_CODING_AGENT:-}" ] && [ "${1:-}" != '--pi' ] && exit 0
 
 input="$(cat)"
 printf '%s' "$input" | jq -e 'has("turn_id")' >/dev/null 2>&1 && exit 0

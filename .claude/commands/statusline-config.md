@@ -1,6 +1,6 @@
 ---
 description: Show, validate and set statusline settings in .claude/statusline.json
-argument-hint: '[key] [value]'
+argument-hint: "[key] [value]"
 allowed-tools: Bash(sh:*)
 disable-model-invocation: true
 ---

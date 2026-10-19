@@ -107,7 +107,6 @@ plugins=(
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
   zsh-users/zsh-syntax-highlighting
-  wbingli/zsh-claudecode-completion
 )
 
 for plugin in ${plugins[@]}; do
@@ -233,7 +232,7 @@ copilot login
 
 #### Visual Studio Code
 
-VS Code's user settings, keybindings, snippets, and custom CSS are tracked in place under `~/Library/Application Support/Code/User`, so the editor reads the repository files directly and Settings Sync changes show up as a diff.
+VS Code's user settings, keybindings, snippets, and custom CSS are tracked under `~/.vscode/user`. `~/Library/Application Support/Code/User` is a relative symlink to that directory, so the editor reads the repository files directly and Settings Sync changes show up as a diff.
 
 Extensions are tracked in [`.vscode/extensions.json`](/.vscode/extensions.json). `dotfiles init` installs any listed extension that is missing from the machine.
 

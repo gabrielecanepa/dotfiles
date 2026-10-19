@@ -1,21 +1,29 @@
 {
-  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxfmt/configuration_schema.json",
-  "arrowParens": "avoid",
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/HEAD/npm/oxfmt/configuration_schema.json",
   "ignorePatterns": [
-    ".agents/.skill-lock.json",
     ".agents/**/*.html",
-    ".config/nvim/lazy-lock.json"
+    "**/*-lock.json"
   ],
-  "semi": false,
-  "singleQuote": true,
-  "trailingComma": "es5",
   "overrides": [
     {
       "files": [
-        "*.css"
+        "*.cjs",
+        "*.cts",
+        "*.js",
+        "*.jsx",
+        "*.mjs",
+        "*.mts",
+        "*.ts",
+        "*.tsx"
+      ],
+      "excludeFiles": [
+        ".zsh/**"
       ],
       "options": {
-        "singleQuote": false
+        "arrowParens": "avoid",
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "es5"
       }
     },
     {
@@ -24,8 +32,16 @@
         "*.jsonc"
       ],
       "options": {
-        "trailingComma": "none",
-        "printWidth": 1
+        "printWidth": 1,
+        "trailingComma": "none"
+      }
+    },
+    {
+      "files": [
+        "**/.agents/**/*.md"
+      ],
+      "options": {
+        "embeddedLanguageFormatting": "off"
       }
     }
   ]

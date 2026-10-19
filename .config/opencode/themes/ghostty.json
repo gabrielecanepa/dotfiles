@@ -1,0 +1,242 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "darkBg": "#171b23",
+    "darkBgAlt": "#171b23",
+    "darkBgPanel": "#1d1f21",
+    "darkFg": "#ffffff",
+    "darkFgMuted": "#c5c8c6",
+    "darkBlue": "#81a2be",
+    "darkGreen": "#b5bd68",
+    "darkRed": "#cc6666",
+    "darkOrange": "#e7c547",
+    "darkPurple": "#b294bb",
+    "darkPink": "#d54e53",
+    "darkYellow": "#f0c674",
+    "darkCyan": "#8abeb7",
+    "darkBorder": "#1d1f21",
+    "darkBorderSubtle": "#171b23",
+    "darkLineNumber": "#666666",
+    "darkDiffAddedBg": "#2a2e2b",
+    "darkDiffRemovedBg": "#2d242b",
+    "lightBg": "#fafafa",
+    "lightBgAlt": "#fafafa",
+    "lightBgPanel": "#eeeeee",
+    "lightFg": "#383a42",
+    "lightFgMuted": "#696c77",
+    "lightBlue": "#4078f2",
+    "lightGreen": "#50a14f",
+    "lightRed": "#e45649",
+    "lightOrange": "#c18401",
+    "lightPurple": "#a626a4",
+    "lightPink": "#e45649",
+    "lightYellow": "#986801",
+    "lightCyan": "#0184bc",
+    "lightBorder": "#eeeeee",
+    "lightBorderSubtle": "#fafafa",
+    "lightDiffAddedBg": "#e6efe5",
+    "lightDiffRemovedBg": "#f7e6e5"
+  },
+  "theme": {
+    "primary": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "secondary": {
+      "dark": "darkPurple",
+      "light": "lightPurple"
+    },
+    "accent": {
+      "dark": "darkCyan",
+      "light": "lightCyan"
+    },
+    "error": {
+      "dark": "darkRed",
+      "light": "lightRed"
+    },
+    "warning": {
+      "dark": "darkYellow",
+      "light": "lightYellow"
+    },
+    "success": {
+      "dark": "darkGreen",
+      "light": "lightGreen"
+    },
+    "info": {
+      "dark": "darkOrange",
+      "light": "lightOrange"
+    },
+    "text": {
+      "dark": "darkFg",
+      "light": "lightFg"
+    },
+    "textMuted": {
+      "dark": "darkFgMuted",
+      "light": "lightFgMuted"
+    },
+    "background": {
+      "dark": "darkBg",
+      "light": "lightBg"
+    },
+    "backgroundPanel": {
+      "dark": "darkBgAlt",
+      "light": "lightBgAlt"
+    },
+    "backgroundElement": {
+      "dark": "darkBgPanel",
+      "light": "lightBgPanel"
+    },
+    "border": {
+      "dark": "darkBorder",
+      "light": "lightBorder"
+    },
+    "borderActive": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "borderSubtle": {
+      "dark": "darkBorderSubtle",
+      "light": "lightBorderSubtle"
+    },
+    "diffAdded": {
+      "dark": "darkGreen",
+      "light": "lightGreen"
+    },
+    "diffRemoved": {
+      "dark": "darkRed",
+      "light": "lightRed"
+    },
+    "diffContext": {
+      "dark": "darkFgMuted",
+      "light": "lightFgMuted"
+    },
+    "diffHunkHeader": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "diffHighlightAdded": {
+      "dark": "darkGreen",
+      "light": "lightGreen"
+    },
+    "diffHighlightRemoved": {
+      "dark": "darkRed",
+      "light": "lightRed"
+    },
+    "diffAddedBg": {
+      "dark": "darkDiffAddedBg",
+      "light": "lightDiffAddedBg"
+    },
+    "diffRemovedBg": {
+      "dark": "darkDiffRemovedBg",
+      "light": "lightDiffRemovedBg"
+    },
+    "diffContextBg": {
+      "dark": "darkBgAlt",
+      "light": "lightBgAlt"
+    },
+    "diffLineNumber": {
+      "dark": "darkLineNumber",
+      "light": "textMuted"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "darkDiffAddedBg",
+      "light": "lightDiffAddedBg"
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "darkDiffRemovedBg",
+      "light": "lightDiffRemovedBg"
+    },
+    "markdownText": {
+      "dark": "darkFg",
+      "light": "lightFg"
+    },
+    "markdownHeading": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "markdownLink": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "markdownLinkText": {
+      "dark": "darkCyan",
+      "light": "lightCyan"
+    },
+    "markdownCode": {
+      "dark": "darkPink",
+      "light": "lightPink"
+    },
+    "markdownBlockQuote": {
+      "dark": "darkFgMuted",
+      "light": "lightFgMuted"
+    },
+    "markdownEmph": {
+      "dark": "darkYellow",
+      "light": "lightYellow"
+    },
+    "markdownStrong": {
+      "dark": "darkOrange",
+      "light": "lightOrange"
+    },
+    "markdownHorizontalRule": {
+      "dark": "darkBorder",
+      "light": "lightBorder"
+    },
+    "markdownListItem": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "markdownListEnumeration": {
+      "dark": "darkCyan",
+      "light": "lightCyan"
+    },
+    "markdownImage": {
+      "dark": "darkBlue",
+      "light": "lightBlue"
+    },
+    "markdownImageText": {
+      "dark": "darkCyan",
+      "light": "lightCyan"
+    },
+    "markdownCodeBlock": {
+      "dark": "darkFg",
+      "light": "lightFg"
+    },
+    "syntaxComment": {
+      "dark": "darkFgMuted",
+      "light": "lightFgMuted"
+    },
+    "syntaxKeyword": {
+      "dark": "darkPink",
+      "light": "lightRed"
+    },
+    "syntaxFunction": {
+      "dark": "darkPurple",
+      "light": "lightPurple"
+    },
+    "syntaxVariable": {
+      "dark": "darkOrange",
+      "light": "lightOrange"
+    },
+    "syntaxString": {
+      "dark": "darkCyan",
+      "light": "lightBlue"
+    },
+    "syntaxNumber": {
+      "dark": "darkBlue",
+      "light": "lightCyan"
+    },
+    "syntaxType": {
+      "dark": "darkOrange",
+      "light": "lightOrange"
+    },
+    "syntaxOperator": {
+      "dark": "darkPink",
+      "light": "lightRed"
+    },
+    "syntaxPunctuation": {
+      "dark": "darkFg",
+      "light": "lightFg"
+    }
+  }
+}

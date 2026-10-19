@@ -1,0 +1,15 @@
+#compdef defaults
+
+_defaults() {
+  if (( CURRENT == 2 )); then
+    _alternative \
+      'commands:command:((dump\:"Refresh the saved defaults" load\:"Apply the saved defaults" list\:"Print the saved defaults" read\:"Read a domain or key" read-type\:"Print the type of a key" write\:"Write a key" rename\:"Rename a key" delete\:"Delete a domain or key" import\:"Import a plist into a domain" export\:"Export a domain to a plist" domains\:"List every domain" find\:"Search domains and keys" help\:"Show the defaults usage"))'
+    return
+  fi
+
+  case $words[2] in
+    dump) _arguments '--dry-run[print the diff without writing]' ;;
+  esac
+}
+
+_defaults "$@"

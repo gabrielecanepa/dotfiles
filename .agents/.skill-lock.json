@@ -15,10 +15,10 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/blader/humanizer.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "e2e92e7b4b8229253ed5c8e81dc65463fdeddda5",
+      "skillFolderHash": "8c307f367c91bd974002f10f2be2965d642c13df",
       "pluginName": "humanizer",
       "installedAt": "2026-06-15T07:25:49.304Z",
-      "updatedAt": "2026-08-29T23:59:05.587Z"
+      "updatedAt": "2026-10-19T14:09:28.942Z"
     },
     "skill-creator": {
       "installedAt": "2026-06-14T19:39:19.357Z",
@@ -36,14 +36,13 @@
   },
   "lastSelectedAgents": [
     "amp",
-    "antigravity",
-    "antigravity-cli",
     "cline",
     "codex",
     "cursor",
-    "deepagents",
+    "droid",
     "gemini-cli",
     "github-copilot",
+    "kilo",
     "kimi-code-cli",
     "opencode",
     "warp",

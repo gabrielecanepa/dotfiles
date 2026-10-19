@@ -1,20 +1,17 @@
-(( $+functions[_zsh::log] )) || _zsh::log() { print -ru2 -- "$2: $3" }
-
-[[ -z "${ZSH_COMPLETIONS_PATH:-}" ]] && export ZSH_COMPLETIONS_PATH="${ZSH_CUSTOM:-$HOME/.zsh}/completions"
-[[ -d "$ZSH_COMPLETIONS_PATH" ]] || mkdir -p "$ZSH_COMPLETIONS_PATH"
-(( ${fpath[(Ie)$ZSH_COMPLETIONS_PATH]} )) || fpath=("$ZSH_COMPLETIONS_PATH" $fpath)
+typeset -g _completions_dir=${ZSH_CACHE_DIR:-${XDG_CACHE_HOME:-~/.cache}/zsh}/completions
+(( ${fpath[(Ie)$_completions_dir]} )) || fpath=($_completions_dir $fpath)
 
 _completions::load() {
   emulate -L zsh
-  local cli="$1" comp="$2"
+  local cli=$1 comp=$2
   local -a words
   (( $+functions[compdef] )) || return 0
-  [[ "$comp" == '#compdef '* ]] || return 0
+  [[ $comp == '#compdef '* ]] || return 0
   words=(${=comp%%$'\n'*})
   shift words
   (( ${#words} )) || return 0
-  autoload -U "_$cli" 2>/dev/null || return 0
-  compdef "_$cli" "${words[@]}" 2>/dev/null
+  autoload -U _$cli 2>/dev/null || return 0
+  compdef _$cli "${words[@]}" 2>/dev/null
 }
 
 completions() {
@@ -25,21 +22,27 @@ completions() {
   integer rc=0
 
   if (( ${#clis[@]} == 0 )); then
-    _zsh::log error completions 'usage: completions <cli> [<cli> ...]'
+    print -ru2 -- 'Usage: completions <cli> [<cli>...]'
     return 1
   fi
 
-  # Read completion text only when stdin is a pipe or regular file, so the startup loop never blocks on read.
+  command mkdir -p $_completions_dir || return 1
+
   if [[ -p /dev/stdin || -f /dev/stdin ]]; then
-    IFS= read -rd '' comp
+    IFS= read -rd '' comp || :
 
     if (( ${#clis[@]} > 1 )); then
-      _zsh::log error completions 'only one cli can be passed when using stdin'
+      print -ru2 -- 'completions: only one CLI can be passed when using stdin'
       return 1
     fi
 
-    if ! print -r -- "$comp" > "$ZSH_COMPLETIONS_PATH/_${clis[1]}"; then
-      _zsh::log error completions "failed to write completions for ${clis[1]}"
+    if [[ $comp != '#compdef '* ]]; then
+      print -ru2 -- "completions: invalid Zsh completions for ${clis[1]}"
+      return 1
+    fi
+
+    if ! print -r -- $comp > $_completions_dir/_${clis[1]}; then
+      print -ru2 -- "completions: failed to write completions for ${clis[1]}"
       return 1
     fi
 
@@ -50,48 +53,60 @@ completions() {
   local file
   for cli in "${clis[@]}"; do
     if (( ! ${+commands[$cli]} )); then
-      _zsh::log error completions "command not found: $cli"
+      print -ru2 -- "completions: command not found: $cli"
       rc=1
       continue
     fi
 
-    comp="$(command "$cli" completion zsh 2>/dev/null)"
-    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion --zsh 2>/dev/null)"
-    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion -s zsh 2>/dev/null)"
-    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" completion 2>/dev/null)"
-    [[ "$comp" == '#compdef '* ]] || comp="$(command "$cli" --completions zsh 2>/dev/null)"
+    comp=$(command $cli completion zsh 2>/dev/null)
+    [[ $comp == '#compdef '* ]] || comp=$(command $cli completion --zsh 2>/dev/null)
+    [[ $comp == '#compdef '* ]] || comp=$(command $cli completion -s zsh 2>/dev/null)
+    [[ $comp == '#compdef '* ]] || comp=$(command $cli completion 2>/dev/null)
+    [[ $comp == '#compdef '* ]] || comp=$(command $cli --completions zsh 2>/dev/null)
 
-    if [[ "$comp" != '#compdef '* ]]; then
-      _zsh::log error completions "cannot generate zsh completions for $cli"
+    if [[ $comp != '#compdef '* ]]; then
+      print -ru2 -- "completions: cannot generate Zsh completions for $cli"
       rc=1
       continue
     fi
 
-    file="$ZSH_COMPLETIONS_PATH/_$cli"
-    [[ -e "$file" && "$comp" == "$(<"$file")" ]] && continue
+    file=$_completions_dir/_$cli
+    if [[ -e $file && $comp == "$(<$file)" ]]; then
+      command touch -- $file
+      _completions::load $cli $comp
+      continue
+    fi
 
-    if ! print -r -- "$comp" > "$file"; then
-      _zsh::log error completions "failed to write completions for $cli"
+    if ! print -r -- $comp > $file; then
+      print -ru2 -- "completions: failed to write completions for $cli"
       rc=1
       continue
     fi
 
-    _completions::load "$cli" "$comp"
+    _completions::load $cli $comp
   done
 
   return $rc
 }
 
-# Generate missing completions and refresh existing caches in the background.
 () {
-  local cli
-  local -a cached
-  for cli in ${ZSH_COMPLETIONS:-}; do
-    if [[ -e "$ZSH_COMPLETIONS_PATH/_$cli" ]]; then
-      cached+=("$cli")
+  emulate -L zsh
+  local cli file
+  local -a stale cache_time link_time bin_time
+  zmodload -F zsh/stat b:zstat 2>/dev/null
+  for cli in ${completions:-}; do
+    file=$_completions_dir/_$cli
+    if [[ -e $file ]]; then
+      _completions::load $cli "$(<$file)"
+      (( ${+commands[$cli]} )) || continue
+      zstat -A cache_time +mtime -- $file &&
+        zstat -L -A link_time +mtime -- $commands[$cli] &&
+        zstat -A bin_time +mtime -- $commands[$cli] || continue
+      (( link_time[1] > cache_time[1] || bin_time[1] > cache_time[1] )) && stale+=($cli)
     else
-      completions "$cli"
+      completions $cli </dev/null &>/dev/null
     fi
   done
-  (( ${#cached} )) && { completions "${cached[@]}" &> /dev/null &! }
+  (( ${#stale} )) && { completions "${stale[@]}" </dev/null &>/dev/null &! }
+  return 0
 }

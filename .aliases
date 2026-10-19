@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-alias cdw="cd ${WORKING_DIR:-~}"
-alias ghrv="gh repo view --web"
-alias ll="ls -la"
-alias ls="/bin/ls -GHhp"
-alias pn="pnpm"
-alias te="open -a TextEdit"

@@ -1,8 +1,8 @@
 # Design direction reference
 
-Load this reference only when inventing a visual direction because the project has no established system.
+Load only the section needed for direction, component defaults, or the general UI audit source.
 
-Choose one direction and adapt it to the product; these are not templates.
+Choose a visual direction here only when the project has no established system. Adapt it to the product; these are not templates.
 
 ## Defaults to avoid
 
@@ -38,7 +38,7 @@ Choose one direction and adapt it to the product; these are not templates.
 - Use explicit language in the brief as the tiebreaker.
 - Calm, tactile, or expensive work may support premium restraint; monochrome or editorial work may support minimalism.
 - Raw grids, terminals, and dense telemetry may support a Swiss or brutalist direction.
-- For a materially different aesthetic, use `find-skills` instead of forcing one of these.
+- For a materially different aesthetic, follow the brief instead of forcing one of these directions.
 
 ### Premium restraint
 

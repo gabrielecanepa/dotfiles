@@ -1,33 +1,34 @@
 {
-  "chat.customizations.locationsMigration.enabled": true,
   "chat.useAgentsMdFile": false,
   "chat.useClaudeMdFile": false,
-  "editor.formatOnSave": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
   "files.associations": {
-    ".aliases": "shellscript",
-    ".config/git/config": "properties"
+    "aliases.zsh": "shellscript",
+    ".config/gem/gemrc": "yaml",
+    ".config/git/config": "properties",
+    ".zshrc.local": "shellscript"
   },
   "files.exclude": {
     ".CFUserTextEncoding": true,
-    ".Trash": true,
-    ".zcompdump-*": true,
+    ".vscode-*": true,
     ".zsh_sessions": true,
     "*_history": true,
-    "**/.localized": true,
-    "OrbStack": true
+    "**/.localized": true
+  },
+  "files.watcherExclude": {
+    "Developer/**": true
   },
   "git.ignoredRepositories": [
     ".oh-my-zsh"
   ],
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Generate a single-line conventional commit message in the format `<type>(<scope>): <subject>`. Use the imperative mood, keep the subject lower-case with no trailing period, and omit the scope when no listed scope fits. Allowed types: agents, brew, chore, docs, git, gui, node, python, ruby, shell, tui. Allowed scopes: bash, cask, claude, codex, copilot, ghostty, mas, neovim, npm, opencode, sh, vscode, zed, zsh. Never use feat, fix, or refactor. Never add a body, footer, `Co-authored-by`, or any other trailer."
+      "text": "Generate a single-line conventional commit message in the format `<type>(<scope>): <subject>`. Use an imperative mood, lower-case subject with no trailing period, and omit the scope when none fits. Allowed types and scopes are listed in ~/.commitlintrc.json; never use different ones. Never add a body, footer, `Co-authored-by`, or other trailers."
     }
   ],
   "markdown.extension.toc.levels": "3..6",
   "oxc.enable.oxfmt": true,
-  "oxc.fmt.configPath": ".oxfmtrc.json",
   "search.exclude": {
     "**/.claude/CLAUDE.md": true,
     "**/.claude/rules": true,
@@ -36,14 +37,14 @@
     "**/.codex/hooks.json": true,
     "**/.codex/skills": true,
     "**/.copilot/copilot-instructions.md": true,
-    "**/.copilot/instructions": true,
     "**/*.code-search": true,
     "**/bower_components": true,
     "**/node_modules": true
   },
   "shellcheck.ignorePatterns": {
-    ".aliases": true,
-    ".hushlogin": true,
-    ".zsh/plugins/*/_*": true
+    ".zsh/aliases.zsh": true,
+    ".zsh/plugins/*/_*": true,
+    ".zsh/themes/*": true,
+    ".zshrc.local": true
   }
 }

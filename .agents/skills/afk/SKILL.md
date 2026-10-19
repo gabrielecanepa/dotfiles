@@ -5,7 +5,7 @@ description: >-
   Use for /afk, /afk off, or when the user is on a phone or away from a desk.
 ---
 
-# afk
+# Using Away From Keyboard (AFK) Mode
 
 The user is working from a phone and cannot open files, a terminal, an IDE, or a desktop browser, so everything needed to judge the work arrives in chat.
 

@@ -1,14 +1,14 @@
 # Browser procedures
 
-The procedures and rationale behind `browser.md`. Read the section the current task needs.
+The procedures and rationale behind `../rules/browser.md`. Read the section the current task needs.
 
 ## Why Homebrew only
 
 - `agent-browser` is a machine-level CLI, like Chrome itself, never a dependency of a repository.
 - Its profiles, downloaded Chrome, sessions, and encryption key live in `~/.agent-browser`, shared by every repository and worktree.
-- A per-repository pin in `package.json` fragments the binary driving one shared store and costs about 87 MB per checkout.
+- Per-repository installs can select different binaries for one shared state store and duplicate downloaded dependencies.
 - nodenv scopes `npm i -g` to one Node version, so a Node bump or global prune silently swaps or removes the binary and strands the old copy.
-- The Homebrew keg is one machine-wide 10 MB copy on the non-interactive PATH; `agent-browser upgrade` detects the install method.
+- Homebrew provides one machine-level installation; verify the binary resolves on the non-interactive PATH.
 - `npx agent-browser` with no local copy downloads whatever the registry tags `latest`, a version nobody chose.
 - Upstream skills such as `next-dev-loop` call the bare command, so the bare form is the only one that stays consistent.
 
@@ -27,9 +27,9 @@ The procedures and rationale behind `browser.md`. Read the section the current t
 
 ## Orphaned sessions
 
-- A session whose owning process exits without closing leaves an orphaned daemon holding roughly 900 MB across a dozen Chrome processes.
-- A few orphans add up to gigabytes of swap.
-- Reap survivors: kill `agent-browser` processes whose parent is `1`, then remove session and config state older than three days.
+- A session can leave browser and daemon processes after its owner exits; inspect ownership before cleanup.
+- Never identify an orphan by parent PID alone; healthy daemons can also have parent PID `1`.
+- Close the known inactive named session first; remove stale state only when its ownership is confirmed.
 - `cleanup-agent-browser.sh` closes every local browser session and reaps the daemon, which runs with parent `1` even while healthy.
 - Both halves can interrupt another agent's active work, which is why it never runs as a hook.
 

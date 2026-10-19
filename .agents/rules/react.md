@@ -1,14 +1,14 @@
 ---
-description: 'Use when writing or editing React components (.jsx/.tsx): prop forwarding, composition, JSX, state, effects, layer boundaries, and Next.js 16.3+ APIs.'
-applyTo: '**/*.jsx, **/*.tsx'
+description: "Use for React components (.jsx/.tsx): props, composition, JSX, state, effects, layer boundaries, and version-matched Next.js APIs."
+applyTo: "**/*.jsx, **/*.tsx"
 paths:
-  - '**/*.jsx'
-  - '**/*.tsx'
+  - "**/*.jsx"
+  - "**/*.tsx"
 ---
 
 # React
 
-Language idioms: `typescript.md`. Examples and Next.js API detail: `../references/react-examples.md`.
+TS idioms: `typescript.md`. Examples: `~/.agents/references/react-examples.md`.
 
 ## Skills and performance
 
@@ -21,17 +21,18 @@ Language idioms: `typescript.md`. Examples and Next.js API detail: `../reference
 
 ## Component props
 
-- Type props as `React.ComponentProps<'div'>` or `React.ComponentProps<typeof Child>` intersected with the component's own props.
-- Destructure `className` and `...props`, merge `className` with `cn(...)`, and spread the rest onto the target element.
+- For prop-forwarding components, derive props from the target with `React.ComponentProps` and add the component's own props.
+- When forwarding DOM props, merge `className` with `cn(...)` and spread the remaining props onto the target element.
 - When a provider only wraps `children`, type it as `React.PropsWithChildren<{ ... }>` without merge or spread.
 - Reference React types through the global `React` namespace; never import React or its types.
 
 ## Component design
 
 - Choose composition by pressure per the reference: props, then slots or compound components, then context.
-- Use `{cond && <El />}` for one branch, a ternary for two, and `<>...</>` over `<Fragment>`; the left side of `&&` must be a real boolean.
+- Use `{cond && <El />}` for one branch and a ternary for two; the left side of `&&` must be a boolean.
+- Use `<>...</>` unless the fragment needs a `key`.
 - Read props directly; copy one into state only to seed the first render, named `defaultX` or `initialX`.
-- Use `key={id}` only when a new identity must reset every descendant.
+- Outside lists, use `key={id}` only when a new identity must reset the subtree.
 
 ## State and effects
 
@@ -46,14 +47,14 @@ Language idioms: `typescript.md`. Examples and Next.js API detail: `../reference
 - When React Compiler is on, do not hand-add `useMemo`, `useCallback`, or `React.memo`.
 - When a client fetch fires on rapid input, abort the prior request with an `AbortController`, or use a data library that cancels.
 - When an effect opens a listener, timer, subscription, or socket, return a cleanup that tears it down.
-- When a user action triggers a promise, expose pending and error UI, block duplicate submission, and guard late continuations.
+- For async user actions, show pending and error UI, block duplicate submission, and guard late continuations.
 - Pass only minimal, serializable, non-sensitive data or Server Actions across the RSC boundary; keep Client Components narrow.
 - Treat RSC data placed in client context as a snapshot with a defined freshness path.
 - Sanitize dynamic HTML and allowlist schemes for dynamic `href` and `src`.
 
 ## State management
 
-Place state at the lowest level that works. Escalate one step at a time under measured re-renders, deep prop drilling, or interdependent state.
+Keep state at the lowest level that works. Escalate for measured re-renders, deep prop drilling, or interdependent state.
 
 1. Keep `useState` or `useReducer` where it renders; derive during render instead of mirroring state.
 2. Lift to the nearest common owner and pass props; try composition before context.
@@ -64,10 +65,10 @@ Place state at the lowest level that works. Escalate one step at a time under me
 
 ## Layers and Next.js placement
 
-- Dependencies flow shared to features to app; `ui/`, `lib/`, `hooks/`, and `icons/` never import feature, app, or action code.
+- App code imports features; features import shared code; shared `ui/`, `lib/`, `hooks/`, and `icons/` never import feature or app code.
 - Keep a module in `ui/` only if it could ship in a generic library; once domain-bound it moves to `features/<domain>/`.
-- In Next.js, `app/` holds only the framework files listed in the reference; everything else lives in its shared layer.
-- Read root params through the async getters of `next/root-params` in Server Components only.
-- Use `catchError` from `next/error` for custom error boundaries.
+- In Next.js, keep framework-owned files in `app/`; application components and helpers belong in shared layers.
+- In Next.js, define pages and layouts as named arrow functions, then default-export them.
+- Before using version-specific Next.js APIs from the reference, confirm support in the installed version's docs.
 - With Cache Components on, mark shared reads with `'use cache'`, set `cacheLife` and `cacheTag`, and `updateTag` affected tags.
-- Start Server Actions inside `startTransition` with `useOptimistic` in the same transition; more 16.3+ detail is in the reference.
+- When calling a Server Action from a client event handler, use `startTransition`; apply `useOptimistic` in the same transition.

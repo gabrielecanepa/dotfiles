@@ -1,6 +1,6 @@
 # deps plugin
 
-Prints the dependencies declared in a project's `package.json`, one per line.
+Prints the dependencies declared in a project's `package.json`.
 
 To use it, add `deps` to the plugins array in your zshrc file:
 
@@ -16,8 +16,6 @@ Requires [`jq`](https://jqlang.org).
 deps [<dir>|<path/to/package.json>] [options]
 ```
 
-With no path, reads `package.json` from the current directory.
-
 | Option         | Description                                          |
 | -------------- | ---------------------------------------------------- |
 | `-L`, `--list` | Print the dependencies on a single line              |
@@ -25,3 +23,5 @@ With no path, reads `package.json` from the current directory.
 | `--peer`       | Include `peerDependencies`                           |
 | `--optional`   | Include `optionalDependencies`                       |
 | `--all`        | Include every group (exclusive with the flags above) |
+
+With no path specified, it reads `package.json` from the current directory.

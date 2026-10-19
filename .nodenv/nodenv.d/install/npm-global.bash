@@ -1,5 +1,5 @@
 npm_global_install() {
-  [ "$STATUS" = "0" ] || return 0
+  [ "$STATUS" = 0 ] || return 0
   local deps
   deps="$("$PREFIX/bin/node" -p 'const d=require(process.argv[1]).dependencies||{};Object.entries(d).map(([k,v])=>k+"@"+v).join("\n")' "${NPM_GLOBAL:-$HOME/.npm}/package.json" 2>/dev/null)" || return 0
   [ -n "$deps" ] || return 0

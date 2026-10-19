@@ -1,6 +1,6 @@
 # npm-global plugin
 
-Tracks npm global packages in a `package.json` manifest and reinstalls them on demand by wrapping `npm`, so every global mutating command keeps the manifest in sync.
+Wraps the `npm` command to automatically track global npm packages in a `package.json`.
 
 To use it, add `npm-global` to the plugins array in your zshrc file:
 
@@ -10,21 +10,21 @@ plugins=(... npm-global)
 
 ## Usage
 
-| Command                | Description                                                          |
-| ---------------------- | -------------------------------------------------------------------- |
-| `npm dump`             | Rewrite the manifest from the installed globals (offline and atomic) |
-| `npm fresh`            | Update every global package, then dump                               |
-| `npm fresh -i`         | Pick updates interactively with `npx taze`, then dump                |
-| `npm install --global` | With no package named, reinstall everything tracked in the manifest  |
+| Command                | Description                                                 |
+| ---------------------- | ----------------------------------------------------------- |
+| `npm dump`             | Write the manifest from the installed global dependencies   |
+| `npm fresh`            | Update every global dependency and dump the manifest        |
+| `npm fresh -i`         | Run an interactive update with `taze` and dump the manifest |
+| `npm install --global` | Install every dependency specified in the manifest          |
 
-Any other `npm` command is passed through unchanged. After a successful global `install`, `uninstall`, or `update` (any spelling npm accepts) the nodenv shims are rehashed and the manifest is re-dumped automatically, so a newly installed binary is on `PATH` right away.
+Any other `npm` command is passed through unchanged.
 
-`npm fresh -i` runs [taze](https://github.com/antfu-collective/taze) through `npx` and dumps the manifest after the interactive update is complete.
+Tab completion includes npm's commands and arguments, plus `dump` and `fresh` (`-i` or `--interactive`).
 
-## Drift
+When [nodenv](https://github.com/nodenv/nodenv) is installed, a successful global `install`, `uninstall`, or `update` rehashes the nodenv shims, so all installed binaries become immediately available under the current Node.js version.
 
-`_npm_global_drift` reports globals that are missing, drifted, or untracked against the manifest. It is report-only: comparing the manifest against the installed set needs a `node` process, which is too slow for shell startup, so `dotfiles doctor` surfaces the drift and `npm install --global` or `npm dump` applies it.
+`npm fresh -i` runs [taze](https://github.com/antfu-collective/taze) with `npx` and updates the manifest after the interactive update is complete.
 
 ## Settings
 
-- `NPM_GLOBAL`: directory holding the tracked `package.json`. Defaults to `~/.npm`.
+- `NPM_GLOBAL_DIR`: directory storing the global `package.json`. Defaults to `~/.npm`.

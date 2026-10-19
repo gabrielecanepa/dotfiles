@@ -1,6 +1,6 @@
 # colors256 plugin
 
-Prints the 256 xterm color codes, each on a swatch of its own color, 16 per row.
+Prints the 256 xterm color codes.
 
 To use it, add `colors256` to the plugins array in your zshrc file:
 

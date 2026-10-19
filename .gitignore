@@ -1,7 +1,5 @@
 /*
 !/.agents/
-!/.bundle/
-/.bundle/*/
 !/.claude/
 /.claude/*
 !/.claude/agents/
@@ -19,41 +17,47 @@
 !/.codex/agents/
 !/.codex/pets/
 /.codex/pets/*/validation.json
-!/.codex/skills
+!/.codex/skills/
 !/.codex/AGENTS.md
 !/.codex/hooks.json
 !/.codex/settings.toml
 !/.config/
 /.config/*
-!/.config/btop/
+!/.config/gem/
 !/.config/gh/
-/.config/gh/*
-!/.config/gh/config.yml
+/.config/gh/hosts.yml
 !/.config/ghostty/
 !/.config/git/
 /.config/git/allowed_signers
+!/.config/macos/
+!/.config/rubocop/
 !/.config/glab-cli/
 /.config/glab-cli/*
 !/.config/glab-cli/aliases.yml
 !/.config/launchd/
+!/.config/lazygit/
 !/.config/nvim/
 !/.config/opencode/
 /.config/opencode/*
-!/.config/opencode/AGENTS.md
 !/.config/opencode/agents/
-!/.config/opencode/cli.json
 !/.config/opencode/commands/
-!/.config/opencode/opencode.jsonc
+!/.config/opencode/themes/
+!/.config/opencode/AGENTS.md
+!/.config/opencode/cli.json
+!/.config/opencode/opencode.json
+!/.config/opencode/tui.json
+!/.config/vim/
 !/.config/zed/
 /.config/zed/*
 !/.config/zed/keymap.json
 !/.config/zed/settings.json
 !/.config/zed/tasks.json
+!/.config/shellcheckrc
 !/.copilot/
 /.copilot/*
 !/.copilot/copilot-instructions.md
-!/.copilot/instructions
-!/.copilot/lsp-config.json
+!/.copilot/lsp-config.js
+!/.copilot/mcp-config.json
 !/.copilot/settings.json
 !/.github/
 !/.homebrew/
@@ -65,54 +69,28 @@
 !/.npm/
 /.npm/*
 !/.npm/package.json
-!/.orbstack/
-/.orbstack/*
-!/.orbstack/vmconfig.json
-!/.ssh/
-/.ssh/*
-!/.ssh/config
+!/.pi/
 !/.vscode/
 /.vscode/*
+!/.vscode/user/
+/.vscode/user/*
+!/.vscode/user/snippets/
+!/.vscode/user/keybindings.json
+!/.vscode/user/settings.json
+!/.vscode/user/styles.css
 !/.vscode/extensions.json
 !/.vscode/settings.json
-!/.zed/
 !/.zsh/
-/.zsh/completions/
 /.zsh/plugins/_*/
 /.zsh/plugins/zsh-*/
-!/Library/
-/Library/*
-!/Library/Application Support/
-/Library/Application Support/*
-!/Library/Application Support/Code/
-/Library/Application Support/Code/*
-!/Library/Application Support/Code/User/
-/Library/Application Support/Code/User/*
-!/Library/Application Support/Code/User/snippets/
-!/Library/Application Support/Code/User/keybindings.json
-!/Library/Application Support/Code/User/settings.json
-!/Library/Application Support/Code/User/styles.css
-!/Library/KeyBindings/
-!/Library/LaunchAgents/
-/Library/LaunchAgents/*
-!/Library/LaunchAgents/local.*.plist
-!/.aliases
 !/.bash_profile
 !/.bashrc
 !/.commitlintrc.json
 !/.editorconfig
-!/.gemrc
-!/.gitattributes
 !/.gitignore
-!/.hushlogin
-!/.install.sh
-!/.irbrc
-!/.macos
 !/.npmrc
 !/.oxfmtrc.json
 !/.profile
-!/.rubocop.yml
-!/.shellcheckrc
-!/.vimrc
+!/.zprofile
 !/.zshenv
 !/.zshrc

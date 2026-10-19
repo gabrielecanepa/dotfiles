@@ -1,0 +1,197 @@
+-g AppleInterfaceStyleSwitchesAutomatically -bool
+-g AppleIconAppearanceTheme -string
+-g AppleReduceDesktopTinting -bool
+-g AppleAntiAliasingThreshold -int
+-g AppleScrollerPagingBehavior -bool
+-g CGDisableCursorLocationMagnification -bool
+-g AppleActionOnDoubleClick -string
+-g AppleMiniaturizeOnDoubleClick -bool
+-g AppleWindowTabbingMode -string
+-g NSQuitAlwaysKeepsWindows -bool
+-g NSCloseAlwaysConfirmsChanges -bool
+com.apple.WindowManager GloballyEnabled -bool
+com.apple.WindowManager EnableTiledWindowMargins -bool
+com.apple.WindowManager AppWindowGroupingBehavior -int
+com.apple.WindowManager StandardHideDesktopIcons -bool
+com.apple.WindowManager StandardHideWidgets -bool
+com.apple.WindowManager StageManagerHideWidgets -bool
+com.apple.WindowManager HideDesktop -bool
+com.apple.WindowManager AutoHide -bool
+com.apple.ActivityMonitor ShowCategory -int
+com.apple.ActivityMonitor SelectedTab -int
+com.apple.ActivityMonitor DisplayType -int
+com.apple.ActivityMonitor OpenMainWindow -bool
+com.apple.TextEdit RichText -int
+com.apple.TextEdit AddExtensionToNewPlainTextFiles -bool
+com.apple.TextEdit SmartQuotes -bool
+com.apple.TextEdit SmartDashes -bool
+com.apple.TextEdit TextReplacement -bool
+com.apple.TextEdit CheckSpellingWhileTyping -bool
+com.apple.TextEdit CorrectSpellingAutomatically -bool
+com.apple.TextEdit IgnoreRichText -bool
+com.apple.TextEdit IgnoreHTML -bool
+com.apple.TextEdit NSFont -string
+com.apple.TextEdit NSFontSize -int
+com.apple.TextEdit NSFixedPitchFont -string
+com.apple.TextEdit NSFixedPitchFontSize -int
+com.apple.Safari IncludeDevelopMenu -bool
+com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool
+com.apple.Safari EnableNarrowTabs -bool
+com.apple.Safari ShowFullURLInSmartSearchField -bool
+com.apple.Safari ShowOverlayStatusBar -bool
+com.apple.Safari ShowSidebarInNewWindows -bool
+com.apple.Safari AlwaysRestoreSessionAtLaunch -bool
+com.apple.Safari NewWindowBehavior -int
+com.apple.Safari NewTabBehavior -int
+com.apple.Safari AutoFillCreditCardData -bool
+com.apple.mail PollTime -int
+com.apple.mail ThreadingDefault -bool
+com.apple.mail MailShowFlags -bool
+com.apple.mail ShowCcHeader -bool
+com.apple.mail ShowBccHeader -bool
+com.apple.mail ShowReplyToHeader -bool
+com.apple.mail ShowPriorityControl -bool
+com.apple.mail SuppressDeliveryFailure -bool
+com.apple.mail IndexJunk -bool
+com.apple.mail IndexTrash -bool
+com.apple.mail IndexDecryptedMessages -bool
+com.apple.mail NSFont -string
+com.apple.mail NSFontSize -int
+com.apple.mail NSFixedPitchFont -string
+com.apple.mail NSFixedPitchFontSize -int
+com.apple.dock orientation -string
+com.apple.dock tilesize -float
+com.apple.dock magnification -bool
+com.apple.dock largesize -float
+com.apple.dock autohide -bool
+com.apple.dock autohide-delay -float
+com.apple.dock mineffect -string
+com.apple.dock minimize-to-application -bool
+com.apple.dock show-process-indicators -bool
+com.apple.dock showhidden -bool
+com.apple.dock show-recents -bool
+com.apple.dock mru-spaces -bool
+com.apple.dock expose-group-apps -bool
+com.apple.dock showAppExposeGestureEnabled -bool
+com.apple.dock wvous-bl-corner -int
+com.apple.dock wvous-bl-modifier -int
+com.apple.dock wvous-br-corner -int
+com.apple.dock wvous-br-modifier -int
+com.apple.finder AppleShowAllFiles -bool
+com.apple.finder ShowPathbar -bool
+com.apple.finder ShowStatusBar -bool
+com.apple.finder ShowSidebar -bool
+com.apple.finder ShowPreviewPane -bool
+com.apple.finder ShowRecentTags -bool
+com.apple.finder QuitMenuItem -bool
+com.apple.finder FXPreferredViewStyle -string
+com.apple.finder FXPreferredSearchViewStyle -string
+com.apple.finder FXDefaultSearchScope -string
+com.apple.finder FXArrangeGroupViewBy -string
+com.apple.finder FXPreferredGroupBy -string
+com.apple.finder _FXSortFoldersFirst -bool
+com.apple.finder _FXSortFoldersFirstOnDesktop -bool
+com.apple.finder _FXEnableColumnAutoSizing -bool
+com.apple.finder _FXShowPosixPathInTitle -bool
+com.apple.finder ShowHardDrivesOnDesktop -bool
+com.apple.finder ShowExternalHardDrivesOnDesktop -bool
+com.apple.finder ShowRemovableMediaOnDesktop -bool
+com.apple.finder ShowMountedServersOnDesktop -bool
+com.apple.finder NewWindowTarget -string
+com.apple.screencapture location -string
+com.apple.screencapture location-screenshot -string
+com.apple.screencapture location-screenrecording -string
+com.apple.screencapture type -string
+com.apple.screencapture target -string
+com.apple.screencapture style -string
+com.apple.screencapture show-thumbnail -bool
+com.apple.screencapture showsClicks -bool
+com.apple.desktopservices DSDontWriteNetworkStores -bool
+com.apple.desktopservices DSDontWriteUSBStores -bool
+-g InitialKeyRepeat -int
+-g KeyRepeat -int
+-g ApplePressAndHoldEnabled -bool
+-g AppleKeyboardUIMode -int
+-g NSAutomaticPeriodSubstitutionEnabled -bool
+-g NSAutomaticCapitalizationEnabled -bool
+com.apple.HIToolbox AppleFnUsageType -int
+com.apple.HIToolbox AppleDictationAutoEnable -int
+com.apple.AppleMultitouchTrackpad Clicking -bool
+com.apple.AppleMultitouchTrackpad Dragging -bool
+com.apple.AppleMultitouchTrackpad DragLock -bool
+com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool
+com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int
+com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool
+com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int
+com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int
+com.apple.AppleMultitouchTrackpad TrackpadHandResting -bool
+com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -bool
+com.apple.AppleMultitouchTrackpad ActuationStrength -int
+com.apple.AppleMultitouchTrackpad ForceSuppressed -bool
+com.apple.AppleMultitouchTrackpad FirstClickThreshold -int
+com.apple.AppleMultitouchTrackpad SecondClickThreshold -int
+com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadHandResting -bool
+com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadMomentumScroll -bool
+-g com.apple.trackpad.forceClick -bool
+-g com.apple.trackpad.scaling -float
+com.apple.AppleMultitouchMouse MouseButtonMode -string
+com.apple.AppleMultitouchMouse MouseOneFingerDoubleTapGesture -int
+com.apple.AppleMultitouchMouse MouseTwoFingerDoubleTapGesture -int
+com.apple.AppleMultitouchMouse MouseTwoFingerHorizSwipeGesture -int
+com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode -string
+com.apple.driver.AppleBluetoothMultitouch.mouse MouseOneFingerDoubleTapGesture -int
+com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerDoubleTapGesture -int
+com.apple.driver.AppleBluetoothMultitouch.mouse MouseTwoFingerHorizSwipeGesture -int
+-g com.apple.sound.beep.feedback -int
+-g com.apple.sound.beep.flash -int
+-g com.apple.sound.beep.sound -string
+-g com.apple.sound.beep.volume -float
+-g _HIHideMenuBar -bool
+-g AppleMenuBarVisibleInFullscreen -bool
+com.apple.controlcenter AutoHideMenuBarOption -int
+com.apple.menuextra.clock IsAnalog -bool
+com.apple.menuextra.clock ShowSeconds -bool
+com.apple.menuextra.clock ShowDayOfWeek -bool
+com.apple.menuextra.clock ShowAMPM -bool
+com.apple.menuextra.clock ShowDate -int
+com.apple.menuextra.clock FlashDateSeparators -bool
+-currentHost com.apple.controlcenter Battery -int
+-currentHost com.apple.controlcenter BatteryShowPercentage -bool
+-currentHost com.apple.controlcenter BatteryShowEnergyMode -bool
+-currentHost com.apple.controlcenter Sound -int
+-currentHost com.apple.controlcenter NowPlaying -int
+-currentHost com.apple.controlcenter WiFi -int
+-currentHost com.apple.controlcenter Bluetooth -int
+-currentHost com.apple.controlcenter Display -int
+-currentHost com.apple.controlcenter FocusModes -int
+-currentHost com.apple.controlcenter ScreenMirroring -int
+-currentHost com.apple.controlcenter Weather -int
+-currentHost com.apple.controlcenter KeyboardBrightness -int
+-currentHost com.apple.controlcenter UserSwitcher -int
+-currentHost com.apple.controlcenter MusicRecognition -int
+-currentHost com.apple.controlcenter AccessibilityShortcuts -int
+-currentHost com.apple.controlcenter AirDrop -int
+-currentHost com.apple.controlcenter Siri -int
+-currentHost com.apple.controlcenter StageManager -int
+-currentHost com.apple.controlcenter TimeMachine -int
+-currentHost com.apple.controlcenter VPN -int
+-currentHost com.apple.controlcenter VoiceControl -int
+-currentHost com.apple.controlcenter ShowSuggestions -bool
+com.apple.Siri TypeToSiriEnabled -bool
+com.apple.Siri VoiceTriggerUserEnabled -bool
+com.apple.Siri ConfirmSiriInvokedViaEitherCmdTwice -bool
+com.apple.Siri StatusMenuVisible -bool
+com.apple.assistant.support 'Dictation Enabled' -bool
+com.apple.assistant.support 'Siri Data Sharing Opt-In Status' -int
+com.apple.assistant.support 'Search Queries Data Sharing Status' -int
+com.apple.AdLib allowApplePersonalizedAdvertising -bool
+-currentHost com.apple.screensaver idleTime -int
+-currentHost com.apple.screensaver showClock -bool

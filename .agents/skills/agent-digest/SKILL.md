@@ -7,7 +7,7 @@ description: >-
 disable-model-invocation: true
 ---
 
-# agent-digest
+# Agent Digest
 
 Turn the week's newsletters into reviewable proposals for one target repository, plus a radar of findings worth knowing.
 

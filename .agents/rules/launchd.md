@@ -1,33 +1,35 @@
 ---
-description: 'Use for the tracked LaunchAgents under ~/Library/LaunchAgents and their dotfiles loader: portable sh wrappers, labels, enabled state, safe retirement, and performance.'
-applyTo: 'Library/LaunchAgents/**,.install.sh,.zsh/plugins/dotfiles/**'
+description: "Use for user LaunchAgents in .config/launchd and their plugin: portable sh wrappers, ownership, enabled state, safe retirement, and performance."
+applyTo: ".config/launchd/**,.zsh/plugins/launchd/**"
 paths:
-  - 'Library/LaunchAgents/**'
-  - '.install.sh'
-  - '.zsh/plugins/dotfiles/**'
+  - ".config/launchd/**"
+  - ".zsh/plugins/launchd/**"
 ---
 
 # Launch agents
 
 ## Tracking and loading
 
-- Track a custom agent in place as `Library/LaunchAgents/<label>.plist`, allowlisted one by one in `.gitignore`.
-- The filename stem must equal `Label`.
-- `dotfiles init` loads every allowlisted agent not loaded or changed since its last load and unloads disabled ones; `dotfiles doctor` reports drift.
-- The `launchd` reconciler at `.zsh/plugins/dotfiles/reconcilers/launchd.zsh` owns that logic and exposes `_launchd_drift` and `_launchd_reconcile`.
-- Load state is a marker file under `${XDG_STATE_HOME:-~/.local/state}/dotfiles/launchd/<label>`, so editing a plist reloads it on the next init.
-- Leave third-party plists in the same directory ignored and untouched.
+- Track each agent as `.config/launchd/<label>.plist`; the filename stem must equal `Label`.
+- The `launchd` plugin reconciles plists asynchronously at shell startup with a process-held lock.
+- Source plists get plugin-owned symlinks in `$HOME/Library/LaunchAgents`, so launchd discovers them at GUI login.
+- The worker bootstraps enabled jobs and reloads changed definitions in the current GUI session.
+- Ownership links and loaded snapshots live under `${XDG_STATE_HOME:-$HOME/.local/state}/launchd`; preserve them.
+- Set `LAUNCHD_DIR` to override `${XDG_CONFIG_HOME:-$HOME/.config}/launchd`; keep it separate from the installation directory.
+- Never replace unrelated installation entries or adopt a loaded label without ownership state.
+- Reconciliation checks loaded definitions, not continuous application health or whether every job has a running process.
 
 ## Plist contents
 
-- launchd expands nothing at runtime, so `ProgramArguments` is `/bin/sh -c` with a short script.
+- For these agents, set `ProgramArguments` to `/bin/sh -c` with a short script; launchd does not perform shell expansion.
 - The script exports `PATH` and `LANG`, runs `cd "$HOME"`, and ends with `exec <command> >/dev/null 2>>"$HOME/Library/Logs/<label>.log"`.
-- launchd sets only `HOME`, `USER`, `SHELL`, and `TMPDIR`, so `PATH` uses the approved `/opt/homebrew/bin:/usr/local/bin` pair, never `$HOMEBREW_PREFIX`.
+- Set the wrapper's `PATH` explicitly with `/opt/homebrew/bin:/usr/local/bin`; never rely on `$HOMEBREW_PREFIX` in launchd.
 - Never write `~`, a `/Users` path, or a bare binary outside the wrapper.
-- Omit `ProcessType`; the `Background` value pins the job and its children to efficiency cores, roughly 3.5x slower.
+- Omit `ProcessType` by default; choose `Background` only for work that can accept lower scheduling and I/O priority.
 
 ## Enabling and retiring
 
-- `Disabled` is the declarative switch: `<false/>` for an active agent, `<true/>` to make the next init unload the job.
-- To retire an agent, set `<true/>`, run `dotfiles init`, then delete the file and its `.gitignore` line.
+- `Disabled` is the declarative switch: `<false/>` for an active agent, `<true/>` to make the next shell unload the job.
+- To retire an agent, delete its source plist; the next shell unloads the plugin-owned job and removes its link and state.
+- When the source directory is missing, reconciliation does nothing; never treat that as removal of every agent.
 - Never use `launchctl enable` or `disable`; their external state overrides the plist.

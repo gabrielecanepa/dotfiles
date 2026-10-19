@@ -26,7 +26,7 @@ Human-facing docs (README, CONTRIBUTING, CHANGELOG, `docs/`) belong to `sync-doc
 - Resolve symlinks and includes; edit the canonical source, never a generated entrypoint or alternate route.
 - Preserve unrelated user changes and the repository's formatting; never commit or push unless the prompt asks.
 - Prefer recoverable removals: delete a tracked duplicate, stale plan, or orphan only with clear ownership and replacement, else ask.
-- Treat a vendored or manager-owned skill as read-only; repair it through its manager, lockfile, or upstream, not a local patch.
+- Treat vendored or manager-owned skills as read-only; only their manager may update their files and lock entries on request.
 - Never write this skill's bundled files or any path under `~` into a repository; record budgets as numbers.
 - Name `/sync-agents --check` to measure them, or commit a check script inside the repository.
 - Ask only for a decision that changes the architecture or cannot be inferred safely; continue independent work while it waits.

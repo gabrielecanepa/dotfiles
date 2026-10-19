@@ -1,28 +1,28 @@
 ---
-description: 'Use when writing or editing Node.js server-side code: APIs, services, CLIs, scripts, workers. Runtime discipline for the event loop, streams, errors, shutdown, config, testing, and packaging.'
-applyTo: '**/*.cjs, **/*.mjs, **/*.server.{ts,js}, **/api/**/*.{ts,js,mts,cts}, **/jobs/**/*.{ts,js,mts,cts}, **/scripts/**/*.{ts,js,mts,cts}, **/server/**/*.{ts,js,mts,cts}, **/workers/**/*.{ts,js,mts,cts}'
+description: "Use when writing or editing Node.js server-side code: APIs, services, CLIs, scripts, workers. Runtime discipline for the event loop, streams, errors, shutdown, config, testing, and packaging."
+applyTo: "**/*.cjs, **/*.mjs, **/*.server.{ts,js}, **/api/**/*.{ts,js,mts,cts}, **/jobs/**/*.{ts,js,mts,cts}, **/scripts/**/*.{ts,js,mts,cts}, **/server/**/*.{ts,js,mts,cts}, **/workers/**/*.{ts,js,mts,cts}"
 paths:
-  - '**/*.cjs'
-  - '**/*.mjs'
-  - '**/*.server.{ts,js}'
-  - '**/api/**/*.{ts,js,mts,cts}'
-  - '**/jobs/**/*.{ts,js,mts,cts}'
-  - '**/scripts/**/*.{ts,js,mts,cts}'
-  - '**/server/**/*.{ts,js,mts,cts}'
-  - '**/workers/**/*.{ts,js,mts,cts}'
+  - "**/*.cjs"
+  - "**/*.mjs"
+  - "**/*.server.{ts,js}"
+  - "**/api/**/*.{ts,js,mts,cts}"
+  - "**/jobs/**/*.{ts,js,mts,cts}"
+  - "**/scripts/**/*.{ts,js,mts,cts}"
+  - "**/server/**/*.{ts,js,mts,cts}"
+  - "**/workers/**/*.{ts,js,mts,cts}"
 ---
 
 # Node.js
 
-Runtime rules for Node server-side work. For Node work outside these paths, open this file by intent. TS idioms live in `typescript.md`.
+Runtime rules for Node server code. Read by intent outside the scoped paths. TS idioms: `typescript.md`.
 
-For depth on any topic, run `npx skills use mcollina/skills@node`.
+For detail, use an installed Node skill or version-matched Node.js docs.
 
 ## Event loop and concurrency
 
-- Never run CPU-heavy or synchronous work on the event loop; use asynchronous built-ins and `node:worker_threads`.
+- Keep blocking work out of request handlers; use asynchronous I/O and workers for CPU-heavy work.
 - For sustained CPU work, use the project's existing worker pool, or justify a new pool dependency.
-- Bound concurrency with the project's existing utility or a small worker loop; never run unbounded `Promise.all` over large inputs.
+- Bound concurrency with an existing utility or worker loop; never run unbounded `Promise.all` over large inputs.
 - Add `p-limit` or `p-map` only when their semantics justify a dependency.
 - Use `Promise.allSettled` when partial failure is acceptable and `Promise.all` only for all-or-nothing independent work.
 - Cancel long-running operations with `AbortController` and build timeouts from `AbortSignal.timeout()`.
@@ -37,7 +37,7 @@ For depth on any topic, run `npx skills use mcollina/skills@node`.
 
 ## Errors and shutdown
 
-- Check errors by their `code` property, not by class.
+- For Node.js system errors, narrow the caught value and check its `code` rather than relying on the error class.
 - Preserve chains with `new Error(msg, { cause })`; never swallow an error in an empty catch.
 - Route fatal process errors into the application's existing graceful-shutdown path.
 - Add a lifecycle package such as `close-with-grace` only when the project lacks one and the service needs it.
@@ -53,9 +53,9 @@ For depth on any topic, run `npx skills use mcollina/skills@node`.
 
 ## Config and env
 
-- Load env with `--env-file` or `process.loadEnvFile()`, not dotenv.
+- When the target runtime supports it, load env with `--env-file` or `process.loadEnvFile()` instead of adding dotenv.
 - Validate config at boot with a schema and exit non-zero on failure.
-- Avoid branching on `NODE_ENV`; define one explicit env var per concern.
+- For application-specific behavior, use an explicit env var rather than overloading `NODE_ENV`.
 
 ## Testing and diagnostics
 
@@ -67,13 +67,15 @@ For depth on any topic, run `npx skills use mcollina/skills@node`.
 ## Modules and packaging
 
 - Prefix builtins with `node:` and use explicit file extensions in ESM imports.
-- Use `import.meta.dirname` over `__dirname` shims and import JSON `with { type: 'json' }`.
+- When the target runtime supports them, use `import.meta.dirname` and JSON imports with `with { type: 'json' }`.
 - On type-stripping targets (Node 22.6+), use erasable TS syntax only: no enums, namespaces, or parameter properties.
 - With type stripping, set `verbatimModuleSyntax` and typecheck separately with `tsc --noEmit`.
 
 ## Auth
 
-- When touching OAuth, use authorization code with PKCE (S256) only; never the implicit flow or tokens in URL fragments.
+- For user-facing OAuth authorization, use authorization code with PKCE (S256); never the implicit flow or tokens in URL fragments.
 - Validate redirect URIs against an allowlist.
-- Validate `iss`, `aud`, `exp`, and `sub` on every JWT; use RS256 or ES256 with JWKS for third-party tokens, never HS256.
-- Store tokens in HttpOnly, Secure, SameSite cookies; rotate refresh tokens on each use; rate-limit token endpoints.
+- For JWT credentials, validate the signature, issuer, audience, expiry, and required subject.
+- For third-party JWTs, use JWKS and allowlist RS256 or ES256; never accept HS256.
+- For browser sessions, keep tokens in HttpOnly, Secure, SameSite cookies.
+- When the issuer supports rotation, rotate refresh tokens on use; rate-limit token endpoints.

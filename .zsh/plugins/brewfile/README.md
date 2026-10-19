@@ -1,6 +1,6 @@
-# brewfile plugin
+# Brewfile plugin
 
-Wraps [`brew`](https://brew.sh) and [`mas`](https://github.com/mas-cli/mas) so every package-mutating command syncs the Brewfile in the background and adds `brew bundle` shortcuts.
+Wraps the [`brew`](https://brew.sh) and [`mas`](https://github.com/mas-cli/mas) CLIs to automatically sync the global Brewfile in background.
 
 To use it, add `brewfile` to the plugins array in your zshrc file:
 
@@ -10,16 +10,18 @@ plugins=(... brewfile)
 
 ## Usage
 
-| Command       | Description                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------ |
-| `brew dump`   | Dump the installed brews, casks, taps, and App Store apps to the Brewfile                        |
-| `brew fresh`  | Update, upgrade everything (`--no-casks` and `--no-mas` to skip), clean up, dump, and run doctor |
-| `brew global` | Run `brew bundle` against the global Brewfile                                                    |
-| `brew check`  | Verify that everything in the Brewfile is installed                                              |
-| `brew reset`  | Run `brew update-reset`                                                                          |
+| Command       | Description                                                                             |
+| ------------- | --------------------------------------------------------------------------------------- |
+| `brew dump`   | Dump the installed brews, casks, taps, and App Store apps to the global Brewfile        |
+| `brew fresh`  | Update and upgrade (or use `--no-casks` and `--no-mas`), clean up, dump, and run doctor |
+| `brew global` | Run `brew bundle` against the global Brewfile                                           |
+| `brew check`  | Verify that everything in the Brewfile is correctly installed                           |
+| `brew reset`  | Alias of `brew update-reset`                                                            |
 
-Any other `brew` or `mas` subcommand is passed through unchanged. After a successful mutating command (`install`, `uninstall`, `upgrade`, `tap`, and friends) the Brewfile is re-dumped in a detached background job, so the prompt returns immediately. `mas install`, `mas uninstall`, and `mas upgrade` must run under `sudo`.
+Any other `brew` or `mas` subcommand is passed unchanged. After a successful writing command (`install`, `uninstall`, `upgrade`, `tap`, etc.) the Brewfile is dumped in a detached background job and the prompt returns immediately.
 
-## Drift
+`mas install`, `mas uninstall`, and `mas upgrade` run under `sudo`.
 
-`_brewfile_drift` reports Brewfile entries that are not installed, which `dotfiles doctor` surfaces. It shells out to `brew bundle check`, which is far too slow for shell startup, so the plugin defines no `_brewfile_reconcile` and `dotfiles init` skips it. Apply the fix with `brew global install`.
+## Settings
+
+- `HOMEBREW_BUNDLE_FILE_GLOBAL`: path to a custom global Brewfile. If not set, Homebrew checks `${XDG_CONFIG_HOME}/homebrew/Brewfile`, `~/.homebrew/Brewfile`, and `~/.Brewfile`.

@@ -1,6 +1,15 @@
-# Bare zsh-<version> prompt with no segments or hooks.
+autoload -U add-zsh-hook
 
-source ${0:A:h}/lib/hooks.zsh
+typeset -ga _THEME_HOOKS
+
+() {
+  emulate -L zsh
+  local spec
+  for spec in $_THEME_HOOKS; do
+    add-zsh-hook -d ${spec%%:*} ${spec#*:}
+  done
+  _THEME_HOOKS=()
+}
 
 PROMPT='zsh-${ZSH_VERSION}$ '
 RPROMPT=

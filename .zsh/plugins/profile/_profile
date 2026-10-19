@@ -1,6 +1,7 @@
 #compdef profile
 
 _profile() {
+  local curcontext=$curcontext state line
   local -a subcommands
   subcommands=(
     'config:Edit the current profile'

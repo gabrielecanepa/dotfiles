@@ -8,7 +8,6 @@ const catalogs = await Promise.all(localeUrls.map(async url => JSON.parse(await 
 const flatten = (value, prefix = '') =>
   Object.entries(value).flatMap(([key, child]) => {
     const path = prefix ? `${prefix}.${key}` : key
-
     return typeof child === 'object' && child !== null ? flatten(child, path) : [[path, child]]
   })
 const sourceKeys = flatten(catalogs[0])

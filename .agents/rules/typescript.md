@@ -1,46 +1,47 @@
 ---
-description: 'Use when writing or editing TypeScript (.ts/.tsx): guard clauses, arrow functions, interface over type, inline type and alias imports, exhaustive unions, typed catch.'
-applyTo: '**/*.ts, **/*.tsx'
+description: "Use when writing or editing TypeScript files: guard clauses, arrow functions, interface over type, inline type and alias imports, exhaustive unions, typed catch."
+applyTo: "**/*.ts, **/*.tsx, **/*.mts, **/*.cts"
 paths:
-  - '**/*.ts'
-  - '**/*.tsx'
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.mts"
+  - "**/*.cts"
 ---
 
 # TypeScript
 
-Language-level idioms for any TypeScript file; React and JSX rules live in `react.md`.
+Language-level rules for all TypeScript files.
 
-Each repository enforces these with its own linter: honor the existing config, never rewrite one to match, and follow these where it is silent.
+Follow the repository's existing configuration where it defines a rule. Apply the rules below where that configuration is silent.
 
 ## Idioms
 
 - Return early with guard clauses; never `else` or `else if` after a `return`.
-- Write arrow functions assigned to `const`, never the `function` keyword.
-- Default-export a page or layout as a named arrow: `const Page = () => {}; export default Page`.
+- Use arrow functions assigned to `const` unless a function declaration is required.
 - Use `interface` over `type` for object shapes.
-- Use `for...of`, `map`, or `reduce`; never `.forEach`.
-- Import types inline: `import { type Foo }`, not `import type { Foo }`.
-- Name files in kebab-case.
-- Omit types the compiler infers: no return-type or variable annotations.
+- Use `for...of` for iteration, `map` for transformation, and `reduce` for accumulation; never `.forEach`.
+- Use kebab-case filenames unless the framework requires another name.
+- Omit redundant type annotations; add them when inference does not express the intended type or contract.
 
 ## Imports
 
-- Never import parent-relative (`../**`); use the path alias (`@/`, `~/`).
-- Use `./` only inside one module: a folder whose barrel (`index`) is the sole public entry and whose files import each other.
-- Across separate modules, use the alias even in the same folder: `user-notes.tsx` imports `@/components/features/chat-status`, not `./chat-status`.
-- Use ESM only; no `require` or `module.exports`.
+- Use configured path aliases for imports across modules.
+- Use relative imports within a module or when no suitable alias exists.
+- Import types inline: `import { type Foo }`, not `import type { Foo }`.
+- Use ESM unless an existing runtime or `.cts` target requires CommonJS.
 
 ## Safety
 
 - End a `switch` over a closed union with a `never` check in `default`, so adding a member fails to compile.
-- Type lookup tables with `satisfies Record<Union, T>`.
-- Type `catch` as `unknown` and narrow before use (`instanceof Error`, a guard); never `catch (e: any)`, an empty swallow, or a thrown non-`Error`.
+- For a lookup table that must cover every union member, use `satisfies Record<Union, T>`.
+- Treat caught values as `unknown` and narrow them before use.
+- Never use `catch (e: any)` or an empty catch block.
+- Throw `Error` instances, not strings or other values.
 - Use `async`/`await` only; no `.then()` chains.
-- Use `??` over `||` for default fallbacks.
+- Use `??` when only `null` and `undefined` should trigger a fallback.
 
 ## Framework docs first
 
-- Before framework work (Next.js, React, an ORM, any library), read the installed version's docs instead of training memory.
+- Before using a framework or library API, check documentation for the installed version.
 - Prefer bundled docs when present (`node_modules/<pkg>/dist/docs/`), else the `context7` MCP.
-- Treat the version-matched docs block Next.js 16.3+ maintains via `next dev` as bundled docs.
 - When a docs finding drives a non-obvious choice, state the version you targeted.

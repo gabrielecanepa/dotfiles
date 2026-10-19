@@ -10,7 +10,9 @@ const flatten = (value, prefix = '') =>
   })
 
 const catalogs = await Promise.all(
-  locales.map(async locale => JSON.parse(await readFile(new URL(`../messages/${locale}.json`, import.meta.url))))
+  locales.map(async locale =>
+    JSON.parse(await readFile(new URL(`../messages/${locale}.json`, import.meta.url)))
+  )
 )
 const sourceKeys = flatten(catalogs[0])
   .map(([key]) => key)

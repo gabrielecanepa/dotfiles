@@ -4,7 +4,7 @@ description: >-
   Interview the user in rounds until a plan, design, or decision has no branch left unexamined, then stop.
   Use only on an explicit /grill-me invocation, never spontaneously.
 disable-model-invocation: true
-argument-hint: '[the idea, plan, or decision to grill]'
+argument-hint: "[the idea, plan, or decision to grill]"
 ---
 
 # grill-me

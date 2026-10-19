@@ -4,7 +4,7 @@ description: >-
   Diagnose a bug, crash, regression, or failing test to a proven root cause before any fix. Use for /find-root-cause, broken behavior, errors, or flaky tests; excludes code review, features, design.
 ---
 
-# find-root-cause
+# Finding the Root Cause of a Bug
 
 A patch aimed at a symptom moves the bug somewhere else and costs the next person the same investigation.
 
@@ -19,7 +19,7 @@ A regression test was also watched failing on the broken code and passing on the
 Hold these for the whole run.
 
 1. Keep diagnosis read-only until a fix is requested; "why", "look into", "investigate", "diagnose", and "what is wrong" authorize reading and reporting only.
-2. Run `git status --short --branch -uall` before anything else and leave the worktree as you found it; `engineering.md` owns the full boundary.
+2. Run `git status --short --branch -uall` before anything else and leave the worktree as you found it; the global `AGENTS.md` owns the read-only boundary.
 3. List every reported and observed symptom in the user's own words before forming a hypothesis.
 4. Put this sentence in the reply before touching code: "The root cause is X because Y." X names a file, function, line, or condition.
 5. When more than one hypothesis survives step 3, write three to five of them, each with the observation that would kill it, and put the ranking in the reply.
@@ -86,7 +86,7 @@ Use when the user says it used to work, names a good commit or version, or repor
 
 ## Sibling sweep
 
-Run before declaring the bug done. `engineering.md` requires the sweep; this is how to execute it.
+Run before declaring the bug done. The global verification workflow requires the sweep; this is how to execute it.
 
 - Extract the pattern signature: the function, regex, API call, selector, lock acquisition, validation skip, or input boundary that produced the bug.
 - Run `grep -rn` for it across the repository, excluding generated directories, build output, and vendored dependencies.

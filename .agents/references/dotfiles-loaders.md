@@ -1,16 +1,15 @@
 # Dotfiles loaders and hooks
 
-Detail behind `agent-config.md`: how each tool discovers the shared sources, how hooks are registered per tool, and the memory and statusline internals.
+Detail behind `../rules/agent-config.md`: instruction discovery, per-tool hooks, memory, and statuslines.
 
 ## VS Code and Copilot loading
 
-- VS Code bundles the same `@github/copilot` engine as the CLI, reads `.copilot`, and treats `.copilot/instructions` as a built-in root.
-- In `chat.instructionsFilesLocations`, only `false` entries carry weight; built-in roots are on by default, so a `true` entry only documents intent.
-- VS Code dedupes symlinked `AGENTS.md`, `CLAUDE.md`, and `copilot-instructions.md` by real path but never `*.instructions.md`.
+- Verify instruction discovery in the installed VS Code and Copilot versions; do not infer editor behavior from the CLI.
+- Check effective `chat.instructionsFilesLocations` settings before adding a route.
+- Resolve symlink targets when checking duplicate routes; verify whether the installed client deduplicates them.
 - VS Code loads file-scoped instructions only from `*.instructions.md` names, so `.copilot/instructions` holds suffixed links to `.agents/rules/<rule>.md`.
-- `.vscode/settings.json` keeps `~/.copilot/instructions` on and disables `.agents/rules`, `.claude/rules`, and `.github/instructions`.
-- The same file disables `chat.useAgentsMdFile` and `chat.useClaudeMdFile`.
-- The tracked user `settings.json` under `Library/Application Support/Code/User` keeps only the two Claude-root disables.
+- `.vscode/settings.json` disables `chat.useAgentsMdFile` and `chat.useClaudeMdFile`; it sets no instruction-file locations.
+- `.vscode/user/settings.json` disables `.claude/rules` and `~/.claude/rules` in `chat.instructionsFilesLocations`.
 
 ## Copilot hooks
 
@@ -23,7 +22,7 @@ Detail behind `agent-config.md`: how each tool discovers the shared sources, how
 
 ## Codex configuration
 
-- `.codex/settings.toml` is the tracked public layer, exposed as `/etc/codex/config.toml` through a system link created by `.install.sh`.
+- `.codex/settings.toml` is the tracked public layer, exposed as `/etc/codex/config.toml` through a system link.
 - `.codex/config.toml` is ignored, mode `600`, and holds private state, secrets, and complete private MCP definitions.
 - Keep each MCP transport and its secret headers in one effective layer; a split definition loses the headers.
 - A higher-layer `skills.config` array replaces the lower one, so every skill-path override lives in the private file.

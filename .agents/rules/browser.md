@@ -1,14 +1,14 @@
 ---
-description: 'Use whenever a task drives or verifies a real web UI. Reuse the running app, drive it with agent-browser headless, keep authenticated state, close every session.'
-applyTo: '**/*.astro, **/*.css, **/*.html, **/*.jsx, **/*.svelte, **/*.tsx, **/*.vue'
+description: "Use whenever a task drives or verifies a real web UI. Reuse the running app, drive it with agent-browser headless, keep authenticated state, close every session."
+applyTo: "**/*.astro, **/*.css, **/*.html, **/*.jsx, **/*.svelte, **/*.tsx, **/*.vue"
 paths:
-  - '**/*.astro'
-  - '**/*.css'
-  - '**/*.html'
-  - '**/*.jsx'
-  - '**/*.svelte'
-  - '**/*.tsx'
-  - '**/*.vue'
+  - "**/*.astro"
+  - "**/*.css"
+  - "**/*.html"
+  - "**/*.jsx"
+  - "**/*.svelte"
+  - "**/*.tsx"
+  - "**/*.vue"
 ---
 
 # Real-browser work
@@ -21,7 +21,7 @@ Procedures, rationale, and recovery steps: `~/.agents/references/browser-procedu
 - Keep `agent-browser` as the default when a browser MCP such as `claude-in-chrome` is loaded; an available tool is not an instruction to use it.
 - Test the running application with its real data; never create a throwaway page, mock route, auth bypass, or ad-hoc preview server.
 - Call it as `agent-browser`, never `npx agent-browser`.
-- When a skill states a minimum version, check `agent-browser --version` and run `agent-browser upgrade` first.
+- When a skill states a minimum version, check `agent-browser --version`; upgrade only if the installed version is too old.
 - Install and update it only through Homebrew (`brew install agent-browser && agent-browser install`, then `agent-browser upgrade`); never `npm i -g`.
 - When the CLI is missing or fails `--version`, repair it yourself per the reference and rerun; hand the reinstall to the user only when blocked.
 
@@ -52,8 +52,9 @@ agent-browser --session <task> close
 ## Authentication
 
 - Launch headless with the project's persistent `--session-name <profile>` so cookies and storage restore across runs.
-- When the login page appears, run `agent-browser auth login <profile>`; the project instructions must name the profile and login URL.
-- When `agent-browser auth list` lacks the profile, print the save command from the reference with project values and stop for the user.
+- When login is needed, use `agent-browser auth login <profile>` only with the project's documented profile and login URL.
+- When the profile or login URL is missing, ask for it; never guess the account or authentication context.
+- When `agent-browser auth list` lacks the profile, print the save command from the reference and stop for the user.
 - Never put a password on the command line.
 - For SSO or magic links, have the user log in once, save state to a gitignored file, set `AGENT_BROWSER_ENCRYPTION_KEY`, and relaunch with `--state`.
 - Use `--headed` only as the last rung, for the user's action alone; relaunch with `--restore`, wait for the user, then reissue the command headless.
